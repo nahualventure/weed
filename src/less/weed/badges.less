@@ -1,0 +1,86 @@
+/**
+  * Edoo badge framework:  TODO v1.0 docu
+  */
+
+// Configuration
+@badge-danger-color:                    @system-danger-color;
+@badge-default-color:                   @system-default-color;
+@badge-default-text-color:              @black-40;
+@badge-info-color:                      @system-info-color;
+@badge-inverted-color:                  @system-inverted-color;
+@badge-primary-color:                   @system-primary-color;
+@badge-success-color:                   @system-success-color;
+@badge-warning-color:                   @system-warning-color;
+
+@badge-default-border-radius:           3em;
+@badge-default-horizontal-padding:      0.9em;
+@badge-default-vertical-padding:        0.15em;
+@badge-font-family:                     "Helvetica Neue", "Helvetica", sans-serif;
+
+// Label generator mixin
+.make-badge(@background-color: @badge-default-color; @text-color: @white; @border-radius: @badge-default-border-radius; @vertical-padding: @badge-default-vertical-padding; @horizontal-padding: @badge-default-horizontal-padding){
+  .border-radius(@border-radius);
+  .user-select(none);
+  background-color: @background-color;
+  color: @text-color;
+  display: inline-block;
+  font-family: @badge-font-family;
+  padding: @vertical-padding @horizontal-padding;
+  &:hover{
+    background-color: lighten(@background-color, 3%);
+  }
+  &:active{
+    background-color: @background-color;
+  }
+}
+
+.badge{
+  font-size: 0.8em;
+
+  // Default colors
+  &.badge-default{
+    .make-badge(@text-color: @badge-default-text-color);
+  }
+  &.badge-primary{
+    .make-badge(@background-color: @badge-primary-color);
+  }
+  &.badge-info{
+    .make-badge(@background-color: @badge-info-color);
+  }
+  &.badge-success{
+    .make-badge(@background-color: @badge-success-color);
+  }
+  &.badge-danger{
+    .make-badge(@background-color: @badge-danger-color);
+  }
+  &.badge-warning{
+    .make-badge(@background-color: @badge-warning-color);
+  }
+  &.badge-inverted{
+    .make-badge(@background-color: @badge-inverted-color);
+  }
+
+  // Default sizes
+  &.badge-small{
+    font-size: 0.6em;
+  }
+  &.badge-large{
+    font-size: 1em;
+  }
+  &.badge-xlarge{
+    font-size: 1.2em;
+  }
+  &.badge-xxlarge{
+    font-size: 1.4em;
+  }
+  &.badge-huge{
+    font-size: 1.6em;
+  }
+}
+
+// IE fixes
+.ie7{
+  .badge{
+    margin-right: 2px;
+  }
+}

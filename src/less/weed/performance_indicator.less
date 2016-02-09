@@ -1,0 +1,54 @@
+/**
+  * Edoo performance indicator framework
+  */
+
+// Configuration
+@performance-indicator-circle-path-color:     @black-5;
+@performance-indicator-danger-color:          @system-danger-color;
+@performance-indicator-default-color:         @system-default-color;
+@performance-indicator-info-color:            @system-info-color;
+@performance-indicator-inverted-color:        @system-inverted-color;
+@performance-indicator-primary-color:         @system-primary-color;
+@performance-indicator-success-color:         @system-success-color;
+@performance-indicator-text-color:            @black-55;
+@performance-indicator-warning-color:         @system-warning-color;
+
+@performance-indicator-font-family:           @font-family-sans-serif;
+@performance-indicator-font-size:             (2*@font-size-base);
+@performance-indicator-font-weight:           normal;
+@performance-indicator-size:                  85px;
+
+// Main element
+.performance-indicator{
+  border-bottom-color: @performance-indicator-circle-path-color; // SVG hack for circle path color
+  color: @performance-indicator-text-color;
+  display: inline-block;
+  font-family: @performance-indicator-font-family;
+  font-size: @performance-indicator-font-size;
+  font-weight: @performance-indicator-font-weight;
+  height: @performance-indicator-size;
+  width: @performance-indicator-size;
+
+  // Default types
+  &.performance-indicator-default{
+    border-top-color: @performance-indicator-default-color; // SVG hack for percentage color
+  }
+  &.performance-indicator-primary{
+    border-top-color: @performance-indicator-primary-color; // SVG hack for percentage color
+  }
+  &.performance-indicator-info{
+    border-top-color: @performance-indicator-info-color; // SVG hack for percentage color
+  }
+  &.performance-indicator-success{
+    border-top-color: @performance-indicator-success-color; // SVG hack for percentage color
+  }
+  &.performance-indicator-danger{
+    border-top-color: @performance-indicator-danger-color; // SVG hack for percentage color
+  }
+  &.performance-indicator-warning{
+    border-top-color: @performance-indicator-warning-color; // SVG hack for percentage color
+  }
+  &.performance-indicator-inverted{
+    border-top-color: @performance-indicator-inverted-color; // SVG hack for percentage color
+  }
+}

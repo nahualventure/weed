@@ -1,0 +1,31 @@
+//
+// Grid system
+// --------------------------------------------------
+
+// Grid
+.make-row() {
+  // Negative margin the row out to align the content of columns
+  margin-left: -@grid-column-padding;
+  margin-right: -@grid-column-padding;
+  // Then clear the floated columns
+  .clearfix();
+}
+.make-column(@columns; @breakpoint: @grid-float-breakpoint) {
+  @media (min-width: @breakpoint) {
+    float: left;
+    // Calculate width based on number of columns available
+    width: percentage(@columns / @grid-columns);
+  }
+  // Prevent columns from collapsing when empty
+  min-height: 1px;
+  // Set inner padding as gutters instead of margin
+  padding-left: @grid-column-padding;
+  padding-right: @grid-column-padding;
+  // Proper box-model (padding doesn't add to width)
+  .box-sizing(border-box);
+}
+.make-column-offset(@columns; @breakpoint: @grid-float-breakpoint) {
+  @media (min-width: @breakpoint) {
+    margin-left: percentage(@columns / @grid-columns);
+  }
+}

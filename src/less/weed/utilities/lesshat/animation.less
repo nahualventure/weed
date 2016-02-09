@@ -1,0 +1,364 @@
+//  @GlobalConfig
+
+  // Config supported browsers for your project
+
+  @w3c: true; // Unprefixed W3C syntax
+  @webkit: true; // Chrome 7+, Safari 5+, iOS5, Android
+  @moz: true; //  Firefox 4+
+  @opera: true; // Opera 10.5+
+  @ms: true;  // IE 10+
+
+// Signals
+
+  @webkitSignal: 1;
+  @mozSignal: 2;
+  @operaSignal: 3;
+  @msSignal: 4;
+  @w3cSignal: 5;
+
+// .animation
+
+.animation(...){
+
+  //  Local config for disabling properties
+
+  @w3cLocal: true; // Unprefixed W3C syntax
+  @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+  @mozLocal: true; //  Firefox 4+
+  @operaLocal: true; // Opera 10.5+
+  @msLocal: true;  // IE 10+
+
+  @processing: ~`(function(){ var arg = "@{arguments}".replace("[","").replace("]","") || "none"; if( !/^\w*([ X])/.test(arg) ) { arg = arg.replace(/,/g,"") } return arg; })()`;
+
+  .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+    .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation: @processing;}
+    .inception (@signal, @arguments) when (@signal = 2) { -moz-animation: @processing;}
+    .inception (@signal, @arguments) when (@signal = 3) { -o-animation: @processing;}
+    .inception (@signal, @arguments) when (@signal = 4) { -ms-animation: @processing;}
+    .inception (@signal, @arguments) when (@signal = 5) { animation: @processing;}
+    .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+    .inception(@signal, @arguments);
+  }
+  .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+}
+
+ //  element{ .animation(nameAnimation 2s linear alternate anim 3s linear alternate ); }
+
+
+//  .animation-delay
+
+.animation-delay(...){
+
+  //  Local config for disabling properties
+
+  @w3cLocal: true; // Unprefixed W3C syntax
+  @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+  @mozLocal: true; //  Firefox 4+
+  @operaLocal: true; // Opera 10.5+
+  @msLocal: true;  // IE 10+
+
+  @processing: ~`(function(){ var arg = "@{arguments}" || "0"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+  .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+    .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-delay: @processing;}
+    .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-delay: @processing;}
+    .inception (@signal, @arguments) when (@signal = 3) { -o-animation-delay: @processing;}
+    .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-delay: @processing;}
+    .inception (@signal, @arguments) when (@signal = 5) { animation-delay: @processing;}
+    .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+    .inception(@signal, @arguments);
+  }
+  .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+}
+
+  //  element{ .animation-delay(1s); }
+  //  element{ .animation-delay(750ms, 2s, 3s); } // For multiple animation-direction
+
+
+//  .animation-direction
+
+  .animation-direction(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "normal"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-direction: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-direction: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-direction: @processing;}
+      .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-direction: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-direction: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+}
+
+  //  element{ .animation-direction(); }
+  //  element{ .animation-direction(normal, alternate); }
+
+
+//  .animation-duration
+
+  .animation-duration(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "0"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-duration: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-duration: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-duration: @processing;}
+      .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-duration: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-duration: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+}
+
+  //  element{ .animation-duration(2s); }
+
+
+//  .animation-fill-mode
+
+  .animation-fill-mode(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "none"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-fill-mode: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-fill-mode: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-fill-mode: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-fill-mode: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+}
+
+  //  element{ .animation-fill-mode(forwards); }
+
+
+//  .animation-timing-function
+
+  .animation-timing-function(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "ease"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-timing-function: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-timing-function: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-timing-function: @processing;}
+      .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-timing-function: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-timing-function: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+  }
+
+  //  element{ .animation-timing-function(ease-in-out); }
+
+
+//  .animation-iteration-count
+
+  .animation-iteration-count(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "0"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-iteration-count: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-iteration-count: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-iteration-count: @processing;}
+      .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-iteration-count: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-iteration-count: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+  }
+
+    //  element{ .animation-iteration-count(3); }
+
+
+//  .animation-name
+
+  .animation-name(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "none"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-name: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-name: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-name: @processing;}
+      .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-name: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-name: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+  }
+
+    //  element{ .animation-name(myReallyCoolAnimationName); }
+
+
+//  .animation-play-state
+
+  .animation-play-state(...){
+
+    //  Local config for disabling properties
+
+    @w3cLocal: true; // Unprefixed W3C syntax
+    @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+    @mozLocal: true; //  Firefox 4+
+    @operaLocal: true; // Opera 10.5+
+    @msLocal: true;  // IE 10+
+
+    @processing: ~`(function(){ var arg = "@{arguments}" || "running"; arg = arg.replace("[","").replace("]",""); return arg; }())`;
+
+    .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+      .inception (@signal, @arguments) when (@signal = 1) { -webkit-animation-play-state: @processing;}
+      .inception (@signal, @arguments) when (@signal = 2) { -moz-animation-play-state: @processing;}
+      .inception (@signal, @arguments) when (@signal = 3) { -o-animation-play-state: @processing;}
+      .inception (@signal, @arguments) when (@signal = 4) { -ms-animation-play-state: @processing;}
+      .inception (@signal, @arguments) when (@signal = 5) { animation-play-state: @processing;}
+      .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+      .inception(@signal, @arguments);
+    }
+    .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+    .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+    // --  this comment must be here because of LESS bug
+    .result(@arguments, @mozSignal, @moz, @mozLocal);
+    // --
+    .result(@arguments, @operaSignal, @opera, @operaLocal);
+    // --
+    .result(@arguments, @msSignal, @ms, @msLocal);
+    // --
+    .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+  }

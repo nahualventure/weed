@@ -1,0 +1,46 @@
+@smile-size: 40px;
+@smile-image-size: 32px;
+
+.smile{
+  .circle(@smile-size);
+  display: inline-block;
+  background: center center no-repeat;
+  text-align: center;
+  line-height: @smile-size;
+  background-size: @smile-image-size auto;
+
+  img{
+    .vertical-center(@smile-size, @smile-image-size);
+    width: @smile-image-size;
+  }
+
+  &.ultrasad{
+    background-color: @system-danger-color;
+    background-image: url('@{system-images-path}smiles/ultrasad.svg');
+  }
+
+  &.sad{
+    background-color: @system-danger-color;
+    background-image: url('@{system-images-path}smiles/sad.svg');
+  }
+
+  &.im_ok{
+    background-color: @system-warning-color;
+    background-image: url('@{system-images-path}smiles/im_ok.svg');
+  }
+
+  &.ok{
+    background-color: @system-base-color;
+    background-image: url('@{system-images-path}smiles/ok.svg');
+  }
+
+  &.happy{
+    background-color: @system-success-color;
+    background-image: url('@{system-images-path}smiles/happy.svg');
+  }
+
+  &.ultrahappy{
+    background-color: @system-success-color;
+    background-image: url('@{system-images-path}smiles/ultrahappy.svg');
+  }
+}

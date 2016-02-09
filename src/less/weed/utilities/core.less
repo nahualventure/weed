@@ -1,0 +1,23 @@
+/**
+  * Weed utilities: Weed is a general purpose LESS utilities belt.
+  * It includes some cool tools like font-awesome, lesshat and preboot.
+  * Also, there is a little aggregation of utilities of our own.
+  */
+
+// Third parties
+@import "preboot/normalize.less";
+@import "font-awesome/font-awesome.less";
+// @import "font-awesome/font-awesome-ie7.less";
+@import "preboot/grid.less";
+@import "preboot/vendor_mixins.less";
+@import "preboot/utilities_mixins.less";
+@import "lesshat/animation.less";
+
+// Weed utilities
+@import "utilities.less";
+@import "easings.less";
+
+// Preboot grid configuration
+@grid-columns:          100;
+@grid-column-padding:   15px; // Left and right inner padding
+@grid-float-breakpoint: 768px;

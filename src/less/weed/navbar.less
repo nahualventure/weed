@@ -1,0 +1,354 @@
+/**
+  * Edoo navbar component
+  * Depends on: sidebar.less
+  */
+
+// Configuration
+@navbar-bubble-background-color:        #ce6f6f;
+@navbar-color:                          @system-base-color;
+@navbar-config-button-color:            @white;
+@navbar-element-hover-color:            darken(@navbar-color, 2%);
+@navbar-notifications-bubble-text-color:  @white;
+@navbar-role-color:                     @white;
+@navbar-search-background-color:        @white;
+@navbar-search-font-color:              @black-30;
+@navbar-search-font-family:             sans-serif;
+@navbar-user-font-family:               sans-serif;
+@navbar-username-color:                 @white;
+
+
+
+
+@navbar-config-button-height:           20px;
+@navbar-element-horizontal-margin:      20px;
+@navbar-expected-user-height:           34px;
+@navbar-height:                         65px;
+@navbar-picture-size:                   45px;
+@navbar-search-height:                  34px;
+@navbar-search-horizontal-padding:      15px;
+@navbar-search-radius:                  5px;
+@navbar-search-submit-width:            30px;
+@navbar-search-width:                   400px;
+@navbar-separator-occupancy:            0.6;
+@navbar-z-index:                        @z-maximum - 11;
+
+@navbar-isotype-last-position: @sidebar-isotype-last-position;
+@navbar-isotype-start-position: @sidebar-isotype-start-position;
+@navbar-isotype-width: @sidebar-isotype-width;
+@navbar-logotype-last-position: @sidebar-logotype-last-position;
+@navbar-logotype-start-position: @sidebar-logotype-start-position;
+@navbar-logotype-width: @sidebar-logotype-width;
+@navbar-notifications-bubble-size: 18px;
+@navbar-notifications-position-x: 12px;
+@navbar-notifications-position-y: 12px;
+
+
+// Utilities mixins
+.center-in-navbar(@height){
+  .vertical-center(@navbar-height; @height);
+}
+
+// Main navigation class
+.navbar{
+  //.clearfix;
+  .expand-x();
+  .origin();
+  .user-select(none);
+  background-color: @navbar-color;
+  position: absolute;
+  z-index: @navbar-z-index;
+  min-width: @system-minwidth;
+
+  &.fixed{
+    position: fixed;
+
+    .navbar-main-action-container{
+      .navbar-main-action{
+        .opacity(0);
+        cursor: default;
+      }
+    }
+  }
+
+  // &.detached{
+  //   display: none;
+  //   position: fixed;
+  // }
+
+  // &.inject{
+  //   top: 0;
+  // }
+
+  // &.excise{
+  //   .opacity(0.0);
+  //   top: -1*@navbar-height;
+  // }
+
+  .container{
+    max-width: (@content-width + 2*(@navbar-element-horizontal-margin));
+  }
+
+  // Any rendered element inside navbar (excepting separator)
+  .navbar-element{
+    display: block;
+    padding: 0 @navbar-element-horizontal-margin;
+
+    // Vertically floating div inside each element
+    .navbar-element-floater{
+      .expand-y();
+      display: block;
+    }
+
+    // Navbar logo
+    &.logo{
+      .pull-left();
+      .transition(@fast);
+      background: @navbar-element-hover-color;
+      height: @navbar-height;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+      width: @sidebar-contracted-width;
+
+      .navbar-isotype, .navbar-logotype{
+        .expand-y();
+        .transition(@faster);
+        background: center center no-repeat;
+        display: block;
+        position: absolute;
+      }
+
+      .navbar-isotype{
+        background-image: url('@{images-path}navbar_isotype.png');
+        left: @navbar-isotype-start-position;
+        width: @navbar-isotype-width;
+      }
+
+      .navbar-logotype{
+        .opacity(0);
+        background-image: url('@{images-path}navbar_logotype.png');
+        left: @navbar-logotype-start-position;
+        width: @navbar-logotype-width;
+      }
+    }
+
+    // Navbar search form
+    &.search-form{
+      .pull-left();
+
+      width: @navbar-search-width;
+
+      .input-wrapper{
+        .bevel(@navbar-color);     // Input height
+        .vertical-center(@navbar-height, 41px + 2px);
+        background: @white;
+        border-color: #009590;
+
+        .tt-dropdown-menu{
+          margin-top: 38px;
+        }
+
+        .form-input-mark{
+          color: @navbar-color;
+        }
+      }
+    }
+
+    // Navbar user display
+    &.navbar-user{
+      .pull-right;
+
+      .navbar-element-floater{
+        .center-in-navbar(@navbar-picture-size);
+        height: @navbar-picture-size;
+      }
+
+      // Rounded picture
+      img.picture{
+        .border-radius(100px); // Extreme round border (circle)
+        .box-shadow(0px 0px 0px 2px darken(@navbar-color, 4%)); // Safari fix instead of border
+        .box-sizing(border-box);
+        float: left;;
+        height: @navbar-picture-size;
+        vertical-align: middle;
+        width: @navbar-picture-size;
+      }
+
+      // User name
+      span.user{
+        .vertical-center(@navbar-picture-size; @navbar-expected-user-height);
+        float: right;
+        font-family: @navbar-user-font-family;
+        margin-left: @element-vertical-margin;
+        vertical-align: middle;
+
+        .name{
+          .ellipsis();
+          color: @navbar-username-color;
+          display: block;
+          font-size: 1.1em;
+          max-width: 120px;
+          margin-top: -3px;
+        }
+
+        .role{
+          color: @navbar-role-color;
+          display: block;
+          font-size: 0.9em;
+        }
+      }
+    }
+
+    // Configuration section
+    // Notifications section
+    &.navbar-configuration,
+    &.navbar-notifications,
+    &.navbar-calendar{
+      .pull-right();
+      height: @navbar-height;
+
+      .navbar-element-floater{
+        .center-in-navbar(@navbar-config-button-height);
+        height: auto;
+
+        .icon-caret-down{
+          font-size: 0.8em;
+          margin-left: 5px;
+        }
+      }
+
+      i{
+        color: @navbar-config-button-color;
+        font-size: 1.4em;
+      }
+    }
+
+    &.navbar-notifications{
+
+      position: relative;
+
+      .navbar-notifications-bubble{
+        .border-radius(100px);
+        .square(@navbar-notifications-bubble-size);
+        background: @navbar-bubble-background-color;
+        color: @navbar-notifications-bubble-text-color;
+        display: block;
+        font-size: 0.7em;
+        line-height: @navbar-notifications-bubble-size;
+        position: absolute;
+        right: @navbar-notifications-position-x;
+        text-align: center;
+        top: @navbar-notifications-position-y;
+      }
+    }
+  }
+
+  // Navbar element whose hover is defined (anchor)
+  a.navbar-element{
+    .icon{
+      .transition(@faster);
+      .opacity(0.8);
+    }
+
+    &:hover{
+      .icon{
+        .opacity(1.0);
+      }
+    }
+
+    &:active{
+      .transition(0);
+      .opacity(0.8);
+    }
+  }
+
+  // Navbar element separator (it itself is not a navbar separator)
+  .navbar-separator{
+    border: none;
+    border-right: 1px solid lighten(@navbar-color, 2%);
+    height: (@navbar-height * @navbar-separator-occupancy);
+    margin: (@navbar-height * (1 - @navbar-separator-occupancy) / 2.0) 0;
+  }
+
+  .navbar-main-action-container{
+    position: absolute;
+    left: 0;
+    top: 67px;
+    width: 100%;
+    text-align: center;
+    height: 0;
+
+    .navbar-main-action{
+      .transition(@faster);
+      .circle(60px);
+      .empty-fill();
+      display: inline-block;
+      background-color: @system-base-color;
+      border: 5px solid @white;
+      font-size: 2em;
+      color: @white;
+      text-align: center;
+      line-height: 52px;
+      cursor: pointer;
+      margin-top: -27px;
+
+      &:hover{
+        .transform(scale(1.05));
+        background: lighten(@system-base-color, 5%);
+      }
+    }
+  }
+}
+
+@media(min-width: @system-hugescreen-breakpoint){
+  .open-sidebar{
+    .navbar{
+      .navbar-element{
+        &.logo{
+          width: @sidebar-open-width;
+          .navbar-isotype{
+            left: @navbar-isotype-last-position;
+          }
+          .navbar-logotype{
+            .opacity(1);
+            left: @navbar-logotype-last-position;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.fixed-navbar{
+  .navbar.fixed{
+    .navbar-main-action{
+      .opacity(1.0);
+      cursor: pointer;
+    }
+  }
+}
+
+// IE fixes
+.ie7, .ie8{
+  .navbar{
+    .search-form{
+      .navbar-element-floater{
+        input[type="text"]{
+          line-height: @navbar-search-height;
+        }
+        button[type="submit"].search{
+          border: none;
+        }
+      }
+    }
+  }
+}
+.ie7{
+  .navbar{
+    .search-form{
+      .navbar-element-floater{
+        .vertical-center-with-offset(@navbar-height; @navbar-search-height; 2px; 1px);
+      }
+    }
+  }
+}

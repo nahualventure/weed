@@ -1,0 +1,200 @@
+@dynamic-card-background: @white;
+@dynamic-card-border-color: @black-25;
+@dynamic-card-close-background: @black-5;
+@dynamic-card-close-border-color: @black-15;
+@dynamic-card-close-font-color: @black-40;
+@dynamic-card-font-family: sans-serif;
+@dynamic-card-name-color: @system-base-color;
+@dynamic-card-picture-background: @white;
+@dynamic-card-picture-border-color: @black-30;
+@dynamic-card-picture-placeholder: url('@{images-path}picture_placeholder.png');
+@dynamic-card-role-color: @black-15;
+
+@dynamic-card-actions-spacing: 25px;
+@dynamic-card-border-radius: @system-border-radius;
+@dynamic-card-bottom-margin: 20px;
+@dynamic-card-corner-action-spacing: 15px;
+@dynamic-card-height: 300px;
+@dynamic-card-horizontal-padding: 35px;
+@dynamic-card-padding: 45px @dynamic-card-horizontal-padding 25px @dynamic-card-horizontal-padding;
+@dynamic-card-picture-margin: 20px;
+@dynamic-card-picture-size: 90px;
+@dynamic-card-picture-small-size: 45px;
+@dynamic-card-placeholder-plus-margin-bottom: 20px; 
+@dynamic-card-placeholder-plus-margin-top: 40px;
+@dynamic-card-placeholder-plus-size: 70px;
+@dynamic-card-placeholder-text-width: 110px;
+@dynamic-card-right-margin: 25px;
+@dynamic-card-width: 190px;
+
+@dynamic-card-subtitle-text-color: @black;
+@dynamic-card-description-text-color: @black;
+@dynamic-card-favorite-color: @system-warning-color;
+@dynamic-card-favorite-hover-color: lighten(@system-warning-color, 10%);
+@dynamic-card-trash-color: @system-danger-color;
+@dynamic-card-placeholder-background: @black-10;
+@dynamic-card-placeholder-border: @black-20;
+@dynamic-card-placeholder-plus-background: @black-30;
+@dynamic-card-placeholder-plus-color: @black-20;
+@dynamic-card-placeholder-text-color: @black-40;
+@dynamic-card-corner-action-width: 26px;
+
+.dynamic-card{
+  .border-radius(@dynamic-card-border-radius);
+  .box-shadow(0 2px 1px 0px fadeout(@dynamic-card-border-color, 70%));
+  .box-sizing(border-box);
+  background: @dynamic-card-background;
+  border: 1px solid @dynamic-card-border-color;
+  border-top: none;
+  display: inline-block;
+  font-family: @dynamic-card-font-family;
+  height: @dynamic-card-height;
+  margin-bottom: @dynamic-card-bottom-margin;
+  margin-right: @dynamic-card-right-margin;
+  overflow: hidden;
+  padding: @dynamic-card-padding;
+  position: relative;
+  width: @dynamic-card-width;
+
+  hr{
+    border-top: none !important;
+    margin-bottom: @element-vertical-margin*1.5 !important;
+  }
+
+  .image-title{
+    background: no-repeat center top;
+    height: @element-vertical-margin*8;
+    margin-bottom: @element-vertical-margin;
+  }
+
+  .title{
+    color: @system-base-color;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: @element-vertical-margin*0.7;
+    text-align: center;
+    line-height: 1.2em;
+  }
+
+  .subtitle{
+    color: @dynamic-card-subtitle-text-color;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: @element-vertical-margin;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .description{
+    color: @dynamic-card-description-text-color;
+    font-size: 0.8em;
+    line-height: 1.4em;
+    text-align: center;
+  }
+
+  .corner-action{
+    .circle(@dynamic-card-corner-action-width);
+    .empty-fill();
+    display: block;
+    font-size: 1.1em;
+    position: absolute;
+    right: @dynamic-card-corner-action-spacing;
+    text-align: center;
+    top: @dynamic-card-corner-action-spacing;
+
+    .icon{
+      left: 0;
+      position: absolute;
+      text-align: center;
+      top: 6px;
+      width: 100%;
+    }
+
+
+    &.favorite{
+      background: @dynamic-card-favorite-color;
+      color: @white;
+
+      &:hover{
+        background: lighten(@dynamic-card-favorite-hover-color, 10%);
+      }
+
+      &.favorited{
+        background: @dynamic-card-favorite-hover-color;
+
+        &:hover{
+          background: lighten(@dynamic-card-favorite-hover-color, 30%);
+        }
+      }
+    }
+
+    &.trash{
+      color: @dynamic-card-trash-color;
+
+      &:hover{
+        color: lighten(@dynamic-card-trash-color, 10%);
+      }
+    }
+  }
+
+  .actions-container{
+    .box-sizing(border-box);
+    bottom: @dynamic-card-actions-spacing;
+    left: 0;
+    padding: 0 @dynamic-card-horizontal-padding;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+
+    .button{
+      .box-sizing(border-box);
+    }
+
+    .preview{
+      color: @dynamic-card-subtitle-text-color;
+      display: block;
+      margin-bottom: @element-vertical-margin;
+      text-transform: uppercase;
+
+      .text, i{
+        vertical-align: middle;
+      }
+
+      .text{
+        margin-left: @element-vertical-margin/2.0;
+        font-size: 0.85em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.left-dynamic-card{
+    padding: 35px 25px 25px 25px;
+    height: 260px;
+
+    .title{
+      color: @dynamic-card-subtitle-text-color;
+      text-align: left;
+    }
+
+    .subtitle{
+      font-weight: lighter;
+      text-align: left;
+    }
+
+    .tag{
+      margin-bottom: @element-vertical-margin;
+
+      .label{
+        text-transform: uppercase;
+        font-size: 0.8em;
+        margin-left: -@element-vertical-margin/2.0;
+      }
+    }
+
+    .description{
+      font-size: 0.9em;
+      text-align: left;
+    }
+  }
+}

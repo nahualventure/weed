@@ -1,0 +1,203 @@
+/**
+Depends on sidebar.less
+*/
+
+@corner-notifications-background-color: @white;
+@corner-notifications-background-shadow-color: @black;
+@corner-notifications-close-border-color: @black-25;
+@corner-notifications-close-text-color: @black-25;
+@corner-notifications-tag-text-color: @white;
+@corner-notifications-text-color: @black-35;
+@corner-notifications-text-font-family: sans-serif;
+
+@corner-notifications-achievement-badge-left: -9px;
+@corner-notifications-achievement-badge-top: -13px;
+@corner-notifications-background-mask-margin-left: 27px;
+@corner-notifications-background-mask-width: @corner-notifications-width + 10px;
+@corner-notifications-bottom-initial-position: 20px;
+@corner-notifications-close-size: 23px;
+@corner-notifications-height: 70px;
+@corner-notifications-left-sidebar-contracted: @sidebar-contracted-width + 20px;
+@corner-notifications-left-sidebar-open: @sidebar-open-width + 20px;
+@corner-notifications-out-achievement-badge-left-margin: 20px;
+@corner-notifications-out-achievement-badge-top-margin: 22.5px;
+@corner-notifications-out-left-delta: 330px;
+@corner-notifications-out-margin: (@corner-notifications-height - @corner-notifications-out-tag-size) / 2.0;
+@corner-notifications-out-tag-size: 34px;
+@corner-notifications-text-left-padding: 90px;
+@corner-notifications-text-line-height: 20px;
+@corner-notifications-text-right-padding: 54px;
+@corner-notifications-width: 355px;
+@corner-notifications-sidebarless-left-position: 15px;
+
+body.sidebarless{
+  .corner-notification{
+    left: @corner-notifications-sidebarless-left-position;
+  }
+}
+
+.corner-notification{
+  .transition(@fast);
+  bottom: @corner-notifications-bottom-initial-position;
+  height: @corner-notifications-height;
+  left: @corner-notifications-left-sidebar-contracted;
+  position: fixed;
+  width: @corner-notifications-width;
+  z-index: @z-maximum;
+
+  &.out{
+    .background-mask{
+      .background, .text{
+        .transition(@fast*1.5 @system-easing-wiggly);
+        margin-left: -1 * @corner-notifications-background-mask-margin-left - @corner-notifications-out-left-delta;
+      }
+
+      .text{
+        .opacity(0);
+      }
+
+      .close{
+        .transition(@fast*1.5 @system-easing-wiggly);
+        right: @corner-notifications-text-right-padding + @corner-notifications-out-left-delta;
+      }
+    }
+
+    .tag, .achievement-badge{
+      .opacity(0);
+      .transition(@faster);
+      .transition-delay(@fast*0.8);
+    }
+
+    .tag{
+      .square(@corner-notifications-out-tag-size);
+      font-size: 0.8em;
+      line-height: @corner-notifications-out-tag-size;
+      margin-left: @corner-notifications-out-margin;
+      margin-top: @corner-notifications-out-margin;
+    }
+
+    .achievement-badge{
+      .make-achievement-badge-size(@corner-notifications-out-tag-size);
+      margin-left: @corner-notifications-out-achievement-badge-left-margin;
+      margin-top: @corner-notifications-out-achievement-badge-top-margin;
+    }
+  }
+
+  &.success{
+    .background-mask{
+      .background{
+        background: #36AD5B; // TODO v1.0
+      }
+    }
+
+    .text{
+      color: @white; // TODO v1.0
+    }
+  }
+
+  &.error{
+    .background-mask{
+      .background{
+        background: @system-danger-color; // TODO v1.0
+      }
+    }
+
+    .text{
+      color: @white; // TODO v1.0
+    }
+  }
+
+  .background-mask{
+    height: 110%;
+    margin-left: @corner-notifications-background-mask-margin-left;
+    overflow-x: hidden;
+    position: relative;
+    width: @corner-notifications-background-mask-width;
+
+    .background, .text, .close{
+      .transition(@fast);
+      .transition-delay(@faster);
+    }
+
+    .background{
+      .border-radius(1000px); // Extreme
+      .box-shadow(0 1px 3px 0 @corner-notifications-background-shadow-color);
+      background: @corner-notifications-background-color;
+      height: @corner-notifications-height;
+      margin-left: -1 * @corner-notifications-background-mask-margin-left;
+      width: @corner-notifications-width;
+    }
+
+    .text{
+      .box-sizing(border-box);
+      font-family: @corner-notifications-text-font-family;
+      font-size: 0.9em;
+      left: 0;
+      line-height: @corner-notifications-text-line-height;
+      margin-left: -1 * @corner-notifications-background-mask-margin-left;
+      padding: 0 @corner-notifications-text-right-padding 0 @corner-notifications-text-left-padding;
+      position: absolute;
+      top: 0;
+      width: @corner-notifications-width;
+    }
+
+    .close{
+      .border-radius(1000px); // Extreme
+      .square(@corner-notifications-close-size);
+      background: @white;
+      color: @corner-notifications-close-text-color;
+      display: block;
+      font-size: 12px;
+      line-height: @corner-notifications-close-size - 2px;
+      position: absolute;
+      right: @corner-notifications-text-right-padding;
+      text-align: center;
+      top: (@corner-notifications-height/2.0) - (@corner-notifications-close-size/2.0) - 1px;
+
+      &:hover{
+        border-color: lighten(@corner-notifications-close-border-color, 2%);
+        color: lighten(@corner-notifications-close-text-color, 2%);
+      }
+    }
+  }
+
+  .tag, .achievement-badge{
+    .transition(@faster);
+    .transition-delay(0);
+  }
+
+  .tag{
+    .border-radius(1000px); // Extreme
+    .square(@corner-notifications-height + 2px);
+    background: darken(@system-success-color, 5%); // TODO v1.0
+    background-size: cover;
+    color: @white; // TODO v1.0
+    font-size: 1.5em;
+    left: 0;
+    line-height: @corner-notifications-height;
+    position: absolute;
+    text-align: center;
+    top: -1px; // Fix
+
+    &.error{
+      background: darken(@system-danger-color, 10%); // TODO v1.0
+    }
+
+    .icon{
+      margin-top: -1px; // Fix
+    }
+  }
+
+  .achievement-badge{
+    .make-achievement-badge-size(@corner-notifications-height + 4px);
+    left: @corner-notifications-achievement-badge-left;
+    position: absolute;
+    top: @corner-notifications-achievement-badge-top;
+  }
+}
+
+.open-sidebar{
+  .corner-notification{
+    left: @corner-notifications-left-sidebar-open;
+  }
+}

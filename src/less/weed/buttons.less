@@ -1,0 +1,626 @@
+/**
+  * Edoo button framework: TODO v1.0 docu
+  */
+
+// Configuration
+@form-focus-transition-time:            100ms;
+@form-focus-shadow-definition:          0px 0px 5px 1px;
+
+@button-danger-color:                   @system-danger-color;
+@button-default-color:                  @system-default-color;
+@button-default-text-color:             @black-40;
+@button-disabled-color:                 @black-5;
+@button-disabled-text-color:            @black-15;
+@button-info-color:                     @system-info-color;
+@button-inverted-color:                 @system-inverted-color;
+@button-primary-color:                  @system-primary-color;
+@button-success-color:                  @system-success-color;
+@button-warning-color:                  @system-warning-color;
+@button-gray-color:                     @black-50;
+
+@button-danger-border-color:            @system-danger-color;
+@button-default-border-color:           @system-default-color;
+@button-disabled-border-color:          @black-5;
+@button-info-border-color:              @system-info-color;
+@button-inverted-border-color:          @system-inverted-color;
+@button-primary-border-color:           @system-primary-color;
+@button-success-border-color:           @system-success-color;
+@button-warning-border-color:           @system-warning-color;
+@button-gray-border-color:              @black-60;
+@button-text-shadow:                    fadeout(lighten(@black, 20%), 80%);
+@button-gray-text-color:                @black;
+
+@button-font-family:                    sans-serif;
+
+@button-breath:                         5px;
+@button-default-border-radius:          @system-border-radius*0.7;
+@button-default-horizontal-padding:     40px;
+@button-default-height:                 51px;
+@button-loader-height:                  11px;
+@button-text-margin-left:               15px;
+@button-start-gradient-color:           @white;
+@button-active-start-gradient-color:    #cbcbcb;
+@button-end-gradient-color:             #c2c2c2;
+@button-pressed-box-shadow-color:       rgba(0,0,0,.06);
+@button-gradient-default-opacity:       85%;
+@button-icon-base-color:                #c5c5c5;
+@button-loader-width:                   35px;
+
+// Sizes
+
+// Sizes
+@button-tiny-border-radius:                  @system-border-radius/2.0;
+@button-tiny-horizontal-padding:             20px;
+@button-tiny-height:                         26px;
+@button-tiny-text-margin-left:               7px;
+@button-tiny-loader-width:                   20px;
+
+@button-small-border-radius:                  @system-border-radius*0.7;
+@button-small-horizontal-padding:             25px;
+@button-small-height:                         39px;
+@button-small-text-margin-left:               7px;
+@button-small-loader-width:                   25px;
+
+@button-large-border-radius:                  @system-border-radius*0.7;
+@button-large-horizontal-padding:             43px;
+@button-large-height:                         66px;
+@button-large-text-margin-left:               20px;
+@button-large-loader-width:                   40px;
+
+// Button generator mixin
+.make-button(
+  @background-color: @button-default-color;
+  @border-color: @black;
+  @text-color: @white;
+  @gradient-opacity: @button-gradient-default-opacity;){
+  #gradient > .vertical(fadeout(@button-start-gradient-color, @gradient-opacity), fadeout(@button-end-gradient-color, @gradient-opacity));
+  .text-shadow(0 1px 1px @button-text-shadow);
+  background-color: @background-color;
+  border: 1px solid fadeout(@border-color, 100%);
+  border-top: 1px solid @border-color;
+  color: @text-color;
+
+  .accent{
+    color: lighten(@background-color, 15%);
+    margin-left: @element-vertical-margin/2.0;
+  }
+
+  [class^="icon-"],
+  [class*=" icon-"],
+  svg *{
+    color: overlay(@background-color, @button-icon-base-color);
+    fill: overlay(@background-color, @button-icon-base-color);
+  }
+
+  // Default states
+  &:hover,
+  &.hover{
+    // .transition(@faster);
+    background-color: lighten(@background-color, 3.1%);
+    border-top-color: lighten(@border-color, 2%);
+  }
+  &:active,
+  &.active{
+    .transition(0);
+    #gradient > .vertical(fadeout(@button-active-start-gradient-color, @gradient-opacity), fadeout(@button-start-gradient-color, @gradient-opacity));
+    background-color: @background-color;
+    border-top-color: darken(@border-color, 2%);
+  }
+  &:focus,
+  &.focus{
+    // .box-shadow(0 0 0 2px fadeout(darken(@background-color, 5%), 55%));
+    .transition(@faster);
+    background-color: lighten(@background-color, 5%);
+  }
+
+  &.selected,
+  &.selected:hover{
+    .transition(0);
+    #gradient > .vertical(fadeout(@button-start-gradient-color, @gradient-opacity), fadeout(@button-end-gradient-color, @gradient-opacity));
+    border-top-color: darken(@border-color, 7%);
+    background-color: darken(@background-color, 0%);
+  }
+
+  &.right-end.bordered{
+    border-left: 1px solid @border-color;
+  }
+
+  &.clear-background{
+    .box-shadow(none) !important;
+    .text-shadow(none) !important;
+    background: none !important;
+    border: none !important;
+    // color: overlay(@background-color, @button-icon-base-color);
+  }
+}
+
+// If it's a button element
+button.button{
+  .box-sizing(content-box);
+}
+
+// Button main class
+.button{
+  .blend-mode(overlay);
+  .border-radius(@button-default-border-radius);
+  .make-button(
+    @background-color: @button-default-color;
+    @border-color: @button-default-border-color;
+    @text-color: @button-default-text-color;
+    @gradient-opacity: 92%;
+  );
+  .text-shadow(0 1px 1px fadeout(@white, 20%));
+  .user-select(none);
+  border-color: @button-default-border-color;
+  cursor: pointer;
+  display: inline-block;
+  font-family: @button-font-family;
+  font-size: 14px;
+  font-weight: normal;
+  height: @button-default-height;
+  line-height: @button-default-height;
+  outline: none;
+  padding: 0 @button-default-horizontal-padding;
+  text-transform: uppercase;
+  vertical-align: middle;
+
+  &.no-paddings{
+    padding: 0;
+    text-align: center;
+  }
+
+  &.resource{
+    .ellipsis();
+    max-width: 150px;
+  }
+
+  &.file-upload-button{
+    input[type="file"]{
+      bottom: 0;
+      cursor: pointer;
+      height: 60px !important;
+      left: 0;
+      padding: 0 !important;
+      position: absolute;
+      top: auto  !important;
+      z-index: 8;
+    }
+  }
+
+  &.no-cursor{
+    cursor: default !important;
+  }
+
+  &.no-x-paddings{
+    padding: 0 @button-default-horizontal-padding/2.0;
+  }
+
+  .accent{
+    color: lighten(@text-color, 10%);
+  }
+
+  &.animated{
+    .transition(@faster);
+  }
+
+  &.file-upload{
+    position:relative;
+
+    .django-file-upload-controller-fix{
+      display: none;
+    }
+
+    input[type="file"]{
+      .opacity(0);
+      cursor: pointer;
+      display:block;
+      padding: 0 !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width:100%;
+      z-index: @z-front;
+      height: 100%;
+      font-size: 0;
+    }
+  }
+
+  &.underline{
+    text-decoration: underline;
+  }
+
+  // Loader initial state
+  .loader{
+    .transition(@faster);
+    display: inline-block;
+    height: @button-default-height - 1;
+    overflow: hidden;
+    margin: 0;
+    width: 0;
+    border: 0;
+    padding: 0;
+
+    svg{
+      .expand();
+    }
+  }
+
+  // SVG for loaders
+  svg *{
+    fill: lighten(@button-default-text-color, 10%);
+  }
+
+  // Icon component behavior
+  [class^="icon-"],
+  [class*=" icon-"]{
+    color: lighten(@button-default-text-color, 10%);
+    font-size: 1.6em;
+    margin-right: @button-text-margin-left;
+  }
+
+  // Span element
+  span{
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  // Docked states
+
+  // Left
+  &.left-end{
+    .border-radius(@button-default-border-radius 0 0 @button-default-border-radius);
+    margin-right: 0 !important;
+    border-right: none !important;
+  }
+
+  // Mid
+  &.mid{
+    .border-radius(0) !important;
+    border-right: none !important;
+  }
+
+  // Right
+  &.right-end{
+    .border-radius(0 @button-default-border-radius @button-default-border-radius 0);
+    margin-left: 0 !important;
+  }
+
+  // The button only contains an icon
+  &.only-icon{
+    overflow: hidden;
+    padding: 0 !important;
+    text-align: center;
+    white-space: nowrap;
+    width: @button-default-height;
+
+    &:before, &:after{
+      content: "\00a0 ";
+    }
+
+    i, .loader{
+      margin: 0;
+    }
+
+    &.circle{
+      .border-radius(100%) !important;
+    }
+  }
+
+  .adjust-button-sizes(@border-radius; @horizontal-padding; @height; @text-margin; @loader-width; @icon-size; @font-size;){
+    .border-radius(@border-radius);
+    font-size: @font-size;
+    height: @height;
+    line-height: @height - 1px;
+    padding: 0 @horizontal-padding;
+
+    .loader{
+      height: @height - 1;
+    }
+
+    [class^="icon-"],
+    [class*=" icon-"]{
+      font-size: @icon-size;
+      margin-right: @text-margin;
+    }
+
+    // Docked states
+
+    // Left
+    &.left-end{
+      .border-radius(@border-radius 0 0 @border-radius);
+    }
+  // Right
+    &.right-end{
+      .border-radius(0 @border-radius @border-radius 0);
+    }
+
+    &.only-icon{
+      // line-height: @height - 1px;
+      width: @height;
+
+      i, .loader{
+        margin: 0;
+      }
+    }
+
+    // When showing the loader
+    &.visible-loader{
+      .loader{
+        width: @loader-width;
+        margin-right: @text-margin;
+      }
+
+      &.only-icon{
+        .loader{
+          width: @loader-width*0.75;
+          margin: 0 (@height - @loader-width*0.75)/2.0;
+        }
+      }
+    }
+  }
+
+  // Tiny
+  &.button-tiny{
+    .adjust-button-sizes(
+      @border-radius: @button-tiny-border-radius;
+      @horizontal-padding: @button-tiny-horizontal-padding;
+      @height: @button-tiny-height;
+      @text-margin: @button-tiny-text-margin-left;
+      @loader-width: @button-tiny-loader-width;
+      @icon-size: 1.1em;
+      @font-size: 13px;
+    );
+
+    &.only-icon{
+      line-height: @button-tiny-height - 3px;
+    }
+  }
+
+  // Small
+  &.button-small{
+    .adjust-button-sizes(
+      @border-radius: @button-small-border-radius;
+      @horizontal-padding: @button-small-horizontal-padding;
+      @height: @button-small-height;
+      @text-margin: @button-small-text-margin-left;
+      @loader-width: @button-small-loader-width;
+      @icon-size: 1.3em;
+      @font-size: 13px;
+    );
+  }
+
+  // Large
+  &.button-large{
+    .adjust-button-sizes(
+      @border-radius: @button-large-border-radius;
+      @horizontal-padding: @button-large-horizontal-padding;
+      @height: @button-large-height;
+      @text-margin: @button-large-text-margin-left;
+      @loader-width: @button-large-loader-width;
+      @icon-size: 1.6em;
+      @font-size: 18px;
+    );
+  }
+
+  // TODO: might be unused, can't remember
+  // &.untoggled{
+  //   background-color: lighten(@button-default-color, 5%);
+  //   border: 1px solid @button-default-color;
+  //   color: lighten(@button-default-text-color, 5%);
+
+  //   &:hover{
+  //     background-color: lighten(@button-default-color, 7%);
+  //   }
+  //   &:active{
+  //     .box-shadow(inset 0 1px 1px 0 fadeout(darken(@button-default-color, 15%), 70%));
+  //     background-color: lighten(@button-default-color, 5%);
+  //   }
+  // }
+
+  // Misc states
+
+  // When showing the loader
+  &.visible-loader{
+    &:before, &:after{
+      content: "";
+    }
+
+    .loader{
+      width: @button-loader-width;
+      margin-right: @button-text-margin-left;
+    }
+
+    &.only-icon{
+      .loader{
+        width: @button-loader-width*0.75;
+        margin: 0 (@button-default-height - @button-loader-width*0.75)/2.0;
+      }
+    }
+  }
+
+  // Blocked button
+  &.button-block, &.block{
+    display: block;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  // Endless loader button
+  &.endless_loading, &.endless_more{
+    display: block;
+    width: 33%;
+    margin: auto;
+    clear: both;
+    text-align: center;
+  }
+
+  // Action states
+
+  // Default hover
+  &:hover,
+  &.hover{
+    background-color: lighten(@button-default-color, 2%);
+  }
+
+  // Default active
+  &:active,
+  &.active{
+    background-color: darken(@button-default-color, 2%);
+  }
+
+  // Default selected
+  &.selected{
+    .box-shadow(inset 0 2px 3px 0 @button-pressed-box-shadow-color);
+    border-top-color: @button-default-border-color;
+  }
+
+  // Disabled
+  &.disabled{
+    .text-shadow(none) !important;
+    background-color: @button-disabled-color !important;
+    border: 1px solid darken(@button-disabled-color, 3%) !important;
+    color: @button-disabled-text-color !important;
+    cursor: default !important;
+
+    [class^="icon-"],
+    [class*=" icon-"]{
+      color: @button-disabled-text-color !important;
+    }
+
+    &.clear-background{
+      background: none !important;
+      border: none !important;
+    }
+
+    // SVG for loaders
+    svg *{
+      fill: @button-disabled-text-color !important;
+    }
+
+    &:focus{
+      border-color: @form-focus-border-color !important;
+    }
+  }
+
+  // Button colors behaviors
+
+  // Clear: might need to be specified in each theme
+  &.button-gray{
+    .make-button(
+      @background-color: @button-gray-color;
+      @border-color: @button-gray-border-color;
+      @text-color: @button-gray-text-color;
+      @gradient-opacity: 92%;
+    );
+    .text-shadow(0 1px 1px fadeout(@white, 20%));
+    border-color: @button-gray-border-color;
+
+    [class^="icon-"],
+    [class*=" icon-"],
+    svg *{
+      color: lighten(@button-default-text-color, 10%);
+      fill: lighten(@button-default-text-color, 10%);
+    }
+
+    &:hover,
+    &.hover{
+      background-color: lighten(@button-gray-color, 2%);
+    }
+
+    &:active,
+    &.active{
+      background-color: darken(@button-gray-color, 2%);
+    }
+
+    &.selected{
+      border-top-color: @button-gray-border-color;
+    }
+  }
+
+  // Primary
+  &.button-primary{
+    .make-button(
+      @background-color: @button-primary-color;
+      @border-color: @button-primary-border-color;
+    );
+  }
+
+  // Information: might need to be specified in each theme
+  &.button-info{
+    .make-button(
+      @background-color: @button-info-color;
+      @border-color: @button-info-border-color;
+    );
+
+    &:hover,
+    &.hover{
+      background-color: lighten(@button-info-color, 2%);
+    }
+
+    &.selected{
+      border-top-color: darken(@button-info-border-color, 4%);
+    }
+  }
+
+  // Success
+  &.button-success{
+    .make-button(
+      @background-color: @button-success-color;
+      @border-color: @button-success-border-color;
+    );
+  }
+
+  // Danger
+  &.button-danger{
+    .make-button(
+      @background-color: @button-danger-color;
+      @border-color: @button-danger-border-color;
+    );
+  }
+
+  // Warning
+  &.button-warning{
+    .make-button(
+      @background-color: @button-warning-color;
+      @border-color: @button-warning-border-color;
+    );
+  }
+
+  // Inverted
+  &.button-inverted{
+    .make-button(
+      @background-color: @button-inverted-color;
+      @border-color: @button-inverted-border-color;
+    );
+  }
+}
+
+.email-button{
+  .button();
+  font-weight: 13px;
+  font-weight: bold;
+}
+
+.email-button-primary{
+  .email-button();
+  .make-button(
+    @background-color: @button-primary-color;
+    @border-color: @button-primary-border-color;
+  );
+}
+
+.email-button-success{
+  .email-button();
+  .make-button(
+    @background-color: @button-success-color;
+    @border-color: @button-success-border-color;
+  );
+}
+
+// IE fixes
+.ie7{
+  .button{
+    margin-right: 2px;
+  }
+}

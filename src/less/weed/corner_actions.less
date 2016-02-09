@@ -1,0 +1,87 @@
+/**
+  * Edoo corner actions framework: TODO v1.0 docu
+  */
+
+// Configuration
+
+@ca-danger-color:                   #ca2a24;
+@ca-default-color:                  @system-default-color;
+@ca-default-text-color:             @black-40;
+@ca-disabled-color:                 @black-5;
+@ca-disabled-text-color:            @black-15;
+@ca-info-color:                     @system-info-color;
+@ca-inverted-color:                 @system-inverted-color;
+@ca-primary-color:                  @system-primary-color;
+@ca-success-color:                  @system-success-color;
+@ca-warning-color:                  @system-warning-color;
+
+@ca-default-text-color:             @white;
+@ca-default-ca-text-color:             #9ca6a6;
+@ca-default-ca-background-color:             #f6f6f6;
+@ca-default-ca-border-color:             #dbdddd;
+
+// @button-danger-border-color:            @system-danger-color;
+// @button-default-border-color:           @system-default-color;
+// @button-disabled-border-color:          @black-5;
+// @button-info-border-color:              @system-info-color;
+// @button-inverted-border-color:          @system-inverted-color;
+// @button-primary-border-color:           @system-primary-color;
+// @button-success-border-color:           @system-success-color;
+// @button-warning-border-color:           @system-warning-color;
+// @button-text-shadow:                    fadeout(lighten(@black, 20%), 80%);
+
+// Sizes
+@ca-size: 52px;
+
+@ca-start-position: 35px;
+@ca-start-y-position: 25px;
+
+.make-corner-action(
+    @background-color: @ca-default-color;
+    @text-color: @ca-default-text-color;){
+  .box-shadow(0 0 0 1px darken(@background-color, 5%));
+  background: @background-color;
+  border-top: 1px solid lighten(@background-color, 10%);
+  color: @text-color;
+}
+
+.corner-actions{
+  .corner-action{
+    .circle(@ca-size);
+    .easeOutExpo(@fast);
+    .make-corner-action(
+      @background-color: @ca-default-ca-background-color;
+      @text-color: @ca-default-ca-text-color);
+    .box-shadow(0 0 0 1px darken(@ca-default-ca-border-color, 5%)); // DONT SORT
+    bottom: @ca-start-y-position;
+    cursor: pointer;
+    font-size: 1.5em;
+    line-height: @ca-size - 2px;
+    position: fixed;
+    text-align: center;
+    z-index: @popup-z-index - 1;
+
+    // Styles
+    &.corner-action-danger{.make-corner-action(@background-color: @ca-danger-color);}
+    &.corner-action-success{.make-corner-action(@background-color: @ca-success-color);}
+    &.corner-action-primary{.make-corner-action(@background-color: @ca-primary-color);}
+    &.corner-action-warning{.make-corner-action(@background-color: @ca-warning-color);}
+    &.corner-action-inverted{.make-corner-action(@background-color: @ca-inverted-color);}
+
+    // Positions
+    .generate-position(@position){
+      right: @ca-start-position + (@ca-size + @element-vertical-margin)*(@position - 1);
+    }
+
+    &:nth-child(1){.generate-position(1);}
+    &:nth-child(2){.generate-position(2);}
+    &:nth-child(3){.generate-position(3);}
+    &:nth-child(4){.generate-position(4);}
+    &:nth-child(5){.generate-position(5);}
+    &:nth-child(6){.generate-position(6);}
+
+    &:after, &:before{content: "\00a0";}
+
+    &:hover{.scale(1.1);}
+  }
+}
