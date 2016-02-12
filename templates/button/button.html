@@ -1,4 +1,4 @@
-<button class="button {{ state }}"
+<a class="button {{ state }}"
   ng-class="{
     'button-primary': type === 'primary',
     'button-success': type === 'success',
@@ -23,4 +23,4 @@
 
   <!-- If just text -->
   <ng-transclude ng-if="icon === undefined"></ng-transclude>
-</button>
+</a>

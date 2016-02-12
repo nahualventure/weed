@@ -1,7 +1,13 @@
 <html>
   <head>
     <title>Test Area</title>
-    <link rel="stylesheet" href="dist/core.css">  
+    <link rel="stylesheet" href="dist/core.css">
+
+    <style>
+        #custom-padding input{
+          padding-left: 190px !important;
+        }
+    </style>
   </head>
 
   <body ng-app="weed">
@@ -50,17 +56,1144 @@
     <h1>Buttons</h1>
 
     <!-- Button: OK -->
-    <a we-button icon="heart" type="danger">Samuel</a>
+    <a we-button icon="cogs" type="danger" size="small">Samuel</a>
 
     <!-- Button: OK -->
     <a we-button icon="cog" type="success"></a>
 
     <h1>Forms</h1>
+
+    <!-- Simple: OK -->
     <h2>Input</h2>
+    <we-input placeholder="wubalubadubdub"></we-input>
+
+    <!-- Left icon: OK -->
+    <h2>Input left icon</h2>
+    <we-input left-icon="search" placeholder="wubalubadubdub"></we-input>
+
+    <!-- Right icon: OK -->
+    <h2>Input right icon</h2>
     <we-input right-icon="search" placeholder="wubalubadubdub"></we-input>
 
+    <!-- Left button: OK but you need to add styles in order to not overlap -->
+    <h2>Input left button</h2>
+    <we-input id="custom-padding" button-position="left" placeholder="wubalubadubdub">
+        <input-button>
+            <a we-button icon="bell" type="danger">Samuel</a>
+        </input-button>
+    </we-input>
+
+    <!-- Right button: OK -->
+    <h2>Input right button</h2>
+    <we-input button-position="right" placeholder="wubalubadubdub">
+        <input-button>
+            <a we-button icon="cog" type="success">Samuel</a>
+        </input-button>
+    </we-input>
+
+    <!-- Left tag: OK -->
+    <h2>Input left tag</h2>
+    <we-input button-position="left" placeholder="wubalubadubdub">
+        <input-button-tag>
+            <a we-button class="form-input-tag" icon="calendar"></a>
+        </input-button-tag>
+    </we-input>
+
+    <!-- Right tag: OK -->
+    <h2>Input right tag</h2>
+    <we-input button-position="right" placeholder="wubalubadubdub">
+        <input-button-tag>
+            <a we-button class="form-input-tag" icon="cog"></a>
+        </input-button-tag>
+    </we-input>
+
+    <hr>
+    <hr>
+
+    <h1>Unmigrated components</h1>
+
+    <hr>
+    <hr>
+
+    <!-- Button framework -->
+    <h2>Button Framework</h2>
+
+    <!-- Small -->
+    <h3>Small</h3>
+    <span tabindex="0" class="button button-default button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-primary button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-info button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-success button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-danger button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-warning button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-small">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-small disabled">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button only-icon button-info button-small untoggled button-square-paddings">
+        <i class="icon icon-plus"></i>
+    </span>
+
+    <!-- Standard -->
+    <h3>Standard</h3>
+    <span tabindex="0" class="button button-default">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-primary">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-info">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-success">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-danger">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-warning">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted disabled">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button only-icon button-info untoggled button-square-paddings">
+        <i class="icon icon-plus"></i>
+    </span>
+
+    <!-- Large -->
+    <h3>Large</h3>
+    <span tabindex="0" class="button button-default button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-primary button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-info button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-success button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-danger button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-warning button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-large">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-large disabled">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button only-icon button-info button-large untoggled button-square-paddings">
+        <i class="icon icon-plus"></i>
+    </span>
+
+    <!-- XLarge -->
+    <h3>XLarge</h3>
+    <span tabindex="0" class="button button-default button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-primary button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-info button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-success button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-danger button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-warning button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-xlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-xlarge disabled">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button only-icon button-info button-xlarge untoggled button-square-paddings">
+        <i class="icon icon-plus"></i>
+    </span>
+
+    <!-- XXLarge -->
+    <h3>XXLarge</h3>
+    <span tabindex="0" class="button button-default button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-primary button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-info button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-success button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-danger button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-warning button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-xxlarge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-xxlarge disabled">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button only-icon button-info button-xxlarge untoggled button-square-paddings">
+        <i class="icon icon-plus"></i>
+    </span>
+
+    <!-- Huge -->
+    <h3>Huge</h3>
+    <span tabindex="0" class="button button-default button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-primary button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-info button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-success button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-danger button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+    
+    <span tabindex="0" class="button button-warning button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-huge">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button button-inverted button-huge disabled">
+        <i class="icon icon-home"></i> Edit
+    </span>
+
+    <span tabindex="0" class="button only-icon button-info button-huge untoggled button-square-paddings">
+        <i class="icon icon-plus"></i>
+    </span>
+
+    <!-- Label framework -->
+    <h2>Label Framework</h2>
+
+    <!-- Small -->
+    <h3>Small</h3>
+    <span class="label label-default label-small">
+        label
+    </span>
+
+    <span class="label label-primary label-small">
+        label
+    </span>
+
+    <span class="label label-info label-small">
+        label
+    </span>
+    
+    <span class="label label-success label-small">
+        label
+    </span>
+    
+    <span class="label label-danger label-small">
+        label
+    </span>
+    
+    <span class="label label-warning label-small">
+        label
+    </span>
+
+    <span class="label label-inverted label-small">
+        label
+    </span>
+
+    <!-- Standard -->
+    <h3>Standard</h3>
+    <span class="label label-default">
+        label
+    </span>
+
+    <span class="label label-primary">
+        label
+    </span>
+
+    <span class="label label-info">
+        label
+    </span>
+    
+    <span class="label label-success">
+        label
+    </span>
+    
+    <span class="label label-danger">
+        label
+    </span>
+    
+    <span class="label label-warning">
+        label
+    </span>
+
+    <span class="label label-inverted">
+        label
+    </span>
+
+    <!-- Large -->
+    <h3>Large</h3>
+    <span class="label label-default label-large">
+        label
+    </span>
+
+    <span class="label label-primary label-large">
+        label
+    </span>
+
+    <span class="label label-info label-large">
+        label
+    </span>
+    
+    <span class="label label-success label-large">
+        label
+    </span>
+    
+    <span class="label label-danger label-large">
+        label
+    </span>
+    
+    <span class="label label-warning label-large">
+        label
+    </span>
+
+    <span class="label label-inverted label-large">
+        label
+    </span>
+
+    <!-- XLarge -->
+    <h3>XLarge</h3>
+    <span class="label label-default label-xlarge">
+        label
+    </span>
+
+    <span class="label label-primary label-xlarge">
+        label
+    </span>
+
+    <span class="label label-info label-xlarge">
+        label
+    </span>
+    
+    <span class="label label-success label-xlarge">
+        label
+    </span>
+    
+    <span class="label label-danger label-xlarge">
+        label
+    </span>
+    
+    <span class="label label-warning label-xlarge">
+        label
+    </span>
+
+    <span class="label label-inverted label-xlarge">
+        label
+    </span>
+
+    <!-- XXLarge -->
+    <h3>XXLarge</h3>
+    <span class="label label-default label-xxlarge">
+        label
+    </span>
+
+    <span class="label label-primary label-xxlarge">
+        label
+    </span>
+
+    <span class="label label-info label-xxlarge">
+        label
+    </span>
+    
+    <span class="label label-success label-xxlarge">
+        label
+    </span>
+    
+    <span class="label label-danger label-xxlarge">
+        label
+    </span>
+    
+    <span class="label label-warning label-xxlarge">
+        label
+    </span>
+
+    <span class="label label-inverted label-xxlarge">
+        label
+    </span>
+
+    <!-- Huge -->
+    <h3>Huge</h3>
+    <span class="label label-default label-huge">
+        label
+    </span>
+
+    <span class="label label-primary label-huge">
+        label
+    </span>
+
+    <span class="label label-info label-huge">
+        label
+    </span>
+    
+    <span class="label label-success label-huge">
+        label
+    </span>
+    
+    <span class="label label-danger label-huge">
+        label
+    </span>
+    
+    <span class="label label-warning label-huge">
+        label
+    </span>
+
+    <span class="label label-inverted label-huge">
+        label
+    </span>
+
+    <!-- Badge framework -->
+    <h2>Badge Framework</h2>
+
+    <!-- Small -->
+    <h3>Small</h3>
+    <span class="badge badge-default badge-small">
+        1
+    </span>
+
+    <span class="badge badge-primary badge-small">
+        1
+    </span>
+
+    <span class="badge badge-info badge-small">
+        1
+    </span>
+    
+    <span class="badge badge-success badge-small">
+        1
+    </span>
+    
+    <span class="badge badge-danger badge-small">
+        1
+    </span>
+    
+    <span class="badge badge-warning badge-small">
+        1
+    </span>
+
+    <span class="badge badge-inverted badge-small">
+        1
+    </span>
+
+    <!-- Standard -->
+    <h3>Standard</h3>
+    <span class="badge badge-default">
+        1
+    </span>
+
+    <span class="badge badge-primary">
+        1
+    </span>
+
+    <span class="badge badge-info">
+        1
+    </span>
+    
+    <span class="badge badge-success">
+        1
+    </span>
+    
+    <span class="badge badge-danger">
+        1
+    </span>
+    
+    <span class="badge badge-warning">
+        1
+    </span>
+
+    <span class="badge badge-inverted">
+        1
+    </span>
+
+    <!-- Large -->
+    <h3>Large</h3>
+    <span class="badge badge-default badge-large">
+        1
+    </span>
+
+    <span class="badge badge-primary badge-large">
+        1
+    </span>
+
+    <span class="badge badge-info badge-large">
+        1
+    </span>
+    
+    <span class="badge badge-success badge-large">
+        1
+    </span>
+    
+    <span class="badge badge-danger badge-large">
+        1
+    </span>
+    
+    <span class="badge badge-warning badge-large">
+        1
+    </span>
+
+    <span class="badge badge-inverted badge-large">
+        1
+    </span>
+
+    <!-- XLarge -->
+    <h3>XLarge</h3>
+    <span class="badge badge-default badge-xlarge">
+        1
+    </span>
+
+    <span class="badge badge-primary badge-xlarge">
+        1
+    </span>
+
+    <span class="badge badge-info badge-xlarge">
+        1
+    </span>
+    
+    <span class="badge badge-success badge-xlarge">
+        1
+    </span>
+    
+    <span class="badge badge-danger badge-xlarge">
+        1
+    </span>
+    
+    <span class="badge badge-warning badge-xlarge">
+        1
+    </span>
+
+    <span class="badge badge-inverted badge-xlarge">
+        1
+    </span>
+
+    <!-- XXLarge -->
+    <h3>XXLarge</h3>
+    <span class="badge badge-default badge-xxlarge">
+        1
+    </span>
+
+    <span class="badge badge-primary badge-xxlarge">
+        1
+    </span>
+
+    <span class="badge badge-info badge-xxlarge">
+        1
+    </span>
+    
+    <span class="badge badge-success badge-xxlarge">
+        1
+    </span>
+    
+    <span class="badge badge-danger badge-xxlarge">
+        1
+    </span>
+    
+    <span class="badge badge-warning badge-xxlarge">
+        1
+    </span>
+
+    <span class="badge badge-inverted badge-xxlarge">
+        1
+    </span>
+
+    <!-- Huge -->
+    <h3>Huge</h3>
+    <span class="badge badge-default badge-huge">
+        1
+    </span>
+
+    <span class="badge badge-primary badge-huge">
+        1
+    </span>
+
+    <span class="badge badge-info badge-huge">
+        1
+    </span>
+    
+    <span class="badge badge-success badge-huge">
+        1
+    </span>
+    
+    <span class="badge badge-danger badge-huge">
+        1
+    </span>
+    
+    <span class="badge badge-warning badge-huge">
+        1
+    </span>
+
+    <span class="badge badge-inverted badge-huge">
+        1
+    </span>
+
+    <!-- Form framework -->
+    <h2>Form framework</h2>
+    <form class="form">
+        <label for="input-test">Label for next input</label>
+        <span class="input-wrapper">
+            <input type="text" name="input-test" placeholder="Insert text here" />
+        </span>
+        <br /><br />
+        <label for="input-test-button-both-2">Label for next input</label>
+        <span class="input-wrapper loffset-70">
+            <a class="button button-danger only-icon"><i class="icon icon-home"></i></a>
+            <input type="text" name="input-test-button-both-2" placeholder="Insert text here" />
+        </span>
+        <br /><br />
+        <label for="input-test-button-both-2">Label for next input</label>
+        <span class="input-wrapper roffset-110">
+            <input type="text" name="input-test-button-both-2" placeholder="Insert text here" />
+            <a class="button button-default float-right">buscar</a>
+        </span>
+        <br /><br />
+        <label for="input-test-disabled">Label for next input (disabled)</label>
+        <span class="input-wrapper disabled">
+            <input type="text" name="input-test-disabled" placeholder="Insert text here" disabled="disabled"/>
+        </span>
+        <br /><br />
+        <label for="input-test-button-both">Label for next input</label>
+        <span class="input-wrapper loffset-50">
+            <i class="form-input-mark icon icon-search"></i>
+            <input type="text" name="input-test-button-both" placeholder="Insert text here" />
+        </span>
+        <br /><br />
+        <label for="input-test-button-both">Label for next input</label>
+        <span class="input-wrapper roffset-30">
+            <input type="text" name="input-test-button-both" placeholder="Insert text here" />
+            <i class="form-input-mark icon icon-search float-right"></i>
+        </span>
+        <br /><br />
+
+        <label for="input-test-button-both">Label for next input</label>
+        <span class="input-wrapper loffset-60">
+            <span class="form-input-tag">
+                <i class="icon icon-calendar"></i>
+            </span>
+            <input type="text" name="input-test-button-both" placeholder="Insert text here" />
+        </span>
+        <br /><br />
+        <label for="input-test-button-both">Label for next input</label>
+        <span class="input-wrapper roffset-60">
+            <input type="text" name="input-test-button-both" placeholder="Insert text here" />
+            <span class="form-input-tag float-right">
+                <i class="icon icon-calendar"></i>
+            </span>
+        </span>
+        <br /><br />
+        <label class="block">Label for next textarea</label>
+        <span class="input-wrapper">
+            <textarea></textarea>
+        </span>
+
+
+        <label class="form-toggler-wrapper check" for="toggler1">
+            <input type="checkbox" name="toggler1" id="toggler1" />
+            Default checkbox text
+        </label>
+        <br />
+
+        <label class="form-toggler-wrapper check" for="toggler2">
+            <input type="checkbox" name="toggler2" id="toggler2" />
+            Default checkbox text
+        </label>
+        <br />
+
+        <label class="form-toggler-wrapper check" for="toggler21">
+            <input type="checkbox" name="toggler21" id="toggler21" checked disabled />
+            Default checkbox text
+        </label>
+        <br />
+
+        <label class="form-toggler-wrapper check" for="toggler22">
+            <input type="checkbox" name="toggler22" id="toggler22" disabled />
+            Default checkbox text
+        </label>
+        <br />
+
+        <label class="form-toggler-wrapper radio" for="toggler3">
+            <input type="radio" name="toggler3" id="toggler3" />
+            Default radio text
+        </label>
+        <br />
+
+        <label class="form-toggler-wrapper radio" for="toggler4">
+            <input type="radio" name="toggler3" id="toggler4" />
+            Default radio text
+        </label>
+        <br />
+
+        <h3>Special components</h3>
+
+        <select class="select2">
+            <option>Samuel</option>
+            <option>Alfredo</option>
+            <option>Chávez</option>
+            <option>Fuentes</option>
+            <option>Nombre extra 1</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+            <option>Apellido extra 2</option>
+        </select>
+
+        <h2>Password strength</h2>
+        <span class="input-wrapper">
+            <input type="password" name="password-test" placeholder="Insert password" />
+        </span>
+
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-0"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-10"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-20"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-30"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-40"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-50"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-60"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-70"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-80"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-90"></div>
+        </div>
+        <div class="password-strength-wrapper">
+            <div class="password-strength-indicator step-100"></div>
+        </div>
+        <br /><br />
+
+        <h2>Form input messages (errors)</h2>
+        <div class="form-last-section">
+            <div class="form-last-section-left">
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q1">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-default right" rel="#input-wrapper">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q2">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-primary right" rel="#input-wrapper2">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q3">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-success right" rel="#input-wrapper3">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q4">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-info right" rel="#input-wrapper4">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q5">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-warning right" rel="#input-wrapper5">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q6">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-danger right" rel="#input-wrapper6">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <label for="input-test">Label for next input</label>
+                <span class="input-wrapper" id="input-wrapper-q7">
+                    <input type="text" name="input-test" placeholder="Insert text here" />
+                </span>
+                <!--span class="form-input-message form-input-message-inverted right" rel="#input-wrapper7">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br />
+                <br />
+                <br /-->
+
+                <!--span class="form-dropdown" id="form-dropdown">
+                    <span class="form-dropdown-background">
+                        <span class="value">Select an option</span>
+                        <span class="drop">
+                            <i class="icon-caret-down"></i>
+                        </span>
+                    </span>
+                    <ul>
+                        <li class="header">Option</li>
+                        <li>Option1</li>
+                        <li>Option2</li>
+                        <li>Option3 with <strong>bold</strong></li>
+                        <li class="header">Option4</li>
+                        <li>Option5</li>
+                        <li>Option6</li>
+                    </ul>
+                </span>
+                <!--span class="form-input-message down form-input-message-primary" rel="#form-dropdown">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span-->
+            </div>
+            <div class="form-last-section-right">
+                <!--label class="form-toggler-wrapper check" for="toggler1" id="form-toggler-wrapper">
+                    <input type="checkbox" name="toggler1" id="toggler1" />
+                    <span class="indicator icon-sign-blank"></span>
+                    Default checkbox text
+                </label>
+                <span class="form-input-message up form-input-message-info" rel="#form-toggler-wrapper">
+                    <strong>Please enter a valid email</strong>
+                    <br/>
+                    info@todoflex.com
+                </span>
+                <br /-->
+            </div>
+        </div>
+        
+
+
+        <br />
+        <input class="form-slider" type="text" name="price" value="20;250" />
+        <br />
+
+
+
+
+
+
+
+    </form>
+
+    <h2>Performance indicator</h2>
+    <div class="performance-indicator performance-indicator-default" rel='{"display_text": "79", "percentage": 0.10}'>
+    </div>
+    <div class="performance-indicator performance-indicator-primary" rel='{"display_text": "100", "percentage": 0.20}'>
+    </div>
+    <div class="performance-indicator performance-indicator-info" rel='{"display_text": "1", "percentage": 0.30}'>
+    </div>
+    <div class="performance-indicator performance-indicator-success" rel='{"display_text": "F", "percentage": 0.40}'>
+    </div>
+    <div class="performance-indicator performance-indicator-danger" rel='{"display_text": "E", "percentage": 0.50}'>
+    </div>
+    <div class="performance-indicator performance-indicator-warning" rel='{"display_text": "D", "percentage": 0.60}'>
+    </div>
+    <div class="performance-indicator performance-indicator-inverted" rel='{"display_text": "C", "percentage": 0.70}'>
+    </div>
+    <div class="performance-indicator performance-indicator-default" rel='{"display_text": "B", "percentage": 0.80}'>
+    </div>
+    <div class="performance-indicator performance-indicator-primary" rel='{"display_text": "A", "percentage": 0.90}'>
+    </div>
+    <div class="performance-indicator performance-indicator-info" rel='{"display_text": "A+", "percentage": 1.0}'>
+    </div>
+
+    <h2>Formatting</h2>
+    <h1>Heading 1</h1>
+    <p>Quisque <a>facilisis erat a dui</a>. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.</p>
+    <h2>Heading 2</h2>
+    <p>Quisque <a>facilisis erat a dui</a>. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.</p>
+    <h3>Heading 3</h3>
+    <p>Quisque <a>facilisis erat a dui</a>. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.</p>
+    <h4>Heading 4</h4>
+    <p>Quisque <a>facilisis erat a dui</a>. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.</p>
+    <h5>Heading 5</h5>
+    <p>Quisque <a>facilisis erat a dui</a>. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.</p>
+    <h6>Heading 6</h6>
+    <p>Quisque <a>facilisis erat a dui</a>. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.</p>
+
+    <h2>Inline message framework</h2>
+    <div class="message message-default">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-primary">
+        <span class="message-value">Mensaje <strong>loco</strong></span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-info">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-success">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-danger">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-warning">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-inverted">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+
+    <h2>Inline banner message framework</h2>
+    <div class="message message-default message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-primary message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-info message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-success message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-danger message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-warning message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+    <div class="message message-inverted message-banner">
+        <span class="message-value">Mensaje loco</span>
+        <span class="message-close"><i class="icon-remove"></i></span>
+    </div>
+
+
+    <h2>Popups</h2>
+
+    <div class="popup-wrapper">
+        <div class="popup main-content popup-alert" id="popup-alert">
+            <div class="popup-heading">
+                <h3>This is a mothafucking popup alert. Are you afraid?</h3>
+            </div>
+            <div class="popup-actions">
+                <a class="button button-info button-small">Yes</a>
+                <a class="button button-success button-small">Absolutely</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="popup-wrapper">
+        <div class="popup main-content popup-message" id="popup-message">
+            <div class="popup-title-bar">Title of the popup</div>
+            <div class="popup-content">
+                <h2>Are you sure?</h2>
+                <p>Nunc auctor bibendum eros. Maecenas porta accumsan mauris. Etiam enim enim, elementum sed, bibendum quis, rhoncus non, metus. Fusce neque dolor, adipiscing sed, consectetuer et, lacinia sit amet, quam. Suspendisse wisi quam, consectetuer in, blandit sed, suscipit eu, eros. Etiam ligula enim, tempor ut, blandit nec, mollis eu, lectus. Nam cursus. Vivamus iaculis. Aenean risus purus, pharetra in, blandit quis, gravida a, turpis. Donec nisl. Aenean eget mi. Fusce mattis est id diam. Phasellus faucibus interdum sapien. Duis quis nunc. Sed enim.</p>
+            </div>
+            <div class="popup-actions">
+                <a class="button button-info button-small">Yes</a>
+                <a class="button button-success button-small">Absolutely</a>
+            </div>
+        </div>
+    </div>
+
+    <a class="button button-success button-small" href="#popup-alert" rel="magnific-inline"><i class="icon-share-alt"></i> Open alert</a>
+    <a class="button button-danger button-small" href="#popup-message" rel="magnific-inline"><i class="icon-share-alt"></i> Open message</a>
+    <br/>
+    <h2>Popover</h2>
+    <p>Suspendisse vestibulum <a class="user-popover-trigger" rel='{"photo": "http://i.ytimg.com/vi/YEaY8One1zg/0.jpg", "name": "Samuel Chávez", "title": "Director primaria", "contact": "samuelchvez@gmail.com"}'>dignissim</a> quam. Integer vel augue. Phasellus nulla purus, interdum ac, venenatis non, varius rutrum, leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis a eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce magna mi, porttitor quis, convallis eget, sodales ac, urna. Phasellus luctus venenatis magna. Vivamus eget lacus. Nunc tincidunt convallis tortor. Duis eros mi, dictum vel, fringilla sit amet, fermentum id, sem. Phasellus nunc enim, faucibus ut, laoreet in, consequat id, metus. Vivamus dignissim. Cras lobortis tempor velit. Phasellus nec diam ac nisl lacinia tristique. Nullam nec metus id mi dictum dignissim. Nullam quis wisi non sem lobortis condimentum. Phasellus pulvinar, nulla non aliquam eleifend, tortor wisi scelerisque felis, in sollicitudin arcu ante lacinia leo.</p>
+
+    <!--div class="qtip-edoo-popover">
+        <div class="popover user-popover">
+            <div class="popover-photo"></div>
+            <div class="popover-info">
+                <div class='name'>Test va vos</div>
+                <div class='title'>Test va vos</div>
+                <div class='contact'>Test va vos</div>
+            </div>
+        </div>
+    </div-->
+
+    <h2>Calendar</h2>
+    <div class="form-last-section">
+        <div class="form-last-section-left">
+            <div class="form">
+                <label for="input-test">Introduce le date:</label>
+                <span class="input-wrapper" id="input-wrapper-q1">
+                    <input type="text" name="input-calendar" placeholder="Insert date here" class="form-calendar" />
+                </span>
+                <br />
+                <br />
+                <span id="span-calendar"></span>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
+        <div class="form-last-section-right"></div>
+    </div>
+
     <!-- Dev scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="/src/js/weed.js"></script>
     <script src="/src/js/navbar/navbar.js"></script>
     <script src="/src/js/navbar/navbarMainAction.js"></script>

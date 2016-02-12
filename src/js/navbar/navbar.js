@@ -4,6 +4,7 @@
  * @description
  * # navbarDirective
  * Directive of the app
+ * Depends upon weInput
  */
 'use strict';
 
@@ -13,7 +14,6 @@ weed.directive('weNavbarElement', ['CONFIG', function(CONFIG) {
     return {
         restrict: 'A',
         transclude: true,
-        // replace: true,
         scope: {
             position: '@',
             type: '@',
@@ -42,9 +42,6 @@ weed.directive('weNavbarElement', ['CONFIG', function(CONFIG) {
 
             return CONFIG.templatesPath + 'navbar/' + template;
         },
-        link: function(scope, elem, attrs) {
-            var transcluded = elem.find('span').contents();
-            scope.withLabel = transcluded.length > 0;
-        }
+        link: function(scope, elem, attrs) {}
     };
 }]);

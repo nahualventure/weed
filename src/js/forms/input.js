@@ -4,6 +4,7 @@
  * @description
  * # navbarDirective
  * Directive of the app
+ * Depends upon weIcon
  */
 'use strict';
 var weed = angular.module('weed');
@@ -11,15 +12,18 @@ var weed = angular.module('weed');
 weed.directive('weInput', ['CONFIG', function(CONFIG) {
   return {
     restrict: 'E',
+    transclude: {
+      buttonSlot: '?inputButton',
+      buttonTagSlot: '?inputButtonTag'
+    },
     scope: {
         rightIcon: '@',
+        leftIcon: '@',
+        buttonPosition: '@',
         size: '@',
         placeholder: '@'
     },
     replace: true,
-    templateUrl: CONFIG.templatesPath + 'forms/input.html',
-    link: function(scope, elem, attrs) {
-        console.log(attrs);
-    }
+    templateUrl: CONFIG.templatesPath + 'forms/input.html'
   };
 }]);
