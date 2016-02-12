@@ -1,0 +1,26 @@
+<button class="button {{ state }}"
+  ng-class="{
+    'button-primary': type === 'primary',
+    'button-success': type === 'success',
+    'button-warning': type === 'warning',
+    'button-danger': type === 'danger',
+    'button-info': type === 'info',
+    'button-gray': type === 'gray',
+    'button-inverse': type === 'inverse',
+
+    'button-small': size === 'small',
+    'button-large': size === 'large',
+    'button-tiny': size === 'tiny',
+
+    'only-icon': !hasText
+  }">
+
+  <!-- If icon has been given -->
+  <we-icon ng-if="icon !== undefined" icon="{{ icon }}"></we-icon>
+  <span class="text" ng-if="icon !== undefined && hasText">
+    <ng-transclude></ng-transclude>
+  </span>
+
+  <!-- If just text -->
+  <ng-transclude ng-if="icon === undefined"></ng-transclude>
+</button>

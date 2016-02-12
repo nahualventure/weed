@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Test Area</title>
+    <link rel="stylesheet" href="dist/core.css">  
+  </head>
+
+  <body ng-app="weed">
+    <div class="navbar">
+
+      <!-- Logo: OK -->
+      <a we-navbar-element
+        type="logo"
+        isotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_isotype.png"
+        logotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_logotype.png"
+        position="left">
+      </a>
+
+      <!-- Search: OK -->
+      <div we-navbar-element type="search-form" position="left" placeholder="Busca al usuario aquí"></div>
+
+      <!-- Link: OK -->
+      <a we-navbar-element type="link" icon="cog" position="right"></a>
+
+      <!-- Link: OK -->
+      <span we-navbar-element type="separator" position="right"></span>
+
+      <!-- Separator: OK -->
+      <a we-navbar-element type="link" icon="plug" position="right"></a>
+
+      <!-- Main action: Ok -->
+      <div class="navbar-main-action-container">
+        <a we-navbar-main-action icon="plus"></a>
+      </div>
+    </div>
+
+    <h1>Icons</h1>
+
+    <!-- Icon: OK -->
+    <we-icon icon="cog"></we-icon>
+
+    <!-- Icon: OK -->
+    <we-icon icon="home"></we-icon>
+
+    <!-- Icon: OK -->
+    <we-icon icon="heart"></we-icon>
+
+    <!-- Icon: OK -->
+    <we-icon icon="pencil"></we-icon>
+
+    <h1>Buttons</h1>
+
+    <!-- Button: OK -->
+    <a we-button icon="heart" type="danger">Samuel</a>
+
+    <!-- Button: OK -->
+    <a we-button icon="cog" type="success"></a>
+
+    <h1>Forms</h1>
+    <h2>Input</h2>
+    <we-input right-icon="search" placeholder="wubalubadubdub"></we-input>
+
+    <!-- Dev scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular.min.js"></script>
+    <script src="/src/js/weed.js"></script>
+    <script src="/src/js/navbar/navbar.js"></script>
+    <script src="/src/js/navbar/navbarMainAction.js"></script>
+    <script src="/src/js/icons/icons.js"></script>
+    <script src="/src/js/button/button.js"></script>
+    <script src="/src/js/forms/input.js"></script>
+
+    </body>
+</html>

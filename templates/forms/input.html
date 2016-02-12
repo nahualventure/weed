@@ -1,0 +1,12 @@
+<div class="input-wrapper" ng-class="
+    {
+      'input-wrapper-small': size=='small',
+      'input-wrapper-large': size=='large',
+      'input-wrapper-tiny': size=='tiny',
+    }
+  ">
+
+  <input type="text" placeholder="{{ placeholder }}">
+
+  <i ng-if="rightIcon !== undefined" class="form-input-mark icon icon-{{ rightIcon }}"></i>
+</div>
