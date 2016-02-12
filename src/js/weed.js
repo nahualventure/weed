@@ -4,5 +4,12 @@
 'use strict';
 
 var weed = angular.module('weed', [
-    'ngAnimate'
+    // 'ngAnimate',
+    // 'ngRoute'
+
+
 ]);
+
+weed.constant('CONFIG', {
+    templatesPath: '/templates/'
+});
