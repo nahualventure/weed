@@ -310,899 +310,895 @@
 }
 
 // Main class
-.form{
-  font-size: @form-font-size;
-  position: relative;
+&.horizontal{
+  .clearfix();
 
-  &.horizontal{
-    .clearfix();
+  & > *{
+    float: left;
+  }
+}
 
-    & > *{
-      float: left;
+.redactor-box{
+  .border-radius(@system-border-radius);
+  float: none;
+  max-width: none;
+
+  .redactor-box{
+    .border-radius(0 0 @system-border-radius @system-border-radius);
+    padding: 10px 20px;
+  }
+
+  .redactor-toolbar{
+    padding: 0 10px !important;
+    height: 50px;
+    border: 1px solid #d9d9d9;
+    background: #f6f6f6;
+    .border-radius(@system-border-radius @system-border-radius 0 0);
+    .box-shadow(none);
+
+    li a{
+      color: #7a7a7a;
+      padding: 18px 15px;
+
+      &:hover{
+        background: #868686;
+        color: @white;
+      }
     }
   }
 
-  .redactor-box{
-    .border-radius(@system-border-radius);
-    float: none;
-    max-width: none;
+  .redactor-editor{
+    border-top: none;
+    .border-radius(0 0 @system-border-radius @system-border-radius);
+  }
+}
 
-    .redactor-box{
-      .border-radius(0 0 @system-border-radius @system-border-radius);
-      padding: 10px 20px;
+input[type="button"]{
+  cursor: pointer !important;
+}
+
+// Input reset
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="url"],
+input[type="week"],
+textarea,
+.fake-result{
+  .box-sizing(border-box);
+  .placeholder(@form-input-placeholder-color);
+  background: none;
+  border: none;
+  color: @form-input-text-color;
+  display: inline-block;
+  font-family: @form-font-family;
+  font-size: 14px;
+  padding: 0 @form-input-horizontal-padding;
+  width: 100%;
+
+  // Disabled state
+  &[disabled="disabled"]{
+    .placeholder(lighten(@form-input-placeholder-color, 2%));
+  }
+}
+
+&.popover-form{
+  display: none;
+}
+
+// Input wrapper utility for buttons and floats
+.input-wrapper{
+  .border-radius(@form-input-border-radius);
+  .box-sizing(border-box);
+  .transition(background @form-focus-transition-time, border @form-focus-transition-time;);
+  .bevel(@system-default-background-color);
+  background: @form-input-background-color;
+  border: 1px solid @form-input-border-color;
+  display: inline-block;
+  overflow: hidden;
+  padding: @form-input-vertical-padding 0;
+  position: relative;
+  width: 100%;
+
+  &.error{
+    border-color: @form-input-error-border-color !important;
+
+    input{
+      color: @form-input-error-text-color !important;
     }
 
-    .redactor-toolbar{
-      padding: 0 10px !important;
-      height: 50px;
-      border: 1px solid #d9d9d9;
-      background: #f6f6f6;
-      .border-radius(@system-border-radius @system-border-radius 0 0);
-      .box-shadow(none);
+    .button{
+      border-color: @form-input-error-border-color !important;
+      color: @form-input-error-text-color !important;
+    }
+  }
 
-      li a{
-        color: #7a7a7a;
-        padding: 18px 15px;
+  // When it contains a typeahead
+  &.typeaheaded{
+    // background: @form-typeaheaded-background-color;
+    overflow: visible;
 
-        &:hover{
-          background: #868686;
-          color: @white;
+    .datum-placeholder{
+      .border-radius(@form-input-border-radius);
+      .box-sizing(border-box);
+      background: @form-typeaheaded-background-color;
+      height: @form-input-height - 2px;
+      display: none;
+      left: 0;
+      padding: 0 @form-input-horizontal-padding;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: (@z-immediate-over + 2);
+
+      &.user, &.structure{
+
+        .picture-container{
+          float: left;
+          margin-right: @form-typeahead-user-placeholder-picture-margin-right;
+
+          img.picture{
+            .border-radius(100px);
+            .box-shadow(0px 0px 0px 2px @form-typeahead-user-placeholder-border-color);
+            .box-sizing(border-box);
+            .vertical-center(@form-input-height - 2; @form-typeahead-user-placeholder-picture-size);
+            height: @form-typeahead-user-placeholder-picture-size;
+            vertical-align: middle;
+            width: @form-typeahead-user-placeholder-picture-size;
+          }
+        }
+
+        // User name
+        .data{
+          .vertical-center(@form-input-height - 2; @form-typeahead-user-placeholder-expected-height);
+          float: left;
+          margin-left: @element-vertical-margin;
+          max-width: @form-typeahead-user-placeholder-data-max-width;
+          text-align: left;
+          vertical-align: middle;
+
+          .name{
+            .ellipsis;
+            color: @form-typeahead-user-placeholder-name-color;
+            display: block;
+            font-size: 1.1em;
+            font-weight: bold;
+          }
+
+          .role{
+            .ellipsis;
+            color: @form-typeahead-user-placeholder-role-color;
+            display: block;
+            font-size: 0.9em;
+          }
+        }
+      }
+
+      &.structure{
+        .data{
+          margin-left: 0;
         }
       }
     }
+  }
 
-    .redactor-editor{
+  &.clear-margin-bottom{
+    margin-bottom: 0;
+  }
+
+  // Incrusted form states
+  &.incrusted{
+    .border-radius(0);
+    border-top: none;
+
+    // closing top position
+    &.close-top{
+      border-top: 1px solid @form-input-border-color;
+      .border-radius(@form-input-border-radius @form-input-border-radius 0 0);
+    }
+
+    &.close-bottom{
+      .border-radius(0 0 @form-input-border-radius @form-input-border-radius);
       border-top: none;
-      .border-radius(0 0 @system-border-radius @system-border-radius);
     }
   }
 
-  input[type="button"]{
-    cursor: pointer !important;
+  &.area{
+    height: auto !important;
+
+    &.with-toolbar{
+      padding-bottom: 0;
+    }
+
+    .input-wrapper-toolbar{
+      background: white;
+      border-top: 1px solid @form-input-toolbar-border-color;
+      height: @form-input-toolbar-height;
+      line-height: @form-input-toolbar-height;
+      padding: 0 @element-vertical-margin*1.5 0 0;
+
+      .tools{
+        float: left;
+        height: 100%;
+
+        .file-label{
+          color: @form-input-toolbar-file-label-color;
+          vertical-align: middle;
+        }
+
+        .button{
+          .vertical-center(@form-input-toolbar-height, @button-small-height - 1px);
+          position: relative;
+          height: @button-small-height - 1px;
+          line-height: @button-small-height - 2px;
+          top: auto;
+          font-size: 14px;
+          left: auto;
+          vertical-align: middle;
+
+          &.clear-element{
+            font-size: 10px;
+
+            i{
+              color: darken(@button-default-color, 20%);
+            }
+          }
+
+          &:last-child{
+            right: auto;
+          }
+
+          &:hover{
+            i{
+              color: darken(@button-default-color, 50%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Horizontal incrusted input states
+  &.left-end{
+    .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
+    border-right: none;
+    width: 50%;
+    float: left;
+  }
+
+  &.right-end{
+    .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
+    width: 50%;
+    float: left;
+
+    &.input-wrapper-focussed{
+      border-left-color: @form-focus-border-color;
+    }
+  }
+
+  &.clear{
+    background: none;
+    border:none;
+  }
+
+  .errorlist{
+    display: none;
+  }
+
+  &.input-wrapper-small{
+    input{
+      padding: 0 @element-vertical-margin*1.5;
+    }
+
+    i.form-input-mark{
+      line-height: @form-input-small-height;
+
+      &.float-left{
+        left: @element-vertical-margin*1.5;
+      }
+
+      &.float-right{
+        right: @element-vertical-margin*1.5;
+      }
+    }
+
+  }
+
+  // Placeholded (for javascript placeholder component)
+  // &.placeholded{
+  //   height: @form-input-height;
+  //   position: relative;
+
+  //   // Small
+  //   &.input-wrapper-small{
+  //     height: @form-input-small-height;
+
+  //     label{
+  //       left: @element-vertical-margin*1.5;
+  //       height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
+  //       line-height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
+  //     }
+
+      
+
+  //     &.area{
+  //       textarea{
+  //         padding-left: @element-vertical-margin*1.5;
+  //         padding-right: @element-vertical-margin*1.5;
+  //       }
+  //     }
+  //   }
+
+  //   // Tiny
+  //   &.input-wrapper-tiny{
+  //     height: @form-input-tiny-height;
+
+  //     input{
+  //       top: 2.5px;
+  //     }
+
+  //     label{
+  //       font-size: 11px;
+  //       height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
+  //       left: @form-input-horizontal-padding/2.0;
+  //       line-height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
+  //       top: 2.5px;
+  //     }
+  //   }
+
+  //   &.input-wrapper-sensitive{
+
+  //     @media(max-width: @system-hugescreen-breakpoint){
+  //       .input-wrapper-small();
+  //     }
+  //   }
+
+  //   &.with-external-label{
+  //     label{
+  //       color: @form-input-placeholder-color;
+  //     }
+  //   }
+
+  //   label{
+  //     color: @form-input-text-color;
+  //     cursor: text;
+  //     font-family: @form-font-family;
+  //     font-size: 1em;
+  //     font-weight: normal;
+  //     height: (@form-input-height - 2*@form-input-vertical-padding - 2);
+  //     left: @form-input-horizontal-padding;
+  //     line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
+  //     margin-bottom: 0;
+  //     padding-left: 0;
+  //     padding-right: @form-input-horizontal-padding;
+  //     position:absolute;
+  //     top: @form-input-vertical-padding;
+  //     z-index: @z-immediate-over;
+
+  //     &:before{
+  //       content: "";
+  //     }
+  //   }
+
+  //   input, .fake-result{
+  //     left: 0;
+  //     position:absolute;
+  //     top: @form-input-vertical-padding;
+  //     width: 100%;
+  //     z-index: (@z-immediate-over + 1);
+  //   }
+
+  //   .button{
+  //     z-index: (@z-immediate-over + 2);
+  //   }
+  // }
+
+  &.file-upload{
+    position:relative;
+
+    .django-file-upload-controller-fix{
+      display: none;
+    }
+
+    .fake-result{
+      .ellipsis();
+      display: inline-block;
+      height: (@form-input-height - 2*@form-input-vertical-padding - 2);
+      line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
+    }
+
+    input[type="file"]{
+      .opacity(0);
+      font-size: 0;
+      cursor: pointer;
+      display:block;
+      padding: 0 !important;
+      position: relative;
+      top: 0;
+      width:100%;
+      z-index: @z-front;
+      height: 100%;
+
+      *{
+        cursor: pointer;
+      }
+    }
   }
 
   // Input reset
   input[type="text"],
   input[type="password"],
   input[type="email"],
-  input[type="range"],
-  input[type="date"],
-  input[type="month"],
-  input[type="datetime"],
-  input[type="datetime-local"],
-  input[type="url"],
-  input[type="week"],
-  textarea,
-  .fake-result{
-    .box-sizing(border-box);
-    .placeholder(@form-input-placeholder-color);
-    background: none;
-    border: none;
-    color: @form-input-text-color;
+  input[type="url"]{
     display: inline-block;
-    font-family: @form-font-family;
-    font-size: 14px;
-    padding: 0 @form-input-horizontal-padding;
-    width: 100%;
-
-    // Disabled state
-    &[disabled="disabled"]{
-      .placeholder(lighten(@form-input-placeholder-color, 2%));
-    }
+    height: (@form-input-height - 2*@form-input-vertical-padding - 2);
+    // line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
   }
 
-  &.popover-form{
-    display: none;
+  // Textarea
+  textarea{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    height: @form-input-height*2 - 2;
   }
 
-  // Input wrapper utility for buttons and floats
-  .input-wrapper{
-    .border-radius(@form-input-border-radius);
-    .box-sizing(border-box);
-    .transition(background @form-focus-transition-time, border @form-focus-transition-time;);
-    .bevel(@system-default-background-color);
-    background: @form-input-background-color;
-    border: 1px solid @form-input-border-color;
-    display: inline-block;
-    overflow: hidden;
-    padding: @form-input-vertical-padding 0;
-    position: relative;
-    width: 100%;
+  // Sizes
 
-    &.error{
-      border-color: @form-input-error-border-color !important;
-
-      input{
-        color: @form-input-error-text-color !important;
-      }
-
-      .button{
-        border-color: @form-input-error-border-color !important;
-        color: @form-input-error-text-color !important;
-      }
+  // Small
+  &.input-wrapper-small{
+    input{
+      height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
     }
 
-    // When it contains a typeahead
-    &.typeaheaded{
-      // background: @form-typeaheaded-background-color;
-      overflow: visible;
-
-      .datum-placeholder{
-        .border-radius(@form-input-border-radius);
-        .box-sizing(border-box);
-        background: @form-typeaheaded-background-color;
-        height: @form-input-height - 2px;
-        display: none;
-        left: 0;
-        padding: 0 @form-input-horizontal-padding;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: (@z-immediate-over + 2);
-
-        &.user, &.structure{
-
-          .picture-container{
-            float: left;
-            margin-right: @form-typeahead-user-placeholder-picture-margin-right;
-
-            img.picture{
-              .border-radius(100px);
-              .box-shadow(0px 0px 0px 2px @form-typeahead-user-placeholder-border-color);
-              .box-sizing(border-box);
-              .vertical-center(@form-input-height - 2; @form-typeahead-user-placeholder-picture-size);
-              height: @form-typeahead-user-placeholder-picture-size;
-              vertical-align: middle;
-              width: @form-typeahead-user-placeholder-picture-size;
-            }
-          }
-
-          // User name
-          .data{
-            .vertical-center(@form-input-height - 2; @form-typeahead-user-placeholder-expected-height);
-            float: left;
-            margin-left: @element-vertical-margin;
-            max-width: @form-typeahead-user-placeholder-data-max-width;
-            text-align: left;
-            vertical-align: middle;
-
-            .name{
-              .ellipsis;
-              color: @form-typeahead-user-placeholder-name-color;
-              display: block;
-              font-size: 1.1em;
-              font-weight: bold;
-            }
-
-            .role{
-              .ellipsis;
-              color: @form-typeahead-user-placeholder-role-color;
-              display: block;
-              font-size: 0.9em;
-            }
-          }
-        }
-
-        &.structure{
-          .data{
-            margin-left: 0;
-          }
-        }
-      }
-    }
-
-    &.clear-margin-bottom{
-      margin-bottom: 0;
-    }
-
-    // Incrusted form states
-    &.incrusted{
-      .border-radius(0);
-      border-top: none;
-
-      // closing top position
-      &.close-top{
-        border-top: 1px solid @form-input-border-color;
-        .border-radius(@form-input-border-radius @form-input-border-radius 0 0);
-      }
-
-      &.close-bottom{
-        .border-radius(0 0 @form-input-border-radius @form-input-border-radius);
-        border-top: none;
-      }
-    }
-
-    &.area{
-      height: auto !important;
-
-      &.with-toolbar{
-        padding-bottom: 0;
-      }
-
-      .input-wrapper-toolbar{
-        background: white;
-        border-top: 1px solid @form-input-toolbar-border-color;
-        height: @form-input-toolbar-height;
-        line-height: @form-input-toolbar-height;
-        padding: 0 @element-vertical-margin*1.5 0 0;
-
-        .tools{
-          float: left;
-          height: 100%;
-
-          .file-label{
-            color: @form-input-toolbar-file-label-color;
-            vertical-align: middle;
-          }
-
-          .button{
-            .vertical-center(@form-input-toolbar-height, @button-small-height - 1px);
-            position: relative;
-            height: @button-small-height - 1px;
-            line-height: @button-small-height - 2px;
-            top: auto;
-            font-size: 14px;
-            left: auto;
-            vertical-align: middle;
-
-            &.clear-element{
-              font-size: 10px;
-
-              i{
-                color: darken(@button-default-color, 20%);
-              }
-            }
-
-            &:last-child{
-              right: auto;
-            }
-
-            &:hover{
-              i{
-                color: darken(@button-default-color, 50%);
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Horizontal incrusted input states
-    &.left-end{
-      .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
-      border-right: none;
-      width: 50%;
-      float: left;
-    }
-
-    &.right-end{
-      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-      width: 50%;
-      float: left;
-
-      &.input-wrapper-focussed{
-        border-left-color: @form-focus-border-color;
-      }
-    }
-
-    &.clear{
-      background: none;
-      border:none;
-    }
-
-    .errorlist{
-      display: none;
-    }
-
-    &.input-wrapper-small{
-      input{
-        padding: 0 @element-vertical-margin*1.5;
-      }
-
-      i.form-input-mark{
-        &.float-left{
-          left: @element-vertical-margin*1.5;
-        }
-
-        &.float-right{
-          right: @element-vertical-margin*1.5;
-        }
-      }
-
-    }
-
-    // Placeholded (for javascript placeholder component)
-    &.placeholded{
-      height: @form-input-height;
-      position: relative;
-
-      // Small
-      &.input-wrapper-small{
-        height: @form-input-small-height;
-
-        label{
-          left: @element-vertical-margin*1.5;
-          height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
-          line-height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
-        }
-
-        i.form-input-mark{
-          line-height: @form-input-small-height;
-        }
-
-        &.area{
-          textarea{
-            padding-left: @element-vertical-margin*1.5;
-            padding-right: @element-vertical-margin*1.5;
-          }
-        }
-      }
-
-      // Tiny
-      &.input-wrapper-tiny{
-        height: @form-input-tiny-height;
-
-        input{
-          top: 2.5px;
-        }
-
-        label{
-          font-size: 11px;
-          height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
-          left: @form-input-horizontal-padding/2.0;
-          line-height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
-          top: 2.5px;
-        }
-
-        i.form-input-mark{
-          font-size: 0.8em;
-          line-height: @form-input-tiny-height;
-          right: @form-input-horizontal-padding/2.0;
-        }
-      }
-
-      &.input-wrapper-sensitive{
-
-        @media(max-width: @system-hugescreen-breakpoint){
-          .input-wrapper-small();
-        }
-      }
-
-      &.with-external-label{
-        label{
-          color: @form-input-placeholder-color;
-        }
-      }
-
-      label{
-        color: @form-input-text-color;
-        cursor: text;
-        font-family: @form-font-family;
-        font-size: 1em;
-        font-weight: normal;
-        height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-        left: @form-input-horizontal-padding;
-        line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-        margin-bottom: 0;
-        padding-left: 0;
-        padding-right: @form-input-horizontal-padding;
-        position:absolute;
-        top: @form-input-vertical-padding;
-        z-index: @z-immediate-over;
-
-        &:before{
-          content: "";
-        }
-      }
-
-      input, .fake-result{
-        left: 0;
-        position:absolute;
-        top: @form-input-vertical-padding;
-        width: 100%;
-        z-index: (@z-immediate-over + 1);
-      }
-
-      .button{
-        z-index: (@z-immediate-over + 2);
-      }
-    }
-
-    &.file-upload{
-      position:relative;
-
-      .django-file-upload-controller-fix{
-        display: none;
-      }
-
-      .fake-result{
-        .ellipsis();
-        display: inline-block;
-        height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-        line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-      }
-
-      input[type="file"]{
-        .opacity(0);
-        font-size: 0;
-        cursor: pointer;
-        display:block;
-        padding: 0 !important;
-        position: relative;
-        top: 0;
-        width:100%;
-        z-index: @z-front;
-        height: 100%;
-
-        *{
-          cursor: pointer;
-        }
-      }
-    }
-
-    // Input reset
-    input[type="text"],
-    input[type="password"],
-    input[type="email"],
-    input[type="url"]{
-      display: inline-block;
-      height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-      // line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-    }
-
-    // Textarea
     textarea{
-      padding-top: 12px;
-      padding-bottom: 12px;
-      height: @form-input-height*2 - 2;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      height: 85px;
     }
 
-    // Sizes
-
-    // Small
-    &.input-wrapper-small{
-      input{
-        height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
-      }
-
-      textarea{
-        padding-bottom: 5px;
-        padding-top: 5px;
-        height: 85px;
-      }
-
-      .form-input-tag{
-        font-size: 1.2em;
-        height: (@form-input-small-height - 2px);
-        line-height: (@form-input-small-height - 2px);
-        width: @form-input-tag-width - 10px;
-
-        i{
-          line-height: (@form-input-small-height - 2px);
-        }
-      }
-    }
-
-    // Tiny
-    &.input-wrapper-tiny{
-      .border-radius(@form-input-border-radius/2.0);
-      padding: @form-input-vertical-padding/2.0 0;
-
-      input{
-        font-size: 11px;
-        height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
-        padding: 0 @form-input-horizontal-padding/2.0;
-      }
-    }
-
-    &.input-wrapper-sensitive{
-
-      @media(max-width: @system-hugescreen-breakpoint){
-        .form > .input-wrapper.input-wrapper-small();
-      }
-    }
-
-    // Special components
-
-    // Buttons
-    .button{
-      font-size: 0.9em;
-                                                        // External border, own border
-      height: @form-input-height - (2*@form-input-vertical-padding) - 2px - 2px - 4px; // (4px of adjustment)
-                                                             // External border, own border
-      line-height: @form-input-height - (2*@form-input-vertical-padding) - 2px - 2px - 4px - 1px; // (4px of adjustment)
-      margin: 0;
-      position: absolute;
-      top: @form-input-vertical-padding + 2px; // 2px adjustment (half 4px of adjusment above)
-      z-index: (@z-immediate-over + 2);
-      &:first-child{
-        left: (@form-input-vertical-padding*1.4);
-      }
-      &:last-child{
-        right: (@form-input-vertical-padding*1.4);
-      }
-      &.float-right{
-        right: (@form-input-vertical-padding*1.4);
-      }
-
-      i{
-        font-size: 1.2em;
-      }
-    }
-
-    // Marks
-    i.form-input-mark{
-      .user-select(none);
-      color: @form-input-mark-color;
-      line-height: @form-input-height;
-      position: absolute;
-      top: -1px;
-      z-index: (@z-immediate-over + 2);
-      &:first-child{
-        left: (@form-input-horizontal-padding);
-      }
-      &:last-child{
-        right: (@form-input-horizontal-padding);
-      }
-      &.float-right{
-        right: (@form-input-horizontal-padding);
-      }
-    }
-
-    // Tags
     .form-input-tag{
-      #gradient .vertical(@form-input-tag-gradient-start, @form-input-tag-gradient-end); // Structural colors
-      .user-select(none);
-      background-color: @form-input-tag-background-color;
-      color: @form-input-tag-text-color;
-      cursor: pointer;
-      font-size: 1.4em;
-      height: (@form-input-height - 2px);
-      line-height: (@form-input-height - 2px);
-      // padding: 0 @form-input-tag-horizontal-padding;
-      position: absolute;
-      text-align: center;
-      top: 0;
-      width: @form-input-tag-width;
-      z-index: (@z-immediate-over + 2);
-      &:first-child{
-        .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
-        border-right: 1px solid @form-input-border-color;
-        left: 0;
-      }
-      &:last-child{
-        .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-        border-left: 1px solid @form-input-border-color;
-        right: 0;
-      }
-      &.float-right{
-        .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-        border-left: 1px solid @form-input-border-color;
-        right: 0;
-      }
-      &:hover{
-        background-color: lighten(@form-input-tag-background-color, 10%);
-      }
-      &:active,
-      &.active{
-        #gradient .vertical(@form-input-tag-gradient-end, @form-input-tag-gradient-start); // Structural colors
-        .box-shadow(inset 0 1px 3px 0 fadeout(darken(@form-input-tag-background-color, 30%), 60%));
-      }
+      font-size: 1.2em;
+      height: (@form-input-small-height - 2px);
+      line-height: (@form-input-small-height - 2px);
+      width: @form-input-tag-width - 10px;
+
       i{
-        line-height: (@form-input-height - 2px);
+        line-height: (@form-input-small-height - 2px);
       }
     }
+  }
 
-    // Marker
-    .form-input-inside-marker{
-      color: lighten(@form-input-text-color, 25%);
-      height: (@form-input-height - 2px);
+  // Tiny
+  &.input-wrapper-tiny{
+    .border-radius(@form-input-border-radius/2.0);
+    padding: @form-input-vertical-padding/2.0 0;
+
+    input{
+      font-size: 11px;
+      height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
+      padding: 0 @form-input-horizontal-padding/2.0;
+    }
+
+    i.form-input-mark{
+      font-size: 0.8em;
+      line-height: @form-input-tiny-height;
+      right: @form-input-horizontal-padding/2.0;
+    }
+  }
+
+  &.input-wrapper-sensitive{
+
+    @media(max-width: @system-hugescreen-breakpoint){
+      .input-wrapper.input-wrapper-small();
+    }
+  }
+
+  // Special components
+
+  // Buttons
+  .button{
+    font-size: 0.9em;
+                                                      // External border, own border
+    height: @form-input-height - (2*@form-input-vertical-padding) - 2px - 2px - 4px; // (4px of adjustment)
+                                                           // External border, own border
+    line-height: @form-input-height - (2*@form-input-vertical-padding) - 2px - 2px - 4px - 1px; // (4px of adjustment)
+    margin: 0;
+    position: absolute;
+    top: @form-input-vertical-padding + 2px; // 2px adjustment (half 4px of adjusment above)
+    z-index: (@z-immediate-over + 2);
+    &:first-child{
+      left: (@form-input-vertical-padding*1.4);
+    }
+    &:last-child{
+      right: (@form-input-vertical-padding*1.4);
+    }
+    &.float-right{
+      right: (@form-input-vertical-padding*1.4);
+    }
+
+    i{
+      font-size: 1.2em;
+    }
+  }
+
+  // Marks
+  i.form-input-mark{
+    .user-select(none);
+    color: @form-input-mark-color;
+    line-height: @form-input-height;
+    position: absolute;
+    top: -1px;
+    z-index: (@z-immediate-over + 2);
+    &:first-child{
+      left: (@form-input-horizontal-padding);
+    }
+    &:last-child{
+      right: (@form-input-horizontal-padding);
+    }
+    &.float-right{
+      right: (@form-input-horizontal-padding);
+    }
+  }
+
+  // Tags
+  .form-input-tag{
+    #gradient .vertical(@form-input-tag-gradient-start, @form-input-tag-gradient-end); // Structural colors
+    .user-select(none);
+    background-color: @form-input-tag-background-color;
+    color: @form-input-tag-text-color;
+    cursor: pointer;
+    font-size: 1.4em;
+    height: (@form-input-height - 2px);
+    line-height: (@form-input-height - 2px);
+    // padding: 0 @form-input-tag-horizontal-padding;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: @form-input-tag-width;
+    z-index: (@z-immediate-over + 2);
+    &:first-child{
+      .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
+      border-right: 1px solid @form-input-border-color;
+      left: 0;
+    }
+    &:last-child{
+      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
+      border-left: 1px solid @form-input-border-color;
+      right: 0;
+    }
+    &.float-right{
+      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
+      border-left: 1px solid @form-input-border-color;
+      right: 0;
+    }
+    &:hover{
+      background-color: lighten(@form-input-tag-background-color, 10%);
+    }
+    &:active,
+    &.active{
+      #gradient .vertical(@form-input-tag-gradient-end, @form-input-tag-gradient-start); // Structural colors
+      .box-shadow(inset 0 1px 3px 0 fadeout(darken(@form-input-tag-background-color, 30%), 60%));
+    }
+    i{
       line-height: (@form-input-height - 2px);
-      position: absolute;
-      top: 0;
-      padding: 0 5px 0 @form-input-horizontal-padding;
+    }
+  }
 
-      &:first-child{
-        left: 0;
-      }
+  // Marker
+  .form-input-inside-marker{
+    color: lighten(@form-input-text-color, 25%);
+    height: (@form-input-height - 2px);
+    line-height: (@form-input-height - 2px);
+    position: absolute;
+    top: 0;
+    padding: 0 5px 0 @form-input-horizontal-padding;
 
-      &:last-child{
-        right: :0;
-      }
+    &:first-child{
+      left: 0;
     }
 
-    // Password strength
-    .password-strength-wrapper{
-      bottom: -1px;
-      left: -1%;
-      margin: 0;
-      position: absolute;
-      width: 102%;
+    &:last-child{
+      right: :0;
     }
+  }
+
+  // Password strength
+  .password-strength-wrapper{
+    bottom: -1px;
+    left: -1%;
+    margin: 0;
+    position: absolute;
+    width: 102%;
+  }
+
+  &:hover{
+    background: lighten(@form-input-background-color, 20%);
+  }
+
+  &.input-wrapper-focussed{
+    //.box-shadow(@form-focus-shadow-definition @form-focus-shadow-color);
+    background: @form-focus-background-color;
+    z-index: (@z-immediate-over + 1);
+    border-color: @form-focus-border-color;
+  }
+
+  // Special component padding mods. TODO: think of a better way v2.0
+
+  // Left
+  &.loffset-10 input, &.loffset-10 .fake-result{ padding-left: 10px !important; }
+  &.loffset-20 input, &.loffset-20 .fake-result{ padding-left: 20px !important; }
+  &.loffset-30 input, &.loffset-30 .fake-result{ padding-left: 30px !important; }
+  &.loffset-40 input, &.loffset-40 .fake-result{ padding-left: 40px !important; }
+  &.loffset-50 input, &.loffset-50 .fake-result{ padding-left: 50px !important; }
+  &.loffset-60 input, &.loffset-60 .fake-result{ padding-left: 60px !important; }
+  &.loffset-70 input, &.loffset-70 .fake-result{ padding-left: 70px !important; }
+  &.loffset-80 input, &.loffset-80 .fake-result{ padding-left: 80px !important; }
+  &.loffset-90 input, &.loffset-90 .fake-result{ padding-left: 90px !important; }
+  &.loffset-100 input, &.loffset-100 .fake-result{ padding-left: 100px !important; }
+  &.loffset-110 input, &.loffset-110 .fake-result{ padding-left: 110px !important; }
+  &.loffset-120 input, &.loffset-120 .fake-result{ padding-left: 120px !important; }
+  &.loffset-130 input, &.loffset-130 .fake-result{ padding-left: 130px !important; }
+  &.loffset-140 input, &.loffset-140 .fake-result{ padding-left: 140px !important; }
+  &.loffset-150 input, &.loffset-150 .fake-result{ padding-left: 150px !important; }
+  &.loffset-160 input, &.loffset-160 .fake-result{ padding-left: 160px !important; }
+  &.loffset-170 input, &.loffset-170 .fake-result{ padding-left: 170px !important; }
+  &.loffset-180 input, &.loffset-180 .fake-result{ padding-left: 180px !important; }
+  &.loffset-190 input, &.loffset-190 .fake-result{ padding-left: 190px !important; }
+  &.loffset-200 input, &.loffset-200 .fake-result{ padding-left: 200px !important; }
+
+  // Left placeholded
+  &.loffset-10.placeholded label{ left: 10px !important; }
+  &.loffset-20.placeholded label{ left: 20px !important; }
+  &.loffset-30.placeholded label{ left: 30px !important; }
+  &.loffset-40.placeholded label{ left: 40px !important; }
+  &.loffset-50.placeholded label{ left: 50px !important; }
+  &.loffset-60.placeholded label{ left: 60px !important; }
+  &.loffset-70.placeholded label{ left: 70px !important; }
+  &.loffset-80.placeholded label{ left: 80px !important; }
+  &.loffset-90.placeholded label{ left: 90px !important; }
+  &.loffset-100.placeholded label{ left: 100px !important; }
+  &.loffset-110.placeholded label{ left: 110px !important; }
+  &.loffset-120.placeholded label{ left: 120px !important; }
+  &.loffset-130.placeholded label{ left: 130px !important; }
+  &.loffset-140.placeholded label{ left: 140px !important; }
+  &.loffset-150.placeholded label{ left: 150px !important; }
+  &.loffset-160.placeholded label{ left: 160px !important; }
+  &.loffset-170.placeholded label{ left: 170px !important; }
+  &.loffset-180.placeholded label{ left: 180px !important; }
+  &.loffset-190.placeholded label{ left: 190px !important; }
+  &.loffset-200.placeholded label{ left: 200px !important; }
+
+  // Right
+  &.roffset-10 input, &.roffset-10 .fake-result{ padding-right: 10px !important; }
+  &.roffset-20 input, &.roffset-20 .fake-result{ padding-right: 20px !important; }
+  &.roffset-30 input, &.roffset-30 .fake-result{ padding-right: 30px !important; }
+  &.roffset-40 input, &.roffset-40 .fake-result{ padding-right: 40px !important; }
+  &.roffset-50 input, &.roffset-50 .fake-result{ padding-right: 50px !important; }
+  &.roffset-60 input, &.roffset-60 .fake-result{ padding-right: 60px !important; }
+  &.roffset-70 input, &.roffset-70 .fake-result{ padding-right: 70px !important; }
+  &.roffset-80 input, &.roffset-80 .fake-result{ padding-right: 80px !important; }
+  &.roffset-90 input, &.roffset-90 .fake-result{ padding-right: 90px !important; }
+  &.roffset-100 input, &.roffset-100 .fake-result{ padding-right: 100px !important; }
+  &.roffset-110 input, &.roffset-110 .fake-result{ padding-right: 110px !important; }
+  &.roffset-120 input, &.roffset-120 .fake-result{ padding-right: 120px !important; }
+  &.roffset-130 input, &.roffset-130 .fake-result{ padding-right: 130px !important; }
+  &.roffset-140 input, &.roffset-140 .fake-result{ padding-right: 140px !important; }
+  &.roffset-150 input, &.roffset-150 .fake-result{ padding-right: 150px !important; }
+  &.roffset-160 input, &.roffset-160 .fake-result{ padding-right: 160px !important; }
+  &.roffset-170 input, &.roffset-170 .fake-result{ padding-right: 170px !important; }
+  &.roffset-180 input, &.roffset-180 .fake-result{ padding-right: 180px !important; }
+  &.roffset-190 input, &.roffset-190 .fake-result{ padding-right: 190px !important; }
+  &.roffset-200 input, &.roffset-200 .fake-result{ padding-right: 200px !important; }
+
+  // Input wrapper states
+  &.disabled{
+    border-color: lighten(@form-input-border-color, 10%);
+    .user-select(none);
 
     &:hover{
-      background: lighten(@form-input-background-color, 20%);
+      background: @form-input-background-color;
     }
 
-    &.input-wrapper-focussed{
-      //.box-shadow(@form-focus-shadow-definition @form-focus-shadow-color);
-      background: @form-focus-background-color;
-      z-index: (@z-immediate-over + 1);
-      border-color: @form-focus-border-color;
+    label{
+      cursor: default;
+      color: fadeout(@form-input-text-color, 60%);
     }
 
-    // Special component padding mods. TODO: think of a better way v2.0
-
-    // Left
-    &.loffset-10 input, &.loffset-10 .fake-result{ padding-left: 10px !important; }
-    &.loffset-20 input, &.loffset-20 .fake-result{ padding-left: 20px !important; }
-    &.loffset-30 input, &.loffset-30 .fake-result{ padding-left: 30px !important; }
-    &.loffset-40 input, &.loffset-40 .fake-result{ padding-left: 40px !important; }
-    &.loffset-50 input, &.loffset-50 .fake-result{ padding-left: 50px !important; }
-    &.loffset-60 input, &.loffset-60 .fake-result{ padding-left: 60px !important; }
-    &.loffset-70 input, &.loffset-70 .fake-result{ padding-left: 70px !important; }
-    &.loffset-80 input, &.loffset-80 .fake-result{ padding-left: 80px !important; }
-    &.loffset-90 input, &.loffset-90 .fake-result{ padding-left: 90px !important; }
-    &.loffset-100 input, &.loffset-100 .fake-result{ padding-left: 100px !important; }
-    &.loffset-110 input, &.loffset-110 .fake-result{ padding-left: 110px !important; }
-    &.loffset-120 input, &.loffset-120 .fake-result{ padding-left: 120px !important; }
-    &.loffset-130 input, &.loffset-130 .fake-result{ padding-left: 130px !important; }
-    &.loffset-140 input, &.loffset-140 .fake-result{ padding-left: 140px !important; }
-    &.loffset-150 input, &.loffset-150 .fake-result{ padding-left: 150px !important; }
-    &.loffset-160 input, &.loffset-160 .fake-result{ padding-left: 160px !important; }
-    &.loffset-170 input, &.loffset-170 .fake-result{ padding-left: 170px !important; }
-    &.loffset-180 input, &.loffset-180 .fake-result{ padding-left: 180px !important; }
-    &.loffset-190 input, &.loffset-190 .fake-result{ padding-left: 190px !important; }
-    &.loffset-200 input, &.loffset-200 .fake-result{ padding-left: 200px !important; }
-
-    // Left placeholded
-    &.loffset-10.placeholded label{ left: 10px !important; }
-    &.loffset-20.placeholded label{ left: 20px !important; }
-    &.loffset-30.placeholded label{ left: 30px !important; }
-    &.loffset-40.placeholded label{ left: 40px !important; }
-    &.loffset-50.placeholded label{ left: 50px !important; }
-    &.loffset-60.placeholded label{ left: 60px !important; }
-    &.loffset-70.placeholded label{ left: 70px !important; }
-    &.loffset-80.placeholded label{ left: 80px !important; }
-    &.loffset-90.placeholded label{ left: 90px !important; }
-    &.loffset-100.placeholded label{ left: 100px !important; }
-    &.loffset-110.placeholded label{ left: 110px !important; }
-    &.loffset-120.placeholded label{ left: 120px !important; }
-    &.loffset-130.placeholded label{ left: 130px !important; }
-    &.loffset-140.placeholded label{ left: 140px !important; }
-    &.loffset-150.placeholded label{ left: 150px !important; }
-    &.loffset-160.placeholded label{ left: 160px !important; }
-    &.loffset-170.placeholded label{ left: 170px !important; }
-    &.loffset-180.placeholded label{ left: 180px !important; }
-    &.loffset-190.placeholded label{ left: 190px !important; }
-    &.loffset-200.placeholded label{ left: 200px !important; }
-
-    // Right
-    &.roffset-10 input, &.roffset-10 .fake-result{ padding-right: 10px !important; }
-    &.roffset-20 input, &.roffset-20 .fake-result{ padding-right: 20px !important; }
-    &.roffset-30 input, &.roffset-30 .fake-result{ padding-right: 30px !important; }
-    &.roffset-40 input, &.roffset-40 .fake-result{ padding-right: 40px !important; }
-    &.roffset-50 input, &.roffset-50 .fake-result{ padding-right: 50px !important; }
-    &.roffset-60 input, &.roffset-60 .fake-result{ padding-right: 60px !important; }
-    &.roffset-70 input, &.roffset-70 .fake-result{ padding-right: 70px !important; }
-    &.roffset-80 input, &.roffset-80 .fake-result{ padding-right: 80px !important; }
-    &.roffset-90 input, &.roffset-90 .fake-result{ padding-right: 90px !important; }
-    &.roffset-100 input, &.roffset-100 .fake-result{ padding-right: 100px !important; }
-    &.roffset-110 input, &.roffset-110 .fake-result{ padding-right: 110px !important; }
-    &.roffset-120 input, &.roffset-120 .fake-result{ padding-right: 120px !important; }
-    &.roffset-130 input, &.roffset-130 .fake-result{ padding-right: 130px !important; }
-    &.roffset-140 input, &.roffset-140 .fake-result{ padding-right: 140px !important; }
-    &.roffset-150 input, &.roffset-150 .fake-result{ padding-right: 150px !important; }
-    &.roffset-160 input, &.roffset-160 .fake-result{ padding-right: 160px !important; }
-    &.roffset-170 input, &.roffset-170 .fake-result{ padding-right: 170px !important; }
-    &.roffset-180 input, &.roffset-180 .fake-result{ padding-right: 180px !important; }
-    &.roffset-190 input, &.roffset-190 .fake-result{ padding-right: 190px !important; }
-    &.roffset-200 input, &.roffset-200 .fake-result{ padding-right: 200px !important; }
-
-    // Input wrapper states
-    &.disabled{
-      border-color: lighten(@form-input-border-color, 10%);
-      .user-select(none);
-
-      &:hover{
-        background: @form-input-background-color;
-      }
-
-      label{
-        cursor: default;
-        color: fadeout(@form-input-text-color, 60%);
-      }
-
-      *[disabled="disabled"]{
-        .placeholder(lighten(@form-input-placeholder-color, 4%));
-      }
-    }
-
-    /*&.big-choice{
-      select{
-        width: 100%;
-        display: inline-block;
-        height: 28px;
-        line-height: 28px;
-        border: 1px solid #000;
-      }
-    }*/
-  }
-
-  // Form label
-  label, .form-label{ // TODO: change class="label" inside forms
-    .text-shadow(0 1px 0 @form-label-shadow-color);
-    color: @form-label-color;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 1.14em;
-    font-weight: bold;
-    margin-bottom: @form-label-vertical-margin;
-    padding-left: 4px;
-
-    // States
-    &.block{
-      display: block;
-    }
-
-    &.required{
-      &:before{
-        color: lighten(@form-label-color, 20%);
-        content: "* ";
-      }
-    }
-
-    // For togglers
-    /*&.form-toggler-wrapper{
-      .user-select(none);
-      cursor: pointer;
-      line-height: @form-input-height;
-      position: relative;
-
-      // Toggler indicator
-      .indicator{
-        background-color: @form-toggler-wrapper-background-color;
-        border: 1px solid @form-toggler-wrapper-border-color;
-        color: transparent;
-        font-size: 1em;
-        margin-left: @form-toggler-wrapper-horizontal-margin;
-        padding: @form-toggler-wrapper-vertical-padding @form-toggler-wrapper-horizontal-padding;
-
-        // Margin adjustment for left indicator
-        &:first-child{
-          margin-left: 0;
-          margin-right: @form-toggler-wrapper-horizontal-margin;
-        }
-      }
-
-      // Override default input
-      input{
-        display: inline-block;
-        opacity: 0;
-      }
-
-      // Types
-
-      // Checkbox
-      &.check{
-        .indicator{
-          .border-radius(@form-toggler-wrapper-check-radius);
-        }
-      }
-
-      // Radio button
-      &.radio{
-        .indicator{
-          .border-radius(@form-toggler-wrapper-radio-radius);
-        }
-      }
-
-      // Checked state
-      &.checked{
-        .indicator{
-          color: @system-base-color;
-        }
-      }
-    }*/
-  }
-
-  // Form togglers (iCheck: http://damirfoy.com/iCheck)
-  .iradio_flat,
-  .icheckbox_flat{
-    .transition(-webkit-box-shadow @form-focus-transition-time, box-shadow @form-focus-transition-time;);
-    background-image: url('@{images-path}icheck_sprites.png');
-    float: left;
-    margin-right: @form-input-horizontal-padding;
-    &.focus{
-      //.box-shadow(@form-focus-shadow-definition @form-focus-shadow-color);
+    *[disabled="disabled"]{
+      .placeholder(lighten(@form-input-placeholder-color, 4%));
     }
   }
-  .icheckbox_flat{
-    .border-radius(5px); // Burned in purpose
-  }
-  .iradio_flat{
-    .border-radius(100px); // Burned in purpose
-  }
 
-  // Password strength indicator
-  .password-strength-wrapper{
-    .border-radius(@form-password-strength-border-radius);
-    .clearfix();
-    margin: @form-password-strength-vertical-spacing auto;
-    width: 98%;
-
-    .password-strength-label{
-      color: @form-password-strength-label-color;
-      float: left;
-      font-size: 0.85em;
-      width: 25%;
-    }
-
-    .password-strength-path{
-      .border-radius(@form-password-strength-border-radius);
-      background-color: @form-password-strength-background-color;
-      float: right;
-      height: @form-password-strength-height;
-      margin-top: 4px; // FIX
-      width: 75%;
-    }
-
-    // Password strength bar
-    .password-strength-indicator{
-      .border-radius(@form-password-strength-border-radius);
-      .opacity(1);
-      .transition(@faster);
+  /*&.big-choice{
+    select{
+      width: 100%;
       display: inline-block;
-      height: @form-password-strength-height;
+      height: 28px;
+      line-height: 28px;
+      border: 1px solid #000;
+    }
+  }*/
+}
 
-      // Default strength steps
-      &.step-0{.opacity(0); width:1%; background-color: @form-password-strength-0-color;}
-      &.step-10{width:10%; background-color: @form-password-strength-10-color;}
-      &.step-20{width:20%; background-color: @form-password-strength-20-color;}
-      &.step-30{width:30%; background-color: @form-password-strength-30-color;}
-      &.step-40{width:40%; background-color: @form-password-strength-40-color;}
-      &.step-50{width:50%; background-color: @form-password-strength-50-color;}
-      &.step-60{width:60%; background-color: @form-password-strength-60-color;}
-      &.step-70{width:70%; background-color: @form-password-strength-70-color;}
-      &.step-80{width:80%; background-color: @form-password-strength-80-color;}
-      &.step-90{width:90%; background-color: @form-password-strength-90-color;}
-      &.step-100{width:100%; background-color: @form-password-strength-100-color;}
+// Form label
+label, .form-label{ // TODO: change class="label" inside forms
+  .text-shadow(0 1px 0 @form-label-shadow-color);
+  color: @form-label-color;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.14em;
+  font-weight: bold;
+  margin-bottom: @form-label-vertical-margin;
+  padding-left: 4px;
+
+  // States
+  &.block{
+    display: block;
+  }
+
+  &.required{
+    &:before{
+      color: lighten(@form-label-color, 20%);
+      content: "* ";
     }
   }
 
-  // Form messages
-  /*.form-input-message-wrapper{
+  // For togglers
+  /*&.form-toggler-wrapper{
+    .user-select(none);
+    cursor: pointer;
+    line-height: @form-input-height;
     position: relative;
-    .form-input-message{
-      .border-radius(@form-input-message-border-radius);
-      .box-sizing(border-box);
-      .make-popover-shadow(@popover-shadow-default-color);
-      .user-select(none);
-      border: 1px solid #000;
-      cursor: pointer;
-      display: block;
-      font-size: 0.9em;
-      line-height: 1.3em;
-      padding: @form-input-message-vertical-spacing (@form-input-message-vertical-spacing*2);
 
-      // Default colors
-      &.form-input-message-default{.make-form-input-message(@form-input-message-default-background-color, @form-input-message-default-text-color);}
-      &.form-input-message-primary{.make-form-input-message(@form-input-message-primary-background-color, @form-input-message-primary-text-color);}
-      &.form-input-message-info{.make-form-input-message(@form-input-message-info-background-color, @form-input-message-info-text-color);}
-      &.form-input-message-success{.make-form-input-message(@form-input-message-success-background-color, @form-input-message-success-text-color);}
-      &.form-input-message-danger{.make-form-input-message(@form-input-message-danger-background-color, @form-input-message-danger-text-color);}
-      &.form-input-message-warning{.make-form-input-message(@form-input-message-warning-background-color, @form-input-message-warning-text-color);}
-      &.form-input-message-inverted{.make-form-input-message(@form-input-message-inverted-background-color, @form-input-message-inverted-text-color);}
+    // Toggler indicator
+    .indicator{
+      background-color: @form-toggler-wrapper-background-color;
+      border: 1px solid @form-toggler-wrapper-border-color;
+      color: transparent;
+      font-size: 1em;
+      margin-left: @form-toggler-wrapper-horizontal-margin;
+      padding: @form-toggler-wrapper-vertical-padding @form-toggler-wrapper-horizontal-padding;
 
-      // Responsive behavior
-      @media (min-width: @system-cellphone-breakpoint){
-        position: absolute;
-        min-width: @form-input-message-default-width;
-        z-index: @z-front;
+      // Margin adjustment for left indicator
+      &:first-child{
+        margin-left: 0;
+        margin-right: @form-toggler-wrapper-horizontal-margin;
+      }
+    }
+
+    // Override default input
+    input{
+      display: inline-block;
+      opacity: 0;
+    }
+
+    // Types
+
+    // Checkbox
+    &.check{
+      .indicator{
+        .border-radius(@form-toggler-wrapper-check-radius);
+      }
+    }
+
+    // Radio button
+    &.radio{
+      .indicator{
+        .border-radius(@form-toggler-wrapper-radio-radius);
+      }
+    }
+
+    // Checked state
+    &.checked{
+      .indicator{
+        color: @system-base-color;
       }
     }
   }*/
 }
+
+// Form togglers (iCheck: http://damirfoy.com/iCheck)
+.iradio_flat,
+.icheckbox_flat{
+  .transition(-webkit-box-shadow @form-focus-transition-time, box-shadow @form-focus-transition-time;);
+  background-image: url('@{images-path}icheck_sprites.png');
+  float: left;
+  margin-right: @form-input-horizontal-padding;
+  &.focus{
+    //.box-shadow(@form-focus-shadow-definition @form-focus-shadow-color);
+  }
+}
+.icheckbox_flat{
+  .border-radius(5px); // Burned in purpose
+}
+.iradio_flat{
+  .border-radius(100px); // Burned in purpose
+}
+
+// Password strength indicator
+.password-strength-wrapper{
+  .border-radius(@form-password-strength-border-radius);
+  .clearfix();
+  margin: @form-password-strength-vertical-spacing auto;
+  width: 98%;
+
+  .password-strength-label{
+    color: @form-password-strength-label-color;
+    float: left;
+    font-size: 0.85em;
+    width: 25%;
+  }
+
+  .password-strength-path{
+    .border-radius(@form-password-strength-border-radius);
+    background-color: @form-password-strength-background-color;
+    float: right;
+    height: @form-password-strength-height;
+    margin-top: 4px; // FIX
+    width: 75%;
+  }
+
+  // Password strength bar
+  .password-strength-indicator{
+    .border-radius(@form-password-strength-border-radius);
+    .opacity(1);
+    .transition(@faster);
+    display: inline-block;
+    height: @form-password-strength-height;
+
+    // Default strength steps
+    &.step-0{.opacity(0); width:1%; background-color: @form-password-strength-0-color;}
+    &.step-10{width:10%; background-color: @form-password-strength-10-color;}
+    &.step-20{width:20%; background-color: @form-password-strength-20-color;}
+    &.step-30{width:30%; background-color: @form-password-strength-30-color;}
+    &.step-40{width:40%; background-color: @form-password-strength-40-color;}
+    &.step-50{width:50%; background-color: @form-password-strength-50-color;}
+    &.step-60{width:60%; background-color: @form-password-strength-60-color;}
+    &.step-70{width:70%; background-color: @form-password-strength-70-color;}
+    &.step-80{width:80%; background-color: @form-password-strength-80-color;}
+    &.step-90{width:90%; background-color: @form-password-strength-90-color;}
+    &.step-100{width:100%; background-color: @form-password-strength-100-color;}
+  }
+}
+
+// Form messages
+/*.form-input-message-wrapper{
+  position: relative;
+  .form-input-message{
+    .border-radius(@form-input-message-border-radius);
+    .box-sizing(border-box);
+    .make-popover-shadow(@popover-shadow-default-color);
+    .user-select(none);
+    border: 1px solid #000;
+    cursor: pointer;
+    display: block;
+    font-size: 0.9em;
+    line-height: 1.3em;
+    padding: @form-input-message-vertical-spacing (@form-input-message-vertical-spacing*2);
+
+    // Default colors
+    &.form-input-message-default{.make-form-input-message(@form-input-message-default-background-color, @form-input-message-default-text-color);}
+    &.form-input-message-primary{.make-form-input-message(@form-input-message-primary-background-color, @form-input-message-primary-text-color);}
+    &.form-input-message-info{.make-form-input-message(@form-input-message-info-background-color, @form-input-message-info-text-color);}
+    &.form-input-message-success{.make-form-input-message(@form-input-message-success-background-color, @form-input-message-success-text-color);}
+    &.form-input-message-danger{.make-form-input-message(@form-input-message-danger-background-color, @form-input-message-danger-text-color);}
+    &.form-input-message-warning{.make-form-input-message(@form-input-message-warning-background-color, @form-input-message-warning-text-color);}
+    &.form-input-message-inverted{.make-form-input-message(@form-input-message-inverted-background-color, @form-input-message-inverted-text-color);}
+
+    // Responsive behavior
+    @media (min-width: @system-cellphone-breakpoint){
+      position: absolute;
+      min-width: @form-input-message-default-width;
+      z-index: @z-front;
+    }
+  }
+}*/
+
 
 // Color picker
 @form-color-picker-colors-selected-color-container-background-color: @black-10;
