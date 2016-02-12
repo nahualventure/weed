@@ -7566,6 +7566,12 @@ textarea[disabled="disabled"]::-webkit-input-placeholder,
     line-height: 39px;
   }
 }
+.input-wrapper.with-button-left .button {
+  left: 7px;
+}
+.input-wrapper.with-button-right .button {
+  right: 7px;
+}
 .input-wrapper .button {
   font-size: 0.9em;
   height: 35px;
@@ -7574,12 +7580,6 @@ textarea[disabled="disabled"]::-webkit-input-placeholder,
   position: absolute;
   top: 7px;
   z-index: 7;
-}
-.input-wrapper .button:first-child {
-  left: 7px;
-}
-.input-wrapper .button:last-child {
-  right: 7px;
 }
 .input-wrapper .button.float-right {
   right: 7px;
@@ -7610,6 +7610,20 @@ textarea[disabled="disabled"]::-webkit-input-placeholder,
 .input-wrapper i.form-input-mark.float-right {
   right: 25px;
 }
+.input-wrapper.with-button-left .form-input-tag {
+  -webkit-border-radius: 10px 0 0 10px;
+  -moz-border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
+  border-right: 1px solid #c3c9c9;
+  left: 0;
+}
+.input-wrapper.with-button-right .form-input-tag {
+  -webkit-border-radius: 0 10px 10px 0;
+  -moz-border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
+  border-left: 1px solid #c3c9c9;
+  right: 0;
+}
 .input-wrapper .form-input-tag {
   background-color: rgba(194, 194, 194, 0.08);
   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(194, 194, 194, 0.08));
@@ -7627,30 +7641,21 @@ textarea[disabled="disabled"]::-webkit-input-placeholder,
   -o-user-select: none;
   user-select: none;
   background-color: #ffffff;
+  border: none;
   color: #9ca6a6;
   cursor: pointer;
   font-size: 1.4em;
   height: 51px;
   line-height: 51px;
+  padding: 0;
   position: absolute;
   text-align: center;
   top: 0;
   width: 55px;
   z-index: 7;
 }
-.input-wrapper .form-input-tag:first-child {
-  -webkit-border-radius: 10px 0 0 10px;
-  -moz-border-radius: 10px 0 0 10px;
-  border-radius: 10px 0 0 10px;
-  border-right: 1px solid #c3c9c9;
-  left: 0;
-}
-.input-wrapper .form-input-tag:last-child {
-  -webkit-border-radius: 0 10px 10px 0;
-  -moz-border-radius: 0 10px 10px 0;
-  border-radius: 0 10px 10px 0;
-  border-left: 1px solid #c3c9c9;
-  right: 0;
+.input-wrapper .form-input-tag i {
+  margin: none;
 }
 .input-wrapper .form-input-tag.float-right {
   -webkit-border-radius: 0 10px 10px 0;
@@ -7786,66 +7791,6 @@ textarea[disabled="disabled"]::-webkit-input-placeholder,
 .input-wrapper.loffset-200 input,
 .input-wrapper.loffset-200 .fake-result {
   padding-left: 200px !important;
-}
-.input-wrapper.loffset-10.placeholded label {
-  left: 10px !important;
-}
-.input-wrapper.loffset-20.placeholded label {
-  left: 20px !important;
-}
-.input-wrapper.loffset-30.placeholded label {
-  left: 30px !important;
-}
-.input-wrapper.loffset-40.placeholded label {
-  left: 40px !important;
-}
-.input-wrapper.loffset-50.placeholded label {
-  left: 50px !important;
-}
-.input-wrapper.loffset-60.placeholded label {
-  left: 60px !important;
-}
-.input-wrapper.loffset-70.placeholded label {
-  left: 70px !important;
-}
-.input-wrapper.loffset-80.placeholded label {
-  left: 80px !important;
-}
-.input-wrapper.loffset-90.placeholded label {
-  left: 90px !important;
-}
-.input-wrapper.loffset-100.placeholded label {
-  left: 100px !important;
-}
-.input-wrapper.loffset-110.placeholded label {
-  left: 110px !important;
-}
-.input-wrapper.loffset-120.placeholded label {
-  left: 120px !important;
-}
-.input-wrapper.loffset-130.placeholded label {
-  left: 130px !important;
-}
-.input-wrapper.loffset-140.placeholded label {
-  left: 140px !important;
-}
-.input-wrapper.loffset-150.placeholded label {
-  left: 150px !important;
-}
-.input-wrapper.loffset-160.placeholded label {
-  left: 160px !important;
-}
-.input-wrapper.loffset-170.placeholded label {
-  left: 170px !important;
-}
-.input-wrapper.loffset-180.placeholded label {
-  left: 180px !important;
-}
-.input-wrapper.loffset-190.placeholded label {
-  left: 190px !important;
-}
-.input-wrapper.loffset-200.placeholded label {
-  left: 200px !important;
 }
 .input-wrapper.roffset-10 input,
 .input-wrapper.roffset-10 .fake-result {

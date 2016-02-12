@@ -799,6 +799,12 @@ textarea,
   }
 
   // Special components
+  &.with-button-left .button{
+    left: (@form-input-vertical-padding*1.4);
+  }
+  &.with-button-right .button{
+    right: (@form-input-vertical-padding*1.4);
+  }
 
   // Buttons
   .button{
@@ -811,12 +817,7 @@ textarea,
     position: absolute;
     top: @form-input-vertical-padding + 2px; // 2px adjustment (half 4px of adjusment above)
     z-index: (@z-immediate-over + 2);
-    &:first-child{
-      left: (@form-input-vertical-padding*1.4);
-    }
-    &:last-child{
-      right: (@form-input-vertical-padding*1.4);
-    }
+
     &.float-right{
       right: (@form-input-vertical-padding*1.4);
     }
@@ -834,6 +835,7 @@ textarea,
     position: absolute;
     top: -1px;
     z-index: (@z-immediate-over + 2);
+
     &:first-child{
       left: (@form-input-horizontal-padding);
     }
@@ -845,32 +847,45 @@ textarea,
     }
   }
 
+  &.with-button-left{
+    .form-input-tag{
+      .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
+      border-right: 1px solid @form-input-border-color;
+      left: 0;
+    }
+  }
+
+  &.with-button-right{
+    .form-input-tag{
+      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
+      border-left: 1px solid @form-input-border-color;
+      right: 0;
+    }
+  }
+
   // Tags
   .form-input-tag{
     #gradient .vertical(@form-input-tag-gradient-start, @form-input-tag-gradient-end); // Structural colors
     .user-select(none);
     background-color: @form-input-tag-background-color;
+    border: none;
     color: @form-input-tag-text-color;
     cursor: pointer;
     font-size: 1.4em;
     height: (@form-input-height - 2px);
     line-height: (@form-input-height - 2px);
     // padding: 0 @form-input-tag-horizontal-padding;
+    padding: 0;
     position: absolute;
     text-align: center;
     top: 0;
     width: @form-input-tag-width;
     z-index: (@z-immediate-over + 2);
-    &:first-child{
-      .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
-      border-right: 1px solid @form-input-border-color;
-      left: 0;
+
+    i{
+      margin: none;
     }
-    &:last-child{
-      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-      border-left: 1px solid @form-input-border-color;
-      right: 0;
-    }
+
     &.float-right{
       .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
       border-left: 1px solid @form-input-border-color;
@@ -950,28 +965,6 @@ textarea,
   &.loffset-180 input, &.loffset-180 .fake-result{ padding-left: 180px !important; }
   &.loffset-190 input, &.loffset-190 .fake-result{ padding-left: 190px !important; }
   &.loffset-200 input, &.loffset-200 .fake-result{ padding-left: 200px !important; }
-
-  // Left placeholded
-  &.loffset-10.placeholded label{ left: 10px !important; }
-  &.loffset-20.placeholded label{ left: 20px !important; }
-  &.loffset-30.placeholded label{ left: 30px !important; }
-  &.loffset-40.placeholded label{ left: 40px !important; }
-  &.loffset-50.placeholded label{ left: 50px !important; }
-  &.loffset-60.placeholded label{ left: 60px !important; }
-  &.loffset-70.placeholded label{ left: 70px !important; }
-  &.loffset-80.placeholded label{ left: 80px !important; }
-  &.loffset-90.placeholded label{ left: 90px !important; }
-  &.loffset-100.placeholded label{ left: 100px !important; }
-  &.loffset-110.placeholded label{ left: 110px !important; }
-  &.loffset-120.placeholded label{ left: 120px !important; }
-  &.loffset-130.placeholded label{ left: 130px !important; }
-  &.loffset-140.placeholded label{ left: 140px !important; }
-  &.loffset-150.placeholded label{ left: 150px !important; }
-  &.loffset-160.placeholded label{ left: 160px !important; }
-  &.loffset-170.placeholded label{ left: 170px !important; }
-  &.loffset-180.placeholded label{ left: 180px !important; }
-  &.loffset-190.placeholded label{ left: 190px !important; }
-  &.loffset-200.placeholded label{ left: 200px !important; }
 
   // Right
   &.roffset-10 input, &.roffset-10 .fake-result{ padding-right: 10px !important; }
