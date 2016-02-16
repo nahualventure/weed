@@ -6,7 +6,7 @@
   ],
   "description": "Weed frontend framework",
   "main": [
-    "./dist/assets/css/weed.css",
+    "./src/assets/less/weed.less",
     "./dist/assets/js/templates.js",
     "./dist/assets/js/weed.js"
   ],
