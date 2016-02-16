@@ -1,6 +1,177 @@
-!function(n){"use strict";var e=n.module("weed",[]);e.constant("weConfig",{})}(angular);
-!function(t){"use strict";var e=t.module("weed");e.directive("weButton",["weConfig",function(t){return{restrict:"A",transclude:!0,replace:!0,scope:{icon:"@",type:"@",toload:"@",size:"@",state:"@"},require:"?^weInput",templateUrl:"components/button/button.html",link:function(t,e,n,o,u){u(function(e){t.hasText=e.length>0})}}}])}(angular);
-!function(t){"use strict";var n=t.module("weed");n.directive("weInput",["weConfig",function(t){return{restrict:"E",transclude:{buttonSlot:"?inputButton",buttonTagSlot:"?inputButtonTag"},scope:{rightIcon:"@",leftIcon:"@",buttonPosition:"@",size:"@",placeholder:"@"},replace:!0,templateUrl:"components/forms/input.html"}}])}(angular);
-!function(e){"use strict";var n=e.module("weed");n.directive("weIcon",["weConfig",function(e){return{restrict:"E",scope:{icon:"@"},replace:!0,templateUrl:"components/icons/icon.html",link:function(e,n,c){}}}])}(angular);
-!function(e){"use strict";var a=e.module("weed");a.directive("weNavbarElement",["weConfig",function(e){return{restrict:"A",transclude:!0,scope:{position:"@",type:"@",icon:"@",logotype:"@",isotype:"@",placeholder:"@"},templateUrl:function(e,a){var r="";switch(a.type){case"link":r="navbar_element_link.html";break;case"logo":r="navbar_element_logo.html";break;case"search-form":r="navbar_element_search_form.html";break;case"separator":r="navbar_element_separator.html"}return"components/navbar/"+r}}}])}(angular);
-!function(e){"use strict";var n=e.module("weed");n.directive("weNavbarMainAction",["weConfig",function(e){return{restrict:"E",transclude:!0,scope:{icon:"@"},templateUrl:"components/navbar/navbar_element_main_action.html"}}])}(angular);
+(function(angular){
+  'use strict';
+
+  var weed = angular.module('weed', []);
+
+  weed.constant('weConfig', {});
+})(angular);
+
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  var weed = angular.module('weed');
+
+  weed.directive('weButton', ['weConfig', function(weConfig) {
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '@',
+          size: '@',
+          state: '@'
+      },
+      require: '?^weInput',
+      templateUrl: 'components/button/button.html',
+      link: function(scope, elem, attrs, weInputCtrl, $transclude) {
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      }
+    };
+  }]);
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  var weed = angular.module('weed');
+
+  weed.directive('weInput', ['weConfig', function(weConfig){
+    return {
+      restrict: 'E',
+      transclude: {
+        buttonSlot: '?inputButton',
+        buttonTagSlot: '?inputButtonTag'
+      },
+      scope: {
+          rightIcon: '@',
+          leftIcon: '@',
+          buttonPosition: '@',
+          size: '@',
+          placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/input.html'
+    };
+  }]);
+})(angular);
+
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  var weed = angular.module('weed');
+
+  weed.directive('weIcon', ['weConfig', function(weConfig) {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  }]);
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInput
+ */
+
+(function(angular){
+  'use strict';
+
+  var weed = angular.module('weed');
+
+  weed.directive('weNavbarElement', ['weConfig', function(weConfig){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@'
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbar_element_link.html';
+            break;
+          case 'logo':
+            template = 'navbar_element_logo.html';
+            break;
+          case 'search-form':
+            template = 'navbar_element_search_form.html';
+            break;
+          case 'separator':
+            template = 'navbar_element_separator.html'
+            break;
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }]);
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  var weed = angular.module('weed');
+
+  weed.directive('weNavbarMainAction', ['weConfig', function(weConfig) {
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: {
+        icon: '@'
+      },
+      templateUrl: 'components/navbar/navbar_element_main_action.html'
+    };
+  }])
+})(angular);
