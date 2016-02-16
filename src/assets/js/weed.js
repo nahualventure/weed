@@ -1,15 +1,7 @@
-// Depends on angular
-// Depends on angular animate
+(function(angular){
+  'use strict';
 
-'use strict';
+  var weed = angular.module('weed', []);
 
-var weed = angular.module('weed', [
-    // 'ngAnimate',
-    // 'ngRoute'
-
-
-]);
-
-weed.constant('CONFIG', {
-    templatesPath: '/templates/'
-});
+  weed.constant('weConfig', {});
+})(angular);

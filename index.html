@@ -10,7 +10,7 @@
     </style>
   </head>
 
-  <body ng-app="weed">
+  <body ng-app="weed.test">
     <div class="navbar">
 
       <!-- Logo: OK -->
@@ -1196,5 +1196,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="/dist/assets/js/weed.js"></script>
     <script src="/dist/assets/js/templates.js"></script>
+    <script>
+        (function(angular){
+            'use strict';
+
+            var app = angular.module('weed.test', ['weed']);
+        })(angular);
+    </script>
     </body>
 </html>

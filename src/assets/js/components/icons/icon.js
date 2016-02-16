@@ -6,18 +6,20 @@
  * Directive of the app
  */
 
-'use strict';
+(function(angular){
+  'use strict';
 
-var weedapp = angular.module('weed');
+  var weed = angular.module('weed');
 
-weed.directive('weIcon', ['CONFIG', function(CONFIG) {
-  return {
-    restrict: 'E',
-    scope: {
-      icon: '@'
-    },
-    replace: true,
-    templateUrl: 'components/icons/icon.html',
-    link: function(scope, elem, attrs) {}
-  };
-}]);
+  weed.directive('weIcon', ['weConfig', function(weConfig) {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  }]);
+})(angular);
