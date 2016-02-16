@@ -8,7 +8,7 @@
   "main": [
     "./dist/assets/css/weed.css",
     "./dist/assets/js/templates.js",
-    "./dist/assets/js/weed.js",
+    "./dist/assets/js/weed.js"
   ],
   "moduleType": [],
   "keywords": [
