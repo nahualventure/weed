@@ -7,8 +7,8 @@
   "description": "Weed frontend framework",
   "main": [
     "./src/assets/less/weed.less",
-    "./dist/assets/js/templates.js",
-    "./dist/assets/js/weed.js"
+    "./dist/assets/js/weed.js",
+    "./dist/assets/js/templates.js"
   ],
   "moduleType": [],
   "keywords": [
