@@ -1,0 +1,29 @@
+{
+  "name": "weed",
+  "homepage": "https://github.com/edoo-project/weed",
+  "authors": [
+    "Samuel <samuelchvez@gmail.com>"
+  ],
+  "description": "Weed frontend framework",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "weed",
+    "frontend",
+    "framework",
+    "less",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-apps": "^1.2.0"
+  }
+}
