@@ -136,7 +136,7 @@
     &.search-form{
       width: @navbar-search-width;
 
-      .input-wrapper{
+      .input-wrapper, input{
         .bevel(@navbar-color);     // Input height
         .vertical-center(@navbar-height, 41px + 2px);
         background: @white;
@@ -148,6 +148,14 @@
 
         .form-input-mark{
           color: @navbar-color;
+        }
+      }
+
+      .input-wrapper{
+        overflow: hidden;
+
+        input{
+          margin: 0;
         }
       }
     }

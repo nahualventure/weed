@@ -19,15 +19,15 @@
 @form-focus-border-color:                 @system-base-color;
 @form-input-background-color:             @black-5;
 @form-input-border-color:                 @black-15;
-@form-input-mark-color:                   @black-15;
+@input-mark-color:                   @black-15;
 @form-input-placeholder-color:            lighten(@form-input-text-color, 25%);
-@form-input-tag-background-color:         @black-5;
-@form-input-tag-text-color:               @black-15;
+@input-tag-background-color:         @black-5;
+@input-tag-text-color:               @black-15;
 @form-input-text-color:                   @black-35;
 @form-label-color:                        @black-60;
 @form-label-shadow-color:                 @white;
-@form-input-tag-gradient-start:           fadeout(@white, 92%);
-@form-input-tag-gradient-end:             fadeout(#c2c2c2, 92%);
+@input-tag-gradient-start:           fadeout(@white, 92%);
+@input-tag-gradient-end:             fadeout(#c2c2c2, 92%);
 @form-input-toolbar-border-color: #eee;
 @form-input-toolbar-file-label-color: #aaa;
 
@@ -69,7 +69,7 @@
 @form-input-small-height:                 41px;
 @form-input-tiny-height:                  28px;
 @form-input-horizontal-padding:           25px;
-@form-input-tag-width:                    55px;
+@input-tag-width:                    55px;
 @form-input-vertical-padding:             5px;
 
 // Toggler
@@ -201,10 +201,7 @@
   }
 }
 
-.adjust-input-wrapper-size(
-    @new-height:@form-input-height;
-    @new-padding:@form-input-horizontal-padding;
-    @new-textarea-vertical-padding: 0){
+.adjust-input-wrapper-size(@new-height:@form-input-height; @new-padding:@form-input-horizontal-padding; @new-textarea-vertical-padding: 0){
   height: @new-height !important;
 
   &.area{
@@ -269,14 +266,14 @@
   }
 
     // Input mark (icon)
-  i.form-input-mark{
+  i.input-mark{
     line-height: @new-height;
     font-style: normal;
     padding: 0 (@new-padding / 2.0);
   }
 
     // Input tag (icon within button)
-  .form-input-tag{
+  .input-tag{
     height: (@new-height - 2px);
     // padding: 0 @new-padding;
 
@@ -374,10 +371,12 @@ textarea,
   .placeholder(@form-input-placeholder-color);
   background: none;
   border: none;
+  border-radius: @system-border-radius;
   color: @form-input-text-color;
   display: inline-block;
   font-family: @form-font-family;
   font-size: 14px;
+  margin-bottom: @element-vertical-margin;
   padding: 0 @form-input-horizontal-padding;
   width: 100%;
 
@@ -387,8 +386,98 @@ textarea,
   }
 }
 
-&.popover-form{
-  display: none;
+// Input styles
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"]{
+  background: @form-input-background-color;
+  border: 1px solid @form-input-border-color;
+  height: (@form-input-height - 2);
+}
+
+textarea{
+  background: @form-input-background-color;
+  border: 1px solid @form-input-border-color;
+}
+
+// Sizes
+
+// Input small
+input.input-small, .input-wrapper.input-small input{
+  height: (@form-input-small-height - 2);
+}
+
+// Area small
+textarea.input-small, .input-wrapper.input-small textarea{
+  height: 85px;
+  padding-bottom: @element-vertical-margin/2.0;
+  padding-top: @element-vertical-margin/2.0;
+}
+
+// Input tag
+.input-wrapper.input-small{
+  .input-tag{
+    height: (@form-input-small-height);
+    line-height: (@form-input-small-height);
+    width: @input-tag-width - 10px;
+
+    i{
+      line-height: (@form-input-small-height - 2px);
+    }
+  }
+
+  i.input-mark{
+    left: 24px;
+    line-height: @form-input-small-height;
+  }
+
+  .button{
+    &.button-small{
+      top: 0;
+      left: 0;
+    }
+
+    &.button-tiny{
+      left: (@form-input-vertical-padding*1.4);
+      top: (@form-input-small-height - @button-tiny-height - 2)/2.0;
+    }
+  }
+}
+
+// Tiny
+input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-wrapper.input-tiny textarea{
+  border-radius: @form-input-border-radius/2.0;
+  font-size: 11px;
+  height: (@form-input-tiny-height - 2);
+  padding: 0 @form-input-horizontal-padding/2.0;
+}
+
+.input-wrapper.input-tiny{
+  border-radius: @form-input-border-radius/2.0;
+
+  .button.button-tiny{
+    left: 0;
+    top: 0;
+  }
+
+  .input-tag{
+    border-radius: @system-border-radius/2.0;
+    height: (@form-input-tiny-height);
+    line-height: 25px;
+    width: @input-tag-width - 24px;
+
+    i{
+      line-height: inherit;
+      font-size: 14px;
+    }
+  }
+
+  i.input-mark{
+    font-size: 0.8em;
+    left: 15px;
+    line-height: @form-input-tiny-height;
+  }
 }
 
 // Input wrapper utility for buttons and floats
@@ -400,95 +489,33 @@ textarea,
   background: @form-input-background-color;
   border: 1px solid @form-input-border-color;
   display: inline-block;
-  overflow: hidden;
-  padding: @form-input-vertical-padding 0;
+  // overflow: hidden; // TODO: test this
+  margin-bottom: @element-vertical-margin;
   position: relative;
   width: 100%;
 
-  &.error{
-    border-color: @form-input-error-border-color !important;
-
-    input{
-      color: @form-input-error-text-color !important;
-    }
-
-    .button{
-      border-color: @form-input-error-border-color !important;
-      color: @form-input-error-text-color !important;
-    }
-  }
-
-  // When it contains a typeahead
-  &.typeaheaded{
-    // background: @form-typeaheaded-background-color;
-    overflow: visible;
-
-    .datum-placeholder{
-      .border-radius(@form-input-border-radius);
-      .box-sizing(border-box);
-      background: @form-typeaheaded-background-color;
-      height: @form-input-height - 2px;
-      display: none;
-      left: 0;
-      padding: 0 @form-input-horizontal-padding;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      z-index: (@z-immediate-over + 2);
-
-      &.user, &.structure{
-
-        .picture-container{
-          float: left;
-          margin-right: @form-typeahead-user-placeholder-picture-margin-right;
-
-          img.picture{
-            .border-radius(100px);
-            .box-shadow(0px 0px 0px 2px @form-typeahead-user-placeholder-border-color);
-            .box-sizing(border-box);
-            .vertical-center(@form-input-height - 2; @form-typeahead-user-placeholder-picture-size);
-            height: @form-typeahead-user-placeholder-picture-size;
-            vertical-align: middle;
-            width: @form-typeahead-user-placeholder-picture-size;
-          }
-        }
-
-        // User name
-        .data{
-          .vertical-center(@form-input-height - 2; @form-typeahead-user-placeholder-expected-height);
-          float: left;
-          margin-left: @element-vertical-margin;
-          max-width: @form-typeahead-user-placeholder-data-max-width;
-          text-align: left;
-          vertical-align: middle;
-
-          .name{
-            .ellipsis;
-            color: @form-typeahead-user-placeholder-name-color;
-            display: block;
-            font-size: 1.1em;
-            font-weight: bold;
-          }
-
-          .role{
-            .ellipsis;
-            color: @form-typeahead-user-placeholder-role-color;
-            display: block;
-            font-size: 0.9em;
-          }
-        }
-      }
-
-      &.structure{
-        .data{
-          margin-left: 0;
-        }
-      }
-    }
-  }
-
-  &.clear-margin-bottom{
+  // Reset inputs inside input-wrapper
+  input,
+  textarea,
+  .fake-result{
+    background: none;
+    border: none;
+    border-radius: 0;
     margin-bottom: 0;
+  }
+
+  // Events
+
+  // Hover
+  &:hover, &.hover{
+    background: lighten(@form-input-background-color, 20%);
+  }
+
+  // Focus
+  &:focus, &.focus{
+    background: @form-focus-background-color;
+    z-index: (@z-immediate-over + 1);
+    border-color: @form-focus-border-color;
   }
 
   // Incrusted form states
@@ -508,55 +535,48 @@ textarea,
     }
   }
 
-  &.area{
-    height: auto !important;
+  // Input wrapper toolbar
+  .input-wrapper-toolbar{
+    background: white;
+    border-top: 1px solid @form-input-toolbar-border-color;
+    height: @form-input-toolbar-height;
+    line-height: @form-input-toolbar-height;
+    padding: 0 @element-vertical-margin*1.5 0 0;
 
-    &.with-toolbar{
-      padding-bottom: 0;
-    }
+    .tools{
+      float: left;
+      height: 100%;
 
-    .input-wrapper-toolbar{
-      background: white;
-      border-top: 1px solid @form-input-toolbar-border-color;
-      height: @form-input-toolbar-height;
-      line-height: @form-input-toolbar-height;
-      padding: 0 @element-vertical-margin*1.5 0 0;
+      .file-label{
+        color: @form-input-toolbar-file-label-color;
+        vertical-align: middle;
+      }
 
-      .tools{
-        float: left;
-        height: 100%;
+      .button{
+        .vertical-center(@form-input-toolbar-height, @button-small-height - 1px);
+        position: relative;
+        height: @button-small-height - 1px;
+        line-height: @button-small-height - 2px;
+        top: auto;
+        font-size: 14px;
+        left: auto;
+        vertical-align: middle;
 
-        .file-label{
-          color: @form-input-toolbar-file-label-color;
-          vertical-align: middle;
+        &.clear-element{
+          font-size: 10px;
+
+          i{
+            color: darken(@button-default-color, 20%);
+          }
         }
 
-        .button{
-          .vertical-center(@form-input-toolbar-height, @button-small-height - 1px);
-          position: relative;
-          height: @button-small-height - 1px;
-          line-height: @button-small-height - 2px;
-          top: auto;
-          font-size: 14px;
-          left: auto;
-          vertical-align: middle;
+        &:last-child{
+          right: auto;
+        }
 
-          &.clear-element{
-            font-size: 10px;
-
-            i{
-              color: darken(@button-default-color, 20%);
-            }
-          }
-
-          &:last-child{
-            right: auto;
-          }
-
-          &:hover{
-            i{
-              color: darken(@button-default-color, 50%);
-            }
+        &:hover{
+          i{
+            color: darken(@button-default-color, 50%);
           }
         }
       }
@@ -586,124 +606,9 @@ textarea,
     border:none;
   }
 
-  .errorlist{
-    display: none;
-  }
-
-  &.input-wrapper-small{
-    input{
-      padding: 0 @element-vertical-margin*1.5;
-    }
-
-    i.form-input-mark{
-      line-height: @form-input-small-height;
-
-      &.float-left{
-        left: @element-vertical-margin*1.5;
-      }
-
-      &.float-right{
-        right: @element-vertical-margin*1.5;
-      }
-    }
-
-  }
-
-  // Placeholded (for javascript placeholder component)
-  // &.placeholded{
-  //   height: @form-input-height;
-  //   position: relative;
-
-  //   // Small
-  //   &.input-wrapper-small{
-  //     height: @form-input-small-height;
-
-  //     label{
-  //       left: @element-vertical-margin*1.5;
-  //       height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
-  //       line-height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
-  //     }
-
-      
-
-  //     &.area{
-  //       textarea{
-  //         padding-left: @element-vertical-margin*1.5;
-  //         padding-right: @element-vertical-margin*1.5;
-  //       }
-  //     }
-  //   }
-
-  //   // Tiny
-  //   &.input-wrapper-tiny{
-  //     height: @form-input-tiny-height;
-
-  //     input{
-  //       top: 2.5px;
-  //     }
-
-  //     label{
-  //       font-size: 11px;
-  //       height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
-  //       left: @form-input-horizontal-padding/2.0;
-  //       line-height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
-  //       top: 2.5px;
-  //     }
-  //   }
-
-  //   &.input-wrapper-sensitive{
-
-  //     @media(max-width: @system-hugescreen-breakpoint){
-  //       .input-wrapper-small();
-  //     }
-  //   }
-
-  //   &.with-external-label{
-  //     label{
-  //       color: @form-input-placeholder-color;
-  //     }
-  //   }
-
-  //   label{
-  //     color: @form-input-text-color;
-  //     cursor: text;
-  //     font-family: @form-font-family;
-  //     font-size: 1em;
-  //     font-weight: normal;
-  //     height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-  //     left: @form-input-horizontal-padding;
-  //     line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-  //     margin-bottom: 0;
-  //     padding-left: 0;
-  //     padding-right: @form-input-horizontal-padding;
-  //     position:absolute;
-  //     top: @form-input-vertical-padding;
-  //     z-index: @z-immediate-over;
-
-  //     &:before{
-  //       content: "";
-  //     }
-  //   }
-
-  //   input, .fake-result{
-  //     left: 0;
-  //     position:absolute;
-  //     top: @form-input-vertical-padding;
-  //     width: 100%;
-  //     z-index: (@z-immediate-over + 1);
-  //   }
-
-  //   .button{
-  //     z-index: (@z-immediate-over + 2);
-  //   }
-  // }
-
+  // File upload control
   &.file-upload{
     position:relative;
-
-    .django-file-upload-controller-fix{
-      display: none;
-    }
 
     .fake-result{
       .ellipsis();
@@ -730,96 +635,24 @@ textarea,
     }
   }
 
-  // Input reset
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="url"]{
-    display: inline-block;
-    height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-    // line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-  }
-
-  // Textarea
-  textarea{
-    padding-top: 12px;
-    padding-bottom: 12px;
-    height: @form-input-height*2 - 2;
-  }
-
-  // Sizes
-
-  // Small
-  &.input-wrapper-small{
-    input{
-      height: (@form-input-small-height - 2*@form-input-vertical-padding - 2);
-    }
-
-    textarea{
-      padding-bottom: 5px;
-      padding-top: 5px;
-      height: 85px;
-    }
-
-    .form-input-tag{
-      font-size: 1.2em;
-      height: (@form-input-small-height - 2px);
-      line-height: (@form-input-small-height - 2px);
-      width: @form-input-tag-width - 10px;
-
-      i{
-        line-height: (@form-input-small-height - 2px);
-      }
-    }
-  }
-
-  // Tiny
-  &.input-wrapper-tiny{
-    .border-radius(@form-input-border-radius/2.0);
-    padding: @form-input-vertical-padding/2.0 0;
-
-    input{
-      font-size: 11px;
-      height: (@form-input-tiny-height - 2*@form-input-vertical-padding/2.0 - 2);
-      padding: 0 @form-input-horizontal-padding/2.0;
-    }
-
-    i.form-input-mark{
-      font-size: 0.8em;
-      line-height: @form-input-tiny-height;
-      right: @form-input-horizontal-padding/2.0;
-    }
-  }
-
-  &.input-wrapper-sensitive{
-
-    @media(max-width: @system-hugescreen-breakpoint){
-      .input-wrapper.input-wrapper-small();
-    }
-  }
-
   // Special components
-  &.with-button-left .button{
-    left: (@form-input-vertical-padding*1.4);
-  }
-  &.with-button-right .button{
-    right: (@form-input-vertical-padding*1.4);
-  }
 
   // Buttons
   .button{
-    font-size: 0.9em;
-                                                      // External border, own border
-    height: @form-input-height - (2*@form-input-vertical-padding) - 2px - 2px - 4px; // (4px of adjustment)
+    left: 0;
                                                            // External border, own border
-    line-height: @form-input-height - (2*@form-input-vertical-padding) - 2px - 2px - 4px - 1px; // (4px of adjustment)
     margin: 0;
     position: absolute;
-    top: @form-input-vertical-padding + 2px; // 2px adjustment (half 4px of adjusment above)
     z-index: (@z-immediate-over + 2);
 
-    &.float-right{
-      right: (@form-input-vertical-padding*1.4);
+    &.button-small{
+      left: (@form-input-vertical-padding*1.4);
+      top: (@form-input-height - @button-small-height - 2)/2.0;
+    }
+
+    &.button-tiny{
+      left: (@form-input-vertical-padding*2.5);
+      top: (@form-input-height - @button-tiny-height - 2)/2.0;
     }
 
     i{
@@ -828,79 +661,35 @@ textarea,
   }
 
   // Marks
-  i.form-input-mark{
+  i.input-mark{
     .user-select(none);
-    color: @form-input-mark-color;
+    color: @input-mark-color;
+    left: (@form-input-horizontal-padding + 5px);
     line-height: @form-input-height;
     position: absolute;
     top: -1px;
     z-index: (@z-immediate-over + 2);
-
-    &:first-child{
-      left: (@form-input-horizontal-padding);
-    }
-    &:last-child{
-      right: (@form-input-horizontal-padding);
-    }
-    &.float-right{
-      right: (@form-input-horizontal-padding);
-    }
-  }
-
-  &.with-button-left{
-    .form-input-tag{
-      .border-radius(@form-input-border-radius 0 0 @form-input-border-radius);
-      border-right: 1px solid @form-input-border-color;
-      left: 0;
-    }
-  }
-
-  &.with-button-right{
-    .form-input-tag{
-      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-      border-left: 1px solid @form-input-border-color;
-      right: 0;
-    }
   }
 
   // Tags
-  .form-input-tag{
-    #gradient .vertical(@form-input-tag-gradient-start, @form-input-tag-gradient-end); // Structural colors
+  .input-tag{
     .user-select(none);
-    background-color: @form-input-tag-background-color;
-    border: none;
-    color: @form-input-tag-text-color;
+    border-radius: @form-input-border-radius 0 0 @form-input-border-radius;
+    color: @input-tag-text-color;
     cursor: pointer;
-    font-size: 1.4em;
-    height: (@form-input-height - 2px);
-    line-height: (@form-input-height - 2px);
-    // padding: 0 @form-input-tag-horizontal-padding;
+    height: (@form-input-height);
+    left: -1px;
+    line-height: inherit;
     padding: 0;
     position: absolute;
     text-align: center;
-    top: 0;
-    width: @form-input-tag-width;
+    top: -1px;
+    width: @input-tag-width;
     z-index: (@z-immediate-over + 2);
 
     i{
-      margin-right: 0 !important;
-    }
-
-    &.float-right{
-      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-      border-left: 1px solid @form-input-border-color;
-      right: 0;
-    }
-    &:hover{
-      background-color: lighten(@form-input-tag-background-color, 10%);
-    }
-    &:active,
-    &.active{
-      #gradient .vertical(@form-input-tag-gradient-end, @form-input-tag-gradient-start); // Structural colors
-      .box-shadow(inset 0 1px 3px 0 fadeout(darken(@form-input-tag-background-color, 30%), 60%));
-    }
-    i{
       line-height: (@form-input-height - 2px);
+      margin-right: 0 !important;
     }
   }
 
@@ -931,15 +720,144 @@ textarea,
     width: 102%;
   }
 
-  &:hover{
-    background: lighten(@form-input-background-color, 20%);
+  // Component positions
+
+  // Component position left: default
+  &.component-position-left{
+    input{
+      padding-left: 70px;
+    }
+
+    .button{
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+
+      &.button-small{
+        border-bottom-right-radius: @system-border-radius;
+        border-top-right-radius: @system-border-radius;
+      }
+
+      &.button-tiny{
+        border-bottom-right-radius: @system-border-radius/2.0;
+        border-top-right-radius: @system-border-radius/2.0;
+      }
+    }
+
+    &.input-small{
+      input{
+        padding-left: 60px;
+      }
+
+      .button{
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+
+        &.button-tiny{
+          border-bottom-right-radius: @system-border-radius/2.0;
+          border-top-right-radius: @system-border-radius/2.0;
+          left: (@form-input-vertical-padding*1.4);
+        }
+      }
+    }
+
+    &.input-tiny{
+      input{
+        padding-left: 40px;
+      }
+
+      .button.button-tiny{
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
   }
 
-  &.input-wrapper-focussed{
-    //.box-shadow(@form-focus-shadow-definition @form-focus-shadow-color);
-    background: @form-focus-background-color;
-    z-index: (@z-immediate-over + 1);
-    border-color: @form-focus-border-color;
+  // Component position right
+  &.component-position-right{
+    input{
+      padding-right: 70px;
+    }
+
+    .button{
+      left: auto;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+
+      &.button-small{
+        border-bottom-left-radius: @system-border-radius;
+        border-top-left-radius: @system-border-radius;
+        right: (@form-input-vertical-padding*1.4);
+      }
+
+      &.button-tiny{
+        border-bottom-left-radius: @system-border-radius/2.0;
+        border-top-left-radius: @system-border-radius/2.0;
+        right: (@form-input-vertical-padding*2.5);
+      }
+    }
+
+    i.input-mark{
+      left: auto;
+      right: (@form-input-horizontal-padding + 5px);
+    }
+
+    // Must happen after .button
+    .input-tag{
+      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
+      left: auto;
+      right: -1px;
+    }
+
+    &.input-small{
+      input{
+        padding-right: 60px;
+      }
+
+      .button{
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+
+        &.button-small{
+          left: auto;
+          right: 0;
+        }
+
+        &.button-tiny{
+          border-bottom-left-radius: @system-border-radius/2.0;
+          border-top-left-radius: @system-border-radius/2.0;
+          left: auto;
+          right: (@form-input-vertical-padding*1.4);
+        }
+      }
+
+      i.input-mark{
+        left: auto;
+        right: @form-input-horizontal-padding - 1px;
+      }
+    }
+
+    &.input-tiny{
+      input{
+        padding-right: 40px;
+      }
+
+      .button.button-tiny{
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        left: auto;
+        right: 0;
+      }
+
+      .input-tag{
+        border-bottom-right-radius: @system-border-radius/2.0;
+        border-top-right-radius: @system-border-radius/2.0;
+      }
+
+      i.input-mark{
+        left: auto;
+        right: 15px;
+      }
+    }
   }
 
   // Special component padding mods. TODO: think of a better way v2.0
@@ -987,35 +905,6 @@ textarea,
   &.roffset-180 input, &.roffset-180 .fake-result{ padding-right: 180px !important; }
   &.roffset-190 input, &.roffset-190 .fake-result{ padding-right: 190px !important; }
   &.roffset-200 input, &.roffset-200 .fake-result{ padding-right: 200px !important; }
-
-  // Input wrapper states
-  &.disabled{
-    border-color: lighten(@form-input-border-color, 10%);
-    .user-select(none);
-
-    &:hover{
-      background: @form-input-background-color;
-    }
-
-    label{
-      cursor: default;
-      color: fadeout(@form-input-text-color, 60%);
-    }
-
-    *[disabled="disabled"]{
-      .placeholder(lighten(@form-input-placeholder-color, 4%));
-    }
-  }
-
-  /*&.big-choice{
-    select{
-      width: 100%;
-      display: inline-block;
-      height: 28px;
-      line-height: 28px;
-      border: 1px solid #000;
-    }
-  }*/
 }
 
 // Form label
@@ -1040,78 +929,11 @@ label, .form-label{ // TODO: change class="label" inside forms
       content: "* ";
     }
   }
-
-  // For togglers
-  /*&.form-toggler-wrapper{
-    .user-select(none);
-    cursor: pointer;
-    line-height: @form-input-height;
-    position: relative;
-
-    // Toggler indicator
-    .indicator{
-      background-color: @form-toggler-wrapper-background-color;
-      border: 1px solid @form-toggler-wrapper-border-color;
-      color: transparent;
-      font-size: 1em;
-      margin-left: @form-toggler-wrapper-horizontal-margin;
-      padding: @form-toggler-wrapper-vertical-padding @form-toggler-wrapper-horizontal-padding;
-
-      // Margin adjustment for left indicator
-      &:first-child{
-        margin-left: 0;
-        margin-right: @form-toggler-wrapper-horizontal-margin;
-      }
-    }
-
-    // Override default input
-    input{
-      display: inline-block;
-      opacity: 0;
-    }
-
-    // Types
-
-    // Checkbox
-    &.check{
-      .indicator{
-        .border-radius(@form-toggler-wrapper-check-radius);
-      }
-    }
-
-    // Radio button
-    &.radio{
-      .indicator{
-        .border-radius(@form-toggler-wrapper-radio-radius);
-      }
-    }
-
-    // Checked state
-    &.checked{
-      .indicator{
-        color: @system-base-color;
-      }
-    }
-  }*/
 }
 
-// Form togglers (iCheck: http://damirfoy.com/iCheck)
-.iradio_flat,
-.icheckbox_flat{
-  .transition(-webkit-box-shadow @form-focus-transition-time, box-shadow @form-focus-transition-time;);
-  background-image: url('@{images-path}icheck_sprites.png');
-  float: left;
-  margin-right: @form-input-horizontal-padding;
-  &.focus{
-    //.box-shadow(@form-focus-shadow-definition @form-focus-shadow-color);
-  }
-}
-.icheckbox_flat{
-  .border-radius(5px); // Burned in purpose
-}
-.iradio_flat{
-  .border-radius(100px); // Burned in purpose
-}
+// TODO: select
+// TODO: checkbox
+// TODO: radio
 
 // Password strength indicator
 .password-strength-wrapper{
@@ -1159,839 +981,22 @@ label, .form-label{ // TODO: change class="label" inside forms
   }
 }
 
-// Form messages
-/*.form-input-message-wrapper{
-  position: relative;
-  .form-input-message{
-    .border-radius(@form-input-message-border-radius);
-    .box-sizing(border-box);
-    .make-popover-shadow(@popover-shadow-default-color);
-    .user-select(none);
-    border: 1px solid #000;
-    cursor: pointer;
-    display: block;
-    font-size: 0.9em;
-    line-height: 1.3em;
-    padding: @form-input-message-vertical-spacing (@form-input-message-vertical-spacing*2);
-
-    // Default colors
-    &.form-input-message-default{.make-form-input-message(@form-input-message-default-background-color, @form-input-message-default-text-color);}
-    &.form-input-message-primary{.make-form-input-message(@form-input-message-primary-background-color, @form-input-message-primary-text-color);}
-    &.form-input-message-info{.make-form-input-message(@form-input-message-info-background-color, @form-input-message-info-text-color);}
-    &.form-input-message-success{.make-form-input-message(@form-input-message-success-background-color, @form-input-message-success-text-color);}
-    &.form-input-message-danger{.make-form-input-message(@form-input-message-danger-background-color, @form-input-message-danger-text-color);}
-    &.form-input-message-warning{.make-form-input-message(@form-input-message-warning-background-color, @form-input-message-warning-text-color);}
-    &.form-input-message-inverted{.make-form-input-message(@form-input-message-inverted-background-color, @form-input-message-inverted-text-color);}
-
-    // Responsive behavior
-    @media (min-width: @system-cellphone-breakpoint){
-      position: absolute;
-      min-width: @form-input-message-default-width;
-      z-index: @z-front;
-    }
-  }
-}*/
-
-
-// Color picker
-@form-color-picker-colors-selected-color-container-background-color: @black-10;
-@form-color-picker-colors-selected-color-container-margin: 2px;
-@form-color-picker-colors-selected-color-holder-border-color: @white;
-
-@form-color-picker-colors-color-container-padding: 2px;
-@form-color-picker-colors-color-container-size: 27px;
-@form-color-picker-margin-left: 15px;
-@form-color-picker-preview-height: 36px;
-@form-color-picker-preview-mask-padding: 4px;
-@form-color-picker-preview-width: 35px;
-
-// Had to place out of form because I need to use it within qtip, and if I do use form, shit happens
-.picker-preview{
-  margin-left: @form-color-picker-margin-left;
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: @form-color-picker-preview-width;
-  height: @form-color-picker-preview-height;
-
-  .picker-mask{
-    background: url('@{images-path}color_picker_mask.png');
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .picker-color-holder{
-    .transition(@faster);
-    height: @form-color-picker-preview-height - 2*@form-color-picker-preview-mask-padding;
-    left: @form-color-picker-preview-mask-padding;
-    position: absolute;
-    top: @form-color-picker-preview-mask-padding;
-    width: @form-color-picker-preview-width - 2*@form-color-picker-preview-mask-padding;
-  }
-}
-
-.picker-colors{
-  .picker-color-container{
-    .border-radius(@form-input-border-radius);
-    .box-sizing(border-box);
-    cursor: pointer;
-    display: inline-block;
-    height: @form-color-picker-colors-color-container-size;
-    margin: @form-color-picker-colors-selected-color-container-margin;
-    padding: @form-color-picker-colors-color-container-padding*2;
-    vertical-align: middle;
-    width: @form-color-picker-colors-color-container-size;
-
-    .picker-color-holder{
-      .border-radius(@form-input-border-radius);
-      .box-sizing(border-box);
-      border: @form-color-picker-colors-color-container-padding solid fadeout(@form-color-picker-colors-selected-color-holder-border-color, 100%); // Hidden border
-      display: inline-block;
-      height: 100%;
-      width: 100%;
-    }
-
-    &.selected, &:hover{
-      background: @form-color-picker-colors-selected-color-container-background-color;
-      padding: @form-color-picker-colors-color-container-padding;
-
-      .picker-color-holder{
-        border-color: @form-color-picker-colors-selected-color-holder-border-color;
-      }
-    }
-  }
-}
-
 // Extra classes (third parties)
 
-.input-wrapper-small{
-  .twitter-typeahead{
-    .tt-dropdown-menu{
-      margin-top: @form-input-small-height;
-    }
-  }
-}
-
-// Typeahead
-.twitter-typeahead{
-  display: block !important;
-
-  .tt-input{
-    position: absolute !important;
-    top: 0 !important;
-  }
-
-  .tt-dropdown-menu{
-    .border-radius(@form-input-border-radius @form-input-border-radius);
-    .box-shadow(0 1px 5px @form-typeahead-dropdown-shadow-color);
-    .box-sizing(border-box);
-    background: @form-typeahead-background-color;
-    border: 1px solid @form-typeahead-dropdown-border-color;
-    margin-top: @form-input-height + 0;
-    max-height: @form-typeahead-suggestion-height*6 + 2px; // Correction
-    overflow-y: auto;
-    width: 100%;
-    z-index: @z-maximum !important;
-
-    &::-webkit-scrollbar-track {
-      .border-radius(0 @system-border-radius @system-border-radius 0);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      .border-radius(@system-border-radius @system-border-radius);
-    }
-
-    .tt-suggestions{
-      max-height: @form-typeahead-suggestion-height*3;
-
-      .tt-suggestion{
-        cursor: pointer;
-        font-family: @form-typeahead-font-family;
-        height: @form-typeahead-suggestion-height;
-        padding: @form-typeahead-suggestion-padding;
-
-        .user,
-        .structure-element{
-          position: relative;
-
-          .picture-container{
-            float: left;
-            left: 0;
-            position: absolute;
-            top: 0;
-
-            .picture{
-              .circle(@form-typeahead-user-picture-size);
-              .box-shadow(0px 0px 0px 2px @form-typeahead-user-border-color);
-              .box-sizing(border-box);
-              .vertical-center(@form-typeahead-suggestion-height; @form-typeahead-user-picture-size);
-              vertical-align: middle;
-            }
-          }
-
-          // User name
-          .data{
-            .vertical-center-with-padding(@form-typeahead-suggestion-height; @form-typeahead-user-expected-height);
-            text-align: left;
-            padding-left: @form-typeahead-user-picture-size + @form-typeahead-user-picture-margin-right + @element-vertical-margin;
-            // padding-left: @element-vertical-margin;
-
-            .name,
-            .title{
-              .ellipsis;
-              color: @form-typeahead-user-name-color;
-              display: block;
-              font-size: 1.1em;
-              font-weight: bold;
-
-              .low-accent,
-              .relation{
-                color: #4a7977;
-                font-weight: lighter;
-              }
-            }
-
-            .role,
-            .subtitle{
-              .ellipsis;
-              color: @form-typeahead-user-role-color;
-              display: block;
-              font-size: 0.9em;
-            }
-          }
-
-          &.empty{
-            .data{
-              padding-left: 0;
-            }
-          }
-        }
-
-        .structure-element{
-          .data{
-            padding-left: 0;
-          }
-        }
-
-        &.tt-cursor{
-          background: @form-typeahead-hover-color;
-
-          .user,
-          .structure-element{
-
-            .picture-container{
-              .picture{
-                .box-shadow(0px 0px 0px 2px @form-typeahead-hover-user-border-color);
-              }
-            }
-
-            // User name
-            .data{
-              .name,
-              .title{
-                color: @form-typeahead-hover-user-name-color;
-
-                .low-accent,
-                .relation{
-                  color: #9cf9f6;
-                }
-              }
-
-              .role,
-              .subtitle{
-                color: @form-typeahead-hover-user-role-color;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-// Dropdown (select2: http://ivaynberg.github.io/select2/)
-.select-wrapper{
-  select{
-    .opacity(0.0);
-  }
-
-  &.error{
-    .select2-container{
-      border-color: @form-input-error-border-color !important;
-
-      .select2-arrow{
-        border-color: @form-input-error-border-color !important;
-      }
-
-      .select2-choice{
-        color: @form-input-error-text-color !important;
-      }
-    }
-  }
-
-  .select2-offscreen, .select2-offscreen:focus{
-    left: inherit !important;
-    top: inherit !important;
-  }
-
-  .errorlist{
-    display: none;
-  }
-
-  &.select-wrapper-small{
-    .select2-container{
-      &.select2-drop-above .select2-choice,
-      .select2-choice{
-        line-height: @form-input-small-height - 2px;
-        height: @form-input-small-height - 2px;
-      }
-    }
-  }
-
-  &.user{
-    .select2-container{
-      .select2-choice{
-        padding-left: 15px;
-      }
-    }
-  }
-}
-
-.select2-drop.select2-drop-above{
-  .border-radius(@form-input-border-radius);
-  border-bottom: 1px solid @form-dropdown-border-color;
-  overflow: hidden;
-
-  .select2-results{
-    margin-bottom: 0;
-  }
-}
-
-.select2-container{
-  .border-radius(@form-input-border-radius); // TODO v1.0
-  .box-shadow(0 1px 3px 0 @form-dropdown-shadow-color);
-  .transition(border-color @form-focus-transition-time);
-  border: 1px solid @form-dropdown-border-color;
-  border-top: 1px solid lighten(@form-dropdown-border-color, 5%);
-  width: 100%;
-
-  &.select2-drop-above .select2-choice,
-  .select2-choice{
-    #gradient > .vertical(@form-dropdown-gradient-start, @form-dropdown-gradient-end);
-    .border-radius(@form-input-border-radius);
-    .box-shadow(0 1px 0 @form-dropdown-reflex-color inset);
-    .transition(@form-focus-transition-time);
-    height: @form-input-height - 2px;
-    line-height: @form-input-height;
-    background-color: @form-dropdown-background-color;
-    border: none;
-    color: @form-dropdown-text-color;
-    z-index: @z-front + 1;
-    padding-left: @form-input-horizontal-padding;
-
-    .select2-chosen{
-      .text-shadow(0 1px 0 @form-label-shadow-color);
-
-      .user{
-        display: inline-block;
-
-        .picture{
-          .circle(38px);
-          vertical-align: middle;
-          margin-right: 10px;
-        }
-
-        .text{
-          vertical-align: middle;
-          display: inline-block;
-          margin-top: -1px;
-          font-size: 1.2em;
-        }
-      }
-
-      .division{
-        .percentage{
-          font-weight: bold;
-          margin-right: 5px;
-          color: lighten(@form-dropdown-text-color, 20%);
-        }
-      }
-    }
-
-    .select2-arrow{
-      background: none;
-      border-left: 1px solid @form-dropdown-border-color;
-      padding: 0;
-      width: @form-dropdown-arrow-container-width - 1px;
-
-      b{
-        .font-awesome-background(@form-dropdown-up-arrow-char, @form-dropdown-arrow-size);
-        .text-shadow(0 1px 0 @form-dropdown-arrow-shadow-color);
-        background: none;
-        color: @form-dropdown-arrow-color;
-        position: relative;
-
-        &:after{
-          margin: -8px 0 0 -6px; // Fix depending on char
-        }
-      }
-    }
-
-    &>.select2-chosen{
-      margin-right: @form-input-horizontal-padding + @form-dropdown-arrow-container-width;
-    }
-  }
-
-  &.select2-dropdown-open{
-    .box-shadow(none);
-    z-index: @form-select2-z-index + 1;
-
-    .select2-choice,
-    .select2-choices{
-      #gradient > .vertical(@form-dropdown-gradient-end, @form-dropdown-gradient-start);
-      .transition(0);
-      background-color: @form-dropdown-background-color;
-
-      .select2-arrow{
-        background-color: @form-dropdown-background-color;
-
-        b{
-          &:after{
-            content: @form-dropdown-down-arrow-char;
-          }
-        }
-      }
-    }
-  }
-
-  &:hover,
-  &.select2-container-active{
-    &.select2-drop-above .select2-choice,
-    .select2-choice{
-      background-color: lighten(@form-dropdown-background-color, 2%);
-    }
-  }
-
-  &.select2-container-active{
-    border-color: @form-focus-border-color;
-  }
-}
-.select2-drop{
-  .border-radius(@form-input-border-radius);
-  .box-shadow(0 1px 5px @form-dropdown-shadow-color);
-  background-color: @form-dropdown-drop-background-color;
-  border: 1px solid @form-dropdown-border-color;
-  color: @form-dropdown-text-color;
-  margin-top: 5px; // Intentionally burned
-  padding-top: 10px; // Intentionally burned
-  z-index: @z-front;
-
-  .select2-search{
-    padding: 0 8px;
-
-    input{
-      .border-radius(@form-input-border-radius*0.6);
-      .font-awesome-background("\f002", 15px);
-      background: url('@{images-path}search.png') no-repeat 97% center @form-input-background-color;
-      border: 1px solid @form-input-border-color;
-      color: lighten(@form-input-text-color, 5%);
-      padding: 0 17px;
-      height: 30px !important;
-    }
-  }
-
-  &.select2-drop-active{
-    z-index: @form-select2-z-index;
-  }
-
-  .select2-results{
-    margin: 0;
-    padding: 8px 0 13px 0; // Intentionally burned
-
-    .select2-result-label{
-      padding: 0 @form-input-horizontal-padding;
-      // height: @form-input-horizontal-padding;
-      line-height: @form-input-horizontal-padding;
-    }
-
-    .select2-no-results{
-      background: none;
-      padding: 0 @form-input-horizontal-padding;
-      height: @form-input-horizontal-padding;
-      line-height: @form-input-horizontal-padding;
-    }
-
-    .select2-highlighted{
-      background-color: @form-dropwdown-item-hover-background-color;
-      color: @form-dropwdown-item-hover-text-color;
-
-      .division{
-        .percentage{
-          color: @form-dropwdown-item-hover-text-color;
-        }
-      }
-    }
-
-    .user{
-      .ellipsis();
-      width: 100%;
-      padding: 8px 0;
-      display: inline-block;
-
-
-      .picture{
-        .circle(28px);
-        vertical-align: middle;
-        margin-right: 10px;
-      }
-
-      .text{
-        vertical-align: middle;
-      }
-    }
-
-    .division{
-      .percentage{
-        font-weight: bold;
-        margin-right: 5px;
-        color: lighten(@form-dropdown-text-color, 20%);
-      }
-    }
-  }
-
-  &.select2-drop-above{
-    .box-shadow(0 -1px 5px @form-dropdown-shadow-color);
-    margin: -5px 0 0 0; // Intentionally burned
-    padding: 7px 0 0 0; // Intentionally burned
-
-    &.select2-drop-active{
-      border-top: 1px solid @form-dropdown-border-color;
-    }
-  }
-}
-
-.select2-drop-mask{
-  z-index: @form-select2-z-index;
-}
-
-// qTip
-.qtip{
-  z-index: @z-maximum - 1 !important;
-}
-.qtip-edoo-default{.make-form-input-message(@form-input-message-default-background-color, @form-input-message-default-text-color);}
-.qtip-edoo-primary{.make-form-input-message(@form-input-message-primary-background-color, @form-input-message-primary-text-color);}
-.qtip-edoo-info{.make-form-input-message(@form-input-message-info-background-color, @form-input-message-info-text-color);}
-.qtip-edoo-success{.make-form-input-message(@form-input-message-success-background-color, @form-input-message-success-text-color);}
-.qtip-edoo-danger{.make-form-input-message(@form-input-message-danger-background-color, @form-input-message-danger-text-color);}
-.qtip-edoo-warning{.make-form-input-message(@form-input-message-warning-background-color, @form-input-message-warning-text-color);}
-.qtip-edoo-inverted{.make-form-input-message(@form-input-message-inverted-background-color, @form-input-message-inverted-text-color);}
-
-.slider-wrapper{
-  .border-radius(@form-jslider_small-border-radius);
-  .box-shadow(0 1px 3px 0 @form-dropdown-shadow-color);
-  background: @form-jslider-wrapper-background;
-  border: 1px solid @form-jslider-wrapper-border-color;
-  padding: @form-jslider-wrapper-padding;
-
-  &.with-controls{
-    padding: @form-jslider-wrapper-with-controls-padding;
-    position: relative;
-
-    .left, .right{
-      .transition(@form-focus-transition-time);
-      .user-select(none);
-      color: @form-jslider-controls-color;
-      display: block;
-      font-weight: bold;
-      height: @form-jslider-controls-height;
-      line-height: @form-jslider-controls-height;
-      position: absolute;
-      text-align: center;
-      top: 0;
-      width: @form-jslider-controls-width;
-
-      &:hover{
-        color: darken(@form-jslider-controls-color, 10%);
-      }
-
-      &:active{
-        .transition(0);
-        color: @form-jslider-controls-color;
-      }
-    }
-
-    .left{
-      left: 0;
-    }
-
-    .right{
-      right: 0;
-    }
-  }
-}
-
-// JSlider (some of the following styles are burned because they are not logic, but necesary)
-.jslider{
-  top: 0;
-  left: 0;
-
-  &.jslider_small{
-    height: @form-jslider_small-height + 2px;
-    margin: auto;
-    width: 95%;
-
-    .jslider-bg i,
-    .jslider-pointer{
-      background-image: @form-jslider_small-sprites;
-    }
-
-    .jslider-pointer{
-      .border-radius(@form-jslider_small-border-radius);
-      .box-sizing(border-box);
-      .transition(background @form-focus-transition-time);
-      background: @form-jslider_small-pointer-background;
-      height: @form-jslider_small-height + 2px;
-      margin-left: -(@form-jslider_small-pointer-width/2.0);
-      top: 0;
-      width: @form-jslider_small-pointer-width;
-
-      &:hover{
-        background: lighten(@form-jslider_small-pointer-background, 2%);
-      }
-
-      &:active{
-        .transition(0);
-        background: darken(@form-jslider_small-pointer-background, 3%);
-      }
-    }
-
-    .jslider-bg{
-      height: @form-jslider_small-height + 2px;
-      margin-top: 0;
-
-      i{
-        .box-shadow(0 1px 0 0 fadeout(@form-jslider_small-glow-color, 70%) inset);
-        background-color: @form-jslider_small-background-color;
-        border: 1px solid @form-jslider_small-background-border-color;
-        height: @form-jslider_small-height;
-
-        &.l, &.v{
-          .border-radius(@form-jslider_small-border-radius 0 0 @form-jslider_small-border-radius);
-          border-right: 0;
-          margin-left: -(@form-jslider_small-pointer-width/2.0);
-          padding-left: (@form-jslider_small-pointer-width/2.0);
-        }
-
-        &.v{
-          background-color: @form-jslider_small-range-color;
-        }
-
-        &.f{
-          border-left: 0;
-          border-right: 0;
-        }
-
-        &.r{
-          .border-radius(0 @form-jslider_small-border-radius @form-jslider_small-border-radius 0);
-          border-left: 0;
-          padding-right: @form-jslider_small-height*0.75/2.0;
-        }
-      }
-    }
-  }
-
-  &.no-range{
-    .jslider-pointer{
-      display: none;
-
-      &.jslider-pointer-to{
-        display: block;
-      }
-    }
-  }
-}
-
-// Zebra date picker
-@form-calendar-body-background-color:               @white;
-@form-calendar-border-color:                        @black-30;
-@form-calendar-days-text-color:                     @form-calendar-text-color;
-@form-calendar-header-background-color:             @black-5;
-@form-calendar-header-text-color:                   @black;
-@form-calendar-hover-background-color:              darken(@form-calendar-header-background-color, 5%);
-@form-calendar-old-month-day-text-color:            @black-5;
-@form-calendar-selected-background-color:           @black;
-@form-calendar-text-color:                          @black;
-@form-calendar-current-background-color:            @black;
-@form-calendar-current-text-color:                  @white;
-
-@form-calendar-border-radius:                       @system-border-radius;
-@form-calendar-shadow-color: fadeout(#ccc, 70%);
-@form-calendar-header-height: 37px;
-@form-calendar-gradient-start: fadeout(@white, 95%);
-@form-calendar-gradient-end: fadeout(#c2c2c2, 95%);
-@form-calendar-inline-renderer-height: 54px;
-
-.inline-calendar-wrapper{
-  .inline-calendar-renderer{
-    position: absolute;
-    top: @form-calendar-inline-renderer-height;
-    width: 100%;
-  }
-}
-
-.inline-calendar-renderer{
-  .box-sizing(border-box);
-  .opacity(0.0);
-  .transition(@fast);
-  height: 0;
-  margin-top: 3px;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  z-index: @z-tip + 1;
-
-  &.open{
-    .opacity(1.0);
-    height: 320px;
-  }
-}
-
-.inline-calendar-float{
-  position: relative;
-
-  .inline-calendar-renderer{
-    left: 0;
-    position: absolute;
-    top: 0;
-
-    &.open{
-      top: 100%;
-    }
-
-    .Zebra_DatePicker{
-      .box-shadow(0 2px 1px 0px @form-calendar-shadow-color);
-    }
-  }
-}
-
-.Zebra_DatePicker{
-  .border-radius(@form-calendar-border-radius);
-  .box-sizing(border-box);
-  .user-select(none);
-  background: @form-calendar-body-background-color;
-  border-bottom: none;
-  border: 1px solid @form-calendar-border-color;
-  overflow: hidden;
-  padding: 0;
-  width: 100%;
-
-  // Cells
-  td, th{
-    padding: 10px 0;
-  }
-
-  // Header
-  .dp_header{
-    #gradient .vertical(@form-calendar-gradient-start, @form-calendar-gradient-end);
-    background-color: @form-calendar-header-background-color;
-    border-bottom: 1px solid @form-calendar-border-color;
-    height: @form-calendar-header-height;
-    width: 100% !important;
-
-    .dp_caption,
-    .dp_previous,
-    .dp_next{
-      min-width: 40px;
-      color: @form-calendar-header-text-color;
-      i{
-        color: darken(@form-calendar-header-text-color, 2%);
-      }
-    }
-    .dp_previous{
-      border-right: 1px solid @form-calendar-border-color;
-    }
-    .dp_next{
-      border-left: 1px solid @form-calendar-border-color;
-    }
-    .dp_hover{
-      .border-radius(0);
-      background: none;
-      color: lighten(@form-calendar-header-text-color,  5%);
-      i{
-        color: lighten(@form-calendar-header-text-color,  5%);
-      }
-    }
-  }
-
-  .dp_daypicker,
-  .dp_monthpicker,
-  .dp_yearpicker{
-    margin-top: 0;
-    width: 100.5% !important;
-
-    th{
-      color: @form-calendar-days-text-color;
-      font-size: 0.85em;
-    }
-    td{
-      border: 1px solid lighten(@form-calendar-border-color, 13%);
-      color: @form-calendar-text-color;
-      &.dp_not_in_month{
-        color: @form-calendar-old-month-day-text-color;
-      }
-      &:first-child{
-        border-left: none;
-      }
-      &.dp_hover{
-        .border-radius(0);
-        background-color: @form-calendar-hover-background-color;
-        color: lighten(@form-calendar-text-color, 5%);
-      }
-      &.dp_selected{
-        .border-radius(0);
-        .box-shadow(inset 0 1px 3px 0 fadeout(darken(@form-calendar-selected-background-color, 20%), 70%));
-        background-color: @form-calendar-selected-background-color !important;
-
-        &:hover{
-          background-color: lighten(@form-calendar-selected-background-color, 5%);
-        }
-      }
-      &.dp_current{
-        // .box-shadow(inset 0 1px 3px 0 fadeout(darken(@form-calendar-selected-background-color, 20%), 70%));
-        background-color: @form-calendar-current-background-color;
-        color: @form-calendar-current-text-color;
-      }
-    }
-  }
-
-  .dp_monthpicker,
-  .dp_yearpicker{
-    margin-top: 0;
-
-    tr:first-child{
-      td{
-        border-top: none;
-      }
-    }
-  }
-}
+// TODO: typeahead
+// TODO: slider
+// TODO: qtip
+// TODO: calendar
 
 // IE fixes
 .ie7{
-  .form{
-    .input-wrapper{
-      .button.float-right{
-        top: (@form-input-vertical-padding + 1.5px);
-      }
-      .form-input-tag{
-        height: (@form-input-height);
-        line-height: (@form-input-height);
-      }
+  .input-wrapper{
+    .button.float-right{
+      top: (@form-input-vertical-padding + 1.5px);
+    }
+    .input-tag{
+      height: (@form-input-height);
+      line-height: (@form-input-height);
     }
   }
 }

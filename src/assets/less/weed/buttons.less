@@ -367,12 +367,13 @@ button.button{
       @height: @button-tiny-height;
       @text-margin: @button-tiny-text-margin-left;
       @loader-width: @button-tiny-loader-width;
-      @icon-size: 1.1em;
+      @icon-size: 11px;
       @font-size: 13px;
     );
+    line-height: @button-tiny-height - 3px;
 
     &.only-icon{
-      line-height: @button-tiny-height - 3px;
+      width: auto;
     }
   }
 

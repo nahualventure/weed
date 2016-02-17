@@ -38,11 +38,6 @@ var paths = {
   weedJS: [
     './src/assets/js/weed.js',
     './src/assets/js/components/**/*.js',
-  ],
-  // These files are for your app's JavaScript
-  appJS: [
-    'src/assets/js/weed.js',
-    'src/assets/js/weed-tpls.js'
   ]
 }
 
@@ -175,6 +170,6 @@ gulp.task('default', ['server'], function () {
   // Watch less files
   gulp.watch(['src/assets/less/**/*'], ['css:update']);
 
-  // Wach scripts
-  gulp.watch(['src/assets/js/components/**/*'], ['uglify']);
+  // Watch scripts
+  gulp.watch(['src/assets/js/components/**/*'], ['copy:weed', 'uglify']);
 });
