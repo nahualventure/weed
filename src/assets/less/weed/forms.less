@@ -21,13 +21,9 @@
 @form-input-border-color:                 @black-15;
 @input-mark-color:                   @black-15;
 @form-input-placeholder-color:            lighten(@form-input-text-color, 25%);
-@input-tag-background-color:         @black-5;
-@input-tag-text-color:               @black-15;
 @form-input-text-color:                   @black-35;
 @form-label-color:                        @black-60;
 @form-label-shadow-color:                 @white;
-@input-tag-gradient-start:           fadeout(@white, 92%);
-@input-tag-gradient-end:             fadeout(#c2c2c2, 92%);
 @form-input-toolbar-border-color: #eee;
 @form-input-toolbar-file-label-color: #aaa;
 
@@ -69,7 +65,6 @@
 @form-input-small-height:                 41px;
 @form-input-tiny-height:                  28px;
 @form-input-horizontal-padding:           25px;
-@input-tag-width:                    55px;
 @form-input-vertical-padding:             5px;
 
 // Toggler
@@ -272,16 +267,6 @@
     padding: 0 (@new-padding / 2.0);
   }
 
-    // Input tag (icon within button)
-  .input-tag{
-    height: (@new-height - 2px);
-    // padding: 0 @new-padding;
-
-    i{
-      line-height: (@new-height - 2px);
-    }
-  }
-
   .tt-dropdown-menu{
     margin-top: @new-height - @form-input-vertical-padding;
   }
@@ -417,15 +402,6 @@ textarea.input-small, .input-wrapper.input-small textarea{
 
 // Input tag
 .input-wrapper.input-small{
-  .input-tag{
-    height: (@form-input-small-height);
-    line-height: (@form-input-small-height);
-    width: @input-tag-width - 10px;
-
-    i{
-      line-height: (@form-input-small-height - 2px);
-    }
-  }
 
   i.input-mark{
     left: 24px;
@@ -434,8 +410,9 @@ textarea.input-small, .input-wrapper.input-small textarea{
 
   .button{
     &.button-small{
-      top: 0;
-      left: 0;
+      box-sizing: content-box;
+      left: -1px;
+      top: -1px;
     }
 
     &.button-tiny{
@@ -457,20 +434,9 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
   border-radius: @form-input-border-radius/2.0;
 
   .button.button-tiny{
-    left: 0;
-    top: 0;
-  }
-
-  .input-tag{
-    border-radius: @system-border-radius/2.0;
-    height: (@form-input-tiny-height);
-    line-height: 25px;
-    width: @input-tag-width - 24px;
-
-    i{
-      line-height: inherit;
-      font-size: 14px;
-    }
+    box-sizing: content-box;
+    left: -1px;
+    top: -1px;
   }
 
   i.input-mark{
@@ -639,18 +605,21 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
 
   // Buttons
   .button{
-    left: 0;
-                                                           // External border, own border
+    box-sizing: content-box;
+    left: -1px;
     margin: 0;
     position: absolute;
+    top: -1px;
     z-index: (@z-immediate-over + 2);
 
     &.button-small{
+      box-sizing: border-box;
       left: (@form-input-vertical-padding*1.4);
       top: (@form-input-height - @button-small-height - 2)/2.0;
     }
 
     &.button-tiny{
+      box-sizing: border-box;
       left: (@form-input-vertical-padding*2.5);
       top: (@form-input-height - @button-tiny-height - 2)/2.0;
     }
@@ -669,28 +638,6 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
     position: absolute;
     top: -1px;
     z-index: (@z-immediate-over + 2);
-  }
-
-  // Tags
-  .input-tag{
-    .user-select(none);
-    border-radius: @form-input-border-radius 0 0 @form-input-border-radius;
-    color: @input-tag-text-color;
-    cursor: pointer;
-    height: (@form-input-height);
-    left: -1px;
-    line-height: inherit;
-    padding: 0;
-    position: absolute;
-    text-align: center;
-    top: -1px;
-    width: @input-tag-width;
-    z-index: (@z-immediate-over + 2);
-
-    i{
-      line-height: (@form-input-height - 2px);
-      margin-right: 0 !important;
-    }
   }
 
   // Marker
@@ -779,9 +726,10 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
     }
 
     .button{
-      left: auto;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
+      left: auto;
+      right: 0;
 
       &.button-small{
         border-bottom-left-radius: @system-border-radius;
@@ -799,13 +747,6 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
     i.input-mark{
       left: auto;
       right: (@form-input-horizontal-padding + 5px);
-    }
-
-    // Must happen after .button
-    .input-tag{
-      .border-radius(0 @form-input-border-radius @form-input-border-radius 0);
-      left: auto;
-      right: -1px;
     }
 
     &.input-small{
@@ -846,11 +787,6 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
         border-top-left-radius: 0;
         left: auto;
         right: 0;
-      }
-
-      .input-tag{
-        border-bottom-right-radius: @system-border-radius/2.0;
-        border-top-right-radius: @system-border-radius/2.0;
       }
 
       i.input-mark{
@@ -993,10 +929,6 @@ label, .form-label{ // TODO: change class="label" inside forms
   .input-wrapper{
     .button.float-right{
       top: (@form-input-vertical-padding + 1.5px);
-    }
-    .input-tag{
-      height: (@form-input-height);
-      line-height: (@form-input-height);
     }
   }
 }
