@@ -21,7 +21,7 @@
     service.modifySettings      = modifySettings;
     service.generateUuid        = generateUuid;
     // service.toggleAnimate       = toggleAnimate;
-    // service.closeActiveElements = closeActiveElements;
+    service.closeActiveElements = closeActiveElements;
     // service.animate             = animate;
     // service.animateAndAdvise    = animateAndAdvise;
 
@@ -84,6 +84,29 @@
 
       uniqueIds.push(uuid);
       return uuid;
+    }
+  }
+
+  function closeActiveElements(options) {
+    var self = this;
+    options = options || {};
+    var activeElements = document.querySelectorAll('.is-active[we-closable]');
+    var nestedActiveElements = document.querySelectorAll('[we-closable] > .is-active');
+
+    if (activeElements.length) {
+      angular.forEach(activeElements, function(el) {
+        if (options.exclude !== el.id) {
+          self.publish(el.id, 'close');
+        }
+      });
+    }
+    if (nestedActiveElements.length) {
+      angular.forEach(nestedActiveElements, function(el) {
+        var parentId = el.parentNode.id;
+        if (options.exclude !== parentId) {
+          self.publish(parentId, 'close');
+        }
+      });
     }
   }
 

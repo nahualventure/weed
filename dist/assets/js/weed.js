@@ -2605,7 +2605,7 @@ if (typeof define === 'function' && define.amd) {
     service.modifySettings      = modifySettings;
     service.generateUuid        = generateUuid;
     // service.toggleAnimate       = toggleAnimate;
-    // service.closeActiveElements = closeActiveElements;
+    service.closeActiveElements = closeActiveElements;
     // service.animate             = animate;
     // service.animateAndAdvise    = animateAndAdvise;
 
@@ -2668,6 +2668,29 @@ if (typeof define === 'function' && define.amd) {
 
       uniqueIds.push(uuid);
       return uuid;
+    }
+  }
+
+  function closeActiveElements(options) {
+    var self = this;
+    options = options || {};
+    var activeElements = document.querySelectorAll('.is-active[we-closable]');
+    var nestedActiveElements = document.querySelectorAll('[we-closable] > .is-active');
+
+    if (activeElements.length) {
+      angular.forEach(activeElements, function(el) {
+        if (options.exclude !== el.id) {
+          self.publish(el.id, 'close');
+        }
+      });
+    }
+    if (nestedActiveElements.length) {
+      angular.forEach(nestedActiveElements, function(el) {
+        var parentId = el.parentNode.id;
+        if (options.exclude !== parentId) {
+          self.publish(parentId, 'close');
+        }
+      });
     }
   }
 
@@ -2762,161 +2785,6 @@ if (typeof define === 'function' && define.amd) {
       };
     });
 
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', function(){
-      return {
-        restrict: 'A',
-        transclude: true,
-        scope: {
-            rightIcon: '@',
-            leftIcon: '@',
-            componentPosition: '@',
-            size: '@',
-            placeholder: '@'
-        },
-        replace: true,
-        templateUrl: 'components/forms/inputWrapper.html'
-      };
-    });
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', function() {
-      return {
-        restrict: 'E',
-        scope: {
-          icon: '@'
-        },
-        replace: true,
-        templateUrl: 'components/icons/icon.html',
-        link: function(scope, elem, attrs) {}
-      };
-    });
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInputWrapper
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbarElement', function(){
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          position: '@',
-          type: '@',
-          icon: '@',
-          logotype: '@',
-          isotype: '@',
-          placeholder: '@'
-        },
-        templateUrl: function(elem, attrs) {
-          var template = '';
-          switch (attrs.type) {
-            case 'link':
-              template = 'navbarElementLink.html';
-              break;
-            case 'logo':
-              template = 'navbarElementLogo.html';
-              break;
-            case 'separator':
-              template = 'navbarElementSeparator.html'
-              break;
-            default:
-              template = 'navbarElement.html'
-          }
-          return 'components/navbar/' + template;
-        }
-      };
-    });
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed')
-    .directive('weNavbarMainAction', function() {
-      return {
-        restrict: 'E',
-        transclude: true,
-        scope: {
-          icon: '@'
-        },
-        templateUrl: 'components/navbar/navbar_element_main_action.html'
-      };
-    })
-})(angular);
-(function() {
-  'use strict';
-
-  angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective)
-  ;
-
-  popupDirective.$inject = ['WeedApi'];
-
-  function popupDirective(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink
-    };
-
-    return directive;
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            console.log("Open(#" + id + "): " + message);
-        }
-      });
-    }
-  }
 })(angular);
 (function(angular) {
   'use strict';
@@ -3131,6 +2999,161 @@ if (typeof define === 'function' && define.amd) {
         }
       }
       return false;
+    }
+  }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', function(){
+      return {
+        restrict: 'A',
+        transclude: true,
+        scope: {
+            rightIcon: '@',
+            leftIcon: '@',
+            componentPosition: '@',
+            size: '@',
+            placeholder: '@'
+        },
+        replace: true,
+        templateUrl: 'components/forms/inputWrapper.html'
+      };
+    });
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', function() {
+      return {
+        restrict: 'E',
+        scope: {
+          icon: '@'
+        },
+        replace: true,
+        templateUrl: 'components/icons/icon.html',
+        link: function(scope, elem, attrs) {}
+      };
+    });
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbarElement', function(){
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          position: '@',
+          type: '@',
+          icon: '@',
+          logotype: '@',
+          isotype: '@',
+          placeholder: '@'
+        },
+        templateUrl: function(elem, attrs) {
+          var template = '';
+          switch (attrs.type) {
+            case 'link':
+              template = 'navbarElementLink.html';
+              break;
+            case 'logo':
+              template = 'navbarElementLogo.html';
+              break;
+            case 'separator':
+              template = 'navbarElementSeparator.html'
+              break;
+            default:
+              template = 'navbarElement.html'
+          }
+          return 'components/navbar/' + template;
+        }
+      };
+    });
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed')
+    .directive('weNavbarMainAction', function() {
+      return {
+        restrict: 'E',
+        transclude: true,
+        scope: {
+          icon: '@'
+        },
+        templateUrl: 'components/navbar/navbar_element_main_action.html'
+      };
+    })
+})(angular);
+(function() {
+  'use strict';
+
+  angular.module('weed.popup', ['weed.core'])
+    .directive('wePopup', popupDirective)
+  ;
+
+  popupDirective.$inject = ['WeedApi'];
+
+  function popupDirective(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink
+    };
+
+    return directive;
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            console.log("Open(#" + id + "): " + message);
+        }
+      });
     }
   }
 })(angular);
