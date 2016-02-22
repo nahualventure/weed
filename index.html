@@ -10,26 +10,26 @@
     </style>
   </head>
 
-  <body ng-app="weed">
-    <div tabset>
-      <div tab heading="TAB 1">
-        Here is a tab
-      </div>
-      <div tab heading="TAB 2" icon='reddit-alien'>
-        TAB so many tabs
-      </div>
-      <div tab heading="TAB 3" icon='heart'>
-        overwalming tabs
-      </div>
-
-    </div>
+  <body ng-app="weed.test">
     <div class="navbar">
 
       <!-- Logo: OK -->
-      <a we-navbar-element type="logo" isotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_isotype.png" logotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_logotype.png" position="left"></a>
+      <a we-navbar-element
+        type="logo"
+        isotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_isotype.png"
+        logotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_logotype.png"
+        position="left">
+      </a>
 
       <!-- Search: OK -->
-      <div we-navbar-element type="search-form" position="left" placeholder="Busca al usuario aquí"></div>
+      <div we-navbar-element position="left" class="search-form">
+        <div class="navbar-element-floater">
+            <div we-input-wrapper component-position="right" size="small">
+                <we-icon icon="search" class="input-mark"></we-icon>
+                <input type="text">
+            </div>
+        </div>
+      </div>
 
       <!-- Link: OK -->
       <a we-navbar-element type="link" icon="cog" position="right"></a>
