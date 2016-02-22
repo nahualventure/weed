@@ -12649,42 +12649,80 @@ body.sidebarless .corner-notification {
   font-size: 0.9em;
   text-align: left;
 }
-/**
-  * Edoo contract framework:  TODO v1.0 docu
-  * Depends on: forms.less
-  */
-.contract {
-  border-radius: 10px;
-  box-shadow: 0 2px 2px 0 rgba(100, 100, 100, 0.1);
-  background: #fbfbfb;
-  border: 1px solid #c3c9c9;
-  margin-bottom: 20px;
-  padding: 15px 20px;
-  position: relative;
+.tabset ul.tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #e6e6e6;
 }
-.contract .name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #97959c;
-  font-size: 1.1em;
-  margin-bottom: 20px;
-  max-width: 230px;
+.tabset ul.tabs:before,
+.tabset ul.tabs:after {
+  content: " ";
+  display: table;
 }
-.contract .controls {
-  position: absolute;
-  right: 20px;
-  top: 5px;
+.tabset ul.tabs:after {
+  clear: both;
 }
-.contract .controls .button {
-  position: relative;
+.tabset ul.tabs.separate-top {
+  border-top: 1px solid #bfbfbf;
 }
-.contract .select-wrapper {
-  margin-bottom: 20px;
+.tabset ul.tabs .tab {
+  box-sizing: border-box;
+  transition: 0.125s;
+  background: #e6e6e6;
+  border-right: 1px solid #d9d9d9;
+  color: #a6a6a6;
+  display: block;
+  float: left;
+  text-align: center;
 }
-.contract .contract-total {
-  color: #888;
+.tabset ul.tabs .tab:hover {
+  color: #bfbfbf;
 }
-.contract .contract-total .total {
-  font-weight: bold;
+.tabset ul.tabs .tab:last-child {
+  border-right: none;
+}
+.tabset ul.tabs .tab:last-child.not-last {
+  border-right: 1px solid #d9d9d9;
+}
+.tabset ul.tabs .tab.active {
+  background: #fff;
+  border-bottom-color: rgba(191, 191, 191, 0);
+  color: #bfbfbf;
+}
+.tabset ul.tabs .tab .text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.tabset ul.tabs .tab .icon {
+  margin-right: 10px;
+}
+.tabset ul.tabs .tab a {
+  color: inherit;
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 1rem;
+}
+.tabset.vertical-icon ul.tabs .tab:not(.only-icon) {
+  height: auto;
+}
+.tabset.vertical-icon ul.tabs .tab:not(.only-icon) a {
+  height: auto;
+  line-height: initial;
+  padding: 1rem 1rem;
+}
+.tabset.vertical-icon ul.tabs .tab:not(.only-icon) a i.icon {
+  margin-right: 0;
+  margin-bottom: 5px;
+}
+.tabset.vertical-icon ul.tabs .tab:not(.only-icon) a .text {
+  display: block;
+}
+.tabset.vertical-icon ul.tabs .tab.only-icon a:before,
+.tabset.vertical-icon ul.tabs .tab.only-icon a:after {
+  content: "\00a0";
+}
+.tabset.vertical-icon ul.tabs .tab.only-icon i.icon {
+  margin-right: 0;
 }

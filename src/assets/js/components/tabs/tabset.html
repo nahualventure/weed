@@ -1,0 +1,20 @@
+<div class="tabset" ng-class="{'vertical-icon': tabset.iconPosition === 'above'}">
+  <ul class="tabs">
+    <li
+      class="tab"
+      ng-repeat="tab in tabset.tabs"
+      ng-class="{
+        'active': tab.active,
+        'only-icon': !tab.heading
+      }">
+
+      <a ng-click="tabset.select(tab)">
+        <i ng-show="{{ tab.icon !== undefined }}" class="icon icon-{{ tab.icon }}"></i>
+        <span ng-show="tab.heading !== undefined" class="text">{{ tab.heading }}</span>
+      </a>
+    </li>
+  </ul>
+
+  <ng-transclude>
+  </ng-transclude>
+</div>

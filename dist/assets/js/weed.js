@@ -2579,6 +2579,7 @@ if (typeof define === 'function' && define.amd) {
       'weed.forms',
       'weed.navbar',
       'weed.popup',
+      'weed.tabs'
     ])
     .constant('weed.config', {});
 })(angular);
@@ -2749,41 +2750,6 @@ if (typeof define === 'function' && define.amd) {
       viewportUnitsBuggyfill.init();
     }
   }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.button', ['weed.core'])
-    .directive('weButton', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-            icon: '@',
-            type: '@',
-            toload: '@',
-            size: '@',
-            state: '@'
-        },
-        templateUrl: 'components/button/button.html',
-        link: function(scope, elem, attrs, controllers, $transclude) {
-          $transclude(function(clone){
-            scope.hasText = clone.length > 0;
-          });
-        }
-      };
-    });
 
 })(angular);
 (function(angular) {
@@ -3008,6 +2974,41 @@ if (typeof define === 'function' && define.amd) {
  * @description
  * # navbarDirective
  * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.button', ['weed.core'])
+    .directive('weButton', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+            icon: '@',
+            type: '@',
+            toload: '@',
+            size: '@',
+            state: '@'
+        },
+        templateUrl: 'components/button/button.html',
+        link: function(scope, elem, attrs, controllers, $transclude) {
+          $transclude(function(clone){
+            scope.hasText = clone.length > 0;
+          });
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
  * Depends upon weIcon
  */
 
@@ -3123,6 +3124,92 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/navbar/navbar_element_main_action.html'
       };
     })
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false
+          tabsetCtrl.addTab(scope)
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        link: function($scope, iElm, iAttrs, controller) {
+          console.log($scope);
+        },
+        controller: function() {
+          var self = this;
+
+          self.tabs = [];
+
+          self.addTab = function addTab(tab) {
+            self.tabs.push(tab);
+
+            if(self.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          self.select = function(selectedTab) {
+            angular.forEach(self.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
 })(angular);
 (function() {
   'use strict';

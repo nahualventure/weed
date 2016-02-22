@@ -10,6 +10,7 @@
       'weed.forms',
       'weed.navbar',
       'weed.popup',
+      'weed.tabs'
     ])
     .constant('weed.config', {});
 })(angular);
