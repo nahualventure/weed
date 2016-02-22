@@ -22,9 +22,6 @@
         templateUrl: 'components/tabs/tabset.html',
         bindToController: true,
         controllerAs: 'tabset',
-        link: function($scope, iElm, iAttrs, controller) {
-          console.log($scope);
-        },
         controller: function() {
           var self = this;
 
