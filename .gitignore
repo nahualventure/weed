@@ -1,1 +1,4 @@
 fonts
+bower_components
+dist/css/tmp
+node_modules

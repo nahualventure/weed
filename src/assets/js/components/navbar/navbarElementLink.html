@@ -1,0 +1,11 @@
+<a class="navbar-element navbar-link" 
+  ng-class="
+    {
+      'pull-left': position === 'left',
+      'pull-right': position === 'right'
+    }">
+
+  <span class ="navbar-element-floater">
+    <i class="icon icon-{{ icon }}"><span ng-transclude></span></i>
+  </span>
+</a>
