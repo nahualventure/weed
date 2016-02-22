@@ -10,7 +10,7 @@
 (function(angular){
   'use strict';
 
-  angular.module('weed')
+  angular.module('weed.button', ['weed.core'])
     .directive('weButton', function() {
       return {
         restrict: 'A',

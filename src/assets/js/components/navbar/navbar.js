@@ -10,7 +10,7 @@
 (function(angular){
   'use strict';
 
-  angular.module('weed')
+  angular.module('weed.navbar', ['weed.core'])
     .directive('weNavbarElement', function(){
       return {
         restrict: 'A',

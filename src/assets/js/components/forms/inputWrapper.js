@@ -10,7 +10,7 @@
 (function(angular){
   'use strict';
 
-  angular.module('weed')
+  angular.module('weed.forms', ['weed.core'])
     .directive('weInputWrapper', function(){
       return {
         restrict: 'A',

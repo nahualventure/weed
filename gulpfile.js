@@ -36,7 +36,9 @@ var paths = {
     'bower_components/foundation-apps/scss'
   ],
   weedJS: [
+    'bower_components/hammerjs/hammer.js',
     './src/assets/js/weed.js',
+    './src/assets/js/core/*.js',
     './src/assets/js/components/**/*.js',
   ]
 }
@@ -171,5 +173,8 @@ gulp.task('default', ['server'], function () {
   gulp.watch(['src/assets/less/**/*'], ['css:update']);
 
   // Watch scripts
-  gulp.watch(['src/assets/js/components/**/*'], ['copy:weed', 'uglify']);
+  gulp.watch([
+    'src/assets/js/**'
+    ],
+    ['copy:weed', 'uglify']);
 });

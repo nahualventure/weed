@@ -9,7 +9,7 @@
 (function(angular){
   'use strict';
 
-  angular.module('weed')
+  angular.module('weed.icon', ['weed.core'])
     .directive('weIcon', function() {
       return {
         restrict: 'E',
