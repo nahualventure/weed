@@ -154,7 +154,7 @@ body{
 
   .sidebar-bottom-action{
     .sidebar-list > .li > .a;
-    .transition(@fast);
+    transition: @fast;
     bottom: 0;
     display: none;
     left: 0;
@@ -162,6 +162,10 @@ body{
     overflow: hidden;
     position: absolute;
     width: @sidebar-contracted-width;
+
+    .icon{
+      transition: @faster;
+    }
   }
 
   @media(min-width: @system-hugescreen-breakpoint){
