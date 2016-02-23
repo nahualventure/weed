@@ -4,6 +4,7 @@
   angular.module(
     'weed', [
       'weed.core',
+      'weed.auth',
       'weed.common',
       'weed.button',
       'weed.icon',

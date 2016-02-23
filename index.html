@@ -272,6 +272,9 @@
         </div>
     </div>
 
+    <h1>Auth</h1>
+    <div ng-controller="WeedTestCtrl as weedTest"></div>
+
     <!-- Dev scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="/dist/assets/js/weed.js"></script>
@@ -280,7 +283,20 @@
         (function(angular){
             'use strict';
 
-            var app = angular.module('weed.test', ['weed']);
+            angular
+                .module('weed.test', ['weed'])
+                .controller('WeedTestCtrl', weedTestCtrl);
+
+            weedTestCtrl.$inject = ['weedUserAuthService'];
+
+            function weedTestCtrl(weedUserAuthService){
+                console.log(weedUserAuthService);
+
+                // weedUserAuthService.login({
+                //     username: 'MACHETE',
+                //     password: 'CACASECA'
+                // });
+            };
         })(angular);
     </script>
     </body>
