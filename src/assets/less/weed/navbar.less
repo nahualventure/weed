@@ -57,7 +57,6 @@
   background-color: @navbar-color;
   position: absolute;
   z-index: @navbar-z-index;
-  min-width: @system-minwidth;
 
   &.fixed{
     position: fixed;
@@ -83,10 +82,6 @@
   //   .opacity(0.0);
   //   top: -1*@navbar-height;
   // }
-
-  .container{
-    max-width: (@content-width + 2*(@navbar-element-horizontal-margin));
-  }
 
   // Any rendered element inside navbar (excepting separator)
   .navbar-element{
@@ -303,19 +298,18 @@
   }
 }
 
-@media(min-width: @system-hugescreen-breakpoint){
-  .open-sidebar{
-    .navbar{
-      .navbar-element{
-        &.logo{
-          width: @sidebar-open-width;
-          .navbar-isotype{
-            left: @navbar-isotype-last-position;
-          }
-          .navbar-logotype{
-            .opacity(1);
-            left: @navbar-logotype-last-position;
-          }
+// TODO: check if breakpoint needed (to autoclose)
+.open-sidebar{
+  .navbar{
+    .navbar-element{
+      &.logo{
+        width: @sidebar-open-width;
+        .navbar-isotype{
+          left: @navbar-isotype-last-position;
+        }
+        .navbar-logotype{
+          .opacity(1);
+          left: @navbar-logotype-last-position;
         }
       }
     }

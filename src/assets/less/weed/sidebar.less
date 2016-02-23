@@ -117,7 +117,6 @@ body{
 
         span.text{
           font-size: 0.8em;
-          // padding-left: @sidebar-text-left-padding;
           vertical-align: middle;
           text-transform: uppercase;
           display: inline-block;
@@ -168,53 +167,52 @@ body{
     }
   }
 
-  @media(min-width: @system-hugescreen-breakpoint){
-    .sidebar-bottom-action{
-      display: block;
+  // TODO: check if breakpoint needed (to autoclose)
+  .sidebar-bottom-action{
+    display: block;
+  }
+
+  &.open-sidebar{
+    .sidebar{
+      width: @sidebar-open-width;
+
+      .header{
+        .sidebar-isotype{
+          left: @sidebar-isotype-last-position;
+        }
+
+        .sidebar-logotype{
+          .opacity(1.0);
+          left: @sidebar-logotype-last-position;
+        }
+      }
+
+      li{
+        a{
+          line-height: @sidebar-open-element-height;
+
+          .icon{
+            line-height: @sidebar-open-element-height;
+          }
+
+          span.centerer{
+            line-height: @sidebar-open-element-height;
+          }
+        }
+      }
     }
 
-    &.open-sidebar{
-      .sidebar{
-        width: @sidebar-open-width;
+    .qtip-sidebar{
+      .opacity(0.0) !important;
+      // display: none !important;
+    }
 
-        .header{
-          .sidebar-isotype{
-            left: @sidebar-isotype-last-position;
-          }
+    .sidebar-bottom-action{
+      width: @sidebar-open-width;
 
-          .sidebar-logotype{
-            .opacity(1.0);
-            left: @sidebar-logotype-last-position;
-          }
-        }
-
-        li{
-          a{
-            line-height: @sidebar-open-element-height;
-
-            .icon{
-              line-height: @sidebar-open-element-height;
-            }
-
-            span.centerer{
-              line-height: @sidebar-open-element-height;
-            }
-          }
-        }
-      }
-
-      .qtip-sidebar{
-        .opacity(0.0) !important;
-        // display: none !important;
-      }
-
-      .sidebar-bottom-action{
-        width: @sidebar-open-width;
-
-        span.icon-container{
-          .icon{
-            .rotate(180deg);
-          }
+      span.icon-container{
+        .icon{
+          .rotate(180deg);
         }
       }
     }
