@@ -7,6 +7,15 @@
         .input-wrapper.custom input{
           padding-left: 170px !important;
         }
+
+        body{
+          transition: 0.5s;
+          padding-left: 80px;
+        }
+
+        body.open-sidebar{
+          padding-left: 220px;
+        }
     </style>
   </head>
 
@@ -45,6 +54,21 @@
         <a we-navbar-main-action icon="plus"></a>
       </div>
     </div>
+
+    <div id="sidebar" we-sidebar>
+
+        <a we-sidebar-header
+          isotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_isotype.png"
+          logotype="http://cesarchavez.me/edoo/finance/staticmedia/styles/themes/finance/compiled/images/navbar_logotype.png"></a>
+
+        <ul class="sidebar-list">
+            <li><a we-sidebar-link icon="home">Dashboard</a></li>
+            <li><a we-sidebar-link icon="cog">Dashboard</a></li>
+            <li><a we-sidebar-link icon="heart">Dashboard</a></li>
+            <li><a we-sidebar-link icon="sign-out" position="bottom" we-toggle="sidebar">Dashboard</a></li>
+        </ul>
+    </div>
+
 
     <h1>Icons</h1>
 

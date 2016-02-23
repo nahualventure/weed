@@ -31,6 +31,7 @@ body{
 
   .sidebar{
     .transition(@fast);
+    left: 0;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -93,7 +94,7 @@ body{
         width: 100%;
         display: inline-block;
 
-        span.icon{
+        span.icon-container{
           .transition(@faster);
           display: inline-block;
           font-size: 1.2em;
@@ -127,7 +128,7 @@ body{
         &.current{
           color: @sidebar-hover-link-color;
 
-          span.icon{
+          span.icon-container{
             i{
               color: @sidebar-hover-link-color;
             }
@@ -137,7 +138,7 @@ body{
         &:active{
           color: darken(@sidebar-link-color, 15%);
 
-          span.icon{
+          span.icon-container{
             i{
               color: darken(@sidebar-link-color, 15%);
             }
@@ -151,19 +152,20 @@ body{
     }
   }
 
-  .sidebar-bottom-contractor{
+  .sidebar-bottom-action{
     .sidebar-list > .li > .a;
     .transition(@fast);
     bottom: 0;
     display: none;
     left: 0;
+    line-height: @sidebar-contracted-element-height !important;
     overflow: hidden;
-    position: fixed;
+    position: absolute;
     width: @sidebar-contracted-width;
   }
 
   @media(min-width: @system-hugescreen-breakpoint){
-    .sidebar-bottom-contractor{
+    .sidebar-bottom-action{
       display: block;
     }
 
@@ -202,10 +204,10 @@ body{
         // display: none !important;
       }
 
-      .sidebar-bottom-contractor{
+      .sidebar-bottom-action{
         width: @sidebar-open-width;
 
-        span.icon{
+        span.icon-container{
           .icon{
             .rotate(180deg);
           }

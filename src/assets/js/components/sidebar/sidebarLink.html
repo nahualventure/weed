@@ -1,0 +1,13 @@
+<a ng-class="{
+    'sidebar-bottom-action': position === 'bottom'
+  }"
+  we-title="{{ title }}">
+
+  <span class="icon-container">
+    <we-icon icon="{{ icon }}"></we-icon>
+  </span>
+  <span class="center">&nbsp;</span>
+  <span class="text">
+    <ng-transclude></ng-transclude>
+  </span>
+</a>
