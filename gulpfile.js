@@ -32,9 +32,7 @@ var paths = {
     'src/assets/less/weed'
     // 'bower_components/foundation-icon-fonts'
   ],
-  sass: [
-    'bower_components/foundation-apps/scss'
-  ],
+  sass: [],
   weedJS: [
     'bower_components/hammerjs/hammer.js',
     './src/assets/js/weed.js',

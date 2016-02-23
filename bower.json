@@ -28,7 +28,6 @@
     "tests"
   ],
   "dependencies": {
-    "foundation-apps": "^1.2.0",
     "font-awesome": "^4.5.0",
     "hammerjs": "^2.0.6"
   }

@@ -9,7 +9,7 @@
       }">
 
       <a ng-click="tabset.select(tab)">
-        <i ng-show="{{ tab.icon !== undefined }}" class="icon icon-{{ tab.icon }}"></i>
+        <we-icon icon="{{ tab.icon }}" ng-show="{{ tab.icon !== undefined }}"></we-icon>
         <span ng-show="tab.heading !== undefined" class="text">{{ tab.heading }}</span>
       </a>
     </li>

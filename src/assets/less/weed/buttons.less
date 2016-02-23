@@ -87,11 +87,9 @@
     margin-left: @element-vertical-margin/2.0;
   }
 
-  [class^="icon-"],
-  [class*=" icon-"],
-  svg *{
+  [class^="@{fa-css-prefix}-"],
+  [class*=" @{fa-css-prefix}-"]{
     color: overlay(@background-color, @button-icon-base-color);
-    fill: overlay(@background-color, @button-icon-base-color);
   }
 
   // Default states
@@ -161,7 +159,7 @@ button.button{
   font-size: 14px;
   font-weight: normal;
   height: @button-default-height;
-  line-height: @button-default-height;
+  line-height: @button-default-height - 2px;
   outline: none;
   padding: 0 @button-default-horizontal-padding;
   text-transform: uppercase;
@@ -246,8 +244,6 @@ button.button{
 
   // Span element
   span.text{
-    display: inline-block;
-    margin-top: -1px;
     vertical-align: middle;
     transition: @faster;
   }
@@ -304,7 +300,7 @@ button.button{
     .border-radius(@border-radius);
     font-size: @font-size;
     height: @height;
-    line-height: @height - 1px;
+    line-height: @height - 2px;
     padding: 0 @horizontal-padding;
 
     [class^="icon-"],
@@ -325,7 +321,6 @@ button.button{
     }
 
     &.only-icon{
-      // line-height: @height - 1px;
       width: @height;
 
       i{
@@ -358,7 +353,6 @@ button.button{
       @icon-size: 11px;
       @font-size: 13px;
     );
-    line-height: @button-tiny-height - 3px;
 
     &.only-icon{
       width: auto;
@@ -428,7 +422,7 @@ button.button{
     position: relative;
     width: @button-default-height*2;
 
-    .text, .icon{
+    .text, .@{fa-css-prefix}{
       opacity: 0;
     }
 
