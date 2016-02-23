@@ -1,0 +1,47 @@
+// Credits to: http://projects.lukehaas.me/css-loaders/
+
+@loader-color: white;
+
+.make-loader(
+    @loader-circle-size;
+    @loader-circle-separation;
+    @loader-delay;){
+  animation-delay: -@loader-delay/2.0;
+  text-indent: -9999em;
+
+  &,
+  &:before,
+  &:after{
+    .circle(@loader-circle-size);
+    animation-fill-mode: both;
+    animation: loadanimation 15*@loader-delay infinite ease-in-out;
+  }
+
+  &:before {
+    left: 0 - @loader-circle-size - @loader-circle-separation;
+    animation-delay: -@loader-delay;
+  }
+
+  &:after{
+    left: @loader-circle-size + @loader-circle-separation;
+    animation-delay: @loader-delay;
+  }
+
+  &:before,
+  &:after{
+    content: '';
+    position: absolute;
+    top: 0;
+  }
+}
+
+@keyframes loadanimation {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em @loader-color;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 @loader-color;
+  }
+}

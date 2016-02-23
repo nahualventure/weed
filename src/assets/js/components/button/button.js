@@ -11,7 +11,7 @@
   'use strict';
 
   angular.module('weed.button', ['weed.core'])
-    .directive('weButton', function() {
+    .directive('weButton', ['$timeout', function($timeout) {
       return {
         restrict: 'A',
         transclude: true,
@@ -28,8 +28,24 @@
           $transclude(function(clone){
             scope.hasText = clone.length > 0;
           });
+
+          if(scope.toload){
+            elem.on('click', function(e){
+
+              if(!scope.loading){
+                scope.loading = true;
+
+                // Stablish current width
+                elem[0].style.width = elem[0].clientWidth;
+                $timeout(function(){
+                  angular.element(elem[0]).addClass("loading");
+                  elem[0].style.width = null;
+                }, 10);
+              }
+            });
+          }
         }
       };
-    });
+    }]);
 
 })(angular);

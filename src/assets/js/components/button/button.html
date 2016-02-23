@@ -23,4 +23,7 @@
 
   <!-- If just text -->
   <ng-transclude ng-if="icon === undefined"></ng-transclude>
+
+  <!-- If it's loading -->
+  <div ng-if="loading" class="loader">...</div>
 </a>
