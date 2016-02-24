@@ -416,6 +416,15 @@ button.button{
 
   // Misc states
 
+  // Blocked button
+  &.button-block, &.block{
+    display: block;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  // Loading (must be after Blocked button)
   &.loading{
     .button.disabled();
     padding: 0;
@@ -436,14 +445,6 @@ button.button{
       top: -16px;
       left: @button-default-height - @button-default-height/8;
     }
-  }
-
-  // Blocked button
-  &.button-block, &.block{
-    display: block;
-    padding: 0;
-    text-align: center;
-    width: 100%;
   }
 
   // Action states

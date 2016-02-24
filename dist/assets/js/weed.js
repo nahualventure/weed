@@ -2858,66 +2858,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.button', ['weed.core'])
-    .directive('weButton', buttonDirective);
-
-  // $timeout injection
-  buttonDirective.$inject = ['$timeout'];
-
-  function buttonDirective($timeout){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-          icon: '@',
-          type: '@',
-          toload: '@',
-          size: '@',
-          state: '@'
-      },
-      templateUrl: 'components/button/button.html',
-      link: function(scope, elem, attrs, controllers, $transclude) {
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-
-        if(scope.toload){
-          elem.on('click', function(e){
-
-            if(!scope.loading){
-              scope.loading = true;
-
-              // Stablish current width
-              elem[0].style.width = elem[0].clientWidth;
-              $timeout(function(){
-
-                // Mark as loading
-                angular.element(elem[0]).addClass("loading");
-
-                // Unset width style
-                elem[0].style.width = null;
-              }, 10);
-            }
-          });
-        }
-      }
-    };
-  }
-
-})(angular);
 (function(angular) {
   'use strict';
 
@@ -3191,6 +3131,66 @@ if (typeof define === 'function' && define.amd) {
     };
   };
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.button', ['weed.core'])
+    .directive('weButton', buttonDirective);
+
+  // $timeout injection
+  buttonDirective.$inject = ['$timeout'];
+
+  function buttonDirective($timeout){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '@',
+          size: '@',
+          state: '@'
+      },
+      templateUrl: 'components/button/button.html',
+      link: function(scope, elem, attrs, controllers, $transclude) {
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+
+        if(scope.toload){
+          elem.on('click', function(e){
+
+            if(!scope.loading){
+              scope.loading = true;
+
+              // Stablish current width
+              elem[0].style.width = elem[0].clientWidth;
+              $timeout(function(){
+
+                // Mark as loading
+                angular.element(elem[0]).addClass("loading");
+
+                // Unset width style
+                elem[0].style.width = null;
+              }, 10);
+            }
+          });
+        }
+      }
+    };
+  }
+
+})(angular);
 (function() {
   'use strict';
 
@@ -3285,6 +3285,89 @@ if (typeof define === 'function' && define.amd) {
       templateUrl: 'components/navbar/navbar_element_main_action.html'
     };
   }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false
+          tabsetCtrl.addTab(scope)
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var self = this;
+
+          self.tabs = [];
+
+          self.addTab = function addTab(tab) {
+            self.tabs.push(tab);
+
+            if(self.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          self.select = function(selectedTab) {
+            angular.forEach(self.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
 })(angular);
 /**
  * @ngdoc function
@@ -3389,87 +3472,4 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/sidebar/sidebarHeader.html'
       };
     });
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false
-          tabsetCtrl.addTab(scope)
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var self = this;
-
-          self.tabs = [];
-
-          self.addTab = function addTab(tab) {
-            self.tabs.push(tab);
-
-            if(self.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
-
-          self.select = function(selectedTab) {
-            angular.forEach(self.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
-              }
-            });
-
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
-
 })(angular);
