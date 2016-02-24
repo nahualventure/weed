@@ -17,12 +17,11 @@
 
   <!-- If icon has been given -->
   <we-icon ng-if="icon !== undefined" icon="{{ icon }}"></we-icon>
-  <span class="text" ng-if="icon !== undefined && hasText">
+
+  <!-- Text -->
+  <span class="text" ng-if="hasText">
     <ng-transclude></ng-transclude>
   </span>
-
-  <!-- If just text -->
-  <ng-transclude ng-if="icon === undefined"></ng-transclude>
 
   <!-- If it's loading -->
   <div ng-if="loading" class="loader">...</div>
