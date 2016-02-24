@@ -6,6 +6,7 @@
     }">
 
   <span class ="navbar-element-floater">
-    <i class="icon icon-{{ icon }}"><span ng-transclude></span></i>
+    <we-icon ng-if="icon !== undefined" icon="{{ icon }}"></we-icon>
+    <span ng-transclude></span>
   </span>
 </a>
