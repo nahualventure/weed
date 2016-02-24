@@ -8,6 +8,8 @@
     .run(Setup);
   ;
 
+  // No dependencies
+
   function WeedApi() {
     var listeners  = {};
     var settings   = {};

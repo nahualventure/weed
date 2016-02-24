@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective)
-  ;
+    .directive('wePopup', popupDirective);
 
+  // Weed api injection
   popupDirective.$inject = ['WeedApi'];
 
   function popupDirective(weedApi) {

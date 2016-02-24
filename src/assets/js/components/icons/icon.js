@@ -10,15 +10,20 @@
   'use strict';
 
   angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', function() {
-      return {
-        restrict: 'E',
-        scope: {
-          icon: '@'
-        },
-        replace: true,
-        templateUrl: 'components/icons/icon.html',
-        link: function(scope, elem, attrs) {}
-      };
-    });
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
 })(angular);

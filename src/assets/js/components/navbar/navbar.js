@@ -11,36 +11,52 @@
   'use strict';
 
   angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbarElement', function(){
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          position: '@',
-          type: '@',
-          icon: '@',
-          logotype: '@',
-          isotype: '@',
-          placeholder: '@'
-        },
-        templateUrl: function(elem, attrs) {
-          var template = '';
-          switch (attrs.type) {
-            case 'link':
-              template = 'navbarElementLink.html';
-              break;
-            case 'logo':
-              template = 'navbarElementLogo.html';
-              break;
-            case 'separator':
-              template = 'navbarElementSeparator.html'
-              break;
-            default:
-              template = 'navbarElement.html'
-          }
-          return 'components/navbar/' + template;
+    .directive('weNavbarElement', navbarElementDirective)
+    .directive('weNavbarMainAction', navbarMainActionDirective);
+
+  // No dependencies
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@'
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          default:
+            template = 'navbarElement.html'
         }
-      };
-    });
+        return 'components/navbar/' + template;
+      }
+    };
+  }
+
+  function navbarMainActionDirective() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: {
+        icon: '@'
+      },
+      templateUrl: 'components/navbar/navbar_element_main_action.html'
+    };
+  }
 })(angular);

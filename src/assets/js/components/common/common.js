@@ -11,7 +11,14 @@
     .directive('weCloseAll', weCloseAll)
   ;
 
+  // Dependency injection
   weClose.$inject = ['WeedApi'];
+  weOpen.$inject = ['WeedApi'];
+  weToggle.$inject = ['WeedApi'];
+  weEscClose.$inject = ['WeedApi'];
+  weSwipeClose.$inject = ['WeedApi'];
+  weHardToggle.$inject = ['WeedApi'];
+  weCloseAll.$inject = ['WeedApi'];
 
   function weClose(weedApi) {
     var directive = {
@@ -49,8 +56,6 @@
     }
   }
 
-  weOpen.$inject = ['WeedApi'];
-
   function weOpen(weedApi) {
     var directive = {
       restrict: 'A',
@@ -67,8 +72,6 @@
     }
   }
 
-  weToggle.$inject = ['WeedApi'];
-
   function weToggle(weedApi) {
     var directive = {
       restrict: 'A',
@@ -84,8 +87,6 @@
       });
     }
   }
-
-  weEscClose.$inject = ['WeedApi'];
 
   function weEscClose(weedApi) {
     var directive = {
@@ -104,8 +105,6 @@
       });
     }
   }
-
-  weSwipeClose.$inject = ['WeedApi'];
 
   function weSwipeClose(weedApi) {
     var directive = {
@@ -151,8 +150,6 @@
     }
   }
 
-  weHardToggle.$inject = ['WeedApi'];
-
   function weHardToggle(weedApi) {
     var directive = {
       restrict: 'A',
@@ -169,8 +166,6 @@
       });
     }
   }
-
-  weCloseAll.$inject = ['WeedApi'];
 
   function weCloseAll(weedApi) {
     var directive = {

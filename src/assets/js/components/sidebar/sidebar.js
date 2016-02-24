@@ -11,48 +11,53 @@
   'use strict';
 
   angular.module('weed.sidebar', ['weed.core'])
-    .directive('weSidebar', ['WeedApi', function(weedApi) {
-      var body = angular.element(document.querySelector('body'));
+    .directive('weSidebar', sidebarDirective);
 
-      function openSidebar($scope){
-        body.addClass('open-sidebar');
-        $scope.open = true;
-      }
+  // Weed api injection
+  sidebarDirective.$inject = ['WeedApi'];
 
-      function closeSidebar($scope){
-        body.removeClass('open-sidebar');
-        $scope.open = false;
-      }
+  function sidebarDirective(weedApi) {
+    var body = angular.element(document.querySelector('body'));
 
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        templateUrl: 'components/sidebar/sidebar.html',
-        link: function($scope, elem, attrs, controllers, $transclude){
-          weedApi.subscribe(attrs.id, function(id, message){
+    function openSidebar($scope){
+      body.addClass('open-sidebar');
+      $scope.open = true;
+    }
 
-            switch(message){
-              case 'show':
-              case 'open':
-                openSidebar($scope);
-                break;
-              case 'close':
-              case 'hide':
+    function closeSidebar($scope){
+      body.removeClass('open-sidebar');
+      $scope.open = false;
+    }
+
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      templateUrl: 'components/sidebar/sidebar.html',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        weedApi.subscribe(attrs.id, function(id, message){
+
+          switch(message){
+            case 'show':
+            case 'open':
+              openSidebar($scope);
+              break;
+            case 'close':
+            case 'hide':
+              closeSidebar($scope);
+              break;
+            case 'toggle':
+              if($scope.open){
                 closeSidebar($scope);
-                break;
-              case 'toggle':
-                if($scope.open){
-                  closeSidebar($scope);
-                }
-                else{
-                  openSidebar($scope);
-                }
-            }
-          });
-        }
-      };
-    }]);
+              }
+              else{
+                openSidebar($scope);
+              }
+          }
+        });
+      }
+    };
+  }
 })(angular);
 
 (function(angular){

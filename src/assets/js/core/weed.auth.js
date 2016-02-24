@@ -9,6 +9,7 @@
     .constant('API', 'http://127.0.0.1:8000/') // TODO: figure out what is the best way to config the base endpoint
     .config(function($httpProvider){});
 
+  // Dependency injections
   authInterceptor.$inject = ['API', 'weedAuthService'];
   weedAuthService.$inject = ['$window'];
   weedUserAuthService.$inject = ['$http', 'API'];

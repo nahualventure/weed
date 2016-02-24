@@ -2596,6 +2596,7 @@ if (typeof define === 'function' && define.amd) {
     .constant('API', 'http://127.0.0.1:8000/') // TODO: figure out what is the best way to config the base endpoint
     .config(function($httpProvider){});
 
+  // Dependency injections
   authInterceptor.$inject = ['API', 'weedAuthService'];
   weedAuthService.$inject = ['$window'];
   weedUserAuthService.$inject = ['$http', 'API'];
@@ -2695,6 +2696,8 @@ if (typeof define === 'function' && define.amd) {
     .factory('Utils', Utils)
     .run(Setup);
   ;
+
+  // No dependencies
 
   function WeedApi() {
     var listeners  = {};
@@ -2868,42 +2871,51 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular.module('weed.button', ['weed.core'])
-    .directive('weButton', ['$timeout', function($timeout) {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-            icon: '@',
-            type: '@',
-            toload: '@',
-            size: '@',
-            state: '@'
-        },
-        templateUrl: 'components/button/button.html',
-        link: function(scope, elem, attrs, controllers, $transclude) {
-          $transclude(function(clone){
-            scope.hasText = clone.length > 0;
+    .directive('weButton', buttonDirective);
+
+  // $timeout injection
+  buttonDirective.$inject = ['$timeout'];
+
+  function buttonDirective($timeout){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '@',
+          size: '@',
+          state: '@'
+      },
+      templateUrl: 'components/button/button.html',
+      link: function(scope, elem, attrs, controllers, $transclude) {
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+
+        if(scope.toload){
+          elem.on('click', function(e){
+
+            if(!scope.loading){
+              scope.loading = true;
+
+              // Stablish current width
+              elem[0].style.width = elem[0].clientWidth;
+              $timeout(function(){
+
+                // Mark as loading
+                angular.element(elem[0]).addClass("loading");
+
+                // Unset width style
+                elem[0].style.width = null;
+              }, 10);
+            }
           });
-
-          if(scope.toload){
-            elem.on('click', function(e){
-
-              if(!scope.loading){
-                scope.loading = true;
-
-                // Stablish current width
-                elem[0].style.width = elem[0].clientWidth;
-                $timeout(function(){
-                  angular.element(elem[0]).addClass("loading");
-                  elem[0].style.width = null;
-                }, 10);
-              }
-            });
-          }
         }
-      };
-    }]);
+      }
+    };
+  }
 
 })(angular);
 (function(angular) {
@@ -2919,7 +2931,14 @@ if (typeof define === 'function' && define.amd) {
     .directive('weCloseAll', weCloseAll)
   ;
 
+  // Dependency injection
   weClose.$inject = ['WeedApi'];
+  weOpen.$inject = ['WeedApi'];
+  weToggle.$inject = ['WeedApi'];
+  weEscClose.$inject = ['WeedApi'];
+  weSwipeClose.$inject = ['WeedApi'];
+  weHardToggle.$inject = ['WeedApi'];
+  weCloseAll.$inject = ['WeedApi'];
 
   function weClose(weedApi) {
     var directive = {
@@ -2957,8 +2976,6 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
-  weOpen.$inject = ['WeedApi'];
-
   function weOpen(weedApi) {
     var directive = {
       restrict: 'A',
@@ -2975,8 +2992,6 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
-  weToggle.$inject = ['WeedApi'];
-
   function weToggle(weedApi) {
     var directive = {
       restrict: 'A',
@@ -2992,8 +3007,6 @@ if (typeof define === 'function' && define.amd) {
       });
     }
   }
-
-  weEscClose.$inject = ['WeedApi'];
 
   function weEscClose(weedApi) {
     var directive = {
@@ -3012,8 +3025,6 @@ if (typeof define === 'function' && define.amd) {
       });
     }
   }
-
-  weSwipeClose.$inject = ['WeedApi'];
 
   function weSwipeClose(weedApi) {
     var directive = {
@@ -3059,8 +3070,6 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
-  weHardToggle.$inject = ['WeedApi'];
-
   function weHardToggle(weedApi) {
     var directive = {
       restrict: 'A',
@@ -3077,8 +3086,6 @@ if (typeof define === 'function' && define.amd) {
       });
     }
   }
-
-  weCloseAll.$inject = ['WeedApi'];
 
   function weCloseAll(weedApi) {
     var directive = {
@@ -3135,21 +3142,25 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', function(){
-      return {
-        restrict: 'A',
-        transclude: true,
-        scope: {
-            rightIcon: '@',
-            leftIcon: '@',
-            componentPosition: '@',
-            size: '@',
-            placeholder: '@'
-        },
-        replace: true,
-        templateUrl: 'components/forms/inputWrapper.html'
-      };
-    });
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+          rightIcon: '@',
+          leftIcon: '@',
+          componentPosition: '@',
+          size: '@',
+          placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html'
+    };
+  };
 })(angular);
 /**
  * @ngdoc function
@@ -3163,17 +3174,22 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', function() {
-      return {
-        restrict: 'E',
-        scope: {
-          icon: '@'
-        },
-        replace: true,
-        templateUrl: 'components/icons/icon.html',
-        link: function(scope, elem, attrs) {}
-      };
-    });
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
 })(angular);
 /**
  * @ngdoc function
@@ -3188,69 +3204,62 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbarElement', function(){
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          position: '@',
-          type: '@',
-          icon: '@',
-          logotype: '@',
-          isotype: '@',
-          placeholder: '@'
-        },
-        templateUrl: function(elem, attrs) {
-          var template = '';
-          switch (attrs.type) {
-            case 'link':
-              template = 'navbarElementLink.html';
-              break;
-            case 'logo':
-              template = 'navbarElementLogo.html';
-              break;
-            case 'separator':
-              template = 'navbarElementSeparator.html'
-              break;
-            default:
-              template = 'navbarElement.html'
-          }
-          return 'components/navbar/' + template;
+    .directive('weNavbarElement', navbarElementDirective)
+    .directive('weNavbarMainAction', navbarMainActionDirective);
+
+  // No dependencies
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@'
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          default:
+            template = 'navbarElement.html'
         }
-      };
-    });
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- */
+        return 'components/navbar/' + template;
+      }
+    };
+  }
 
-(function(angular){
-  'use strict';
-
-  angular.module('weed')
-    .directive('weNavbarMainAction', function() {
-      return {
-        restrict: 'E',
-        transclude: true,
-        scope: {
-          icon: '@'
-        },
-        templateUrl: 'components/navbar/navbar_element_main_action.html'
-      };
-    })
+  function navbarMainActionDirective() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: {
+        icon: '@'
+      },
+      templateUrl: 'components/navbar/navbar_element_main_action.html'
+    };
+  }
 })(angular);
 (function() {
   'use strict';
 
   angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective)
-  ;
+    .directive('wePopup', popupDirective);
 
+  // Weed api injection
   popupDirective.$inject = ['WeedApi'];
 
   function popupDirective(weedApi) {
@@ -3290,48 +3299,53 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular.module('weed.sidebar', ['weed.core'])
-    .directive('weSidebar', ['WeedApi', function(weedApi) {
-      var body = angular.element(document.querySelector('body'));
+    .directive('weSidebar', sidebarDirective);
 
-      function openSidebar($scope){
-        body.addClass('open-sidebar');
-        $scope.open = true;
-      }
+  // Weed api injection
+  sidebarDirective.$inject = ['WeedApi'];
 
-      function closeSidebar($scope){
-        body.removeClass('open-sidebar');
-        $scope.open = false;
-      }
+  function sidebarDirective(weedApi) {
+    var body = angular.element(document.querySelector('body'));
 
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        templateUrl: 'components/sidebar/sidebar.html',
-        link: function($scope, elem, attrs, controllers, $transclude){
-          weedApi.subscribe(attrs.id, function(id, message){
+    function openSidebar($scope){
+      body.addClass('open-sidebar');
+      $scope.open = true;
+    }
 
-            switch(message){
-              case 'show':
-              case 'open':
-                openSidebar($scope);
-                break;
-              case 'close':
-              case 'hide':
+    function closeSidebar($scope){
+      body.removeClass('open-sidebar');
+      $scope.open = false;
+    }
+
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      templateUrl: 'components/sidebar/sidebar.html',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        weedApi.subscribe(attrs.id, function(id, message){
+
+          switch(message){
+            case 'show':
+            case 'open':
+              openSidebar($scope);
+              break;
+            case 'close':
+            case 'hide':
+              closeSidebar($scope);
+              break;
+            case 'toggle':
+              if($scope.open){
                 closeSidebar($scope);
-                break;
-              case 'toggle':
-                if($scope.open){
-                  closeSidebar($scope);
-                }
-                else{
-                  openSidebar($scope);
-                }
-            }
-          });
-        }
-      };
-    }]);
+              }
+              else{
+                openSidebar($scope);
+              }
+          }
+        });
+      }
+    };
+  }
 })(angular);
 
 (function(angular){
