@@ -330,12 +330,10 @@ button.button{
 
     // MUST be after only-icon
     &.loading{
-      width: @height*2;
-
       .loader{
         .make-loader(
-          @loader-circle-size: @height/4;
-          @loader-circle-separation: 4px;
+          @loader-circle-size: @height/5;
+          @loader-circle-separation: 2px;
           @loader-delay: @button-loader-delay;
         );
         left: @height - @height/8;
@@ -359,8 +357,6 @@ button.button{
     }
 
     &.loading{
-      width: @button-tiny-height*2;
-
       .loader{
         top: -23px;
       }
@@ -427,9 +423,7 @@ button.button{
   // Loading (must be after Blocked button)
   &.loading{
     .button.disabled();
-    padding: 0;
     position: relative;
-    width: @button-default-height*2;
 
     .text, .@{fa-css-prefix}{
       opacity: 0;
@@ -437,8 +431,8 @@ button.button{
 
     .loader{
       .make-loader(
-        @loader-circle-size: @button-default-height/4;
-        @loader-circle-separation: 4px;
+        @loader-circle-size: @button-default-height/5;
+        @loader-circle-separation: 2px;
         @loader-delay: @button-loader-delay;
       );
       position: absolute;

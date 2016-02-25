@@ -2626,9 +2626,6 @@ button.button {
 .button.button-tiny.only-icon i {
   margin: 0;
 }
-.button.button-tiny.loading {
-  width: 52px;
-}
 .button.button-tiny.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -2639,20 +2636,20 @@ button.button {
 .button.button-tiny.loading .loader:before,
 .button.button-tiny.loading .loader:after {
   border-radius: 10000px;
-  width: 6.5px;
-  height: 6.5px;
+  width: 5.2px;
+  height: 5.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .button.button-tiny.loading .loader:before {
-  left: -10.5px;
+  left: -7.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .button.button-tiny.loading .loader:after {
-  left: 10.5px;
+  left: 7.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -2664,9 +2661,6 @@ button.button {
 }
 .button.button-tiny.only-icon {
   width: auto;
-}
-.button.button-tiny.loading {
-  width: 52px;
 }
 .button.button-tiny.loading .loader {
   top: -23px;
@@ -2695,9 +2689,6 @@ button.button {
 .button.button-small.only-icon i {
   margin: 0;
 }
-.button.button-small.loading {
-  width: 78px;
-}
 .button.button-small.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -2708,20 +2699,20 @@ button.button {
 .button.button-small.loading .loader:before,
 .button.button-small.loading .loader:after {
   border-radius: 10000px;
-  width: 9.75px;
-  height: 9.75px;
+  width: 7.8px;
+  height: 7.8px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .button.button-small.loading .loader:before {
-  left: -13.75px;
+  left: -9.8px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .button.button-small.loading .loader:after {
-  left: 13.75px;
+  left: 9.8px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -2758,9 +2749,6 @@ button.button {
 .button.button-large.only-icon i {
   margin: 0;
 }
-.button.button-large.loading {
-  width: 132px;
-}
 .button.button-large.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -2771,20 +2759,20 @@ button.button {
 .button.button-large.loading .loader:before,
 .button.button-large.loading .loader:after {
   border-radius: 10000px;
-  width: 16.5px;
-  height: 16.5px;
+  width: 13.2px;
+  height: 13.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .button.button-large.loading .loader:before {
-  left: -20.5px;
+  left: -15.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .button.button-large.loading .loader:after {
-  left: 20.5px;
+  left: 15.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -2810,9 +2798,7 @@ button.button {
   border: 1px solid #ebebeb !important;
   color: #d9d9d9 !important;
   cursor: auto !important;
-  padding: 0;
   position: relative;
-  width: 102px;
 }
 .button.loading [class^="icon-"],
 .button.loading [class*=" icon-"] {
@@ -2841,20 +2827,20 @@ button.button {
 .button.loading .loader:before,
 .button.loading .loader:after {
   border-radius: 10000px;
-  width: 12.75px;
-  height: 12.75px;
+  width: 10.2px;
+  height: 10.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .button.loading .loader:before {
-  left: -16.75px;
+  left: -12.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .button.loading .loader:after {
-  left: 16.75px;
+  left: 12.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -3528,9 +3514,6 @@ button.button {
 .email-button.button-tiny.only-icon i {
   margin: 0;
 }
-.email-button.button-tiny.loading {
-  width: 52px;
-}
 .email-button.button-tiny.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -3541,20 +3524,20 @@ button.button {
 .email-button.button-tiny.loading .loader:before,
 .email-button.button-tiny.loading .loader:after {
   border-radius: 10000px;
-  width: 6.5px;
-  height: 6.5px;
+  width: 5.2px;
+  height: 5.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button.button-tiny.loading .loader:before {
-  left: -10.5px;
+  left: -7.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button.button-tiny.loading .loader:after {
-  left: 10.5px;
+  left: 7.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -3566,9 +3549,6 @@ button.button {
 }
 .email-button.button-tiny.only-icon {
   width: auto;
-}
-.email-button.button-tiny.loading {
-  width: 52px;
 }
 .email-button.button-tiny.loading .loader {
   top: -23px;
@@ -3597,9 +3577,6 @@ button.button {
 .email-button.button-small.only-icon i {
   margin: 0;
 }
-.email-button.button-small.loading {
-  width: 78px;
-}
 .email-button.button-small.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -3610,20 +3587,20 @@ button.button {
 .email-button.button-small.loading .loader:before,
 .email-button.button-small.loading .loader:after {
   border-radius: 10000px;
-  width: 9.75px;
-  height: 9.75px;
+  width: 7.8px;
+  height: 7.8px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button.button-small.loading .loader:before {
-  left: -13.75px;
+  left: -9.8px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button.button-small.loading .loader:after {
-  left: 13.75px;
+  left: 9.8px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -3660,9 +3637,6 @@ button.button {
 .email-button.button-large.only-icon i {
   margin: 0;
 }
-.email-button.button-large.loading {
-  width: 132px;
-}
 .email-button.button-large.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -3673,20 +3647,20 @@ button.button {
 .email-button.button-large.loading .loader:before,
 .email-button.button-large.loading .loader:after {
   border-radius: 10000px;
-  width: 16.5px;
-  height: 16.5px;
+  width: 13.2px;
+  height: 13.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button.button-large.loading .loader:before {
-  left: -20.5px;
+  left: -15.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button.button-large.loading .loader:after {
-  left: 20.5px;
+  left: 15.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -3712,9 +3686,7 @@ button.button {
   border: 1px solid #ebebeb !important;
   color: #d9d9d9 !important;
   cursor: auto !important;
-  padding: 0;
   position: relative;
-  width: 102px;
 }
 .email-button.loading [class^="icon-"],
 .email-button.loading [class*=" icon-"] {
@@ -3743,20 +3715,20 @@ button.button {
 .email-button.loading .loader:before,
 .email-button.loading .loader:after {
   border-radius: 10000px;
-  width: 12.75px;
-  height: 12.75px;
+  width: 10.2px;
+  height: 10.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button.loading .loader:before {
-  left: -16.75px;
+  left: -12.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button.loading .loader:after {
-  left: 16.75px;
+  left: 12.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -4437,9 +4409,6 @@ button.button {
 .email-button-primary.button-tiny.only-icon i {
   margin: 0;
 }
-.email-button-primary.button-tiny.loading {
-  width: 52px;
-}
 .email-button-primary.button-tiny.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -4450,20 +4419,20 @@ button.button {
 .email-button-primary.button-tiny.loading .loader:before,
 .email-button-primary.button-tiny.loading .loader:after {
   border-radius: 10000px;
-  width: 6.5px;
-  height: 6.5px;
+  width: 5.2px;
+  height: 5.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-primary.button-tiny.loading .loader:before {
-  left: -10.5px;
+  left: -7.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-primary.button-tiny.loading .loader:after {
-  left: 10.5px;
+  left: 7.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -4475,9 +4444,6 @@ button.button {
 }
 .email-button-primary.button-tiny.only-icon {
   width: auto;
-}
-.email-button-primary.button-tiny.loading {
-  width: 52px;
 }
 .email-button-primary.button-tiny.loading .loader {
   top: -23px;
@@ -4506,9 +4472,6 @@ button.button {
 .email-button-primary.button-small.only-icon i {
   margin: 0;
 }
-.email-button-primary.button-small.loading {
-  width: 78px;
-}
 .email-button-primary.button-small.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -4519,20 +4482,20 @@ button.button {
 .email-button-primary.button-small.loading .loader:before,
 .email-button-primary.button-small.loading .loader:after {
   border-radius: 10000px;
-  width: 9.75px;
-  height: 9.75px;
+  width: 7.8px;
+  height: 7.8px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-primary.button-small.loading .loader:before {
-  left: -13.75px;
+  left: -9.8px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-primary.button-small.loading .loader:after {
-  left: 13.75px;
+  left: 9.8px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -4569,9 +4532,6 @@ button.button {
 .email-button-primary.button-large.only-icon i {
   margin: 0;
 }
-.email-button-primary.button-large.loading {
-  width: 132px;
-}
 .email-button-primary.button-large.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -4582,20 +4542,20 @@ button.button {
 .email-button-primary.button-large.loading .loader:before,
 .email-button-primary.button-large.loading .loader:after {
   border-radius: 10000px;
-  width: 16.5px;
-  height: 16.5px;
+  width: 13.2px;
+  height: 13.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-primary.button-large.loading .loader:before {
-  left: -20.5px;
+  left: -15.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-primary.button-large.loading .loader:after {
-  left: 20.5px;
+  left: 15.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -4621,9 +4581,7 @@ button.button {
   border: 1px solid #ebebeb !important;
   color: #d9d9d9 !important;
   cursor: auto !important;
-  padding: 0;
   position: relative;
-  width: 102px;
 }
 .email-button-primary.loading [class^="icon-"],
 .email-button-primary.loading [class*=" icon-"] {
@@ -4652,20 +4610,20 @@ button.button {
 .email-button-primary.loading .loader:before,
 .email-button-primary.loading .loader:after {
   border-radius: 10000px;
-  width: 12.75px;
-  height: 12.75px;
+  width: 10.2px;
+  height: 10.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-primary.loading .loader:before {
-  left: -16.75px;
+  left: -12.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-primary.loading .loader:after {
-  left: 16.75px;
+  left: 12.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -5393,9 +5351,6 @@ button.button {
 .email-button-success.button-tiny.only-icon i {
   margin: 0;
 }
-.email-button-success.button-tiny.loading {
-  width: 52px;
-}
 .email-button-success.button-tiny.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -5406,20 +5361,20 @@ button.button {
 .email-button-success.button-tiny.loading .loader:before,
 .email-button-success.button-tiny.loading .loader:after {
   border-radius: 10000px;
-  width: 6.5px;
-  height: 6.5px;
+  width: 5.2px;
+  height: 5.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-success.button-tiny.loading .loader:before {
-  left: -10.5px;
+  left: -7.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-success.button-tiny.loading .loader:after {
-  left: 10.5px;
+  left: 7.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -5431,9 +5386,6 @@ button.button {
 }
 .email-button-success.button-tiny.only-icon {
   width: auto;
-}
-.email-button-success.button-tiny.loading {
-  width: 52px;
 }
 .email-button-success.button-tiny.loading .loader {
   top: -23px;
@@ -5462,9 +5414,6 @@ button.button {
 .email-button-success.button-small.only-icon i {
   margin: 0;
 }
-.email-button-success.button-small.loading {
-  width: 78px;
-}
 .email-button-success.button-small.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -5475,20 +5424,20 @@ button.button {
 .email-button-success.button-small.loading .loader:before,
 .email-button-success.button-small.loading .loader:after {
   border-radius: 10000px;
-  width: 9.75px;
-  height: 9.75px;
+  width: 7.8px;
+  height: 7.8px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-success.button-small.loading .loader:before {
-  left: -13.75px;
+  left: -9.8px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-success.button-small.loading .loader:after {
-  left: 13.75px;
+  left: 9.8px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -5525,9 +5474,6 @@ button.button {
 .email-button-success.button-large.only-icon i {
   margin: 0;
 }
-.email-button-success.button-large.loading {
-  width: 132px;
-}
 .email-button-success.button-large.loading .loader {
   -webkit-animation-delay: -0.05s;
           animation-delay: -0.05s;
@@ -5538,20 +5484,20 @@ button.button {
 .email-button-success.button-large.loading .loader:before,
 .email-button-success.button-large.loading .loader:after {
   border-radius: 10000px;
-  width: 16.5px;
-  height: 16.5px;
+  width: 13.2px;
+  height: 13.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-success.button-large.loading .loader:before {
-  left: -20.5px;
+  left: -15.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-success.button-large.loading .loader:after {
-  left: 20.5px;
+  left: 15.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
@@ -5577,9 +5523,7 @@ button.button {
   border: 1px solid #ebebeb !important;
   color: #d9d9d9 !important;
   cursor: auto !important;
-  padding: 0;
   position: relative;
-  width: 102px;
 }
 .email-button-success.loading [class^="icon-"],
 .email-button-success.loading [class*=" icon-"] {
@@ -5608,20 +5552,20 @@ button.button {
 .email-button-success.loading .loader:before,
 .email-button-success.loading .loader:after {
   border-radius: 10000px;
-  width: 12.75px;
-  height: 12.75px;
+  width: 10.2px;
+  height: 10.2px;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-animation: loadanimation 1.5s infinite ease-in-out;
           animation: loadanimation 1.5s infinite ease-in-out;
 }
 .email-button-success.loading .loader:before {
-  left: -16.75px;
+  left: -12.2px;
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
 .email-button-success.loading .loader:after {
-  left: 16.75px;
+  left: 12.2px;
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
