@@ -4,22 +4,20 @@
   angular
     .module('weed.auth', ['weed.core'])
     .factory('authInterceptor', authInterceptor)
-    .service('weedUserAuthService', weedUserAuthService)
     .service('weedAuthService', weedAuthService)
-    .constant('API', 'http://127.0.0.1:8000/') // TODO: figure out what is the best way to config the base endpoint
-    .config(function($httpProvider){});
+    .config(function($httpProvider){}); //TODO
 
   // Dependency injections
-  authInterceptor.$inject = ['API', 'weedAuthService'];
-  weedAuthService.$inject = ['$window'];
-  weedUserAuthService.$inject = ['$http', 'API'];
+  authInterceptor.$inject = ['weedAuthService'];
+  weedAuthService.$inject = ['$window', '$http'];
 
-  function authInterceptor(API, auth) {
+  //TODO
+  function authInterceptor(weedAuthService) {
     return {
       // automatically attach Authorization header
       request: function(config) {
-        var token = auth.getToken();
-        if (config.url.indexOf(API) === 0 && token) {
+        var token = weedAuthService.getToken();
+        if (token) {
           config.headers.Authorization = 'Bearer' + token;
         }
 
@@ -29,18 +27,21 @@
       // If a token was sent back, save it
       response: function(res) {
         if(res.config.url.indexOf(API) === 0 && res.data.token) {
-          auth.saveToken(res.data.token);
+          weedAuthService.saveToken(res.data.token);
         }
         return res;
       }
     }
   }
 
-  function weedAuthService($window) {
-    var self = this;
+  function weedAuthService($window, $http) {
+    var vm = this,
+        apiConfigs = {};
 
-    // Add JWT methods here
-    self.parseJwt = function(token) {
+    // Service Utilites
+
+
+    function parseJwt(token) {
       var base64Url = token.split('.')[1];
       var base64 = base64Url.replace('-', '+').replace('_', '/');
       switch (base64.length % 4) {
@@ -58,44 +59,52 @@
       return JSON.parse($window.atob(base64));
     }
 
-    self.saveToken = function(token) {
-      $window.localStorage['jwtToken'] = token;
+    function saveToken(token) {
+      $window.localStorage['jwt'] = token;
     }
 
-    self.getToken = function() {
-      return $window.localStorage['jwtToken'];
+    function getToken() {
+      return $window.localStorage['jwt'];
     }
 
-    self.isAuthed = function() {
-      var token = self.getToken();
+
+    // Public Interface
+
+    //TODO: Actualizar Documentacion
+    vm.addNewApi = function(id, url) {
+      apiConfigs[id] = {
+        url: url,
+        jwt: ''
+      };
+    }
+
+    vm.isAuthenticated = function() {
+      var token = getToken();
       if (token) {
-        var params = self.parseJwt(token);
+        var params = parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
       }
       else {
         return false;
       }
     }
+    //TODO
+    vm.login = function(apiId, route, data) {
+      return $http.post(apiConfigs[apiId].url, route, data);
+    }
 
-    self.logout = function() {
-      $window.localStorage.removeItem('jwtToken');
+    vm.logout = function() {
+      $window.localStorage.removeItem('jwt');
     }
 
   }
 
   function weedUserAuthService($http, API) {
-    var self = this;
+    var vm = this;
     // add authentication methods here
 
-    self.register = function(){
+    vm.register = function(){
       // register code goes in here
-    }
-
-    self.login = function(username, password) {
-      return $http.post(API +'token-auth/', {
-        username: username,
-        password: password
-      })
     }
   }
 
