@@ -2561,12 +2561,11 @@ button.button {
 .button.underline {
   text-decoration: underline;
 }
-.button [class^="icon-"],
-.button [class*=" icon-"] {
+.button [class^="ic-"],
+.button [class*="ic-"] {
   color: #a3a6a6;
   font-size: 1.6em;
-  margin-right: 15px;
-  transition: 0.25s;
+  transition: 0.5s;
 }
 .button span.text {
   vertical-align: middle;
@@ -2609,10 +2608,9 @@ button.button {
   line-height: 24px;
   padding: 0 20px;
 }
-.button.button-tiny [class^="icon-"],
-.button.button-tiny [class*=" icon-"] {
+.button.button-tiny [class^="ic-"],
+.button.button-tiny [class*=" ic-"] {
   font-size: 11px;
-  margin-right: 7px;
 }
 .button.button-tiny.left-end {
   border-radius: 5px 0 0 5px;
@@ -2672,10 +2670,9 @@ button.button {
   line-height: 37px;
   padding: 0 25px;
 }
-.button.button-small [class^="icon-"],
-.button.button-small [class*=" icon-"] {
+.button.button-small [class^="ic-"],
+.button.button-small [class*=" ic-"] {
   font-size: 1.3em;
-  margin-right: 7px;
 }
 .button.button-small.left-end {
   border-radius: 7px 0 0 7px;
@@ -2732,10 +2729,9 @@ button.button {
   line-height: 64px;
   padding: 0 43px;
 }
-.button.button-large [class^="icon-"],
-.button.button-large [class*=" icon-"] {
+.button.button-large [class^="ic-"],
+.button.button-large [class*=" ic-"] {
   font-size: 1.6em;
-  margin-right: 20px;
 }
 .button.button-large.left-end {
   border-radius: 7px 0 0 7px;
@@ -2800,8 +2796,8 @@ button.button {
   cursor: auto !important;
   position: relative;
 }
-.button.loading [class^="icon-"],
-.button.loading [class*=" icon-"] {
+.button.loading [class^="ic-"],
+.button.loading [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .button.loading.clear-background {
@@ -2869,8 +2865,8 @@ button.button {
   color: #d9d9d9 !important;
   cursor: auto !important;
 }
-.button.disabled [class^="icon-"],
-.button.disabled [class*=" icon-"] {
+.button.disabled [class^="ic-"],
+.button.disabled [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .button.disabled.clear-background {
@@ -2940,8 +2936,8 @@ button.button {
   background: none !important;
   border: none !important;
 }
-.button.button-gray [class^="icon-"],
-.button.button-gray [class*=" icon-"],
+.button.button-gray [class^="ic-"],
+.button.button-gray [class*=" ic-"],
 .button.button-gray svg * {
   color: #a3a6a6;
   fill: #a3a6a6;
@@ -3449,12 +3445,11 @@ button.button {
 .email-button.underline {
   text-decoration: underline;
 }
-.email-button [class^="icon-"],
-.email-button [class*=" icon-"] {
+.email-button [class^="ic-"],
+.email-button [class*="ic-"] {
   color: #a3a6a6;
   font-size: 1.6em;
-  margin-right: 15px;
-  transition: 0.25s;
+  transition: 0.5s;
 }
 .email-button span.text {
   vertical-align: middle;
@@ -3497,10 +3492,9 @@ button.button {
   line-height: 24px;
   padding: 0 20px;
 }
-.email-button.button-tiny [class^="icon-"],
-.email-button.button-tiny [class*=" icon-"] {
+.email-button.button-tiny [class^="ic-"],
+.email-button.button-tiny [class*=" ic-"] {
   font-size: 11px;
-  margin-right: 7px;
 }
 .email-button.button-tiny.left-end {
   border-radius: 5px 0 0 5px;
@@ -3560,10 +3554,9 @@ button.button {
   line-height: 37px;
   padding: 0 25px;
 }
-.email-button.button-small [class^="icon-"],
-.email-button.button-small [class*=" icon-"] {
+.email-button.button-small [class^="ic-"],
+.email-button.button-small [class*=" ic-"] {
   font-size: 1.3em;
-  margin-right: 7px;
 }
 .email-button.button-small.left-end {
   border-radius: 7px 0 0 7px;
@@ -3620,10 +3613,9 @@ button.button {
   line-height: 64px;
   padding: 0 43px;
 }
-.email-button.button-large [class^="icon-"],
-.email-button.button-large [class*=" icon-"] {
+.email-button.button-large [class^="ic-"],
+.email-button.button-large [class*=" ic-"] {
   font-size: 1.6em;
-  margin-right: 20px;
 }
 .email-button.button-large.left-end {
   border-radius: 7px 0 0 7px;
@@ -3688,8 +3680,8 @@ button.button {
   cursor: auto !important;
   position: relative;
 }
-.email-button.loading [class^="icon-"],
-.email-button.loading [class*=" icon-"] {
+.email-button.loading [class^="ic-"],
+.email-button.loading [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .email-button.loading.clear-background {
@@ -3757,8 +3749,8 @@ button.button {
   color: #d9d9d9 !important;
   cursor: auto !important;
 }
-.email-button.disabled [class^="icon-"],
-.email-button.disabled [class*=" icon-"] {
+.email-button.disabled [class^="ic-"],
+.email-button.disabled [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .email-button.disabled.clear-background {
@@ -3828,8 +3820,8 @@ button.button {
   background: none !important;
   border: none !important;
 }
-.email-button.button-gray [class^="icon-"],
-.email-button.button-gray [class*=" icon-"],
+.email-button.button-gray [class^="ic-"],
+.email-button.button-gray [class*=" ic-"],
 .email-button.button-gray svg * {
   color: #a3a6a6;
   fill: #a3a6a6;
@@ -4344,12 +4336,11 @@ button.button {
 .email-button-primary.underline {
   text-decoration: underline;
 }
-.email-button-primary [class^="icon-"],
-.email-button-primary [class*=" icon-"] {
+.email-button-primary [class^="ic-"],
+.email-button-primary [class*="ic-"] {
   color: #a3a6a6;
   font-size: 1.6em;
-  margin-right: 15px;
-  transition: 0.25s;
+  transition: 0.5s;
 }
 .email-button-primary span.text {
   vertical-align: middle;
@@ -4392,10 +4383,9 @@ button.button {
   line-height: 24px;
   padding: 0 20px;
 }
-.email-button-primary.button-tiny [class^="icon-"],
-.email-button-primary.button-tiny [class*=" icon-"] {
+.email-button-primary.button-tiny [class^="ic-"],
+.email-button-primary.button-tiny [class*=" ic-"] {
   font-size: 11px;
-  margin-right: 7px;
 }
 .email-button-primary.button-tiny.left-end {
   border-radius: 5px 0 0 5px;
@@ -4455,10 +4445,9 @@ button.button {
   line-height: 37px;
   padding: 0 25px;
 }
-.email-button-primary.button-small [class^="icon-"],
-.email-button-primary.button-small [class*=" icon-"] {
+.email-button-primary.button-small [class^="ic-"],
+.email-button-primary.button-small [class*=" ic-"] {
   font-size: 1.3em;
-  margin-right: 7px;
 }
 .email-button-primary.button-small.left-end {
   border-radius: 7px 0 0 7px;
@@ -4515,10 +4504,9 @@ button.button {
   line-height: 64px;
   padding: 0 43px;
 }
-.email-button-primary.button-large [class^="icon-"],
-.email-button-primary.button-large [class*=" icon-"] {
+.email-button-primary.button-large [class^="ic-"],
+.email-button-primary.button-large [class*=" ic-"] {
   font-size: 1.6em;
-  margin-right: 20px;
 }
 .email-button-primary.button-large.left-end {
   border-radius: 7px 0 0 7px;
@@ -4583,8 +4571,8 @@ button.button {
   cursor: auto !important;
   position: relative;
 }
-.email-button-primary.loading [class^="icon-"],
-.email-button-primary.loading [class*=" icon-"] {
+.email-button-primary.loading [class^="ic-"],
+.email-button-primary.loading [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .email-button-primary.loading.clear-background {
@@ -4652,8 +4640,8 @@ button.button {
   color: #d9d9d9 !important;
   cursor: auto !important;
 }
-.email-button-primary.disabled [class^="icon-"],
-.email-button-primary.disabled [class*=" icon-"] {
+.email-button-primary.disabled [class^="ic-"],
+.email-button-primary.disabled [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .email-button-primary.disabled.clear-background {
@@ -4723,8 +4711,8 @@ button.button {
   background: none !important;
   border: none !important;
 }
-.email-button-primary.button-gray [class^="icon-"],
-.email-button-primary.button-gray [class*=" icon-"],
+.email-button-primary.button-gray [class^="ic-"],
+.email-button-primary.button-gray [class*=" ic-"],
 .email-button-primary.button-gray svg * {
   color: #a3a6a6;
   fill: #a3a6a6;
@@ -5286,12 +5274,11 @@ button.button {
 .email-button-success.underline {
   text-decoration: underline;
 }
-.email-button-success [class^="icon-"],
-.email-button-success [class*=" icon-"] {
+.email-button-success [class^="ic-"],
+.email-button-success [class*="ic-"] {
   color: #a3a6a6;
   font-size: 1.6em;
-  margin-right: 15px;
-  transition: 0.25s;
+  transition: 0.5s;
 }
 .email-button-success span.text {
   vertical-align: middle;
@@ -5334,10 +5321,9 @@ button.button {
   line-height: 24px;
   padding: 0 20px;
 }
-.email-button-success.button-tiny [class^="icon-"],
-.email-button-success.button-tiny [class*=" icon-"] {
+.email-button-success.button-tiny [class^="ic-"],
+.email-button-success.button-tiny [class*=" ic-"] {
   font-size: 11px;
-  margin-right: 7px;
 }
 .email-button-success.button-tiny.left-end {
   border-radius: 5px 0 0 5px;
@@ -5397,10 +5383,9 @@ button.button {
   line-height: 37px;
   padding: 0 25px;
 }
-.email-button-success.button-small [class^="icon-"],
-.email-button-success.button-small [class*=" icon-"] {
+.email-button-success.button-small [class^="ic-"],
+.email-button-success.button-small [class*=" ic-"] {
   font-size: 1.3em;
-  margin-right: 7px;
 }
 .email-button-success.button-small.left-end {
   border-radius: 7px 0 0 7px;
@@ -5457,10 +5442,9 @@ button.button {
   line-height: 64px;
   padding: 0 43px;
 }
-.email-button-success.button-large [class^="icon-"],
-.email-button-success.button-large [class*=" icon-"] {
+.email-button-success.button-large [class^="ic-"],
+.email-button-success.button-large [class*=" ic-"] {
   font-size: 1.6em;
-  margin-right: 20px;
 }
 .email-button-success.button-large.left-end {
   border-radius: 7px 0 0 7px;
@@ -5525,8 +5509,8 @@ button.button {
   cursor: auto !important;
   position: relative;
 }
-.email-button-success.loading [class^="icon-"],
-.email-button-success.loading [class*=" icon-"] {
+.email-button-success.loading [class^="ic-"],
+.email-button-success.loading [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .email-button-success.loading.clear-background {
@@ -5594,8 +5578,8 @@ button.button {
   color: #d9d9d9 !important;
   cursor: auto !important;
 }
-.email-button-success.disabled [class^="icon-"],
-.email-button-success.disabled [class*=" icon-"] {
+.email-button-success.disabled [class^="ic-"],
+.email-button-success.disabled [class*=" ic-"] {
   color: #d9d9d9 !important;
 }
 .email-button-success.disabled.clear-background {
@@ -5665,8 +5649,8 @@ button.button {
   background: none !important;
   border: none !important;
 }
-.email-button-success.button-gray [class^="icon-"],
-.email-button-success.button-gray [class*=" icon-"],
+.email-button-success.button-gray [class^="ic-"],
+.email-button-success.button-gray [class*=" ic-"],
 .email-button-success.button-gray svg * {
   color: #a3a6a6;
   fill: #a3a6a6;

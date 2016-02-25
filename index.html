@@ -90,18 +90,22 @@
     <!-- Button: OK -->
     <a we-button icon="cogs" type="danger" size="small">Test</a>
 
-    <h2>Buttons with loaders</h2>
-    <a we-button icon="bell" type="info" size="large" toload="true">Test</a><br>
-    <a we-button state="block" type="info" size="large" toload="true">asdfasdfasdf</a><br>
+    <div ng-controller="WeedTestCtrl as testCtrl">
+        <h2>Buttons with loaders</h2>
+        <a we-button state="block" type="info" size="large" toload="true">asdfasdfasdf</a><br>
 
-    <a we-button state="block" type="success" toload="true">Test</a> <br>
-    <a we-button icon="bell" type="success" toload="true"></a> <br>
+        <a we-button state="block" type="success" toload="true">Test</a> <br>
+        <a we-button icon="bell" type="success" toload="true"></a> <br>
 
-    <a we-button icon="bell" type="warning" size="small" toload="true">Test</a> <br>
-    <a we-button icon="bell" type="warning" size="small" toload="true"></a> <br>
+        <a we-button icon="bell" type="warning" size="small" toload="true">Test</a> <br>
+        <a we-button icon="bell" type="warning" size="small" toload="true"></a> <br>
 
-    <a we-button icon="bell" type="danger" size="tiny" toload="true">Test</a> <br>
-    <a we-button icon="bell" type="danger" size="tiny" toload="true"></a>
+        <a we-button icon="bell" type="danger" size="tiny" toload="true">Test</a> <br>
+        <a we-button icon="bell" type="danger" size="tiny" toload="true"></a>
+
+        <h3>Buttons with loader callback</h3>
+        <a we-button icon="bell" type="info" size="large" toload="testCtrl.testFunctionToLoad()">Test</a><br>
+    </div>
 
     <h1>Forms</h1>
 
@@ -284,7 +288,39 @@
                 .module('weed.test', ['weed'])
                 .controller('WeedTestCtrl', weedTestCtrl);
 
-            function weedTestCtrl(weedUserAuthService){};
+            weedTestCtrl.$inject = ['$scope', '$q', '$timeout'];
+
+            function weedTestCtrl($scope, $q, $timeout){
+                var vm = this;
+                vm.testFunctionToLoad = function() {
+                    var defer = $q.defer(),
+                        promise;
+
+                    // Mock
+                    $timeout(function(){
+                        if(Math.round(Math.random())){
+                            defer.resolve("resolved");
+                        }
+                        else {
+                            defer.reject("rejected");
+                        }
+                    }, 2000);
+
+                    // Get promise
+                    promise = defer.promise;
+
+                    promise.then(
+                        function(){
+                            // TODO: local code to handle success
+                        },
+                        function(){
+                            // TODO: local code to handle failure
+                        }
+                    );
+
+                    return promise;
+                }
+            };
         })(angular);
     </script>
     </body>

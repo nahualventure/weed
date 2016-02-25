@@ -234,12 +234,11 @@ button.button{
 
 
   // Icon component behavior
-  [class^="icon-"],
-  [class*=" icon-"]{
+  [class^="@{fa-css-prefix}-"],
+  [class*="@{fa-css-prefix}-"]{
     color: lighten(@button-default-text-color, 10%);
     font-size: 1.6em;
-    margin-right: @button-text-margin-left;
-    transition: @faster;
+    transition: @fast;
   }
 
   // Span element
@@ -303,10 +302,9 @@ button.button{
     line-height: @height - 2px;
     padding: 0 @horizontal-padding;
 
-    [class^="icon-"],
-    [class*=" icon-"]{
+    [class^="@{fa-css-prefix}-"],
+    [class*=" @{fa-css-prefix}-"]{
       font-size: @icon-size;
-      margin-right: @text-margin;
     }
 
     // Docked states
@@ -469,8 +467,8 @@ button.button{
     color: @button-disabled-text-color !important;
     cursor: auto !important;
 
-    [class^="icon-"],
-    [class*=" icon-"]{
+    [class^="@{fa-css-prefix}-"],
+    [class*=" @{fa-css-prefix}-"]{
       color: @button-disabled-text-color !important;
     }
 
@@ -497,8 +495,8 @@ button.button{
     .text-shadow(0 1px 1px fadeout(@white, 20%));
     border-color: @button-gray-border-color;
 
-    [class^="icon-"],
-    [class*=" icon-"],
+    [class^="@{fa-css-prefix}-"],
+    [class*=" @{fa-css-prefix}-"],
     svg *{
       color: lighten(@button-default-text-color, 10%);
       fill: lighten(@button-default-text-color, 10%);
