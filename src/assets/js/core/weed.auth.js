@@ -2,32 +2,18 @@
   'use strict';
 
   angular
-    .module('weed.auth', ['weed.core'])
-    .factory('authInterceptor', authInterceptor)
-    .service('weedAuthService', weedAuthService);
+    .module('weed.auth.jwt', ['weed.core'])
+    .service('weedJWTAuthService', weedJWTAuthService)
+    .factory('weedJWTInterceptor', weedJWTInterceptor);
 
   // Dependency injections
-  authInterceptor.$inject = ['weedAuthService'];
-  weedAuthService.$inject = ['$window', '$http'];
+  weedJWTAuthService.$inject = ['$window', '$http', '$filter'];
+  weedJWTInterceptor.$inject = ['$injector'];
 
-  //TODO
-  function authInterceptor(weedAuthService) {
-    return {
-      // Automatically attach Authorization header
-      request: function(config) {
-        // var token = weedAuthService.getToken();
-        // if (token) {
-        //   config.headers.Authorization = 'Bearer' + token;
-        // }
-
-        // return config;
-      }
-    }
-  }
-
-  function weedAuthService($window, $http) {
+  function weedJWTAuthService($window, $http, $filter) {
     var vm = this,
-        apiData = {};
+        apiData = {},
+        objectFilter = $filter('filter');
 
     // Service Utilites
 
@@ -64,11 +50,6 @@
     function saveUserDataForApi(apiId, token){
       apiData[apiId].user = parseJwt(token);
       return apiData[apiId].user;
-    }
-
-    // Gets the JWT for a given api
-    function getTokenInApi(apiId) {
-      return $window.localStorage[getLocalJWTId(apiId)];
     }
 
     // Given an api and a route, builds the fully described route
@@ -110,9 +91,14 @@
       apiData[api.id] = angular.extend({}, defaults, api);
     }
 
+    // TODO: update documentation
+    vm.getTokenInApi = function(apiId) {
+      return $window.localStorage[getLocalJWTId(apiId)];
+    }
+
     //TODO: update documentation
     vm.isAuthenticated = function(apiId) {
-      var token = getTokenInApi(apiId);
+      var token = vm.getTokenInApi(apiId);
       if (token) {
         var params = parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
@@ -151,7 +137,7 @@
         apiId,
         apiData[apiId].refreshRoute,
         {
-          token: getTokenInApi(apiId)
+          token: vm.getTokenInApi(apiId)
         }
       );
     }
@@ -159,6 +145,59 @@
     // TODO: check if save state on server needed
     vm.logout = function(apiId) {
       $window.localStorage.removeItem(getLocalJWTId(apiId));
+    }
+
+    // TODO: docu
+    vm.getApiForURL = function(url){
+      var apiKeys = Object.keys(apiData),
+          api,
+          i;
+
+      for(i = 0; i < apiKeys.length; i++){
+        api = apiData[apiKeys[i]];
+
+        if(url.indexOf(api.url) > -1){
+          return api;
+        }
+      }
+
+      return undefined;
+    }
+  }
+
+  //TODO
+  function weedJWTInterceptor($injector) {
+    return {
+      // Automatically attach Authorization header
+      request: function(config) {
+        // Delay injection
+        var weedJWTAuthService = $injector.get('weedJWTAuthService'),
+
+            // Find if the current request URL is of any of our JWT apis
+            api = weedJWTAuthService.getApiForURL(config.url),
+
+            // Token declaration
+            token;
+
+        // If an api was found
+        if(api){
+
+          // Fetch token from local storage
+          token = weedJWTAuthService.getTokenInApi(api.id);
+
+          // If there is token
+          if (token) {
+
+            // Add to header
+            config.headers.Authorization = 'Bearer' + token;
+          }
+        }
+
+        return config;
+      },
+      response: function(res){
+        return res;
+      }
     }
   }
 

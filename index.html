@@ -91,9 +91,11 @@
     <a we-button icon="cogs" type="danger" size="small">Test</a>
 
     <div ng-controller="WeedTestCtrl as testCtrl">
-        <h2>Buttons with loaders</h2>
-        <a we-button state="block" type="info" size="large" toload="true">asdfasdfasdf</a><br>
+        <h2>Auth</h2>
+        <a we-button type="success" icon="check" ng-click="testCtrl.login()">Login</a>
+        <a we-button type="warning" icon="refresh" ng-click="testCtrl.refreshToken()">Token</a><br>
 
+        <h2>Buttons with loaders</h2>
         <a we-button state="block" type="success" toload="true">Test</a> <br>
         <a we-button icon="bell" type="success" toload="true"></a> <br>
 
@@ -286,12 +288,51 @@
 
             angular
                 .module('weed.test', ['weed'])
-                .controller('WeedTestCtrl', weedTestCtrl);
+                .controller('WeedTestCtrl', weedTestCtrl)
+                .config(weedTestConfig);
 
-            weedTestCtrl.$inject = ['$scope', '$q', '$timeout', 'weedAuthService'];
+            // Dependencies
+            weedTestCtrl.$inject = ['$scope', '$q', '$timeout', 'weedJWTAuthService'];
+            weedTestConfig.$inject = ['$httpProvider'];
 
-            function weedTestCtrl($scope, $q, $timeout, weedAuthService){
+            function weedTestConfig($httpProvider){
+                $httpProvider.interceptors.push('weedJWTInterceptor');
+            }
+
+            function weedTestCtrl($scope, $q, $timeout, weedJWTAuthService){
                 var vm = this;
+
+                vm.login = function(){
+                    var r = weedJWTAuthService.login(
+                        'finance',
+                        {
+                            username: 'root',
+                            password: 'root'
+                        }
+                    );
+
+                    r.error(function(d){
+                        console.log("Error: ");
+                        console.dir(d);
+                    }).success(function(d){
+                        console.log("Success: ");
+                        console.log(localStorage);
+                        console.log(weedJWTAuthService.getUser('finance'));
+                    });
+                }
+
+                vm.refreshToken = function(){
+                    var r = weedJWTAuthService.refreshToken('finance');
+                    r.error(function(d){
+                        console.log("Error: ");
+                        console.log(d);
+                    }).success(function(d){
+                        console.log("Success: ");
+                        console.log(localStorage);
+                        console.log(weedJWTAuthService.getUser('finance'));
+                    });
+                }
+
                 vm.testFunctionToLoad = function() {
                     var defer = $q.defer(),
                         promise;
@@ -321,42 +362,22 @@
                     return promise;
                 }
 
-                weedAuthService.addNewApi({
+                weedJWTAuthService.addNewApi({
                     id: 'finance',
                     url: 'http://127.0.0.1:8000',
                     refreshUntilMissing: 100
                 });
 
-                console.log(localStorage);
+                weedJWTAuthService.addNewApi({
+                    id: 'finance2',
+                    url: 'http://127.0.0.2:8000',
+                    refreshUntilMissing: 100
+                });
 
-                // var r = weedAuthService.login(
-                //     'finance',
-                //     {
-                //         username: 'root',
-                //         password: 'root'
-                //     }
-                // );
-
-                // r.error(function(d){
-                //     console.log("Error: ");
-                //     console.dir(d);
-                //     console.log(weedAuthService.isAuthenticated('finance'))
-                // }).success(function(d){
-                //     console.log("Success: ");
-                //     console.dir(d);
-                //     console.log(weedAuthService.isAuthenticated('finance'))
-                //     console.dir(weedAuthService.getUser('finance'));
-                // });
-
-                var r = weedAuthService.refreshToken('finance');
-                r.error(function(d){
-                    console.log("Error: ");
-                    console.dir(d);
-                    console.log(weedAuthService.isAuthenticated('finance'))
-                }).success(function(d){
-                    console.log("Success: ");
-                    console.dir(d);
-                    console.log(localStorage);
+                weedJWTAuthService.addNewApi({
+                    id: 'finance3',
+                    url: 'http://127.0.0.3:8000',
+                    refreshUntilMissing: 100
                 });
 
             };

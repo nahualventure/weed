@@ -2573,7 +2573,7 @@ if (typeof define === 'function' && define.amd) {
   angular.module(
     'weed', [
       'weed.core',
-      'weed.auth',
+      'weed.auth.jwt',
       'weed.common',
       'weed.button',
       'weed.icon',
@@ -2589,32 +2589,18 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular
-    .module('weed.auth', ['weed.core'])
-    .factory('authInterceptor', authInterceptor)
-    .service('weedAuthService', weedAuthService);
+    .module('weed.auth.jwt', ['weed.core'])
+    .service('weedJWTAuthService', weedJWTAuthService)
+    .factory('weedJWTInterceptor', weedJWTInterceptor);
 
   // Dependency injections
-  authInterceptor.$inject = ['weedAuthService'];
-  weedAuthService.$inject = ['$window', '$http'];
+  weedJWTAuthService.$inject = ['$window', '$http', '$filter'];
+  weedJWTInterceptor.$inject = ['$injector'];
 
-  //TODO
-  function authInterceptor(weedAuthService) {
-    return {
-      // Automatically attach Authorization header
-      request: function(config) {
-        // var token = weedAuthService.getToken();
-        // if (token) {
-        //   config.headers.Authorization = 'Bearer' + token;
-        // }
-
-        // return config;
-      }
-    }
-  }
-
-  function weedAuthService($window, $http) {
+  function weedJWTAuthService($window, $http, $filter) {
     var vm = this,
-        apiData = {};
+        apiData = {},
+        objectFilter = $filter('filter');
 
     // Service Utilites
 
@@ -2651,11 +2637,6 @@ if (typeof define === 'function' && define.amd) {
     function saveUserDataForApi(apiId, token){
       apiData[apiId].user = parseJwt(token);
       return apiData[apiId].user;
-    }
-
-    // Gets the JWT for a given api
-    function getTokenInApi(apiId) {
-      return $window.localStorage[getLocalJWTId(apiId)];
     }
 
     // Given an api and a route, builds the fully described route
@@ -2697,9 +2678,14 @@ if (typeof define === 'function' && define.amd) {
       apiData[api.id] = angular.extend({}, defaults, api);
     }
 
+    // TODO: update documentation
+    vm.getTokenInApi = function(apiId) {
+      return $window.localStorage[getLocalJWTId(apiId)];
+    }
+
     //TODO: update documentation
     vm.isAuthenticated = function(apiId) {
-      var token = getTokenInApi(apiId);
+      var token = vm.getTokenInApi(apiId);
       if (token) {
         var params = parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
@@ -2738,7 +2724,7 @@ if (typeof define === 'function' && define.amd) {
         apiId,
         apiData[apiId].refreshRoute,
         {
-          token: getTokenInApi(apiId)
+          token: vm.getTokenInApi(apiId)
         }
       );
     }
@@ -2746,6 +2732,59 @@ if (typeof define === 'function' && define.amd) {
     // TODO: check if save state on server needed
     vm.logout = function(apiId) {
       $window.localStorage.removeItem(getLocalJWTId(apiId));
+    }
+
+    // TODO: docu
+    vm.getApiForURL = function(url){
+      var apiKeys = Object.keys(apiData),
+          api,
+          i;
+
+      for(i = 0; i < apiKeys.length; i++){
+        api = apiData[apiKeys[i]];
+
+        if(url.indexOf(api.url) > -1){
+          return api;
+        }
+      }
+
+      return undefined;
+    }
+  }
+
+  //TODO
+  function weedJWTInterceptor($injector) {
+    return {
+      // Automatically attach Authorization header
+      request: function(config) {
+        // Delay injection
+        var weedJWTAuthService = $injector.get('weedJWTAuthService'),
+
+            // Find if the current request URL is of any of our JWT apis
+            api = weedJWTAuthService.getApiForURL(config.url),
+
+            // Token declaration
+            token;
+
+        // If an api was found
+        if(api){
+
+          // Fetch token from local storage
+          token = weedJWTAuthService.getTokenInApi(api.id);
+
+          // If there is token
+          if (token) {
+
+            // Add to header
+            config.headers.Authorization = 'Bearer' + token;
+          }
+        }
+
+        return config;
+      },
+      response: function(res){
+        return res;
+      }
     }
   }
 
@@ -2917,6 +2956,98 @@ if (typeof define === 'function' && define.amd) {
     // Attach viewport units buggyfill
     if (typeof(viewportUnitsBuggyfill) !== 'undefined') {
       viewportUnitsBuggyfill.init();
+    }
+  }
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.button', ['weed.core'])
+    .directive('weButton', buttonDirective);
+
+  // No dependency injections
+
+  function buttonDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '&?',
+          size: '@',
+          state: '@'
+      },
+      templateUrl: 'components/button/button.html',
+      link: buttonLink
+    };
+  }
+
+  function buttonLink(scope, elem, attrs, controllers, $transclude) {
+    var buttonCurrentWidth,
+        buttonCurrentHeight,
+        loaderWidth,
+        oLoader;
+
+    // Check if there is text
+    $transclude(function(clone){
+      scope.hasText = clone.length > 0;
+    });
+
+    // If load behavior attached
+    if(scope.toload){
+      elem.on('click', function(e){
+
+        // If yet not loading
+        if(!scope.loading){
+
+          // Try to get a defer from toload attribute
+          var promise = scope.$apply(scope.toload);
+
+          // If it's a promise
+          if(promise.then){
+            promise.then(
+              function(data){
+
+                // On success, set loading false
+                scope.loading = false;
+              },
+              function(data){
+
+                // On failure, set loading false
+                scope.loading = false;
+              }
+            );
+          }
+
+          scope.loading = true;
+
+          // Refresh bindings
+          scope.$apply();
+
+          // Sizing utilities
+          buttonCurrentWidth = elem[0].clientWidth;
+          buttonCurrentHeight = elem[0].clientHeight;
+          loaderWidth = buttonCurrentHeight / 5.0;
+
+          // Fetch loader
+          oLoader = angular.element(elem[0].querySelector('.loader'));
+
+          // Set loader position
+          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
+        }
+      });
     }
   }
 
@@ -3474,97 +3605,5 @@ if (typeof define === 'function' && define.amd) {
         }
       };
     });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.button', ['weed.core'])
-    .directive('weButton', buttonDirective);
-
-  // No dependency injections
-
-  function buttonDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-          icon: '@',
-          type: '@',
-          toload: '&?',
-          size: '@',
-          state: '@'
-      },
-      templateUrl: 'components/button/button.html',
-      link: buttonLink
-    };
-  }
-
-  function buttonLink(scope, elem, attrs, controllers, $transclude) {
-    var buttonCurrentWidth,
-        buttonCurrentHeight,
-        loaderWidth,
-        oLoader;
-
-    // Check if there is text
-    $transclude(function(clone){
-      scope.hasText = clone.length > 0;
-    });
-
-    // If load behavior attached
-    if(scope.toload){
-      elem.on('click', function(e){
-
-        // If yet not loading
-        if(!scope.loading){
-
-          // Try to get a defer from toload attribute
-          var promise = scope.$apply(scope.toload);
-
-          // If it's a promise
-          if(promise.then){
-            promise.then(
-              function(data){
-
-                // On success, set loading false
-                scope.loading = false;
-              },
-              function(data){
-
-                // On failure, set loading false
-                scope.loading = false;
-              }
-            );
-          }
-
-          scope.loading = true;
-
-          // Refresh bindings
-          scope.$apply();
-
-          // Sizing utilities
-          buttonCurrentWidth = elem[0].clientWidth;
-          buttonCurrentHeight = elem[0].clientHeight;
-          loaderWidth = buttonCurrentHeight / 5.0;
-
-          // Fetch loader
-          oLoader = angular.element(elem[0].querySelector('.loader'));
-
-          // Set loader position
-          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
-        }
-      });
-    }
-  }
 
 })(angular);
