@@ -2614,18 +2614,14 @@ if (typeof define === 'function' && define.amd) {
       $window.localStorage[getLocalJWTId(apiId)] = token;
     }
 
-    // Saves user data returned by login endpoint
-    function saveUserDataForApi(apiId, token){
-      apiData[apiId].user = vm.parseJwt(token);
-      return apiData[apiId].user;
-    }
-
     // Given an api and a route, builds the fully described route
     function buildRoute(apiId, route){
       return [apiData[apiId].url, route].join('/');
     }
 
-    function handleToken(apiId, route, data){
+    // Handles the incomming new tokens, save them and stores it's data
+    // in the apiData object.
+    function handleNewToken(apiId, route, data){
       var api = apiData[apiId],
           fRoute = buildRoute(apiId, route);
 
@@ -2637,7 +2633,7 @@ if (typeof define === 'function' && define.amd) {
             saveTokenForApi(apiId, data.token);
 
             // saves locally the user for the given api
-            saveUserDataForApi(apiId, data.token);
+            vm._saveUserDataForApi(apiId, data.token);
           }
         }
       );
@@ -2645,25 +2641,6 @@ if (typeof define === 'function' && define.amd) {
 
 
     // Public Interface
-
-    // Parses a token
-    vm.parseJwt = function(token) {
-      var base64Url = token.split('.')[1];
-      var base64 = base64Url.replace('-', '+').replace('_', '/');
-      switch (base64.length % 4) {
-        case 0:
-          break;
-        case 2:
-          base64 += '==';
-          break;
-        case 3:
-          base64 += '=';
-          break;
-        default:
-          throw 'Illegal base64url string!';
-      }
-      return JSON.parse($window.atob(base64));
-    }
 
     //TODO: update documentation
     vm.addNewApi = function(api) {
@@ -2691,7 +2668,7 @@ if (typeof define === 'function' && define.amd) {
     vm.isAuthenticated = function(apiId) {
       var token = vm.getTokenInApi(apiId);
       if (token) {
-        var params = vm.parseJwt(token);
+        var params = vm._parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
       }
       else {
@@ -2705,7 +2682,7 @@ if (typeof define === 'function' && define.amd) {
         return apiData[apiId].user;
       }
       else if(apiData[apiId].token){
-        return saveUserDataForApi(apiData[apiId].token);
+        return vm._saveUserDataForApi(apiData[apiId].token);
       }
 
       return undefined;
@@ -2714,7 +2691,7 @@ if (typeof define === 'function' && define.amd) {
     //TODO: update documentation
     vm.login = function(apiId, data) {
 
-      return handleToken(
+      return handleNewToken(
         apiId,
         apiData[apiId].loginRoute,
         data
@@ -2724,7 +2701,7 @@ if (typeof define === 'function' && define.amd) {
     //TODO: update documentation
     vm.refreshToken = function(apiId) {
 
-      return handleToken (
+      return handleNewToken (
         apiId,
         apiData[apiId].refreshRoute,
         {
@@ -2754,9 +2731,36 @@ if (typeof define === 'function' && define.amd) {
 
       return undefined;
     }
+
+    // AVOID EXTERNAL USAGE OF THE FOLLOWING SERVICES
+    // We mark them as public because we need them in our JWT interceptor
+
+    // Saves user data returned by login endpoint
+    vm._saveUserDataForApi = function(apiId, token){
+      apiData[apiId].user = vm._parseJwt(token);
+      return apiData[apiId].user;
+    }
+
+    // Parses a token
+    vm._parseJwt = function(token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      switch (base64.length % 4) {
+        case 0:
+          break;
+        case 2:
+          base64 += '==';
+          break;
+        case 3:
+          base64 += '=';
+          break;
+        default:
+          throw 'Illegal base64url string!';
+      }
+      return JSON.parse($window.atob(base64));
+    }
   }
 
-  //TODO
   function weedJWTInterceptor($injector) {
     return {
       // Automatically attach Authorization header
@@ -2783,7 +2787,7 @@ if (typeof define === 'function' && define.amd) {
           token = authService.getTokenInApi(api.id);
 
           // Decrypt userData from token
-          userData = authService.parseJwt(token);
+          userData = authService._parseJwt(token);
 
           // Add to header
           config.headers.Authorization = 'JWT ' + token;
@@ -3299,101 +3303,6 @@ if (typeof define === 'function' && define.amd) {
  * @description
  * # navbarDirective
  * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', inputWrapperDirective);
-
-  // No dependencies
-
-  function inputWrapperDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-          rightIcon: '@',
-          leftIcon: '@',
-          componentPosition: '@',
-          size: '@',
-          placeholder: '@'
-      },
-      replace: true,
-      templateUrl: 'components/forms/inputWrapper.html'
-    };
-  };
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-(function() {
-  'use strict';
-
-  angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective);
-
-  // Weed api injection
-  popupDirective.$inject = ['WeedApi'];
-
-  function popupDirective(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink
-    };
-
-    return directive;
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            console.log("Open(#" + id + "): " + message);
-        }
-      });
-    }
-  }
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
  * Depends upon weInputWrapper
  */
 
@@ -3449,6 +3358,68 @@ if (typeof define === 'function' && define.amd) {
       templateUrl: 'components/navbar/navbar_element_main_action.html'
     };
   }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+          rightIcon: '@',
+          leftIcon: '@',
+          componentPosition: '@',
+          size: '@',
+          placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html'
+    };
+  };
 })(angular);
 /**
  * @ngdoc function
@@ -3636,4 +3607,37 @@ if (typeof define === 'function' && define.amd) {
       };
     });
 
+})(angular);
+(function() {
+  'use strict';
+
+  angular.module('weed.popup', ['weed.core'])
+    .directive('wePopup', popupDirective);
+
+  // Weed api injection
+  popupDirective.$inject = ['WeedApi'];
+
+  function popupDirective(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink
+    };
+
+    return directive;
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            console.log("Open(#" + id + "): " + message);
+        }
+      });
+    }
+  }
 })(angular);

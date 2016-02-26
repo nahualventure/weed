@@ -90,24 +90,19 @@
     <!-- Button: OK -->
     <a we-button icon="cogs" type="danger" size="small">Test</a>
 
-    <div ng-controller="WeedTestCtrl as testCtrl">
-        <h2>Auth</h2>
-        <a we-button type="success" icon="check" ng-click="testCtrl.login()">Login</a>
-        <a we-button type="warning" icon="refresh" ng-click="testCtrl.refreshToken()">Token</a>
-        <a we-button type="info" icon="heart" ng-click="testCtrl.testPost()">POST</a><br>
+    <h2>Buttons with loaders</h2>
+    <a we-button state="block" type="success" toload="true">Test</a> <br>
+    <a we-button icon="bell" type="success" toload="true"></a> <br>
 
-        <h2>Buttons with loaders</h2>
-        <a we-button state="block" type="success" toload="true">Test</a> <br>
-        <a we-button icon="bell" type="success" toload="true"></a> <br>
+    <a we-button icon="bell" type="warning" size="small" toload="true">Test</a> <br>
+    <a we-button icon="bell" type="warning" size="small" toload="true"></a> <br>
 
-        <a we-button icon="bell" type="warning" size="small" toload="true">Test</a> <br>
-        <a we-button icon="bell" type="warning" size="small" toload="true"></a> <br>
+    <a we-button icon="bell" type="danger" size="tiny" toload="true">Test</a> <br>
+    <a we-button icon="bell" type="danger" size="tiny" toload="true"></a>
 
-        <a we-button icon="bell" type="danger" size="tiny" toload="true">Test</a> <br>
-        <a we-button icon="bell" type="danger" size="tiny" toload="true"></a>
-
-        <h3>Buttons with loader callback</h3>
-        <a we-button icon="bell" type="info" size="large" toload="testCtrl.testFunctionToLoad()">Test</a><br>
+    <h3>Buttons with loader callback</h3>
+    <div ng-controller="WeedButtonController as btnCtrl">
+        <a we-button icon="bell" type="info" size="large" toload="btnCtrl.testFunctionToLoad()">Test</a><br>
     </div>
 
     <h1>Forms</h1>
@@ -279,6 +274,13 @@
         </div>
     </div>
 
+    <h1>Auth</h1>
+    <div ng-controller="WeedAuthController as authCtrl">
+        <a we-button type="success" icon="check" ng-click="authCtrl.login()">Login</a>
+        <a we-button type="warning" icon="refresh" ng-click="authCtrl.refreshToken()">Token</a>
+        <a we-button type="info" icon="heart" ng-click="authCtrl.testPost()">POST</a><br>
+    </div>
+
     <!-- Dev scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="/dist/assets/js/weed.js"></script>
@@ -289,18 +291,80 @@
 
             angular
                 .module('weed.test', ['weed'])
-                .controller('WeedTestCtrl', weedTestCtrl)
-                .config(weedTestConfig);
+                .config(weedConfig)
+                .controller('WeedButtonController', weedButtonCtrl)
+                .controller('WeedAuthController', weedAuthController)
+                .run(weedRun);
 
             // Dependencies
-            weedTestCtrl.$inject = ['$scope', '$q', '$timeout', 'weedJWTAuthService', '$http'];
-            weedTestConfig.$inject = ['$httpProvider'];
+            weedConfig.$inject = ['$httpProvider'];
+            weedRun.$inject = ['weedJWTAuthService'];
+            weedButtonCtrl.$inject = ['$scope', '$q', '$timeout'];
+            weedAuthController.$inject = ['$scope', 'weedJWTAuthService', '$http'];
 
-            function weedTestConfig($httpProvider){
+            // Test module http configuration
+            function weedConfig($httpProvider){
                 $httpProvider.interceptors.push('weedJWTInterceptor');
             }
 
-            function weedTestCtrl($scope, $q, $timeout, weedJWTAuthService, $http){
+            // Test module initial JWT setup
+            function weedRun(weedJWTAuthService){
+                weedJWTAuthService.addNewApi({
+                    id: 'finance',
+                    url: 'http://127.0.0.1:8000',
+                    autoRefresh: {
+                        enabled: true,
+                        timeDelta: 290
+                    }
+                });
+
+                weedJWTAuthService.addNewApi({
+                    id: 'finance2',
+                    url: 'http://127.0.0.2:8000'
+                });
+
+                weedJWTAuthService.addNewApi({
+                    id: 'finance3',
+                    url: 'http://127.0.0.3:8000'
+                });
+            }
+
+            // Test button controller
+            function weedButtonCtrl($scope, $q, $timeout){
+                var vm = this;
+
+                vm.testFunctionToLoad = function() {
+                    var defer = $q.defer(),
+                        promise;
+
+                    // Mock
+                    $timeout(function(){
+                        if(Math.round(Math.random())){
+                            defer.resolve("resolved");
+                        }
+                        else {
+                            defer.reject("rejected");
+                        }
+                    }, 2000);
+
+                    // Get promise
+                    promise = defer.promise;
+
+                    promise.then(
+                        function(){
+                            // TODO: local code to handle success
+                        },
+                        function(){
+                            // TODO: local code to handle failure
+                        }
+                    );
+
+                    return promise;
+                }
+            };
+
+            // Test auth controller
+            function weedAuthController($scope, weedJWTAuthService, $http){
                 var vm = this;
 
                 vm.login = function(){
@@ -337,56 +401,7 @@
                 vm.testPost = function(){
                     $http.get('http://127.0.0.1:8000/user/');
                 }
-
-                vm.testFunctionToLoad = function() {
-                    var defer = $q.defer(),
-                        promise;
-
-                    // Mock
-                    $timeout(function(){
-                        if(Math.round(Math.random())){
-                            defer.resolve("resolved");
-                        }
-                        else {
-                            defer.reject("rejected");
-                        }
-                    }, 2000);
-
-                    // Get promise
-                    promise = defer.promise;
-
-                    promise.then(
-                        function(){
-                            // TODO: local code to handle success
-                        },
-                        function(){
-                            // TODO: local code to handle failure
-                        }
-                    );
-
-                    return promise;
-                }
-
-                weedJWTAuthService.addNewApi({
-                    id: 'finance',
-                    url: 'http://127.0.0.1:8000',
-                    autoRefresh: {
-                        enabled: true,
-                        timeDelta: 290
-                    }
-                });
-
-                weedJWTAuthService.addNewApi({
-                    id: 'finance2',
-                    url: 'http://127.0.0.2:8000'
-                });
-
-                weedJWTAuthService.addNewApi({
-                    id: 'finance3',
-                    url: 'http://127.0.0.3:8000'
-                });
-
-            };
+            }
         })(angular);
     </script>
     </body>

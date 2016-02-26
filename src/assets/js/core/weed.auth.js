@@ -27,18 +27,14 @@
       $window.localStorage[getLocalJWTId(apiId)] = token;
     }
 
-    // Saves user data returned by login endpoint
-    function saveUserDataForApi(apiId, token){
-      apiData[apiId].user = vm.parseJwt(token);
-      return apiData[apiId].user;
-    }
-
     // Given an api and a route, builds the fully described route
     function buildRoute(apiId, route){
       return [apiData[apiId].url, route].join('/');
     }
 
-    function handleToken(apiId, route, data){
+    // Handles the incomming new tokens, save them and stores it's data
+    // in the apiData object.
+    function handleNewToken(apiId, route, data){
       var api = apiData[apiId],
           fRoute = buildRoute(apiId, route);
 
@@ -50,7 +46,7 @@
             saveTokenForApi(apiId, data.token);
 
             // saves locally the user for the given api
-            saveUserDataForApi(apiId, data.token);
+            vm._saveUserDataForApi(apiId, data.token);
           }
         }
       );
@@ -58,25 +54,6 @@
 
 
     // Public Interface
-
-    // Parses a token
-    vm.parseJwt = function(token) {
-      var base64Url = token.split('.')[1];
-      var base64 = base64Url.replace('-', '+').replace('_', '/');
-      switch (base64.length % 4) {
-        case 0:
-          break;
-        case 2:
-          base64 += '==';
-          break;
-        case 3:
-          base64 += '=';
-          break;
-        default:
-          throw 'Illegal base64url string!';
-      }
-      return JSON.parse($window.atob(base64));
-    }
 
     //TODO: update documentation
     vm.addNewApi = function(api) {
@@ -104,7 +81,7 @@
     vm.isAuthenticated = function(apiId) {
       var token = vm.getTokenInApi(apiId);
       if (token) {
-        var params = vm.parseJwt(token);
+        var params = vm._parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
       }
       else {
@@ -118,7 +95,7 @@
         return apiData[apiId].user;
       }
       else if(apiData[apiId].token){
-        return saveUserDataForApi(apiData[apiId].token);
+        return vm._saveUserDataForApi(apiData[apiId].token);
       }
 
       return undefined;
@@ -127,7 +104,7 @@
     //TODO: update documentation
     vm.login = function(apiId, data) {
 
-      return handleToken(
+      return handleNewToken(
         apiId,
         apiData[apiId].loginRoute,
         data
@@ -137,7 +114,7 @@
     //TODO: update documentation
     vm.refreshToken = function(apiId) {
 
-      return handleToken (
+      return handleNewToken (
         apiId,
         apiData[apiId].refreshRoute,
         {
@@ -167,9 +144,36 @@
 
       return undefined;
     }
+
+    // AVOID EXTERNAL USAGE OF THE FOLLOWING SERVICES
+    // We mark them as public because we need them in our JWT interceptor
+
+    // Saves user data returned by login endpoint
+    vm._saveUserDataForApi = function(apiId, token){
+      apiData[apiId].user = vm._parseJwt(token);
+      return apiData[apiId].user;
+    }
+
+    // Parses a token
+    vm._parseJwt = function(token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      switch (base64.length % 4) {
+        case 0:
+          break;
+        case 2:
+          base64 += '==';
+          break;
+        case 3:
+          base64 += '=';
+          break;
+        default:
+          throw 'Illegal base64url string!';
+      }
+      return JSON.parse($window.atob(base64));
+    }
   }
 
-  //TODO
   function weedJWTInterceptor($injector) {
     return {
       // Automatically attach Authorization header
@@ -196,7 +200,7 @@
           token = authService.getTokenInApi(api.id);
 
           // Decrypt userData from token
-          userData = authService.parseJwt(token);
+          userData = authService._parseJwt(token);
 
           // Add to header
           config.headers.Authorization = 'JWT ' + token;
