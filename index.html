@@ -288,9 +288,9 @@
                 .module('weed.test', ['weed'])
                 .controller('WeedTestCtrl', weedTestCtrl);
 
-            weedTestCtrl.$inject = ['$scope', '$q', '$timeout'];
+            weedTestCtrl.$inject = ['$scope', '$q', '$timeout', 'weedAuthService'];
 
-            function weedTestCtrl($scope, $q, $timeout){
+            function weedTestCtrl($scope, $q, $timeout, weedAuthService){
                 var vm = this;
                 vm.testFunctionToLoad = function() {
                     var defer = $q.defer(),
@@ -320,6 +320,45 @@
 
                     return promise;
                 }
+
+                weedAuthService.addNewApi({
+                    id: 'finance',
+                    url: 'http://127.0.0.1:8000',
+                    refreshUntilMissing: 100
+                });
+
+                console.log(localStorage);
+
+                // var r = weedAuthService.login(
+                //     'finance',
+                //     {
+                //         username: 'root',
+                //         password: 'root'
+                //     }
+                // );
+
+                // r.error(function(d){
+                //     console.log("Error: ");
+                //     console.dir(d);
+                //     console.log(weedAuthService.isAuthenticated('finance'))
+                // }).success(function(d){
+                //     console.log("Success: ");
+                //     console.dir(d);
+                //     console.log(weedAuthService.isAuthenticated('finance'))
+                //     console.dir(weedAuthService.getUser('finance'));
+                // });
+
+                var r = weedAuthService.refreshToken('finance');
+                r.error(function(d){
+                    console.log("Error: ");
+                    console.dir(d);
+                    console.log(weedAuthService.isAuthenticated('finance'))
+                }).success(function(d){
+                    console.log("Success: ");
+                    console.dir(d);
+                    console.log(localStorage);
+                });
+
             };
         })(angular);
     </script>

@@ -4,8 +4,7 @@
   angular
     .module('weed.auth', ['weed.core'])
     .factory('authInterceptor', authInterceptor)
-    .service('weedAuthService', weedAuthService)
-    .config(function($httpProvider){}); //TODO
+    .service('weedAuthService', weedAuthService);
 
   // Dependency injections
   authInterceptor.$inject = ['weedAuthService'];
@@ -14,33 +13,25 @@
   //TODO
   function authInterceptor(weedAuthService) {
     return {
-      // automatically attach Authorization header
+      // Automatically attach Authorization header
       request: function(config) {
-        var token = weedAuthService.getToken();
-        if (token) {
-          config.headers.Authorization = 'Bearer' + token;
-        }
+        // var token = weedAuthService.getToken();
+        // if (token) {
+        //   config.headers.Authorization = 'Bearer' + token;
+        // }
 
-        return config;
-      },
-
-      // If a token was sent back, save it
-      response: function(res) {
-        if(res.config.url.indexOf(API) === 0 && res.data.token) {
-          weedAuthService.saveToken(res.data.token);
-        }
-        return res;
+        // return config;
       }
     }
   }
 
   function weedAuthService($window, $http) {
     var vm = this,
-        apiConfigs = {};
+        apiData = {};
 
     // Service Utilites
 
-
+    // Parses a token
     function parseJwt(token) {
       var base64Url = token.split('.')[1];
       var base64 = base64Url.replace('-', '+').replace('_', '/');
@@ -59,27 +50,69 @@
       return JSON.parse($window.atob(base64));
     }
 
-    function saveToken(token) {
-      $window.localStorage['jwt'] = token;
+    // Generate local storage api token identifier
+    function getLocalJWTId(apiId){
+      return [apiId, '_', 'jwt'].join('');
     }
 
-    function getToken() {
-      return $window.localStorage['jwt'];
+    // Saves a token
+    function saveTokenForApi(apiId, token) {
+      $window.localStorage[getLocalJWTId(apiId)] = token;
+    }
+
+    // Saves user data returned by login endpoint
+    function saveUserDataForApi(apiId, token){
+      apiData[apiId].user = parseJwt(token);
+      return apiData[apiId].user;
+    }
+
+    // Gets the JWT for a given api
+    function getTokenInApi(apiId) {
+      return $window.localStorage[getLocalJWTId(apiId)];
+    }
+
+    // Given an api and a route, builds the fully described route
+    function buildRoute(apiId, route){
+      return [apiData[apiId].url, route].join('/');
+    }
+
+    function handleToken(apiId, route, data){
+      var api = apiData[apiId],
+          fRoute = buildRoute(apiId, route);
+
+      return $http.post(fRoute, data)
+        .success(function(data){
+          if(data.token){
+
+            // Saves locallly the token for given api
+            saveTokenForApi(apiId, data.token);
+
+            // saves locally the user for the given api
+            saveUserDataForApi(apiId, data.token);
+          }
+        }
+      );
     }
 
 
     // Public Interface
 
-    //TODO: Actualizar Documentacion
-    vm.addNewApi = function(id, url) {
-      apiConfigs[id] = {
-        url: url,
-        jwt: ''
+    //TODO: update documentation
+    vm.addNewApi = function(api) {
+      var defaults = {
+        refreshUntilMissing: 86400, // one day
+        user: {},
+        loginRoute: 'token-auth/',
+        refreshRoute: 'token-refresh/'
       };
+
+      // Api data init
+      apiData[api.id] = angular.extend({}, defaults, api);
     }
 
-    vm.isAuthenticated = function() {
-      var token = getToken();
+    //TODO: update documentation
+    vm.isAuthenticated = function(apiId) {
+      var token = getTokenInApi(apiId);
       if (token) {
         var params = parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
@@ -88,23 +121,44 @@
         return false;
       }
     }
-    //TODO
-    vm.login = function(apiId, route, data) {
-      return $http.post(apiConfigs[apiId].url, route, data);
+
+    //TODO: update documentation
+    vm.getUser = function(apiId) {
+      if (apiData[apiId].user){
+        return apiData[apiId].user;
+      }
+      else if(apiData[apiId].token){
+        return saveUserDataForApi(apiData[apiId].token);
+      }
+
+      return undefined;
     }
 
-    vm.logout = function() {
-      $window.localStorage.removeItem('jwt');
+    //TODO: update documentation
+    vm.login = function(apiId, data) {
+
+      return handleToken(
+        apiId,
+        apiData[apiId].loginRoute,
+        data
+      );
     }
 
-  }
+    //TODO: update documentation
+    vm.refreshToken = function(apiId) {
 
-  function weedUserAuthService($http, API) {
-    var vm = this;
-    // add authentication methods here
+      return handleToken (
+        apiId,
+        apiData[apiId].refreshRoute,
+        {
+          token: getTokenInApi(apiId)
+        }
+      );
+    }
 
-    vm.register = function(){
-      // register code goes in here
+    // TODO: check if save state on server needed
+    vm.logout = function(apiId) {
+      $window.localStorage.removeItem(getLocalJWTId(apiId));
     }
   }
 
