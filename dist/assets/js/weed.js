@@ -2604,25 +2604,6 @@ if (typeof define === 'function' && define.amd) {
 
     // Service Utilites
 
-    // Parses a token
-    function parseJwt(token) {
-      var base64Url = token.split('.')[1];
-      var base64 = base64Url.replace('-', '+').replace('_', '/');
-      switch (base64.length % 4) {
-        case 0:
-          break;
-        case 2:
-          base64 += '==';
-          break;
-        case 3:
-          base64 += '=';
-          break;
-        default:
-          throw 'Illegal base64url string!';
-      }
-      return JSON.parse($window.atob(base64));
-    }
-
     // Generate local storage api token identifier
     function getLocalJWTId(apiId){
       return [apiId, '_', 'jwt'].join('');
@@ -2635,7 +2616,7 @@ if (typeof define === 'function' && define.amd) {
 
     // Saves user data returned by login endpoint
     function saveUserDataForApi(apiId, token){
-      apiData[apiId].user = parseJwt(token);
+      apiData[apiId].user = vm.parseJwt(token);
       return apiData[apiId].user;
     }
 
@@ -2665,13 +2646,36 @@ if (typeof define === 'function' && define.amd) {
 
     // Public Interface
 
+    // Parses a token
+    vm.parseJwt = function(token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      switch (base64.length % 4) {
+        case 0:
+          break;
+        case 2:
+          base64 += '==';
+          break;
+        case 3:
+          base64 += '=';
+          break;
+        default:
+          throw 'Illegal base64url string!';
+      }
+      return JSON.parse($window.atob(base64));
+    }
+
     //TODO: update documentation
     vm.addNewApi = function(api) {
       var defaults = {
         refreshUntilMissing: 86400, // one day
         user: {},
         loginRoute: 'token-auth/',
-        refreshRoute: 'token-refresh/'
+        refreshRoute: 'token-refresh/',
+        autoRefresh: {
+          enabled: true,
+          timeDelta: 43200 // half a day
+        }
       };
 
       // Api data init
@@ -2687,7 +2691,7 @@ if (typeof define === 'function' && define.amd) {
     vm.isAuthenticated = function(apiId) {
       var token = vm.getTokenInApi(apiId);
       if (token) {
-        var params = parseJwt(token);
+        var params = vm.parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
       }
       else {
@@ -2758,25 +2762,51 @@ if (typeof define === 'function' && define.amd) {
       // Automatically attach Authorization header
       request: function(config) {
         // Delay injection
-        var weedJWTAuthService = $injector.get('weedJWTAuthService'),
+        var authService = $injector.get('weedJWTAuthService'),
 
             // Find if the current request URL is of any of our JWT apis
-            api = weedJWTAuthService.getApiForURL(config.url),
+            api = authService.getApiForURL(config.url),
 
             // Token declaration
-            token;
+            token,
 
-        // If an api was found
-        if(api){
+            // Current time
+            currentTime = Math.round(new Date().getTime() / 1000),
+
+            // api userData
+            userData;
+
+        // If an api was found and token is still living
+        if(api && authService.isAuthenticated(api.id)){
 
           // Fetch token from local storage
-          token = weedJWTAuthService.getTokenInApi(api.id);
+          token = authService.getTokenInApi(api.id);
 
-          // If there is token
-          if (token) {
+          // Decrypt userData from token
+          userData = authService.parseJwt(token);
 
-            // Add to header
-            config.headers.Authorization = 'Bearer' + token;
+          // Add to header
+          config.headers.Authorization = 'JWT ' + token;
+
+          // If autoRefresh is enabled and it's time to refresh
+          if(api.autoRefresh.enabled && (
+              (userData.exp - currentTime) < Math.abs(api.autoRefresh.timeDelta))){
+
+            // Refresh token
+
+            // Avoid concurrent refreshes
+            api.autoRefresh.enabled = false;
+
+            authService.refreshToken(api.id)
+              .success(function(d){
+                console.log("Token automatically refreshed");
+                api.autoRefresh.enabled = true;
+              })
+              .error(function(d){
+                console.log("Unable to refresh token atomatically");
+                api.autoRefresh.enabled = true;
+              }
+            );
           }
         }
 
@@ -2956,98 +2986,6 @@ if (typeof define === 'function' && define.amd) {
     // Attach viewport units buggyfill
     if (typeof(viewportUnitsBuggyfill) !== 'undefined') {
       viewportUnitsBuggyfill.init();
-    }
-  }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.button', ['weed.core'])
-    .directive('weButton', buttonDirective);
-
-  // No dependency injections
-
-  function buttonDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-          icon: '@',
-          type: '@',
-          toload: '&?',
-          size: '@',
-          state: '@'
-      },
-      templateUrl: 'components/button/button.html',
-      link: buttonLink
-    };
-  }
-
-  function buttonLink(scope, elem, attrs, controllers, $transclude) {
-    var buttonCurrentWidth,
-        buttonCurrentHeight,
-        loaderWidth,
-        oLoader;
-
-    // Check if there is text
-    $transclude(function(clone){
-      scope.hasText = clone.length > 0;
-    });
-
-    // If load behavior attached
-    if(scope.toload){
-      elem.on('click', function(e){
-
-        // If yet not loading
-        if(!scope.loading){
-
-          // Try to get a defer from toload attribute
-          var promise = scope.$apply(scope.toload);
-
-          // If it's a promise
-          if(promise.then){
-            promise.then(
-              function(data){
-
-                // On success, set loading false
-                scope.loading = false;
-              },
-              function(data){
-
-                // On failure, set loading false
-                scope.loading = false;
-              }
-            );
-          }
-
-          scope.loading = true;
-
-          // Refresh bindings
-          scope.$apply();
-
-          // Sizing utilities
-          buttonCurrentWidth = elem[0].clientWidth;
-          buttonCurrentHeight = elem[0].clientHeight;
-          loaderWidth = buttonCurrentHeight / 5.0;
-
-          // Fetch loader
-          oLoader = angular.element(elem[0].querySelector('.loader'));
-
-          // Set loader position
-          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
-        }
-      });
     }
   }
 
@@ -3269,6 +3207,98 @@ if (typeof define === 'function' && define.amd) {
  * @description
  * # navbarDirective
  * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.button', ['weed.core'])
+    .directive('weButton', buttonDirective);
+
+  // No dependency injections
+
+  function buttonDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '&?',
+          size: '@',
+          state: '@'
+      },
+      templateUrl: 'components/button/button.html',
+      link: buttonLink
+    };
+  }
+
+  function buttonLink(scope, elem, attrs, controllers, $transclude) {
+    var buttonCurrentWidth,
+        buttonCurrentHeight,
+        loaderWidth,
+        oLoader;
+
+    // Check if there is text
+    $transclude(function(clone){
+      scope.hasText = clone.length > 0;
+    });
+
+    // If load behavior attached
+    if(scope.toload){
+      elem.on('click', function(e){
+
+        // If yet not loading
+        if(!scope.loading){
+
+          // Try to get a defer from toload attribute
+          var promise = scope.$apply(scope.toload);
+
+          // If it's a promise
+          if(promise.then){
+            promise.then(
+              function(data){
+
+                // On success, set loading false
+                scope.loading = false;
+              },
+              function(data){
+
+                // On failure, set loading false
+                scope.loading = false;
+              }
+            );
+          }
+
+          scope.loading = true;
+
+          // Refresh bindings
+          scope.$apply();
+
+          // Sizing utilities
+          buttonCurrentWidth = elem[0].clientWidth;
+          buttonCurrentHeight = elem[0].clientHeight;
+          loaderWidth = buttonCurrentHeight / 5.0;
+
+          // Fetch loader
+          oLoader = angular.element(elem[0].querySelector('.loader'));
+
+          // Set loader position
+          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
+        }
+      });
+    }
+  }
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
  * Depends upon weIcon
  */
 
@@ -3324,6 +3354,39 @@ if (typeof define === 'function' && define.amd) {
     };
   };
 
+})(angular);
+(function() {
+  'use strict';
+
+  angular.module('weed.popup', ['weed.core'])
+    .directive('wePopup', popupDirective);
+
+  // Weed api injection
+  popupDirective.$inject = ['WeedApi'];
+
+  function popupDirective(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink
+    };
+
+    return directive;
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            console.log("Open(#" + id + "): " + message);
+        }
+      });
+    }
+  }
 })(angular);
 /**
  * @ngdoc function
@@ -3385,39 +3448,6 @@ if (typeof define === 'function' && define.amd) {
       },
       templateUrl: 'components/navbar/navbar_element_main_action.html'
     };
-  }
-})(angular);
-(function() {
-  'use strict';
-
-  angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective);
-
-  // Weed api injection
-  popupDirective.$inject = ['WeedApi'];
-
-  function popupDirective(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink
-    };
-
-    return directive;
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            console.log("Open(#" + id + "): " + message);
-        }
-      });
-    }
   }
 })(angular);
 /**

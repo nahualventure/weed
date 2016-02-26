@@ -17,25 +17,6 @@
 
     // Service Utilites
 
-    // Parses a token
-    function parseJwt(token) {
-      var base64Url = token.split('.')[1];
-      var base64 = base64Url.replace('-', '+').replace('_', '/');
-      switch (base64.length % 4) {
-        case 0:
-          break;
-        case 2:
-          base64 += '==';
-          break;
-        case 3:
-          base64 += '=';
-          break;
-        default:
-          throw 'Illegal base64url string!';
-      }
-      return JSON.parse($window.atob(base64));
-    }
-
     // Generate local storage api token identifier
     function getLocalJWTId(apiId){
       return [apiId, '_', 'jwt'].join('');
@@ -48,7 +29,7 @@
 
     // Saves user data returned by login endpoint
     function saveUserDataForApi(apiId, token){
-      apiData[apiId].user = parseJwt(token);
+      apiData[apiId].user = vm.parseJwt(token);
       return apiData[apiId].user;
     }
 
@@ -78,13 +59,36 @@
 
     // Public Interface
 
+    // Parses a token
+    vm.parseJwt = function(token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      switch (base64.length % 4) {
+        case 0:
+          break;
+        case 2:
+          base64 += '==';
+          break;
+        case 3:
+          base64 += '=';
+          break;
+        default:
+          throw 'Illegal base64url string!';
+      }
+      return JSON.parse($window.atob(base64));
+    }
+
     //TODO: update documentation
     vm.addNewApi = function(api) {
       var defaults = {
         refreshUntilMissing: 86400, // one day
         user: {},
         loginRoute: 'token-auth/',
-        refreshRoute: 'token-refresh/'
+        refreshRoute: 'token-refresh/',
+        autoRefresh: {
+          enabled: true,
+          timeDelta: 43200 // half a day
+        }
       };
 
       // Api data init
@@ -100,7 +104,7 @@
     vm.isAuthenticated = function(apiId) {
       var token = vm.getTokenInApi(apiId);
       if (token) {
-        var params = parseJwt(token);
+        var params = vm.parseJwt(token);
         return Math.round(new Date().getTime() / 1000) < params.exp;
       }
       else {
@@ -171,25 +175,51 @@
       // Automatically attach Authorization header
       request: function(config) {
         // Delay injection
-        var weedJWTAuthService = $injector.get('weedJWTAuthService'),
+        var authService = $injector.get('weedJWTAuthService'),
 
             // Find if the current request URL is of any of our JWT apis
-            api = weedJWTAuthService.getApiForURL(config.url),
+            api = authService.getApiForURL(config.url),
 
             // Token declaration
-            token;
+            token,
 
-        // If an api was found
-        if(api){
+            // Current time
+            currentTime = Math.round(new Date().getTime() / 1000),
+
+            // api userData
+            userData;
+
+        // If an api was found and token is still living
+        if(api && authService.isAuthenticated(api.id)){
 
           // Fetch token from local storage
-          token = weedJWTAuthService.getTokenInApi(api.id);
+          token = authService.getTokenInApi(api.id);
 
-          // If there is token
-          if (token) {
+          // Decrypt userData from token
+          userData = authService.parseJwt(token);
 
-            // Add to header
-            config.headers.Authorization = 'Bearer' + token;
+          // Add to header
+          config.headers.Authorization = 'JWT ' + token;
+
+          // If autoRefresh is enabled and it's time to refresh
+          if(api.autoRefresh.enabled && (
+              (userData.exp - currentTime) < Math.abs(api.autoRefresh.timeDelta))){
+
+            // Refresh token
+
+            // Avoid concurrent refreshes
+            api.autoRefresh.enabled = false;
+
+            authService.refreshToken(api.id)
+              .success(function(d){
+                console.log("Token automatically refreshed");
+                api.autoRefresh.enabled = true;
+              })
+              .error(function(d){
+                console.log("Unable to refresh token atomatically");
+                api.autoRefresh.enabled = true;
+              }
+            );
           }
         }
 

@@ -93,7 +93,8 @@
     <div ng-controller="WeedTestCtrl as testCtrl">
         <h2>Auth</h2>
         <a we-button type="success" icon="check" ng-click="testCtrl.login()">Login</a>
-        <a we-button type="warning" icon="refresh" ng-click="testCtrl.refreshToken()">Token</a><br>
+        <a we-button type="warning" icon="refresh" ng-click="testCtrl.refreshToken()">Token</a>
+        <a we-button type="info" icon="heart" ng-click="testCtrl.testPost()">POST</a><br>
 
         <h2>Buttons with loaders</h2>
         <a we-button state="block" type="success" toload="true">Test</a> <br>
@@ -292,14 +293,14 @@
                 .config(weedTestConfig);
 
             // Dependencies
-            weedTestCtrl.$inject = ['$scope', '$q', '$timeout', 'weedJWTAuthService'];
+            weedTestCtrl.$inject = ['$scope', '$q', '$timeout', 'weedJWTAuthService', '$http'];
             weedTestConfig.$inject = ['$httpProvider'];
 
             function weedTestConfig($httpProvider){
                 $httpProvider.interceptors.push('weedJWTInterceptor');
             }
 
-            function weedTestCtrl($scope, $q, $timeout, weedJWTAuthService){
+            function weedTestCtrl($scope, $q, $timeout, weedJWTAuthService, $http){
                 var vm = this;
 
                 vm.login = function(){
@@ -331,6 +332,10 @@
                         console.log(localStorage);
                         console.log(weedJWTAuthService.getUser('finance'));
                     });
+                }
+
+                vm.testPost = function(){
+                    $http.get('http://127.0.0.1:8000/user/');
                 }
 
                 vm.testFunctionToLoad = function() {
@@ -365,19 +370,20 @@
                 weedJWTAuthService.addNewApi({
                     id: 'finance',
                     url: 'http://127.0.0.1:8000',
-                    refreshUntilMissing: 100
+                    autoRefresh: {
+                        enabled: true,
+                        timeDelta: 290
+                    }
                 });
 
                 weedJWTAuthService.addNewApi({
                     id: 'finance2',
-                    url: 'http://127.0.0.2:8000',
-                    refreshUntilMissing: 100
+                    url: 'http://127.0.0.2:8000'
                 });
 
                 weedJWTAuthService.addNewApi({
                     id: 'finance3',
-                    url: 'http://127.0.0.3:8000',
-                    refreshUntilMissing: 100
+                    url: 'http://127.0.0.3:8000'
                 });
 
             };
