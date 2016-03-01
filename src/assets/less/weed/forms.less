@@ -1,184 +1,180 @@
 /**
   * Edoo form framework
-  * Depends on:
-  * - messages.less
-  * - popup.less
-  * - buttons.less
   */
 
+@import "buttons.less";
+
 // Configurations
-@form-font-family:                        @font-family-base;
-@form-font-size:                          1em;
+@form-font-family:                                          @system-font-family;
+@form-font-size:                                            1em;
 
-@system-default-background-color:         @black-10;
-
-@images-path: @system-images-path;
+@system-default-background-color:                           @black-10;
 
 // Input
-@form-focus-shadow-color:                 rgba(27, 155, 224, 0.6);
-@form-focus-border-color:                 @system-base-color;
-@form-input-background-color:             @black-5;
-@form-input-border-color:                 @black-15;
-@input-mark-color:                   @black-15;
-@form-input-placeholder-color:            lighten(@form-input-text-color, 25%);
-@form-input-text-color:                   @black-35;
-@form-label-color:                        @black-60;
-@form-label-shadow-color:                 @white;
-@form-input-toolbar-border-color: #eee;
-@form-input-toolbar-file-label-color: #aaa;
+@form-focus-shadow-color:                                   rgba(27, 155, 224, 0.6);
+@form-focus-border-color:                                   @system-base-color;
+@form-input-background-color:                               @black-5;
+@form-input-border-color:                                   @black-15;
+@input-mark-color:                                          @black-15;
+@form-input-placeholder-color:                              lighten(@form-input-text-color, 25%);
+@form-input-text-color:                                     @black-35;
+@form-label-color:                                          @black-60;
+@form-label-shadow-color:                                   @white;
+@form-input-toolbar-border-color:                           #eee;
+@form-input-toolbar-file-label-color:                       #aaa;
 
 
-@form-input-toolbar-height: 40px;
+@form-input-toolbar-height:                                 40px;
 
-@form-label-vertical-margin:              23px;
+@form-label-vertical-margin:                                23px;
 
 // Form jslider
-@form-jslider-background-color:           @black;
-@form-jslider-text-color:                 @white;
+@form-jslider-background-color:                             @black;
+@form-jslider-text-color:                                   @white;
 
-@form-jslider-height:                     32px;
-@form-jslider-border-radius:              5px;
+@form-jslider-height:                                       32px;
+@form-jslider-border-radius:                                5px;
 
-@form-jslider_small-sprites:                    none;
-@form-jslider_small-background-color:           @black-5;
-@form-jslider_small-pointer-background:         @black-10;
-@form-jslider_small-background-border-color:    @black-10;
-@form-jslider_small-range-color:                @system-base-color;
-@form-jslider_small-glow-color:                 @white;
-@form-jslider-wrapper-background:               @white;
-@form-jslider-wrapper-border-color:             @black;
-@form-jslider-controls-color:                   @black;
+@form-jslider_small-sprites:                                none;
+@form-jslider_small-background-color:                       @black-5;
+@form-jslider_small-pointer-background:                     @black-10;
+@form-jslider_small-background-border-color:                @black-10;
+@form-jslider_small-range-color:                            @system-base-color;
+@form-jslider_small-glow-color:                             @white;
+@form-jslider-wrapper-background:                           @white;
+@form-jslider-wrapper-border-color:                         @black;
+@form-jslider-controls-color:                               @black;
 
-@form-jslider-controls-height:                  38px;
-@form-jslider-controls-width:                   35px;
-@form-jslider-wrapper-padding:                  4px 6px;
-@form-jslider-wrapper-with-controls-padding:    4px 40px;
-@form-jslider_small-border-radius:              @system-border-radius/2.0;
-@form-jslider_small-height:                     24px;
-@form-jslider_small-pointer-width:              17px;
+@form-jslider-controls-height:                              38px;
+@form-jslider-controls-width:                               35px;
+@form-jslider-wrapper-padding:                              4px 6px;
+@form-jslider-wrapper-with-controls-padding:                4px 40px;
+@form-jslider_small-border-radius:                          @system-border-radius/2.0;
+@form-jslider_small-height:                                 24px;
+@form-jslider_small-pointer-width:                          17px;
 
 
-@form-focus-shadow-definition:            0px 0px 5px 1px;
-@form-focus-transition-time:              150ms;
-@form-input-border-radius:                @system-border-radius;
-@form-input-height:                       53px;
-@form-input-small-height:                 41px;
-@form-input-tiny-height:                  28px;
-@form-input-horizontal-padding:           25px;
-@form-input-vertical-padding:             5px;
+@form-focus-shadow-definition:                              0px 0px 5px 1px;
+@form-focus-transition-time:                                150ms;
+@form-input-border-radius:                                  @system-border-radius;
+@form-input-height:                                         53px;
+@form-input-small-height:                                   41px;
+@form-input-tiny-height:                                    28px;
+@form-input-horizontal-padding:                             25px;
+@form-input-vertical-padding:                               5px;
 
 // Toggler
-@form-toggler-wrapper-background-color:   @black-10;
-@form-toggler-wrapper-border-color:       @form-input-border-color;
+@form-toggler-wrapper-background-color:                     @black-10;
+@form-toggler-wrapper-border-color:                         @form-input-border-color;
 
-@form-toggler-wrapper-check-radius:       0.2em;
-@form-toggler-wrapper-horizontal-margin:  5px;
-@form-toggler-wrapper-horizontal-padding: 2px;
-@form-toggler-wrapper-radio-radius:       2em;
-@form-toggler-wrapper-vertical-padding:   1px;
+@form-toggler-wrapper-check-radius:                         0.2em;
+@form-toggler-wrapper-horizontal-margin:                    5px;
+@form-toggler-wrapper-horizontal-padding:                   2px;
+@form-toggler-wrapper-radio-radius:                         2em;
+@form-toggler-wrapper-vertical-padding:                     1px;
 
-@form-select2-z-index:                    @popup-z-index + 1;
+@form-select2-z-index:                                      2;
 
 // Dropdown
-@form-dropdown-background-color:                fadeout(@black-5, 5%);
-@form-dropdown-border-color:                    @black-15;
-@form-dropdown-text-color:                      @black-55;
-@form-dropwdown-item-hover-background-color:    @system-base-color;
-@form-dropwdown-item-hover-text-color:          @white;
-@form-dropdown-arrow-color:                     @black;
-@form-dropdown-arrow-shadow-color:              @white;
-@form-dropdown-up-arrow-char:                   "\f078";
-@form-dropdown-down-arrow-char:                 "\f077";
-@form-dropdown-gradient-start:                  fadeout(@white, 95%);
-@form-dropdown-gradient-end:                    fadeout(@black, 95%);
-@form-dropdown-reflex-color:                    fadeout(@white, 50%);
-@form-dropdown-drop-background-color:           @white;
-@form-dropdown-shadow-color:                    rgba(93, 93, 93, 0.18);
+@form-dropdown-background-color:                            fadeout(@black-5, 5%);
+@form-dropdown-border-color:                                @black-15;
+@form-dropdown-text-color:                                  @black-55;
+@form-dropwdown-item-hover-background-color:                @system-base-color;
+@form-dropwdown-item-hover-text-color:                      @white;
+@form-dropdown-arrow-color:                                 @black;
+@form-dropdown-arrow-shadow-color:                          @white;
+@form-dropdown-up-arrow-char:                               "\f078";
+@form-dropdown-down-arrow-char:                             "\f077";
+@form-dropdown-gradient-start:                              fadeout(@white, 95%);
+@form-dropdown-gradient-end:                                fadeout(@black, 95%);
+@form-dropdown-reflex-color:                                fadeout(@white, 50%);
+@form-dropdown-drop-background-color:                       @white;
+@form-dropdown-shadow-color:                                rgba(93, 93, 93, 0.18);
 
-@form-dropdown-border-radius:                   5px;
-@form-dropdown-horizontal-padding:              20px;
-@form-dropdown-arrow-container-width:           48px;
-@form-dropdown-arrow-size:                      18px;
+@form-dropdown-border-radius:                               5px;
+@form-dropdown-horizontal-padding:                          20px;
+@form-dropdown-arrow-container-width:                       48px;
+@form-dropdown-arrow-size:                                  18px;
 
 // Password strength indicator
-@form-password-strength-0-color:              @system-danger-color;
-@form-password-strength-10-color:             @system-danger-color;
-@form-password-strength-20-color:             @system-danger-color;
-@form-password-strength-30-color:             @system-danger-color;
-@form-password-strength-40-color:             @system-warning-color;
-@form-password-strength-50-color:             @system-warning-color;
-@form-password-strength-60-color:             @system-warning-color;
-@form-password-strength-70-color:             @system-info-color;
-@form-password-strength-80-color:             @system-info-color;
-@form-password-strength-90-color:             @system-success-color;
-@form-password-strength-100-color:            @system-success-color;
-@form-password-strength-background-color:     @black-10;
-@form-password-strength-label-color:          @black;
+@form-password-strength-0-color:                            @system-danger-color;
+@form-password-strength-10-color:                           @system-danger-color;
+@form-password-strength-20-color:                           @system-danger-color;
+@form-password-strength-30-color:                           @system-danger-color;
+@form-password-strength-40-color:                           @system-warning-color;
+@form-password-strength-50-color:                           @system-warning-color;
+@form-password-strength-60-color:                           @system-warning-color;
+@form-password-strength-70-color:                           @system-info-color;
+@form-password-strength-80-color:                           @system-info-color;
+@form-password-strength-90-color:                           @system-success-color;
+@form-password-strength-100-color:                          @system-success-color;
+@form-password-strength-background-color:                   @black-10;
+@form-password-strength-label-color:                        @black;
 
-@form-password-strength-vertical-spacing:     10px;
-@form-password-strength-border-radius:        10px;
-@form-password-strength-height:               10px;
+@form-password-strength-vertical-spacing:                   10px;
+@form-password-strength-border-radius:                      10px;
+@form-password-strength-height:                             10px;
 
 // Form input message
-@form-input-message-danger-background-color:       lighten(@system-danger-color, 45%);
-@form-input-message-danger-text-color:             desaturate(darken(@message-danger-background-color, 25%), 20%);
-@form-input-message-default-background-color:      lighten(@system-default-color, 10%);
-@form-input-message-default-text-color:            darken(@message-default-background-color, 25%);
-@form-input-message-info-background-color:         lighten(@system-primary-color, 45%);
-@form-input-message-info-text-color:               darken(@message-info-background-color, 25%);
-@form-input-message-inverted-background-color:     lighten(@system-default-color, 5%);
-@form-input-message-inverted-text-color:           darken(@message-default-background-color, 25%);
-@form-input-message-primary-background-color:      lighten(@system-primary-color, 50%);
-@form-input-message-primary-text-color:            darken(@message-primary-background-color, 25%);
-@form-input-message-success-background-color:      lighten(@system-success-color, 50%);
-@form-input-message-success-text-color:            darken(@message-success-background-color, 25%);
-@form-input-message-warning-background-color:      lighten(@system-warning-color, 40%);
-@form-input-message-warning-text-color:            desaturate(darken(@message-warning-background-color, 25%), 25%);
-@form-input-message-font-family:                   sans-serif;
+@form-input-message-danger-background-color:                lighten(@system-danger-color, 45%);
+@form-input-message-danger-text-color:                      desaturate(darken(@form-input-message-danger-background-color, 25%), 20%);
+@form-input-message-default-background-color:               lighten(@system-default-color, 10%);
+@form-input-message-default-text-color:                     darken(@form-input-message-default-background-color, 25%);
+@form-input-message-info-background-color:                  lighten(@system-primary-color, 45%);
+@form-input-message-info-text-color:                        darken(@form-input-message-info-background-color, 25%);
+@form-input-message-inverted-background-color:              lighten(@system-default-color, 5%);
+@form-input-message-inverted-text-color:                    darken(@form-input-message-default-background-color, 25%);
+@form-input-message-primary-background-color:               lighten(@system-primary-color, 50%);
+@form-input-message-primary-text-color:                     darken(@form-input-message-primary-background-color, 25%);
+@form-input-message-success-background-color:               lighten(@system-success-color, 50%);
+@form-input-message-success-text-color:                     darken(@form-input-message-success-background-color, 25%);
+@form-input-message-warning-background-color:               lighten(@system-warning-color, 40%);
+@form-input-message-warning-text-color:                     desaturate(darken(@form-input-message-warning-background-color, 25%), 25%);
+@form-input-message-font-family:                            sans-serif;
 
 // Typeahead
-@form-typeahead-background-color: @white;
-@form-typeahead-dropdown-border-color: @black-30;
-@form-typeahead-dropdown-shadow-color: @black-30;
-@form-typeahead-font-family: sans-serif;
-@form-typeaheaded-background-color: @white;
+@form-typeahead-background-color:                           @white;
+@form-typeahead-dropdown-border-color:                      @black-30;
+@form-typeahead-dropdown-shadow-color:                      @black-30;
+@form-typeahead-font-family:                                sans-serif;
+@form-typeaheaded-background-color:                         @white;
 
-@form-typeahead-user-border-color: @black-25;
-@form-typeahead-user-name-color: @black;
-@form-typeahead-user-role-color: @black-60;
+@form-typeahead-user-border-color:                          @black-25;
+@form-typeahead-user-name-color:                            @black;
+@form-typeahead-user-role-color:                            @black-60;
 
-@form-typeahead-user-placeholder-border-color: @black-25;
-@form-typeahead-user-placeholder-name-color: @black;
-@form-typeahead-user-placeholder-role-color: @black-60;
+@form-typeahead-user-placeholder-border-color:              @black-25;
+@form-typeahead-user-placeholder-name-color:                @black;
+@form-typeahead-user-placeholder-role-color:                @black-60;
 
-@form-typeahead-hover-color: @system-base-color;
-@form-typeahead-hover-user-border-color: darken(@system-base-color, 5%);
-@form-typeahead-hover-user-name-color: @black;
-@form-typeahead-hover-user-role-color: @black-60;
+@form-typeahead-hover-color:                                @system-base-color;
+@form-typeahead-hover-user-border-color:                    darken(@system-base-color, 5%);
+@form-typeahead-hover-user-name-color:                      @black;
+@form-typeahead-hover-user-role-color:                      @black-60;
 
-@form-typeahead-suggestion-height: 54px;
-@form-typeahead-suggestion-padding: 0 25px;
+@form-typeahead-suggestion-height:                          54px;
+@form-typeahead-suggestion-padding:                         0 25px;
 
-@form-typeahead-user-expected-height: 38px;
-@form-typeahead-user-picture-margin-right: 13px;
-@form-typeahead-user-picture-size: 32px;
+@form-typeahead-user-expected-height:                       38px;
+@form-typeahead-user-picture-margin-right:                  13px;
+@form-typeahead-user-picture-size:                          32px;
 
-@form-typeahead-user-placeholder-data-max-width: 145px;
-@form-typeahead-user-placeholder-expected-height: 38px;
-@form-typeahead-user-placeholder-picture-margin-right: 13px;
-@form-typeahead-user-placeholder-picture-size: 32px;
+@form-typeahead-user-placeholder-data-max-width:            145px;
+@form-typeahead-user-placeholder-expected-height:           38px;
+@form-typeahead-user-placeholder-picture-margin-right:      13px;
+@form-typeahead-user-placeholder-picture-size:              32px;
 
-@form-input-message-vertical-spacing:              5px;
-@form-input-message-border-radius:                 5px;
-@form-input-message-default-width:                 250px;
+@form-input-message-vertical-spacing:                       5px;
+@form-input-message-border-radius:                          5px;
+@form-input-message-default-width:                          250px;
 
-@form-focus-background-color:                      @black-5;
+@form-focus-background-color:                               @black-5;
 
-@form-inline-editable-placeholder-hover-color:     @black-5;
+@form-inline-editable-placeholder-hover-color:              @black-5;
 
 // TODO v1.0
-@form-input-error-border-color: #F8A5A5;
-@form-input-error-text-color: @form-input-text-color;
+@form-input-error-border-color:                             #F8A5A5;
+@form-input-error-text-color:                               @form-input-text-color;
 
 // Specific mixins
 .make-form-input-message(@background-color; @text-color){
@@ -386,6 +382,19 @@ textarea{
   border: 1px solid @form-input-border-color;
 }
 
+// States
+input, textarea{
+  &:hover, .hover{
+    background: lighten(@form-input-background-color, 20%);
+  }
+
+  &:focus, &.focus{
+    background: @form-focus-background-color;
+    border-color: @form-focus-border-color;
+    z-index: (@z-immediate-over + 1);
+  }
+}
+
 // Sizes
 
 // Input small
@@ -473,7 +482,8 @@ input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-w
   // Events
 
   // Hover
-  &:hover, &.hover{
+  &:hover,
+  &.hover{
     background: lighten(@form-input-background-color, 20%);
   }
 

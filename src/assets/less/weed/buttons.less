@@ -2,72 +2,69 @@
   * Edoo button framework: TODO v1.0 docu
   */
 
+@import "config.less";
+
 // Configuration
-@form-focus-transition-time:            100ms;
-@form-focus-shadow-definition:          0px 0px 5px 1px;
+@form-focus-transition-time:                                100ms;
+@form-focus-shadow-definition:                              0px 0px 5px 1px;
 
-@button-danger-color:                   @system-danger-color;
-@button-default-color:                  @system-default-color;
-@button-default-text-color:             @black-40;
-@button-disabled-color:                 @black-5;
-@button-disabled-text-color:            @black-15;
-@button-info-color:                     @system-info-color;
-@button-inverted-color:                 @system-inverted-color;
-@button-primary-color:                  @system-primary-color;
-@button-success-color:                  @system-success-color;
-@button-warning-color:                  @system-warning-color;
-@button-gray-color:                     @black-50;
+@button-danger-color:                                       @system-danger-color;
+@button-default-color:                                      @system-default-color;
+@button-default-text-color:                                 @black-40;
+@button-disabled-color:                                     @black-5;
+@button-disabled-text-color:                                @black-15;
+@button-info-color:                                         @system-info-color;
+@button-inverted-color:                                     @system-inverted-color;
+@button-primary-color:                                      @system-primary-color;
+@button-success-color:                                      @system-success-color;
+@button-warning-color:                                      @system-warning-color;
+@button-gray-color:                                         @black-50;
 
-@button-danger-border-color:            @system-danger-color;
-@button-default-border-color:           @system-default-color;
-@button-disabled-border-color:          @black-5;
-@button-info-border-color:              @system-info-color;
-@button-inverted-border-color:          @system-inverted-color;
-@button-primary-border-color:           @system-primary-color;
-@button-success-border-color:           @system-success-color;
-@button-warning-border-color:           @system-warning-color;
-@button-gray-border-color:              @black-60;
-@button-text-shadow:                    fadeout(lighten(@black, 20%), 80%);
-@button-gray-text-color:                @black;
+@button-danger-border-color:                                @system-danger-color;
+@button-default-border-color:                               @system-default-color;
+@button-disabled-border-color:                              @black-5;
+@button-info-border-color:                                  @system-info-color;
+@button-inverted-border-color:                              @system-inverted-color;
+@button-primary-border-color:                               @system-primary-color;
+@button-success-border-color:                               @system-success-color;
+@button-warning-border-color:                               @system-warning-color;
+@button-gray-border-color:                                  @black-60;
+@button-text-shadow:                                        fadeout(lighten(@black, 20%), 80%);
+@button-gray-text-color:                                    @black;
 
-@button-font-family:                    sans-serif;
+@button-font-family:                                        sans-serif;
 
-@button-breath:                         5px;
-@button-default-border-radius:          @system-border-radius*0.7;
-@button-default-horizontal-padding:     40px;
-@button-default-height:                 51px;
-@button-text-margin-left:               15px;
-@button-start-gradient-color:           @white;
-@button-active-start-gradient-color:    #cbcbcb;
-@button-end-gradient-color:             #c2c2c2;
-@button-pressed-box-shadow-color:       rgba(0,0,0,.06);
-@button-gradient-default-opacity:       85%;
-@button-icon-base-color:                #c5c5c5;
+@button-breath:                                             5px;
+@button-default-border-radius:                              @system-border-radius*0.7;
+@button-default-horizontal-padding:                         40px;
+@button-default-height:                                     51px;
+@button-text-margin-left:                                   15px;
+@button-start-gradient-color:                               @white;
+@button-active-start-gradient-color:                        #cbcbcb;
+@button-end-gradient-color:                                 #c2c2c2;
+@button-pressed-box-shadow-color:                           rgba(0,0,0,.06);
+@button-gradient-default-opacity:                           85%;
+@button-icon-base-color:                                    #c5c5c5;
 
 // Loader
 @button-loader-delay: 0.10s;
 
 // Sizes
 
-// Sizes
-@button-tiny-border-radius:                  @system-border-radius/2.0;
-@button-tiny-horizontal-padding:             20px;
-@button-tiny-height:                         26px;
-@button-tiny-text-margin-left:               7px;
+@button-tiny-border-radius:                                 @system-border-radius/2.0;
+@button-tiny-horizontal-padding:                            20px;
+@button-tiny-height:                                        26px;
+@button-tiny-text-margin-left:                              7px;
 
-@button-small-border-radius:                  @system-border-radius*0.7;
-@button-small-horizontal-padding:             25px;
-@button-small-height:                         39px;
-@button-small-text-margin-left:               7px;
+@button-small-border-radius:                                @system-border-radius*0.7;
+@button-small-horizontal-padding:                           25px;
+@button-small-height:                                       39px;
+@button-small-text-margin-left:                             7px;
 
-@button-large-border-radius:                  @system-border-radius*0.7;
-@button-large-horizontal-padding:             43px;
-@button-large-height:                         66px;
-@button-large-text-margin-left:               20px;
-
-// @keyframes buttonloadanimation{
-//   .make-load-animation();
-// }
+@button-large-border-radius:                                @system-border-radius*0.7;
+@button-large-horizontal-padding:                           43px;
+@button-large-height:                                       66px;
+@button-large-text-margin-left:                             20px;
 
 // Button generator mixin
 .make-button(
@@ -196,10 +193,6 @@ button.button{
 
   &.no-x-paddings{
     padding: 0 @button-default-horizontal-padding/2.0;
-  }
-
-  .accent{
-    color: lighten(@text-color, 10%);
   }
 
   &.animated{
@@ -573,28 +566,6 @@ button.button{
       @border-color: @button-inverted-border-color;
     );
   }
-}
-
-.email-button{
-  .button();
-  font-weight: 13px;
-  font-weight: bold;
-}
-
-.email-button-primary{
-  .email-button();
-  .make-button(
-    @background-color: @button-primary-color;
-    @border-color: @button-primary-border-color;
-  );
-}
-
-.email-button-success{
-  .email-button();
-  .make-button(
-    @background-color: @button-success-color;
-    @border-color: @button-success-border-color;
-  );
 }
 
 // IE fixes

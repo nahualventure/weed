@@ -2,30 +2,32 @@
   * Edoo sidebar framework
   */
 
-// Configuration
-@sidebar-border-color:        @black-10;
-@sidebar-font-family:         sans-serif;
-@sidebar-header-background:   @black;
-@sidebar-hover-link-color:    @black;
-@sidebar-link-color:          @black-50;
-@sidebar-text-shadow-color:   @black;
-@sidebar-background-color:    @black;
+@import "config.less";
 
-@sidebar-border-radius:       5px;
-@sidebar-contracted-element-height:      60px;
-@sidebar-contracted-element-height: 55px;
-@sidebar-contracted-header-margin:       25px;
-@sidebar-contracted-width:    65px;
-@sidebar-icon-width:          65px;
-@sidebar-isotype-last-position: 44px;
-@sidebar-isotype-start-position: 15px;
-@sidebar-isotype-width: 36px;
-@sidebar-logotype-last-position: 85px;
-@sidebar-logotype-start-position: 75px;
-@sidebar-logotype-width: 71px;
-@sidebar-open-element-height: 45px;
-@sidebar-open-width:          210px;
-@sidebar-text-left-padding:   5px;
+// Configuration
+@sidebar-border-color:                                      @black-10;
+@sidebar-font-family:                                       sans-serif;
+@sidebar-header-background:                                 @black;
+@sidebar-hover-link-color:                                  @black-80;
+@sidebar-link-color:                                        @black-50;
+@sidebar-text-shadow-color:                                 @black;
+@sidebar-background-color:                                  @black;
+
+@sidebar-border-radius:                                     5px;
+@sidebar-contracted-element-height:                         60px;
+@sidebar-contracted-element-height:                         55px;
+@sidebar-contracted-header-margin:                          25px;
+@sidebar-contracted-width:                                  65px;
+@sidebar-icon-width:                                        65px;
+@sidebar-isotype-last-position:                             44px;
+@sidebar-isotype-start-position:                            15px;
+@sidebar-isotype-width:                                     36px;
+@sidebar-logotype-last-position:                            85px;
+@sidebar-logotype-start-position:                           75px;
+@sidebar-logotype-width:                                    71px;
+@sidebar-open-element-height:                               45px;
+@sidebar-open-width:                                        210px;
+@sidebar-text-left-padding:                                 5px;
 
 body{
 
@@ -66,14 +68,12 @@ body{
       }
 
       .sidebar-isotype{
-        background-image: url('@{images-path}sidebar_isotype.png');
         left: @sidebar-isotype-start-position;
         width: @sidebar-isotype-width;
       }
 
       .sidebar-logotype{
         .opacity(0.0);
-        background-image: url('@{images-path}sidebar_logo.png');
         left: @sidebar-logotype-start-position;
         width: @sidebar-logotype-width;
       }

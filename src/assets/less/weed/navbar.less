@@ -2,46 +2,43 @@
   * Edoo navbar component
   * Depends on: sidebar.less
   */
+@import "sidebar.less";
 
 // Configuration
-@navbar-bubble-background-color:        #ce6f6f;
-@navbar-color:                          @system-base-color;
-@navbar-config-button-color:            @white;
-@navbar-element-hover-color:            darken(@navbar-color, 2%);
-@navbar-notifications-bubble-text-color:  @white;
-@navbar-role-color:                     @white;
-@navbar-search-background-color:        @white;
-@navbar-search-font-color:              @black-30;
-@navbar-search-font-family:             sans-serif;
-@navbar-user-font-family:               sans-serif;
-@navbar-username-color:                 @white;
+@navbar-bubble-background-color:                            #ce6f6f;
+@navbar-color:                                              @system-base-color;
+@navbar-config-button-color:                                @white;
+@navbar-element-hover-color:                                darken(@navbar-color, 2%);
+@navbar-notifications-bubble-text-color:                    @white;
+@navbar-role-color:                                         @white;
+@navbar-search-background-color:                            @white;
+@navbar-search-font-color:                                  @black-30;
+@navbar-search-font-family:                                 sans-serif;
+@navbar-user-font-family:                                   sans-serif;
+@navbar-username-color:                                     @white;
 
+@navbar-config-button-height:                               20px;
+@navbar-element-horizontal-margin:                          20px;
+@navbar-expected-user-height:                               34px;
+@navbar-height:                                             65px;
+@navbar-picture-size:                                       45px;
+@navbar-search-height:                                      34px;
+@navbar-search-horizontal-padding:                          15px;
+@navbar-search-radius:                                      5px;
+@navbar-search-submit-width:                                30px;
+@navbar-search-width:                                       400px;
+@navbar-separator-occupancy:                                0.6;
+@navbar-z-index:                                            @z-maximum - 11;
 
-
-
-@navbar-config-button-height:           20px;
-@navbar-element-horizontal-margin:      20px;
-@navbar-expected-user-height:           34px;
-@navbar-height:                         65px;
-@navbar-picture-size:                   45px;
-@navbar-search-height:                  34px;
-@navbar-search-horizontal-padding:      15px;
-@navbar-search-radius:                  5px;
-@navbar-search-submit-width:            30px;
-@navbar-search-width:                   400px;
-@navbar-separator-occupancy:            0.6;
-@navbar-z-index:                        @z-maximum - 11;
-
-@navbar-isotype-last-position: @sidebar-isotype-last-position;
-@navbar-isotype-start-position: @sidebar-isotype-start-position;
-@navbar-isotype-width: @sidebar-isotype-width;
-@navbar-logotype-last-position: @sidebar-logotype-last-position;
-@navbar-logotype-start-position: @sidebar-logotype-start-position;
-@navbar-logotype-width: @sidebar-logotype-width;
-@navbar-notifications-bubble-size: 18px;
-@navbar-notifications-position-x: 12px;
-@navbar-notifications-position-y: 12px;
-
+@navbar-isotype-last-position:                              @sidebar-isotype-last-position;
+@navbar-isotype-start-position:                             @sidebar-isotype-start-position;
+@navbar-isotype-width:                                      @sidebar-isotype-width;
+@navbar-logotype-last-position:                             @sidebar-logotype-last-position;
+@navbar-logotype-start-position:                            @sidebar-logotype-start-position;
+@navbar-logotype-width:                                     @sidebar-logotype-width;
+@navbar-notifications-bubble-size:                          18px;
+@navbar-notifications-position-x:                           12px;
+@navbar-notifications-position-y:                           12px;
 
 // Utilities mixins
 .center-in-navbar(@height){
@@ -114,14 +111,12 @@
       }
 
       .navbar-isotype{
-        background-image: url('@{images-path}navbar_isotype.png');
         left: @navbar-isotype-start-position;
         width: @navbar-isotype-width;
       }
 
       .navbar-logotype{
         .opacity(0);
-        background-image: url('@{images-path}navbar_logotype.png');
         left: @navbar-logotype-start-position;
         width: @navbar-logotype-width;
       }
@@ -135,7 +130,7 @@
         .bevel(@navbar-color);     // Input height
         .vertical-center(@navbar-height, 41px + 2px);
         background: @white;
-        border-color: #009590;
+        border: none;
 
         .tt-dropdown-menu{
           margin-top: 38px;
