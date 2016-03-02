@@ -335,6 +335,23 @@ input[type="button"]{
   cursor: pointer !important;
 }
 
+// Selects
+select{
+  background: none;
+  height: @form-input-height;
+  line-height: @form-input-height;
+
+  &.input-small{
+    height: @form-input-small-height;
+    line-height: @form-input-small-height;
+  }
+
+  &.input-tiny{
+    height: @form-input-tiny-height;
+    line-height: @form-input-tiny-height;
+  }
+}
+
 // Input reset
 input[type="text"],
 input[type="password"],
