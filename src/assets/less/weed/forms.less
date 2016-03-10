@@ -26,7 +26,7 @@
 
 @form-input-toolbar-height:                                 40px;
 
-@form-label-vertical-margin:                                23px;
+@form-label-vertical-margin:                                10px;
 
 // Form jslider
 @form-jslider-background-color:                             @black;
@@ -218,15 +218,6 @@
 
   textarea{
     padding: @new-textarea-vertical-padding @new-padding !important;
-  }
-
-  &.placeholded{
-
-    label{
-      height: (@new-height - 2*@form-input-vertical-padding - 2);
-      left: @new-padding;
-      line-height: (@new-height - 2*@form-input-vertical-padding - 2);
-    }
   }
 
   &.typeaheaded{
@@ -875,11 +866,15 @@ label, .form-label{ // TODO: change class="label" inside forms
   .text-shadow(0 1px 0 @form-label-shadow-color);
   color: @form-label-color;
   cursor: pointer;
-  display: inline-block;
-  font-size: 1.14em;
+  display: block;
+  font-size: 0.75rem;
   font-weight: bold;
-  margin-bottom: @form-label-vertical-margin;
-  padding-left: 4px;
+  line-height: 2rem;
+  text-transform: uppercase;
+
+  input, textarea{
+    margin-bottom: 0;
+  }
 
   // States
   &.block{
@@ -892,6 +887,11 @@ label, .form-label{ // TODO: change class="label" inside forms
       content: "* ";
     }
   }
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+  margin: 0 0.5rem;
 }
 
 // TODO: select

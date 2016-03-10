@@ -3852,11 +3852,17 @@ label,
   text-shadow: 0 1px 0 #fff;
   color: #666666;
   cursor: pointer;
-  display: inline-block;
-  font-size: 1.14em;
+  display: block;
+  font-size: 0.75rem;
   font-weight: bold;
-  margin-bottom: 23px;
-  padding-left: 4px;
+  line-height: 2rem;
+  text-transform: uppercase;
+}
+label input,
+.form-label input,
+label textarea,
+.form-label textarea {
+  margin-bottom: 0;
 }
 label.block,
 .form-label.block {
@@ -3866,6 +3872,10 @@ label.required:before,
 .form-label.required:before {
   color: #999999;
   content: "* ";
+}
+input[type="checkbox"],
+input[type="radio"] {
+  margin: 0 0.5rem;
 }
 .password-strength-wrapper {
   border-radius: 10px;
