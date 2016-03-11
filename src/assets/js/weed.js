@@ -12,7 +12,8 @@
       'weed.navbar',
       'weed.popup',
       'weed.tabs',
-      'weed.sidebar'
+      'weed.sidebar',
+      'weed.toload'
     ])
     .constant('weed.config', {});
 })(angular);

@@ -325,6 +325,10 @@
     <label><input type="radio">Ejemplo</label>
     <label>Ejemplo:<input type="radio"></label>
 
+    <h1>ToLoad</h1>
+    <div ng-controller="WeedButtonController as btnCtrl">
+        <a class="button button-success" we-toload="btnCtrl.testFunctionToLoad()">Ejemplo {{ loading }}</a>
+    </div>
 
     <h1>Auth</h1>
     <div ng-controller="WeedAuthController as authCtrl">
@@ -418,6 +422,11 @@
             // Test auth controller
             function weedAuthController($scope, weedJWTAuthService, $http){
                 var vm = this;
+
+                vm.add = function(a, b){
+                    console.log("llega mula");
+                    return a + b;
+                }
 
                 vm.login = function(){
                     var r = weedJWTAuthService.login(
