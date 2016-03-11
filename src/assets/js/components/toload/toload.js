@@ -20,7 +20,8 @@
     return {
       restrict: 'A',
       scope: {
-        method: '&weToload'
+        method: '&weToload',
+        loadingClass: '@'
       },
       link: toloadLink
     };
@@ -38,7 +39,7 @@
           scope.loading = true;
 
           // Add loading class
-          elem.addClass("loading");
+          elem.addClass(scope.loadingClass);
 
           // Try to get a defer from toload attribute
           var promise = scope.$apply(scope.method);
@@ -52,7 +53,7 @@
                 scope.loading = false;
 
                 // Remove loading class
-                elem.removeClass("loading");
+                elem.removeClass(scope.loadingClass);
               },
               function(data){
 
@@ -60,7 +61,7 @@
                 scope.loading = false;
 
                 // Remove loading class
-                elem.removeClass("loading");
+                elem.removeClass(scope.loadingClass);
               }
             );
           }
