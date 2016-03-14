@@ -2678,10 +2678,10 @@ if (typeof define === 'function' && define.amd) {
 
     vm.postLogin = function(apiId, token){
       // Saves locallly the token for given api
-      weedJWTUtilities.saveTokenForApi(apiId, data.token);
+      weedJWTUtilities.saveTokenForApi(apiId, token);
 
       // saves locally the user for the given api
-      saveUserDataForApi(apiId, data.token);
+      saveUserDataForApi(apiId, token);
     }
 
     //TODO: update documentation
