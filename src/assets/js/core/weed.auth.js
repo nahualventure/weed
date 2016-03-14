@@ -72,11 +72,8 @@
         .success(function(data){
           if(data.token){
 
-            // Saves locallly the token for given api
-            weedJWTUtilities.saveTokenForApi(apiId, data.token);
-
-            // saves locally the user for the given api
-            saveUserDataForApi(apiId, data.token);
+            // Post login local update
+            vm.postLogin(apiId, data.token);
           }
         }
       );
@@ -90,6 +87,14 @@
 
 
     // Public Interface
+
+    vm.postLogin = function(apiId, token){
+      // Saves locallly the token for given api
+      weedJWTUtilities.saveTokenForApi(apiId, data.token);
+
+      // saves locally the user for the given api
+      saveUserDataForApi(apiId, data.token);
+    }
 
     //TODO: update documentation
     vm.addNewApi = function(api) {
