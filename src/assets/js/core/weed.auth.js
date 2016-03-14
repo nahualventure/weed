@@ -94,15 +94,17 @@
     //TODO: update documentation
     vm.addNewApi = function(api) {
 
-      var defaults = {
-        user: weedJWTUtilities.getTokenInApi(api.id) || {},
-        loginRoute: 'token-auth/',
-        refreshRoute: 'token-refresh/',
-        autoRefresh: {
-          enabled: true,
-          timeDelta: 43200 // half a day
-        }
-      };
+      var existentToken = weedJWTUtilities.getTokenInApi(api.id),
+          existentUser = existentToken ? weedJWTUtilities.parseJwt(existentToken) : {},
+          defaults = {
+            user: existentUser,
+            loginRoute: 'token-auth/',
+            refreshRoute: 'token-refresh/',
+            autoRefresh: {
+              enabled: true,
+              timeDelta: 43200 // half a day
+            }
+          };
 
       // Api data init
       apiData[api.id] = angular.extend({}, defaults, api);
