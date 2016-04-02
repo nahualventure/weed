@@ -1,0 +1,43 @@
+@import "config.less";
+
+// Configuration
+@grid-half-gutter-width:                                    0.5rem;
+@grid-gutter-compensation:                                  -0.5rem;
+@grid-outer-margin:                                         2rem;
+@grid-columns:                                              12;
+
+// The class
+@grid-column-class:                                         col;
+
+// Default sizings
+@grid-col-names:                                            s, m, l, xl;
+@grid-col-breaks:                                           @system-small-break, @system-medium-break, @system-large-break, @system-xlarge-break;
+
+.grid {
+  padding-: 0 @grid-outer-margin;
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: @grid-gutter-compensation;
+  margin-right: @grid-gutter-compensation;
+}
+
+.row.reverse {
+  .row-reverse();
+}
+.col.reverse {
+   .col-reverse();
+}
+
+.makegrid(@grid-column-class; xs);
+
+.for-each(@grid-col-breaks);
+.-each(@breakpoint) {
+  @media only screen and (min-width: @breakpoint) {
+    .makegrid(@grid-column-class; extract(@grid-col-names, @i));
+  }
+}

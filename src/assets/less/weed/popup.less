@@ -111,8 +111,8 @@
 
 // Popup styling
 .popup{
-  .border-radius(@popup-border-radius);
-  .box-shadow(0 0 6px 0px @popup-shadow-color);
+  border-radius: @popup-border-radius;
+  box-shadow: 0 0 6px 0px @popup-shadow-color;
   background: @popup-background-color;
   // border: 1px solid @popup-title-bar-border-color;
   margin-left: auto;
@@ -193,9 +193,9 @@
 
   // Popup components
   .popup-title-bar{
-    .border-radius(@popup-border-radius @popup-border-radius 0 0);
-    .box-shadow(inset 0 1px 0 0 @popup-title-bar-inset-shadow-color);
-    .user-select(none);
+    border-radius: @popup-border-radius @popup-border-radius 0 0;
+    box-shadow: inset 0 1px 0 0 @popup-title-bar-inset-shadow-color;
+    user-select: none;
     background-color: @popup-title-bar-background-color;
     border-bottom: 1px solid @popup-title-bar-border-color;
     color: @popup-title-bar-text-color;
@@ -346,7 +346,7 @@
     }
 
     .fault{
-      .box-sizing(border-box);
+      box-sizing: border-box;
       float: left;
       padding-left: 2*@element-vertical-margin;
       width: 60%;
@@ -373,7 +373,7 @@
         padding: 0 0 @element-vertical-margin*2 0;
 
         .counter, .taken-by, .search-filter{
-          .box-sizing(border-box);
+          box-sizing: border-box;
           float: left;
           height: 41px;
           padding: 0 @element-vertical-margin;
@@ -460,7 +460,7 @@
   }
 
   &.popup-alert{
-    .border-radius(@popup-alert-border-radius);
+    border-radius: @popup-alert-border-radius;
 
     .popup-content{
       padding: @popup-alert-padding;
@@ -511,8 +511,8 @@
     }
 
     button.mfp-close{
-      .transition(@faster);
-      .opacity(1.0);
+      transition: @faster;
+      opacity: 1.0;
       .circle(@popup-alert-close-button-size);
       line-height: @popup-alert-close-button-size - 2px;
       color: @popup-alert-close-button-color;
@@ -527,15 +527,15 @@
       }
 
       &:active{
-        .transition(0);
+        transition: 0;
         color: @popup-alert-close-button-color;
       }
     }
   }
 
   &.side-popup{
-    .border-radius(0);
-    .box-shadow(0 0 @element-vertical-margin 0 @popup-side-box-shadow-color);
+    border-radius: 0;
+    box-shadow: 0 0 @element-vertical-margin 0 @popup-side-box-shadow-color;
     float: right;
     margin: 0;
     max-width: @popup-side-max-width;
@@ -543,7 +543,7 @@
     width: @popup-side-max-width;
 
     .popup-title-bar{
-      .border-radius(0);
+      border-radius: 0;
     }
   }
 }
@@ -562,36 +562,36 @@
 
   /* start state */
   .popup {
-    .opacity(0);
+    opacity: 0.0;
     .transform(scale(@popup-zoom-initial)); 
-    .transition(all @fastest ease-in-out);
+    transition: all @fastest ease-in-out;
   }
   
   &.mfp-bg {
-    .opacity(0);
-    .transition(all @faster ease-out);
+    opacity: 0.0;
+    transition: all @faster ease-out;
   }
   
   /* animate in */
   &.mfp-ready {
     .popup {
-      .opacity(1);
+      opacity: 1.0;
       .transform(scale(1));
     }
     &.mfp-bg {
-      .opacity(@popup-zoom-bg-opacity);
+      opacity: @popup-zoom-bg-opacity;
     }
   }
   
   /* animate out */
   &.mfp-removing {
     .popup {
-      .opacity(0);
+      opacity: 0.0;
       .transform(scale(@popup-zoom-initial));
     }
 
     &.mfp-bg {
-      .opacity(0);
+      opacity: 0.0;
     }
   }
 }
@@ -600,40 +600,40 @@
 
   /* start state */
   .popup {
-    // .opacity(0);
+    // opacity: 0.0;
     // .transform(scale(@popup-zoom-initial)); 
-    .transition(all @faster ease-in-out);
+    transition: all @faster ease-in-out;
     margin-right: -700px;
   }
   
   &.mfp-bg {
-    .opacity(0);
-    .transition(all @fast ease-out);
+    opacity: 0.0;
+    transition: all @fast ease-out;
   }
   
   /* animate in */
   &.mfp-ready {
     .popup {
-      // .opacity(1);
+      // opacity: 1.0;
       // .transform(scale(1));
       margin-right: 0;
     }
 
     &.mfp-bg {
-      .opacity(@popup-zoom-bg-opacity);
+      opacity: @popup-zoom-bg-opacity;
     }
   }
   
   /* animate out */
   &.mfp-removing {
     .popup {
-      .opacity(0);
+      opacity: 0.0;
       // .transform(scale(@popup-zoom-initial));
       margin-right: -700px;
     }
 
     &.mfp-bg {
-      .opacity(0);
+      opacity: 0.0;
     }
   }
 }

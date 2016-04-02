@@ -32,7 +32,7 @@
 body{
 
   .sidebar{
-    .transition(@fast);
+    transition: @fast;
     left: 0;
     overflow: hidden;
     position: fixed;
@@ -44,8 +44,8 @@ body{
     height: 100%;
 
     .header{
-      .box-sizing(border-box);
-      .transition(@faster);
+      box-sizing: border-box;
+      transition: @faster;
       background: @sidebar-header-background;
       display: block;
       height: @navbar-height;
@@ -59,7 +59,7 @@ body{
       }
 
       .sidebar-isotype, .sidebar-logotype{
-        .transition(@fast);
+        transition: @fast;
         background: center center no-repeat;
         display: block;
         height: @navbar-height;
@@ -73,7 +73,7 @@ body{
       }
 
       .sidebar-logotype{
-        .opacity(0.0);
+        opacity: 0.0;
         left: @sidebar-logotype-start-position;
         width: @sidebar-logotype-width;
       }
@@ -86,8 +86,8 @@ body{
 
     li, .li{
       a, .a{
-        .text-shadow(1px 1px 1px @sidebar-text-shadow-color);
-        .transition(@faster);
+        text-shadow: 1px 1px 1px @sidebar-text-shadow-color;
+        transition: @faster;
         color: @sidebar-link-color;
         font-family: @sidebar-font-family;
         line-height: @sidebar-contracted-element-height;
@@ -95,7 +95,7 @@ body{
         display: inline-block;
 
         span.icon-container{
-          .transition(@faster);
+          transition: @faster;
           display: inline-block;
           font-size: 1.2em;
           line-height: @sidebar-contracted-element-height;
@@ -110,7 +110,7 @@ body{
         }
 
         span.centerer{
-          .transition(@faster);
+          transition: @faster;
           line-height: @sidebar-contracted-element-height;
           vertical-align: middle;
         }
@@ -182,7 +182,7 @@ body{
         }
 
         .sidebar-logotype{
-          .opacity(1.0);
+          opacity: 1.0;
           left: @sidebar-logotype-last-position;
         }
       }
@@ -203,7 +203,7 @@ body{
     }
 
     .qtip-sidebar{
-      .opacity(0.0) !important;
+      opacity: 0.0 !important;
       // display: none !important;
     }
 
@@ -212,7 +212,7 @@ body{
 
       span.icon-container{
         .@{fa-css-prefix}{
-          .rotate(180deg);
+          transform: rotate(180deg);
         }
       }
     }

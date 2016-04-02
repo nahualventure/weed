@@ -1,0 +1,102 @@
+// .for
+.for(@i, @n) {.-each(@i)}
+.for(@n)     when (isnumber(@n)) {.for(1, @n)}
+.for(@i, @n) when not (@i = @n)  {
+  .for((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+// .for-each
+.for-each(@array)   when (default()) {.for-impl_(length(@array))}
+.for-impl_(@i) when (@i > 1)    {.for-impl_((@i - 1))}
+.for-impl_(@i) when (@i > 0)    {.-each(extract(@array, @i))}
+
+.row-reverse() {
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+}
+
+.col-reverse() {
+  flex-direction: column-reverse;
+  flex-wrap: wrap-reverse;
+}
+
+.makegrid(@col-class, @class) {
+  [class^="@{col-class}-@{class}"], [class*=" @{col-class}-@{class}"],
+  [class^="@{col-class}-@{class}-offset"], [class*=" @{col-class}-@{class}-offset"] {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding-right: @grid-half-gutter-width;
+    padding-left: @grid-half-gutter-width;
+  }
+
+  .@{col-class}-@{class} {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  .make-cols(@col-class; @class);
+  .make-offsets(@col-class; @class);
+  .make-position-classes(@class);
+}
+
+.make-column(@col-class; @class; @col-number) {
+  .@{col-class}-@{class}-@{col-number} {
+    flex-basis: ((100% / @grid-columns) * @col-number);
+    max-width: ((100% / @grid-columns) * @col-number);
+  }
+}
+
+.make-cols(@col-class; @class; @col-number: @grid-columns) when (@col-number > 0) {
+  .make-cols(@col-class; @class; (@col-number - 1));
+  .make-column(@col-class; @class; @col-number);
+}
+
+.make-offset(@col-class; @class; @col-number) {
+  .@{col-class}-@{class}-offset-@{col-number} {
+    margin-left: ((100% / @grid-columns) * @col-number);
+  }
+}
+
+.make-offsets(@col-class; @class; @col-number: (@grid-columns - 1)) when (@col-number > 0) {
+  .make-offsets(@col-class; @class; (@col-number - 1));
+  .make-offset(@col-class; @class; @col-number);
+}
+
+.make-position-classes(@class) {
+
+  .start-@{class} {
+    justify-content: flex-start;
+    text-align: start;
+  }
+  .center-@{class} {
+    justify-content: center;
+    text-align: center;
+  }
+  .end-@{class} {
+    justify-content: flex-end;
+    text-align: end;
+  }
+  .top-@{class} {
+    align-items: flex-start;
+  }
+  .middle-@{class} {
+    align-items: center;
+  }
+  .bottom-@{class} {
+    align-items: flex-end;
+  }
+  .around-@{class} {
+    justify-content: space-around;
+  }
+  .between-@{class} {
+    justify-content: space-between;
+  }
+  .first-@{class} {
+    order: -1;
+  }
+  .last-@{class} {
+    order: 1;
+  }
+}

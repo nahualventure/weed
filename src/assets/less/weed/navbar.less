@@ -50,7 +50,7 @@
   //.clearfix;
   .expand-x();
   .origin();
-  .user-select(none);
+  user-select: none;
   background-color: @navbar-color;
   position: absolute;
   z-index: @navbar-z-index;
@@ -60,7 +60,7 @@
 
     .navbar-main-action-container{
       .navbar-main-action{
-        .opacity(0);
+        opacity: 0.0;
         cursor: default;
       }
     }
@@ -76,7 +76,7 @@
   // }
 
   // &.excise{
-  //   .opacity(0.0);
+  //   opacity: 0.0;
   //   top: -1*@navbar-height;
   // }
 
@@ -94,7 +94,7 @@
     // Navbar logo
     &.logo{
       .pull-left();
-      .transition(@fast);
+      transition: @fast;
       background: @navbar-element-hover-color;
       height: @navbar-height;
       overflow: hidden;
@@ -104,7 +104,7 @@
 
       .navbar-isotype, .navbar-logotype{
         .expand-y();
-        .transition(@faster);
+        transition: @faster;
         background: center center no-repeat;
         display: block;
         position: absolute;
@@ -116,7 +116,7 @@
       }
 
       .navbar-logotype{
-        .opacity(0);
+        opacity: 0.0;
         left: @navbar-logotype-start-position;
         width: @navbar-logotype-width;
       }
@@ -161,9 +161,9 @@
 
       // Rounded picture
       img.picture{
-        .border-radius(100px); // Extreme round border (circle)
-        .box-shadow(0px 0px 0px 2px darken(@navbar-color, 4%)); // Safari fix instead of border
-        .box-sizing(border-box);
+        border-radius: 100px; // Extreme round border (circle)
+        box-shadow: 0px 0px 0px 2px darken(@navbar-color, 4%); // Safari fix instead of border
+        box-sizing: border-box;
         float: left;;
         height: @navbar-picture-size;
         vertical-align: middle;
@@ -221,7 +221,7 @@
       position: relative;
 
       .navbar-notifications-bubble{
-        .border-radius(100px);
+        border-radius: 100px;
         .square(@navbar-notifications-bubble-size);
         background: @navbar-bubble-background-color;
         color: @navbar-notifications-bubble-text-color;
@@ -239,19 +239,19 @@
   // Navbar element whose hover is defined (anchor)
   a.navbar-element{
     .@{fa-css-prefix}{
-      .transition(@faster);
-      .opacity(0.8);
+      transition: @faster;
+      opacity: 0.8;
     }
 
     &:hover{
       .@{fa-css-prefix}{
-        .opacity(1.0);
+        opacity: 1.0;
       }
     }
 
     &:active{
-      .transition(0);
-      .opacity(0.8);
+      transition: 0;
+      opacity: 0.8;
     }
   }
 
@@ -272,7 +272,7 @@
     height: 0;
 
     .navbar-main-action{
-      .transition(@faster);
+      transition: @faster;
       .circle(60px);
       .empty-fill();
       display: inline-block;
@@ -303,7 +303,7 @@
           left: @navbar-isotype-last-position;
         }
         .navbar-logotype{
-          .opacity(1);
+          opacity: 1.0;
           left: @navbar-logotype-last-position;
         }
       }
@@ -314,7 +314,7 @@
 body.fixed-navbar{
   .navbar.fixed{
     .navbar-main-action{
-      .opacity(1.0);
+      opacity: 1.0;
       cursor: pointer;
     }
   }

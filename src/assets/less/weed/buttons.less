@@ -73,7 +73,7 @@
   @text-color: @white;
   @gradient-opacity: @button-gradient-default-opacity;){
   #gradient > .vertical(fadeout(@button-start-gradient-color, @gradient-opacity), fadeout(@button-end-gradient-color, @gradient-opacity));
-  .text-shadow(0 1px 1px @button-text-shadow);
+  text-shadow: 0 1px 1px @button-text-shadow;
   background-color: @background-color;
   border: 1px solid fadeout(@border-color, 100%);
   border-top: 1px solid @border-color;
@@ -92,13 +92,13 @@
   // Default states
   &:hover,
   &.hover{
-    // .transition(@faster);
+    // transition: @faster;
     background-color: lighten(@background-color, 3.1%);
     border-top-color: lighten(@border-color, 2%);
   }
   &:active,
   &.active{
-    .transition(0);
+    transition: 0;
     #gradient > .vertical(fadeout(@button-active-start-gradient-color, @gradient-opacity), fadeout(@button-start-gradient-color, @gradient-opacity));
     background-color: @background-color;
     border-top-color: darken(@border-color, 2%);
@@ -106,13 +106,13 @@
   &:focus,
   &.focus{
     // .box-shadow(0 0 0 2px fadeout(darken(@background-color, 5%), 55%));
-    .transition(@faster);
+    transition: @faster;
     background-color: lighten(@background-color, 5%);
   }
 
   &.selected,
   &.selected:hover{
-    .transition(0);
+    transition: 0;
     #gradient > .vertical(fadeout(@button-start-gradient-color, @gradient-opacity), fadeout(@button-end-gradient-color, @gradient-opacity));
     border-top-color: darken(@border-color, 7%);
     background-color: darken(@background-color, 0%);
@@ -123,8 +123,8 @@
   }
 
   &.clear-background{
-    .box-shadow(none) !important;
-    .text-shadow(none) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
     background: none !important;
     border: none !important;
     // color: overlay(@background-color, @button-icon-base-color);
@@ -133,21 +133,21 @@
 
 // If it's a button element
 button.button{
-  .box-sizing(content-box);
+  box-sizing: content-box;
 }
 
 // Button main class
 .button{
   .blend-mode(overlay);
-  .border-radius(@button-default-border-radius);
+  border-radius: @button-default-border-radius;
   .make-button(
     @background-color: @button-default-color;
     @border-color: @button-default-border-color;
     @text-color: @button-default-text-color;
     @gradient-opacity: 92%;
   );
-  .text-shadow(0 1px 1px fadeout(@white, 20%));
-  .user-select(none);
+  text-shadow: 0 1px 1px fadeout(@white, 20%);
+  user-select: none;
   border-color: @button-default-border-color;
   box-sizing: border-box;
   cursor: pointer;
@@ -196,7 +196,7 @@ button.button{
   }
 
   &.animated{
-    .transition(@faster);
+    transition: @faster;
   }
 
   &.file-upload{
@@ -207,7 +207,7 @@ button.button{
     }
 
     input[type="file"]{
-      .opacity(0);
+      opacity: 0.0;
       cursor: pointer;
       display:block;
       padding: 0 !important;
@@ -244,20 +244,20 @@ button.button{
 
   // Left
   &.left-end{
-    .border-radius(@button-default-border-radius 0 0 @button-default-border-radius);
+    border-radius: @button-default-border-radius 0 0 @button-default-border-radius;
     margin-right: 0 !important;
     border-right: none !important;
   }
 
   // Mid
   &.mid{
-    .border-radius(0) !important;
+    border-radius: 0 !important;
     border-right: none !important;
   }
 
   // Right
   &.right-end{
-    .border-radius(0 @button-default-border-radius @button-default-border-radius 0);
+    border-radius: 0 @button-default-border-radius @button-default-border-radius 0;
     margin-left: 0 !important;
   }
 
@@ -278,7 +278,7 @@ button.button{
     }
 
     &.circle{
-      .border-radius(100%) !important;
+      border-radius: 100% !important;
     }
   }
 
@@ -289,7 +289,7 @@ button.button{
       @text-margin;
       @icon-size;
       @font-size;){
-    .border-radius(@border-radius);
+    border-radius: @border-radius;
     font-size: @font-size;
     height: @height;
     line-height: @height - 2px;
@@ -304,11 +304,11 @@ button.button{
 
     // Left
     &.left-end{
-      .border-radius(@border-radius 0 0 @border-radius);
+      border-radius: @border-radius 0 0 @border-radius;
     }
   // Right
     &.right-end{
-      .border-radius(0 @border-radius @border-radius 0);
+      border-radius: 0 @border-radius @border-radius 0;
     }
 
     &.only-icon{
@@ -448,13 +448,13 @@ button.button{
 
   // Default selected
   &.selected{
-    .box-shadow(inset 0 2px 3px 0 @button-pressed-box-shadow-color);
+    box-shadow: inset 0 2px 3px 0 @button-pressed-box-shadow-color;
     border-top-color: @button-default-border-color;
   }
 
   // Disabled
   &.disabled{
-    .text-shadow(none) !important;
+    text-shadow: none !important;
     background-color: @button-disabled-color !important;
     border: 1px solid darken(@button-disabled-color, 3%) !important;
     color: @button-disabled-text-color !important;
@@ -485,7 +485,7 @@ button.button{
       @text-color: @button-gray-text-color;
       @gradient-opacity: 92%;
     );
-    .text-shadow(0 1px 1px fadeout(@white, 20%));
+    text-shadow: 0 1px 1px fadeout(@white, 20%);
     border-color: @button-gray-border-color;
 
     [class^="@{fa-css-prefix}-"],
