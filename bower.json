@@ -29,7 +29,6 @@
   ],
   "dependencies": {
     "font-awesome": "^4.5.0",
-    "hammerjs": "^2.0.6",
-    "ng-dialog": "^0.5.9"
+    "hammerjs": "^2.0.6"
   }
 }
