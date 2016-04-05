@@ -17,10 +17,51 @@
         body.open-sidebar{
           padding-left: 220px;
         }
+
+        /*.col{
+            background: #eee;
+        }*/
+
+        .box{
+            background: #ddd;
+            color: #555;
+            font-size: 1.3rem;
+            font-weight: bold;
+            line-height: 50px;
+            margin-bottom: 1rem;
+            min-height: 50px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .ref.grid{
+            background: #eee;
+        }
+
+        .ref.row{
+            background: #eee;
+            padding: 0.5rem 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .ref.row .box{
+            margin-bottom: 0;
+        }
+
+        .ref.box{
+            height: 200px;
+            line-height: 200px;
+        }
+
+        .grid.frame .box{
+            height: 100%;
+            margin: 0;
+        }
     </style>
   </head>
 
-  <body ng-app="weed.test">
+  <body ng-app="weed.test" class="open-modal">
+
     <div class="navbar">
 
       <!-- Logo: OK -->
@@ -66,34 +107,9 @@
             <li><a we-sidebar-link icon="home">Dashboard</a></li>
             <li><a we-sidebar-link icon="cog">Dashboard</a></li>
             <li><a we-sidebar-link icon="heart">Dashboard</a></li>
-            <li><a we-sidebar-link icon="angle-right" position="bottom" we-toggle="sidebar">Dashboard</a></li>
+            <li><a we-sidebar-link icon="angle-right" we-toggle="sidebar" position="bottom">Dashboard</a></li>
         </ul>
     </div>
-
-    <div class="row">
-        <div class="col-s-12 col-m-6 col-l-4">
-            <div class="box">a</div>
-        </div>
-        <div class="col-s-12 col-m-6 col-l-4">
-            <div class="box">b</div>
-        </div>
-
-        <div class="col-s-12 col-m-6 col-l-4">
-            <div class="box">c</div>
-        </div>
-
-        <div class="col-s-12 col-m-6 col-l-4">
-            <div class="box">d</div>
-        </div>
-        <div class="col-s-12 col-m-6 col-l-4">
-            <div class="box">e</div>
-        </div>
-
-        <div class="col-s-12 col-m-6 col-l-4">
-            <div class="box">f</div>
-        </div>
-    </div>
-
 
     <h1>Icons</h1>
 
@@ -341,13 +357,223 @@
     <h1>Label</h1>
     <label>
         Etiqueta del input:
-        <input type="text">
+        <input type="date">
     </label>
 
     <label><input type="checkbox">Ejemplo</label>
     <label>Ejemplo:<input type="checkbox"></label>
     <label><input type="radio">Ejemplo</label>
     <label>Ejemplo:<input type="radio"></label>
+
+    <h1>The Greed</h1>
+    <h2>Responsive</h2>
+    <div class="grid">
+        <div class="row">
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">a</div>
+            </div>
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">b</div>
+            </div>
+
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">c</div>
+            </div>
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">d</div>
+            </div>
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">e</div>
+            </div>
+
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">f</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Offsets</h2>
+    <div class="grid">
+        <div class="row">
+            <div class="col xs-12 m-6 l-4 off-m-6 off-l-8">
+                <div class="box">a</div>
+            </div>
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">b</div>
+            </div>
+
+            <div class="col xs-12 m-6 l-4">
+                <div class="box">c</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Autowidth</h2>
+    <div class="grid">
+        <div class="row">
+            <div class="col">
+                <div class="box">1</div>
+            </div>
+            <div class="col">
+                <div class="box">2</div>
+            </div>
+            <div class="col">
+                <div class="box">3</div>
+            </div>
+            <div class="col">
+                <div class="box">4</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="box">1</div>
+            </div>
+            <div class="col">
+                <div class="box">2</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="box">1</div>
+            </div>
+            <div class="col">
+                <div class="box">2</div>
+            </div>
+            <div class="col">
+                <div class="box">3</div>
+            </div>
+            <div class="col">
+                <div class="box">4</div>
+            </div>
+            <div class="col">
+                <div class="box">5</div>
+            </div>
+            <div class="col">
+                <div class="box">6</div>
+            </div>
+            <div class="col">
+                <div class="box">7</div>
+            </div>
+            <div class="col">
+                <div class="box">8</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Horizontal alignment</h2>
+    <div class="grid">
+        <div class="row">
+            <div class="col xs-6">
+                <div class="box">Start</div>
+            </div>
+        </div>
+
+        <div class="row center-xs">
+            <div class="col xs-6">
+                <div class="box">Center</div>
+            </div>
+        </div>
+
+        <div class="row end-xs">
+            <div class="col xs-6">
+                <div class="box">End</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Vertical alignment</h2>
+    <div class="grid">
+        <div class="ref row">
+            <div class="col">
+                <div class="ref box">Ref</div>
+            </div>
+
+            <div class="col">
+                <div class="box">Top</div>
+            </div>
+        </div>
+
+        <div class="ref row middle-xs">
+            <div class="col">
+                <div class="ref box">Ref</div>
+            </div>
+
+            <div class="col">
+                <div class="box">Middle</div>
+            </div>
+        </div>
+
+        <div class="ref row bottom-xs">
+            <div class="col">
+                <div class="ref box">Ref</div>
+            </div>
+
+            <div class="col">
+                <div class="box">Bottom</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Distribution</h2>
+
+    <h3>Around</h3>
+    <div class="grid">
+        <div class="ref row around-xs">
+            <div class="col xs-3">
+                <div class="box">A</div>
+            </div>
+
+            <div class="col xs-3">
+                <div class="box">B</div>
+            </div>
+
+            <div class="col xs-3">
+                <div class="box">C</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Between</h3>
+    <div class="grid">
+        <div class="ref row between-xs">
+            <div class="col xs-3">
+                <div class="box">A</div>
+            </div>
+
+            <div class="col xs-3">
+                <div class="box">B</div>
+            </div>
+
+            <div class="col xs-3">
+                <div class="box">C</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Full height frames</h2>
+    <div we-fill-height debounce-wait="2000">
+        <div class="ref grid frame">
+            <div class="row">
+                <div class="col xs-3">
+                    <div class="box">A</div>
+                </div>
+
+                <div class="col xs-3">
+                    <div class="box">B</div>
+                </div>
+
+                <div class="col xs-3">
+                    <div class="box">C</div>
+                </div>
+
+                <div class="col xs-3">
+                    <div class="box">D</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <h1>ToLoad</h1>
     <div ng-controller="WeedButtonController as btnCtrl">

@@ -35,6 +35,7 @@ var paths = {
   sass: [],
   weedJS: [
     'bower_components/hammerjs/hammer.js',
+    'bower_components/ng-dialog/js/ngDialog.js',
     './src/assets/js/weed.js',
     './src/assets/js/core/*.js',
     './src/assets/js/components/**/*.js',

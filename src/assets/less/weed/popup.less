@@ -5,7 +5,7 @@
 // Configuration
 @popup-actions-border-color:              @black-20;
 @popup-background-color:                  @white;
-@popup-modal-background-color:            @white;
+@popup-modal-background-color:            fadeout(@black, 30%);
 @popup-solid-shadow-color:                @black-70;
 @popup-shadow-color:                      fadeout(@popup-solid-shadow-color, 60%);
 @popup-title-bar-background-color:        @black-40;
@@ -81,29 +81,35 @@
 @popup-search-content-background-color: @black-5;
 @popup-search-close-color: @black-80;
 
-// Magnific classes
-.mfp-bg{
-  background: @popup-modal-background-color;
-  z-index: @popup-z-index;
+body.modal-open{
+  overflow-y: hidden;
 }
-.mfp-content{
-  z-index: @popup-z-index;
-}
-.mfp-close-btn-in button.mfp-close{
-  color: fadeout(@popup-title-bar-text-color, 10%);
-  border-left: 1px solid @popup-title-bar-border-color;
-  font-size: 1.8em;
-  height: @popup-title-height + 1;
-  outline: none;
-  width: @popup-title-height;
 
-  &:active{
-    height: @popup-title-height;
-  }
-}
-.mfp-wrap{
+.popup-veil{
+  background: @popup-modal-background-color;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
   z-index: @popup-z-index;
 }
+
+// .mfp-close-btn-in button.mfp-close{
+//   color: fadeout(@popup-title-bar-text-color, 10%);
+//   border-left: 1px solid @popup-title-bar-border-color;
+//   font-size: 1.8em;
+//   height: @popup-title-height + 1;
+//   outline: none;
+//   width: @popup-title-height;
+
+//   &:active{
+//     height: @popup-title-height;
+//   }
+// }
+// .mfp-wrap{
+//   z-index: @popup-z-index;
+// }
 
 .popup-wrapper{
   display: none;
@@ -114,7 +120,6 @@
   border-radius: @popup-border-radius;
   box-shadow: 0 0 6px 0px @popup-shadow-color;
   background: @popup-background-color;
-  // border: 1px solid @popup-title-bar-border-color;
   margin-left: auto;
   margin-right: auto;
   max-width: @popup-max-width;
@@ -143,7 +148,7 @@
     }
   }
 
-  button.mfp-close{
+  button.popup-close{
     font-size: 1.3em;
 
     &:after{
@@ -185,7 +190,7 @@
       padding: @popup-vertical-spacing @popup-horizontal-spacing;
     }
 
-    .mfp-close{
+    .popup-close{
       color: @popup-search-close-color;
       border: none;
     }
@@ -255,7 +260,7 @@
       line-height: @popup-mimics-height;
     }
 
-    button.mfp-close{
+    button.popup-close{
       height: @popup-mimics-height;
       width: 70px;
     }
@@ -291,7 +296,7 @@
       }
     }
 
-    button.mfp-close{
+    button.popup-close{
       font-size: 1.5em;
       height: @popup-dual-titled-title-height + 1;
       width: @popup-dual-titled-close-width;
@@ -510,7 +515,7 @@
       margin-bottom: @popup-alert-title-margin;
     }
 
-    button.mfp-close{
+    button.popup-close{
       transition: @faster;
       opacity: 1.0;
       .circle(@popup-alert-close-button-size);
@@ -548,95 +553,16 @@
   }
 }
 
-.mfp-full-height{
-  .mfp-container{
-    padding-right: 0;
+// .mfp-full-height{
+//   .mfp-container{
+//     padding-right: 0;
 
-    .mfp-content{
-      height: 100%;
-    }
-  }
-}
+//     .mfp-content{
+//       height: 100%;
+//     }
+//   }
+// }
 
-.mfp-zoom-in {
-
-  /* start state */
-  .popup {
-    opacity: 0.0;
-    .transform(scale(@popup-zoom-initial)); 
-    transition: all @fastest ease-in-out;
-  }
-  
-  &.mfp-bg {
-    opacity: 0.0;
-    transition: all @faster ease-out;
-  }
-  
-  /* animate in */
-  &.mfp-ready {
-    .popup {
-      opacity: 1.0;
-      .transform(scale(1));
-    }
-    &.mfp-bg {
-      opacity: @popup-zoom-bg-opacity;
-    }
-  }
-  
-  /* animate out */
-  &.mfp-removing {
-    .popup {
-      opacity: 0.0;
-      .transform(scale(@popup-zoom-initial));
-    }
-
-    &.mfp-bg {
-      opacity: 0.0;
-    }
-  }
-}
-
-.mfp-slide-in-right {
-
-  /* start state */
-  .popup {
-    // opacity: 0.0;
-    // .transform(scale(@popup-zoom-initial)); 
-    transition: all @faster ease-in-out;
-    margin-right: -700px;
-  }
-  
-  &.mfp-bg {
-    opacity: 0.0;
-    transition: all @fast ease-out;
-  }
-  
-  /* animate in */
-  &.mfp-ready {
-    .popup {
-      // opacity: 1.0;
-      // .transform(scale(1));
-      margin-right: 0;
-    }
-
-    &.mfp-bg {
-      opacity: @popup-zoom-bg-opacity;
-    }
-  }
-  
-  /* animate out */
-  &.mfp-removing {
-    .popup {
-      opacity: 0.0;
-      // .transform(scale(@popup-zoom-initial));
-      margin-right: -700px;
-    }
-
-    &.mfp-bg {
-      opacity: 0.0;
-    }
-  }
-}
 
 // IE fixes
 .ie7,
