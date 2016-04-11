@@ -14,7 +14,58 @@
       transclude: true,
       scope: {},
       replace: true,
-      link: popupLink
+      link: popupLink,
+      templateUrl: 'components/popup/popup.html',
+      controllerAs: 'popup',
+      controller: popupController
+    };
+
+    return directive;
+
+    popupController.$inject = ['$scope'];
+
+    function popupController($scope){
+      var vm = this;
+
+      vm.active = false;
+
+      vm.open = function(){
+        vm.active = true;
+        $scope.$apply();
+      }
+
+      vm.close = function(){
+        vm.active = false;
+        $scope.$apply();
+      }
+    }
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            controller.open();
+            break;
+          case 'hide':
+          case 'close':
+            controller.close();
+            break;
+        }
+      });
+    }
+  }
+
+  function popupTitle(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popupTitle.html',
     };
 
     return directive;

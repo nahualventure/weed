@@ -35,7 +35,7 @@
       if (attrs.weClose) {
         targetId = attrs.weClose;
       } else {
-        var parentElement= false;
+        var parentElement = false;
         var tempElement = element.parent();
         //find parent modal
         while(parentElement === false) {
@@ -49,8 +49,10 @@
 
           tempElement = tempElement.parent();
         }
+
         targetId = parentElement.attr('id');
       }
+
       element.on('click', function(e) {
         weedApi.publish(targetId, 'close');
         e.preventDefault();
