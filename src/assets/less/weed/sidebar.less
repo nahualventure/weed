@@ -104,6 +104,7 @@ body{
           width: @sidebar-icon-width;
 
           i{
+            transition: @faster;
             color: @sidebar-link-color;
             font-size: 1.5em;
           }
@@ -161,10 +162,6 @@ body{
     overflow: hidden;
     position: absolute;
     width: @sidebar-contracted-width;
-
-    .@{fa-css-prefix}{
-      transition: @faster;
-    }
   }
 
   // TODO: check if breakpoint needed (to autoclose)

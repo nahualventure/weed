@@ -4279,6 +4279,7 @@ body .sidebar-list li a span.icon-container i,
 body .sidebar-list .li a span.icon-container i,
 body .sidebar-list li .a span.icon-container i,
 body .sidebar-list .li .a span.icon-container i {
+  transition: 0.25s;
   color: #808080;
   font-size: 1.5em;
 }
@@ -4363,6 +4364,7 @@ body .sidebar-bottom-action span.icon-container {
   width: 65px;
 }
 body .sidebar-bottom-action span.icon-container i {
+  transition: 0.25s;
   color: #808080;
   font-size: 1.5em;
 }
@@ -4391,9 +4393,6 @@ body .sidebar-bottom-action:active {
 }
 body .sidebar-bottom-action:active span.icon-container i {
   color: #595959;
-}
-body .sidebar-bottom-action .ic {
-  transition: 0.25s;
 }
 body .sidebar-bottom-action {
   display: block;
