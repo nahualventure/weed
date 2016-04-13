@@ -3007,98 +3007,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.button', ['weed.core'])
-    .directive('weButton', buttonDirective);
-
-  // No dependency injections
-
-  function buttonDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-          icon: '@',
-          type: '@',
-          toload: '&?',
-          size: '@',
-          state: '@'
-      },
-      templateUrl: 'components/button/button.html',
-      link: buttonLink
-    };
-  }
-
-  function buttonLink(scope, elem, attrs, controllers, $transclude) {
-    var buttonCurrentWidth,
-        buttonCurrentHeight,
-        loaderWidth,
-        oLoader;
-
-    // Check if there is text
-    $transclude(function(clone){
-      scope.hasText = clone.length > 0;
-    });
-
-    // If load behavior attached
-    if(scope.toload){
-      elem.on('click', function(e){
-
-        // If yet not loading
-        if(!scope.loading){
-
-          // Try to get a defer from toload attribute
-          var promise = scope.$apply(scope.toload);
-
-          // If it's a promise
-          if(promise.then){
-            promise.then(
-              function(data){
-
-                // On success, set loading false
-                scope.loading = false;
-              },
-              function(data){
-
-                // On failure, set loading false
-                scope.loading = false;
-              }
-            );
-          }
-
-          scope.loading = true;
-
-          // Refresh bindings
-          scope.$apply();
-
-          // Sizing utilities
-          buttonCurrentWidth = elem[0].clientWidth;
-          buttonCurrentHeight = elem[0].clientHeight;
-          loaderWidth = buttonCurrentHeight / 5.0;
-
-          // Fetch loader
-          oLoader = angular.element(elem[0].querySelector('.loader'));
-
-          // Set loader position
-          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
-        }
-      });
-    }
-  }
-
-})(angular);
 (function(angular) {
   'use strict';
 
@@ -3469,10 +3377,24 @@ if (typeof define === 'function' && define.amd) {
   'use strict';
 
   angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
     .directive('weNavbarElement', navbarElementDirective)
     .directive('weNavbarMainAction', navbarMainActionDirective);
 
   // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
 
   function navbarElementDirective(){
     return {
@@ -3518,193 +3440,97 @@ if (typeof define === 'function' && define.amd) {
     };
   }
 })(angular);
-(function() {
-  'use strict';
-
-  angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective);
-
-  // Weed api injection
-  popupDirective.$inject = ['WeedApi'];
-
-  function popupDirective(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink,
-      templateUrl: 'components/popup/popup.html',
-      controllerAs: 'popup',
-      controller: popupController
-    };
-
-    return directive;
-
-    popupController.$inject = ['$scope'];
-
-    function popupController($scope){
-      var vm = this;
-
-      vm.active = false;
-
-      vm.open = function(){
-        vm.active = true;
-        $scope.$apply();
-      }
-
-      vm.close = function(){
-        vm.active = false;
-        $scope.$apply();
-      }
-    }
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            controller.open();
-            break;
-          case 'hide':
-          case 'close':
-            controller.close();
-            break;
-        }
-      });
-    }
-  }
-
-  function popupTitle(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink,
-      templateUrl: 'components/popup/popupTitle.html',
-    };
-
-    return directive;
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            console.log("Open(#" + id + "): " + message);
-        }
-      });
-    }
-  }
-})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
  * Directive of the app
- * Depends upon weInput
+ * TODO: to-load, button-groups
  */
 
 (function(angular){
   'use strict';
 
-  angular.module('weed.sidebar', ['weed.core'])
-    .directive('weSidebar', sidebarDirective);
+  angular.module('weed.button', ['weed.core'])
+    .directive('weButton', buttonDirective);
 
-  // Weed api injection
-  sidebarDirective.$inject = ['WeedApi'];
+  // No dependency injections
 
-  function sidebarDirective(weedApi) {
-    var body = angular.element(document.querySelector('body'));
-
-    function openSidebar($scope){
-      body.addClass('open-sidebar');
-      $scope.open = true;
-    }
-
-    function closeSidebar($scope){
-      body.removeClass('open-sidebar');
-      $scope.open = false;
-    }
-
+  function buttonDirective(){
     return {
       restrict: 'A',
       transclude: true,
       replace: true,
-      templateUrl: 'components/sidebar/sidebar.html',
-      link: function($scope, elem, attrs, controllers, $transclude){
-        weedApi.subscribe(attrs.id, function(id, message){
-
-          switch(message){
-            case 'show':
-            case 'open':
-              openSidebar($scope);
-              break;
-            case 'close':
-            case 'hide':
-              closeSidebar($scope);
-              break;
-            case 'toggle':
-              if($scope.open){
-                closeSidebar($scope);
-              }
-              else{
-                openSidebar($scope);
-              }
-          }
-        });
-      }
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '&?',
+          size: '@',
+          state: '@'
+      },
+      templateUrl: 'components/button/button.html',
+      link: buttonLink
     };
   }
-})(angular);
 
-(function(angular){
-  'use strict';
+  function buttonLink(scope, elem, attrs, controllers, $transclude) {
+    var buttonCurrentWidth,
+        buttonCurrentHeight,
+        loaderWidth,
+        oLoader;
 
-  angular.module('weed.sidebar')
-    .directive('weSidebarLink', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          title: '@',
-          icon: '@',
-          position: '@'
-        },
-        templateUrl: 'components/sidebar/sidebarLink.html',
-        link: function($scope, elem, attrs, controllers, $transclude){
-          $transclude(function(clone){
-            if(clone.length > 0){
-              $scope.title = clone[0].textContent;
-            }
-          });
+    // Check if there is text
+    $transclude(function(clone){
+      scope.hasText = clone.length > 0;
+    });
+
+    // If load behavior attached
+    if(scope.toload){
+      elem.on('click', function(e){
+
+        // If yet not loading
+        if(!scope.loading){
+
+          // Try to get a defer from toload attribute
+          var promise = scope.$apply(scope.toload);
+
+          // If it's a promise
+          if(promise.then){
+            promise.then(
+              function(data){
+
+                // On success, set loading false
+                scope.loading = false;
+              },
+              function(data){
+
+                // On failure, set loading false
+                scope.loading = false;
+              }
+            );
+          }
+
+          scope.loading = true;
+
+          // Refresh bindings
+          scope.$apply();
+
+          // Sizing utilities
+          buttonCurrentWidth = elem[0].clientWidth;
+          buttonCurrentHeight = elem[0].clientHeight;
+          loaderWidth = buttonCurrentHeight / 5.0;
+
+          // Fetch loader
+          oLoader = angular.element(elem[0].querySelector('.loader'));
+
+          // Set loader position
+          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
         }
-      };
-    });
-})(angular);
+      });
+    }
+  }
 
-(function(angular){
-  'use strict';
-
-  angular.module('weed.sidebar')
-    .directive('weSidebarHeader', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        scope: {
-          isotype: '@',
-          logotype: '@'
-        },
-        templateUrl: 'components/sidebar/sidebarHeader.html'
-      };
-    });
 })(angular);
 /**
  * @ngdoc function
@@ -3861,4 +3687,193 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
+})(angular);
+(function() {
+  'use strict';
+
+  angular.module('weed.popup', ['weed.core'])
+    .directive('wePopup', popupDirective);
+
+  // Weed api injection
+  popupDirective.$inject = ['WeedApi'];
+
+  function popupDirective(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popup.html',
+      controllerAs: 'popup',
+      controller: popupController
+    };
+
+    return directive;
+
+    popupController.$inject = ['$scope'];
+
+    function popupController($scope){
+      var vm = this;
+
+      vm.active = false;
+
+      vm.open = function(){
+        vm.active = true;
+        $scope.$apply();
+      }
+
+      vm.close = function(){
+        vm.active = false;
+        $scope.$apply();
+      }
+    }
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            controller.open();
+            break;
+          case 'hide':
+          case 'close':
+            controller.close();
+            break;
+        }
+      });
+    }
+  }
+
+  function popupTitle(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popupTitle.html',
+    };
+
+    return directive;
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            console.log("Open(#" + id + "): " + message);
+        }
+      });
+    }
+  }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInput
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.sidebar', ['weed.core'])
+    .directive('weSidebar', sidebarDirective);
+
+  // Weed api injection
+  sidebarDirective.$inject = ['WeedApi'];
+
+  function sidebarDirective(weedApi) {
+    var body = angular.element(document.querySelector('body'));
+    body.addClass('with-sidebar');
+
+    function openSidebar($scope){
+      body.addClass('with-open-sidebar');
+      $scope.open = true;
+    }
+
+    function closeSidebar($scope){
+      body.removeClass('with-open-sidebar');
+      $scope.open = false;
+    }
+
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      templateUrl: 'components/sidebar/sidebar.html',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        weedApi.subscribe(attrs.id, function(id, message){
+
+          switch(message){
+            case 'show':
+            case 'open':
+              openSidebar($scope);
+              break;
+            case 'close':
+            case 'hide':
+              closeSidebar($scope);
+              break;
+            case 'toggle':
+              if($scope.open){
+                closeSidebar($scope);
+              }
+              else{
+                openSidebar($scope);
+              }
+          }
+        });
+      }
+    };
+  }
+})(angular);
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.sidebar')
+    .directive('weSidebarLink', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          title: '@',
+          icon: '@',
+          position: '@'
+        },
+        templateUrl: 'components/sidebar/sidebarLink.html',
+        link: function($scope, elem, attrs, controllers, $transclude){
+          $transclude(function(clone){
+            if(clone.length > 0){
+              $scope.title = clone[0].textContent;
+            }
+          });
+        }
+      };
+    });
+})(angular);
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.sidebar')
+    .directive('weSidebarHeader', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        scope: {
+          isotype: '@',
+          logotype: '@'
+        },
+        templateUrl: 'components/sidebar/sidebarHeader.html'
+      };
+    });
 })(angular);

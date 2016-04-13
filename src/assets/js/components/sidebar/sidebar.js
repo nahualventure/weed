@@ -18,14 +18,15 @@
 
   function sidebarDirective(weedApi) {
     var body = angular.element(document.querySelector('body'));
+    body.addClass('with-sidebar');
 
     function openSidebar($scope){
-      body.addClass('open-sidebar');
+      body.addClass('with-open-sidebar');
       $scope.open = true;
     }
 
     function closeSidebar($scope){
-      body.removeClass('open-sidebar');
+      body.removeClass('with-open-sidebar');
       $scope.open = false;
     }
 

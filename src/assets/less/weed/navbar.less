@@ -311,11 +311,17 @@
   }
 }
 
-body.fixed-navbar{
-  .navbar.fixed{
-    .navbar-main-action{
-      opacity: 1.0;
-      cursor: pointer;
+body{
+  &.with-navbar{
+    padding-top: @navbar-height;
+  }
+
+  &.fixed-navbar{
+    .navbar.fixed{
+      .navbar-main-action{
+        opacity: 1.0;
+        cursor: pointer;
+      }
     }
   }
 }

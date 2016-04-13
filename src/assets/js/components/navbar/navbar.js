@@ -11,10 +11,24 @@
   'use strict';
 
   angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
     .directive('weNavbarElement', navbarElementDirective)
     .directive('weNavbarMainAction', navbarMainActionDirective);
 
   // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
 
   function navbarElementDirective(){
     return {

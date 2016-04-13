@@ -8,16 +8,6 @@
           padding-left: 170px !important;
         }
 
-        body{
-          transition: 0.5s;
-          padding-left: 80px;
-          padding-top: 75px;
-        }
-
-        body.open-sidebar{
-          padding-left: 220px;
-        }
-
         /*.col{
             background: #eee;
         }*/
@@ -60,32 +50,9 @@
     </style>
   </head>
 
-  <body ng-app="weed.test" class="open-modal">
+  <body ng-app="weed.test">
 
-    <!-- <div class="popup-veil grid frame">
-      <div class="row middle-xs">
-        <div class="col shrink">
-          <div class="popup">
-            <div class="popup-title-bar">
-              Título de popup
-
-              <button class="popup-close"></button>
-            </div>
-
-            <div class="popup-content">
-              Test
-            </div>
-
-            <div class="popup-actions">
-              <a we-button type="success" size="small" icon="check">Ejemplo</a>
-              <a we-button type="danger" size="small" icon="bell">Acción</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <div class="navbar">
+    <we-navbar>
 
       <!-- Logo: OK -->
       <a we-navbar-element
@@ -118,7 +85,7 @@
       <div class="navbar-main-action-container">
         <a we-navbar-main-action icon="plus"></a>
       </div>
-    </div>
+    </we-navbar>
 
     <div id="sidebar" we-sidebar>
 

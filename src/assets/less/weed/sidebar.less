@@ -169,7 +169,14 @@ body{
     display: block;
   }
 
-  &.open-sidebar{
+  &.with-sidebar{
+    transition: padding @fast;
+    padding-left: @sidebar-contracted-width;
+  }
+
+  &.with-open-sidebar{
+    padding-left: @sidebar-open-width;
+
     .sidebar{
       width: @sidebar-open-width;
 
@@ -197,11 +204,6 @@ body{
           }
         }
       }
-    }
-
-    .qtip-sidebar{
-      opacity: 0.0 !important;
-      // display: none !important;
     }
 
     .sidebar-bottom-action{
