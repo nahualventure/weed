@@ -4173,13 +4173,13 @@ input[type="radio"] {
   transform: scale(1.05);
   background: #8c8c8c;
 }
-.open-sidebar .navbar .navbar-element.logo {
+.with-open-sidebar .navbar .navbar-element.logo {
   width: 210px;
 }
-.open-sidebar .navbar .navbar-element.logo .navbar-isotype {
+.with-open-sidebar .navbar .navbar-element.logo .navbar-isotype {
   left: 44px;
 }
-.open-sidebar .navbar .navbar-element.logo .navbar-logotype {
+.with-open-sidebar .navbar .navbar-element.logo .navbar-logotype {
   opacity: 1.0;
   left: 85px;
 }
