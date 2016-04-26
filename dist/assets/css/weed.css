@@ -4904,7 +4904,6 @@ body.modal-open {
 }
 .grid {
   overflow-x: hidden;
-  padding-: 0 2rem;
 }
 .grid.frame {
   height: 100%;
@@ -4914,6 +4913,9 @@ body.modal-open {
 }
 .grid.frame > .row > .col {
   height: 100%;
+}
+.grid.scrollable {
+  overflow-y: scroll;
 }
 .row {
   box-sizing: border-box;
@@ -4928,6 +4930,9 @@ body.modal-open {
           flex-wrap: wrap;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
+}
+.row.scrollable {
+  overflow-y: scroll;
 }
 .row.reverse {
   -webkit-flex-direction: row-reverse;
@@ -4965,6 +4970,12 @@ body.modal-open {
 }
 .col.shrink {
   height: auto !important;
+}
+.col.content {
+  padding: 1rem;
+}
+.col.scrollable {
+  overflow-y: scroll;
 }
 .col.xs-1 {
   -webkit-flex-basis: 8.33333333%;

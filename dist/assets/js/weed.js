@@ -2816,11 +2816,9 @@ if (typeof define === 'function' && define.amd) {
 
             authService.refreshToken(api.id)
               .success(function(d){
-                console.log("Token automatically refreshed");
                 api.autoRefresh.enabled = true;
               })
               .error(function(d){
-                console.log("Unable to refresh token atomatically");
                 api.autoRefresh.enabled = true;
               }
             );

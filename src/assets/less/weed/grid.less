@@ -3,7 +3,7 @@
 // Configuration
 @grid-half-gutter-width:                                    0.5rem;
 @grid-gutter-compensation:                                  -0.5rem;
-@grid-outer-margin:                                         2rem;
+@grid-content-padding:                                      1rem;
 @grid-columns:                                              12;
 
 // Classes definition
@@ -19,7 +19,6 @@
 
 .@{grid-class} {
   overflow-x: hidden;
-  padding-: 0 @grid-outer-margin;
 
   &.@{grid-frame-class}{
     height: 100%;
@@ -32,6 +31,10 @@
       }
     }
   }
+
+  &.scrollable{
+    overflow-y: scroll;
+  }
 }
 
 .@{grid-row-class} {
@@ -41,6 +44,10 @@
   flex-wrap: wrap;
   margin-left: @grid-gutter-compensation;
   margin-right: @grid-gutter-compensation;
+
+  &.scrollable{
+    overflow-y: scroll;
+  }
 }
 
 .@{grid-row-class}.reverse {
@@ -63,6 +70,14 @@
 
   &.shrink{
     height: auto !important;
+  }
+
+  &.content{
+    padding: @grid-content-padding;
+  }
+
+  &.scrollable{
+    overflow-y: scroll;
   }
 }
 
