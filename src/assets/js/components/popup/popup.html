@@ -1,4 +1,8 @@
-<div class="popup-veil grid frame" ng-show="popup.active" we-closable>
+<div
+  class="popup-veil grid frame"
+  ng-class="{'is-active': popup.active}"
+  ng-show="popup.active"
+  we-closable>
   <div class="row middle-xs">
     <div class="col shrink">
       <div class="popup" ng-transclude></div>
