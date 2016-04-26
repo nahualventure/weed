@@ -9,8 +9,9 @@
   ;
 
   // No dependencies
+  WeedApi.$inject = ['$timeout'];
 
-  function WeedApi() {
+  function WeedApi($timeout) {
     var listeners  = {};
     var settings   = {};
     var uniqueIds  = [];
@@ -58,7 +59,9 @@
       }
 
       listeners[name].forEach(function(cb) {
-        cb(name, msg);
+
+        // Avoid $digest problems
+        $timeout(function(){cb(name, msg);}, 1);
       });
 
       return;

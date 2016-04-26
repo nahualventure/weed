@@ -291,22 +291,26 @@
 
     <h2>Popup</h2>
     <a we-button icon="heart" type="warning" we-open="test-popup-1">Open test popup</a>
-    <div id="test-popup-1" we-popup>
+    <div ng-controller="PopupController as popupCtrl">
+        <div id="test-popup-1" we-popup>
 
-      <div class="popup-title-bar">
-        Título de popup
+          <div class="popup-title-bar">
+            Título de popup
 
-        <button class="popup-close" we-close></button>
-      </div>
+            <button class="popup-close" we-close></button>
+          </div>
 
-      <div class="popup-content">
-        Test
-      </div>
+          <div class="popup-content">
+            Test
 
-      <div class="popup-actions">
-        <a we-button type="success" size="small" icon="check">Ejemplo</a>
-        <a we-button type="danger" size="small" icon="bell">Acción</a>
-      </div>
+            <a ng-click="popupCtrl.closeActiveElements()">Close</a>
+          </div>
+
+          <div class="popup-actions">
+            <a we-button type="success" size="small" icon="check">Ejemplo</a>
+            <a we-button type="danger" size="small" icon="bell">Acción</a>
+          </div>
+        </div>
     </div>
 
     <h2>Tabs</h2>
@@ -588,6 +592,7 @@
                 .config(weedConfig)
                 .controller('WeedButtonController', weedButtonCtrl)
                 .controller('WeedAuthController', weedAuthController)
+                .controller('PopupController', popupController)
                 .run(weedRun);
 
             // Dependencies
@@ -595,6 +600,15 @@
             weedRun.$inject = ['weedJWTAuthService'];
             weedButtonCtrl.$inject = ['$scope', '$q', '$timeout'];
             weedAuthController.$inject = ['$scope', 'weedJWTAuthService', '$http'];
+            popupController.$inject = ['WeedApi'];
+
+            function popupController(WeedApi){
+                var vm = this;
+
+                vm.closeActiveElements = function(){
+                    WeedApi.closeActiveElements();
+                }
+            }
 
             // Test module http configuration
             function weedConfig($httpProvider){
