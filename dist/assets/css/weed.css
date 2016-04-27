@@ -4553,11 +4553,13 @@ strong.danger,
 /**
   * Edoo popup framework
   */
-body.modal-open {
+body.with-open-popup {
   overflow-y: hidden;
 }
-.popup-veil {
-  background: rgba(0, 0, 0, 0.7);
+.popup-wrapper {
+  display: none;
+}
+.popup-grid-wrapper {
   height: 100%;
   left: 0;
   position: fixed;
@@ -4565,8 +4567,13 @@ body.modal-open {
   width: 100%;
   z-index: 2147483647;
 }
-.popup-wrapper {
-  display: none;
+.popup-grid-wrapper .popup-veil {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 .popup {
   border-radius: 20px;
@@ -4576,6 +4583,7 @@ body.modal-open {
   margin-right: auto;
   max-width: 700px;
   position: relative;
+  z-index: 2147483648;
 }
 .popup button.popup-close {
   background: none;

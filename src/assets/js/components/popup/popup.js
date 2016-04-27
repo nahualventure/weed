@@ -9,6 +9,8 @@
 
   function popupDirective(weedApi) {
 
+    var body = angular.element(document.querySelector('body'));
+
     var directive = {
       restrict: 'A',
       transclude: true,
@@ -31,11 +33,13 @@
 
       vm.open = function(){
         vm.active = true;
+        body.addClass('with-open-popup');
         $scope.$apply();
       }
 
       vm.close = function(){
         vm.active = false;
+        body.removeClass('with-open-popup');
         $scope.$apply();
       }
     }

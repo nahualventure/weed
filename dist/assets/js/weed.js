@@ -3430,35 +3430,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -3544,6 +3515,8 @@ if (typeof define === 'function' && define.amd) {
 
   function popupDirective(weedApi) {
 
+    var body = angular.element(document.querySelector('body'));
+
     var directive = {
       restrict: 'A',
       transclude: true,
@@ -3566,11 +3539,13 @@ if (typeof define === 'function' && define.amd) {
 
       vm.open = function(){
         vm.active = true;
+        body.addClass('with-open-popup');
         $scope.$apply();
       }
 
       vm.close = function(){
         vm.active = false;
+        body.removeClass('with-open-popup');
         $scope.$apply();
       }
     }
@@ -3876,5 +3851,34 @@ if (typeof define === 'function' && define.amd) {
       });
     }
   }
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
 
 })(angular);

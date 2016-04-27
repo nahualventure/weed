@@ -82,18 +82,8 @@
 @popup-search-content-background-color: @black-5;
 @popup-search-close-color: @black-80;
 
-body.modal-open{
+body.with-open-popup{
   overflow-y: hidden;
-}
-
-.popup-veil{
-  background: @popup-modal-background-color;
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: @popup-z-index;
 }
 
 // .mfp-close-btn-in button.mfp-close{
@@ -117,6 +107,24 @@ body.modal-open{
 }
 
 // Popup styling
+.popup-grid-wrapper{
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: @popup-z-index;
+
+  .popup-veil{
+    background: @popup-modal-background-color;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+}
+
 .popup{
   border-radius: @popup-border-radius;
   box-shadow: 0 0 6px 0px @popup-shadow-color;
@@ -125,6 +133,7 @@ body.modal-open{
   margin-right: auto;
   max-width: @popup-max-width;
   position: relative;
+  z-index: @popup-z-index + 1;
 
   // .bubble.bubble-shadow{
   //   background-color: #f6f6f6 !important;
