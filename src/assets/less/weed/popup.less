@@ -3,7 +3,8 @@
   */
 
 // Configuration
-@popup-actions-border-color:              #f8f8f8;
+@popup-actions-border-color:              @black-10;
+@popup-actions-background-color:          @black-5;
 @popup-content-border-color:              none;
 @popup-background-color:                  @white;
 @popup-modal-background-color:            fadeout(@black, 30%);
@@ -17,6 +18,7 @@
 @popup-dual-titled-subtitle-color:        @white;
 
 @popup-transition:                                          0.4s;
+@popup-content-max-height:                                  400px;
 
 @popup-alert-title-color: @black;
 @popup-alert-close-button-color: @black;
@@ -121,7 +123,7 @@ body.with-open-popup{
     background: @popup-modal-background-color;
     height: 100%;
     left: 0;
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
   }
@@ -170,6 +172,7 @@ body.with-open-popup{
   margin-left: auto;
   margin-right: auto;
   max-width: @popup-max-width;
+  overflow: hidden;
   position: relative;
   z-index: @popup-z-index + 1;
 
@@ -284,6 +287,11 @@ body.with-open-popup{
     border-bottom: 1px solid @popup-content-border-color;
     padding: @popup-vertical-spacing @popup-horizontal-spacing;
 
+    @media(min-width: @system-small-break){
+      max-height: @popup-content-max-height;
+      overflow-y: scroll;
+    }
+
     &.clear-paddings{
       padding: 0;
 
@@ -300,6 +308,7 @@ body.with-open-popup{
   }
 
   .popup-actions{
+    background: @popup-actions-background-color;
     border-top: 1px solid @popup-actions-border-color;
     padding: @popup-action-padding;
     text-align: center;
