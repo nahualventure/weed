@@ -16,6 +16,8 @@
 @popup-title-bar-inset-shadow-color:      @black-35;
 @popup-dual-titled-subtitle-color:        @white;
 
+@popup-transition:                                          0.4s;
+
 @popup-alert-title-color: @black;
 @popup-alert-close-button-color: @black;
 @popup-alert-close-button-background: @white;
@@ -122,6 +124,42 @@ body.with-open-popup{
     position: fixed;
     top: 0;
     width: 100%;
+  }
+
+  // For ngAnimate
+  transition: @popup-transition;
+
+  .popup-veil{
+    transition: @popup-transition * 0.75;
+  }
+
+  .popup{
+    transition: @popup-transition;
+  }
+
+  &.ng-hide{
+
+    .popup-veil{
+      opacity: 0;
+    }
+
+    .popup{
+      opacity: 0.0;
+      transform: scale(0.95);
+    }
+  }
+
+  &.ng-hide-active{
+
+    .popup-veil{
+      opacity: 1.0;
+    }
+
+    .popup{
+      margin-top: 0;
+      opacity: 1.0;
+      transform: scale(1.0);
+    }
   }
 }
 

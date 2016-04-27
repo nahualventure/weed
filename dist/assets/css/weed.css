@@ -4566,6 +4566,7 @@ body.with-open-popup {
   top: 0;
   width: 100%;
   z-index: 2147483647;
+  transition: 0.4s;
 }
 .popup-grid-wrapper .popup-veil {
   background: rgba(0, 0, 0, 0.7);
@@ -4574,6 +4575,29 @@ body.with-open-popup {
   position: fixed;
   top: 0;
   width: 100%;
+}
+.popup-grid-wrapper .popup-veil {
+  transition: 0.3s;
+}
+.popup-grid-wrapper .popup {
+  transition: 0.4s;
+}
+.popup-grid-wrapper.ng-hide .popup-veil {
+  opacity: 0;
+}
+.popup-grid-wrapper.ng-hide .popup {
+  opacity: 0.0;
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+.popup-grid-wrapper.ng-hide-active .popup-veil {
+  opacity: 1.0;
+}
+.popup-grid-wrapper.ng-hide-active .popup {
+  margin-top: 0;
+  opacity: 1.0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 .popup {
   border-radius: 20px;
