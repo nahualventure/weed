@@ -4037,13 +4037,9 @@ input[type="radio"] {
   background: #fff;
   border: none;
 }
-.navbar .navbar-element.search-form .input-wrapper .tt-dropdown-menu,
-.navbar .navbar-element.search-form input .tt-dropdown-menu {
-  margin-top: 38px;
-}
-.navbar .navbar-element.search-form .input-wrapper .form-input-mark,
-.navbar .navbar-element.search-form input .form-input-mark {
-  color: #808080;
+.navbar .navbar-element.search-form .input-wrapper .input-mark,
+.navbar .navbar-element.search-form input .input-mark {
+  color: #000000;
 }
 .navbar .navbar-element.search-form .input-wrapper {
   overflow: hidden;
@@ -4051,29 +4047,40 @@ input[type="radio"] {
 .navbar .navbar-element.search-form .input-wrapper input {
   margin: 0;
 }
+.navbar .navbar-element.search-form .input-wrapper input::-webkit-input-placeholder,
+.navbar .navbar-element.search-form .input-wrapper input:-moz-placeholder,
+.navbar .navbar-element.search-form .input-wrapper input::-moz-placeholder,
+.navbar .navbar-element.search-form .input-wrapper input:-ms-input-placeholder {
+  color: #000000;
+}
 .navbar .navbar-element.navbar-user {
   float: right;
+}
+.navbar .navbar-element.navbar-user.no-picture span.user {
+  margin-left: 0;
 }
 .navbar .navbar-element.navbar-user .navbar-element-floater {
   margin-top: 10px;
   margin-bottom: 10px;
   height: 45px;
 }
+.navbar .navbar-element.navbar-user .navbar-element-floater:before,
+.navbar .navbar-element.navbar-user .navbar-element-floater:after {
+  content: "\00a0";
+  line-height: 45px;
+}
 .navbar .navbar-element.navbar-user img.picture {
   border-radius: 100px;
-  box-shadow: 0px 0px 0px 2px #757575;
+  box-shadow: 0px 0px 0px 2px #666666;
   box-sizing: border-box;
-  float: left;
   height: 45px;
   vertical-align: middle;
   width: 45px;
 }
 .navbar .navbar-element.navbar-user span.user {
-  margin-top: 5.5px;
-  margin-bottom: 5.5px;
-  float: right;
+  display: inline-block;
   font-family: sans-serif;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   vertical-align: middle;
 }
 .navbar .navbar-element.navbar-user span.user .name {
@@ -4082,21 +4089,27 @@ input[type="radio"] {
   white-space: nowrap;
   color: #fff;
   display: block;
-  font-size: 1.1em;
+  font-size: 1.3em;
   max-width: 120px;
-  margin-top: -3px;
 }
 .navbar .navbar-element.navbar-user span.user .role {
-  color: #fff;
+  color: #b3b3b3;
   display: block;
   font-size: 0.9em;
 }
 .navbar .navbar-element.navbar-link {
+  line-height: 65px;
   height: 65px;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 16px;
+}
+.navbar .navbar-element.navbar-link:before,
+.navbar .navbar-element.navbar-link:after {
+  content: "\00a0";
 }
 .navbar .navbar-element.navbar-link .navbar-element-floater {
-  margin-top: 22.5px;
-  margin-bottom: 22.5px;
+  display: inline-block;
   height: auto;
 }
 .navbar .navbar-element.navbar-link .navbar-element-floater .ic-caret-down {
@@ -4104,8 +4117,8 @@ input[type="radio"] {
   margin-left: 5px;
 }
 .navbar .navbar-element.navbar-link i {
-  color: #fff;
-  font-size: 1.4em;
+  color: inherit;
+  font-size: 18px;
 }
 .navbar .navbar-element.navbar-notifications {
   position: relative;
@@ -4124,11 +4137,11 @@ input[type="radio"] {
   text-align: center;
   top: 12px;
 }
-.navbar a.navbar-element .ic {
+.navbar a.navbar-element {
   transition: 0.25s;
   opacity: 0.8;
 }
-.navbar a.navbar-element:hover .ic {
+.navbar a.navbar-element:hover {
   opacity: 1.0;
 }
 .navbar a.navbar-element:active {

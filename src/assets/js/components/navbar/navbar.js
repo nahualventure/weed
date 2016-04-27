@@ -41,7 +41,15 @@
         icon: '@',
         logotype: '@',
         isotype: '@',
-        placeholder: '@'
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
       },
       templateUrl: function(elem, attrs) {
         var template = '';
@@ -54,6 +62,9 @@
             break;
           case 'separator':
             template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
             break;
           default:
             template = 'navbarElement.html'

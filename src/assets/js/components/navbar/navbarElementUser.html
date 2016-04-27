@@ -1,0 +1,18 @@
+<a class="navbar-element navbar-user" 
+  ng-class="
+    {
+      'pull-left': position === 'left',
+      'pull-right': position === 'right',
+      'no-picture': !userPicture
+    }">
+
+  <span class="navbar-element-floater">
+    <img ng-attr-src="{{ userPicture }}" ng-if="userPicture" class="picture">
+
+    <span class="user" ng-if="hasText">
+      <span class="name"><ng-transclude></ng-transclude></span>
+      <span class="role">{{ userRole }}</span>
+    </span>
+
+  </span>
+</a>

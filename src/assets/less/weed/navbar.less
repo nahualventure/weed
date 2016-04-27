@@ -10,12 +10,17 @@
 @navbar-config-button-color:                                @white;
 @navbar-element-hover-color:                                darken(@navbar-color, 2%);
 @navbar-notifications-bubble-text-color:                    @white;
-@navbar-role-color:                                         @white;
+@navbar-role-color:                                         @black-30;
 @navbar-search-background-color:                            @white;
 @navbar-search-font-color:                                  @black-30;
 @navbar-search-font-family:                                 sans-serif;
+@navbar-search-icon-color:                                  @black;
+@navbar-search-placeholder-color:                           @black;
 @navbar-user-font-family:                                   sans-serif;
 @navbar-username-color:                                     @white;
+@navbar-element-link-icon-size:                             18px;
+@navbar-element-link-font-size:                             16px;
+@navbar-element-link-color:                                 @white;
 
 @navbar-config-button-height:                               20px;
 @navbar-element-horizontal-margin:                          20px;
@@ -129,15 +134,11 @@
       .input-wrapper, input{
         .bevel(@navbar-color);     // Input height
         .vertical-center(@navbar-height, 41px + 2px);
-        background: @white;
+        background: @navbar-search-background-color;
         border: none;
 
-        .tt-dropdown-menu{
-          margin-top: 38px;
-        }
-
-        .form-input-mark{
-          color: @navbar-color;
+        .input-mark{
+          color: @navbar-search-icon-color;
         }
       }
 
@@ -145,6 +146,7 @@
         overflow: hidden;
 
         input{
+          .placeholder(@navbar-search-placeholder-color);
           margin: 0;
         }
       }
@@ -152,19 +154,29 @@
 
     // Navbar user display
     &.navbar-user{
-      .pull-right;
+      float: right;
+
+      &.no-picture{
+        span.user{
+          margin-left: 0;
+        }
+      }
 
       .navbar-element-floater{
         .center-in-navbar(@navbar-picture-size);
         height: @navbar-picture-size;
+
+        &:before, &:after{
+          content: "\00a0";
+          line-height: @navbar-picture-size;
+        }
       }
 
       // Rounded picture
       img.picture{
         border-radius: 100px; // Extreme round border (circle)
-        box-shadow: 0px 0px 0px 2px darken(@navbar-color, 4%); // Safari fix instead of border
+        box-shadow: 0px 0px 0px 2px darken(@navbar-color, 10%); // Safari fix instead of border
         box-sizing: border-box;
-        float: left;;
         height: @navbar-picture-size;
         vertical-align: middle;
         width: @navbar-picture-size;
@@ -172,19 +184,17 @@
 
       // User name
       span.user{
-        .vertical-center(@navbar-picture-size; @navbar-expected-user-height);
-        float: right;
+        display: inline-block;
         font-family: @navbar-user-font-family;
-        margin-left: @element-vertical-margin;
+        margin-left: @element-vertical-margin / 2;
         vertical-align: middle;
 
         .name{
           .ellipsis();
           color: @navbar-username-color;
           display: block;
-          font-size: 1.1em;
+          font-size: 1.3em;
           max-width: 120px;
-          margin-top: -3px;
         }
 
         .role{
@@ -198,10 +208,19 @@
     // Configuration section
     // Notifications section
     &.navbar-link{
+      line-height: @navbar-height;
       height: @navbar-height;
+      white-space: nowrap;
+      color: @navbar-element-link-color;
+      font-size: @navbar-element-link-font-size;
+      // font-weight: bold;
+
+      &:before, &:after{
+        content: "\00a0";
+      }
 
       .navbar-element-floater{
-        .center-in-navbar(@navbar-config-button-height);
+        display: inline-block;
         height: auto;
 
         .@{fa-css-prefix}-caret-down{
@@ -211,8 +230,8 @@
       }
 
       i{
-        color: @navbar-config-button-color;
-        font-size: 1.4em;
+        color: inherit;
+        font-size: @navbar-element-link-icon-size;
       }
     }
 
@@ -238,15 +257,11 @@
 
   // Navbar element whose hover is defined (anchor)
   a.navbar-element{
-    .@{fa-css-prefix}{
-      transition: @faster;
-      opacity: 0.8;
-    }
+    transition: @faster;
+    opacity: 0.8;
 
     &:hover{
-      .@{fa-css-prefix}{
-        opacity: 1.0;
-      }
+      opacity: 1.0;
     }
 
     &:active{
