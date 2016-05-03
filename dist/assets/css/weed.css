@@ -2350,6 +2350,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #fbfbfb;
 }
 .button.no-paddings {
   padding: 0;
@@ -2776,6 +2777,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #c5c5c5;
 }
 .button.button-gray [class^="ic-"],
 .button.button-gray [class*=" ic-"],
@@ -2851,6 +2853,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #b9b9b9;
 }
 .button.button-info {
   background-color: rgba(194, 194, 194, 0.15);
@@ -2909,6 +2912,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #00c8c6;
 }
 .button.button-info:hover,
 .button.button-info.hover {
@@ -2974,6 +2978,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #2bd697;
 }
 .button.button-danger {
   background-color: rgba(194, 194, 194, 0.15);
@@ -3032,6 +3037,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #f08b8b;
 }
 .button.button-warning {
   background-color: rgba(194, 194, 194, 0.15);
@@ -3090,6 +3096,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #ffdc35;
 }
 .button.button-inverted {
   background-color: rgba(194, 194, 194, 0.15);
@@ -3148,6 +3155,7 @@ button.button {
   text-shadow: none !important;
   background: none !important;
   border: none !important;
+  color: #4f4f4f;
 }
 .ie7 .button {
   margin-right: 2px;
@@ -5842,6 +5850,151 @@ body.with-open-popup {
         -ms-flex-order: 1;
             order: 1;
   }
+}
+body.sidebarless .corner-notification {
+  left: 15px;
+}
+.corner-notification {
+  transition: 0.25s;
+  height: 70px;
+  left: 85px;
+  position: fixed;
+  width: 355px;
+  bottom: 20px;
+  z-index: 2147483647;
+}
+.corner-notification.success .background-mask .background {
+  background: #36AD5B;
+}
+.corner-notification.success .text {
+  color: #fff;
+}
+.corner-notification.success .tag {
+  background: #188e55;
+}
+.corner-notification.error .background-mask .background {
+  background: #de5a5a;
+}
+.corner-notification.error .tag {
+  background: #d63030;
+}
+.corner-notification.error .text {
+  color: #fff;
+}
+.corner-notification .background-mask {
+  height: 110%;
+  margin-left: 27px;
+  overflow-x: hidden;
+  position: relative;
+  width: 365px;
+}
+.corner-notification .background-mask .background,
+.corner-notification .background-mask .text,
+.corner-notification .background-mask .close {
+  transition: 0.5s;
+  transition-delay: 0.2s;
+}
+.corner-notification .background-mask .background {
+  background: #fff;
+  border-radius: 1000px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  height: 70px;
+  margin-left: -27px;
+  width: 355px;
+}
+.corner-notification .background-mask .text {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-size: 13px;
+  left: 0;
+  line-height: 1.4em;
+  margin-left: -27px;
+  padding: 0 54px 0 90px;
+  position: absolute;
+  top: 0;
+  width: 355px;
+  max-height: 70px;
+  overflow-y: hidden;
+}
+.corner-notification .background-mask .close {
+  width: 23px;
+  height: 23px;
+  background: #fff;
+  border-radius: 1000px;
+  color: #bfbfbf;
+  display: block;
+  font-size: 12px;
+  line-height: 21px;
+  position: absolute;
+  right: 54px;
+  text-align: center;
+  top: 22.5px;
+}
+.corner-notification .background-mask .close:hover {
+  border-color: #c4c4c4;
+  color: #c4c4c4;
+}
+.corner-notification .background-mask .close .ic {
+  height: 100%;
+  line-height: 23px;
+}
+.corner-notification .tag,
+.corner-notification .achievement-badge {
+  transition: 0.25s;
+  transition-delay: 0;
+}
+.corner-notification .tag {
+  width: 73px;
+  height: 73px;
+  background-size: cover;
+  border-radius: 1000px;
+  color: #fff;
+  font-size: 2em;
+  left: 0;
+  line-height: 70px;
+  position: absolute;
+  text-align: center;
+  top: -1px;
+}
+.corner-notification .tag .ic {
+  height: 100%;
+  line-height: 70px;
+  opacity: 0.8;
+}
+.corner-notification.ng-hide {
+  transition-delay: 0.75s;
+}
+.corner-notification.ng-hide .background-mask .background,
+.corner-notification.ng-hide .background-mask .text {
+  margin-left: -357px;
+  transition: 0.75s cubic-bezier(0.37, -0.01, 0.23, 1.55);
+}
+.corner-notification.ng-hide .background-mask .text {
+  opacity: 0;
+}
+.corner-notification.ng-hide .background-mask .close {
+  transition: 0.75s cubic-bezier(0.37, -0.01, 0.23, 1.55);
+  right: 384px;
+}
+.corner-notification.ng-hide .tag,
+.corner-notification.ng-hide .achievement-badge {
+  opacity: 0;
+  transition: 0.25s;
+  transition-delay: 0.4s;
+}
+.corner-notification.ng-hide .tag {
+  width: 34px;
+  height: 34px;
+  font-size: 0.8em;
+  line-height: 34px;
+  margin-left: 18px;
+  margin-top: 28px;
+}
+.corner-notification .grid {
+  height: 70px;
+}
+.with-open-sidebar .corner-notification {
+  left: 230px;
 }
 /*
  * Instructions: each weed module contains a base customization variables at

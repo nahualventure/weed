@@ -47,6 +47,10 @@
             height: 100%;
             margin: 0;
         }
+
+        .grid{
+          padding: 0 1rem;
+        }
     </style>
   </head>
 
@@ -136,10 +140,10 @@
     <a we-button icon="cogs" type="danger" size="small">Test</a>
 
     <h2>Buttons with loaders</h2>
-    <a we-button state="block" type="success" toload="true">Test</a> <br>
+    <a we-button type="success" toload="true">Test</a> <br>
     <a we-button icon="bell" type="success" toload="true"></a> <br>
 
-    <a we-button icon="bell" type="warning" size="small" toload="true">Test</a> <br>
+    <a we-button class="clear-background" icon="bell" type="warning" size="small" toload="true">Test</a> <br>
     <a we-button icon="bell" type="warning" size="small" toload="true"></a> <br>
 
     <a we-button icon="bell" type="danger" size="tiny" toload="true">Test</a> <br>
@@ -500,19 +504,19 @@
 
     <h2>Horizontal alignment</h2>
     <div class="grid">
-        <div class="row">
+        <div class="row ">
             <div class="col xs-6">
                 <div class="box">Start</div>
             </div>
         </div>
 
-        <div class="row center-xs">
+        <div class="row center-xs end-m start-l">
             <div class="col xs-6">
                 <div class="box">Center</div>
             </div>
         </div>
 
-        <div class="row end-xs">
+        <div class="row center-l end-xs start-m">
             <div class="col xs-6">
                 <div class="box">End</div>
             </div>
@@ -521,7 +525,7 @@
 
     <h2>Vertical alignment</h2>
     <div class="grid">
-        <div class="ref row">
+        <div class="ref row top-xs middle-m bottom-l">
             <div class="col">
                 <div class="ref box">Ref</div>
             </div>
@@ -531,7 +535,7 @@
             </div>
         </div>
 
-        <div class="ref row middle-xs">
+        <div class="ref row middle-xs top-l bottom-m">
             <div class="col">
                 <div class="ref box">Ref</div>
             </div>
@@ -541,7 +545,7 @@
             </div>
         </div>
 
-        <div class="ref row bottom-xs">
+        <div class="ref row bottom-xs middle-l top-m">
             <div class="col">
                 <div class="ref box">Ref</div>
             </div>
@@ -623,8 +627,27 @@
         <a we-button type="info" icon="heart" ng-click="authCtrl.testPost()">POST</a><br>
     </div>
 
+    <h1>Corner notifications</h1>
+    <div ng-controller="NotificationController as ctrl">
+        <a we-button type="info" icon="bell" we-open="main-notification">Open notification</a>
+        <a we-button type="warning" icon="times" we-close="main-notification">Close notification</a>
+        <a we-button type="danger" icon="cog" ng-click="ctrl.sendNotification()">Create notification</a>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div
+        we-corner-notification
+        id="main-notification"
+        timeout="4000"
+        type="success"
+        icon="bell"
+        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quo officiis."></div>
+
     <!-- Dev scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
     <script src="/dist/assets/js/weed.js"></script>
     <script src="/dist/assets/js/templates.js"></script>
     <script>
@@ -632,11 +655,12 @@
             'use strict';
 
             angular
-                .module('weed.test', ['weed'])
+                .module('weed.test', ['weed', 'ngAnimate'])
                 .config(weedConfig)
                 .controller('WeedButtonController', weedButtonCtrl)
                 .controller('WeedAuthController', weedAuthController)
                 .controller('PopupController', popupController)
+                .controller('NotificationController', notificationController)
                 .run(weedRun);
 
             // Dependencies
@@ -645,6 +669,20 @@
             weedButtonCtrl.$inject = ['$scope', '$q', '$timeout'];
             weedAuthController.$inject = ['$scope', 'weedJWTAuthService', '$http'];
             popupController.$inject = ['WeedApi'];
+            notificationController.$inject = ['WeedApi'];
+
+            function notificationController(WeedApi){
+                var vm = this;
+
+                vm.sendNotification = function(){
+                    WeedApi.publish('main-notification', {
+                        text: 'jajaja',
+                        type: 'error',
+                        icon: 'cog',
+                        timeout: 2000
+                    })
+                }
+            }
 
             function popupController(WeedApi){
                 var vm = this;

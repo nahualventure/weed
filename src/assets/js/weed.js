@@ -13,7 +13,8 @@
       'weed.popup',
       'weed.tabs',
       'weed.sidebar',
-      'weed.toload'
+      'weed.toload',
+      'weed.corner-notifications'
     ])
     .constant('weed.config', {});
 })(angular);

@@ -1,5 +1,5 @@
-<a class="button {{ state }}"
-  ng-class="{
+<a ng-class="{
+    'button': true,
     'button-primary': type === 'primary',
     'button-success': type === 'success',
     'button-warning': type === 'warning',
@@ -7,6 +7,11 @@
     'button-info': type === 'info',
     'button-gray': type === 'gray',
     'button-inverse': type === 'inverse',
+
+    'disabled': state === 'disabled',
+    'selected': state === 'selected',
+    'active': state === 'active',
+    'hover': state === 'hover',
 
     'button-small': size === 'small',
     'button-large': size === 'large',

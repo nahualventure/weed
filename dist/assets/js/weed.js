@@ -2582,7 +2582,8 @@ if (typeof define === 'function' && define.amd) {
       'weed.popup',
       'weed.tabs',
       'weed.sidebar',
-      'weed.toload'
+      'weed.toload',
+      'weed.corner-notifications'
     ])
     .constant('weed.config', {});
 })(angular);
@@ -3008,6 +3009,98 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.button', ['weed.core'])
+    .directive('weButton', buttonDirective);
+
+  // No dependency injections
+
+  function buttonDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+          icon: '@',
+          type: '@',
+          toload: '&?',
+          size: '@',
+          state: '@'
+      },
+      templateUrl: 'components/button/button.html',
+      link: buttonLink
+    };
+  }
+
+  function buttonLink(scope, elem, attrs, controllers, $transclude) {
+    var buttonCurrentWidth,
+        buttonCurrentHeight,
+        loaderWidth,
+        oLoader;
+
+    // Check if there is text
+    $transclude(function(clone){
+      scope.hasText = clone.length > 0;
+    });
+
+    // If load behavior attached
+    if(scope.toload){
+      elem.on('click', function(e){
+
+        // If yet not loading
+        if(!scope.loading){
+
+          // Try to get a defer from toload attribute
+          var promise = scope.$apply(scope.toload);
+
+          // If it's a promise
+          if(promise.then){
+            promise.then(
+              function(data){
+
+                // On success, set loading false
+                scope.loading = false;
+              },
+              function(data){
+
+                // On failure, set loading false
+                scope.loading = false;
+              }
+            );
+          }
+
+          scope.loading = true;
+
+          // Refresh bindings
+          scope.$apply();
+
+          // Sizing utilities
+          buttonCurrentWidth = elem[0].clientWidth;
+          buttonCurrentHeight = elem[0].clientHeight;
+          loaderWidth = buttonCurrentHeight / 5.0;
+
+          // Fetch loader
+          oLoader = angular.element(elem[0].querySelector('.loader'));
+
+          // Set loader position
+          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
+        }
+      });
+    }
+  }
+
+})(angular);
 (function(angular) {
   'use strict';
 
@@ -3371,98 +3464,6 @@ if (typeof define === 'function' && define.amd) {
  * @description
  * # navbarDirective
  * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.button', ['weed.core'])
-    .directive('weButton', buttonDirective);
-
-  // No dependency injections
-
-  function buttonDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-          icon: '@',
-          type: '@',
-          toload: '&?',
-          size: '@',
-          state: '@'
-      },
-      templateUrl: 'components/button/button.html',
-      link: buttonLink
-    };
-  }
-
-  function buttonLink(scope, elem, attrs, controllers, $transclude) {
-    var buttonCurrentWidth,
-        buttonCurrentHeight,
-        loaderWidth,
-        oLoader;
-
-    // Check if there is text
-    $transclude(function(clone){
-      scope.hasText = clone.length > 0;
-    });
-
-    // If load behavior attached
-    if(scope.toload){
-      elem.on('click', function(e){
-
-        // If yet not loading
-        if(!scope.loading){
-
-          // Try to get a defer from toload attribute
-          var promise = scope.$apply(scope.toload);
-
-          // If it's a promise
-          if(promise.then){
-            promise.then(
-              function(data){
-
-                // On success, set loading false
-                scope.loading = false;
-              },
-              function(data){
-
-                // On failure, set loading false
-                scope.loading = false;
-              }
-            );
-          }
-
-          scope.loading = true;
-
-          // Refresh bindings
-          scope.$apply();
-
-          // Sizing utilities
-          buttonCurrentWidth = elem[0].clientWidth;
-          buttonCurrentHeight = elem[0].clientHeight;
-          loaderWidth = buttonCurrentHeight / 5.0;
-
-          // Fetch loader
-          oLoader = angular.element(elem[0].querySelector('.loader'));
-
-          // Set loader position
-          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
-        }
-      });
-    }
-  }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
  * Depends upon weInputWrapper
  */
 
@@ -3543,6 +3544,94 @@ if (typeof define === 'function' && define.amd) {
       templateUrl: 'components/navbar/navbar_element_main_action.html'
     };
   }
+})(angular);
+(function(angular){
+  'use strict';
+
+  // TODO
+  angular
+    .module('weed.corner-notifications', ['weed.core'])
+    .directive('weCornerNotification', cornerNotificationDirective);
+
+  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
+
+  function cornerNotificationDirective(WeedApi, $timeout){
+
+    return {
+      restrict: 'A',
+      replace: true,
+      templateUrl: 'components/notifications/cornerNotifications.html',
+      scope: {
+        type: '@',
+        icon: '@',
+        text: '@',
+        timeout: '@'
+      },
+      controller: cornerNotificationsController,
+      controllerAs: 'ctrl',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        $scope.open = false;
+        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
+
+        WeedApi.subscribe(attrs.id, function(id, message){
+          switch(message){
+            case 'show':
+            case 'open':
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+              break;
+
+            case 'close':
+            case 'hide':
+              $scope.open = false;
+              break;
+
+            case 'toggle':
+              if($scope.open){
+                $scope.open = false;
+              }
+              else{
+                $scope.open = true;
+
+                // Close after a timeout
+                $timeout(function(){
+                  $scope.open = false;
+                }, $scope.timeout);
+              }
+              break;
+
+            default:
+              controllers.text = message.text;
+              controllers.type = message.type;
+              controllers.icon = message.icon;
+              $scope.timeout = message.timeout;
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+          }
+        });
+      }
+    };
+
+    // Injection
+    cornerNotificationsController.$inject = ['$scope'];
+
+    function cornerNotificationsController($scope){
+      var vm = this;
+      vm.icon = $scope.icon;
+      vm.type = $scope.type;
+      vm.text = $scope.text;
+    }
+  }
+
+
 })(angular);
 (function() {
   'use strict';
@@ -3631,6 +3720,162 @@ if (typeof define === 'function' && define.amd) {
       });
     }
   }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false
+          tabsetCtrl.addTab(scope)
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var self = this;
+
+          self.tabs = [];
+
+          self.addTab = function addTab(tab) {
+            self.tabs.push(tab);
+
+            if(self.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          self.select = function(selectedTab) {
+            angular.forEach(self.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.toload', ['weed.core'])
+    .directive('weToload', toloadDirective);
+
+  // Dependencies
+  toloadDirective.$inject = ['$parse'];
+
+  function toloadDirective($parse){
+    return {
+      restrict: 'A',
+      scope: {
+        method: '&weToload',
+        loadingClass: '@'
+      },
+      link: toloadLink
+    };
+
+    function toloadLink(scope, elem, attrs, controllers, $transclude) {
+
+      var clickHandler;
+
+      elem.on('click', function(e){
+
+        // If yet not loading
+        if(!scope.loading){
+
+          // Mark as loading
+          scope.loading = true;
+
+          // Add loading class
+          elem.addClass(scope.loadingClass);
+
+          // Try to get a defer from toload attribute
+          var promise = scope.$apply(scope.method);
+
+          // If it's a promise
+          if(promise && promise.then){
+            promise.then(
+              function(data){
+
+                // On success, set loading false
+                scope.loading = false;
+
+                // Remove loading class
+                elem.removeClass(scope.loadingClass);
+              },
+              function(data){
+
+                // On failure, set loading false
+                scope.loading = false;
+
+                // Remove loading class
+                elem.removeClass(scope.loadingClass);
+              }
+            );
+          }
+        }
+      });
+    }
+  }
+
 })(angular);
 /**
  * @ngdoc function
@@ -3736,160 +3981,4 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/sidebar/sidebarHeader.html'
       };
     });
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.toload', ['weed.core'])
-    .directive('weToload', toloadDirective);
-
-  // Dependencies
-  toloadDirective.$inject = ['$parse'];
-
-  function toloadDirective($parse){
-    return {
-      restrict: 'A',
-      scope: {
-        method: '&weToload',
-        loadingClass: '@'
-      },
-      link: toloadLink
-    };
-
-    function toloadLink(scope, elem, attrs, controllers, $transclude) {
-
-      var clickHandler;
-
-      elem.on('click', function(e){
-
-        // If yet not loading
-        if(!scope.loading){
-
-          // Mark as loading
-          scope.loading = true;
-
-          // Add loading class
-          elem.addClass(scope.loadingClass);
-
-          // Try to get a defer from toload attribute
-          var promise = scope.$apply(scope.method);
-
-          // If it's a promise
-          if(promise && promise.then){
-            promise.then(
-              function(data){
-
-                // On success, set loading false
-                scope.loading = false;
-
-                // Remove loading class
-                elem.removeClass(scope.loadingClass);
-              },
-              function(data){
-
-                // On failure, set loading false
-                scope.loading = false;
-
-                // Remove loading class
-                elem.removeClass(scope.loadingClass);
-              }
-            );
-          }
-        }
-      });
-    }
-  }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false
-          tabsetCtrl.addTab(scope)
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var self = this;
-
-          self.tabs = [];
-
-          self.addTab = function addTab(tab) {
-            self.tabs.push(tab);
-
-            if(self.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
-
-          self.select = function(selectedTab) {
-            angular.forEach(self.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
-              }
-            });
-
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
-
 })(angular);

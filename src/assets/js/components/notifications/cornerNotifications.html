@@ -1,0 +1,21 @@
+<div class="corner-notification {{ ctrl.type }}" ng-show="open" we-closable>
+  <div class="background-mask">
+    <div class="background"></div>
+
+    <div class="grid frame text">
+      <div class="row middle-xs">
+        <div class="col shrink">
+          {{ ctrl.text }}
+        </div>
+      </div>
+    </div>
+
+    <a class="close" we-close>
+      <i class="ic ic-times"></i>
+    </a>
+  </div>
+
+  <div class="tag {{ tag_class }}" style="background-image: url({{ image }})">
+    <i class="ic ic-{{ ctrl.icon }}"></i>
+  </div>
+</div>
