@@ -3211,6 +3211,14 @@ select {
   height: 53px;
   line-height: 53px;
 }
+select.left-end {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+select.right-end {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
 select.block {
   display: block;
   width: 100%;
@@ -6202,6 +6210,310 @@ body.sidebarless .corner-notification {
   color: #a6a7a7;
   display: inline-block;
   width: 110px;
+}
+/**
+  * Edoo tag framework:  TODO v1.0 docu
+  */
+.tag {
+  font-size: 0.8em;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #f6f6f6;
+  border: 1px solid #ececec;
+  color: #bfbfbf;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.custom {
+  border-color: rgba(228, 228, 228, 0);
+  color: #fff;
+}
+.tag.hidden {
+  opacity: 0.0;
+}
+.tag .text {
+  vertical-align: middle;
+}
+.tag .actions {
+  margin-right: -12px;
+}
+.tag .ic.ic-times:hover {
+  color: #d1d1d1;
+}
+.tag .ic.ic-times:active {
+  color: #bfbfbf;
+  margin-bottom: -1px;
+}
+.tag.tag-primary {
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #787878;
+  border: 1px solid #6e6e6e;
+  color: #fff;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.tag-primary.custom {
+  border-color: rgba(102, 102, 102, 0);
+  color: #fff;
+}
+.tag.tag-primary.hidden {
+  opacity: 0.0;
+}
+.tag.tag-primary .text {
+  vertical-align: middle;
+}
+.tag.tag-primary .actions {
+  margin-right: -12px;
+}
+.tag.tag-primary .ic.ic-times:hover {
+  color: #ffffff;
+}
+.tag.tag-primary .ic.ic-times:active {
+  color: #fff;
+  margin-bottom: -1px;
+}
+.tag.tag-info {
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #008782;
+  border: 1px solid #00736e;
+  color: #fff;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.tag-info.custom {
+  border-color: rgba(0, 99, 96, 0);
+  color: #fff;
+}
+.tag.tag-info.hidden {
+  opacity: 0.0;
+}
+.tag.tag-info .text {
+  vertical-align: middle;
+}
+.tag.tag-info .actions {
+  margin-right: -12px;
+}
+.tag.tag-info .ic.ic-times:hover {
+  color: #ffffff;
+}
+.tag.tag-info .ic.ic-times:active {
+  color: #fff;
+  margin-bottom: -1px;
+}
+.tag.tag-success {
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #1ca462;
+  border: 1px solid #199358;
+  color: #fff;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.tag-success.custom {
+  border-color: rgba(23, 134, 80, 0);
+  color: #fff;
+}
+.tag.tag-success.hidden {
+  opacity: 0.0;
+}
+.tag.tag-success .text {
+  vertical-align: middle;
+}
+.tag.tag-success .actions {
+  margin-right: -12px;
+}
+.tag.tag-success .ic.ic-times:hover {
+  color: #ffffff;
+}
+.tag.tag-success .ic.ic-times:active {
+  color: #fff;
+  margin-bottom: -1px;
+}
+.tag.tag-danger {
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #de5a5a;
+  border: 1px solid #db4949;
+  color: #fff;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.tag-danger.custom {
+  border-color: rgba(216, 60, 60, 0);
+  color: #fff;
+}
+.tag.tag-danger.hidden {
+  opacity: 0.0;
+}
+.tag.tag-danger .text {
+  vertical-align: middle;
+}
+.tag.tag-danger .actions {
+  margin-right: -12px;
+}
+.tag.tag-danger .ic.ic-times:hover {
+  color: #ffffff;
+}
+.tag.tag-danger .ic.ic-times:active {
+  color: #fff;
+  margin-bottom: -1px;
+}
+.tag.tag-warning {
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #ffb122;
+  border: 1px solid #ffaa0e;
+  color: #fff;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.tag-warning.custom {
+  border-color: rgba(253, 164, 0, 0);
+  color: #fff;
+}
+.tag.tag-warning.hidden {
+  opacity: 0.0;
+}
+.tag.tag-warning .text {
+  vertical-align: middle;
+}
+.tag.tag-warning .actions {
+  margin-right: -12px;
+}
+.tag.tag-warning .ic.ic-times:hover {
+  color: #ffffff;
+}
+.tag.tag-warning .ic.ic-times:active {
+  color: #fff;
+  margin-bottom: -1px;
+}
+.tag.tag-inverted {
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: 0.25s;
+  opacity: 1.0;
+  background-color: #333333;
+  border: 1px solid #292929;
+  color: #fff;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tag.tag-inverted.custom {
+  border-color: rgba(33, 33, 33, 0);
+  color: #fff;
+}
+.tag.tag-inverted.hidden {
+  opacity: 0.0;
+}
+.tag.tag-inverted .text {
+  vertical-align: middle;
+}
+.tag.tag-inverted .actions {
+  margin-right: -12px;
+}
+.tag.tag-inverted .ic.ic-times:hover {
+  color: #ffffff;
+}
+.tag.tag-inverted .ic.ic-times:active {
+  color: #fff;
+  margin-bottom: -1px;
+}
+.tag.tag-small {
+  line-height: 20px;
+  height: 20px;
+}
+.tag.tag-large,
+.tag.tag-xlarge,
+.tag.tag-xxlarge,
+.tag.tag-huge {
+  line-height: 51px;
+  height: 51px;
+  padding: 0 30px;
+}
+.tag.tag-large {
+  font-size: 1.2em;
+}
+.tag.tag-xlarge {
+  font-size: 1.4em;
+}
+.tag.tag-xxlarge {
+  font-size: 1.6em;
+}
+.tag.tag-huge {
+  font-size: 1.8em;
+}
+.ie7 .tag {
+  margin-right: 2px;
 }
 /*
  * Instructions: each weed module contains a base customization variables at
