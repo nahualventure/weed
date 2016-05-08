@@ -3211,6 +3211,10 @@ select {
   height: 53px;
   line-height: 53px;
 }
+select.block {
+  display: block;
+  width: 100%;
+}
 select.input-small {
   height: 41px;
   line-height: 41px;
