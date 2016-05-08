@@ -5996,6 +5996,201 @@ body.sidebarless .corner-notification {
 .with-open-sidebar .corner-notification {
   left: 230px;
 }
+.user-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 1px 0px rgba(191, 191, 191, 0.3);
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #bfbfbf;
+  border-top: none;
+  display: inline-block;
+  font-family: sans-serif;
+  height: 294px;
+  margin-bottom: 20px;
+  margin-right: 25px;
+  overflow: hidden;
+  padding: 30px 20px 40px 20px;
+  position: relative;
+  width: 240px;
+}
+.user-card .close,
+.user-card .more {
+  border-radius: 0 10px 0 10px;
+  border-right: none;
+  border-top: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.user-card .more {
+  height: 20px;
+  line-height: 20px;
+  top: 10px;
+}
+.user-card .more i {
+  color: #d7d7d7;
+}
+.user-card .picture {
+  border-radius: 1000px;
+  background: url('') #fff center center;
+  background-size: cover;
+  border: 2px solid #b3b3b3;
+  display: block;
+  height: 90px;
+  margin: 0 auto 20px auto;
+  width: 90px;
+}
+.user-card .picture.placeholded {
+  border-color: rgba(179, 179, 179, 0);
+}
+.user-card .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #808080;
+  display: block;
+  font-family: sans-serif;
+  font-size: 1.5em;
+  text-align: center;
+}
+.user-card .role,
+.user-card .extra-data {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #d9d9d9;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.user-card .email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #d9d9d9;
+  text-align: center;
+}
+.user-card .email .text,
+.user-card .email .ic {
+  vertical-align: middle;
+}
+.user-card .email .ic {
+  color: #808080;
+}
+.user-card.compress {
+  padding: 25px 15px;
+  width: 270px;
+  height: 90px;
+}
+.user-card.compress .picture {
+  margin-top: -2px;
+  float: left;
+  height: 45px;
+  width: 45px;
+  margin-bottom: 0;
+}
+.user-card.compress .data {
+  float: left;
+  margin-left: 10px;
+  width: 140px;
+}
+.user-card.compress .data .name {
+  margin-top: 0;
+  font-size: 1.2em;
+  text-align: left;
+}
+.user-card.compress .data .role,
+.user-card.compress .data .extra-data {
+  margin-bottom: 0;
+  text-align: left;
+}
+.user-card.compress .email {
+  display: none;
+}
+.user-card.compress.client {
+  height: auto;
+  position: relative;
+  overflow: visible;
+  width: 250px;
+  margin: 0 40px 50px 0;
+}
+.user-card.compress.client .data {
+  max-width: 150px;
+  width: auto;
+  float: none;
+  margin-bottom: 2rem;
+}
+.user-card.compress.client .data .name {
+  color: #97959c;
+}
+.user-card.compress.client .data .extra-data {
+  color: #b1afb5;
+  font-size: 0.8em;
+  margin-bottom: 1rem;
+}
+.user-card.compress.client .data .client-phone,
+.user-card.compress.client .data .client-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+.user-card.compress.client .data .client-phone {
+  color: #13a547;
+}
+.user-card.compress.client .data .client-email {
+  color: #00938e;
+}
+.user-card.compress.client .client-tag-container {
+  position: absolute;
+  right: -30px;
+  width: 100px;
+  top: 2.5rem;
+}
+.user-card.compress.client .client-tag-container .client-tag-label {
+  color: #716e76;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+.user-card.compress.client .client-tag-container .client-tag {
+  border-radius: 5px;
+  color: #fff;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+.user-card.compress.client .client-tag-container .client-tag.danger {
+  background: #de5a5a;
+}
+.user-card.compress.client .client-tag-container .client-tag.success {
+  background: #1ca462;
+}
+.user-card.placeholder {
+  background: #e2e7e7;
+  border: 2px dashed #d5dada;
+  text-align: center;
+}
+.user-card.placeholder .plus {
+  width: 70px;
+  height: 70px;
+  background: #c1c6c6;
+  border-radius: 1000px;
+  color: #e2e7e7;
+  display: inline-block;
+  font-size: 2.2em;
+  line-height: 70px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  text-align: center;
+}
+.user-card.placeholder .text {
+  color: #a6a7a7;
+  display: inline-block;
+  width: 110px;
+}
 /*
  * Instructions: each weed module contains a base customization variables at
  * the begining of the file. Copy those variables here and customize them away!

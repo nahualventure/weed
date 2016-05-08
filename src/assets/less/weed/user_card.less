@@ -1,0 +1,295 @@
+@user-card-background: @white;
+@user-card-border-color: @black-25;
+@user-card-close-background: @black-5;
+@user-card-close-border-color: @black-15;
+@user-card-close-font-color: @black-40;
+@user-card-font-family: sans-serif;
+@user-card-name-color: @system-base-color;
+@user-card-picture-background: @white;
+@user-card-picture-border-color: @black-30;
+@user-card-picture-placeholder: url('');
+@user-card-role-color: @black-15;
+
+@user-card-placeholder-background: #e2e7e7;
+@user-card-placeholder-border: #d5dada;
+@user-card-placeholder-plus-background: #c1c6c6;
+@user-card-placeholder-plus-color: #e2e7e7;
+@user-card-placeholder-text-color: #a6a7a7;
+
+
+@user-card-border-radius: @system-border-radius;
+@user-card-bottom-margin: 20px;
+@user-card-compress-data-width: 140px;
+@user-card-compress-padding: 15px;
+@user-card-compress-separation: 10px;
+@user-card-compress-width: 270px;
+@user-card-padding: 30px 20px 40px 20px;
+@user-card-picture-margin: 20px;
+@user-card-picture-size: 90px;
+@user-card-picture-small-size: 45px;
+@user-card-right-margin: 25px;
+@user-card-width: 240px;
+@user-card-height: 294px;
+@user-card-compressed-height: 90px;
+@user-card-placeholder-plus-size: 70px;
+@user-card-placeholder-plus-margin-bottom: 20px;
+@user-card-placeholder-plus-margin-top: 40px;
+@user-card-placeholder-text-width: 110px;
+
+.make-user-card(
+  @background: @user-card-background;
+  @border-color: @user-card-border-color;
+  @border-radius: @user-card-border-radius;
+  @bottom-margin: @user-card-bottom-margin;
+  @close-background: @user-card-close-background;
+  @close-border-color: @user-card-close-border-color;
+  @compress-height: @user-card-compressed-height;
+  @close-font-color: @user-card-close-font-color;
+  @compress-data-width: @user-card-compress-data-width;
+  @compress-padding: @user-card-compress-padding;
+  @compress-separation: @user-card-compress-separation;
+  @compress-width: @user-card-compress-width;
+  @font-family: @user-card-font-family;
+  @font-family: @user-card-font-family;
+  @name-color: @user-card-name-color;
+  @padding: @user-card-padding;
+  @picture-background: @user-card-picture-background;
+  @picture-border-color: @user-card-picture-border-color;
+  @picture-margin: @user-card-picture-margin;
+  @picture-placeholder: @user-card-picture-placeholder;
+  @picture-size: @user-card-picture-size;
+  @picture-small-size: @user-card-picture-small-size;
+  @right-margin: @user-card-right-margin;
+  @role-color: @user-card-role-color;
+  @width: @user-card-width;
+  @height: @user-card-height;
+  @placeholder-background: @user-card-placeholder-background;
+  @placeholder-border: @user-card-placeholder-border;
+  @placeholder-plus-size: @user-card-placeholder-plus-size;
+  @placeholder-plus-background: @user-card-placeholder-plus-background;
+  @placeholder-plus-color: @user-card-placeholder-plus-color;
+  @placeholder-plus-margin-bottom: @user-card-placeholder-plus-margin-bottom;
+  @placeholder-plus-margin-top: @user-card-placeholder-plus-margin-top;
+  @placeholder-text-color: @user-card-placeholder-text-color;
+  @placeholder-text-width: @user-card-placeholder-text-width;
+  ){
+  border-radius: @border-radius;
+  box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
+  box-sizing: border-box;
+  background: @background;
+  border: 1px solid @border-color;
+  border-top: none;
+  display: inline-block;
+  font-family: @font-family;
+  height: @height;
+  margin-bottom: @bottom-margin;
+  margin-right: @right-margin;
+  overflow: hidden;
+  padding: @padding;
+  position: relative;
+  width: @width;
+
+  .close, .more{
+    border-radius: 0 @border-radius 0 @border-radius;
+    border-right: none;
+    border-top: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .more{
+    height: 20px;
+    line-height: 20px;
+    top: 10px;
+
+    i{
+      color: #d7d7d7;
+    }
+  }
+
+  .picture{
+    border-radius: 1000px; // Extreme
+    background: @picture-placeholder @picture-background center center;
+    background-size: cover;
+    border: 2px solid @user-card-picture-border-color;
+    display: block;
+    height: @picture-size;
+    margin: 0 auto @picture-margin auto;
+    width: @picture-size;
+
+    &.placeholded{
+      border-color: fadeout(@user-card-picture-border-color, 100%);
+    }
+  }
+
+  .name{
+    .ellipsis();
+    color: @name-color;
+    display: block;
+    font-family: @font-family;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .role, .extra-data{
+    .ellipsis();
+    color: @role-color;
+    margin-bottom: @picture-margin * 1.5;
+    text-align: center;
+  }
+
+  .email{
+    .ellipsis();
+    color: @role-color;
+    text-align: center;
+
+    .text, .@{fa-css-prefix}{
+      vertical-align: middle;
+    }
+
+    .@{fa-css-prefix}{
+      color: @name-color;
+    }
+  }
+
+  &.compress{
+    padding: (@compress-separation + @compress-padding) @compress-padding;
+    width: @compress-width;
+    height: @compress-height;
+
+    .picture{
+      margin-top: -2px; // Check how it works in /student-members 
+      float: left;
+      height: @picture-small-size;
+      width: @picture-small-size;
+      margin-bottom: 0;
+    }
+
+    .data{
+      float: left;
+      margin-left: @compress-separation;
+      width: @compress-data-width;
+
+      .name{
+        margin-top: 0;
+        font-size: 1.2em;
+        text-align: left;
+      }
+
+      .role, .extra-data{
+        margin-bottom: 0;
+        text-align: left;
+      }
+    }
+
+    .email{
+      display: none;
+    }
+
+    &.client{
+      height: auto;
+      position: relative;
+      overflow: visible;
+      width: @compress-width - 20px;
+      margin: 0 40px 50px 0;
+
+      @client-tag-height: 30px;
+      @client-tag-width: 100px;
+      @client-name-color: #97959c;;
+
+      .data{
+        max-width: 150px;
+        width: auto;
+        float: none;
+        margin-bottom: @element-vertical-margin*2;
+
+        .name{
+          color: @client-name-color;
+        }
+
+        .extra-data{
+          color: lighten(@client-name-color, 10%);
+          font-size: 0.8em;
+          margin-bottom: @element-vertical-margin;
+        }
+
+        .client-phone, .client-email{
+          .ellipsis();
+          font-weight: bold;
+          font-size: 0.8em;
+        }
+
+        .client-phone{
+          color: #13a547;
+        }
+
+        .client-email{
+          color: #00938e;
+        }
+      }
+
+      .client-tag-container{
+        position: absolute;
+        right: -@client-tag-height;
+        width: @client-tag-width;
+        top: @element-vertical-margin * 2.5;
+
+        .client-tag-label{
+          color: darken(@client-name-color, 15%);
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 0.8em;
+          padding-left: @element-vertical-margin;
+          margin-bottom: @element-vertical-margin / 2.0;
+        }
+
+        .client-tag{
+          border-radius: @system-border-radius / 2.0;
+          color: @white;
+          height: @client-tag-height;
+          line-height: @client-tag-height;
+          text-align: center;
+
+          &.danger{
+            background: @system-danger-color;
+          }
+
+          &.success{
+            background: @system-success-color;
+          }
+        }
+      }
+    }
+  }
+
+  // TODO r1.0
+  &.placeholder{
+    background: @placeholder-background;
+    border: 2px dashed @placeholder-border;
+    text-align: center;
+
+    .plus{
+      .square(@placeholder-plus-size);
+      background: @placeholder-plus-background;
+      border-radius: 1000px; // Extreme
+      color: @placeholder-plus-color;
+      display: inline-block;
+      font-size: 2.2em;
+      line-height: @placeholder-plus-size;
+      margin-bottom: @placeholder-plus-margin-bottom;
+      margin-top: @placeholder-plus-margin-top;
+      text-align: center;
+    }
+
+    .text{
+      color: @placeholder-text-color;
+      display: inline-block;
+      width: @placeholder-text-width;
+    }
+  }
+}
+
+.user-card{
+  .make-user-card();
+}
