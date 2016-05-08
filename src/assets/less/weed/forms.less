@@ -23,6 +23,13 @@
 @form-input-toolbar-border-color:                           #eee;
 @form-input-toolbar-file-label-color:                       #aaa;
 
+// Textarea
+@form-textarea-padding:                                     15px;
+@form-textarea-small-padding:                               15px;
+@form-textarea-tiny-padding:                                12px;
+@form-textarea-height:                                      100px;
+@form-textarea-small-height:                                85px;
+@form-textarea-tiny-height:                                 60px;
 
 @form-input-toolbar-height:                                 40px;
 
@@ -395,11 +402,6 @@ input[type="datetime-local"]{
   height: (@form-input-height - 2);
 }
 
-textarea{
-  background: @form-input-background-color;
-  border: 1px solid @form-input-border-color;
-}
-
 // States
 input, textarea{
   &:hover, .hover{
@@ -420,11 +422,26 @@ input.input-small, .input-wrapper.input-small input{
   height: (@form-input-small-height - 2);
 }
 
-// Area small
-textarea.input-small, .input-wrapper.input-small textarea{
-  height: 85px;
-  padding-bottom: @element-vertical-margin/2.0;
-  padding-top: @element-vertical-margin/2.0;
+textarea{
+  background: @form-input-background-color;
+  border: 1px solid @form-input-border-color;
+  height: @form-textarea-height;
+  padding-bottom: @form-textarea-padding;
+  padding-top: @form-textarea-padding;
+
+  &.input-small{
+    height: @form-textarea-small-height;
+    padding-bottom: @form-textarea-small-padding;
+    padding-top: @form-textarea-small-padding;
+  }
+
+  &.input-tiny{
+    height: @form-textarea-tiny-height;
+    border-radius: @form-input-border-radius/2.0;
+    font-size: 11px;
+    padding-bottom: @form-textarea-tiny-padding;
+    padding-top: @form-textarea-tiny-padding;
+  }
 }
 
 // Input tag
@@ -450,7 +467,7 @@ textarea.input-small, .input-wrapper.input-small textarea{
 }
 
 // Tiny
-input.input-tiny, textarea.input-tiny, .input-wrapper.input-tiny input, .input-wrapper.input-tiny textarea{
+input.input-tiny, .input-wrapper.input-tiny input{
   border-radius: @form-input-border-radius/2.0;
   font-size: 11px;
   height: (@form-input-tiny-height - 2);

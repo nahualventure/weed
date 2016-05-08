@@ -3376,10 +3376,6 @@ input[type="datetime-local"] {
   border: 1px solid #d9d9d9;
   height: 51px;
 }
-textarea {
-  background: #f2f2f2;
-  border: 1px solid #d9d9d9;
-}
 input:hover,
 textarea:hover,
 input .hover,
@@ -3398,11 +3394,24 @@ input.input-small,
 .input-wrapper.input-small input {
   height: 39px;
 }
-textarea.input-small,
-.input-wrapper.input-small textarea {
+textarea {
+  background: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  height: 100px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+textarea.input-small {
   height: 85px;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+textarea.input-tiny {
+  height: 60px;
+  border-radius: 5px;
+  font-size: 11px;
+  padding-bottom: 12px;
+  padding-top: 12px;
 }
 .input-wrapper.input-small i.input-mark {
   left: 24px;
@@ -3418,9 +3427,7 @@ textarea.input-small,
   top: 6.5px;
 }
 input.input-tiny,
-textarea.input-tiny,
-.input-wrapper.input-tiny input,
-.input-wrapper.input-tiny textarea {
+.input-wrapper.input-tiny input {
   border-radius: 5px;
   font-size: 11px;
   height: 26px;
