@@ -1,12 +1,12 @@
-<a ng-class="{
+<button ng-class="{
     'button': true,
-    'button-primary': type === 'primary',
-    'button-success': type === 'success',
-    'button-warning': type === 'warning',
-    'button-danger': type === 'danger',
-    'button-info': type === 'info',
-    'button-gray': type === 'gray',
-    'button-inverse': type === 'inverse',
+    'button-primary': color === 'primary',
+    'button-success': color === 'success',
+    'button-warning': color === 'warning',
+    'button-danger': color === 'danger',
+    'button-info': color === 'info',
+    'button-gray': color === 'gray',
+    'button-inverse': color === 'inverse',
 
     'disabled': state === 'disabled',
     'selected': state === 'selected',
@@ -31,4 +31,4 @@
 
   <!-- If it's loading -->
   <div ng-if="loading" class="loader">...</div>
-</a>
+</button>

@@ -1,0 +1,34 @@
+<a ng-class="{
+    'button': true,
+    'button-primary': color === 'primary',
+    'button-success': color === 'success',
+    'button-warning': color === 'warning',
+    'button-danger': color === 'danger',
+    'button-info': color === 'info',
+    'button-gray': color === 'gray',
+    'button-inverse': color === 'inverse',
+
+    'disabled': state === 'disabled',
+    'selected': state === 'selected',
+    'active': state === 'active',
+    'hover': state === 'hover',
+
+    'button-small': size === 'small',
+    'button-large': size === 'large',
+    'button-tiny': size === 'tiny',
+
+    'only-icon': !hasText,
+    'loading': loading
+  }">
+
+  <!-- If icon has been given -->
+  <we-icon ng-show="icon !== undefined" icon="{{ icon }}"></we-icon>
+
+  <!-- Text -->
+  <span class="text" ng-if="hasText">
+    <ng-transclude></ng-transclude>
+  </span>
+
+  <!-- If it's loading -->
+  <div ng-if="loading" class="loader">...</div>
+</a>

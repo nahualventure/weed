@@ -3033,12 +3033,18 @@ if (typeof define === 'function' && define.amd) {
       replace: true,
       scope: {
           icon: '@',
-          type: '@',
+          color: '@',
           toload: '&?',
           size: '@',
           state: '@'
       },
-      templateUrl: 'components/button/button.html',
+      templateUrl: function(elem, attrs){
+        if(elem[0].tagName === 'A'){
+          return 'components/button/button_a.html';
+        }
+
+        return 'components/button/button_button.html';
+      },
       link: buttonLink
     };
   }

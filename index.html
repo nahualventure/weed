@@ -137,21 +137,21 @@
     <h1>Buttons</h1>
 
     <!-- Button: OK -->
-    <a we-button icon="cogs" type="danger" size="small">Test</a>
+    <button we-button icon="cogs" color="danger" size="small" type="submit">Test</button>
 
     <h2>Buttons with loaders</h2>
-    <a we-button type="success" toload="true">Test</a> <br>
-    <a we-button icon="bell" type="success" toload="true"></a> <br>
+    <a we-button color="success" toload="true">Test</a> <br>
+    <a we-button icon="bell" color="success" toload="true"></a> <br>
 
-    <a we-button class="clear-background" icon="bell" type="warning" size="small" toload="true">Test</a> <br>
-    <a we-button icon="bell" type="warning" size="small" toload="true"></a> <br>
+    <a we-button class="clear-background" icon="bell" color="warning" size="small" toload="true">Test</a> <br>
+    <a we-button icon="bell" color="warning" size="small" toload="true"></a> <br>
 
-    <a we-button icon="bell" type="danger" size="tiny" toload="true">Test</a> <br>
-    <a we-button icon="bell" type="danger" size="tiny" toload="true"></a>
+    <a we-button icon="bell" color="danger" size="tiny" toload="true">Test</a> <br>
+    <a we-button icon="bell" color="danger" size="tiny" toload="true"></a>
 
     <h3>Buttons with loader callback</h3>
     <div ng-controller="WeedButtonController as btnCtrl">
-        <a we-button icon="bell" type="info" size="large" toload="btnCtrl.testFunctionToLoad()">Test</a><br>
+        <a we-button icon="bell" color="info" size="large" toload="btnCtrl.testFunctionToLoad()">Test</a><br>
     </div>
 
     <h1>Forms</h1>
@@ -208,28 +208,28 @@
     <!-- Left button: OK but you need to add styles in order to not overlap -->
     <h2>Input left button</h2>
     <div we-input-wrapper component-position="left" class="custom">
-        <a we-button icon="bell" size="small" type="danger">Example</a>
+        <a we-button icon="bell" size="small" color="danger">Example</a>
         <input type="text" placeholder="With left button">
     </div>
 
     <!-- Right button: OK -->
     <h2>Input right button</h2>
     <div we-input-wrapper component-position="right">
-        <a we-button icon="cog" size="small" type="success">Example</a>
+        <a we-button icon="cog" size="small" color="success">Example</a>
         <input type="text" placeholder="With right button">
     </div>
 
     <!-- Left tag: OK -->
     <h2>Input left tag</h2>
     <div we-input-wrapper component-position="left">
-        <a we-button icon="calendar" type="danger"></a>
+        <a we-button icon="calendar" color="danger"></a>
         <input type="text" placeholder="With left tag">
     </div>
 
     <!-- Right tag: OK -->
     <h2>Input left tag</h2>
     <div we-input-wrapper component-position="right">
-        <a we-button icon="calendar" type="success"></a>
+        <a we-button icon="calendar" color="success"></a>
         <input type="text" placeholder="With right tag">
     </div>
 
@@ -256,28 +256,28 @@
     <!-- Left button: OK but you need to add styles in order to not overlap -->
     <h2>Input left button</h2>
     <div we-input-wrapper size="small" component-position="left" class="custom">
-        <a we-button icon="bell" size="tiny" type="danger">Example</a>
+        <a we-button icon="bell" size="tiny" color="danger">Example</a>
         <input type="text" placeholder="With left button">
     </div>
 
     <!-- Right button: OK -->
     <h2>Input right button</h2>
     <div we-input-wrapper size="small" component-position="right">
-        <a we-button icon="cog" size="tiny" type="success">Example</a>
+        <a we-button icon="cog" size="tiny" color="success">Example</a>
         <input type="text" placeholder="With right button">
     </div>
 
     <!-- Left tag: OK -->
     <h2>Input left tag</h2>
     <div we-input-wrapper size="small" component-position="left">
-        <a we-button icon="calendar" size="small" type="danger"></a>
+        <a we-button icon="calendar" size="small" color="danger"></a>
         <input type="text" placeholder="With left tag">
     </div>
 
     <!-- Right tag: OK -->
     <h2>Input left tag</h2>
     <div we-input-wrapper size="small" component-position="right">
-        <a we-button icon="calendar" size="small" type="success"></a>
+        <a we-button icon="calendar" size="small" color="success"></a>
         <input type="text" placeholder="With right tag">
     </div>
 
@@ -304,19 +304,19 @@
     <!-- Left button: OK but you need to add styles in order to not overlap -->
     <h2>Input left button / tag</h2>
     <div we-input-wrapper size="tiny" component-position="left" class="custom">
-        <a we-button icon="bell" size="tiny" type="danger">Example</a>
+        <a we-button icon="bell" size="tiny" color="danger">Example</a>
         <input type="text" placeholder="With left button">
     </div>
 
     <!-- Right button: OK -->
     <h2>Input right button / tag</h2>
     <div we-input-wrapper size="tiny" component-position="right">
-        <a we-button icon="cog" size="tiny" type="success">Example</a>
+        <a we-button icon="cog" size="tiny" color="success">Example</a>
         <input type="text" placeholder="With right button">
     </div>
 
     <h2>Popup</h2>
-    <a we-button icon="heart" type="warning" we-open="test-popup-1">Open test popup</a>
+    <a we-button icon="heart" color="warning" we-open="test-popup-1">Open test popup</a>
     <div ng-controller="PopupController as popupCtrl">
         <div id="test-popup-1" we-popup>
 
@@ -362,8 +362,8 @@
           </div>
 
           <div class="popup-actions">
-            <a we-button type="success" size="small" icon="check">Ejemplo</a>
-            <a we-button type="danger" size="small" icon="bell">Acción</a>
+            <a we-button color="success" size="small" icon="check">Ejemplo</a>
+            <a we-button color="danger" size="small" icon="bell">Acción</a>
           </div>
         </div>
     </div>
@@ -629,16 +629,16 @@
 
     <h1>Auth</h1>
     <div ng-controller="WeedAuthController as authCtrl">
-        <a we-button type="success" icon="check" ng-click="authCtrl.login()">Login</a>
-        <a we-button type="warning" icon="refresh" ng-click="authCtrl.refreshToken()">Token</a>
-        <a we-button type="info" icon="heart" ng-click="authCtrl.testPost()">POST</a><br>
+        <a we-button color="success" icon="check" ng-click="authCtrl.login()">Login</a>
+        <a we-button color="warning" icon="refresh" ng-click="authCtrl.refreshToken()">Token</a>
+        <a we-button color="info" icon="heart" ng-click="authCtrl.testPost()">POST</a><br>
     </div>
 
     <h1>Corner notifications</h1>
     <div ng-controller="NotificationController as ctrl">
-        <a we-button type="info" icon="bell" we-open="main-notification">Open notification</a>
-        <a we-button type="warning" icon="times" we-close="main-notification">Close notification</a>
-        <a we-button type="danger" icon="cog" ng-click="ctrl.sendNotification()">Create notification</a>
+        <a we-button color="info" icon="bell" we-open="main-notification">Open notification</a>
+        <a we-button color="warning" icon="times" we-close="main-notification">Close notification</a>
+        <a we-button color="danger" icon="cog" ng-click="ctrl.sendNotification()">Create notification</a>
     </div>
 
     <h1>User cards</h1>
@@ -672,7 +672,7 @@
         we-corner-notification
         id="main-notification"
         timeout="4000"
-        type="success"
+        color="success"
         icon="bell"
         text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quo officiis."></div>
 
