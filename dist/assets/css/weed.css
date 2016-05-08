@@ -3398,6 +3398,7 @@ textarea {
   background: #f2f2f2;
   border: 1px solid #d9d9d9;
   height: 100px;
+  margin-bottom: 1rem;
   padding-bottom: 15px;
   padding-top: 15px;
 }
