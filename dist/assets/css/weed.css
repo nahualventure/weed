@@ -3216,12 +3216,12 @@ select.block {
   width: 100%;
 }
 select.input-small {
-  height: 41px;
-  line-height: 41px;
+  height: 39px;
+  line-height: 39px;
 }
 select.input-tiny {
-  height: 28px;
-  line-height: 28px;
+  height: 26px;
+  line-height: 26px;
 }
 input[type="text"],
 input[type="password"],
