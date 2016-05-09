@@ -1,4 +1,4 @@
-<div class="corner-notification {{ ctrl.type }}" ng-show="open" we-closable>
+<div class="corner-notification {{ ctrl.color }}" ng-show="open" we-closable>
   <div class="background-mask">
     <div class="background"></div>
 
@@ -15,7 +15,7 @@
     </a>
   </div>
 
-  <div class="tag {{ tag_class }}" style="background-image: url({{ image }})">
+  <div class="notification-tag {{ tag_class }}" style="background-image: url({{ image }})">
     <i class="ic ic-{{ ctrl.icon }}"></i>
   </div>
 </div>

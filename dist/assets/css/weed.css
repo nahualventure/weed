@@ -5889,13 +5889,13 @@ body.sidebarless .corner-notification {
 .corner-notification.success .text {
   color: #fff;
 }
-.corner-notification.success .tag {
+.corner-notification.success .notification-tag {
   background: #188e55;
 }
 .corner-notification.error .background-mask .background {
   background: #de5a5a;
 }
-.corner-notification.error .tag {
+.corner-notification.error .notification-tag {
   background: #d63030;
 }
 .corner-notification.error .text {
@@ -5958,12 +5958,12 @@ body.sidebarless .corner-notification {
   height: 100%;
   line-height: 23px;
 }
-.corner-notification .tag,
+.corner-notification .notification-tag,
 .corner-notification .achievement-badge {
   transition: 0.25s;
   transition-delay: 0;
 }
-.corner-notification .tag {
+.corner-notification .notification-tag {
   width: 73px;
   height: 73px;
   background-size: cover;
@@ -5976,7 +5976,7 @@ body.sidebarless .corner-notification {
   text-align: center;
   top: -1px;
 }
-.corner-notification .tag .ic {
+.corner-notification .notification-tag .ic {
   height: 100%;
   line-height: 70px;
   opacity: 0.8;
@@ -5996,13 +5996,13 @@ body.sidebarless .corner-notification {
   transition: 0.75s cubic-bezier(0.37, -0.01, 0.23, 1.55);
   right: 384px;
 }
-.corner-notification.ng-hide .tag,
+.corner-notification.ng-hide .notification-tag,
 .corner-notification.ng-hide .achievement-badge {
   opacity: 0;
   transition: 0.25s;
   transition-delay: 0.4s;
 }
-.corner-notification.ng-hide .tag {
+.corner-notification.ng-hide .notification-tag {
   width: 34px;
   height: 34px;
   font-size: 0.8em;
@@ -6514,6 +6514,92 @@ body.sidebarless .corner-notification {
 }
 .ie7 .tag {
   margin-right: 2px;
+}
+.bubble {
+  border-radius: 10px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  background: #fff;
+  padding: 35px 25px;
+}
+.bubble.bubble-shadow {
+  box-shadow: none;
+  background-color: #dfdfdf;
+}
+.bubble hr {
+  border: none;
+  border-top: 1px solid #fff;
+  margin: 35px 0;
+}
+.bubble hr.small-top {
+  margin-top: 17.5px;
+}
+.bubble hr.small-bottom {
+  margin-bottom: 17.5px;
+}
+.bubble .inner-title {
+  line-height: 33px;
+  height: 33px;
+  position: relative;
+  padding: 0 10px;
+  margin-bottom: 1rem;
+}
+.bubble .inner-title:before,
+.bubble .inner-title:after {
+  content: " ";
+  display: table;
+}
+.bubble .inner-title:after {
+  clear: both;
+}
+.bubble .inner-title h1,
+.bubble .inner-title h2,
+.bubble .inner-title h3,
+.bubble .inner-title h4,
+.bubble .inner-title h5,
+.bubble .inner-title h6 {
+  margin-top: 0;
+}
+.bubble .inner-title h2 {
+  color: #808080;
+  font-family: sans-serif;
+  font-size: 1.8em;
+  font-weight: normal;
+}
+.bubble .inner-title h3 {
+  color: #808080;
+  font-family: sans-serif;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+.bubble .inner-title .main-action {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.bubble .inner-title .main-action .button,
+.bubble .inner-title .main-action select,
+.bubble .inner-title .main-action input {
+  margin-left: 10px;
+  margin-top: -10px;
+}
+.bubble .inner-title .main-action .button.button-tiny,
+.bubble .inner-title .main-action select.button-tiny,
+.bubble .inner-title .main-action input.button-tiny,
+.bubble .inner-title .main-action .button.input-tiny,
+.bubble .inner-title .main-action select.input-tiny,
+.bubble .inner-title .main-action input.input-tiny {
+  margin-top: 2.5px;
+}
+.bubble .inner-title .main-action .button.button-small,
+.bubble .inner-title .main-action select.button-small,
+.bubble .inner-title .main-action input.button-small,
+.bubble .inner-title .main-action .button.input-small,
+.bubble .inner-title .main-action select.input-small,
+.bubble .inner-title .main-action input.input-small {
+  margin-top: -4px;
+}
+.bubble .inner-body {
+  padding: 0 10px;
 }
 /*
  * Instructions: each weed module contains a base customization variables at

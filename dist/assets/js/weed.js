@@ -3547,7 +3547,10 @@ if (typeof define === 'function' && define.amd) {
       scope: {
         icon: '@'
       },
-      templateUrl: 'components/navbar/navbar_element_main_action.html'
+      templateUrl: 'components/navbar/navbarElementMainAction.html',
+      link: function(){
+        console.log("llegaaa");
+      }
     };
   }
 })(angular);
@@ -3568,7 +3571,7 @@ if (typeof define === 'function' && define.amd) {
       replace: true,
       templateUrl: 'components/notifications/cornerNotifications.html',
       scope: {
-        type: '@',
+        color: '@',
         icon: '@',
         text: '@',
         timeout: '@'
@@ -3612,7 +3615,7 @@ if (typeof define === 'function' && define.amd) {
 
             default:
               controllers.text = message.text;
-              controllers.type = message.type;
+              controllers.color = message.color;
               controllers.icon = message.icon;
               $scope.timeout = message.timeout;
               $scope.open = true;
@@ -3632,7 +3635,7 @@ if (typeof define === 'function' && define.amd) {
     function cornerNotificationsController($scope){
       var vm = this;
       vm.icon = $scope.icon;
-      vm.type = $scope.type;
+      vm.color = $scope.color;
       vm.text = $scope.text;
     }
   }

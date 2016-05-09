@@ -15,7 +15,7 @@
       replace: true,
       templateUrl: 'components/notifications/cornerNotifications.html',
       scope: {
-        type: '@',
+        color: '@',
         icon: '@',
         text: '@',
         timeout: '@'
@@ -59,7 +59,7 @@
 
             default:
               controllers.text = message.text;
-              controllers.type = message.type;
+              controllers.color = message.color;
               controllers.icon = message.icon;
               $scope.timeout = message.timeout;
               $scope.open = true;
@@ -79,7 +79,7 @@
     function cornerNotificationsController($scope){
       var vm = this;
       vm.icon = $scope.icon;
-      vm.type = $scope.type;
+      vm.color = $scope.color;
       vm.text = $scope.text;
     }
   }

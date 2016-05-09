@@ -712,6 +712,23 @@
     <span class="tag tag-xlarge tag-warning">Hola</span>
     <span class="tag tag-xlarge tag-inverted">Hola</span>
 
+    <h1>Bubble</h1>
+    <div style="background: #ccc; padding: 20px;">
+        <div class="bubble">
+            <div class="inner-title">
+                <h2>Título de ejemplo</h2>
+
+                <div class="main-action">
+                    <a we-button color="success" icon="cog" size="small">Acción</a>
+                </div>
+            </div>
+
+            <div class="inner-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur doloremque quam distinctio voluptate quibusdam repudiandae ad aspernatur alias, numquam, dolorem optio modi expedita, illo recusandae harum itaque delectus cumque facilis.</p>
+            </div>
+        </div>
+    </div>
+
     <br>
     <br>
     <br>
@@ -756,7 +773,7 @@
                 vm.sendNotification = function(){
                     WeedApi.publish('main-notification', {
                         text: 'jajaja',
-                        type: 'error',
+                        color: 'error',
                         icon: 'cog',
                         timeout: 2000
                     })

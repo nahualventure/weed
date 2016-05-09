@@ -81,7 +81,10 @@
       scope: {
         icon: '@'
       },
-      templateUrl: 'components/navbar/navbar_element_main_action.html'
+      templateUrl: 'components/navbar/navbarElementMainAction.html',
+      link: function(){
+        console.log("llegaaa");
+      }
     };
   }
 })(angular);

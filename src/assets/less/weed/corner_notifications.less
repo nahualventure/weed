@@ -57,7 +57,7 @@ body.sidebarless{
       color: @white; // TODO v1.0
     }
 
-    .tag{
+    .notification-tag{
       background: darken(@system-success-color, 5%); // TODO v1.0
     }
   }
@@ -69,7 +69,7 @@ body.sidebarless{
       }
     }
 
-    .tag{
+    .notification-tag{
       background: darken(@system-danger-color, 10%); // TODO v1.0
     }
 
@@ -139,12 +139,12 @@ body.sidebarless{
     }
   }
 
-  .tag, .achievement-badge{
+  .notification-tag, .achievement-badge{
     transition: @faster;
     transition-delay: 0;
   }
 
-  .tag{
+  .notification-tag{
     .square(@corner-notifications-height + 3px);
     background-size: cover;
     border-radius: 1000px; // Extreme
@@ -184,13 +184,13 @@ body.sidebarless{
       }
     }
 
-    .tag, .achievement-badge{
+    .notification-tag, .achievement-badge{
       opacity: 0;
       transition: @faster;
       transition-delay: @fast*0.8;
     }
 
-    .tag{
+    .notification-tag{
       .square(@corner-notifications-out-tag-size);
       font-size: 0.8em;
       line-height: @corner-notifications-out-tag-size;
