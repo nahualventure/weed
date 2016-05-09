@@ -6601,6 +6601,128 @@ body.sidebarless .corner-notification {
 .bubble .inner-body {
   padding: 0 10px;
 }
+table.data-table {
+  font-size: 0.9em;
+  width: 100%;
+}
+table.data-table.clear-background tr {
+  background: none !important;
+}
+table.data-table.inverted tr:nth-child(even) {
+  background: #f2f2f2;
+}
+table.data-table.inverted tr:nth-child(odd) {
+  background: none;
+}
+table.data-table tr {
+  line-height: 28px;
+  height: 28px;
+  color: #333333;
+  height: auto;
+}
+table.data-table tr:before,
+table.data-table tr:after {
+  content: " ";
+  display: table;
+}
+table.data-table tr:after {
+  clear: both;
+}
+table.data-table tr th {
+  color: #999999;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+table.data-table tr td,
+table.data-table tr th {
+  padding: 0.5rem 1rem;
+}
+table.data-table tr td a.context,
+table.data-table tr th a.context {
+  color: red;
+  border-bottom: 1px dotted red;
+}
+table.data-table tr td.centered,
+table.data-table tr th.centered {
+  text-align: center;
+}
+table.data-table tr td.actions,
+table.data-table tr th.actions {
+  float: right;
+}
+table.data-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+table.data-table.independent-rows.with-handle > tr:first-child {
+  padding-left: 4rem;
+}
+table.data-table.independent-rows.with-handle > tr td.handle {
+  position: relative;
+  border-right: 1px solid #e7e7e7;
+  color: #b2b2b2;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  height: 28px;
+  width: 3rem;
+}
+table.data-table.independent-rows.with-handle > tr td.handle:after {
+  content: "\f105";
+  font-family: "FontAwesome";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  height: 16px;
+  left: 50%;
+  line-height: 16px;
+  margin: -8px 0 0 -8px;
+  position: absolute;
+  text-decoration: inherit;
+  top: 50%;
+  z-index: 1;
+}
+table.data-table.independent-rows.with-handle > tr td.handle:hover {
+  color: #cbcbcb;
+}
+table.data-table.independent-rows.with-handle > tr td.handle:after {
+  left: 70%;
+}
+table.data-table.independent-rows.with-handle > tr .row-body {
+  border-top: 1px solid #e7e7e7;
+  clear: both;
+  display: none;
+  padding: 1rem 2rem 2rem 1rem;
+}
+table.data-table.independent-rows.with-handle > tr .row-body hr {
+  border-bottom: none;
+}
+table.data-table.independent-rows.with-handle > tr.open td.handle:after {
+  content: "\f107";
+  left: 60%;
+}
+table.data-table.independent-rows.with-handle > tr.open .row-body {
+  display: block;
+}
+table.data-table.independent-rows tr:first-child {
+  background: none;
+  margin-bottom: 0;
+}
+table.data-table.independent-rows > tr {
+  border-radius: 5px;
+  background: #fff;
+  margin-bottom: 1rem;
+}
+table.data-table .view-more {
+  color: #000000;
+  text-align: right;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-top: 2rem;
+}
 /*
  * Instructions: each weed module contains a base customization variables at
  * the begining of the file. Copy those variables here and customize them away!

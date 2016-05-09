@@ -1,0 +1,141 @@
+@simple-grid-row-height:                                    28px;
+@simple-grid-even-row-background-color:                     @black-5;
+@simple-grid-text-color:                                    @black-80;
+@simple-grid-title-color:                                   @black-40;
+@simple-grid-actions-color:                                 @black;
+@simple-grid-context-color:                                 red;
+@simple-grid-handle-width:                                  @element-vertical-margin*3;
+@simple-grid-handle-color:                                  #b2b2b2;
+@simple-grid-handle-border-color:                           #e7e7e7;
+@simple-grid-view-more-color:                               @black;
+
+table.data-table{
+  font-size: 0.9em;
+  width: 100%;
+
+  &.clear-background{
+    tr{
+      background: none !important;
+    }
+  }
+
+  &.inverted{
+    tr{
+      &:nth-child(even){
+        background: @simple-grid-even-row-background-color;
+      }
+
+      &:nth-child(odd){
+        background: none;
+      }
+    }
+  }
+
+  tr{
+    .clearfix();
+    .vcentered-text(@simple-grid-row-height);
+    color: @simple-grid-text-color;
+    height: auto;
+
+    th{
+      color: @simple-grid-title-color;
+      font-size: 0.9em;
+      font-weight: bold;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    td, th{
+      padding: 0.5rem 1rem;
+
+      a.context{
+        color: @simple-grid-context-color;
+        border-bottom: 1px dotted @simple-grid-context-color;
+      }
+
+      &.centered{
+        text-align: center;
+      }
+
+      &.actions{
+        float: right;
+      }
+    }
+
+    &:nth-child(even){
+      background: @simple-grid-even-row-background-color; 
+    }
+  }
+
+  &.independent-rows{
+    &.with-handle{
+      & > tr{
+        &:first-child{
+          padding-left: @simple-grid-handle-width + 1px;
+        }
+
+        td.handle{
+          .font-awesome-background("\f105", 16px);
+          border-right: 1px solid @simple-grid-handle-border-color;
+          color: @simple-grid-handle-color;
+          padding: 0;
+          text-align: center;
+          cursor: pointer;
+          height: @simple-grid-row-height;
+          width: @simple-grid-handle-width;
+
+          &:hover{
+            color: lighten(@simple-grid-handle-color, 10%)
+          }
+
+          &:after{
+            left: 70%;
+          }
+        }
+
+        .row-body{
+          border-top: 1px solid @simple-grid-handle-border-color;
+          clear: both;
+          display: none;
+          padding: @element-vertical-margin @element-vertical-margin*2 @element-vertical-margin*2 @element-vertical-margin;
+
+          hr{
+            border-bottom: none;
+          }
+        }
+
+        &.open{
+          td.handle:after{
+            content: "\f107";
+            left: 60%;
+          }
+
+          .row-body{
+            display: block;
+          }
+        }
+      }
+    }
+
+    tr:first-child{
+      background: none;
+      margin-bottom: 0;
+    }
+
+    & > tr{
+      border-radius: @system-border-radius/2.0;
+      background: @white;
+      margin-bottom: @element-vertical-margin;
+    }
+  }
+
+  .view-more{
+    color: @simple-grid-view-more-color;
+    text-align: right;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-top: @element-vertical-margin*2;
+  }
+}
