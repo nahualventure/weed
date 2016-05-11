@@ -3,6 +3,7 @@
   */
 
 @import "config.less";
+@import "buttons.less";
 
 // Configuration
 @tag-danger-color:                    @system-danger-color;
@@ -19,9 +20,9 @@
 @tag-default-vertical-padding:        0;
 @tag-font-family:                     sans-serif;
 @tag-big-padding:                     30px;
-@tag-big-height:                      51px;
-@tag-height:                          30px;
-@tag-small-height:                    20px;
+@tag-big-height:                      @button-large-height - 2px;
+@tag-height:                          @button-default-height - 2px;
+@tag-small-height:                    @button-small-height - 2px;
 
 // tag generator mixin
 .make-tag(@height: @tag-height; @background-color: @tag-default-color; @text-color: @white; @border-radius: @tag-default-border-radius; @vertical-padding: @tag-default-vertical-padding; @horizontal-padding: @tag-default-horizontal-padding){
