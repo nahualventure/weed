@@ -21,6 +21,8 @@
 @navbar-element-link-icon-size:                             18px;
 @navbar-element-link-font-size:                             16px;
 @navbar-element-link-color:                                 @white;
+@navbar-main-action-size:                                   60px;
+@navbar-main-action-border:                                 5px;
 
 @navbar-config-button-height:                               20px;
 @navbar-element-horizontal-margin:                          20px;
@@ -288,15 +290,15 @@
 
     .navbar-main-action{
       transition: @faster;
-      .circle(60px);
+      .circle(@navbar-main-action-size);
       .empty-fill();
       display: inline-block;
       background-color: @system-base-color;
-      border: 5px solid @white;
+      border: @navbar-main-action-border solid @white;
       font-size: 2em;
       color: @white;
       text-align: center;
-      line-height: 52px;
+      line-height: @navbar-main-action-size;
       cursor: pointer;
       margin-top: -27px;
 

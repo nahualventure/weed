@@ -4211,7 +4211,7 @@ input[type="radio"] {
   font-size: 2em;
   color: #fff;
   text-align: center;
-  line-height: 52px;
+  line-height: 60px;
   cursor: pointer;
   margin-top: -27px;
 }
@@ -4717,7 +4717,7 @@ body.with-open-popup {
 }
 .popup .popup-content hr {
   border: none;
-  border-top: 1px solid rgba(204, 204, 204, 0.1);
+  border-top: 1px solid rgba(128, 128, 128, 0.5);
   margin: 25px 0;
 }
 .popup .popup-actions {
@@ -6225,7 +6225,7 @@ body.sidebarless .corner-notification {
   * Edoo tag framework:  TODO v1.0 docu
   */
 .tag {
-  font-size: 0.8em;
+  font-size: 12px;
   border-radius: 5px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -6239,8 +6239,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6264,6 +6264,9 @@ body.sidebarless .corner-notification {
   color: #bfbfbf;
   margin-bottom: -1px;
 }
+.tag.block {
+  display: block;
+}
 .tag.tag-primary {
   border-radius: 5px;
   -webkit-user-select: none;
@@ -6278,8 +6281,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6317,8 +6320,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6356,8 +6359,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6395,8 +6398,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6434,8 +6437,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6473,8 +6476,8 @@ body.sidebarless .corner-notification {
   display: inline-block;
   font-family: sans-serif;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 49px;
+  line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -6499,28 +6502,29 @@ body.sidebarless .corner-notification {
   margin-bottom: -1px;
 }
 .tag.tag-small {
-  line-height: 20px;
-  height: 20px;
+  font-size: 10px;
+  line-height: 37px;
+  height: 37px;
 }
 .tag.tag-large,
 .tag.tag-xlarge,
 .tag.tag-xxlarge,
 .tag.tag-huge {
-  line-height: 51px;
-  height: 51px;
+  line-height: 64px;
+  height: 64px;
   padding: 0 30px;
 }
 .tag.tag-large {
-  font-size: 1.2em;
+  font-size: 16px;
 }
 .tag.tag-xlarge {
-  font-size: 1.4em;
+  font-size: 18px;
 }
 .tag.tag-xxlarge {
-  font-size: 1.6em;
+  font-size: 20px;
 }
 .tag.tag-huge {
-  font-size: 1.8em;
+  font-size: 22px;
 }
 .ie7 .tag {
   margin-right: 2px;

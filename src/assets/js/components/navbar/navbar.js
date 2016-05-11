@@ -12,8 +12,7 @@
 
   angular.module('weed.navbar', ['weed.core'])
     .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective)
-    .directive('weNavbarMainAction', navbarMainActionDirective);
+    .directive('weNavbarElement', navbarElementDirective);
 
   // No dependencies
 
@@ -70,20 +69,6 @@
             template = 'navbarElement.html'
         }
         return 'components/navbar/' + template;
-      }
-    };
-  }
-
-  function navbarMainActionDirective() {
-    return {
-      restrict: 'E',
-      transclude: true,
-      scope: {
-        icon: '@'
-      },
-      templateUrl: 'components/navbar/navbarElementMainAction.html',
-      link: function(){
-        console.log("llegaaa");
       }
     };
   }
