@@ -6141,7 +6141,6 @@ body.sidebarless .corner-notification {
   position: relative;
   overflow: visible;
   width: auto;
-  margin: 0 40px 50px 0;
 }
 .user-card.compress.client .data {
   max-width: 150px;
@@ -6175,7 +6174,7 @@ body.sidebarless .corner-notification {
   position: absolute;
   right: -30px;
   width: 100px;
-  top: 2.5rem;
+  top: 25px;
 }
 .user-card.compress.client .client-tag-container .client-tag-label {
   color: #716e76;

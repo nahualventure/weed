@@ -194,7 +194,7 @@
       position: relative;
       overflow: visible;
       width: @client-width;
-      margin: 0 40px 50px 0;
+      // margin: 0 40px 50px 0;
 
       @client-tag-height: 30px;
       @client-tag-width: 100px;
@@ -235,7 +235,7 @@
         position: absolute;
         right: -@client-tag-height;
         width: @client-tag-width;
-        top: @element-vertical-margin * 2.5;
+        top: (@compress-separation + @compress-padding);
 
         .client-tag-label{
           color: darken(@client-name-color, 15%);
