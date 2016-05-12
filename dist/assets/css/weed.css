@@ -6041,7 +6041,7 @@ body.sidebarless .corner-notification {
   overflow: hidden;
   padding: 30px 20px 40px 20px;
   position: relative;
-  width: 240px;
+  width: auto;
 }
 .user-card .close,
 .user-card .more {
@@ -6108,7 +6108,7 @@ body.sidebarless .corner-notification {
 }
 .user-card.compress {
   padding: 25px 15px;
-  width: 270px;
+  width: auto;
   height: 90px;
 }
 .user-card.compress .picture {
@@ -6140,7 +6140,7 @@ body.sidebarless .corner-notification {
   height: auto;
   position: relative;
   overflow: visible;
-  width: 250px;
+  width: auto;
   margin: 0 40px 50px 0;
 }
 .user-card.compress.client .data {

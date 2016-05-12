@@ -22,19 +22,20 @@
 @user-card-compress-data-width: 140px;
 @user-card-compress-padding: 15px;
 @user-card-compress-separation: 10px;
-@user-card-compress-width: 270px;
+@user-card-compress-width: auto;
 @user-card-padding: 30px 20px 40px 20px;
 @user-card-picture-margin: 20px;
 @user-card-picture-size: 90px;
 @user-card-picture-small-size: 45px;
 @user-card-right-margin: 25px;
-@user-card-width: 240px;
+@user-card-width: auto;
 @user-card-height: 294px;
 @user-card-compressed-height: 90px;
 @user-card-placeholder-plus-size: 70px;
 @user-card-placeholder-plus-margin-bottom: 20px;
 @user-card-placeholder-plus-margin-top: 40px;
 @user-card-placeholder-text-width: 110px;
+@user-card-client-width: auto;
 
 .make-user-card(
   @background: @user-card-background;
@@ -49,6 +50,7 @@
   @compress-padding: @user-card-compress-padding;
   @compress-separation: @user-card-compress-separation;
   @compress-width: @user-card-compress-width;
+  @client-width: @user-card-client-width; 
   @font-family: @user-card-font-family;
   @font-family: @user-card-font-family;
   @name-color: @user-card-name-color;
@@ -191,7 +193,7 @@
       height: auto;
       position: relative;
       overflow: visible;
-      width: @compress-width - 20px;
+      width: @client-width;
       margin: 0 40px 50px 0;
 
       @client-tag-height: 30px;
