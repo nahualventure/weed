@@ -4042,15 +4042,16 @@ input[type="radio"] {
 .navbar .navbar-element.search-form .input-wrapper,
 .navbar .navbar-element.search-form input {
   box-shadow: 0 1px 0 0 #8a8a8a;
-  margin-top: 12.5px;
-  margin-bottom: 12.5px;
+  margin-top: 15.5px;
+  margin-bottom: 15.5px;
   background: #fff;
   border: none;
-  height: 40px;
+  height: 34px;
 }
 .navbar .navbar-element.search-form .input-wrapper .input-mark,
 .navbar .navbar-element.search-form input .input-mark {
   color: #000000;
+  line-height: 34px;
 }
 .navbar .navbar-element.search-form .input-wrapper {
   overflow: hidden;
@@ -4221,15 +4222,15 @@ body.fixed-navbar .navbar.fixed .navbar-main-action {
 }
 .ie7 .navbar .search-form .navbar-element-floater input[type="text"],
 .ie8 .navbar .search-form .navbar-element-floater input[type="text"] {
-  line-height: 40px;
+  line-height: 34px;
 }
 .ie7 .navbar .search-form .navbar-element-floater button[type="submit"].search,
 .ie8 .navbar .search-form .navbar-element-floater button[type="submit"].search {
   border: none;
 }
 .ie7 .navbar .search-form .navbar-element-floater {
-  margin-top: 10.5px;
-  margin-bottom: 11.5px;
+  margin-top: 13.5px;
+  margin-bottom: 14.5px;
 }
 /**
   * Edoo sidebar framework
