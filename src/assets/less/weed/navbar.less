@@ -29,7 +29,7 @@
 @navbar-expected-user-height:                               34px;
 @navbar-height:                                             65px;
 @navbar-picture-size:                                       45px;
-@navbar-search-height:                                      34px;
+@navbar-search-height:                                      40px;
 @navbar-search-horizontal-padding:                          15px;
 @navbar-search-radius:                                      5px;
 @navbar-search-submit-width:                                30px;
@@ -135,9 +135,10 @@
 
       .input-wrapper, input{
         .bevel(@navbar-color);     // Input height
-        .vertical-center(@navbar-height, 41px + 2px);
+        .vertical-center(@navbar-height, @navbar-search-height);
         background: @navbar-search-background-color;
         border: none;
+        height: @navbar-search-height;
 
         .input-mark{
           color: @navbar-search-icon-color;

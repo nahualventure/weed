@@ -3232,7 +3232,9 @@ input[type="datetime-local"]::-webkit-input-placeholder,
 input[type="url"]::-webkit-input-placeholder,
 input[type="week"]::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder,
-.fake-result::-webkit-input-placeholder,
+.fake-result::-webkit-input-placeholder {
+  color: #e6e6e6;
+}
 input[type="text"]:-moz-placeholder,
 input[type="number"]:-moz-placeholder,
 input[type="password"]:-moz-placeholder,
@@ -3247,7 +3249,9 @@ input[type="datetime-local"]:-moz-placeholder,
 input[type="url"]:-moz-placeholder,
 input[type="week"]:-moz-placeholder,
 textarea:-moz-placeholder,
-.fake-result:-moz-placeholder,
+.fake-result:-moz-placeholder {
+  color: #e6e6e6;
+}
 input[type="text"]::-moz-placeholder,
 input[type="number"]::-moz-placeholder,
 input[type="password"]::-moz-placeholder,
@@ -3262,7 +3266,9 @@ input[type="datetime-local"]::-moz-placeholder,
 input[type="url"]::-moz-placeholder,
 input[type="week"]::-moz-placeholder,
 textarea::-moz-placeholder,
-.fake-result::-moz-placeholder,
+.fake-result::-moz-placeholder {
+  color: #e6e6e6;
+}
 input[type="text"]:-ms-input-placeholder,
 input[type="number"]:-ms-input-placeholder,
 input[type="password"]:-ms-input-placeholder,
@@ -3294,7 +3300,9 @@ input[type="datetime-local"][disabled="disabled"]::-webkit-input-placeholder,
 input[type="url"][disabled="disabled"]::-webkit-input-placeholder,
 input[type="week"][disabled="disabled"]::-webkit-input-placeholder,
 textarea[disabled="disabled"]::-webkit-input-placeholder,
-.fake-result[disabled="disabled"]::-webkit-input-placeholder,
+.fake-result[disabled="disabled"]::-webkit-input-placeholder {
+  color: #ebebeb;
+}
 input[type="text"][disabled="disabled"]:-moz-placeholder,
 input[type="number"][disabled="disabled"]:-moz-placeholder,
 input[type="password"][disabled="disabled"]:-moz-placeholder,
@@ -3309,7 +3317,9 @@ input[type="datetime-local"][disabled="disabled"]:-moz-placeholder,
 input[type="url"][disabled="disabled"]:-moz-placeholder,
 input[type="week"][disabled="disabled"]:-moz-placeholder,
 textarea[disabled="disabled"]:-moz-placeholder,
-.fake-result[disabled="disabled"]:-moz-placeholder,
+.fake-result[disabled="disabled"]:-moz-placeholder {
+  color: #ebebeb;
+}
 input[type="text"][disabled="disabled"]::-moz-placeholder,
 input[type="number"][disabled="disabled"]::-moz-placeholder,
 input[type="password"][disabled="disabled"]::-moz-placeholder,
@@ -3324,7 +3334,9 @@ input[type="datetime-local"][disabled="disabled"]::-moz-placeholder,
 input[type="url"][disabled="disabled"]::-moz-placeholder,
 input[type="week"][disabled="disabled"]::-moz-placeholder,
 textarea[disabled="disabled"]::-moz-placeholder,
-.fake-result[disabled="disabled"]::-moz-placeholder,
+.fake-result[disabled="disabled"]::-moz-placeholder {
+  color: #ebebeb;
+}
 input[type="text"][disabled="disabled"]:-ms-input-placeholder,
 input[type="number"][disabled="disabled"]:-ms-input-placeholder,
 input[type="password"][disabled="disabled"]:-ms-input-placeholder,
@@ -4030,10 +4042,11 @@ input[type="radio"] {
 .navbar .navbar-element.search-form .input-wrapper,
 .navbar .navbar-element.search-form input {
   box-shadow: 0 1px 0 0 #8a8a8a;
-  margin-top: 11px;
-  margin-bottom: 11px;
+  margin-top: 12.5px;
+  margin-bottom: 12.5px;
   background: #fff;
   border: none;
+  height: 40px;
 }
 .navbar .navbar-element.search-form .input-wrapper .input-mark,
 .navbar .navbar-element.search-form input .input-mark {
@@ -4045,9 +4058,15 @@ input[type="radio"] {
 .navbar .navbar-element.search-form .input-wrapper input {
   margin: 0;
 }
-.navbar .navbar-element.search-form .input-wrapper input::-webkit-input-placeholder,
-.navbar .navbar-element.search-form .input-wrapper input:-moz-placeholder,
-.navbar .navbar-element.search-form .input-wrapper input::-moz-placeholder,
+.navbar .navbar-element.search-form .input-wrapper input::-webkit-input-placeholder {
+  color: #000000;
+}
+.navbar .navbar-element.search-form .input-wrapper input:-moz-placeholder {
+  color: #000000;
+}
+.navbar .navbar-element.search-form .input-wrapper input::-moz-placeholder {
+  color: #000000;
+}
 .navbar .navbar-element.search-form .input-wrapper input:-ms-input-placeholder {
   color: #000000;
 }
@@ -4202,15 +4221,15 @@ body.fixed-navbar .navbar.fixed .navbar-main-action {
 }
 .ie7 .navbar .search-form .navbar-element-floater input[type="text"],
 .ie8 .navbar .search-form .navbar-element-floater input[type="text"] {
-  line-height: 34px;
+  line-height: 40px;
 }
 .ie7 .navbar .search-form .navbar-element-floater button[type="submit"].search,
 .ie8 .navbar .search-form .navbar-element-floater button[type="submit"].search {
   border: none;
 }
 .ie7 .navbar .search-form .navbar-element-floater {
-  margin-top: 13.5px;
-  margin-bottom: 14.5px;
+  margin-top: 10.5px;
+  margin-bottom: 11.5px;
 }
 /**
   * Edoo sidebar framework
@@ -4944,6 +4963,9 @@ body.with-open-popup {
 }
 .grid.frame {
   height: 100vh;
+}
+.grid.frame .row {
+  height: 100%;
 }
 .grid.scrollable {
   overflow-y: scroll;
