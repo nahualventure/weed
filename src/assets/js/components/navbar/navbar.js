@@ -42,7 +42,8 @@
         isotype: '@',
         placeholder: '@',
         userPicture: '@',
-        userRole: '@'
+        userRole: '@',
+        counter: '@'
       },
       link: function(scope, elem, attrs, controllers, $transclude){
         // Check if there is text

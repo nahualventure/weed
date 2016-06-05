@@ -2,11 +2,14 @@
   ng-class="
     {
       'pull-left': position === 'left',
-      'pull-right': position === 'right'
+      'pull-right': position === 'right',
+      'with-counter': counter !== undefined
     }">
 
   <span class ="navbar-element-floater">
     <we-icon ng-if="icon !== undefined" icon="{{ icon }}"></we-icon>
     <span ng-transclude></span>
   </span>
+
+  <span class="navbar-bubble">{{ counter }}</span>
 </a>

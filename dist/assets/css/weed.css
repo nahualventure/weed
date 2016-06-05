@@ -4047,6 +4047,7 @@ input[type="radio"] {
   background: #fff;
   border: none;
   height: 34px;
+  margin-bottom: 0;
 }
 .navbar .navbar-element.search-form .input-wrapper .input-mark,
 .navbar .navbar-element.search-form input .input-mark {
@@ -4138,13 +4139,13 @@ input[type="radio"] {
   color: inherit;
   font-size: 18px;
 }
-.navbar .navbar-element.navbar-notifications {
+.navbar .navbar-element.with-counter {
   position: relative;
 }
-.navbar .navbar-element.navbar-notifications .navbar-notifications-bubble {
-  border-radius: 100px;
+.navbar .navbar-element.with-counter .navbar-bubble {
   width: 18px;
   height: 18px;
+  border-radius: 100px;
   background: #ce6f6f;
   color: #fff;
   display: block;
@@ -4963,6 +4964,7 @@ body.with-open-popup {
   overflow-x: hidden;
 }
 .grid.frame {
+  box-sizing: border-box;
   height: 100vh;
 }
 .grid.frame .row {
