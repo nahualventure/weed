@@ -3,88 +3,89 @@
   */
 
 // Configuration
-@popup-actions-border-color:              @black-10;
-@popup-actions-background-color:          @black-5;
-@popup-content-border-color:              none;
-@popup-background-color:                  @white;
-@popup-modal-background-color:            fadeout(@black, 30%);
-@popup-solid-shadow-color:                @black-70;
-@popup-shadow-color:                      fadeout(@popup-solid-shadow-color, 60%);
-@popup-title-bar-background-color:        @black-40;
-@popup-title-bar-text-color:              @black-5;
-@popup-title-bar-border-color:            @black-20;
-@popover-user-title-font-family:          sans-serif;
-@popup-title-bar-inset-shadow-color:      @black-35;
-@popup-dual-titled-subtitle-color:        @white;
+@popup-actions-border-color:                                @black-10;
+@popup-actions-background-color:                            @black-5;
+@popup-content-border-color:                                none;
+@popup-background-color:                                    @white;
+@popup-modal-background-color:                              fadeout(@black, 30%);
+@popup-solid-shadow-color:                                  @black-70;
+@popup-shadow-color:                                        fadeout(@popup-solid-shadow-color, 60%);
+@popup-title-bar-background-color:                          @black-40;
+@popup-title-bar-text-color:                                @black-5;
+@popup-title-bar-border-color:                              @black-20;
+@popover-user-title-font-family:                            sans-serif;
+@popup-title-bar-inset-shadow-color:                        @black-35;
+@popup-dual-titled-subtitle-color:                          @white;
 
 @popup-transition:                                          0.4s;
 @popup-content-max-height:                                  400px;
 
-@popup-alert-title-color: @black;
-@popup-alert-close-button-color: @black;
-@popup-alert-close-button-background: @white;
-@popup-alert-close-button-border-color: @black;
+@popup-alert-title-color:                                   @black;
+@popup-alert-close-button-color:                            @black;
+@popup-alert-close-button-background:                       @white;
+@popup-alert-close-button-border-color:                     @black;
 
-@popup-alert-border-radius: @popup-border-radius*4;
-@popup-alert-padding: 90px 35px 40px 35px;
-@popup-alert-actions-padding: 0 35px 75px 35px;
-@popup-alert-actions-button-margin: 0 15px;
-@popup-alert-title-max-width: 400px;
-@popup-alert-title-margin: 35px;
-@popup-alert-close-button-size: 36px;
-@popup-alert-close-button-offset: 30px;
+@popup-alert-border-radius:                                 @popup-border-radius*4;
+@popup-alert-padding:                                       90px 35px 40px 35px;
+@popup-alert-actions-padding:                               0 35px 75px 35px;
+@popup-alert-actions-button-margin:                         0 15px;
+@popup-alert-title-max-width:                               400px;
+@popup-alert-title-margin:                                  35px;
+@popup-alert-close-button-size:                             36px;
+@popup-alert-close-button-offset:                           30px;
 
-@popup-border-radius:                     20px;
-@popup-horizontal-spacing:                35px;
-@popup-action-padding:                    @popup-vertical-spacing @popup-horizontal-spacing;
-@popup-max-width:                         700px;
-@popup-title-height:                      57px;
-@popup-vertical-spacing:                  25px;
-@popup-z-index:                           @z-maximum;
-@popup-zoom-initial:                      0.9;
-@popup-zoom-bg-opacity:                   0.8;
-@popup-dual-titled-title-height:          110px;
-@popup-dual-titled-close-width:           75px;
-@popup-dual-titled-subtitle-padding:      10px 0 0 0;
-@popup-dual-titled-title-padding:         25px;
-@popup-actions-button-margin:             10px;
+@popup-border-radius:                                       20px;
+@popup-horizontal-spacing:                                  35px;
+@popup-action-padding:                                      @popup-vertical-spacing @popup-horizontal-spacing;
+@popup-max-width:                                           700px;
+@popup-title-height:                                        57px;
+@popup-vertical-spacing:                                    25px;
+@popup-z-index:                                             @z-maximum;
+@popup-zoom-initial:                                        0.9;
+@popup-zoom-bg-opacity:                                     0.8;
+@popup-dual-titled-title-height:                            110px;
+@popup-dual-titled-close-width:                             75px;
+@popup-dual-titled-subtitle-padding:                        10px 0 0 0;
+@popup-dual-titled-title-padding:                           25px;
+@popup-actions-button-margin:                               10px;
 
-@popup-side-max-width: 800px;
-@popup-side-box-shadow-color: @black;
+@popup-side-max-width:                                      800px;
+@popup-side-box-shadow-color:                               @black;
 
-@danger-popup-strong-color: @system-danger-color;
-@danger-popup-title-color: @black-60;
-@danger-popup-title-font-family: sans-serif;
-@danger-popup-title-padding: 15px;
-@danger-popup-explanation-padding: 25px;
-@danger-popup-danger-sign-height: 97px;
-@danger-popup-danger-sign-width: 28%;
+@danger-popup-strong-color:                                 @system-danger-color;
+@danger-popup-title-color:                                  @black-60;
+@danger-popup-title-font-family:                            sans-serif;
+@danger-popup-title-padding:                                15px;
+@danger-popup-explanation-padding:                          25px;
+@danger-popup-danger-sign-height:                           97px;
+@danger-popup-danger-sign-width:                            28%;
 
-@popup-change-name-p-color: @black;
+@popup-change-name-p-color:                                 @black;
 
-@popup-change-name-max-width: 575px;
-@popup-change-name-padding: 0 40px;
-@popup-change-name-p-margin: 20px 0 35px 0;
-@popup-change-name-input-margin: 5px;
+@popup-change-name-max-width:                               575px;
+@popup-change-name-padding:                                 0 40px;
+@popup-change-name-p-margin:                                20px 0 35px 0;
+@popup-change-name-input-margin:                            5px;
 
-@popup-discipline-alert-search-panel-width: 320px;
-@popup-discipline-max-width: 580px;
-@popup-assitance-max-width: 650px;
-@popup-assistance-users-results-max-height: 390px;
-@popup-assistance-users-padding: 35px;
-@popup-alert-more-reduced-padding: 25px;
-@popup-alert-reduced-padding: 55px;
-@popup-mimics-height: 90px;
-@popup-search-max-width: 500px;
+@popup-discipline-alert-search-panel-width:                 320px;
+@popup-discipline-max-width:                                580px;
+@popup-assitance-max-width:                                 650px;
+@popup-assistance-users-results-max-height:                 390px;
+@popup-assistance-users-padding:                            35px;
+@popup-alert-more-reduced-padding:                          25px;
+@popup-alert-reduced-padding:                               55px;
+@popup-mimics-height:                                       90px;
+@popup-search-max-width:                                    500px;
 
-@popup-assistance-default-label-color: @black;
-@popup-assistance-meta-filters-border-color: @black-10;
-@popup-assistance-users-background-color: @black-10;
-@popup-assistance-users-border-color: @black-5;
-@popup-hr-color: fadeout(@black-50, 50%);
+@popup-assistance-default-label-color:                      @black;
+@popup-assistance-meta-filters-border-color:                @black-10;
+@popup-assistance-users-background-color:                   @black-10;
+@popup-assistance-users-border-color:                       @black-5;
+@popup-hr-color:                                            fadeout(@black-50, 50%);
 
-@popup-search-content-background-color: @black-5;
-@popup-search-close-color: @black-80;
+@popup-search-content-background-color:                     @black-5;
+@popup-search-close-color:                                  @black-80;
+@popup-close-color:                                         @black-50;
 
 body.with-open-popup{
   overflow-y: hidden;
@@ -168,7 +169,6 @@ body.with-open-popup{
 .popup{
   border-radius: @popup-border-radius;
   box-shadow: 0 0 6px 0px @popup-shadow-color;
-  background: @popup-background-color;
   margin-left: auto;
   margin-right: auto;
   max-width: @popup-max-width;
@@ -207,7 +207,7 @@ body.with-open-popup{
     position: absolute;
     right: 0;
     top: 0;
-    color: fadeout(@white, 30%);
+    color: @popup-close-color;
     display: block;
     width: @popup-title-height * 1.2;
     height: @popup-title-height;
@@ -284,12 +284,13 @@ body.with-open-popup{
   }
 
   .popup-content{
+    background: @popup-background-color;
     border-bottom: 1px solid @popup-content-border-color;
     padding: @popup-vertical-spacing @popup-horizontal-spacing;
 
     @media(min-width: @system-small-break){
       max-height: @popup-content-max-height;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
 
     &.clear-paddings{
