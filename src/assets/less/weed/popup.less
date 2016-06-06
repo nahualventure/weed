@@ -290,6 +290,10 @@ body.with-open-popup{
     border-bottom: 1px solid @popup-content-border-color;
     padding: @popup-vertical-spacing @popup-horizontal-spacing;
 
+    &.popup-title-extension{
+      background-color: @popup-title-bar-background-color;
+    }
+
     @media(min-width: @system-small-break){
       max-height: @popup-content-max-height;
       overflow-y: auto;
