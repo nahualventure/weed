@@ -85,7 +85,8 @@
 
 @popup-search-content-background-color:                     @black-5;
 @popup-search-close-color:                                  @black-80;
-@popup-close-color:                                         @black-50;
+@popup-close-color:                                         @black-20;
+@popup-close-hover-color:                                   @white;
 
 body.with-open-popup{
   overflow-y: hidden;
@@ -212,9 +213,10 @@ body.with-open-popup{
     width: @popup-title-height * 1.2;
     height: @popup-title-height;
     line-height: @popup-title-height;
+    transition: @smooth;
 
     &:hover{
-      color: fadeout(@white, 10%);
+      color: @popup-close-hover-color;
     }
 
     &:after{

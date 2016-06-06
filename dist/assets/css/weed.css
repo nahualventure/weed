@@ -4634,14 +4634,15 @@ body.with-open-popup {
   position: absolute;
   right: 0;
   top: 0;
-  color: #808080;
+  color: #cccccc;
   display: block;
   width: 68.4px;
   height: 57px;
   line-height: 57px;
+  transition: 1s;
 }
 .popup button.popup-close:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: #fff;
 }
 .popup button.popup-close:after {
   content: "\f00d";
