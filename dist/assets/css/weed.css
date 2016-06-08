@@ -3876,6 +3876,7 @@ label,
   font-weight: bold;
   line-height: 2rem;
   text-transform: uppercase;
+  font-family: sans-serif;
 }
 label input,
 .form-label input,
@@ -4247,6 +4248,7 @@ body .sidebar {
   z-index: 2147483635;
   background: #000000;
   height: 100%;
+  border-right: solid #000000 1px;
 }
 body .sidebar .header {
   box-sizing: border-box;
@@ -4334,6 +4336,7 @@ body .sidebar-list .li .a span.text {
   text-transform: uppercase;
   display: inline-block;
   line-height: 1.5em;
+  color: #808080;
 }
 body .sidebar-list li a:hover,
 body .sidebar-list .li a:hover,
@@ -4413,6 +4416,7 @@ body .sidebar-bottom-action span.text {
   text-transform: uppercase;
   display: inline-block;
   line-height: 1.5em;
+  color: #808080;
 }
 body .sidebar-bottom-action:hover,
 body .sidebar-bottom-action.current {
@@ -4670,6 +4674,13 @@ body.with-open-popup {
   background: #fff;
   border-bottom: 1px solid none;
   padding: 25px 35px;
+}
+.popup .popup-content.popup-title-extension {
+  background-color: #999999;
+}
+.popup .popup-content.popup-title-extension label {
+  color: #f2f2f2;
+  text-shadow: none;
 }
 @media (min-width: 650px) {
   .popup .popup-content {

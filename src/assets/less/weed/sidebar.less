@@ -12,6 +12,9 @@
 @sidebar-link-color:                                        @black-50;
 @sidebar-text-shadow-color:                                 @black;
 @sidebar-background-color:                                  @black;
+@sidebar-border-right-color:                                @sidebar-background-color;
+@sidebar-border-right-size:                                 1px;
+@sidebar-text-color:                                        @sidebar-link-color;
 
 @sidebar-border-radius:                                     5px;
 @sidebar-contracted-element-height:                         60px;
@@ -29,6 +32,7 @@
 @sidebar-open-width:                                        210px;
 @sidebar-text-left-padding:                                 5px;
 
+
 body{
 
   .sidebar{
@@ -42,6 +46,7 @@ body{
     z-index: @navbar-z-index - 1;
     background: @sidebar-background-color;
     height: 100%;
+    border-right: solid @sidebar-border-right-color @sidebar-border-right-size;
 
     .header{
       box-sizing: border-box;
@@ -122,6 +127,7 @@ body{
           text-transform: uppercase;
           display: inline-block;
           line-height: 1.5em;
+          color: @sidebar-text-color;
         }
 
         &:hover,
