@@ -1,4 +1,4 @@
-<a class="navbar-element navbar-user" 
+<a class="navbar-element navbar-user user" 
   ng-class="
     {
       'pull-left': position === 'left',
@@ -9,7 +9,7 @@
   <span class="navbar-element-floater">
     <img ng-attr-src="{{ userPicture }}" ng-if="userPicture" class="picture">
 
-    <span class="user" ng-if="hasText">
+    <span class="data" ng-if="hasText">
       <span class="name"><ng-transclude></ng-transclude></span>
       <span class="role">{{ userRole }}</span>
     </span>

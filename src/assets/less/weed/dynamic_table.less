@@ -1,0 +1,286 @@
+/**
+  * Edoo dynamic grid framework
+  */
+
+@import "buttons.less";
+@import "config.less";
+
+// Configuration
+
+@dynamic-table-row-background-color:                        @white;
+@dynamic-table-row-border-color:                            @black-5;
+@dynamic-table-text-color:                                  @black-60;
+@dynamic-table-font-family:                                 sans-serif;
+@dynamic-table-user-border-color:                           @black-25;
+@dynamic-table-user-name-color:                             @black;
+@dynamic-table-user-role-color:                             @black-60;
+@dynamic-table-row-title-font-family:                       serif;
+@dynamic-table-shadow-color:                                fadeout(@black, 82%);
+@dynamic-table-placeholder-background:                      #dce4e4;
+@dynamic-table-row-default-iconned-background:                 @system-base-color;
+@dynamic-table-division-title-color:                        @black;
+
+@dynamic-table-row-radius:                                  @system-border-radius;
+@dynamic-table-row-height:                                  75px;
+@dynamic-table-row-margin:                                  30px;
+@dynamic-table-row-element-padding:                         20px;
+@dynamic-table-row-tag-width:                               12px;
+@dynamic-table-user-picture-size:                           45px;
+@dynamic-table-user-expected-height:                        36px;
+@dynamic-table-vertical-knob-width:                         18px;
+@dynamic-table-vertical-knob-height:                        28px;
+@dynamic-table-tab-section-padding:                         40px;
+@dynamic-table-more-button-height:                          26px;
+@dynamic-table-change-user-left:                            60px;
+@dynamic-table-change-user-top:                             40px;
+@dynamic-table-in-border-color:                             #eee;
+@dynamic-table-seperator-height:                            @dynamic-table-row-height*0.5;
+@dynamic-table-extra-body-padding:                          20px 40px;
+@dynamic-table-extra-body-border-color:                     fadeout(@dynamic-table-row-border-color, 40%);
+@dynamic-table-row-transform-height:                        1.1;
+@dynamic-table-sperator-color:                              fadeout(@dynamic-table-row-border-color, 40%);
+@dynamic-table-tag-icon-left-offset:                        18px;
+@dynamic-table-tag-icon-top-offset:                         11px;
+@dyamic-table-tag-icon-size:                                50px;
+@dynamic-table-row-title-padding:                           0 25px;
+@dynamic-table-row-title-padding:                           0 25px;
+@dynamic-table-row-one-liner-size:                          16px;
+@dynamic-table-row-one-liner-small-size:                    12px;
+@dynamic-table-row-big-up-size:                             15px;
+@dynamic-table-row-big-up-padding-top:                      17px;
+@dynamic-table-row-down-margin-correction:                  -5px;
+@dynamic-table-button-margin:                               10px;
+@dynamic-table-small-element-height:                        0.25*@dynamic-table-row-height;
+@dynamic-table-big-element-height:                          0.35*@dynamic-table-row-height;
+@dynamic-table-big-element-font-size:                       18px;
+@dynamic-table-big-element-max-width:                       240px;
+@dynamic-table-small-element-font-size:                     10px;
+@dynamic-table-small-up-padding:                            0.2*@dynamic-table-row-height;
+@dynamic-table-title-color:                                 @black;
+@dynamic-table-user-name-color:                             @black;
+@dynamic-table-user-role-color:                             @black-60;
+@dynamic-table-user-image-border-color:                     @black-80;
+
+.dynamic-table{
+  position: relative;
+
+  .dynamic-table-title{
+    color: @dynamic-table-title-color;
+    font-weight: bold;
+    margin-bottom: @element-vertical-margin;
+    padding-left: @element-vertical-margin;
+    text-transform: uppercase;
+  }
+
+  .dynamic-table-row{
+    background: @dynamic-table-row-background-color;
+    border-radius: @dynamic-table-row-radius;
+    box-shadow: 0 1px 3px 0 @dynamic-table-shadow-color;
+    box-sizing: border-box;
+    color: @dynamic-table-text-color;
+    font-family: @dynamic-table-font-family;
+    height: @dynamic-table-row-height;
+    margin-bottom: @dynamic-table-row-margin;
+    overflow: hidden;
+    transition: transform @fastest, opacity @fastest;
+    width: 100%;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+
+    &.with-body{
+      height: auto;
+      position: relative;
+
+      .dynamic-table-row-extra-body{
+        display: none;
+        clear: both;
+        border-top: 1px solid @dynamic-table-extra-body-border-color;
+        padding: @dynamic-table-extra-body-padding;
+      }
+    }
+
+    &.focus{
+      transform: scale(@dynamic-table-row-transform-height, @dynamic-table-row-transform-height);
+    }
+
+    &.clickeable{
+      cursor: pointer;
+    }
+
+    .separator{
+      .vertical-center(@dynamic-table-row-height, @dynamic-table-seperator-height);
+      border-right: 1px solid @dynamic-table-sperator-color;
+      display: block;
+      float: left;
+      height: @dynamic-table-seperator-height;
+      width: 0;
+    }
+
+    .element{
+      display: block;
+      float: left;
+      padding: 0 @dynamic-table-row-element-padding;
+      text-align: center;
+
+      &.spaceless{
+        padding: 0;
+
+        .button{
+          margin-left: 0;
+        }
+      }
+
+      &.actions{
+        padding-left: @dynamic-table-row-element-padding/2.0;
+        padding-right: @dynamic-table-row-element-padding/2.0;
+      }
+
+      &.more{
+        padding-left: 0;
+      }
+
+      &.user{
+        text-align: left;
+
+        .vertical-center(@dynamic-table-row-height, @user-picture-size + 2*2px);
+
+        .name{
+          color: @dynamic-table-user-name-color;
+        }
+
+        .role{
+          color: @dynamic-table-user-role-color;
+        }
+
+        .picture{
+          border-color: @dynamic-table-user-image-border-color;
+        }
+      }
+
+      &.dynamic-table-row-tag{
+        border-right: 1px solid @dynamic-table-in-border-color;
+        height: 100%;
+        padding: 0;
+        width: @dynamic-table-row-tag-width;
+
+        &.title{
+          color: @dynamic-table-row-background-color;
+          width: auto;
+        }
+
+        &.iconned{
+          background: @dynamic-table-row-default-iconned-background;
+          position: relative;
+          overflow: hidden;
+          padding: 0 @dynamic-table-row-element-padding*2; // Space for icon
+          width: 0;
+
+          .accent{
+            color: inherit;
+            font-weight: bold;
+          }
+
+          .bg-icon{
+            color: fadeout(@dynamic-table-row-background-color, 90%);
+            font-size: @dyamic-table-tag-icon-size;
+            position: absolute;
+            left: @dynamic-table-tag-icon-left-offset; // Icon offset
+            top: @dynamic-table-tag-icon-top-offset; // Icon offset
+          }
+        }
+      }
+
+      &.title{
+        font-family: @dynamic-table-row-title-font-family;
+        color: @dynamic-table-user-name-color;
+        height: 100%;
+        padding: @dynamic-table-row-title-padding; // TODO v1.0
+
+        .big.up{
+          font-size: @dynamic-table-row-big-up-size;
+          padding-top: @dynamic-table-row-big-up-padding-top;
+          text-align: left;
+        }
+
+        .down{
+          text-align: left;
+          color: @dynamic-table-user-role-color;
+          margin-top: @dynamic-table-row-down-margin-correction;
+        }
+      }
+
+      &.one-liner{
+        font-size: @dynamic-table-row-one-liner-size;
+        line-height: @dynamic-table-row-height;
+
+        .text, i{
+          vertical-align: middle;
+        }
+
+        .link{
+          transition: @fastest;
+          text-transform: uppercase;
+          text-decoration: underline;
+          font-weight: bold;
+        }
+
+        a:hover{
+          color: lighten(@dynamic-table-text-color, 5%);
+        }
+
+        a:active{
+          color: darken(@dynamic-table-text-color, 5%);
+        }
+
+        .text{
+          margin-left: @element-vertical-margin;
+        }
+
+        &.small{
+          font-size: @dynamic-table-row-one-liner-small-size;
+        }
+      }
+
+      &.fade{
+        color: fadeout(@dynamic-table-text-color, 60%);
+      }
+
+      .button{
+        .vertical-center(@dynamic-table-row-height; @button-default-height);
+        margin-left: @dynamic-table-button-margin;
+
+        &.button-tiny{
+          .vertical-center(@dynamic-table-row-height; @button-tiny-height);
+        }
+
+        &.button-small{
+          .vertical-center(@dynamic-table-row-height; @button-small-height);
+        }
+      }
+
+      .small{
+        height: @dynamic-table-small-element-height;
+        line-height: @dynamic-table-small-element-height;
+        font-size: @dynamic-table-small-element-font-size;
+      }
+
+      .up{
+        padding-top: @dynamic-table-small-up-padding;
+      }
+
+      .big{
+        .ellipsis();
+        font-size: @dynamic-table-big-element-font-size;
+        height: @dynamic-table-big-element-height;
+        line-height: @dynamic-table-big-element-height;
+        max-width: @dynamic-table-big-element-max-width;
+      }
+
+      &.pull-right{
+        float: right;
+      }
+    }
+  }
+}

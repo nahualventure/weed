@@ -4076,9 +4076,6 @@ input[type="radio"] {
 .navbar .navbar-element.navbar-user {
   float: right;
 }
-.navbar .navbar-element.navbar-user.no-picture span.user {
-  margin-left: 0;
-}
 .navbar .navbar-element.navbar-user .navbar-element-floater {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -4089,33 +4086,8 @@ input[type="radio"] {
   content: "\00a0";
   line-height: 45px;
 }
-.navbar .navbar-element.navbar-user img.picture {
-  border-radius: 100px;
-  box-shadow: 0px 0px 0px 2px #666666;
-  box-sizing: border-box;
-  height: 45px;
-  vertical-align: middle;
-  width: 45px;
-}
-.navbar .navbar-element.navbar-user span.user {
-  display: inline-block;
-  font-family: sans-serif;
-  margin-left: 0.5rem;
-  vertical-align: middle;
-}
-.navbar .navbar-element.navbar-user span.user .name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #fff;
-  display: block;
-  font-size: 1.3em;
+.navbar .navbar-element.navbar-user .name {
   max-width: 120px;
-}
-.navbar .navbar-element.navbar-user span.user .role {
-  color: #b3b3b3;
-  display: block;
-  font-size: 0.9em;
 }
 .navbar .navbar-element.navbar-link {
   line-height: 65px;
@@ -5138,7 +5110,6 @@ body.with-open-popup {
 .center-xs {
   -ms-flex-pack: center;
       justify-content: center;
-  text-align: center;
 }
 .end-xs {
   -ms-flex-pack: end;
@@ -5278,7 +5249,6 @@ body.with-open-popup {
   .center-s {
     -ms-flex-pack: center;
         justify-content: center;
-    text-align: center;
   }
   .end-s {
     -ms-flex-pack: end;
@@ -5419,7 +5389,6 @@ body.with-open-popup {
   .center-m {
     -ms-flex-pack: center;
         justify-content: center;
-    text-align: center;
   }
   .end-m {
     -ms-flex-pack: end;
@@ -5560,7 +5529,6 @@ body.with-open-popup {
   .center-l {
     -ms-flex-pack: center;
         justify-content: center;
-    text-align: center;
   }
   .end-l {
     -ms-flex-pack: end;
@@ -5701,7 +5669,6 @@ body.with-open-popup {
   .center-xl {
     -ms-flex-pack: center;
         justify-content: center;
-    text-align: center;
   }
   .end-xl {
     -ms-flex-pack: end;
@@ -6594,6 +6561,233 @@ table.data-table .view-more {
   font-weight: bold;
   font-size: 0.9em;
   margin-top: 2rem;
+}
+hr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+}
+.user.no-picture span.user {
+  margin-left: 0;
+}
+.user img.picture {
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  box-shadow: 0px 0px 0px 2px #666666;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.user span.data {
+  display: inline-block;
+  font-family: sans-serif;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+.user span.data .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  display: block;
+  font-size: 16px;
+}
+.user span.data .role {
+  color: #fff;
+  display: block;
+  font-size: 10px;
+}
+/**
+  * Edoo dynamic grid framework
+  */
+.dynamic-table {
+  position: relative;
+}
+.dynamic-table .dynamic-table-title {
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  text-transform: uppercase;
+}
+.dynamic-table .dynamic-table-row {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.18);
+  box-sizing: border-box;
+  color: #666666;
+  font-family: sans-serif;
+  height: 75px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  transition: transform 0.125s, opacity 0.125s;
+  width: 100%;
+}
+.dynamic-table .dynamic-table-row:last-child {
+  margin-bottom: 0;
+}
+.dynamic-table .dynamic-table-row.with-body {
+  height: auto;
+  position: relative;
+}
+.dynamic-table .dynamic-table-row.with-body .dynamic-table-row-extra-body {
+  display: none;
+  clear: both;
+  border-top: 1px solid rgba(242, 242, 242, 0.6);
+  padding: 20px 40px;
+}
+.dynamic-table .dynamic-table-row.focus {
+  transform: scale(1.1, 1.1);
+}
+.dynamic-table .dynamic-table-row.clickeable {
+  cursor: pointer;
+}
+.dynamic-table .dynamic-table-row .separator {
+  margin-top: 18.75px;
+  margin-bottom: 18.75px;
+  border-right: 1px solid rgba(242, 242, 242, 0.6);
+  display: block;
+  float: left;
+  height: 37.5px;
+  width: 0;
+}
+.dynamic-table .dynamic-table-row .element {
+  display: block;
+  float: left;
+  padding: 0 20px;
+  text-align: center;
+}
+.dynamic-table .dynamic-table-row .element.spaceless {
+  padding: 0;
+}
+.dynamic-table .dynamic-table-row .element.spaceless .button {
+  margin-left: 0;
+}
+.dynamic-table .dynamic-table-row .element.actions {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.dynamic-table .dynamic-table-row .element.more {
+  padding-left: 0;
+}
+.dynamic-table .dynamic-table-row .element.user {
+  text-align: left;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+.dynamic-table .dynamic-table-row .element.user .name {
+  color: #000000;
+}
+.dynamic-table .dynamic-table-row .element.user .role {
+  color: #666666;
+}
+.dynamic-table .dynamic-table-row .element.user .picture {
+  border-color: #333333;
+}
+.dynamic-table .dynamic-table-row .element.dynamic-table-row-tag {
+  border-right: 1px solid #eee;
+  height: 100%;
+  padding: 0;
+  width: 12px;
+}
+.dynamic-table .dynamic-table-row .element.dynamic-table-row-tag.title {
+  color: #fff;
+  width: auto;
+}
+.dynamic-table .dynamic-table-row .element.dynamic-table-row-tag.iconned {
+  background: #808080;
+  position: relative;
+  overflow: hidden;
+  padding: 0 40px;
+  width: 0;
+}
+.dynamic-table .dynamic-table-row .element.dynamic-table-row-tag.iconned .accent {
+  color: inherit;
+  font-weight: bold;
+}
+.dynamic-table .dynamic-table-row .element.dynamic-table-row-tag.iconned .bg-icon {
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 50px;
+  position: absolute;
+  left: 18px;
+  top: 11px;
+}
+.dynamic-table .dynamic-table-row .element.title {
+  font-family: serif;
+  color: #000000;
+  height: 100%;
+  padding: 0 25px;
+}
+.dynamic-table .dynamic-table-row .element.title .big.up {
+  font-size: 15px;
+  padding-top: 17px;
+  text-align: left;
+}
+.dynamic-table .dynamic-table-row .element.title .down {
+  text-align: left;
+  color: #666666;
+  margin-top: -5px;
+}
+.dynamic-table .dynamic-table-row .element.one-liner {
+  font-size: 16px;
+  line-height: 75px;
+}
+.dynamic-table .dynamic-table-row .element.one-liner .text,
+.dynamic-table .dynamic-table-row .element.one-liner i {
+  vertical-align: middle;
+}
+.dynamic-table .dynamic-table-row .element.one-liner .link {
+  transition: 0.125s;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.dynamic-table .dynamic-table-row .element.one-liner a:hover {
+  color: #737373;
+}
+.dynamic-table .dynamic-table-row .element.one-liner a:active {
+  color: #595959;
+}
+.dynamic-table .dynamic-table-row .element.one-liner .text {
+  margin-left: 1rem;
+}
+.dynamic-table .dynamic-table-row .element.one-liner.small {
+  font-size: 12px;
+}
+.dynamic-table .dynamic-table-row .element.fade {
+  color: rgba(102, 102, 102, 0.4);
+}
+.dynamic-table .dynamic-table-row .element .button {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+}
+.dynamic-table .dynamic-table-row .element .button.button-tiny {
+  margin-top: 24.5px;
+  margin-bottom: 24.5px;
+}
+.dynamic-table .dynamic-table-row .element .button.button-small {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.dynamic-table .dynamic-table-row .element .small {
+  height: 18.75px;
+  line-height: 18.75px;
+  font-size: 10px;
+}
+.dynamic-table .dynamic-table-row .element .up {
+  padding-top: 15px;
+}
+.dynamic-table .dynamic-table-row .element .big {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  height: 26.25px;
+  line-height: 26.25px;
+  max-width: 240px;
+}
+.dynamic-table .dynamic-table-row .element.pull-right {
+  float: right;
 }
 /*
  * Instructions: each weed module contains a base customization variables at
