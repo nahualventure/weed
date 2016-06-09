@@ -5019,6 +5019,9 @@ body.with-open-popup {
       flex-basis: 0;
   max-width: 100%;
 }
+.col.friendly-size {
+  max-width: 916px;
+}
 .col.reverse {
   -ms-flex-direction: column-reverse;
       flex-direction: column-reverse;
