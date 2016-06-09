@@ -4248,6 +4248,7 @@ body .sidebar {
   z-index: 2147483635;
   background: #000000;
   height: 100%;
+  border-right: solid #000000 1px;
 }
 body .sidebar .header {
   box-sizing: border-box;
@@ -4335,6 +4336,7 @@ body .sidebar-list .li .a span.text {
   text-transform: uppercase;
   display: inline-block;
   line-height: 1.5em;
+  color: #808080;
 }
 body .sidebar-list li a:hover,
 body .sidebar-list .li a:hover,
@@ -4414,6 +4416,7 @@ body .sidebar-bottom-action span.text {
   text-transform: uppercase;
   display: inline-block;
   line-height: 1.5em;
+  color: #808080;
 }
 body .sidebar-bottom-action:hover,
 body .sidebar-bottom-action.current {
@@ -5015,6 +5018,9 @@ body.with-open-popup {
   -ms-flex-preferred-size: 0;
       flex-basis: 0;
   max-width: 100%;
+}
+.col.friendly-size {
+  max-width: 916px;
 }
 .col.reverse {
   -ms-flex-direction: column-reverse;
