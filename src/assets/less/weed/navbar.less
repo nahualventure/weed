@@ -10,14 +10,11 @@
 @navbar-config-button-color:                                @white;
 @navbar-element-hover-color:                                darken(@navbar-color, 2%);
 @navbar-notifications-bubble-text-color:                    @white;
-@navbar-role-color:                                         @black-30;
 @navbar-search-background-color:                            @white;
 @navbar-search-font-color:                                  @black-30;
 @navbar-search-font-family:                                 sans-serif;
 @navbar-search-icon-color:                                  @black;
-@navbar-search-placeholder-color:                           @black;
-@navbar-user-font-family:                                   sans-serif;
-@navbar-username-color:                                     @white;
+@navbar-search-kplaceholder-color:                           @black;
 @navbar-element-link-icon-size:                             18px;
 @navbar-element-link-font-size:                             16px;
 @navbar-element-link-color:                                 @white;
@@ -26,9 +23,8 @@
 
 @navbar-config-button-height:                               20px;
 @navbar-element-horizontal-margin:                          20px;
-@navbar-expected-user-height:                               34px;
 @navbar-height:                                             65px;
-@navbar-picture-size:                                       45px;
+
 @navbar-search-height:                                      34px;
 @navbar-search-horizontal-padding:                          15px;
 @navbar-search-radius:                                      5px;
@@ -46,6 +42,7 @@
 @navbar-notifications-bubble-size:                          18px;
 @navbar-notifications-position-x:                           12px;
 @navbar-notifications-position-y:                           12px;
+@navbar-user-role-max-width:                                120px;
 
 // Utilities mixins
 .center-in-navbar(@height){
@@ -161,12 +158,6 @@
     &.navbar-user{
       float: right;
 
-      &.no-picture{
-        span.user{
-          margin-left: 0;
-        }
-      }
-
       .navbar-element-floater{
         .center-in-navbar(@navbar-picture-size);
         height: @navbar-picture-size;
@@ -177,36 +168,8 @@
         }
       }
 
-      // Rounded picture
-      img.picture{
-        border-radius: 100px; // Extreme round border (circle)
-        box-shadow: 0px 0px 0px 2px darken(@navbar-color, 10%); // Safari fix instead of border
-        box-sizing: border-box;
-        height: @navbar-picture-size;
-        vertical-align: middle;
-        width: @navbar-picture-size;
-      }
-
-      // User name
-      span.user{
-        display: inline-block;
-        font-family: @navbar-user-font-family;
-        margin-left: @element-vertical-margin / 2;
-        vertical-align: middle;
-
-        .name{
-          .ellipsis();
-          color: @navbar-username-color;
-          display: block;
-          font-size: 1.3em;
-          max-width: 120px;
-        }
-
-        .role{
-          color: @navbar-role-color;
-          display: block;
-          font-size: 0.9em;
-        }
+      .name{
+        max-width: @navbar-user-role-max-width;
       }
     }
 

@@ -1,0 +1,46 @@
+@import "config.less";
+
+@user-picture-size:                                         45px;
+@user-picture-border-color:                                 @black;
+@user-role-color:                                           @white;
+@user-font-family:                                          sans-serif;
+@user-username-color:                                       @white;
+
+.user{
+  float: right;
+
+  &.no-picture{
+    span.user{
+      margin-left: 0;
+    }
+  }
+
+  // Rounded picture
+  img.picture{
+    .circle(@user-picture-size);
+    box-shadow: 0px 0px 0px 2px darken(@navbar-color, 10%); // Safari fix instead of border
+    box-sizing: border-box;
+    vertical-align: middle;
+  }
+
+  // User name
+  span.user{
+    display: inline-block;
+    font-family: @user-font-family;
+    margin-left: @element-vertical-margin / 2;
+    vertical-align: middle;
+
+    .name{
+      .ellipsis();
+      color: @user-username-color;
+      display: block;
+      font-size: 1.3em;
+    }
+
+    .role{
+      color: @user-role-color;
+      display: block;
+      font-size: 0.9em;
+    }
+  }
+}

@@ -3376,7 +3376,7 @@ input:focus,
 textarea:focus,
 input.focus,
 textarea.focus {
-  background: #f2f2f2;
+  background: #fff;
   border-color: #808080;
   z-index: 6;
 }
@@ -3463,7 +3463,7 @@ input.input-tiny,
 }
 .input-wrapper:focus,
 .input-wrapper.focus {
-  background: #f2f2f2;
+  background: #fff;
   z-index: 6;
   border-color: #808080;
 }
@@ -3876,6 +3876,7 @@ label,
   font-weight: bold;
   line-height: 2rem;
   text-transform: uppercase;
+  font-family: sans-serif;
 }
 label input,
 .form-label input,
@@ -4670,6 +4671,13 @@ body.with-open-popup {
   background: #fff;
   border-bottom: 1px solid none;
   padding: 25px 35px;
+}
+.popup .popup-content.popup-title-extension {
+  background-color: #999999;
+}
+.popup .popup-content.popup-title-extension label {
+  color: #f2f2f2;
+  text-shadow: none;
 }
 @media (min-width: 650px) {
   .popup .popup-content {

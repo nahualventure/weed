@@ -1,0 +1,440 @@
+/**
+  * Edoo dynamic grid framework
+  */
+
+@import "config.less";
+
+// Configuration
+
+@dynamic-grid-row-background-color:                                             @white;
+@dynamic-grid-row-border-color:                                                 @black-5;
+@dynamic-grid-text-color:                                                       @black-60;
+@dynamic-grid-font-family:                                                      sans-serif;
+@dynamic-grid-user-border-color:                                                @black-25;
+@dynamic-grid-user-name-color:                                                  @black;
+@dynamic-grid-user-role-color:                                                  @black-60;
+@dynamic-grid-row-title-font-family:                                            serif;
+@dynamic-grid-shadow-color:                                                     fadeout(@black, 82%);
+@dynamic-grid-placeholder-background:                                           #dce4e4;
+@dynamic-grid-row-default-iconned-background:                                   @system-base-color;
+@dynamic-grid-division-title-color:                                             @black;
+
+@dynamic-grid-row-radius:                                                       @system-border-radius;
+@dynamic-grid-row-height:                                                       75px;
+@dynamic-grid-row-margin:                                                       30px;
+@dynamic-grid-row-element-padding:                                              20px;
+@dynamic-row-tag-width:                                                         12px;
+@dynamic-grid-user-picture-size:                                                45px;
+@dynamic-grid-user-expected-height:                                             36px;
+@dynamic-grid-button-expected-height:                                           32px;
+@dynamic-grid-vertical-knob-width:                                              18px;
+@dynamic-grid-vertical-knob-height:                                             28px;
+@dynamic-grid-tab-section-padding:                                              40px;
+@dynamic-grid-more-button-height:                                               26px;
+@dynamic-grid-change-user-left:                                                 60px;
+@dynamic-grid-change-user-top:                                                  40px;
+@dynamic-grid-in-border-color:                                                  #eee;
+
+.dynamic-grid{
+  position: relative;
+
+  .division-titleynamic-data-table--margin;
+    text-transform: uppercase;
+  }
+
+  .row{
+    background: @dynamic-data-table-row-backround-color;
+    border-radius: @dynamic-data-table-row-radius;
+    box-shadow: 0 1px 3px 0 @dynamic-data-table-shadow-color;
+    box-sizing: border-box;
+    color: @dynamic-data-table-text-color;
+    font-family: @dynamic-data-table-font-family;
+    height: @dynamic-data-table-row-height;
+    left: 0;
+    margin-bottom: @dynamic-data-table-row-margin;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: transform @dynamic-data-table-fastest, opacity @dynamic-data-table-fastest;
+    width: 100%;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+
+    &.with-body{
+      height: auto;
+      position: relative;
+
+      .row-extra-body{
+        display: none;
+        clear: both;
+        border-top: 1px solid fadeout(@dynamic-data-table-row-border-color, 40%);
+        padding: 20px 40px;
+      }
+    }
+
+    &.focus{
+      transform: scale(1.01, 1.01);
+    }
+
+    &.clickeable{
+      cursor: pointer;
+    }
+
+    .separator{
+      .vertical-center(@dynamic-data-table-row-height, @dynamic-data-table-row-height*0.5);
+      border-right: 1px solid fadeout(@dynamic-data-table-row-border-color, 40%);
+      display: block;
+      float: left;
+      height: @dynamic-data-table-row-height*0.5;
+      width: 0;
+    }
+
+    .element{
+      display: block;
+      float: left;
+      padding: 0 @dynamic-data-table-element-padding;
+      text-align: center;
+
+      .input-wrapper{
+        .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-form-input-height);
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      &.button{
+        line-height: @dynamic-data-table-row-height;
+      }
+
+      a{
+        // color: inherit;
+      }
+
+      &.spaceless{
+        padding: 0;
+
+        .button{
+          margin-left: 0;
+        }
+      }
+
+      &.actions{
+        padding-left: @dynamic-data-table-element-padding/2.0;
+        padding-right: @dynamic-data-table-element-padding/2.0;
+
+        // a{
+        //   display: inline-block;
+        //   height: @dynamic-data-table-row-height;
+        //   line-height: @dynamic-data-table-row-height;
+        // }
+
+        .button.clear-background{
+          margin-left: 0 !important;
+        }
+      }
+
+      &.more{
+        // padding-right: @dynamic-data-table-element-padding - 20px;
+        padding-left: 0;
+
+        .button{
+          .vertical-center(@dynamic-data-table-row-height, @dynamic-data-table-more-button-height);
+          height: @dynamic-data-table-more-button-height;
+          line-height: @dynamic-data-table-more-button-height;
+          margin-left: 0;
+          // padding-right: @dynamic-data-table-element-padding !important; // Popover centering problem
+        }
+      }
+
+      i{
+        display: inline-block;
+      }
+
+      &.tag{
+        border-right: 1px solid @dynamic-data-table-in-border-color;
+        height: 100%;
+        padding: 0;
+        width: @dynamic-data-table-row-tag-width;
+
+        &.title{
+          color: @dynamic-data-table-row-background-color;
+          width: auto;
+        }
+
+        &.iconned{
+          background: @dynamic-data-table-row-default-iconned-background;
+          position: relative;
+          overflow: hidden;
+          padding: 0 @dynamic-data-table-element-padding*2; // Space for icon
+
+          .accent{
+            color: inherit;
+            font-weight: bold;
+          }
+
+          .bg-icon{
+            color: fadeout(@dynamic-data-table-row-background-color, 90%);
+            font-size: 4.5em;
+            position: absolute;
+            left: 15px; // Icon offset
+            top: 10px; // Icon offset
+          }
+        }
+      }
+
+      &.title{
+        // background: darken(@dynamic-data-table-row-background-color, 4%);
+        font-family: @dynamic-data-table-row-title-font-family;
+        color: @dynamic-data-table-user-name-color;
+        height: 100%;
+        padding: 0 25px; // TODO v1.0
+
+        .big.up{
+          font-size: 1.2em;
+          padding-top: 17px;
+          text-align: left;
+        }
+
+        .down{
+          text-align: left;
+          color: @dynamic-data-table-user-role-color;
+          margin-top: -5px;
+        }
+      }
+
+      &.one-liner{
+        font-size: 1.3em;
+        line-height: @dynamic-data-table-row-height;
+
+        .text, i{
+          vertical-align: middle;
+        }
+
+        .link{
+          .transition(@dynamic-data-table-fastest);
+          font-size: 0.7em;
+          text-transform: uppercase;
+          text-decoration: underline;
+          font-weight: bold;
+        }
+
+        a:hover{
+          color: lighten(@dynamic-data-table-text-color, 5%);
+        }
+
+        a:active{
+          color: darken(@dynamic-data-table-text-color, 5%);
+        }
+
+        .text{
+          margin-left: @dynamic-data-table-element-vertical-margin;
+        }
+
+        &.small{
+          font-size: 1.2em;
+        }
+      }
+
+      &.user, &.notification-title{
+        position: relative;
+        padding-left: @dynamic-data-table-element-padding + 2px;
+
+        // User picture
+        img.picture, .picture{
+          .box-shadow(0px 0px 0px 2px @dynamic-data-table-user-border-color); // Safari fix instead of border
+          .box-sizing(border-box);
+          .circle(@dynamic-data-table-user-picture-size);
+          .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-user-picture-size);
+          cursor: pointer;
+          display: block;
+          float: left;
+          vertical-align: middle;
+          line-height: @dynamic-data-table-user-picture-size - 5px;
+          color: fadeout(@dynamic-data-table-white, 10%);
+          font-size: 1.5em;
+
+          &:before, &:after{
+            content: "\00a0 ";
+          }
+
+          &.first-notification{
+            background: @dynamic-data-table-popover-navbar-notifications-tag-visualizer-first-notification-background;
+          }
+
+          &.event{
+            background: @dynamic-data-table-popover-navbar-notifications-tag-visualizer-event-background;
+          }
+
+          &.supervisor{
+            background: @dynamic-data-table-popover-navbar-notifications-tag-visualizer-supervisor-background;
+          }
+
+          &.success{
+            background: @dynamic-data-table-popover-navbar-notifications-tag-visualizer-success-background;
+          }
+
+          &.danger{
+            background: @dynamic-data-table-popover-navbar-notifications-tag-visualizer-danger-background;
+          }
+        }
+
+        // Change user button
+        .change-user{
+          margin: 0 !important;
+          position: absolute;
+          left: @dynamic-data-table-change-user-left;
+          top: @dynamic-data-table-change-user-top;
+        }
+
+        // User name
+        span.data{
+          .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-user-expected-height);
+          float: right;
+          margin-left: @dynamic-data-table-element-vertical-margin*2;
+          text-align: left;
+          vertical-align: middle;
+          max-width: 180px;
+
+          .name, .title{
+            .ellipsis();
+            color: @dynamic-data-table-user-name-color;
+            display: block;
+            font-size: 1.1em;
+            font-weight: bold;
+          }
+
+          .role, .subtitle{
+            color: @dynamic-data-table-user-role-color;
+            display: block;
+            font-size: 0.9em;
+            margin-top: -3px;
+          }
+        }
+      }
+
+      &.notification-title{
+
+        &.no-image{
+          span.data{
+            margin-left: 0;
+          }
+        }
+
+        span.data{
+          max-width: 100%;
+
+          .title{
+            color: #31706e;
+            font-weight: normal;
+
+            .accent{
+              color: #019e9a;
+              font-weight: bold;
+            }
+          }
+        }
+
+        &.achievement-results{
+          .achievement-badge{
+            .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-achievement-badge-small-width*(17.0 / 15.0));
+            margin-left: 7px;
+            margin-right: 7px;
+          }
+        }
+      }
+
+      &.fade{
+        color: fadeout(@dynamic-data-table-text-color, 60%);
+      }
+
+      .button{
+        .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-button-default-height + 2px);
+        margin-left: 10px;
+
+        // &.more-button{
+        //   .vertical-center(@dynamic-data-table-row-height, @dynamic-data-table-more-button-height);
+        //   height: @dynamic-data-table-more-button-height;
+        // }
+
+        &.button-tiny{
+          .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-button-tiny-height + 2px);
+        }
+
+        &.button-small{
+          .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-button-small-height + 2px);
+        }
+      }
+
+      .small{
+        height: 0.25*@dynamic-data-table-row-height;
+        line-height: 0.25*@dynamic-data-table-row-height;
+        font-size: 0.9em;
+      }
+
+      .up{
+        padding-top: 0.2*@dynamic-data-table-row-height;
+      }
+
+      .big{
+        height: 0.35*@dynamic-data-table-row-height;
+        line-height: 0.35*@dynamic-data-table-row-height;
+        font-size: 1.5em;
+        .ellipsis();
+        max-width: 240px;
+      }
+
+      &.pull-right{
+        float: right;
+      }
+    }
+
+    &.hiden-row{
+      .opacity(0.0);
+      .transform(scale(0.99, 0.99));
+    }
+  }
+
+  .row-placeholder{
+    .border-radius(@dynamic-data-table-row-radius);
+    .box-sizing(border-box);
+    background: @dynamic-data-table-placeholder-background;
+    border: 2px dashed darken(@dynamic-data-table-row-border-color, 10%);
+    height: @dynamic-data-table-row-height;
+    margin-bottom: @dynamic-data-table-row-margin;
+  }
+
+  .vertical-knob{
+    .vertical-center(@dynamic-data-table-row-height; @dynamic-data-table-vertical-knob-height);
+    background: url('@dynamic-data-table-{images-path}vertical_knob.png') left top no-repeat;
+    display: inline-block;
+    height: @dynamic-data-table-vertical-knob-height;
+    width: @dynamic-data-table-vertical-knob-width;
+  }
+
+  .dynamic-grid-tab-section{
+    padding-left: @dynamic-data-table-tab-section-padding;
+  }
+
+  &.sortable{
+    .row{
+      cursor: move;
+
+      &:hover{
+        .transform(scale(1.005, 1.005));
+      }
+
+      &:active{
+        // .opacity(0.65);
+      }
+
+      .handle{
+        cursor: move;
+      }
+    }
+  }
+}
+
+.dynamic-grid{
+  .make-dynamic-grid();
+}
