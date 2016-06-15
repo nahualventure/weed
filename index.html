@@ -944,6 +944,18 @@
         </div>
     </div>
 
+    <h2>Typeahead</h2>
+    <div class="row" ng-controller="TypeaheadController as typeCtrl">
+      <div class="col xs-12">
+        <input type="text" ng-model="typeCtrl.selected" placeholder="Escribir el nombre de un estado..."
+        uib-typeahead="state for state in typeCtrl.states | filter:$viewValue | limitTo:8">
+      </div>
+    </div>
+    <h2>Qtip</h2>
+    <div ng-controller="QTipController as qtCtrl">
+          <span qtip="Woah!" qtip-visible="true">{{qtCtrl.variable}}</span>
+    </div>
+
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -967,6 +979,12 @@
                 .controller('WeedAuthController', weedAuthController)
                 .controller('PopupController', popupController)
                 .controller('NotificationController', notificationController)
+                .factory("States", function(){
+                  var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+                  return states;
+                })
+                .controller('TypeaheadController',typeaheadController)
+                .controller('QTipController',qTipController)
                 .run(weedRun);
 
             // Dependencies
@@ -976,7 +994,17 @@
             weedAuthController.$inject = ['$scope', 'weedJWTAuthService', '$http'];
             popupController.$inject = ['WeedApi'];
             notificationController.$inject = ['WeedApi'];
+            typeaheadController.$inject = ['WeedApi','States'];
+            qTipController.$inject = ['WeedApi'];
 
+            function typeaheadController(WeedApi, States){
+              var vm = this;
+              vm.states = States;
+            }
+            function qTipController(WeedApi){
+              var vm = this;
+              vm.variable = "Samuel";
+            }
             function notificationController(WeedApi){
                 var vm = this;
 

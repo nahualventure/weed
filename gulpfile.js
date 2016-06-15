@@ -36,8 +36,10 @@ var paths = {
   weedJS: [
     'bower_components/hammerjs/hammer.js',
     'bower_components/ng-dialog/js/ngDialog.js',
+    'bower_components/ng-qtip2/ng-qtip2.js',
     './src/assets/js/weed.js',
     './src/assets/js/core/*.js',
+    './src/assets/js/vendors/*.js',
     './src/assets/js/components/**/*.js',
   ]
 }
