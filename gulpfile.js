@@ -33,14 +33,17 @@ var paths = {
     // 'bower_components/foundation-icon-fonts'
   ],
   sass: [],
+  css: [],
+  boostrap: [
+    'bower_components/bootstrap/less'
+  ],
   weedJS: [
     'bower_components/hammerjs/hammer.js',
     'bower_components/ng-dialog/js/ngDialog.js',
-    'bower_components/ng-qtip2/ng-qtip2.js',
     './src/assets/js/weed.js',
     './src/assets/js/core/*.js',
     './src/assets/js/vendors/*.js',
-    './src/assets/js/components/**/*.js',
+    './src/assets/js/components/**/*.js'
   ]
 }
 
@@ -117,11 +120,24 @@ gulp.task('less', ['sass'], function(){
       .pipe(gulp.dest('dist/temp'));
 });
 
+// Compile Bootstrap
+gulp.task('bootstrap', ['less'], function(){
+  return gulp.src('src/assets/less/bootstrap.less')
+      .pipe(less({
+        paths: paths.boostrap
+      }))
+      .pipe($.autoprefixer({
+        browsers: browsers
+      }))
+      .pipe(rename('bootstrap.css'))
+      .pipe(gulp.dest('dist/temp'));
+});
+
 // Concat CSS
-gulp.task('css', ['less'], function(cb){
+gulp.task('css', ['bootstrap'], function(cb){
   var minifyCss = $.if(isProduction, $.minifyCss());
 
-  return gulp.src(['dist/temp/sass.css', 'dist/temp/less.css'])
+  return gulp.src(['dist/temp/bootstrap.css', 'dist/temp/sass.css', 'dist/temp/less.css'].concat(paths.css))
     .pipe($.concat('weed.css'))
     .pipe(minifyCss)
     .pipe(gulp.dest('dist/assets/css/'));

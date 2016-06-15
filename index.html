@@ -952,10 +952,16 @@
       </div>
     </div>
     <h2>Qtip</h2>
-    <div ng-controller="QTipController as qtCtrl">
-          <span qtip="Woah!" qtip-visible="true">{{qtCtrl.variable}}</span>
+    <div class="row" ng-controller="QTipController as qtCtrl">
+      <div class="col xs-12">
+        <button tooltip-placement="top" uib-tooltip="tooltip" type="button">Tooltip top</button>              <!--span qtip="Woah!!!!!" qtip-title="este es un titulo" qtip-fixed="true">{{qtCtrl.variable}}</span-->
+      </div>
     </div>
-
+    <h2>Popover</h2>
+    <div class="row" ng-controller="QTipController as qtCtrl">
+      <div class="col xs-12">
+        <button uib-popover="Hello, World!" popover-title="Title" type="button">Dynamic Popover</button>      </div>
+    </div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>

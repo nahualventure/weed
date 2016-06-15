@@ -16,7 +16,9 @@
       'weed.toload',
       'weed.corner-notifications',
       'ui.bootstrap',
-      'ui.bootstrap.typeahead'
+      'ui.bootstrap.typeahead',
+      'ui.bootstrap.tooltip',
+      'ui.bootstrap.popover'
     ])
     .constant('weed.config', {});
 })(angular);
