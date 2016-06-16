@@ -1,0 +1,114 @@
+@bubble-menu-background: @white;
+@bubble-menu-border-color: @black-25;
+@bubble-menu-close-background: @black-5;
+@bubble-menu-close-border-color: @black-15;
+@bubble-menu-close-font-color: @black-40;
+@bubble-menu-font-family: sans-serif;
+@bubble-menu-name-color: @system-base-color;
+@bubble-menu-picture-background: @white;
+@bubble-menu-picture-border-color: @black-30;
+@bubble-menu-picture-placeholder: url('');
+@bubble-menu-role-color: @black-15;
+
+@bubble-menu-placeholder-background: #e2e7e7;
+@bubble-menu-placeholder-border: #d5dada;
+@bubble-menu-placeholder-plus-background: #c1c6c6;
+@bubble-menu-placeholder-plus-color: #e2e7e7;
+@bubble-menu-placeholder-text-color: #a6a7a7;
+
+@bubble-menu-placeholder-background: #e2e7e7;
+@bubble-menu-placeholder-border: #d5dada;
+@bubble-menu-placeholder-plus-background: #c1c6c6;
+@bubble-menu-placeholder-plus-color: #e2e7e7;
+@bubble-menu-placeholder-text-color: #a6a7a7;
+
+@bubble-menu-divider: #b3b3b3;
+@bubble-menu-icon-size: 20px;
+
+@bubble-menu-border-radius: @system-border-radius;
+@bubble-menu-bottom-margin: 20px;
+@bubble-menu-padding: 5px 20px 20px 20px;
+@bubble-menu-picture-margin: 20px;
+@bubble-menu-picture-width: 100%;
+@bubble-menu-picture-height: auto;
+@bubble-menu-picture-small-size: 45px;
+@bubble-menu-right-margin: 25px;
+@bubble-menu-width: 240px;
+@bubble-menu-max-width: 240px;
+@bubble-menu-height: 240px;
+@bubble-menu-placeholder-plus-size: 70px;
+@bubble-menu-placeholder-plus-margin-bottom: 20px;
+@bubble-menu-placeholder-plus-margin-top: 40px;
+@bubble-menu-placeholder-text-width: 110px;
+@bubble-menu-client-width: auto;
+
+.make-bubble-menu(
+  @background: @bubble-menu-background;
+  @border-color: @bubble-menu-border-color;
+  @border-radius: @bubble-menu-border-radius;
+  @bottom-margin: @bubble-menu-bottom-margin;
+  @close-background: @bubble-menu-close-background;
+  @close-border-color: @bubble-menu-close-border-color;
+  @close-font-color: @bubble-menu-close-font-color;
+  @client-width: @bubble-menu-client-width;
+  @font-family: @bubble-menu-font-family;
+  @font-family: @bubble-menu-font-family;
+  @name-color: @bubble-menu-name-color;
+  @padding: @bubble-menu-padding;
+  @picture-background: @bubble-menu-picture-background;
+  @picture-border-color: @bubble-menu-picture-border-color;
+  @picture-margin: @bubble-menu-picture-margin;
+  @picture-placeholder: @bubble-menu-picture-placeholder;
+  @picture-width: @bubble-menu-picture-width;
+  @picture-height: @bubble-menu-picture-height;
+  @picture-small-size: @bubble-menu-picture-small-size;
+  @right-margin: @bubble-menu-right-margin;
+  @role-color: @bubble-menu-role-color;
+  @width: @bubble-menu-width;
+  @max-width: @bubble-menu-max-width;
+  @height: @bubble-menu-height;
+  @placeholder-background: @bubble-menu-placeholder-background;
+  @placeholder-border: @bubble-menu-placeholder-border;
+  @placeholder-plus-size: @bubble-menu-placeholder-plus-size;
+  @placeholder-plus-background: @bubble-menu-placeholder-plus-background;
+  @placeholder-plus-color: @bubble-menu-placeholder-plus-color;
+  @placeholder-plus-margin-bottom: @bubble-menu-placeholder-plus-margin-bottom;
+  @placeholder-plus-margin-top: @bubble-menu-placeholder-plus-margin-top;
+  @placeholder-text-color: @bubble-menu-placeholder-text-color;
+  @placeholder-text-width: @bubble-menu-placeholder-text-width;
+  @menu-divider: @bubble-menu-divider;
+  @icon-size: @bubble-menu-icon-size;
+  ){
+  border-radius: @border-radius;
+  box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
+  box-sizing: border-box;
+  background: @background;
+  border: 1px solid @border-color;
+  border-top: none;
+  display: inline-block;
+  font-family: @font-family;
+  min-height: @height;
+  margin-bottom: @bottom-margin;
+  margin-right: @right-margin;
+  overflow: hidden;
+  padding: @padding;
+  position: relative;
+  min-width: @width;
+  max-width: @max-width;
+  .bubble-menu-nav{
+    .bubble-menu-list{
+      list-style: none;
+      padding: 0;
+    }
+    .bubble-menu-icon{
+      margin-right: 5px;
+      font-size: @icon-size;
+    }
+  }
+  .bubble-menu-separator{
+    border-top: solid 1px @menu-divider;
+  }
+}
+.bubble-menu{
+  .make-bubble-menu();
+}

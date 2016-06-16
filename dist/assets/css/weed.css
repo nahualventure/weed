@@ -7306,6 +7306,35 @@ hr {
   display: inline-block;
   vertical-align: middle;
 }
+.bubble-menu {
+  border-radius: 10px;
+  box-shadow: 0 2px 1px 0px rgba(191, 191, 191, 0.3);
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #bfbfbf;
+  border-top: none;
+  display: inline-block;
+  font-family: sans-serif;
+  min-height: 240px;
+  margin-bottom: 20px;
+  margin-right: 25px;
+  overflow: hidden;
+  padding: 5px 20px 20px 20px;
+  position: relative;
+  min-width: 240px;
+  max-width: 240px;
+}
+.bubble-menu .bubble-menu-nav .bubble-menu-list {
+  list-style: none;
+  padding: 0;
+}
+.bubble-menu .bubble-menu-nav .bubble-menu-icon {
+  margin-right: 5px;
+  font-size: 20px;
+}
+.bubble-menu .bubble-menu-separator {
+  border-top: solid 1px #b3b3b3;
+}
 /*
  * Instructions: each weed module contains a base customization variables at
  * the begining of the file. Copy those variables here and customize them away!
