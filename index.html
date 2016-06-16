@@ -951,7 +951,7 @@
         uib-typeahead="state for state in typeCtrl.states | filter:$viewValue | limitTo:8">
       </div>
     </div>
-    <h2>Qtip</h2>
+    <h2>Tooltip</h2>
     <div class="row" ng-controller="QTipController as qtCtrl">
       <div class="col xs-12">
         <button tooltip-placement="top" uib-tooltip="tooltip" type="button">Tooltip top</button>              <!--span qtip="Woah!!!!!" qtip-title="este es un titulo" qtip-fixed="true">{{qtCtrl.variable}}</span-->
@@ -961,6 +961,25 @@
     <div class="row" ng-controller="QTipController as qtCtrl">
       <div class="col xs-12">
         <button uib-popover="Hello, World!" popover-title="Title" type="button">Dynamic Popover</button>      </div>
+    </div>
+    <h2>Bubble Menu</h2>
+
+    <h2>Custom Cards</h2>
+    <div class="card">
+      <img class="picture" src="http://placekitten.com/g/400/200">
+      <div class="card-divider">
+        Divider
+      </div>
+      <div class="card-section">
+        <h4>Title</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec tristique neque, egestas vestibulum est. Duis sagittis tempus enim sit amet semper. Praesent aliquet urna ex, a viverra sapien dapibus sodales.
+        </p>
+      </div>
+      <div class="card-footer">
+        <img class="picture-footer" src="https://33.media.tumblr.com/avatar_025387c4da6f_128.png">
+        <span class="text-footer">Lorem ipsum dolor</span>
+      </div>
     </div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
