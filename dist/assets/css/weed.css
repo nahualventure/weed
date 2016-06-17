@@ -7283,12 +7283,21 @@ hr {
 .card .card-divider {
   background: #b3b3b3;
   padding: 1rem;
+  font-family: sans-serif;
+  color: #e2e7e7;
 }
 .card .card-section {
   padding: 1rem;
 }
+.card .card-section .card-tittle {
+  font-family: sans-serif;
+  color: #d9d9d9;
+}
+.card .card-section .card-paragraph {
+  font-family: sans-serif;
+  color: #999999;
+}
 .card .card-footer {
-  border-top: solid 1px #b3b3b3;
   padding: 1rem;
   text-align: center;
 }
@@ -7305,6 +7314,11 @@ hr {
 .card .card-footer .text-footer {
   display: inline-block;
   vertical-align: middle;
+  color: #bfbfbf;
+}
+.card .card-hr {
+  border-top: solid 1px #b3b3b3;
+  border-bottom: solid 1px #b3b3b3;
 }
 .bubble-menu {
   border-radius: 10px;
@@ -7324,19 +7338,32 @@ hr {
   min-width: 240px;
   max-width: 240px;
 }
+.bubble-menu .bubble-menu-tittle {
+  font-family: sans-serif;
+}
+.bubble-menu .bubble-menu-paragraph {
+  font-family: sans-serif;
+}
 .bubble-menu .bubble-menu-nav .bubble-menu-list {
   list-style: none;
   padding: 0;
 }
 .bubble-menu .bubble-menu-nav .bubble-menu-list li {
+  display: block;
+  font-family: sans-serif;
   margin-bottom: 10px;
+  color: #d5dada;
+}
+.bubble-menu .bubble-menu-nav .bubble-menu-list li a {
+  display: block;
 }
 .bubble-menu .bubble-menu-nav .bubble-menu-icon {
   margin-right: 5px;
   font-size: 20px;
 }
-.bubble-menu .bubble-menu-separator {
+.bubble-menu .bubble-menu-hr {
   border-top: solid 1px #b3b3b3;
+  border-bottom: solid 1px #b3b3b3;
 }
 /*
  * Instructions: each weed module contains a base customization variables at

@@ -4,6 +4,10 @@
 @bubble-menu-close-border-color: @black-15;
 @bubble-menu-close-font-color: @black-40;
 @bubble-menu-font-family: sans-serif;
+@bubble-menu-font-family-tittle: sans-serif;
+@bubble-menu-font-family-paragraph: sans-serif;
+@bubble-menu-font-family-link: sans-serif;
+@bubble-menu-font-color-link: #d5dada;
 @bubble-menu-name-color: @system-base-color;
 @bubble-menu-picture-background: @white;
 @bubble-menu-picture-border-color: @black-30;
@@ -24,6 +28,8 @@
 
 @bubble-menu-divider: #b3b3b3;
 @bubble-menu-icon-size: 20px;
+@bubble-menu-hr-divider-top: #b3b3b3;
+@bubble-menu-hr-divider-bottom: #b3b3b3;
 
 @bubble-menu-border-radius: @system-border-radius;
 @bubble-menu-bottom-margin: 20px;
@@ -52,7 +58,9 @@
   @close-font-color: @bubble-menu-close-font-color;
   @client-width: @bubble-menu-client-width;
   @font-family: @bubble-menu-font-family;
-  @font-family: @bubble-menu-font-family;
+  @font-family-tittle: @bubble-menu-font-family-tittle;
+  @font-family-paragraph: @bubble-menu-font-family-paragraph;
+  @font-family-link: @bubble-menu-font-family-link;
   @name-color: @bubble-menu-name-color;
   @padding: @bubble-menu-padding;
   @picture-background: @bubble-menu-picture-background;
@@ -78,6 +86,9 @@
   @placeholder-text-width: @bubble-menu-placeholder-text-width;
   @menu-divider: @bubble-menu-divider;
   @icon-size: @bubble-menu-icon-size;
+  @menu-hr-divider-top: @bubble-menu-hr-divider-top;
+  @menu-hr-divider-bottom: @bubble-menu-hr-divider-bottom;
+  @font-color-link: @bubble-menu-font-color-link;
   ){
   border-radius: @border-radius;
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
@@ -95,12 +106,24 @@
   position: relative;
   min-width: @width;
   max-width: @max-width;
+  .bubble-menu-tittle{
+    font-family: @font-family-tittle;
+  }
+  .bubble-menu-paragraph{
+    font-family: @font-family-paragraph;
+  }
   .bubble-menu-nav{
     .bubble-menu-list{
       list-style: none;
       padding: 0;
       li{
+        display: block;
+        font-family: @font-family-link;
         margin-bottom: 10px;
+        color: @font-color-link;
+        a{
+          display: block;;
+        }
       }
     }
     .bubble-menu-icon{
@@ -108,8 +131,12 @@
       font-size: @icon-size;
     }
   }
-  .bubble-menu-separator{
-    border-top: solid 1px @menu-divider;
+  .bubble-menu-hr{
+    border-top: solid 1px @menu-hr-divider-top;
+    border-bottom: solid 1px @menu-hr-divider-bottom;
+  }
+  .bubble-menu-section{
+    //border-top: solid 1px @menu-divider;
   }
 }
 .bubble-menu{

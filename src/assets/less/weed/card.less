@@ -4,6 +4,8 @@
 @card-close-border-color: @black-15;
 @card-close-font-color: @black-40;
 @card-font-family: sans-serif;
+@card-font-family-tittle: sans-serif;
+@card-font-family-paragraph: sans-serif;
 @card-name-color: @system-base-color;
 @card-picture-background: @white;
 @card-picture-border-color: @black-30;
@@ -24,6 +26,12 @@
 
 @card-divider-background: #b3b3b3;
 @card-bottom-top-margin: #b3b3b3;
+@card-font-family-divider: sans-serif;
+@card-font-color-divider: #e2e7e7;
+@card-font-color-paragraph: @black-40;
+@card-font-color-tittle: @black-15;
+@card-hr-divider-top: #b3b3b3;
+@card-hr-divider-bottom: #b3b3b3;
 
 @card-border-radius: @system-border-radius;
 @card-bottom-margin: 20px;
@@ -41,6 +49,9 @@
 @card-placeholder-plus-margin-top: 40px;
 @card-placeholder-text-width: 110px;
 @card-client-width: auto;
+
+@card-footer-font-color: @black-25;
+@card-footer-image-size: 50px;
 
 .make-card(
   @background: @card-background;
@@ -78,6 +89,16 @@
   @placeholder-text-width: @card-placeholder-text-width;
   @divider-background: @card-divider-background;
   @bottom-top-margin: @card-bottom-top-margin;
+  @font-family-tittle: @card-font-family-tittle;
+  @font-family-paragraph: @card-font-family-paragraph;
+  @font-family-divider: @card-font-family-divider;
+  @font-color-divider: @card-font-color-divider;
+  @font-color-paragraph: @card-font-color-paragraph;
+  @font-color-tittle: @card-font-color-tittle;
+  @hr-divider-top: @card-hr-divider-top;
+  @hr-divider-bottom: @card-hr-divider-bottom;
+  @footer-font-color: @card-footer-font-color;
+  @footer-image-size: @card-footer-image-size;
   ){
   border-radius: @border-radius;
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
@@ -112,12 +133,22 @@
   .card-divider{
     background: @divider-background;
     padding: 1rem;
+    font-family: @font-family-divider;
+    color: @font-color-divider;
   }
   .card-section{
     padding: 1rem;
+    .card-tittle{
+      font-family: @font-family-tittle;
+      color: @font-color-tittle;
+    }
+    .card-paragraph{
+      font-family: @font-family-paragraph;
+      color: @font-color-paragraph;
+    }
   }
   .card-footer{
-    border-top: solid 1px @bottom-top-margin;
+    //border-top: solid 1px @bottom-top-margin;
     padding: 1rem;
     text-align: center;
 
@@ -128,15 +159,19 @@
       border: 2px solid @user-card-picture-border-color;
       margin-right: 10px;
       vertical-align: middle;
-      height: 50px;
-      width: 50px;
+      height: @footer-image-size;
+      width: @footer-image-size;
     }
     .text-footer{
       display: inline-block;
       vertical-align: middle;
+      color: @footer-font-color;
     }
   }
-
+  .card-hr{
+    border-top: solid 1px @hr-divider-top;
+    border-bottom: solid 1px @hr-divider-bottom;
+  }
 }
 .card{
   .make-card();
