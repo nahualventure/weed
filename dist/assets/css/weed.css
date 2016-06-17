@@ -7328,6 +7328,9 @@ hr {
   list-style: none;
   padding: 0;
 }
+.bubble-menu .bubble-menu-nav .bubble-menu-list li {
+  margin-bottom: 10px;
+}
 .bubble-menu .bubble-menu-nav .bubble-menu-icon {
   margin-right: 5px;
   font-size: 20px;
