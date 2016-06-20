@@ -1,0 +1,16 @@
+<div class="list" ng-class="
+    {
+      'selectable': selectable !== undefined,
+      'list-small': size=='small',
+      'list-large': size=='large',
+      'list-tiny': size=='tiny',
+
+      'loffset-50': leftIcon !== undefined,
+      'roffset-50': rightIcon !== undefined,
+
+      'component-position-left': componentPosition === 'left',
+      'component-position-right': componentPosition === 'right'
+    }
+  ">
+    <span ng-transclude></span>
+</div>

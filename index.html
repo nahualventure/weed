@@ -151,6 +151,15 @@
     <a we-button icon="bell" color="danger" size="tiny" toload="true">Test</a> <br>
     <a we-button icon="bell" color="danger" size="tiny" toload="true"></a>
 
+    <br>
+
+    <a
+        we-button icon="bell" color="success" class="left-end"></a><a
+        we-button icon="github" color="warning" class="mid"></a><a
+        we-button icon="cog" color="danger" class="right-end">
+    </a>
+
+
     <h3>Buttons with loader callback</h3>
     <div ng-controller="WeedButtonController as btnCtrl">
         <a we-button icon="bell" color="info" size="large" toload="btnCtrl.testFunctionToLoad()">Test</a><br>
@@ -230,6 +239,16 @@
         <input type="text" placeholder="With right button">
     </div>
 
+    <!-- Right button: OK -->
+    <h2>Input right multiple buttons</h2>
+    <div we-input-wrapper component-position="right">
+        <div class="multi-component">
+            <a we-button icon="cog" class="mid" color="success"></a><a
+                we-button icon="github" class="right-end" color="warning"></a>
+        </div>
+        <input type="text" placeholder="With right button">
+    </div>
+
     <!-- Left tag: OK -->
     <h2>Input left tag</h2>
     <div we-input-wrapper component-position="left">
@@ -238,7 +257,7 @@
     </div>
 
     <!-- Right tag: OK -->
-    <h2>Input left tag</h2>
+    <h2>Input right tag</h2>
     <div we-input-wrapper component-position="right">
         <a we-button icon="calendar" color="success"></a>
         <input type="text" placeholder="With right tag">
@@ -286,7 +305,7 @@
     </div>
 
     <!-- Right tag: OK -->
-    <h2>Input left tag</h2>
+    <h2>Input right tag</h2>
     <div we-input-wrapper size="small" component-position="right">
         <a we-button icon="calendar" size="small" color="success"></a>
         <input type="text" placeholder="With right tag">
@@ -846,7 +865,7 @@
         </tr>
     </table>
 
-    <h2>Dynamic grid</h2>
+    <h1>Dynamic grid</h1>
     <div class="dynamic-table vertical sortable sort-stages">
         <div class="dynamic-table-row">
             <div class="element title handle">
@@ -944,6 +963,186 @@
         </div>
     </div>
 
+    <h1>List</h1>
+
+    <h2>Simple</h2>
+    <ul we-list>
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Simple with components</h2>
+
+    <ul we-list component-position="right">
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+            <a we-button icon="cog" color="success">Example</a>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="success" class="mid"></a>
+                <a we-button icon="cog" color="primary" class="mid"></a>
+                <a we-button icon="cog" color="danger" class="mid"></a>
+            </div>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="info"></a>
+                <a we-button icon="cog" color="warning" class="mid"></a>
+            </div>
+        </li>
+    </ul>
+    <ul we-list component-position="right">
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+            <a we-button icon="cog" color="success">Example</a>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="success" class="mid"></a>
+                <a we-button icon="cog" color="primary" class="mid"></a>
+                <a we-button icon="cog" color="danger" class="mid"></a>
+            </div>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="info"></a>
+                <a we-button icon="cog" color="warning" class="mid"></a>
+            </div>
+        </li>
+    </ul>
+
+    <h2>Small</h2>
+    <ul we-list size="small">
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Tiny</h2>
+    <ul we-list size="tiny">
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Clickable</h2>
+    <ul we-list>
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Clickable Small</h2>
+    <ul we-list size="small">
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Clickable Small with components</h2>
+    <ul we-list size="small" component-position="right">
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+            <a we-button size="small" icon="cog" color="success">Example</a>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="success" size="small" class="mid"></a>
+                <a we-button icon="cog" color="primary" size="small" class="mid"></a>
+                <a we-button icon="cog" color="danger" size="small" class="mid"></a>
+            </div>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="info" size="small"></a>
+                <a we-button icon="cog" color="warning" size="small" class="mid"></a>
+            </div>
+        </li>
+    </ul>
+
+    <h2>Clickable Tiny</h2>
+    <ul we-list size="tiny">
+        <li class="list-item selectable">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Selectable</h2>
+    <ul we-list selectable>
+        <li class="list-item">
+            <p class="item-text">Item 1</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 2</p>
+        </li>
+        <li class="list-item">
+            <p class="item-text">Item 3</p>
+        </li>
+    </ul>
+
+    <h2>Contextual list</h2>
+    <div we-list>
+        <a href="" class="list-item list-item-primary">
+            <p class="item-text">Primary</p>
+        </a>
+        <a href="" class="list-item list-item-success">
+            <p class="item-text">Success</p>
+        </a>
+        <a href="" class="list-item list-item-info">
+            <p class="item-text">Information</p>
+        </a>
+        <a href="" class="list-item list-item-warning">
+            <p class="item-text">Warning</p>
+        </a>
+        <a href="" class="list-item list-item-danger">
+            <p class="item-text">Danger</p>
+        </a>
+    </div>
+
     <h2>Typeahead</h2>
     <div class="row" ng-controller="TypeaheadController as typeCtrl">
       <div class="col xs-12">
@@ -952,13 +1151,13 @@
       </div>
     </div>
     <h2>Tooltip</h2>
-    <div class="row" ng-controller="QTipController as qtCtrl">
+    <div class="row">
       <div class="col xs-12">
-        <button tooltip-placement="top" uib-tooltip="tooltip" type="button">Tooltip top</button>              <!--span qtip="Woah!!!!!" qtip-title="este es un titulo" qtip-fixed="true">{{qtCtrl.variable}}</span-->
+        <button tooltip-placement="top" uib-tooltip="tooltip" type="button">Tooltip top</button>
       </div>
     </div>
     <h2>Popover</h2>
-    <div class="row" ng-controller="QTipController as qtCtrl">
+    <div class="row">
       <div class="col xs-12">
         <button uib-popover="Hello, World!" popover-title="Title" type="button">Dynamic Popover</button>      </div>
     </div>
@@ -1047,7 +1246,6 @@
                   return states;
                 })
                 .controller('TypeaheadController',typeaheadController)
-                .controller('QTipController',qTipController)
                 .run(weedRun);
 
             // Dependencies
@@ -1058,15 +1256,10 @@
             popupController.$inject = ['WeedApi'];
             notificationController.$inject = ['WeedApi'];
             typeaheadController.$inject = ['WeedApi','States'];
-            qTipController.$inject = ['WeedApi'];
 
             function typeaheadController(WeedApi, States){
               var vm = this;
               vm.states = States;
-            }
-            function qTipController(WeedApi){
-              var vm = this;
-              vm.variable = "Samuel";
             }
             function notificationController(WeedApi){
                 var vm = this;

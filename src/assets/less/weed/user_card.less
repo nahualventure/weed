@@ -1,41 +1,41 @@
-@user-card-background: @white;
-@user-card-border-color: @black-25;
-@user-card-close-background: @black-5;
-@user-card-close-border-color: @black-15;
-@user-card-close-font-color: @black-40;
-@user-card-font-family: sans-serif;
-@user-card-name-color: @system-base-color;
-@user-card-picture-background: @white;
-@user-card-picture-border-color: @black-30;
-@user-card-picture-placeholder: url('');
-@user-card-role-color: @black-15;
+@user-card-background:                                      @white;
+@user-card-border-color:                                    @black-25;
+@user-card-close-background:                                @black-5;
+@user-card-close-border-color:                              @black-15;
+@user-card-close-font-color:                                @black-40;
+@user-card-font-family:                                     sans-serif;
+@user-card-name-color:                                      @system-base-color;
+@user-card-picture-background:                              @white;
+@user-card-picture-border-color:                            @black-30;
+@user-card-picture-placeholder:                             url('');
+@user-card-role-color:                                      @black-15;
 
-@user-card-placeholder-background: #e2e7e7;
-@user-card-placeholder-border: #d5dada;
-@user-card-placeholder-plus-background: #c1c6c6;
-@user-card-placeholder-plus-color: #e2e7e7;
-@user-card-placeholder-text-color: #a6a7a7;
+@user-card-placeholder-background:                          #e2e7e7;
+@user-card-placeholder-border:                              #d5dada;
+@user-card-placeholder-plus-background:                     #c1c6c6;
+@user-card-placeholder-plus-color:                          #e2e7e7;
+@user-card-placeholder-text-color:                          #a6a7a7;
 
 
-@user-card-border-radius: @system-border-radius;
-@user-card-bottom-margin: 20px;
-@user-card-compress-data-width: 140px;
-@user-card-compress-padding: 15px;
-@user-card-compress-separation: 10px;
-@user-card-compress-width: auto;
-@user-card-padding: 30px 20px 40px 20px;
-@user-card-picture-margin: 20px;
-@user-card-picture-size: 90px;
-@user-card-picture-small-size: 45px;
-@user-card-right-margin: 25px;
-@user-card-width: auto;
-@user-card-height: 294px;
-@user-card-compressed-height: 90px;
-@user-card-placeholder-plus-size: 70px;
-@user-card-placeholder-plus-margin-bottom: 20px;
-@user-card-placeholder-plus-margin-top: 40px;
-@user-card-placeholder-text-width: 110px;
-@user-card-client-width: auto;
+@user-card-border-radius:                                   @system-border-radius;
+@user-card-bottom-margin:                                   20px;
+@user-card-compress-data-width:                             140px;
+@user-card-compress-padding:                                15px;
+@user-card-compress-separation:                             10px;
+@user-card-compress-width:                                  auto;
+@user-card-padding:                                         30px 20px 40px 20px;
+@user-card-picture-margin:                                  20px;
+@user-card-picture-size:                                    90px;
+@user-card-picture-small-size:                              45px;
+@user-card-right-margin:                                    25px;
+@user-card-width:                                           auto;
+@user-card-height:                                          294px;
+@user-card-compressed-height:                               90px;
+@user-card-placeholder-plus-size:                           70px;
+@user-card-placeholder-plus-margin-bottom:                  20px;
+@user-card-placeholder-plus-margin-top:                     40px;
+@user-card-placeholder-text-width:                          110px;
+@user-card-client-width:                                    auto;
 
 .make-user-card(
   @background: @user-card-background;
@@ -114,14 +114,14 @@
     border-radius: 1000px; // Extreme
     background: @picture-placeholder @picture-background center center;
     background-size: cover;
-    border: 2px solid @user-card-picture-border-color;
+    border: 2px solid @picture-border-color;
     display: block;
     height: @picture-size;
     margin: 0 auto @picture-margin auto;
     width: @picture-size;
 
     &.placeholded{
-      border-color: fadeout(@user-card-picture-border-color, 100%);
+      border-color: fadeout(@picture-border-color, 100%);
     }
   }
 
