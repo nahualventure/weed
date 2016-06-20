@@ -89,7 +89,7 @@
           oLoader = angular.element(elem[0].querySelector('.loader'));
 
           // Set loader position
-          oLoader.css('left', (buttonCurrentWidth - loaderWidth)/2.0);
+          oLoader.css('left', ((buttonCurrentWidth - loaderWidth)/2.0) + "px");
         }
       });
     }

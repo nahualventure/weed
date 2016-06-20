@@ -153,7 +153,15 @@
 
     <h3>Buttons with loader callback</h3>
     <div ng-controller="WeedButtonController as btnCtrl">
-        <a we-button icon="bell" color="info" size="large" toload="btnCtrl.testFunctionToLoad()">Test</a><br>
+        <button
+            we-button
+            icon="bell"
+            color="info"
+            size="large"
+            toload="btnCtrl.testFunctionToLoad()"
+            class="block">
+            Test
+        </button><br>
     </div>
 
     <h1>Forms</h1>
