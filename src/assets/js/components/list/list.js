@@ -10,7 +10,7 @@
 (function(angular){
   'use strict';
 
-  angular.module('weed.list', ['weed.core'])
+  angular.module('weed.list')
       .directive('weList', listDirective);
 
   // No dependency injections
@@ -19,30 +19,41 @@
     return {
       restrict: 'A',
       transclude: true,
+      replace: true,
       scope: {
-        icon: '@',
-        color: '@',
-        size: '@',
+        clickable: '@',
         selectable: '@',
         componentPosition: '@',
-        state: '@'
+        color: '@',
+        size: '@'
       },
-      replace: true,
       templateUrl: 'components/list/list.html',
-      link: listLink
+      bindToController: true,
+      controllerAs: 'list',
+      controller: listController
     };
   }
 
-  function listLink(scope, elem, attrs, controllers, $transclude) {
-    var item = elem.find('.list-item');
-    item.on("click", function(){
-      this.active = false;
-      item.active = true;
-      item.$apply();
-    });
-    if (scope.selectable){
-      item.selectable = true;
-    }
+  listController.$inject = ['$scope'];
+
+  function listController($scope) {
+    var vm = this;
+
+    vm.items = [];
+
+    vm.addItem = function addItem(item) {
+      vm.items.push(item);
+    };
+
+    vm.select = function(selectedItem) {
+      angular.forEach(vm.items, function(item){
+        if(item.active && item !== selectedItem){
+          item.active = false;
+        }
+      });
+      selectedItem.active = true;
+      $scope.$apply();
+    };
   }
 
 })(angular);

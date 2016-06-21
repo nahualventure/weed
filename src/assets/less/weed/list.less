@@ -290,25 +290,18 @@
     }
   }
 
-  button, .selectable{
+  &.clickable, &.selectable{
     cursor: pointer;
-    &.list-item{
+    .list-item{
       &:hover, &:focus{
         //text-decoration: none;
         color: @list-font-color-focus;
         background-color: @list-background-color-hover;
       }
-      &.active{
-        color: @list-font-color-active;
-        background-color: @list-background-color-active;
-      }
       &.list-item-primary{
         &:hover, &:focus{
           color: @list-primary-text-color;
           background-color: @list-primary-background-color-hover;
-        }
-        &.active{
-          background-color: @list-primary-background-color-active;;
         }
       }
       &.list-item-success{
@@ -316,17 +309,11 @@
           color: @list-success-text-color;
           background-color: @list-success-background-color-hover;
         }
-        &.active{
-          background-color: @list-success-background-color-active;;
-        }
       }
       &.list-item-info{
         &:hover, &:focus{
           color: @list-info-text-color;
           background-color: @list-info-background-color-hover;
-        }
-        &.active{
-          background-color: @list-info-background-color-active;;
         }
       }
       &.list-item-warning{
@@ -334,15 +321,42 @@
           color: @list-warning-text-color;
           background-color: @list-warning-background-color-hover;
         }
-        &.active{
-          background-color: @list-warning-background-color-active;;
-        }
       }
       &.list-item-danger{
         &:hover, &:focus{
           color: @list-danger-text-color;
           background-color: @list-danger-background-color-hover;
         }
+      }
+    }
+  }
+  &.selectable{
+    .list-item{
+      &.active{
+        color: @list-font-color-active;
+        background-color: @list-background-color-active;
+      }
+      &.list-item-primary{
+        &.active{
+          background-color: @list-primary-background-color-active;;
+        }
+      }
+      &.list-item-success{
+        &.active{
+          background-color: @list-success-background-color-active;;
+        }
+      }
+      &.list-item-info{
+        &.active{
+          background-color: @list-info-background-color-active;;
+        }
+      }
+      &.list-item-warning{
+        &.active{
+          background-color: @list-warning-background-color-active;;
+        }
+      }
+      &.list-item-danger{
         &.active{
           background-color: @list-danger-background-color-active;;
         }

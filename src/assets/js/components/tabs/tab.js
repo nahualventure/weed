@@ -1,6 +1,6 @@
 /**
  * @ngdoc function
- * @name weed.directive: weNavbar
+ * @name weed.directive: weTab
  * @description
  * # navbarDirective
  * Directive of the app
@@ -23,8 +23,8 @@
         templateUrl: 'components/tabs/tab.html',
         require: '^weTabset',
         link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false
-          tabsetCtrl.addTab(scope)
+          scope.active = false;
+          tabsetCtrl.addTab(scope);
         }
       };
     });

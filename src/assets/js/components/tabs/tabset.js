@@ -23,20 +23,20 @@
         bindToController: true,
         controllerAs: 'tabset',
         controller: function() {
-          var self = this;
+          var vm = this;
 
-          self.tabs = [];
+          vm.tabs = [];
 
-          self.addTab = function addTab(tab) {
-            self.tabs.push(tab);
+          vm.addTab = function addTab(tab) {
+            vm.tabs.push(tab);
 
-            if(self.tabs.length === 1) {
+            if(vm.tabs.length === 1) {
               tab.active = true;
             }
           };
 
-          self.select = function(selectedTab) {
-            angular.forEach(self.tabs, function(tab){
+          vm.select = function(selectedTab) {
+            angular.forEach(vm.tabs, function(tab){
               if(tab.active && tab !== selectedTab){
                 tab.active = false;
               }

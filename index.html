@@ -153,11 +153,9 @@
 
     <br>
 
-    <a
-        we-button icon="bell" color="success" class="left-end"></a><a
+    <a  we-button icon="bell" color="success" class="left-end"></a><a
         we-button icon="github" color="warning" class="mid"></a><a
-        we-button icon="cog" color="danger" class="right-end">
-    </a>
+        we-button icon="cog" color="danger" class="right-end"></a>
 
 
     <h3>Buttons with loader callback</h3>
@@ -974,181 +972,114 @@
     <h1>List</h1>
 
     <h2>Simple</h2>
-    <ul we-list>
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list>
+        <div we-list-item>Item 1</div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Simple with components</h2>
 
-    <ul we-list component-position="right">
-        <li class="list-item">
+    <div we-list component-position="right">
+        <div we-list-item>
             <p class="item-text">Item 1</p>
             <a we-button icon="cog" color="success">Example</a>
-        </li>
-        <li class="list-item">
+        </div>
+        <div we-list-item>
             <p class="item-text">Item 2</p>
             <div class="multi-component">
                 <a we-button icon="cog" color="success" class="mid"></a>
                 <a we-button icon="cog" color="primary" class="mid"></a>
                 <a we-button icon="cog" color="danger" class="mid"></a>
             </div>
-        </li>
-        <li class="list-item">
+        </div>
+        <div we-list-item>
             <p class="item-text">Item 3</p>
             <div class="multi-component">
                 <a we-button icon="cog" color="info"></a>
                 <a we-button icon="cog" color="warning" class="mid"></a>
             </div>
-        </li>
-    </ul>
-    <ul we-list component-position="right">
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-            <a we-button icon="cog" color="success">Example</a>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-            <div class="multi-component">
-                <a we-button icon="cog" color="success" class="mid"></a>
-                <a we-button icon="cog" color="primary" class="mid"></a>
-                <a we-button icon="cog" color="danger" class="mid"></a>
-            </div>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-            <div class="multi-component">
-                <a we-button icon="cog" color="info"></a>
-                <a we-button icon="cog" color="warning" class="mid"></a>
-            </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <h2>Small</h2>
-    <ul we-list size="small">
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list size="small">
+        <div we-list-item>Item 1</div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Tiny</h2>
-    <ul we-list size="tiny">
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list size="tiny">
+        <div we-list-item>Item 1</div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Clickable</h2>
-    <ul we-list>
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list clickable>
+        <div we-list-item>Item 1</div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Clickable Small</h2>
-    <ul we-list size="small">
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list clickable size="small">
+        <div we-list-item>Item 1</div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Clickable Small with components</h2>
-    <ul we-list size="small" component-position="right">
-        <li class="list-item">
+    <div we-list clickable size="small" component-position="right">
+        <div we-list-item>
             <p class="item-text">Item 1</p>
             <a we-button size="small" icon="cog" color="success">Example</a>
-        </li>
-        <li class="list-item">
+        </div>
+        <div we-list-item>
             <p class="item-text">Item 2</p>
             <div class="multi-component">
                 <a we-button icon="cog" color="success" size="small" class="mid"></a>
                 <a we-button icon="cog" color="primary" size="small" class="mid"></a>
                 <a we-button icon="cog" color="danger" size="small" class="mid"></a>
             </div>
-        </li>
-        <li class="list-item">
+        </div>
+        <div we-list-item>
             <p class="item-text">Item 3</p>
             <div class="multi-component">
                 <a we-button icon="cog" color="info" size="small"></a>
                 <a we-button icon="cog" color="warning" size="small" class="mid"></a>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <h2>Clickable Tiny</h2>
-    <ul we-list size="tiny">
-        <li class="list-item selectable">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list clickable size="tiny">
+        <div we-list-item>Item 1</div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Selectable</h2>
-    <ul we-list selectable>
-        <li class="list-item">
-            <p class="item-text">Item 1</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 2</p>
-        </li>
-        <li class="list-item">
-            <p class="item-text">Item 3</p>
-        </li>
-    </ul>
+    <div we-list selectable component-position="right">
+        <div we-list-item>
+            <div class="item-text">Item 1</div>
+            <div class="multi-component">
+                <a we-button icon="cog" color="info"></a><a
+                    we-button icon="cog" color="warning" class="mid"></a>
+            </div>
+        </div>
+        <div we-list-item>Item 2</div>
+        <div we-list-item>Item 3</div>
+    </div>
 
     <h2>Contextual list</h2>
-    <div we-list>
-        <a href="" class="list-item list-item-primary">
-            <p class="item-text">Primary</p>
-        </a>
-        <a href="" class="list-item list-item-success">
-            <p class="item-text">Success</p>
-        </a>
-        <a href="" class="list-item list-item-info">
-            <p class="item-text">Information</p>
-        </a>
-        <a href="" class="list-item list-item-warning">
-            <p class="item-text">Warning</p>
-        </a>
-        <a href="" class="list-item list-item-danger">
-            <p class="item-text">Danger</p>
-        </a>
+    <div we-list selectable>
+        <div we-list-item color="primary">Primary</div>
+        <div we-list-item color="success">Success</div>
+        <div we-list-item color="info">Information</div>
+        <div we-list-item color="danger">Danger</div>
+        <div we-list-item color="warning">Warning</div>
     </div>
 
     <h2>Typeahead</h2>

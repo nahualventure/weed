@@ -1,16 +1,17 @@
-<div class="list" ng-class="
+<ul ng-class="
     {
-      'selectable': selectable !== undefined,
-      'list-small': size=='small',
-      'list-large': size=='large',
-      'list-tiny': size=='tiny',
+        'list' : true,
+        'selectable': list.selectable !== undefined,
+        'clickable': list.clickable !== undefined,
+        'list-small': list.size=='small',
+        'list-large': list.size=='large',
+        'list-tiny': list.size=='tiny',
 
-      'loffset-50': leftIcon !== undefined,
-      'roffset-50': rightIcon !== undefined,
+        'loffset-50': list.leftIcon !== undefined,
+        'roffset-50': list.rightIcon !== undefined,
 
-      'component-position-left': componentPosition === 'left',
-      'component-position-right': componentPosition === 'right'
-    }
-  ">
-    <span ng-transclude></span>
-</div>
+        'component-position-right' : list.componentPosition === 'right',
+        'component-position-left' : list.componentPosition === 'left'
+    }"
+    ng-transclude>
+</ul>
