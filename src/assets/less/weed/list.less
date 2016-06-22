@@ -2,7 +2,7 @@
   * Edoo list group framework
   */
 
-@import "buttons.less";
+@import "forms.less";
 @import "config.less";
 
 // Configuration
@@ -17,9 +17,9 @@
 @list-font-color-focus:                                     @black-65;
 @list-font-color-disabled:                                  @black-45;
 @list-font-color-active:                                    @black-45;
-@list-item-height:                                          53px;
-@list-item-height-small:                                    41px;
-@list-item-height-tiny:                                     28px;
+@list-item-height:                                          @form-input-height;
+@list-item-height-small:                                    @form-input-small-height;
+@list-item-height-tiny:                                     @form-input-tiny-height;
 @list-font-size:                                            14px;
 @list-font-size-small:                                      12px;
 @list-font-size-tiny:                                       11px;
@@ -118,8 +118,16 @@
   // Component position left: default
   &.component-position-left .list-item{
     padding-left: 0;
+    .item-text{
+      float: right;
+    }
+    .button {
+      float: left;
+      right: auto;
+      left: 0;
+    }
 
-    .button{
+    .list-normal{
       &.button-small{
         border-bottom-right-radius: @list-border-radius;
         border-top-right-radius: @list-border-radius;
@@ -138,14 +146,22 @@
     &.list-small{
 
       .button{
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
+        &.button-small{
+          left: auto;
+          right: 0;
+        }
 
         &.button-tiny{
           border-bottom-right-radius: @list-border-radius/2.0;
           border-top-right-radius: @list-border-radius/2.0;
-          left: (@list-vertical-padding*1.4);
+          left: auto;
+          right: (@list-vertical-padding*1.4);
         }
+      }
+
+      i.input-mark{
+        left: @list-horizontal-padding - 1px;
+        right: auto;
       }
     }
 
@@ -154,6 +170,13 @@
       .button.button-tiny{
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
+        left: 0;
+        right: auto;
+      }
+
+      i.input-mark{
+        left: auto;
+        right: 15px;
       }
     }
   }
@@ -162,18 +185,19 @@
   &.component-position-right .list-item{
     padding-right: 0;
 
-    .button{
+    .button {
       float: right;
       left: auto;
       right: 0;
-
-      &.button-small{
+    }
+    .list-normal{
+      &.button-small {
         border-bottom-left-radius: @list-border-radius;
         border-top-left-radius: @list-border-radius;
         right: (@list-vertical-padding*1.4);
       }
 
-      &.button-tiny{
+      &.button-tiny {
         border-bottom-left-radius: @list-border-radius/2.0;
         border-top-left-radius: @list-border-radius/2.0;
         right: (@list-vertical-padding*2.5);
@@ -192,9 +216,6 @@
     &.list-small{
 
       .button{
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-
         &.button-small{
           left: auto;
           right: 0;
@@ -244,17 +265,11 @@
     &:first-child{
       border-top-right-radius: @list-border-radius;
       border-top-left-radius: @list-border-radius;
-      .button, .multi-component, .input-mark{
-        border-top-right-radius: @list-border-radius;
-      }
     }
     &:last-child{
       margin-bottom: 0;
       border-bottom-right-radius: @list-border-radius;
       border-bottom-left-radius: @list-border-radius;
-      .button, .multi-component, .input-mark{
-        border-bottom-right-radius: @list-border-radius;
-      }
     }
     &.disabled{
       background-color: @list-background-color-disabled;
@@ -287,6 +302,38 @@
     &.list-item-danger{
       color: @list-danger-text-color;
       background-color: @list-danger-background-color;
+    }
+  }
+
+  &.component-position-right .list-item {
+    padding-right: 0;
+
+    &:first-child {
+      .button, .multi-component, .input-mark {
+        border-top-right-radius: @list-border-radius;
+      }
+    }
+
+    &:last-child {
+      .button, .multi-component, .input-mark {
+        border-bottom-right-radius: @list-border-radius;
+      }
+    }
+  }
+
+  &.component-position-left .list-item {
+    padding-left: 0;
+
+    &:first-child {
+      .button, .multi-component, .input-mark {
+        border-top-left-radius: @list-border-radius;
+      }
+    }
+
+    &:last-child {
+      .button, .multi-component, .input-mark {
+        border-bottom-left-radius: @list-border-radius;
+      }
     }
   }
 

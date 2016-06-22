@@ -245,16 +245,6 @@
         <input type="text" placeholder="With right button">
     </div>
 
-    <!-- Right button: OK -->
-    <h2>Input right multiple buttons</h2>
-    <div we-input-wrapper component-position="right">
-        <div class="multi-component">
-            <a we-button icon="cog" class="mid" color="success"></a><a
-                we-button icon="github" class="right-end" color="warning"></a>
-        </div>
-        <input type="text" placeholder="With right button">
-    </div>
-
     <!-- Left tag: OK -->
     <h2>Input left tag</h2>
     <div we-input-wrapper component-position="left">
@@ -267,6 +257,30 @@
     <div we-input-wrapper component-position="right">
         <a we-button icon="calendar" color="success"></a>
         <input type="text" placeholder="With right tag">
+    </div>
+
+    <h1>Multiple Buttons</h1>
+
+    <!-- Right buttons: OK -->
+    <h2>Input buttons right</h2>
+    <div we-input-wrapper component-position="right">
+        <div class="multi-component">
+            <a we-button icon="cog" class="mid" color="success"></a><a
+                we-button icon="github" class="mid" color="warning"></a><a
+                we-button icon="github" class="right-end" color="danger"></a>
+        </div>
+        <input type="text" placeholder="With right button">
+    </div>
+
+    <!-- Left buttons: BUG -->
+    <h2>Input buttons left</h2>
+    <div we-input-wrapper component-position="left">
+        <div class="multi-component">
+            <a we-button icon="cog" class="left-end" color="success"></a><a
+                we-button icon="github" class="mid" color="warning"></a><a
+                we-button icon="github" class="mid" color="danger"></a>
+        </div>
+        <input type="text" placeholder="With right button">
     </div>
 
     <h1>Small size</h1>
@@ -1032,6 +1046,29 @@
 
     <h2>Clickable Small with components</h2>
     <div we-list clickable size="small" component-position="right">
+        <div we-list-item>
+            <p class="item-text">Item 1</p>
+            <a we-button size="small" icon="cog" color="success">Example</a>
+        </div>
+        <div we-list-item>
+            <p class="item-text">Item 2</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="success" size="small" class="mid"></a>
+                <a we-button icon="cog" color="primary" size="small" class="mid"></a>
+                <a we-button icon="cog" color="danger" size="small" class="mid"></a>
+            </div>
+        </div>
+        <div we-list-item>
+            <p class="item-text">Item 3</p>
+            <div class="multi-component">
+                <a we-button icon="cog" color="info" size="small"></a>
+                <a we-button icon="cog" color="warning" size="small" class="mid"></a>
+            </div>
+        </div>
+    </div>
+
+    <h2>Clickable Small with components left</h2>
+    <div we-list clickable size="small" component-position="left">
         <div we-list-item>
             <p class="item-text">Item 1</p>
             <a we-button size="small" icon="cog" color="success">Example</a>

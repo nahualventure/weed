@@ -663,7 +663,7 @@ input.input-tiny, .input-wrapper.input-tiny input{
   // Special components
 
   // Buttons
-  .button{
+  > .button{
     box-sizing: content-box;
     left: -1px;
     margin: 0;
@@ -686,6 +686,12 @@ input.input-tiny, .input-wrapper.input-tiny input{
     i{
       font-size: 1.2em;
     }
+  }
+
+  .multi-component{
+    margin: 0;
+    position: absolute;
+    z-index: (@z-immediate-over + 2);
   }
 
   // Marks
@@ -751,6 +757,8 @@ input.input-tiny, .input-wrapper.input-tiny input{
 
     .multi-component{
       float: left;
+      left: 0;
+      right: auto;
     }
 
     &.input-small{
@@ -788,7 +796,7 @@ input.input-tiny, .input-wrapper.input-tiny input{
       padding-right: 70px;
     }
 
-    .button{
+    > .button{
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
       left: auto;
@@ -809,6 +817,8 @@ input.input-tiny, .input-wrapper.input-tiny input{
 
     .multi-component{
       float: right;
+      left: auto;
+      right: 0;
     }
 
     i.input-mark{

@@ -46,13 +46,15 @@
     };
 
     vm.select = function(selectedItem) {
-      angular.forEach(vm.items, function(item){
-        if(item.active && item !== selectedItem){
-          item.active = false;
-        }
-      });
-      selectedItem.active = true;
-      $scope.$apply();
+      if (typeof vm.selectable !== 'undefined'){
+        angular.forEach(vm.items, function(item){
+          if(item.active && item !== selectedItem){
+            item.active = false;
+          }
+        });
+        selectedItem.active = true;
+        $scope.$apply();
+      }
     };
   }
 
