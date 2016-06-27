@@ -4023,7 +4023,7 @@ input.input-tiny,
 .input-wrapper.file-upload input[type="file"] * {
   cursor: pointer;
 }
-.input-wrapper .button {
+.input-wrapper > .button {
   box-sizing: content-box;
   left: -1px;
   margin: 0;
@@ -4031,18 +4031,23 @@ input.input-tiny,
   top: -1px;
   z-index: 7;
 }
-.input-wrapper .button.button-small {
+.input-wrapper > .button.button-small {
   box-sizing: border-box;
   left: 7px;
   top: 6px;
 }
-.input-wrapper .button.button-tiny {
+.input-wrapper > .button.button-tiny {
   box-sizing: border-box;
   left: 12.5px;
   top: 12.5px;
 }
-.input-wrapper .button i {
+.input-wrapper > .button i {
   font-size: 1.2em;
+}
+.input-wrapper .multi-component {
+  margin: 0;
+  position: absolute;
+  z-index: 7;
 }
 .input-wrapper i.input-mark {
   -webkit-user-select: none;
@@ -4092,6 +4097,11 @@ input.input-tiny,
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
 }
+.input-wrapper.component-position-left .multi-component {
+  float: left;
+  left: 0;
+  right: auto;
+}
 .input-wrapper.component-position-left.input-small input {
   padding-left: 60px;
 }
@@ -4114,21 +4124,26 @@ input.input-tiny,
 .input-wrapper.component-position-right input {
   padding-right: 70px;
 }
-.input-wrapper.component-position-right .button {
+.input-wrapper.component-position-right > .button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   left: auto;
   right: 0;
 }
-.input-wrapper.component-position-right .button.button-small {
+.input-wrapper.component-position-right > .button.button-small {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   right: 7px;
 }
-.input-wrapper.component-position-right .button.button-tiny {
+.input-wrapper.component-position-right > .button.button-tiny {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   right: 12.5px;
+}
+.input-wrapper.component-position-right .multi-component {
+  float: right;
+  left: auto;
+  right: 0;
 }
 .input-wrapper.component-position-right i.input-mark {
   left: auto;
@@ -7250,6 +7265,303 @@ hr {
 }
 .dynamic-table .dynamic-table-row .element.pull-right {
   float: right;
+}
+/**
+  * Edoo list group framework
+  */
+.list {
+  color: #8c8c8c;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+.list.list-small {
+  font-size: 12px;
+}
+.list.list-small .list-item {
+  height: 41px;
+  line-height: 41px;
+}
+.list.list-small .list-item .item-text {
+  line-height: 40px;
+}
+.list.list-small i.list-mark {
+  left: 24px;
+  line-height: 41px;
+}
+.list.list-small .button.button-small {
+  box-sizing: content-box;
+  left: -1px;
+  top: -1px;
+}
+.list.list-small .button.button-tiny {
+  left: 7px;
+  top: 6.5px;
+}
+.list.list-tiny {
+  font-size: 11px;
+}
+.list.list-tiny .list-item {
+  height: 28px;
+  line-height: 28px;
+}
+.list.list-tiny .list-item .item-text {
+  line-height: 27px;
+}
+.list.list-tiny i.list-mark {
+  left: 24px;
+  line-height: 28px;
+}
+.list.list-tiny .button.button-tiny {
+  box-sizing: content-box;
+  left: -1px;
+  top: -1px;
+}
+.list.component-position-left .list-item {
+  padding-left: 0;
+}
+.list.component-position-left .list-item .item-text {
+  float: right;
+}
+.list.component-position-left .list-item .button {
+  float: left;
+  right: auto;
+  left: 0;
+}
+.list.component-position-left .list-item .list-normal.button-small {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.list.component-position-left .list-item .list-normal.button-tiny {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.list.component-position-left .list-item .multi-component {
+  float: left;
+}
+.list.component-position-left .list-item.list-small .button.button-small {
+  left: auto;
+  right: 0;
+}
+.list.component-position-left .list-item.list-small .button.button-tiny {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  left: auto;
+  right: 7px;
+}
+.list.component-position-left .list-item.list-small i.input-mark {
+  left: 24px;
+  right: auto;
+}
+.list.component-position-left .list-item.list-tiny .button.button-tiny {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  left: 0;
+  right: auto;
+}
+.list.component-position-left .list-item.list-tiny i.input-mark {
+  left: auto;
+  right: 15px;
+}
+.list.component-position-right .list-item {
+  padding-right: 0;
+}
+.list.component-position-right .list-item .button {
+  float: right;
+  left: auto;
+  right: 0;
+}
+.list.component-position-right .list-item .list-normal.button-small {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  right: 7px;
+}
+.list.component-position-right .list-item .list-normal.button-tiny {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  right: 12.5px;
+}
+.list.component-position-right .list-item .multi-component {
+  float: right;
+}
+.list.component-position-right .list-item i.item-mark {
+  left: auto;
+  right: 30px;
+}
+.list.component-position-right .list-item.list-small .button.button-small {
+  left: auto;
+  right: 0;
+}
+.list.component-position-right .list-item.list-small .button.button-tiny {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  left: auto;
+  right: 7px;
+}
+.list.component-position-right .list-item.list-small i.input-mark {
+  left: auto;
+  right: 24px;
+}
+.list.component-position-right .list-item.list-tiny .button.button-tiny {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  left: auto;
+  right: 0;
+}
+.list.component-position-right .list-item.list-tiny i.input-mark {
+  left: auto;
+  right: 15px;
+}
+.list .list-item {
+  height: 51px;
+  line-height: 53px;
+  position: relative;
+  display: block;
+  padding: 0 25px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+}
+.list .list-item .button,
+.list .list-item .multi-component,
+.list .list-item .input-mark {
+  border-radius: 0;
+}
+.list .list-item:first-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.list .list-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.list .list-item.disabled {
+  background-color: #f2f2f2;
+  color: #8c8c8c;
+  cursor: not-allowed;
+}
+.list .list-item .item-text {
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: block;
+  line-height: 52px;
+}
+.list .list-item.list-item-primary {
+  color: #787878;
+  background-color: #ebebeb;
+}
+.list .list-item.list-item-success {
+  color: #1ca462;
+  background-color: #b3f2d4;
+}
+.list .list-item.list-item-info {
+  color: #6b6b6b;
+  background-color: #d1d1d1;
+}
+.list .list-item.list-item-warning {
+  color: #e3a93e;
+  background-color: #fff0d5;
+}
+.list .list-item.list-item-danger {
+  color: #da4545;
+  background-color: #f8dada;
+}
+.list.component-position-right .list-item {
+  padding-right: 0;
+}
+.list.component-position-right .list-item:first-child .button,
+.list.component-position-right .list-item:first-child .multi-component,
+.list.component-position-right .list-item:first-child .input-mark {
+  border-top-right-radius: 10px;
+}
+.list.component-position-right .list-item:last-child .button,
+.list.component-position-right .list-item:last-child .multi-component,
+.list.component-position-right .list-item:last-child .input-mark {
+  border-bottom-right-radius: 10px;
+}
+.list.component-position-left .list-item {
+  padding-left: 0;
+}
+.list.component-position-left .list-item:first-child .button,
+.list.component-position-left .list-item:first-child .multi-component,
+.list.component-position-left .list-item:first-child .input-mark {
+  border-top-left-radius: 10px;
+}
+.list.component-position-left .list-item:last-child .button,
+.list.component-position-left .list-item:last-child .multi-component,
+.list.component-position-left .list-item:last-child .input-mark {
+  border-bottom-left-radius: 10px;
+}
+.list.clickable,
+.list.selectable {
+  cursor: pointer;
+}
+.list.clickable .list-item:hover,
+.list.selectable .list-item:hover,
+.list.clickable .list-item:focus,
+.list.selectable .list-item:focus {
+  color: #595959;
+  background-color: #f2f2f2;
+}
+.list.clickable .list-item.list-item-primary:hover,
+.list.selectable .list-item.list-item-primary:hover,
+.list.clickable .list-item.list-item-primary:focus,
+.list.selectable .list-item.list-item-primary:focus {
+  color: #787878;
+  background-color: #dedede;
+}
+.list.clickable .list-item.list-item-success:hover,
+.list.selectable .list-item.list-item-success:hover,
+.list.clickable .list-item.list-item-success:focus,
+.list.selectable .list-item.list-item-success:focus {
+  color: #1ca462;
+  background-color: #9eeec7;
+}
+.list.clickable .list-item.list-item-info:hover,
+.list.selectable .list-item.list-item-info:hover,
+.list.clickable .list-item.list-item-info:focus,
+.list.selectable .list-item.list-item-info:focus {
+  color: #6b6b6b;
+  background-color: #c4c4c4;
+}
+.list.clickable .list-item.list-item-warning:hover,
+.list.selectable .list-item.list-item-warning:hover,
+.list.clickable .list-item.list-item-warning:focus,
+.list.selectable .list-item.list-item-warning:focus {
+  color: #e3a93e;
+  background-color: #ffe7bb;
+}
+.list.clickable .list-item.list-item-danger:hover,
+.list.selectable .list-item.list-item-danger:hover,
+.list.clickable .list-item.list-item-danger:focus,
+.list.selectable .list-item.list-item-danger:focus {
+  color: #da4545;
+  background-color: #f3c4c4;
+}
+.list.selectable .list-item.active {
+  color: #8c8c8c;
+  background-color: #f2f2f2;
+}
+.list.selectable .list-item.list-item-primary.active {
+  background-color: #dedede;
+}
+.list.selectable .list-item.list-item-success.active {
+  background-color: #9eeec7;
+}
+.list.selectable .list-item.list-item-info.active {
+  background-color: #c4c4c4;
+}
+.list.selectable .list-item.list-item-warning.active {
+  background-color: #ffe7bb;
+}
+.list.selectable .list-item.list-item-danger.active {
+  background-color: #f3c4c4;
+}
+.list button.list-item {
+  width: 100%;
+  text-align: left;
 }
 .card {
   border-radius: 10px;
