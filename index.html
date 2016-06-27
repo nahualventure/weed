@@ -153,6 +153,7 @@
 
     <br>
 
+    <h3>Group of buttons</h3>
     <a  we-button icon="bell" color="success" class="left-end"></a><a
         we-button icon="github" color="warning" class="mid"></a><a
         we-button icon="cog" color="danger" class="right-end"></a>
@@ -1133,9 +1134,11 @@
       </div>
     </div>
     <h2>Popover</h2>
-    <div class="row">
-      <div class="col xs-12">
-        <button uib-popover="Hello, World!" popover-title="Title" type="button">Dynamic Popover</button>      </div>
+    <div ng-controller="PopoverController as popoverController">
+        <a we-button uib-popover="Hello, World!" popover-title="title" color="success">Dynamic Popover</a>
+        <a we-button uib-popover-template="'src/assets/html/vendors/popover/popover-info.html'" color="danger">Info Popover</a>
+        <a we-button uib-popover-template="'src/assets/html/vendors/popover/popover-links.html'" popover-placement="right" color="primary">Links Popover</a>
+        <a we-button uib-popover-template="'src/assets/html/vendors/popover/popover-sections.html'" popover-placement="left" color="warning">Sections Popover</a>
     </div>
     <h2>Bubble Menu</h2>
     <div class="bubble-menu">
@@ -1217,6 +1220,7 @@
                 .controller('WeedAuthController', weedAuthController)
                 .controller('PopupController', popupController)
                 .controller('NotificationController', notificationController)
+                .controller('PopoverController', popoverController)
                 .factory("States", function(){
                   var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
                   return states;
@@ -1232,6 +1236,11 @@
             popupController.$inject = ['WeedApi'];
             notificationController.$inject = ['WeedApi'];
             typeaheadController.$inject = ['WeedApi','States'];
+
+            function popoverController() {
+                var vm = this;
+                vm.text = "Shoo mulaa";
+            }
 
             function typeaheadController(WeedApi, States){
               var vm = this;
@@ -1256,6 +1265,7 @@
                 vm.closeActiveElements = function(){
                     WeedApi.closeActiveElements();
                 }
+
             }
 
             // Test module http configuration

@@ -20,6 +20,6 @@
       'ui.bootstrap.typeahead',
       'ui.bootstrap.tooltip',
       'ui.bootstrap.popover'
-    ])
+      ])
     .constant('weed.config', {});
 })(angular);

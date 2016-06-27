@@ -1,0 +1,193 @@
+/**
+  * Edoo popover group framework
+  */
+
+@import "config.less";
+
+
+
+@popover-background-color:                                    @white;
+@popover-border-radius:                                       @system-border-radius;
+@popover-border-color:                                        @black-10;
+@popover-padding:                                             1px;
+@popover-min-width:                                           150px;
+@popover-max-width:                                           300px;
+
+@popover-icon-size:                                           1.7em;
+@popover-title-icon-size:                                     1.8em;
+
+@popover-title-background-color:                              @white;
+@popover-title-border-bottom:                                 @black-20;
+@popover-title-padding-vertical:                              8px;
+@popover-title-padding-horizontal:                            14px;
+
+@popover-header-background-color:                             @white;
+@popover-header-separator-color:                              @black-20;
+@popover-header-padding-vertical:                             15px;
+@popover-header-padding-horizontal:                           0;
+
+@popover-inner-section-padding-vertical:                      10px;
+@popover-inner-section-padding-horizontal:                    0;
+
+@popover-footer-background-color:                             @white;
+@popover-footer-separator-color:                              @black-20;
+@popover-footer-padding-vertical:                             10px;
+@popover-footer-padding-horizontal:                           0;
+@popover-footer-button-margin-left:                           20px;
+
+@popover-info-padding-vertical:                               15px;
+@popover-info-padding-horizontal:                             0px;
+
+
+// Configuration
+.popover {
+  min-width: @popover-min-width;
+  max-width: @popover-max-width;
+  padding: @popover-padding;
+  background-color: @popover-background-color;
+  border: 1px solid @popover-border-color;
+  border-radius: @popover-border-radius;
+  font-family: @system-font-family;
+  color: @system-text-color;
+  font-size: 12px;
+
+  &.top {
+    margin-top: -10px;
+    > .arrow {
+      border-top-color: darken(@popover-border-color, 10%);
+      &:after {
+        border-top-color: @popover-background-color;
+      }
+    }
+  }
+
+  &.right {
+    margin-left: 10px;
+    > .arrow {
+      border-right-color: darken(@popover-border-color, 10%);
+      &:after {
+        border-right-color: @popover-background-color;
+      }
+    }
+  }
+
+  &.bottom {
+    margin-top: 10px;
+    > .arrow {
+      border-bottom-color: darken(@popover-border-color, 10%);
+      &:after {
+        border-bottom-color: @popover-background-color;
+      }
+    }
+  }
+
+  &.left {
+    margin-left: -10px;
+    > .arrow {
+      border-left-color: darken(@popover-border-color, 10%);
+      &:after {
+        border-left-color: @popover-background-color;
+      }
+    }
+  }
+
+  > hr{
+    margin: 0;
+    border: 1px solid @popover-header-separator-color;
+  }
+
+  .popover-title {
+    margin: 0;
+    padding: @popover-title-padding-vertical @popover-title-padding-vertical;
+    background-color: @popover-title-background-color;
+    border-bottom: 1px solid @popover-title-border-bottom;
+  }
+
+  .popover-header {
+    margin: 0;
+    padding: @popover-header-padding-vertical @popover-header-padding-horizontal;
+    background-color: @popover-header-background-color;
+    &.popover-header-titled{
+      .popover-icon{
+        display: inline-block;
+        font-size: @popover-title-icon-size;
+        &:after {
+          content: "\00a0";
+        }
+      }
+      .popover-header-title{
+        display: inline-block;
+        margin: 0;
+        vertical-align: bottom;
+      }
+    }
+    &.popover-header-actionable{
+      position: relative;
+      text-align: center;
+      padding: 0 @popover-header-padding-horizontal;
+      .popover-icon-left{
+        font-size: 20px;
+        vertical-align: middle;
+        position: absolute;
+        left: 0;
+      }
+      .popover-icon-right{
+        font-size: 20px;
+        vertical-align: middle;
+        position: absolute;
+        right: 0;
+      }
+      .popover-header-title{
+        position: relative;
+        .ellipsis();
+      }
+      .clearfix();
+    }
+  }
+
+  .popover-footer {
+    padding: @popover-footer-padding-vertical @popover-footer-padding-horizontal;
+    background-color: @popover-footer-background-color;
+    .popover-footer-buttons{
+      .button{
+        float: right;
+        margin-left: @popover-footer-button-margin-left;
+
+      }
+      .clearfix();
+    }
+  }
+
+  .popover-info {
+    padding: @popover-info-padding-vertical @popover-info-padding-horizontal;
+    .popover-icon{
+      text-align: center;
+      font-size: @popover-icon-size;
+      &.popover-icon-default{
+        color: @system-default-color;
+      }
+      &.popover-icon-primary{
+        color: @system-primary-color;
+      }
+      &.popover-icon-success{
+        color: @system-success-color;
+      }
+      &.popover-icon-info{
+        color: @system-info-color;
+      }
+      &.popover-icon-warning{
+        color: @system-warning-color;
+      }
+      &.popover-icon-danger{
+        color: @system-danger-color;
+      }
+    }
+    .popover-text{
+      width: @popover-max-width/1.8;
+    }
+  }
+  .popover-inner-section {
+    padding:  @popover-inner-section-padding-vertical
+              @popover-inner-section-padding-horizontal;
+  }
+}
