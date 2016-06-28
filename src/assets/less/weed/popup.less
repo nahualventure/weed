@@ -293,6 +293,13 @@ body.with-open-popup{
     &.popup-title-extension{
       background-color: @popup-title-bar-background-color;
 
+      &.no-title-bar{
+        border-radius: @popup-border-radius @popup-border-radius 0 0;
+        box-shadow: inset 0 1px 0 0 @popup-title-bar-inset-shadow-color;
+        background-color: @popup-title-bar-background-color;
+        border-bottom: 1px solid @popup-title-bar-border-color;
+      }
+
       label{
         color: @popup-title-bar-text-color;
         text-shadow: none;

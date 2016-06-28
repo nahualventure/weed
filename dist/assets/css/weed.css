@@ -5127,6 +5127,12 @@ body.with-open-popup {
 .popup .popup-content.popup-title-extension {
   background-color: #999999;
 }
+.popup .popup-content.popup-title-extension.no-title-bar {
+  border-radius: 20px 20px 0 0;
+  box-shadow: inset 0 1px 0 0 #a6a6a6;
+  background-color: #999999;
+  border-bottom: 1px solid #cccccc;
+}
 .popup .popup-content.popup-title-extension label {
   color: #f2f2f2;
   text-shadow: none;
@@ -5420,6 +5426,161 @@ body.with-open-popup {
 .ie7 .popup,
 .ie8 .popup {
   border: 1px solid #4d4d4d;
+}
+/**
+  * Edoo popover group framework
+  */
+.popover {
+  min-width: 150px;
+  max-width: 300px;
+  padding: 1px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  font-family: sans-serif;
+  color: #000000;
+  font-size: 12px;
+}
+.popover.top {
+  margin-top: -10px;
+}
+.popover.top > .arrow {
+  border-top-color: #cccccc;
+}
+.popover.top > .arrow:after {
+  border-top-color: #fff;
+}
+.popover.right {
+  margin-left: 10px;
+}
+.popover.right > .arrow {
+  border-right-color: #cccccc;
+}
+.popover.right > .arrow:after {
+  border-right-color: #fff;
+}
+.popover.bottom {
+  margin-top: 10px;
+}
+.popover.bottom > .arrow {
+  border-bottom-color: #cccccc;
+}
+.popover.bottom > .arrow:after {
+  border-bottom-color: #fff;
+}
+.popover.left {
+  margin-left: -10px;
+}
+.popover.left > .arrow {
+  border-left-color: #cccccc;
+}
+.popover.left > .arrow:after {
+  border-left-color: #fff;
+}
+.popover > hr {
+  margin: 0;
+  border: 1px solid #cccccc;
+}
+.popover .popover-title {
+  margin: 0;
+  padding: 8px 8px;
+  background-color: #fff;
+  border-bottom: 1px solid #cccccc;
+}
+.popover .popover-header {
+  margin: 0;
+  padding: 15px 0;
+  background-color: #fff;
+}
+.popover .popover-header.popover-header-titled .popover-icon {
+  display: inline-block;
+  font-size: 1.8em;
+}
+.popover .popover-header.popover-header-titled .popover-icon:after {
+  content: "\00a0";
+}
+.popover .popover-header.popover-header-titled .popover-header-title {
+  display: inline-block;
+  margin: 0;
+  vertical-align: bottom;
+}
+.popover .popover-header.popover-header-actionable {
+  position: relative;
+  text-align: center;
+  padding: 0 0;
+}
+.popover .popover-header.popover-header-actionable .popover-icon-left {
+  font-size: 20px;
+  vertical-align: middle;
+  position: absolute;
+  left: 0;
+}
+.popover .popover-header.popover-header-actionable .popover-icon-right {
+  font-size: 20px;
+  vertical-align: middle;
+  position: absolute;
+  right: 0;
+}
+.popover .popover-header.popover-header-actionable .popover-header-title {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.popover .popover-header.popover-header-actionable:before,
+.popover .popover-header.popover-header-actionable:after {
+  content: " ";
+  display: table;
+}
+.popover .popover-header.popover-header-actionable:after {
+  clear: both;
+}
+.popover .popover-footer {
+  padding: 10px 0;
+  background-color: #fff;
+}
+.popover .popover-footer .popover-footer-buttons .button {
+  float: right;
+  margin-left: 20px;
+}
+.popover .popover-footer .popover-footer-buttons:before,
+.popover .popover-footer .popover-footer-buttons:after {
+  content: " ";
+  display: table;
+}
+.popover .popover-footer .popover-footer-buttons:after {
+  clear: both;
+}
+.popover .popover-info {
+  padding: 15px 0px;
+}
+.popover .popover-info .popover-icon {
+  text-align: center;
+  font-size: 1.7em;
+}
+.popover .popover-info .popover-icon.popover-icon-default {
+  color: #f6f6f6;
+}
+.popover .popover-info .popover-icon.popover-icon-primary {
+  color: #787878;
+}
+.popover .popover-info .popover-icon.popover-icon-success {
+  color: #1ca462;
+}
+.popover .popover-info .popover-icon.popover-icon-info {
+  color: #008782;
+}
+.popover .popover-info .popover-icon.popover-icon-warning {
+  color: #ffb122;
+}
+.popover .popover-info .popover-icon.popover-icon-danger {
+  color: #de5a5a;
+}
+.popover .popover-info .popover-text {
+  width: 166.66666667px;
+}
+.popover .popover-inner-section {
+  padding: 10px 0;
 }
 .grid {
   overflow-x: hidden;
@@ -6877,13 +7038,13 @@ body.sidebarless .corner-notification {
 }
 .bubble .inner-title h2 {
   color: #808080;
-  font-family: sans-serif;
+  font-family: monospace;
   font-size: 1.8em;
   font-weight: normal;
 }
 .bubble .inner-title h3 {
   color: #808080;
-  font-family: sans-serif;
+  font-family: monospace;
   font-size: 0.9em;
   text-transform: uppercase;
 }
