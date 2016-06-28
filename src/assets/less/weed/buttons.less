@@ -34,10 +34,12 @@
 
 @button-font-family:                                        sans-serif;
 
+@button-font-size:                                          14px;
 @button-breath:                                             5px;
-@button-default-border-radius:                              @system-border-radius*0.7;
-@button-default-horizontal-padding:                         40px;
-@button-default-height:                                     51px;
+@button-border-radius:                                      @system-border-radius*0.7;
+@button-horizontal-padding:                                 40px;
+@button-text-transform:                                     uppercase;
+@button-height:                                             51px;
 @button-text-margin-left:                                   15px;
 @button-start-gradient-color:                               @white;
 @button-active-start-gradient-color:                        #cbcbcb;
@@ -139,7 +141,7 @@ button.button{
 // Button main class
 .button{
   .blend-mode(overlay);
-  border-radius: @button-default-border-radius;
+  border-radius: @button-border-radius;
   .make-button(
     @background-color: @button-default-color;
     @border-color: @button-default-border-color;
@@ -153,13 +155,13 @@ button.button{
   cursor: pointer;
   display: inline-block;
   font-family: @button-font-family;
-  font-size: 14px;
+  font-size: @button-font-size;
   font-weight: normal;
-  height: @button-default-height;
-  line-height: @button-default-height - 2px;
+  height: @button-height;
+  line-height: @button-height - 2px;
   outline: none;
-  padding: 0 @button-default-horizontal-padding;
-  text-transform: uppercase;
+  padding: 0 @button-horizontal-padding;
+  text-transform: @button-text-transform;
   transition: @fast;
   vertical-align: middle;
   white-space: nowrap;
@@ -192,7 +194,7 @@ button.button{
   }
 
   &.no-x-paddings{
-    padding: 0 @button-default-horizontal-padding/2.0;
+    padding: 0 @button-horizontal-padding/2.0;
   }
 
   &.animated{
@@ -244,7 +246,7 @@ button.button{
 
   // Left
   &.left-end{
-    border-radius: @button-default-border-radius 0 0 @button-default-border-radius;
+    border-radius: @button-border-radius 0 0 @button-border-radius;
     margin-right: 0 !important;
     border-right: none !important;
   }
@@ -257,7 +259,7 @@ button.button{
 
   // Right
   &.right-end{
-    border-radius: 0 @button-default-border-radius @button-default-border-radius 0;
+    border-radius: 0 @button-border-radius @button-border-radius 0;
     margin-left: 0 !important;
   }
 
@@ -267,7 +269,7 @@ button.button{
     padding: 0 !important;
     text-align: center;
     white-space: nowrap;
-    width: @button-default-height;
+    width: @button-height;
 
     &:before, &:after{
       content: "\00a0 ";
@@ -422,13 +424,13 @@ button.button{
 
     .loader{
       .make-loader(
-        @loader-circle-size: @button-default-height/5;
+        @loader-circle-size: @button-height/5;
         @loader-circle-separation: 2px;
         @loader-delay: @button-loader-delay;
       );
       position: absolute;
       top: -16px;
-      left: @button-default-height - @button-default-height/8;
+      left: @button-height - @button-height/8;
     }
   }
 
