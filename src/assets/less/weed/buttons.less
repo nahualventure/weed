@@ -40,6 +40,7 @@
 @button-horizontal-padding:                                 40px;
 @button-text-transform:                                     uppercase;
 @button-height:                                             51px;
+@button-max-width:                                          150px;
 @button-text-margin-left:                                   15px;
 @button-start-gradient-color:                               @white;
 @button-active-start-gradient-color:                        #cbcbcb;
@@ -173,7 +174,7 @@ button.button{
 
   &.resource{
     .ellipsis();
-    max-width: 150px;
+    max-width: @button-max-width;
   }
 
   &.file-upload-button{
