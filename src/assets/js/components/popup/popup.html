@@ -3,7 +3,10 @@
   ng-class="{'is-active': popup.active}"
   ng-show="popup.active"
   we-closable>
-  <div class="popup-veil" we-close></div>
+
+  <div ng-if="!avoidCloseOutside" class="popup-veil" we-close></div>
+  <div ng-if="avoidCloseOutside" class="popup-veil"></div>
+
   <div class="row middle-s">
     <div class="col shrink">
       <div class="popup" ng-transclude></div>
