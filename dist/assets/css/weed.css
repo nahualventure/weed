@@ -5127,6 +5127,12 @@ body.with-open-popup {
 .popup .popup-content.popup-title-extension {
   background-color: #999999;
 }
+.popup .popup-content.popup-title-extension.no-title-bar {
+  border-radius: 20px 20px 0 0;
+  box-shadow: inset 0 1px 0 0 #a6a6a6;
+  background-color: #999999;
+  border-bottom: 1px solid #cccccc;
+}
 .popup .popup-content.popup-title-extension label {
   color: #f2f2f2;
   text-shadow: none;
@@ -5471,14 +5477,9 @@ body.with-open-popup {
 .popover.left > .arrow:after {
   border-left-color: #fff;
 }
-.popover .popover-content {
-  padding: 0;
-}
-.popover .popover-sections {
-  padding: 9px 14px;
-}
-.popover > .hr {
+.popover > hr {
   margin: 0;
+  border: 1px solid #cccccc;
 }
 .popover .popover-title {
   margin: 0;
@@ -5551,7 +5552,7 @@ body.with-open-popup {
   clear: both;
 }
 .popover .popover-info {
-  padding: 24px 14px;
+  padding: 15px 0px;
 }
 .popover .popover-info .popover-icon {
   text-align: center;

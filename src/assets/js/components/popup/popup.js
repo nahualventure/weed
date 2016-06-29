@@ -14,7 +14,9 @@
     var directive = {
       restrict: 'A',
       transclude: true,
-      scope: {},
+      scope: {
+        avoidCloseOutside: '@'
+      },
       replace: true,
       link: popupLink,
       templateUrl: 'components/popup/popup.html',

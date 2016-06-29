@@ -369,12 +369,16 @@
     <h2>Popup</h2>
     <a we-button icon="heart" color="warning" we-open="test-popup-1">Open test popup</a>
     <div ng-controller="PopupController as popupCtrl">
-        <div id="test-popup-1" we-popup>
+        <div id="test-popup-1" we-popup avoid-close-outside="true">
 
           <div class="popup-title-bar">
             Título de popup
 
             <button class="popup-close" we-close></button>
+          </div>
+
+          <div class="popup-content popup-title-extension">
+              Extensión de título
           </div>
 
           <div class="popup-content">
