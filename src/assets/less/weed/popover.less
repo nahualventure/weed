@@ -21,8 +21,10 @@
 @popover-title-padding-vertical:                              8px;
 @popover-title-padding-horizontal:                            14px;
 
+@popover-sections-padding-vertical:                           9px;
+@popover-sections-padding-horizontal:                         14px;
+
 @popover-header-background-color:                             @white;
-@popover-header-separator-color:                              @black-20;
 @popover-header-padding-vertical:                             15px;
 @popover-header-padding-horizontal:                           0;
 
@@ -30,13 +32,12 @@
 @popover-inner-section-padding-horizontal:                    0;
 
 @popover-footer-background-color:                             @white;
-@popover-footer-separator-color:                              @black-20;
 @popover-footer-padding-vertical:                             10px;
 @popover-footer-padding-horizontal:                           0;
 @popover-footer-button-margin-left:                           20px;
 
-@popover-info-padding-vertical:                               15px;
-@popover-info-padding-horizontal:                             0px;
+@popover-info-padding-vertical:                               24px;
+@popover-info-padding-horizontal:                             14px;
 
 
 // Configuration
@@ -91,9 +92,16 @@
     }
   }
 
-  > hr{
+  .popover-content{
+    padding: 0;
+  }
+
+  .popover-sections{
+    padding: @popover-sections-padding-vertical @popover-sections-padding-horizontal;
+  }
+
+  > .hr{
     margin: 0;
-    border: 1px solid @popover-header-separator-color;
   }
 
   .popover-title {
