@@ -29,6 +29,7 @@ var paths = {
   ],
   // Less will check these folders for files when you use @import.
   less: [
+    'bower_components/bootstrap/less',
     'src/assets/less/weed'
     // 'bower_components/foundation-icon-fonts'
   ],
@@ -120,24 +121,11 @@ gulp.task('less', ['sass'], function(){
       .pipe(gulp.dest('dist/temp'));
 });
 
-// Compile Bootstrap
-gulp.task('bootstrap', ['less'], function(){
-  return gulp.src('src/assets/less/bootstrap.less')
-      .pipe(less({
-        paths: paths.boostrap
-      }))
-      .pipe($.autoprefixer({
-        browsers: browsers
-      }))
-      .pipe(rename('bootstrap.css'))
-      .pipe(gulp.dest('dist/temp'));
-});
-
 // Concat CSS
-gulp.task('css', ['bootstrap'], function(cb){
+gulp.task('css', ['less'], function(cb){
   var minifyCss = $.if(isProduction, $.minifyCss());
 
-  return gulp.src(['dist/temp/bootstrap.css', 'dist/temp/sass.css', 'dist/temp/less.css'].concat(paths.css))
+  return gulp.src(['dist/temp/sass.css', 'dist/temp/less.css'].concat(paths.css))
     .pipe($.concat('weed.css'))
     .pipe(minifyCss)
     .pipe(gulp.dest('dist/assets/css/'));
