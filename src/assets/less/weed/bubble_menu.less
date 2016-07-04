@@ -19,6 +19,7 @@
 @bubble-menu-placeholder-plus-background: #c1c6c6;
 @bubble-menu-placeholder-plus-color: #e2e7e7;
 @bubble-menu-placeholder-text-color: #a6a7a7;
+@bubble-menu-text-color-active: @black-15;
 
 @bubble-menu-placeholder-background: #e2e7e7;
 @bubble-menu-placeholder-border: #d5dada;
@@ -89,6 +90,7 @@
   @menu-hr-divider-top: @bubble-menu-hr-divider-top;
   @menu-hr-divider-bottom: @bubble-menu-hr-divider-bottom;
   @font-color-link: @bubble-menu-font-color-link;
+  @text-color-active: @bubble-menu-text-color-active;
   ){
   border-radius: @border-radius;
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
@@ -129,6 +131,9 @@
     .bubble-menu-icon{
       margin-right: 5px;
       font-size: @icon-size;
+    }
+    .bubble-menu-active{
+      color: @text-color-active;
     }
   }
   .bubble-menu-hr{
