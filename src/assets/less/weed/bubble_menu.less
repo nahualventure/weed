@@ -5,6 +5,7 @@
 @bubble-menu-close-font-color: @black-40;
 @bubble-menu-font-family: sans-serif;
 @bubble-menu-font-family-tittle: sans-serif;
+@bubble-menu-tittle-color: red;
 @bubble-menu-font-family-paragraph: sans-serif;
 @bubble-menu-font-family-link: sans-serif;
 @bubble-menu-font-color-link: #d5dada;
@@ -19,6 +20,7 @@
 @bubble-menu-placeholder-plus-background: #c1c6c6;
 @bubble-menu-placeholder-plus-color: #e2e7e7;
 @bubble-menu-placeholder-text-color: #a6a7a7;
+@bubble-menu-text-color-active: red;
 
 @bubble-menu-placeholder-background: #e2e7e7;
 @bubble-menu-placeholder-border: #d5dada;
@@ -89,6 +91,8 @@
   @menu-hr-divider-top: @bubble-menu-hr-divider-top;
   @menu-hr-divider-bottom: @bubble-menu-hr-divider-bottom;
   @font-color-link: @bubble-menu-font-color-link;
+  @text-color-active: @bubble-menu-text-color-active;
+  @tittle-color: @bubble-menu-tittle-color;
   ){
   border-radius: @border-radius;
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
@@ -108,6 +112,7 @@
   max-width: @max-width;
   .bubble-menu-tittle{
     font-family: @font-family-tittle;
+    color: @tittle-color;
   }
   .bubble-menu-paragraph{
     font-family: @font-family-paragraph;
@@ -129,6 +134,9 @@
     .bubble-menu-icon{
       margin-right: 5px;
       font-size: @icon-size;
+    }
+    .bubble-menu-active{
+      color: @text-color-active;
     }
   }
   .bubble-menu-hr{

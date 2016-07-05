@@ -8027,6 +8027,7 @@ hr {
 }
 .bubble-menu .bubble-menu-tittle {
   font-family: sans-serif;
+  color: red;
 }
 .bubble-menu .bubble-menu-paragraph {
   font-family: sans-serif;
@@ -8047,6 +8048,9 @@ hr {
 .bubble-menu .bubble-menu-nav .bubble-menu-icon {
   margin-right: 5px;
   font-size: 20px;
+}
+.bubble-menu .bubble-menu-nav .bubble-menu-active {
+  color: red;
 }
 .bubble-menu .bubble-menu-hr {
   border-top: solid 1px #b3b3b3;
