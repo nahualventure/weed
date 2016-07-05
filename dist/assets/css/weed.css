@@ -5682,6 +5682,7 @@ body.with-open-popup {
   content: "\00a0";
 }
 .popover .popover-header.popover-header-titled .popover-header-title {
+  font-size: 1.2em;
   display: inline-block;
   margin: 0;
   vertical-align: bottom;
