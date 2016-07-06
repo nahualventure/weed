@@ -4621,7 +4621,7 @@ input[type="radio"] {
           user-select: none;
   background-color: #808080;
   position: absolute;
-  z-index: 2147483636;
+  z-index: 2147483626;
 }
 .navbar.fixed {
   position: fixed;
@@ -4855,7 +4855,7 @@ body .sidebar {
   top: 0;
   white-space: nowrap;
   width: 65px;
-  z-index: 2147483635;
+  z-index: 2147483625;
   background: #000000;
   height: 100%;
   border-right: solid #000000 1px;
@@ -5207,7 +5207,7 @@ body.with-open-popup {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 2147483636;
   transition: 0.4s;
 }
 .popup-grid-wrapper .popup-veil {
@@ -5247,7 +5247,7 @@ body.with-open-popup {
   max-width: 700px;
   overflow: hidden;
   position: relative;
-  z-index: 1001;
+  z-index: 2147483637;
 }
 .popup button.popup-close {
   background: none;
@@ -5617,7 +5617,7 @@ body.with-open-popup {
   font-family: sans-serif;
   color: #000000;
   font-size: 12px;
-  z-index: 1060;
+  z-index: 2147483647;
 }
 .popover.top {
   margin-top: -10px;

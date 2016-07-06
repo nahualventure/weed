@@ -3920,89 +3920,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weTab
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false;
-          tabsetCtrl.addTab(scope);
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var vm = this;
-
-          vm.tabs = [];
-
-          vm.addTab = function addTab(tab) {
-            vm.tabs.push(tab);
-
-            if(vm.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
-
-          vm.select = function(selectedTab) {
-            angular.forEach(vm.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
-              }
-            });
-
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -4105,6 +4022,89 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/sidebar/sidebarHeader.html'
       };
     });
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weTab
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false;
+          tabsetCtrl.addTab(scope);
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var vm = this;
+
+          vm.tabs = [];
+
+          vm.addTab = function addTab(tab) {
+            vm.tabs.push(tab);
+
+            if(vm.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          vm.select = function(selectedTab) {
+            angular.forEach(vm.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
 })(angular);
 /**
  * @ngdoc function
