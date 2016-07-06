@@ -38,6 +38,8 @@
 @popover-info-padding-vertical:                               24px;
 @popover-info-padding-horizontal:                             14px;
 
+@popover-z-index:                                             1060;
+
 
 // Configuration
 .popover {
@@ -50,7 +52,7 @@
   font-family: @system-font-family;
   color: @system-text-color;
   font-size: 12px;
-  //overflow: hidden;
+  z-index: @popover-z-index;
 
   &.top {
     margin-top: -10px;

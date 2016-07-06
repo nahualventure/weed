@@ -5207,7 +5207,7 @@ body.with-open-popup {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2147483647;
+  z-index: 1000;
   transition: 0.4s;
 }
 .popup-grid-wrapper .popup-veil {
@@ -5247,7 +5247,7 @@ body.with-open-popup {
   max-width: 700px;
   overflow: hidden;
   position: relative;
-  z-index: 2147483648;
+  z-index: 1001;
 }
 .popup button.popup-close {
   background: none;
@@ -5617,6 +5617,7 @@ body.with-open-popup {
   font-family: sans-serif;
   color: #000000;
   font-size: 12px;
+  z-index: 1060;
 }
 .popover.top {
   margin-top: -10px;
