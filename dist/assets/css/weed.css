@@ -3981,8 +3981,6 @@ input[type="datetime"].left-end,
 input[type="datetime-local"].left-end {
   border-radius: 10px 0 0 10px;
   border-right: none;
-  width: 50%;
-  float: left;
 }
 input[type="text"].right-end,
 input[type="password"].right-end,
@@ -8088,7 +8086,8 @@ hr {
 .bubble-menu .bubble-menu-nav .bubble-menu-active {
   color: red;
 }
-.bubble-menu .bubble-menu-hr {
+.bubble-menu hr {
+  border: none;
   border-top: solid 1px #b3b3b3;
   border-bottom: solid 1px #b3b3b3;
 }
