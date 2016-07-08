@@ -413,6 +413,23 @@ input[type="datetime-local"]{
   background: @form-input-background-color;
   border: 1px solid @form-input-border-color;
   height: (@form-input-height - 2);
+
+  &.left-end{
+    border-radius: @form-input-border-radius 0 0 @form-input-border-radius;
+    border-right: none;
+    width: 50%;
+    float: left;
+  }
+
+  &.right-end{
+    border-radius: 0 @form-input-border-radius @form-input-border-radius 0;
+    width: 50%;
+    float: left;
+
+    &.input-wrapper-focussed{
+      border-left-color: @form-focus-border-color;
+    }
+  }
 }
 
 // States
@@ -526,23 +543,6 @@ input.input-tiny, .input-wrapper.input-tiny input{
     border: none;
     border-radius: 0;
     margin-bottom: 0;
-
-    &.left-end{
-      border-radius: @form-input-border-radius 0 0 @form-input-border-radius;
-      border-right: none;
-      width: 50%;
-      float: left;
-    }
-
-    &.right-end{
-      border-radius: 0 @form-input-border-radius @form-input-border-radius 0;
-      width: 50%;
-      float: left;
-
-      &.input-wrapper-focussed{
-        border-left-color: @form-focus-border-color;
-      }
-    }
   }
 
   // Events

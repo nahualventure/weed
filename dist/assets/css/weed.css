@@ -3971,6 +3971,41 @@ input[type="datetime-local"] {
   border: 1px solid #d9d9d9;
   height: 51px;
 }
+input[type="text"].left-end,
+input[type="password"].left-end,
+input[type="number"].left-end,
+input[type="email"].left-end,
+input[type="url"].left-end,
+input[type="date"].left-end,
+input[type="datetime"].left-end,
+input[type="datetime-local"].left-end {
+  border-radius: 10px 0 0 10px;
+  border-right: none;
+  width: 50%;
+  float: left;
+}
+input[type="text"].right-end,
+input[type="password"].right-end,
+input[type="number"].right-end,
+input[type="email"].right-end,
+input[type="url"].right-end,
+input[type="date"].right-end,
+input[type="datetime"].right-end,
+input[type="datetime-local"].right-end {
+  border-radius: 0 10px 10px 0;
+  width: 50%;
+  float: left;
+}
+input[type="text"].right-end.input-wrapper-focussed,
+input[type="password"].right-end.input-wrapper-focussed,
+input[type="number"].right-end.input-wrapper-focussed,
+input[type="email"].right-end.input-wrapper-focussed,
+input[type="url"].right-end.input-wrapper-focussed,
+input[type="date"].right-end.input-wrapper-focussed,
+input[type="datetime"].right-end.input-wrapper-focussed,
+input[type="datetime-local"].right-end.input-wrapper-focussed {
+  border-left-color: #808080;
+}
 input:hover,
 textarea:hover,
 input .hover,
@@ -4061,26 +4096,6 @@ input.input-tiny,
   border: none;
   border-radius: 0;
   margin-bottom: 0;
-}
-.input-wrapper input.left-end,
-.input-wrapper textarea.left-end,
-.input-wrapper .fake-result.left-end {
-  border-radius: 10px 0 0 10px;
-  border-right: none;
-  width: 50%;
-  float: left;
-}
-.input-wrapper input.right-end,
-.input-wrapper textarea.right-end,
-.input-wrapper .fake-result.right-end {
-  border-radius: 0 10px 10px 0;
-  width: 50%;
-  float: left;
-}
-.input-wrapper input.right-end.input-wrapper-focussed,
-.input-wrapper textarea.right-end.input-wrapper-focussed,
-.input-wrapper .fake-result.right-end.input-wrapper-focussed {
-  border-left-color: #808080;
 }
 .input-wrapper:hover,
 .input-wrapper.hover {
