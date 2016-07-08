@@ -4062,6 +4062,26 @@ input.input-tiny,
   border-radius: 0;
   margin-bottom: 0;
 }
+.input-wrapper input.left-end,
+.input-wrapper textarea.left-end,
+.input-wrapper .fake-result.left-end {
+  border-radius: 10px 0 0 10px;
+  border-right: none;
+  width: 50%;
+  float: left;
+}
+.input-wrapper input.right-end,
+.input-wrapper textarea.right-end,
+.input-wrapper .fake-result.right-end {
+  border-radius: 0 10px 10px 0;
+  width: 50%;
+  float: left;
+}
+.input-wrapper input.right-end.input-wrapper-focussed,
+.input-wrapper textarea.right-end.input-wrapper-focussed,
+.input-wrapper .fake-result.right-end.input-wrapper-focussed {
+  border-left-color: #808080;
+}
 .input-wrapper:hover,
 .input-wrapper.hover {
   background: #ffffff;
