@@ -8037,9 +8037,42 @@ hr {
   vertical-align: middle;
   color: #bfbfbf;
 }
-.card .card-hr {
+.card hr {
+  border: none;
   border-top: solid 1px #b3b3b3;
   border-bottom: solid 1px #b3b3b3;
+}
+.card.loading {
+  min-height: 530px;
+}
+.card.loading .loader {
+  position: absolute;
+  animation-delay: -0.05s;
+  text-indent: -9999em;
+  left: 110px;
+}
+.card.loading .loader,
+.card.loading .loader:before,
+.card.loading .loader:after {
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  animation-fill-mode: both;
+  animation: loadanimation 1.5s infinite ease-in-out;
+}
+.card.loading .loader:before {
+  left: -12px;
+  animation-delay: -0.1s;
+}
+.card.loading .loader:after {
+  left: 12px;
+  animation-delay: 0.1s;
+}
+.card.loading .loader:before,
+.card.loading .loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
 }
 .bubble-menu {
   border-radius: 10px;

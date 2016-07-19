@@ -53,6 +53,10 @@
 @card-footer-font-color: @black-25;
 @card-footer-image-size: 50px;
 
+@card-loader-delay: 0.1s;
+@card-loader-circle-size:10px;
+@card-loader-circle-separation: 2px;
+@card-loader-left-separation: 110px;
 .make-card(
   @background: @card-background;
   @border-color: @card-border-color;
@@ -99,6 +103,10 @@
   @hr-divider-bottom: @card-hr-divider-bottom;
   @footer-font-color: @card-footer-font-color;
   @footer-image-size: @card-footer-image-size;
+  @loader-delay: @card-loader-delay;
+  @loader-circle-size: @card-loader-circle-size;
+  @loader-circle-separation: @card-loader-circle-separation;
+  @loader-left-separation: @card-loader-left-separation;
   ){
   border-radius: @border-radius;
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
@@ -171,6 +179,18 @@
     border: none;
     border-top: solid 1px @hr-divider-top;
     border-bottom: solid 1px @hr-divider-bottom;
+  }
+  &.loading{
+    min-height: 530px;
+    .loader{
+      position: absolute;
+      .make-loader(
+        @loader-circle-size:@loader-circle-size;
+        @loader-circle-separation: @loader-circle-separation;
+        @loader-delay: @loader-delay;
+      );
+      left:@loader-left-separation;
+    }
   }
 }
 .card{
