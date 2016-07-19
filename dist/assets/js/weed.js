@@ -3195,35 +3195,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
 (function(angular) {
   'use strict';
 
@@ -3666,6 +3637,35 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -3739,94 +3739,6 @@ if (typeof define === 'function' && define.amd) {
       }
     };
   }
-})(angular);
-(function(angular){
-  'use strict';
-
-  // TODO
-  angular
-    .module('weed.corner-notifications', ['weed.core'])
-    .directive('weCornerNotification', cornerNotificationDirective);
-
-  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
-
-  function cornerNotificationDirective(WeedApi, $timeout){
-
-    return {
-      restrict: 'A',
-      replace: true,
-      templateUrl: 'components/notifications/cornerNotifications.html',
-      scope: {
-        color: '@',
-        icon: '@',
-        text: '@',
-        timeout: '@'
-      },
-      controller: cornerNotificationsController,
-      controllerAs: 'ctrl',
-      link: function($scope, elem, attrs, controllers, $transclude){
-        $scope.open = false;
-        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
-
-        WeedApi.subscribe(attrs.id, function(id, message){
-          switch(message){
-            case 'show':
-            case 'open':
-              $scope.open = true;
-
-              // Close after a timeout
-              $timeout(function(){
-                $scope.open = false;
-              }, $scope.timeout);
-              break;
-
-            case 'close':
-            case 'hide':
-              $scope.open = false;
-              break;
-
-            case 'toggle':
-              if($scope.open){
-                $scope.open = false;
-              }
-              else{
-                $scope.open = true;
-
-                // Close after a timeout
-                $timeout(function(){
-                  $scope.open = false;
-                }, $scope.timeout);
-              }
-              break;
-
-            default:
-              controllers.text = message.text;
-              controllers.color = message.color;
-              controllers.icon = message.icon;
-              $scope.timeout = message.timeout;
-              $scope.open = true;
-
-              // Close after a timeout
-              $timeout(function(){
-                $scope.open = false;
-              }, $scope.timeout);
-          }
-        });
-      }
-    };
-
-    // Injection
-    cornerNotificationsController.$inject = ['$scope'];
-
-    function cornerNotificationsController($scope){
-      var vm = this;
-      vm.icon = $scope.icon;
-      vm.color = $scope.color;
-      vm.text = $scope.text;
-    }
-  }
-
-
 })(angular);
 (function() {
   'use strict';
@@ -3918,87 +3830,92 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weTab
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
 (function(angular){
   'use strict';
 
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false;
-          tabsetCtrl.addTab(scope);
-        }
-      };
-    });
+  // TODO
+  angular
+    .module('weed.corner-notifications', ['weed.core'])
+    .directive('weCornerNotification', cornerNotificationDirective);
 
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
+  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
 
-(function(angular){
-  'use strict';
+  function cornerNotificationDirective(WeedApi, $timeout){
 
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var vm = this;
+    return {
+      restrict: 'A',
+      replace: true,
+      templateUrl: 'components/notifications/cornerNotifications.html',
+      scope: {
+        color: '@',
+        icon: '@',
+        text: '@',
+        timeout: '@'
+      },
+      controller: cornerNotificationsController,
+      controllerAs: 'ctrl',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        $scope.open = false;
+        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
 
-          vm.tabs = [];
+        WeedApi.subscribe(attrs.id, function(id, message){
+          switch(message){
+            case 'show':
+            case 'open':
+              $scope.open = true;
 
-          vm.addTab = function addTab(tab) {
-            vm.tabs.push(tab);
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+              break;
 
-            if(vm.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
+            case 'close':
+            case 'hide':
+              $scope.open = false;
+              break;
 
-          vm.select = function(selectedTab) {
-            angular.forEach(vm.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
+            case 'toggle':
+              if($scope.open){
+                $scope.open = false;
               }
-            });
+              else{
+                $scope.open = true;
 
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
+                // Close after a timeout
+                $timeout(function(){
+                  $scope.open = false;
+                }, $scope.timeout);
+              }
+              break;
+
+            default:
+              controllers.text = message.text;
+              controllers.color = message.color;
+              controllers.icon = message.icon;
+              $scope.timeout = message.timeout;
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+          }
+        });
+      }
+    };
+
+    // Injection
+    cornerNotificationsController.$inject = ['$scope'];
+
+    function cornerNotificationsController($scope){
+      var vm = this;
+      vm.icon = $scope.icon;
+      vm.color = $scope.color;
+      vm.text = $scope.text;
+    }
+  }
+
 
 })(angular);
 /**
@@ -4105,6 +4022,89 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/sidebar/sidebarHeader.html'
       };
     });
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weTab
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false;
+          tabsetCtrl.addTab(scope);
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var vm = this;
+
+          vm.tabs = [];
+
+          vm.addTab = function addTab(tab) {
+            vm.tabs.push(tab);
+
+            if(vm.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          vm.select = function(selectedTab) {
+            angular.forEach(vm.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
 })(angular);
 /**
  * @ngdoc function

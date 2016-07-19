@@ -3,12 +3,11 @@
 @import "config.less";
 
 @loader-color:                                              @black-50;
-@loader-dots-color:                                         @loader-color;
+
 .make-loader(
     @loader-circle-size;
     @loader-circle-separation;
-    @loader-delay;
-    @loader-dots-color;){
+    @loader-delay;){
   animation-delay: -@loader-delay/2.0;
   text-indent: -9999em;
 
@@ -42,9 +41,9 @@
   0%,
   80%,
   100% {
-    box-shadow: 0 2.5em 0 -1.3em @loader-dots-color;
+    box-shadow: 0 2.5em 0 -1.3em @loader-color;
   }
   40% {
-    box-shadow: 0 2.5em 0 0 @loader-dots-color;
+    box-shadow: 0 2.5em 0 0 @loader-color;
   }
 }
