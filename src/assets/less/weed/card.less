@@ -57,6 +57,8 @@
 @card-loader-circle-size:10px;
 @card-loader-circle-separation: 2px;
 @card-loader-left-separation: 110px;
+@card-loader-dots-color: red;
+
 .make-card(
   @background: @card-background;
   @border-color: @card-border-color;
@@ -107,6 +109,7 @@
   @loader-circle-size: @card-loader-circle-size;
   @loader-circle-separation: @card-loader-circle-separation;
   @loader-left-separation: @card-loader-left-separation;
+  @loader-dots-color-display: @card-loader-dots-color;
   ){
   border-radius: @border-radius;
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
@@ -188,6 +191,7 @@
         @loader-circle-size:@loader-circle-size;
         @loader-circle-separation: @loader-circle-separation;
         @loader-delay: @loader-delay;
+        @loader-dots-color: @loader-dots-color-display;
       );
       left:@loader-left-separation;
     }
