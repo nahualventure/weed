@@ -2716,6 +2716,16 @@ body h6 {
 body .ic {
   vertical-align: middle;
 }
+@keyframes btnloaderkf {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #808080;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #808080;
+  }
+}
 button.button {
   box-sizing: content-box;
 }
@@ -2930,7 +2940,7 @@ button.button {
   width: 5.2px;
   height: 5.2px;
   animation-fill-mode: both;
-  animation: loadanimation 1.5s infinite ease-in-out;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
 }
 .button.button-tiny.loading .loader:before {
   left: -7.2px;
@@ -2987,7 +2997,7 @@ button.button {
   width: 7.8px;
   height: 7.8px;
   animation-fill-mode: both;
-  animation: loadanimation 1.5s infinite ease-in-out;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
 }
 .button.button-small.loading .loader:before {
   left: -9.8px;
@@ -3041,7 +3051,7 @@ button.button {
   width: 13.2px;
   height: 13.2px;
   animation-fill-mode: both;
-  animation: loadanimation 1.5s infinite ease-in-out;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
 }
 .button.button-large.loading .loader:before {
   left: -15.2px;
@@ -3104,7 +3114,7 @@ button.button {
   width: 10.2px;
   height: 10.2px;
   animation-fill-mode: both;
-  animation: loadanimation 1.5s infinite ease-in-out;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
 }
 .button.loading .loader:before {
   left: -12.2px;
@@ -5194,16 +5204,6 @@ body.with-open-sidebar .sidebar-bottom-action span.icon-container .ic {
 }
 .tabset.vertical-icon ul.tabs .tab.only-icon i.ic {
   margin-right: 0;
-}
-@keyframes loadanimation {
-  0%,
-  80%,
-  100% {
-    box-shadow: 0 2.5em 0 -1.3em #808080;
-  }
-  40% {
-    box-shadow: 0 2.5em 0 0 #808080;
-  }
 }
 strong.danger,
 .accent.danger {
@@ -7972,6 +7972,16 @@ hr {
   width: 100%;
   text-align: left;
 }
+@keyframes cardloaderkf {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em red;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 red;
+  }
+}
 .card {
   border-radius: 10px;
   box-shadow: 0 2px 1px 0px rgba(191, 191, 191, 0.3);
@@ -8058,7 +8068,7 @@ hr {
   width: 10px;
   height: 10px;
   animation-fill-mode: both;
-  animation: loadanimation 1.5s infinite ease-in-out;
+  animation: cardloaderkf 1.5s infinite ease-in-out;
 }
 .card.loading .loader:before {
   left: -12px;
