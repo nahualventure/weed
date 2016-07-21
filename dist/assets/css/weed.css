@@ -8134,6 +8134,104 @@ hr {
   border-top: solid 1px #b3b3b3;
   border-bottom: solid 1px #b3b3b3;
 }
+.border-box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.we-calendar-class {
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background: white;
+  width: 300px;
+  border: solid 1px #CCC;
+  margin-bottom: 10px;
+}
+.we-calendar-class > div.header {
+  float: left;
+  width: 100%;
+  background: #2875C7;
+  height: 40px;
+  color: white;
+}
+.we-calendar-class > div.header > * {
+  height: 40px;
+  line-height: 40px !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+.we-calendar-class > div.header > i {
+  float: left;
+  width: 40px;
+  font-size: 1.125em;
+  font-weight: bold;
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.we-calendar-class > div.header > i.fa-angle-left {
+  text-align: left;
+}
+.we-calendar-class > div.header > i.fa-angle-right {
+  text-align: right;
+  margin-left: -40px;
+}
+.we-calendar-class > div.header > span {
+  float: left;
+  width: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 50px;
+  margin-left: -40px;
+  text-align: center;
+  padding-right: 40px;
+  color: inherit;
+}
+.we-calendar-class > div.week {
+  float: left;
+  width: 100%;
+  border-top: solid 1px #CCC;
+}
+.we-calendar-class > div.week:first-child {
+  border-top: none;
+}
+.we-calendar-class > div.week > span.day {
+  float: left;
+  width: 14.28571429%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border-left: solid 1px #CCC;
+  font-size: 0.75em;
+  text-align: center;
+  height: 30px;
+  line-height: 30px !important;
+  display: inline-block;
+  vertical-align: middle;
+  background: white;
+  cursor: pointer;
+  color: black;
+}
+.we-calendar-class > div.week > span.day:first-child {
+  border-left: none;
+}
+.we-calendar-class > div.week > span.day.today {
+  background: #E3F2FF;
+}
+.we-calendar-class > div.week > span.day.different-month {
+  color: #C0C0C0;
+}
+.we-calendar-class > div.week > span.day.selected {
+  background: #2875C7;
+  color: white;
+}
+.we-calendar-class > div.week.names > span {
+  color: #2875C7;
+  font-weight: bold;
+}
 /*
  * Instructions: each weed module contains a base customization variables at
  * the begining of the file. Copy those variables here and customize them away!

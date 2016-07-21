@@ -40,6 +40,7 @@ var paths = {
   ],
   weedJS: [
     'bower_components/hammerjs/hammer.js',
+    'bower_components/moment/moment.js',
     'bower_components/ng-dialog/js/ngDialog.js',
     './src/assets/js/weed.js',
     './src/assets/js/core/*.js',

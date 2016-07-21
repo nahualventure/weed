@@ -1211,6 +1211,10 @@
 
       </div>
     </div>
+    <h2>Calendar</h2>
+    <div ng-controller="CalendarController as calendarController">
+      <div we-calendar class="we-calendar-class" selected="calendarController.day"></div>
+    </div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -1234,6 +1238,7 @@
                 .controller('WeedAuthController', weedAuthController)
                 .controller('PopupController', popupController)
                 .controller('NotificationController', notificationController)
+                .controller('CalendarController', calendarController)
                 .controller('PopoverController', popoverController)
                 .factory("States", function(){
                   var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
@@ -1250,6 +1255,11 @@
             popupController.$inject = ['WeedApi'];
             notificationController.$inject = ['WeedApi'];
             typeaheadController.$inject = ['WeedApi','States'];
+
+            function calendarController() {
+              var vm = this;
+              vm.day = moment();
+            }
 
             function popoverController() {
                 var vm = this;
