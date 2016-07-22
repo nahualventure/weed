@@ -1,7 +1,7 @@
 @import "config.less";
 @calendar-border-colour:                                                        #CCC;
 @calendar-background-color:                                                     white;
-@calendar-width:                                                                300px;
+@calendar-width:                                                                700px;
 @calendar-border-width:                                                         1px;
 @calendar-margin-bottom:                                                        10px;
 @calendar-header-second-color:                                                  #2875C7;
@@ -10,7 +10,7 @@
 @calendar-header-height:                                                        40px;
 @calendar-header-width:                                                         100%;
 @calendar-header-font-color:                                                    white;
-@calendar-font-size:                                                            1.125em;
+@calendar-font-size:                                                            3em;
 @calendar-different-month-color:                                                #C0C0C0;
 @calendar-day-background:                                                       white;
 @calendar-day-font-color:                                                       black;
@@ -37,40 +37,17 @@
     border:solid @calendar-border-width @calendar-border-colour;
     margin-bottom: @calendar-margin-bottom;
 
-    >div.header {
-        float:left;
+    .header {
         width: @calendar-header-width;
         background: @calendar-header-second-color;
         height: @calendar-header-height;
         color: @calendar-header-font-color;
 
-        >* {
+        * {
             .vertical-center(@calendar-header-height);
         }
 
-        >i {
-            float:left;
-            width:@icon-width;
-            font-size: @calendar-font-size;
-            font-weight:bold;
-            position:relative;
-            .border-box;
-            padding:0 @spacing;
-            cursor:pointer;
-        }
-
-        >i.fa-angle-left {
-            text-align:left;
-        }
-
-        >i.fa-angle-right {
-            text-align:right;
-            margin-left:@icon-width*-1;
-        }
-
-        >span {
-            float:left;
-            width:100%;
+        span {
             font-weight:bold;
             text-transform:uppercase;
             .border-box;
@@ -81,7 +58,7 @@
             color:inherit;
         }
     }
-    >div.week {
+    .week {
         float:left;
         width:100%;
         border-top:solid 1px @calendar-border-colour;
@@ -90,7 +67,7 @@
             border-top:none;
         }
 
-        >span.day {
+        .day {
             float:left;
             width:100%/7;
             .border-box;

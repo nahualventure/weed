@@ -12,19 +12,20 @@
   angular.module('weed.calendar', ['weed.core'])
     .directive('weCalendar', calendarDirective);
 
-  // No dependencies
 
   function calendarDirective() {
     return {
       restrict: 'A',
       scope: {
-        selected: '='
+        selected: '=',
+        languagec: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
+        moment.locale('es'); // default the locale to English
+        var localLocale = moment();
         scope.selected = _removeTime(scope.selected || moment());
         scope.month = scope.selected.clone();
-
         var start = scope.selected.clone();
         start.date(1);
         _removeTime(start.day(0));

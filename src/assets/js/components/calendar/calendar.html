@@ -1,11 +1,23 @@
 <div class="header">
-    <i class="fa fa-angle-left" ng-click="previous()"></i>
-    <span>{{month.format("MMMM, YYYY")}}</span>
-    <i class="fa fa-angle-right" ng-click="next()"></i>
+    <a
+      we-button
+      size="small"
+      ng-click="previous()"
+      icon="chevron-left">
+    </a>
+
+    <span>{{month.locale('es').format("MMMM, YYYY")}}</span>
+
+    <a
+      we-button
+      size="small"
+      icon="chevron-right"
+      ng-click="next()">
+    </a>
 </div>
 <div class="week names">
     <span class="day">Sun</span>
-    <span class="day">Mon</span>
+    <span class="day">{{varD}}</span>
     <span class="day">Tue</span>
     <span class="day">Wed</span>
     <span class="day">Thu</span>
