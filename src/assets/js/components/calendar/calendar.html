@@ -3,27 +3,31 @@
       we-button
       size="small"
       ng-click="previous()"
-      icon="chevron-left">
-    </a>
+      icon="chevron-left"
+      class="calendar-navigation navigation-left"></a>
+      <a
+        we-button
+        size="small"
+        ng-click="today()"
+        class="calendar-navigation navigation-today"
+        color="primary">Hoy</a>
 
-    <span>{{month.locale('es').format("MMMM, YYYY")}}</span>
+    <span class="calendar-header-month">{{month.format("MMMM, YYYY")}}</span>
 
     <a
       we-button
       size="small"
       icon="chevron-right"
-      ng-click="next()">
-    </a>
+      ng-click="next()"
+      class="calendar-navigation navigation-right"></a>
 </div>
 <div class="week names">
-    <span class="day">Sun</span>
-    <span class="day">{{varD}}</span>
-    <span class="day">Tue</span>
-    <span class="day">Wed</span>
-    <span class="day">Thu</span>
-    <span class="day">Fri</span>
-    <span class="day">Sat</span>
+    <span class="day-names" ng-repeat="d in weekArray">{{d}}</span>
 </div>
 <div class="week" ng-repeat="week in weeks">
-    <span class="day" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days">{{day.number}}</span>
+  <div class="day-cell-number"
+        ng-class="{ 'center-number': numberposition === 'center','left-upper-number': numberposition === 'upper-left',today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }"
+        ng-click="select(day)" ng-repeat="day in week.days">
+  <span class="calendar-number-day">{{day.number}}</span>
+  </div>
 </div>

@@ -8139,36 +8139,43 @@ hr {
   -moz-box-sizing: border-box;
 }
 .we-calendar-class {
-  display: block;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   background: white;
   width: 700px;
   border: solid 1px #CCC;
   margin-bottom: 10px;
+  margin-left: 30px;
 }
 .we-calendar-class .header {
   width: 100%;
   background: #2875C7;
-  height: 40px;
+  height: 80px;
   color: white;
-}
-.we-calendar-class .header * {
-  height: 40px;
-  line-height: 40px !important;
-  display: inline-block;
+  position: relative;
+  text-align: center;
   vertical-align: middle;
 }
-.we-calendar-class .header span {
+.we-calendar-class .header .calendar-header-month {
   font-weight: bold;
   text-transform: uppercase;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  padding-left: 50px;
-  margin-left: -40px;
-  text-align: center;
-  padding-right: 40px;
-  color: inherit;
+  vertical-align: middle;
+  line-height: 80px;
+}
+.we-calendar-class .header .calendar-navigation {
+  position: absolute;
+  top: 20px;
+}
+.we-calendar-class .header .calendar-navigation.navigation-left {
+  left: 1rem;
+}
+.we-calendar-class .header .calendar-navigation.navigation-right {
+  right: 1rem;
+}
+.we-calendar-class .header .calendar-navigation.navigation-today {
+  left: 4rem;
 }
 .we-calendar-class .week {
   float: left;
@@ -8178,7 +8185,7 @@ hr {
 .we-calendar-class .week:first-child {
   border-top: none;
 }
-.we-calendar-class .week .day {
+.we-calendar-class .week .day-names {
   float: left;
   width: 14.28571429%;
   box-sizing: border-box;
@@ -8186,25 +8193,50 @@ hr {
   border-left: solid 1px #CCC;
   font-size: 0.75em;
   text-align: center;
-  height: 30px;
-  line-height: 30px !important;
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 50px;
+  background: white;
+  cursor: pointer;
+  color: black;
+}
+.we-calendar-class .week .day-names:first-child {
+  border-left: none;
+}
+.we-calendar-class .week .day-cell-number {
+  float: left;
+  width: 14.28571429%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border-left: solid 1px #CCC;
+  font-size: 0.75em;
+  height: 50px;
   display: inline-block;
   vertical-align: middle;
   background: white;
   cursor: pointer;
   color: black;
 }
-.we-calendar-class .week .day:first-child {
+.we-calendar-class .week .day-cell-number.center-number {
+  text-align: center;
+  line-height: 50px;
+}
+.we-calendar-class .week .day-cell-number.left-upper-number {
+  text-align: left;
+  line-height: 1rem;
+}
+.we-calendar-class .week .day-cell-number:first-child {
   border-left: none;
 }
-.we-calendar-class .week .day.today {
+.we-calendar-class .week .day-cell-number.today {
   background: #E3F2FF;
 }
-.we-calendar-class .week .day.different-month {
+.we-calendar-class .week .day-cell-number.different-month {
   color: #C0C0C0;
 }
-.we-calendar-class .week .day.selected {
-  background: #2875C7;
+.we-calendar-class .week .day-cell-number.selected {
+  background: red;
   color: white;
 }
 .we-calendar-class .week.names > span {

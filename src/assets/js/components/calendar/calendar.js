@@ -18,13 +18,15 @@
       restrict: 'A',
       scope: {
         selected: '=',
-        languagec: '='
+        languagec: '=',
+        numberposition: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
-        moment.locale('es'); // default the locale to English
-        var localLocale = moment();
-        scope.selected = _removeTime(scope.selected || moment());
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = _removeTime(moment().locale(scope.languagec));
+        scope.selected.add(1,'d');
         scope.month = scope.selected.clone();
         var start = scope.selected.clone();
         start.date(1);
@@ -48,6 +50,19 @@
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
             _buildMonth(scope, previous, scope.month);
+        };
+
+        scope.today = function() {
+          moment.locale(scope.languagec);
+          scope.weekArray = moment.weekdays();
+          scope.selected = _removeTime(moment().locale(scope.languagec));
+          scope.selected.add(1,'d');
+          scope.month = scope.selected.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month);
         };
       }
     };
