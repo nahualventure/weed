@@ -8163,6 +8163,7 @@ hr {
   -moz-box-sizing: border-box;
   vertical-align: middle;
   line-height: 80px;
+  font-size: 20px;
 }
 .we-calendar-class .header .calendar-navigation {
   position: absolute;
