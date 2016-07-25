@@ -69,6 +69,12 @@
 @button-large-height:                                       66px;
 @button-large-text-margin-left:                             20px;
 
+@button-loader-color:                                       @black-50;
+
+.make-loader-animation(btnloaderkf; @button-loader-color;);
+
+
+
 // Button generator mixin
 .make-button(
   @background-color: @button-default-color;
@@ -329,6 +335,7 @@ button.button{
           @loader-circle-size: @height/5;
           @loader-circle-separation: 2px;
           @loader-delay: @button-loader-delay;
+          btnloaderkf;
         );
         left: @height - @height/8;
       }
@@ -428,6 +435,7 @@ button.button{
         @loader-circle-size: @button-height/5;
         @loader-circle-separation: 2px;
         @loader-delay: @button-loader-delay;
+        btnloaderkf;
       );
       position: absolute;
       top: -16px;

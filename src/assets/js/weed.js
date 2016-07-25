@@ -15,6 +15,7 @@
       'weed.sidebar',
       'weed.toload',
       'weed.list',
+      'weed.calendar',
       'weed.corner-notifications',
       'ui.bootstrap',
       'ui.bootstrap.typeahead',
