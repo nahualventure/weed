@@ -8181,7 +8181,6 @@ hr {
 .we-calendar-class .week {
   float: left;
   width: 100%;
-  border-top: solid 1px #CCC;
 }
 .we-calendar-class .week:first-child {
   border-top: none;
@@ -8201,6 +8200,7 @@ hr {
   background: white;
   cursor: pointer;
   color: black;
+  border-top: solid 1px #CCC;
 }
 .we-calendar-class .week .day-names:first-child {
   border-left: none;
@@ -8218,6 +8218,7 @@ hr {
   background: white;
   cursor: pointer;
   color: black;
+  border-top: solid 1px #CCC;
 }
 .we-calendar-class .week .day-cell-number.center-number {
   text-align: center;
