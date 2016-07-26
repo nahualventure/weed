@@ -25,8 +25,7 @@
       link: function(scope, elem, attrs) {
         moment.locale(scope.languagec);
         scope.weekArray = moment.weekdays();
-        scope.selected = _removeTime(moment().locale(scope.languagec));
-        scope.selected.add(1,'d');
+        scope.selected = moment().locale(scope.languagec);
         scope.month = scope.selected.clone();
         var start = scope.selected.clone();
         start.date(1);
