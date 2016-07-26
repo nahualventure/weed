@@ -26,7 +26,7 @@
 @calendar-number-font-size:                                                     0.75em;
 @calendar-names-font-size:                                                      0.75em;
 @calendar-header-font-size:                                                     20px;
-
+@calendar-height-day-names-cell:                                                30px;
 
 .vertical-center (@height) {
     height:@height;
@@ -93,8 +93,8 @@
             border-left:solid 1px @calendar-border-colour;
             font-size:@calendar-names-font-size;
             text-align:center;
-            .vertical-center(@calendar-height-day-cell);
-            line-height:@calendar-height-day-cell;
+            .vertical-center(@calendar-height-day-names-cell);
+            line-height:@calendar-height-day-names-cell;
             background:@calendar-day-background;
             cursor:pointer;
             color:@calendar-day-font-color;

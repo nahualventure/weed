@@ -8193,10 +8193,10 @@ hr {
   border-left: solid 1px #CCC;
   font-size: 0.75em;
   text-align: center;
-  height: 50px;
+  height: 30px;
   display: inline-block;
   vertical-align: middle;
-  line-height: 50px;
+  line-height: 30px;
   background: white;
   cursor: pointer;
   color: black;
