@@ -8240,10 +8240,6 @@ hr {
   background: red;
   color: white;
 }
-.we-calendar-class .week.names > span {
-  color: #2875C7;
-  font-weight: bold;
-}
 /*
  * Instructions: each weed module contains a base customization variables at
  * the begining of the file. Copy those variables here and customize them away!
