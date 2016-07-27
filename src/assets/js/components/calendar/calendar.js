@@ -54,8 +54,8 @@
         scope.today = function() {
           moment.locale(scope.languagec);
           scope.weekArray = moment.weekdays();
-          scope.selected = _removeTime(moment().locale(scope.languagec));
-          scope.selected.add(1,'d');
+          scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
           scope.month = scope.selected.clone();
           var start = scope.selected.clone();
           start.date(1);
@@ -89,9 +89,14 @@
               number: date.date(),
               isCurrentMonth: date.month() === month.month(),
               isToday: date.isSame(new Date(), "day"),
-              date: date
+              date: date,
+              dateId: date.format("DD-MM-YYYY")
           });
           date = date.clone();
+          console.log("------------------------------------------");
+          console.log(date.format("DD-MM-YYYY"));
+          console.log(moment(new Date(date._d)).format("DD-MM-YYYY"));
+
           date.add(1, "d");
       }
       return days;
