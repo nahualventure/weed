@@ -22,8 +22,7 @@
         languagec: '=',
         numberposition: '=',
         activities: '=',
-        limit: '=',
-        pop: '='
+        limit: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -40,8 +39,6 @@
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
-          console.log(scope.selected);
-          console.log(scope.selectedobject);
         };
 
         scope.next = function() {

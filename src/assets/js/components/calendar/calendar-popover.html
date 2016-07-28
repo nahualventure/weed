@@ -1,0 +1,12 @@
+<div class="popover-sections calendar-popover-day">
+  <div class="popover-header popover-header-titled calendar-popover-day-title">
+    <p class="popover-header-title">{{selectedobject.date.format("DD MMMM, YYYY")}}</p>
+  </div>
+  <div class="popover-inner-section calendar-popover-day-content">
+    <div class="calendar-popover-day-activity" ng-repeat="act in selectedobject.activities">
+      <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
+      <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
+    </div>
+  </div>
+  </div>
+</div>
