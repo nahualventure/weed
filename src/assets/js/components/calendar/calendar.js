@@ -79,7 +79,6 @@
 
       scope.monthActivities.then(
         function(su){
-          $log.log("ACTIVIDADES DE CALENDARIO",su)
           scope.weeks = [];
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
