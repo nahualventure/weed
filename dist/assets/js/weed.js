@@ -15073,7 +15073,8 @@ if (typeof define === 'function' && define.amd) {
       scope: {
         selected: '=',
         languagec: '=',
-        numberposition: '='
+        numberposition: '=',
+        activities: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -15125,17 +15126,18 @@ if (typeof define === 'function' && define.amd) {
     }
 
     function _buildMonth(scope, start, month) {
+      scope.monthActivities = scope.activities();
       scope.weeks = [];
       var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
       while (!done) {
-          scope.weeks.push({ days: _buildWeek(date.clone(), month) });
+          scope.weeks.push({ days: _buildWeek(date.clone(), month, scope.monthActivities) });
           date.add(1, "w");
           done = count++ > 2 && monthIndex !== date.month();
           monthIndex = date.month();
       }
     }
 
-    function _buildWeek(date, month) {
+    function _buildWeek(date, month, activities) {
       var days = [];
       for (var i = 0; i < 7; i++) {
           days.push({
@@ -15144,12 +15146,17 @@ if (typeof define === 'function' && define.amd) {
               isCurrentMonth: date.month() === month.month(),
               isToday: date.isSame(new Date(), "day"),
               date: date,
-              dateId: date.format("DD-MM-YYYY")
+              dateId: date.format("DD-MM-YYYY"),
+              activities: []
           });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              days[days.length-1].activities.push(activities[j]);
+            }
+          }
           date = date.clone();
-          console.log("------------------------------------------");
-          console.log(date.format("DD-MM-YYYY"));
-          console.log(moment(new Date(date._d)).format("DD-MM-YYYY"));
 
           date.add(1, "d");
       }
@@ -15982,111 +15989,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInput
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.sidebar', ['weed.core'])
-    .directive('weSidebar', sidebarDirective);
-
-  // Weed api injection
-  sidebarDirective.$inject = ['WeedApi'];
-
-  function sidebarDirective(weedApi) {
-    var body = angular.element(document.querySelector('body'));
-    body.addClass('with-sidebar');
-
-    function openSidebar($scope){
-      body.addClass('with-open-sidebar');
-      $scope.open = true;
-    }
-
-    function closeSidebar($scope){
-      body.removeClass('with-open-sidebar');
-      $scope.open = false;
-    }
-
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      templateUrl: 'components/sidebar/sidebar.html',
-      link: function($scope, elem, attrs, controllers, $transclude){
-        weedApi.subscribe(attrs.id, function(id, message){
-
-          switch(message){
-            case 'show':
-            case 'open':
-              openSidebar($scope);
-              break;
-            case 'close':
-            case 'hide':
-              closeSidebar($scope);
-              break;
-            case 'toggle':
-              if($scope.open){
-                closeSidebar($scope);
-              }
-              else{
-                openSidebar($scope);
-              }
-          }
-        });
-      }
-    };
-  }
-})(angular);
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.sidebar')
-    .directive('weSidebarLink', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          title: '@',
-          icon: '@',
-          position: '@'
-        },
-        templateUrl: 'components/sidebar/sidebarLink.html',
-        link: function($scope, elem, attrs, controllers, $transclude){
-          $transclude(function(clone){
-            if(clone.length > 0){
-              $scope.title = clone[0].textContent;
-            }
-          });
-        }
-      };
-    });
-})(angular);
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.sidebar')
-    .directive('weSidebarHeader', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        scope: {
-          isotype: '@',
-          logotype: '@'
-        },
-        templateUrl: 'components/sidebar/sidebarHeader.html'
-      };
-    });
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weTab
  * @description
  * # navbarDirective
@@ -16240,4 +16142,109 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInput
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.sidebar', ['weed.core'])
+    .directive('weSidebar', sidebarDirective);
+
+  // Weed api injection
+  sidebarDirective.$inject = ['WeedApi'];
+
+  function sidebarDirective(weedApi) {
+    var body = angular.element(document.querySelector('body'));
+    body.addClass('with-sidebar');
+
+    function openSidebar($scope){
+      body.addClass('with-open-sidebar');
+      $scope.open = true;
+    }
+
+    function closeSidebar($scope){
+      body.removeClass('with-open-sidebar');
+      $scope.open = false;
+    }
+
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      templateUrl: 'components/sidebar/sidebar.html',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        weedApi.subscribe(attrs.id, function(id, message){
+
+          switch(message){
+            case 'show':
+            case 'open':
+              openSidebar($scope);
+              break;
+            case 'close':
+            case 'hide':
+              closeSidebar($scope);
+              break;
+            case 'toggle':
+              if($scope.open){
+                closeSidebar($scope);
+              }
+              else{
+                openSidebar($scope);
+              }
+          }
+        });
+      }
+    };
+  }
+})(angular);
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.sidebar')
+    .directive('weSidebarLink', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          title: '@',
+          icon: '@',
+          position: '@'
+        },
+        templateUrl: 'components/sidebar/sidebarLink.html',
+        link: function($scope, elem, attrs, controllers, $transclude){
+          $transclude(function(clone){
+            if(clone.length > 0){
+              $scope.title = clone[0].textContent;
+            }
+          });
+        }
+      };
+    });
+})(angular);
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.sidebar')
+    .directive('weSidebarHeader', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        scope: {
+          isotype: '@',
+          logotype: '@'
+        },
+        templateUrl: 'components/sidebar/sidebarHeader.html'
+      };
+    });
 })(angular);

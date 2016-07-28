@@ -1217,7 +1217,8 @@
            class="we-calendar-class"
            selected="calendarController.day"
            languagec="'es'"
-           numberposition="'upper-left'"></div>
+           numberposition="'upper-left'"
+           activities="calendarController.funcionActividades"></div>
     </div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -1263,6 +1264,9 @@
             function calendarController() {
               var vm = this;
               vm.day = moment().locale("es");
+              vm.funcionActividades = function(){
+                return [{"name":"Meeting Committee 1","place":"Oakland","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7}];
+              };
             }
 
             function popoverController() {

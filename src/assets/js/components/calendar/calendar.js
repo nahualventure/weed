@@ -19,7 +19,8 @@
       scope: {
         selected: '=',
         languagec: '=',
-        numberposition: '='
+        numberposition: '=',
+        activities: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -71,17 +72,18 @@
     }
 
     function _buildMonth(scope, start, month) {
+      scope.monthActivities = scope.activities();
       scope.weeks = [];
       var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
       while (!done) {
-          scope.weeks.push({ days: _buildWeek(date.clone(), month) });
+          scope.weeks.push({ days: _buildWeek(date.clone(), month, scope.monthActivities) });
           date.add(1, "w");
           done = count++ > 2 && monthIndex !== date.month();
           monthIndex = date.month();
       }
     }
 
-    function _buildWeek(date, month) {
+    function _buildWeek(date, month, activities) {
       var days = [];
       for (var i = 0; i < 7; i++) {
           days.push({
@@ -90,12 +92,17 @@
               isCurrentMonth: date.month() === month.month(),
               isToday: date.isSame(new Date(), "day"),
               date: date,
-              dateId: date.format("DD-MM-YYYY")
+              dateId: date.format("DD-MM-YYYY"),
+              activities: []
           });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              days[days.length-1].activities.push(activities[j]);
+            }
+          }
           date = date.clone();
-          console.log("------------------------------------------");
-          console.log(date.format("DD-MM-YYYY"));
-          console.log(moment(new Date(date._d)).format("DD-MM-YYYY"));
 
           date.add(1, "d");
       }
