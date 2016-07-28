@@ -75,15 +75,23 @@
     }
 
     function _buildMonth(scope, start, month) {
-      scope.monthActivities = scope.activities();
-      scope.weeks = [];
-      var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-      while (!done) {
-          scope.weeks.push({ days: _buildWeek(date.clone(), month, scope.monthActivities) });
-          date.add(1, "w");
-          done = count++ > 2 && monthIndex !== date.month();
-          monthIndex = date.month();
-      }
+      scope.monthActivities = scope.activities()
+
+      scope.monthActivities.then(
+        function(su){
+          scope.weeks = [];
+          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          while (!done) {
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, scope.monthActivities) });
+              date.add(1, "w");
+              done = count++ > 2 && monthIndex !== date.month();
+              monthIndex = date.month();
+          }
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
     }
 
     function _buildWeek(date, month, activities) {
