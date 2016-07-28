@@ -79,10 +79,11 @@
 
       scope.monthActivities.then(
         function(su){
+          $log.log("ACTIVIDADES DE CALENDARIO",su)
           scope.weeks = [];
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month, scope.monthActivities) });
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
               date.add(1, "w");
               done = count++ > 2 && monthIndex !== date.month();
               monthIndex = date.month();
