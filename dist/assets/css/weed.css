@@ -8142,7 +8142,7 @@ hr {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   background: white;
-  width: 700px;
+  width: 95%;
   border: solid 1px #CCC;
   margin-bottom: 10px;
   margin-left: 30px;
@@ -8212,7 +8212,7 @@ hr {
   -moz-box-sizing: border-box;
   border-left: solid 1px #CCC;
   font-size: 0.75em;
-  height: 50px;
+  height: 150px;
   display: inline-block;
   vertical-align: middle;
   background: white;
@@ -8222,7 +8222,7 @@ hr {
 }
 .we-calendar-class .week .day-cell-number.center-number {
   text-align: center;
-  line-height: 50px;
+  line-height: 150px;
 }
 .we-calendar-class .week .day-cell-number.left-upper-number {
   text-align: left;

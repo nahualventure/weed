@@ -1218,7 +1218,9 @@
            selected="calendarController.day"
            languagec="'es'"
            numberposition="'upper-left'"
-           activities="calendarController.funcionActividades"></div>
+           activities="calendarController.funcionActividades"
+           limit="2"
+           pop="'src/assets/html/vendors/popover/popover-separated.html'"></div>
     </div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -1265,7 +1267,10 @@
               var vm = this;
               vm.day = moment().locale("es");
               vm.funcionActividades = function(){
-                return [{"name":"Meeting Committee 1","place":"Oakland","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7}];
+                return [{"name":"Meeting Committee 1","place":"Here","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
+                        {"name":"Meeting Committee 2","place":"Now","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
+                        {"name":"Meeting Committee 3","place":"There","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
+                        {"name":"Meeting Committee 4","place":"IDK","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7}];
               };
             }
 

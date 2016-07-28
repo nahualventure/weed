@@ -20,7 +20,9 @@
         selected: '=',
         languagec: '=',
         numberposition: '=',
-        activities: '='
+        activities: '=',
+        limit: '=',
+        pop: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
