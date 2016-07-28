@@ -17,6 +17,7 @@
     return {
       restrict: 'A',
       scope: {
+        selectedobject: '=',
         selected: '=',
         languagec: '=',
         numberposition: '=',
@@ -38,6 +39,7 @@
 
         scope.select = function(day) {
           scope.selected = day.date;
+          scope.selectedobject = day;
         };
 
         scope.next = function() {

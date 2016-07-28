@@ -1215,6 +1215,7 @@
     <div ng-controller="CalendarController as calendarController">
       <div we-calendar
            class="we-calendar-class"
+           selectedobject="calendarController.dayO"
            selected="calendarController.day"
            languagec="'es'"
            numberposition="'upper-left'"
@@ -1266,6 +1267,7 @@
             function calendarController() {
               var vm = this;
               vm.day = moment().locale("es");
+              vm.dayO = null;
               vm.funcionActividades = function(){
                 return [{"name":"Meeting Committee 1","place":"Here","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
                         {"name":"Meeting Committee 2","place":"Now","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
