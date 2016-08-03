@@ -24,7 +24,8 @@
         activities: '=',
         limit: '=',
         popupopenselect: '=',
-        functionopenselect:'='
+        functionopenselect:'=',
+        selectedobjectinside: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -68,6 +69,11 @@
           _removeTime(start.day(0));
 
           _buildMonth(scope, start, scope.month);
+        };
+
+        scope.doOnClickElement = function(elementInside){
+          scope.selectedobjectinside = elementInside;
+          scope.functionopenselect();
         };
       }
     };
