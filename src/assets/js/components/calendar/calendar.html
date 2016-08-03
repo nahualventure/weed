@@ -36,6 +36,8 @@
     ng-repeat="act in day.activities | limitTo:limit"
     ng-click="doOnClickElement(act)"
     we-open="popupopenselect">
+    <p>{{popupopenselect}}</p>
+    <p>{{selectedobjectinside}}</p>
     <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
     <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
   </div>
