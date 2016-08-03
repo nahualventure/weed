@@ -15223,8 +15223,6 @@ if (typeof define === 'function' && define.amd) {
         };
 
         scope.doOnClickElement = function(elementInside){
-          scope.selectedobjectinside = elementInside;
-          console.log("ElementInside: "+scope.selectedobjectinside);
           scope.functionopenselect(elementInside);
         };
       }
@@ -15285,6 +15283,53 @@ if (typeof define === 'function' && define.amd) {
 
 /**
  * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        rightIcon: '@',
+        leftIcon: '@',
+        componentPosition: '@',
+        size: '@',
+        placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html',
+      link: inputWrapperLink
+    };
+  }
+    function inputWrapperLink(scope, elem) {
+      var input = elem.find('input');
+      input.on("focus", function(){
+        scope.focused = true;
+        scope.$apply();
+      });
+
+      input.on("blur", function(){
+        scope.focused = false;
+        scope.$apply();
+      });
+
+    }
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weIcon
  * @description
  * # Directive to import icons
@@ -15310,6 +15355,104 @@ if (typeof define === 'function' && define.amd) {
       link: function(scope, elem, attrs) {}
     };
   };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weListItem
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.list', ['weed.core'])
+      .directive('weListItem', listItemDirective);
+
+  function listItemDirective() {
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        color: '@',
+        url: '@'
+      },
+      templateUrl: 'components/list/list-item.html',
+      require: '^weList',
+      link: function(scope, elem, attr, listCtrl) {
+        scope.active = false;
+        listCtrl.addItem(scope);
+        elem.on('click', function() {
+          listCtrl.select(scope);
+        });
+      }
+    };
+  }
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.list')
+      .directive('weList', listDirective);
+
+  // No dependency injections
+
+  function listDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        clickable: '@',
+        selectable: '@',
+        componentPosition: '@',
+        color: '@',
+        size: '@'
+      },
+      templateUrl: 'components/list/list.html',
+      bindToController: true,
+      controllerAs: 'list',
+      controller: listController
+    };
+  }
+
+  listController.$inject = ['$scope'];
+
+  function listController($scope) {
+    var vm = this;
+
+    vm.items = [];
+
+    vm.addItem = function addItem(item) {
+      vm.items.push(item);
+    };
+
+    vm.select = function(selectedItem) {
+      if (typeof vm.selectable !== 'undefined'){
+        angular.forEach(vm.items, function(item){
+          if(item.active && item !== selectedItem){
+            item.active = false;
+          }
+        });
+        selectedItem.active = true;
+        $scope.$apply();
+      }
+    };
+  }
 
 })(angular);
 (function(angular) {
@@ -15607,151 +15750,6 @@ if (typeof define === 'function' && define.amd) {
     };
   }
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', inputWrapperDirective);
-
-  // No dependencies
-
-  function inputWrapperDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        rightIcon: '@',
-        leftIcon: '@',
-        componentPosition: '@',
-        size: '@',
-        placeholder: '@'
-      },
-      replace: true,
-      templateUrl: 'components/forms/inputWrapper.html',
-      link: inputWrapperLink
-    };
-  }
-    function inputWrapperLink(scope, elem) {
-      var input = elem.find('input');
-      input.on("focus", function(){
-        scope.focused = true;
-        scope.$apply();
-      });
-
-      input.on("blur", function(){
-        scope.focused = false;
-        scope.$apply();
-      });
-
-    }
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weListItem
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.list', ['weed.core'])
-      .directive('weListItem', listItemDirective);
-
-  function listItemDirective() {
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        color: '@',
-        url: '@'
-      },
-      templateUrl: 'components/list/list-item.html',
-      require: '^weList',
-      link: function(scope, elem, attr, listCtrl) {
-        scope.active = false;
-        listCtrl.addItem(scope);
-        elem.on('click', function() {
-          listCtrl.select(scope);
-        });
-      }
-    };
-  }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.list')
-      .directive('weList', listDirective);
-
-  // No dependency injections
-
-  function listDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        clickable: '@',
-        selectable: '@',
-        componentPosition: '@',
-        color: '@',
-        size: '@'
-      },
-      templateUrl: 'components/list/list.html',
-      bindToController: true,
-      controllerAs: 'list',
-      controller: listController
-    };
-  }
-
-  listController.$inject = ['$scope'];
-
-  function listController($scope) {
-    var vm = this;
-
-    vm.items = [];
-
-    vm.addItem = function addItem(item) {
-      vm.items.push(item);
-    };
-
-    vm.select = function(selectedItem) {
-      if (typeof vm.selectable !== 'undefined'){
-        angular.forEach(vm.items, function(item){
-          if(item.active && item !== selectedItem){
-            item.active = false;
-          }
-        });
-        selectedItem.active = true;
-        $scope.$apply();
-      }
-    };
-  }
-
-})(angular);
 (function() {
   'use strict';
 
@@ -15842,82 +15840,6 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInputWrapper
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective);
-
-  // No dependencies
-
-  function navbarDirective(){
-    return {
-      restrict: 'E',
-      link: function(){
-        var body = angular.element(document.querySelector('body'));
-        body.addClass('with-navbar');
-      },
-      templateUrl: 'components/navbar/navbar.html',
-      transclude: true,
-      replace: true
-    }
-  }
-
-  function navbarElementDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        position: '@',
-        type: '@',
-        icon: '@',
-        logotype: '@',
-        isotype: '@',
-        placeholder: '@',
-        userPicture: '@',
-        userRole: '@',
-        counter: '@'
-      },
-      link: function(scope, elem, attrs, controllers, $transclude){
-        // Check if there is text
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-      },
-      templateUrl: function(elem, attrs) {
-        var template = '';
-        switch (attrs.type) {
-          case 'link':
-            template = 'navbarElementLink.html';
-            break;
-          case 'logo':
-            template = 'navbarElementLogo.html';
-            break;
-          case 'separator':
-            template = 'navbarElementSeparator.html'
-            break;
-          case 'user':
-            template = 'navbarElementUser.html'
-            break;
-          default:
-            template = 'navbarElement.html'
-        }
-        return 'components/navbar/' + template;
-      }
-    };
-  }
-})(angular);
 (function(angular){
   'use strict';
 
@@ -16004,6 +15926,165 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
+    .directive('weNavbarElement', navbarElementDirective);
+
+  // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@',
+        counter: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
+            break;
+          default:
+            template = 'navbarElement.html'
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weTab
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false;
+          tabsetCtrl.addTab(scope);
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var vm = this;
+
+          vm.tabs = [];
+
+          vm.addTab = function addTab(tab) {
+            vm.tabs.push(tab);
+
+            if(vm.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          vm.select = function(selectedTab) {
+            angular.forEach(vm.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
 
 })(angular);
 /**
@@ -16182,88 +16263,5 @@ if (typeof define === 'function' && define.amd) {
       });
     }
   }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weTab
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false;
-          tabsetCtrl.addTab(scope);
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var vm = this;
-
-          vm.tabs = [];
-
-          vm.addTab = function addTab(tab) {
-            vm.tabs.push(tab);
-
-            if(vm.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
-
-          vm.select = function(selectedTab) {
-            angular.forEach(vm.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
-              }
-            });
-
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
 
 })(angular);
