@@ -73,7 +73,7 @@
         scope.doOnClickElement = function(elementInside){
           scope.selectedobjectinside = elementInside;
           console.log("ElementInside: "+scope.selectedobjectinside);
-          scope.functionopenselect();
+          scope.functionopenselect(elementInside);
         };
       }
     };
