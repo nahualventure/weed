@@ -22,7 +22,9 @@
         languagec: '=',
         numberposition: '=',
         activities: '=',
-        limit: '='
+        limit: '=',
+        popupopenselect: '=',
+        functionopenselect:'='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
