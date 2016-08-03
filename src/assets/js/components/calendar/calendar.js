@@ -72,6 +72,7 @@
         };
 
         scope.doOnClickElement = function(elementInside){
+          alert("hello world");
           scope.selectedobjectinside = elementInside;
           scope.functionopenselect();
         };
