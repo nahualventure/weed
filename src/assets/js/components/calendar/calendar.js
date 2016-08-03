@@ -23,7 +23,6 @@
         numberposition: '=',
         activities: '=',
         limit: '=',
-        popupopenselect: '=',
         functionopenselect:'=',
         selectedobjectinside: '='
       },
