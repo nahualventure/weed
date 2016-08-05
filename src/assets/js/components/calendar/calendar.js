@@ -25,7 +25,8 @@
         limit: '=',
         functionopenselect:'=',
         selectedobjectinside: '=',
-        actualmonth: '='
+        actualmonth: '=',
+        updatefunction: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -76,6 +77,10 @@
 
         scope.doOnClickElement = function(elementInside){
           scope.functionopenselect(elementInside);
+        };
+
+        scope.updatefunction = function(){
+          _buildMonth(scope, scope.actualmonth, scope.month, scope.actualmonth);
         };
       }
     };
