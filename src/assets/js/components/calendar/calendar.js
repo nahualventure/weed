@@ -66,7 +66,10 @@
           scope.weekArray = moment.weekdays();
           scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
+          console.log(scope.actualmonth);
+          console.log(scope.month);
           scope.actualmonth = moment();
+          console.log(scope.actualmonth);
           var start = scope.selected.clone();
           start.date(1);
           _removeTime(start.day(0));
