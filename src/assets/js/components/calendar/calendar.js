@@ -83,7 +83,8 @@
     }
 
     function _buildMonth(scope, start, month, actualmonth) {
-      scope.monthActivities = scope.activities(actualmonth)
+      console.log(actualmonth);
+      scope.monthActivities = scope.activities(actualmonth);
 
       scope.monthActivities.then(
         function(su){
