@@ -46,9 +46,10 @@
         };
 
         scope.today = function() {
+          scope.actualmonth = moment();
+          console.log(scope.actualmonth);
           scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
-          scope.actualmonth = moment();
           var start = scope.selected.clone();
           start.date(1);
           _removeTime(start.day(0));
