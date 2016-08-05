@@ -47,15 +47,13 @@
 
         scope.today = function() {
           scope.actualmonth = moment();
-          console.log(scope.actualmonth);
           scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
           var start = scope.selected.clone();
           start.date(1);
           _removeTime(start.day(0));
 
-          _buildMonth(scope, start, scope.month);
-          console.log(scope.actualmonth);
+          _buildMonth(scope, start, scope.month, scope.actualmonth);
         };
 
         scope.next = function() {
@@ -63,7 +61,7 @@
           scope.actualmonth = scope.actualmonth.add(1,'months');
           _removeTime(next.month(next.month()+1).date(1));
           scope.month.month(scope.month.month()+1);
-          _buildMonth(scope, next, scope.month);
+          _buildMonth(scope, next, scope.month, scope.actualmonth);
         };
 
         scope.previous = function() {
@@ -71,7 +69,7 @@
             scope.actualmonth = scope.actualmonth.add(-1,'months');
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
-            _buildMonth(scope, previous, scope.month);
+            _buildMonth(scope, previous, scope.month, scope.actualmonth);
         };
 
         scope.doOnClickElement = function(elementInside){
@@ -84,8 +82,8 @@
       return date.day(0).hour(0).minute(0).second(0).millisecond(0);
     }
 
-    function _buildMonth(scope, start, month) {
-      scope.monthActivities = scope.activities()
+    function _buildMonth(scope, start, month, actualmonth) {
+      scope.monthActivities = scope.activities(actualmonth)
 
       scope.monthActivities.then(
         function(su){
