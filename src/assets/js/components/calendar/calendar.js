@@ -38,7 +38,8 @@
         start.date(1);
         _removeTime(start.day(0));
 
-        _buildMonth(scope, start, scope.month);
+        console.log(scope.actualmonth);
+        _buildMonth(scope, start, scope.month, scope.actualmonth);
 
         scope.select = function(day) {
           scope.selected = day.date;
@@ -53,6 +54,7 @@
           start.date(1);
           _removeTime(start.day(0));
 
+          console.log(scope.actualmonth);
           _buildMonth(scope, start, scope.month, scope.actualmonth);
         };
 
@@ -61,6 +63,8 @@
           scope.actualmonth = scope.actualmonth.add(1,'months');
           _removeTime(next.month(next.month()+1).date(1));
           scope.month.month(scope.month.month()+1);
+
+          console.log(scope.actualmonth);
           _buildMonth(scope, next, scope.month, scope.actualmonth);
         };
 
@@ -69,6 +73,8 @@
             scope.actualmonth = scope.actualmonth.add(-1,'months');
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
+
+            console.log(scope.actualmonth);
             _buildMonth(scope, previous, scope.month, scope.actualmonth);
         };
 
