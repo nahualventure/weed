@@ -33,7 +33,7 @@
         scope.weekArray = moment.weekdays();
         scope.selected = moment().locale(scope.languagec);
         scope.month = scope.selected.clone();
-        scope.actualmonth = scope.month.clone();
+        scope.actualmonth = moment();
         var start = scope.selected.clone();
         start.date(1);
         _removeTime(start.day(0));
@@ -48,7 +48,7 @@
         scope.next = function() {
           var next = scope.month.clone();
           scope.actualmonth = scope.month.clone();
-          scope.actualmonth = scope.actualmonth.add(1,'m');
+          scope.actualmonth = scope.actualmonth.add(1,'months');
           _removeTime(next.month(next.month()+1).date(1));
           scope.month.month(scope.month.month()+1);
           _buildMonth(scope, next, scope.month);
@@ -56,7 +56,7 @@
 
         scope.previous = function() {
             var previous = scope.month.clone();
-            scope.actualmonth = scope.actualmonth.add(-1,'m');
+            scope.actualmonth = scope.actualmonth.add(-1,'months');
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
             _buildMonth(scope, previous, scope.month);
@@ -68,7 +68,7 @@
           scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
           scope.month = scope.selected.clone();
-          scope.actualmonth = scope.month.clone();
+          scope.actualmonth = moment();
           var start = scope.selected.clone();
           start.date(1);
           _removeTime(start.day(0));
