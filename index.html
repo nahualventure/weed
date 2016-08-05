@@ -1220,7 +1220,8 @@
            languagec="'es'"
            numberposition="'upper-left'"
            activities="calendarController.funcionActividades"
-           limit="2"></div>
+           limit="2"
+           actualmonth="calendarController.actual"></div>
     </div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -1267,6 +1268,7 @@
               var vm = this;
               vm.day = moment().locale("es");
               vm.dayO = null;
+              vm.actualmonth =null;
               vm.funcionActividades = function(){
                 return [{"name":"Meeting Committee 1","place":"Here","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
                         {"name":"Meeting Committee 2","place":"Now","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},

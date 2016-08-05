@@ -15150,6 +15150,222 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.calendar', ['weed.core'])
+    .directive('weCalendar', calendarDirective);
+
+
+  function calendarDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        selectedobject: '=',
+        selected: '=',
+        languagec: '=',
+        numberposition: '=',
+        activities: '=',
+        limit: '=',
+        functionopenselect:'=',
+        selectedobjectinside: '=',
+        actualmonth: '='
+      },
+      templateUrl: 'components/calendar/calendar.html',
+      link: function(scope, elem, attrs) {
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = moment().locale(scope.languagec);
+        scope.month = scope.selected.clone();
+        scope.actualmonth = scope.month.clone();
+        var start = scope.selected.clone();
+        start.date(1);
+        _removeTime(start.day(0));
+
+        _buildMonth(scope, start, scope.month);
+
+        scope.select = function(day) {
+          scope.selected = day.date;
+          scope.selectedobject = day;
+        };
+
+        scope.next = function() {
+          var next = scope.month.clone();
+          scope.actualmonth = scope.month.clone();
+          scope.actualmonth = scope.actualmonth.add(1,'m');
+          _removeTime(next.month(next.month()+1).date(1));
+          scope.month.month(scope.month.month()+1);
+          _buildMonth(scope, next, scope.month);
+        };
+
+        scope.previous = function() {
+            var previous = scope.month.clone();
+            scope.actualmonth = scope.actualmonth.add(-1,'m');
+            _removeTime(previous.month(previous.month()-1).date(1));
+            scope.month.month(scope.month.month()-1);
+            _buildMonth(scope, previous, scope.month);
+        };
+
+        scope.today = function() {
+          moment.locale(scope.languagec);
+          scope.weekArray = moment.weekdays();
+          scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          scope.month = scope.selected.clone();
+          scope.actualmonth = scope.month.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month);
+        };
+
+        scope.doOnClickElement = function(elementInside){
+          scope.functionopenselect(elementInside);
+        };
+      }
+    };
+
+    function _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month) {
+      scope.monthActivities = scope.activities()
+
+      scope.monthActivities.then(
+        function(su){
+          console.log(su);
+          scope.weeks = [];
+          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          while (!done) {
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+              date.add(1, "w");
+              done = count++ > 2 && monthIndex !== date.month();
+              monthIndex = date.month();
+          }
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
+    }
+
+    function _buildWeek(date, month, activities) {
+      console.log(activities);
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+          days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              dateId: date.format("DD-MM-YYYY"),
+              activities: []
+          });
+          for(var j = 0; j < activities.length; j++)
+          {
+            console.log(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day'));
+            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              days[days.length-1].activities.push(activities[j]);
+            }
+          }
+          date = date.clone();
+
+          date.add(1, "d");
+      }
+      return days;
+    }
+  };
+
+})(angular);
+
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        rightIcon: '@',
+        leftIcon: '@',
+        componentPosition: '@',
+        size: '@',
+        placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html',
+      link: inputWrapperLink
+    };
+  }
+    function inputWrapperLink(scope, elem) {
+      var input = elem.find('input');
+      input.on("focus", function(){
+        scope.focused = true;
+        scope.$apply();
+      });
+
+      input.on("blur", function(){
+        scope.focused = false;
+        scope.$apply();
+      });
+
+    }
+})(angular);
 (function(angular) {
   'use strict';
 
@@ -15447,186 +15663,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.calendar', ['weed.core'])
-    .directive('weCalendar', calendarDirective);
-
-
-  function calendarDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        selectedobject: '=',
-        selected: '=',
-        languagec: '=',
-        numberposition: '=',
-        activities: '=',
-        limit: '=',
-        functionopenselect:'=',
-        selectedobjectinside: '='
-      },
-      templateUrl: 'components/calendar/calendar.html',
-      link: function(scope, elem, attrs) {
-        moment.locale(scope.languagec);
-        scope.weekArray = moment.weekdays();
-        scope.selected = moment().locale(scope.languagec);
-        scope.month = scope.selected.clone();
-        var start = scope.selected.clone();
-        start.date(1);
-        _removeTime(start.day(0));
-
-        _buildMonth(scope, start, scope.month);
-
-        scope.select = function(day) {
-          scope.selected = day.date;
-          scope.selectedobject = day;
-        };
-
-        scope.next = function() {
-          var next = scope.month.clone();
-          _removeTime(next.month(next.month()+1).date(1));
-          scope.month.month(scope.month.month()+1);
-          _buildMonth(scope, next, scope.month);
-        };
-
-        scope.previous = function() {
-            var previous = scope.month.clone();
-            _removeTime(previous.month(previous.month()-1).date(1));
-            scope.month.month(scope.month.month()-1);
-            _buildMonth(scope, previous, scope.month);
-        };
-
-        scope.today = function() {
-          moment.locale(scope.languagec);
-          scope.weekArray = moment.weekdays();
-          scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          scope.month = scope.selected.clone();
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month);
-        };
-
-        scope.doOnClickElement = function(elementInside){
-          scope.functionopenselect(elementInside);
-        };
-      }
-    };
-
-    function _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
-
-    function _buildMonth(scope, start, month) {
-      scope.monthActivities = scope.activities()
-
-      scope.monthActivities.then(
-        function(su){
-          console.log(su);
-          scope.weeks = [];
-          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-          while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-              date.add(1, "w");
-              done = count++ > 2 && monthIndex !== date.month();
-              monthIndex = date.month();
-          }
-        },
-        function(err){
-          $log.log("ERROR: ",error);
-        }
-      );
-    }
-
-    function _buildWeek(date, month, activities) {
-      console.log(activities);
-      var days = [];
-      for (var i = 0; i < 7; i++) {
-          days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              dateId: date.format("DD-MM-YYYY"),
-              activities: []
-          });
-          for(var j = 0; j < activities.length; j++)
-          {
-            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
-              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
-              days[days.length-1].activities.push(activities[j]);
-            }
-          }
-          date = date.clone();
-
-          date.add(1, "d");
-      }
-      return days;
-    }
-  };
-
-})(angular);
-
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', inputWrapperDirective);
-
-  // No dependencies
-
-  function inputWrapperDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        rightIcon: '@',
-        leftIcon: '@',
-        componentPosition: '@',
-        size: '@',
-        placeholder: '@'
-      },
-      replace: true,
-      templateUrl: 'components/forms/inputWrapper.html',
-      link: inputWrapperLink
-    };
-  }
-    function inputWrapperLink(scope, elem) {
-      var input = elem.find('input');
-      input.on("focus", function(){
-        scope.focused = true;
-        scope.$apply();
-      });
-
-      input.on("blur", function(){
-        scope.focused = false;
-        scope.$apply();
-      });
-
-    }
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weListItem
  * @description
  * # navbarDirective
@@ -15721,199 +15757,6 @@ if (typeof define === 'function' && define.amd) {
       }
     };
   }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInputWrapper
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective);
-
-  // No dependencies
-
-  function navbarDirective(){
-    return {
-      restrict: 'E',
-      link: function(){
-        var body = angular.element(document.querySelector('body'));
-        body.addClass('with-navbar');
-      },
-      templateUrl: 'components/navbar/navbar.html',
-      transclude: true,
-      replace: true
-    }
-  }
-
-  function navbarElementDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        position: '@',
-        type: '@',
-        icon: '@',
-        logotype: '@',
-        isotype: '@',
-        placeholder: '@',
-        userPicture: '@',
-        userRole: '@',
-        counter: '@'
-      },
-      link: function(scope, elem, attrs, controllers, $transclude){
-        // Check if there is text
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-      },
-      templateUrl: function(elem, attrs) {
-        var template = '';
-        switch (attrs.type) {
-          case 'link':
-            template = 'navbarElementLink.html';
-            break;
-          case 'logo':
-            template = 'navbarElementLogo.html';
-            break;
-          case 'separator':
-            template = 'navbarElementSeparator.html'
-            break;
-          case 'user':
-            template = 'navbarElementUser.html'
-            break;
-          default:
-            template = 'navbarElement.html'
-        }
-        return 'components/navbar/' + template;
-      }
-    };
-  }
-})(angular);
-(function(angular){
-  'use strict';
-
-  // TODO
-  angular
-    .module('weed.corner-notifications', ['weed.core'])
-    .directive('weCornerNotification', cornerNotificationDirective);
-
-  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
-
-  function cornerNotificationDirective(WeedApi, $timeout){
-
-    return {
-      restrict: 'A',
-      replace: true,
-      templateUrl: 'components/notifications/cornerNotifications.html',
-      scope: {
-        color: '@',
-        icon: '@',
-        text: '@',
-        timeout: '@'
-      },
-      controller: cornerNotificationsController,
-      controllerAs: 'ctrl',
-      link: function($scope, elem, attrs, controllers, $transclude){
-        $scope.open = false;
-        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
-
-        WeedApi.subscribe(attrs.id, function(id, message){
-          switch(message){
-            case 'show':
-            case 'open':
-              $scope.open = true;
-
-              // Close after a timeout
-              $timeout(function(){
-                $scope.open = false;
-              }, $scope.timeout);
-              break;
-
-            case 'close':
-            case 'hide':
-              $scope.open = false;
-              break;
-
-            case 'toggle':
-              if($scope.open){
-                $scope.open = false;
-              }
-              else{
-                $scope.open = true;
-
-                // Close after a timeout
-                $timeout(function(){
-                  $scope.open = false;
-                }, $scope.timeout);
-              }
-              break;
-
-            default:
-              controllers.text = message.text;
-              controllers.color = message.color;
-              controllers.icon = message.icon;
-              $scope.timeout = message.timeout;
-              $scope.open = true;
-
-              // Close after a timeout
-              $timeout(function(){
-                $scope.open = false;
-              }, $scope.timeout);
-          }
-        });
-      }
-    };
-
-    // Injection
-    cornerNotificationsController.$inject = ['$scope'];
-
-    function cornerNotificationsController($scope){
-      var vm = this;
-      vm.icon = $scope.icon;
-      vm.color = $scope.color;
-      vm.text = $scope.text;
-    }
-  }
-
 
 })(angular);
 (function() {
@@ -16110,6 +15953,170 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/sidebar/sidebarHeader.html'
       };
     });
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
+    .directive('weNavbarElement', navbarElementDirective);
+
+  // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@',
+        counter: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
+            break;
+          default:
+            template = 'navbarElement.html'
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }
+})(angular);
+(function(angular){
+  'use strict';
+
+  // TODO
+  angular
+    .module('weed.corner-notifications', ['weed.core'])
+    .directive('weCornerNotification', cornerNotificationDirective);
+
+  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
+
+  function cornerNotificationDirective(WeedApi, $timeout){
+
+    return {
+      restrict: 'A',
+      replace: true,
+      templateUrl: 'components/notifications/cornerNotifications.html',
+      scope: {
+        color: '@',
+        icon: '@',
+        text: '@',
+        timeout: '@'
+      },
+      controller: cornerNotificationsController,
+      controllerAs: 'ctrl',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        $scope.open = false;
+        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
+
+        WeedApi.subscribe(attrs.id, function(id, message){
+          switch(message){
+            case 'show':
+            case 'open':
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+              break;
+
+            case 'close':
+            case 'hide':
+              $scope.open = false;
+              break;
+
+            case 'toggle':
+              if($scope.open){
+                $scope.open = false;
+              }
+              else{
+                $scope.open = true;
+
+                // Close after a timeout
+                $timeout(function(){
+                  $scope.open = false;
+                }, $scope.timeout);
+              }
+              break;
+
+            default:
+              controllers.text = message.text;
+              controllers.color = message.color;
+              controllers.icon = message.icon;
+              $scope.timeout = message.timeout;
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+          }
+        });
+      }
+    };
+
+    // Injection
+    cornerNotificationsController.$inject = ['$scope'];
+
+    function cornerNotificationsController($scope){
+      var vm = this;
+      vm.icon = $scope.icon;
+      vm.color = $scope.color;
+      vm.text = $scope.text;
+    }
+  }
+
+
 })(angular);
 /**
  * @ngdoc function
