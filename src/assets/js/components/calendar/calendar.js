@@ -45,6 +45,17 @@
           scope.selectedobject = day;
         };
 
+        scope.today = function() {
+          scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          scope.actualmonth = moment();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month);
+        };
+
         scope.next = function() {
           var next = scope.month.clone();
           scope.actualmonth = scope.actualmonth.add(1,'months');
@@ -59,20 +70,6 @@
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
             _buildMonth(scope, previous, scope.month);
-        };
-
-        scope.today = function() {
-          moment.locale(scope.languagec);
-          scope.weekArray = moment.weekdays();
-          scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          scope.actualmonth = scope.month.clone();
-          console.log(scope.actualmonth);
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month);
         };
 
         scope.doOnClickElement = function(elementInside){

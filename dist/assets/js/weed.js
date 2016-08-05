@@ -15197,6 +15197,17 @@ if (typeof define === 'function' && define.amd) {
           scope.selectedobject = day;
         };
 
+        scope.today = function() {
+          scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          scope.actualmonth = moment();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month);
+        };
+
         scope.next = function() {
           var next = scope.month.clone();
           scope.actualmonth = scope.actualmonth.add(1,'months');
@@ -15211,20 +15222,6 @@ if (typeof define === 'function' && define.amd) {
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
             _buildMonth(scope, previous, scope.month);
-        };
-
-        scope.today = function() {
-          moment.locale(scope.languagec);
-          scope.weekArray = moment.weekdays();
-          scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          scope.actualmonth = scope.month.clone();
-          console.log(scope.actualmonth);
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month);
         };
 
         scope.doOnClickElement = function(elementInside){
@@ -15657,6 +15654,96 @@ if (typeof define === 'function' && define.amd) {
   };
 
 })(angular);
+(function() {
+  'use strict';
+
+  angular.module('weed.popup', ['weed.core'])
+    .directive('wePopup', popupDirective);
+
+  // Weed api injection
+  popupDirective.$inject = ['WeedApi'];
+
+  function popupDirective(weedApi) {
+
+    var body = angular.element(document.querySelector('body'));
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        avoidCloseOutside: '@'
+      },
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popup.html',
+      controllerAs: 'popup',
+      controller: popupController
+    };
+
+    return directive;
+
+    popupController.$inject = ['$scope'];
+
+    function popupController($scope){
+      var vm = this;
+
+      vm.active = false;
+
+      vm.open = function(){
+        vm.active = true;
+        body.addClass('with-open-popup');
+        $scope.$apply();
+      }
+
+      vm.close = function(){
+        vm.active = false;
+        body.removeClass('with-open-popup');
+        $scope.$apply();
+      }
+    }
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            controller.open();
+            break;
+          case 'hide':
+          case 'close':
+            controller.close();
+            break;
+        }
+      });
+    }
+  }
+
+  function popupTitle(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popupTitle.html',
+    };
+
+    return directive;
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            console.log("Open(#" + id + "): " + message);
+        }
+      });
+    }
+  }
+})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weListItem
@@ -15918,96 +16005,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 
-})(angular);
-(function() {
-  'use strict';
-
-  angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective);
-
-  // Weed api injection
-  popupDirective.$inject = ['WeedApi'];
-
-  function popupDirective(weedApi) {
-
-    var body = angular.element(document.querySelector('body'));
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        avoidCloseOutside: '@'
-      },
-      replace: true,
-      link: popupLink,
-      templateUrl: 'components/popup/popup.html',
-      controllerAs: 'popup',
-      controller: popupController
-    };
-
-    return directive;
-
-    popupController.$inject = ['$scope'];
-
-    function popupController($scope){
-      var vm = this;
-
-      vm.active = false;
-
-      vm.open = function(){
-        vm.active = true;
-        body.addClass('with-open-popup');
-        $scope.$apply();
-      }
-
-      vm.close = function(){
-        vm.active = false;
-        body.removeClass('with-open-popup');
-        $scope.$apply();
-      }
-    }
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            controller.open();
-            break;
-          case 'hide':
-          case 'close':
-            controller.close();
-            break;
-        }
-      });
-    }
-  }
-
-  function popupTitle(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink,
-      templateUrl: 'components/popup/popupTitle.html',
-    };
-
-    return directive;
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            console.log("Open(#" + id + "): " + message);
-        }
-      });
-    }
-  }
 })(angular);
 /**
  * @ngdoc function
