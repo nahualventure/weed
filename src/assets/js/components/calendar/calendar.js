@@ -47,7 +47,6 @@
 
         scope.next = function() {
           var next = scope.month.clone();
-          scope.actualmonth = scope.month.clone();
           scope.actualmonth = scope.actualmonth.add(1,'months');
           _removeTime(next.month(next.month()+1).date(1));
           scope.month.month(scope.month.month()+1);
@@ -66,7 +65,6 @@
           moment.locale(scope.languagec);
           scope.weekArray = moment.weekdays();
           scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
           scope.month = scope.selected.clone();
           scope.actualmonth = moment();
           var start = scope.selected.clone();
@@ -91,7 +89,6 @@
 
       scope.monthActivities.then(
         function(su){
-          console.log(su);
           scope.weeks = [];
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
@@ -108,7 +105,6 @@
     }
 
     function _buildWeek(date, month, activities) {
-      console.log(activities);
       var days = [];
       for (var i = 0; i < 7; i++) {
           days.push({
@@ -122,7 +118,6 @@
           });
           for(var j = 0; j < activities.length; j++)
           {
-            console.log(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day'));
             if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
               activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
               days[days.length-1].activities.push(activities[j]);
