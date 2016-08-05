@@ -54,6 +54,7 @@
           _removeTime(start.day(0));
 
           _buildMonth(scope, start, scope.month);
+          console.log(scope.actualmonth);
         };
 
         scope.next = function() {
