@@ -62,7 +62,6 @@
         };
 
         scope.today = function() {
-          moment.locale(scope.languagec);
           scope.weekArray = moment.weekdays();
           scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
@@ -87,10 +86,11 @@
 
     function _buildMonth(scope, start, month) {
       scope.monthActivities = scope.activities()
-
+      console.log(scope.actualmonth);
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
+          console.log(scope.actualmonth);
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
               scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
@@ -98,6 +98,7 @@
               done = count++ > 2 && monthIndex !== date.month();
               monthIndex = date.month();
           }
+          console.log(scope.actualmonth);
         },
         function(err){
           $log.log("ERROR: ",error);
@@ -107,6 +108,7 @@
 
     function _buildWeek(date, month, activities) {
       var days = [];
+      console.log(scope.actualmonth);
       for (var i = 0; i < 7; i++) {
           days.push({
               name: date.format("dd").substring(0, 1),
@@ -128,6 +130,7 @@
 
           date.add(1, "d");
       }
+      console.log(scope.actualmonth);
       return days;
     }
   };
