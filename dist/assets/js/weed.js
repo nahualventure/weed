@@ -15203,15 +15203,16 @@ if (typeof define === 'function' && define.amd) {
 
         scope.today = function() {
           scope.actualmonth = moment();
-          scope.selected = moment().locale(scope.languagec);
-		  console.log("Day on today function");
-		  console.log(scope.selected);
+		  scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
           var start = scope.selected.clone();
           start.date(1);
           _removeTime(start.day(0));
 
           _buildMonth(scope, start, scope.month, scope.actualmonth);
+		  scope.selected = moment().locale(scope.languagec);
+		  console.log("Day on today function");
+		  console.log(scope.selected);
         };
 
         scope.next = function() {
