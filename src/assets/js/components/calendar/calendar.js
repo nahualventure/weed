@@ -45,7 +45,6 @@
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
-		  console.log(scope.selected);
         };
 
         scope.today = function() {
