@@ -38,18 +38,18 @@
         var start = scope.selected.clone();
         start.date(1);
         _removeTime(start.day(0));
+		scope.findToday = false;
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
         scope.select = function(day) {
           scope.selected = day.date;
-		  console.log("Day on selected function");
-		  console.log(scope.selected);
-		  console.log(day);
           scope.selectedobject = day;
+		  console.log(scope.selected);
         };
 
         scope.today = function() {
+		  scope.findToday = true;
           scope.actualmonth = moment();
 		  scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
@@ -58,9 +58,7 @@
           _removeTime(start.day(0));
 
           _buildMonth(scope, start, scope.month, scope.actualmonth);
-		  scope.selected = moment().locale(scope.languagec);
-		  console.log("Day on today function");
-		  console.log(scope.selected);
+		  
         };
 
         scope.next = function() {
@@ -108,6 +106,19 @@
               done = count++ > 2 && monthIndex !== date.month();
               monthIndex = date.month();
           }
+		  if(scope.findToday){
+		    scope.findToday = false;
+			for(var i = 0; i < scope.weeks.length; i++) {
+			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+			    if(scope.weeks[i].days[j].isToday)
+				{
+				  scope.select(scope.weeks[i].days[j]);
+				  break;
+				  i = scope.weeks.length;
+				}
+			  }
+			}
+		  }
         },
         function(err){
           $log.log("ERROR: ",error);
