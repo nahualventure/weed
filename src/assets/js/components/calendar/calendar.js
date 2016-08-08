@@ -43,12 +43,17 @@
 
         scope.select = function(day) {
           scope.selected = day.date;
+		  console.log("Day on selected function");
+		  console.log(scope.selected);
+		  console.log(day);
           scope.selectedobject = day;
         };
 
         scope.today = function() {
           scope.actualmonth = moment();
           scope.selected = moment().locale(scope.languagec);
+		  console.log("Day on today function");
+		  console.log(scope.selected);
           scope.month = scope.selected.clone();
           var start = scope.selected.clone();
           start.date(1);
