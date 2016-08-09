@@ -57,7 +57,7 @@
           _removeTime(start.day(0));
 
           _buildMonth(scope, start, scope.month, scope.actualmonth);
-		  
+
         };
 
         scope.next = function() {
@@ -82,7 +82,9 @@
           scope.functionopenselect(elementInside);
         };
 
-        scope.updatefunction = function(){
+        scope.updatefunction = function() {
+          console.log(scope.month);
+          console.log(scope.actualmonth);
           _buildMonth(scope, scope.actualmonth, scope.month, scope.actualmonth);
         };
       }
