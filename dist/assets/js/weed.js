@@ -15150,6 +15150,212 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.calendar', ['weed.core'])
+    .directive('weCalendar', calendarDirective);
+
+
+  function calendarDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        selectedobject: '=',
+        selected: '=',
+        languagec: '=',
+        numberposition: '=',
+        activities: '=',
+        limit: '=',
+        functionopenselect:'=',
+        selectedobjectinside: '=',
+        actualmonth: '=',
+        updatefunction: '='
+      },
+      templateUrl: 'components/calendar/calendar.html',
+      link: function(scope, elem, attrs) {
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = moment().locale(scope.languagec);
+        scope.month = scope.selected.clone();
+        scope.actualmonth = moment();
+        var start = scope.selected.clone();
+        start.date(1);
+        _removeTime(start.day(0));
+		scope.findToday = false;
+
+        _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        scope.select = function(day) {
+          scope.selected = day.date;
+          scope.selectedobject = day;
+        };
+
+        scope.today = function() {
+		  scope.findToday = true;
+          scope.actualmonth = moment();
+		  scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        };
+
+        scope.next = function() {
+          var next = scope.month.clone();
+          scope.actualmonth = scope.actualmonth.add(1,'months');
+          _removeTime(next.month(next.month()+1).date(1));
+          scope.month.month(scope.month.month()+1);
+
+          _buildMonth(scope, next, scope.month, scope.actualmonth);
+        };
+
+        scope.previous = function() {
+            var previous = scope.month.clone();
+            scope.actualmonth = scope.actualmonth.add(-1,'months');
+            _removeTime(previous.month(previous.month()-1).date(1));
+            scope.month.month(scope.month.month()-1);
+
+            _buildMonth(scope, previous, scope.month, scope.actualmonth);
+        };
+
+        scope.doOnClickElement = function(elementInside){
+          scope.functionopenselect(elementInside);
+        };
+
+        scope.updatefunction = function() {
+          console.log(scope.month);
+          console.log(scope.actualmonth);
+          _removeTime(scope.actualmonth.month(scope.actualmonth.month()).date(1));
+          _buildMonth(scope, scope.actualmonth, scope.month, scope.actualmonth);
+        };
+      }
+    };
+
+    function _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month, actualmonth) {
+      scope.monthActivities = scope.activities(actualmonth);
+
+      scope.monthActivities.then(
+        function(su){
+          scope.weeks = [];
+          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          while (!done) {
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+              date.add(1, "w");
+              done = count++ > 2 && monthIndex !== date.month();
+              monthIndex = date.month();
+          }
+    		  if(scope.findToday) {
+    		    scope.findToday = false;
+      			for(var i = 0; i < scope.weeks.length; i++) {
+      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+      			    if(scope.weeks[i].days[j].isToday)
+        				{
+        				  scope.select(scope.weeks[i].days[j]);
+        				  break;
+        				  i = scope.weeks.length;
+        				}
+      			  }
+      			}
+    		  }
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
+    }
+
+    function _buildWeek(date, month, activities) {
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+          days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              dateId: date.format("DD-MM-YYYY"),
+              activities: []
+          });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              days[days.length-1].activities.push(activities[j]);
+            }
+          }
+          date = date.clone();
+
+          date.add(1, "d");
+      }
+      return days;
+    }
+  };
+
+})(angular);
+
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        rightIcon: '@',
+        leftIcon: '@',
+        componentPosition: '@',
+        size: '@',
+        placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html',
+      link: inputWrapperLink
+    };
+  }
+    function inputWrapperLink(scope, elem) {
+      var input = elem.find('input');
+      input.on("focus", function(){
+        scope.focused = true;
+        scope.$apply();
+      });
+
+      input.on("blur", function(){
+        scope.focused = false;
+        scope.$apply();
+      });
+
+    }
+})(angular);
 (function(angular) {
   'use strict';
 
@@ -15444,211 +15650,6 @@ if (typeof define === 'function' && define.amd) {
       }
     };
   }
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.calendar', ['weed.core'])
-    .directive('weCalendar', calendarDirective);
-
-
-  function calendarDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        selectedobject: '=',
-        selected: '=',
-        languagec: '=',
-        numberposition: '=',
-        activities: '=',
-        limit: '=',
-        functionopenselect:'=',
-        selectedobjectinside: '=',
-        actualmonth: '=',
-        updatefunction: '='
-      },
-      templateUrl: 'components/calendar/calendar.html',
-      link: function(scope, elem, attrs) {
-        moment.locale(scope.languagec);
-        scope.weekArray = moment.weekdays();
-        scope.selected = moment().locale(scope.languagec);
-        scope.month = scope.selected.clone();
-        scope.actualmonth = moment();
-        var start = scope.selected.clone();
-        start.date(1);
-        _removeTime(start.day(0));
-		scope.findToday = false;
-
-        _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        scope.select = function(day) {
-          scope.selected = day.date;
-          scope.selectedobject = day;
-        };
-
-        scope.today = function() {
-		  scope.findToday = true;
-          scope.actualmonth = moment();
-		  scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        };
-
-        scope.next = function() {
-          var next = scope.month.clone();
-          scope.actualmonth = scope.actualmonth.add(1,'months');
-          _removeTime(next.month(next.month()+1).date(1));
-          scope.month.month(scope.month.month()+1);
-
-          _buildMonth(scope, next, scope.month, scope.actualmonth);
-        };
-
-        scope.previous = function() {
-            var previous = scope.month.clone();
-            scope.actualmonth = scope.actualmonth.add(-1,'months');
-            _removeTime(previous.month(previous.month()-1).date(1));
-            scope.month.month(scope.month.month()-1);
-
-            _buildMonth(scope, previous, scope.month, scope.actualmonth);
-        };
-
-        scope.doOnClickElement = function(elementInside){
-          scope.functionopenselect(elementInside);
-        };
-
-        scope.updatefunction = function() {
-          console.log(scope.month);
-          console.log(scope.actualmonth);
-          _buildMonth(scope, scope.month, scope.month, scope.actualmonth);
-        };
-      }
-    };
-
-    function _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
-
-    function _buildMonth(scope, start, month, actualmonth) {
-      scope.monthActivities = scope.activities(actualmonth);
-
-      scope.monthActivities.then(
-        function(su){
-          scope.weeks = [];
-          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-          while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-              date.add(1, "w");
-              done = count++ > 2 && monthIndex !== date.month();
-              monthIndex = date.month();
-          }
-    		  if(scope.findToday) {
-    		    scope.findToday = false;
-      			for(var i = 0; i < scope.weeks.length; i++) {
-      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-      			    if(scope.weeks[i].days[j].isToday)
-        				{
-        				  scope.select(scope.weeks[i].days[j]);
-        				  break;
-        				  i = scope.weeks.length;
-        				}
-      			  }
-      			}
-    		  }
-        },
-        function(err){
-          $log.log("ERROR: ",error);
-        }
-      );
-    }
-
-    function _buildWeek(date, month, activities) {
-      var days = [];
-      for (var i = 0; i < 7; i++) {
-          days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              dateId: date.format("DD-MM-YYYY"),
-              activities: []
-          });
-          for(var j = 0; j < activities.length; j++)
-          {
-            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
-              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
-              days[days.length-1].activities.push(activities[j]);
-            }
-          }
-          date = date.clone();
-
-          date.add(1, "d");
-      }
-      return days;
-    }
-  };
-
-})(angular);
-
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', inputWrapperDirective);
-
-  // No dependencies
-
-  function inputWrapperDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        rightIcon: '@',
-        leftIcon: '@',
-        componentPosition: '@',
-        size: '@',
-        placeholder: '@'
-      },
-      replace: true,
-      templateUrl: 'components/forms/inputWrapper.html',
-      link: inputWrapperLink
-    };
-  }
-    function inputWrapperLink(scope, elem) {
-      var input = elem.find('input');
-      input.on("focus", function(){
-        scope.focused = true;
-        scope.$apply();
-      });
-
-      input.on("blur", function(){
-        scope.focused = false;
-        scope.$apply();
-      });
-
-    }
 })(angular);
 /**
  * @ngdoc function
