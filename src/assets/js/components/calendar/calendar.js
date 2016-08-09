@@ -65,7 +65,7 @@
           scope.actualmonth = scope.actualmonth.add(1,'months');
           _removeTime(next.month(next.month()+1).date(1));
           scope.month.month(scope.month.month()+1);
-
+          console.log(scope.month);
           _buildMonth(scope, next, scope.month, scope.actualmonth);
         };
 
@@ -74,7 +74,7 @@
             scope.actualmonth = scope.actualmonth.add(-1,'months');
             _removeTime(previous.month(previous.month()-1).date(1));
             scope.month.month(scope.month.month()-1);
-
+            console.log(scope.month);
             _buildMonth(scope, previous, scope.month, scope.actualmonth);
         };
 
@@ -85,8 +85,9 @@
         scope.updatefunction = function() {
           console.log(scope.month);
           console.log(scope.actualmonth);
-          _removeTime(scope.actualmonth.month(scope.actualmonth.month()).date(1));
-          _buildMonth(scope, scope.actualmonth, scope.month, scope.actualmonth);
+          var dummy = scope.month.clone();
+          _removeTime(dummy.month(dummy.month()).date(1));
+          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
         };
       }
     };

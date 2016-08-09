@@ -15054,6 +15054,166 @@ if (typeof define === 'function' && define.amd) {
  */angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.popover","ui.bootstrap.tooltip","ui.bootstrap.position","ui.bootstrap.stackedMap","ui.bootstrap.typeahead","ui.bootstrap.debounce"]),angular.module("ui.bootstrap.tpls",["uib/template/popover/popover-html.html","uib/template/popover/popover-template.html","uib/template/popover/popover.html","uib/template/tooltip/tooltip-html-popup.html","uib/template/tooltip/tooltip-popup.html","uib/template/tooltip/tooltip-template-popup.html","uib/template/typeahead/typeahead-match.html","uib/template/typeahead/typeahead-popup.html"]),angular.module("ui.bootstrap.popover",["ui.bootstrap.tooltip"]).directive("uibPopoverTemplatePopup",function(){return{replace:!0,scope:{uibTitle:"@",contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/popover/popover-template.html"}}).directive("uibPopoverTemplate",["$uibTooltip",function(t){return t("uibPopoverTemplate","popover","click",{useContentExp:!0})}]).directive("uibPopoverHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",uibTitle:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/popover/popover-html.html"}}).directive("uibPopoverHtml",["$uibTooltip",function(t){return t("uibPopoverHtml","popover","click",{useContentExp:!0})}]).directive("uibPopoverPopup",function(){return{replace:!0,scope:{uibTitle:"@",content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/popover/popover.html"}}).directive("uibPopover",["$uibTooltip",function(t){return t("uibPopover","popover","click")}]),angular.module("ui.bootstrap.tooltip",["ui.bootstrap.position","ui.bootstrap.stackedMap"]).provider("$uibTooltip",function(){function t(t){var o=/[A-Z]/g,e="-";return t.replace(o,function(t,o){return(o?e:"")+t.toLowerCase()})}var o={placement:"top",placementClassPrefix:"",animation:!0,popupDelay:0,popupCloseDelay:0,useContentExp:!1},e={mouseenter:"mouseleave",click:"click",outsideClick:"outsideClick",focus:"blur",none:""},i={};this.options=function(t){angular.extend(i,t)},this.setTriggers=function(t){angular.extend(e,t)},this.$get=["$window","$compile","$timeout","$document","$uibPosition","$interpolate","$rootScope","$parse","$$stackedMap",function(p,n,l,r,a,u,s,c,m){function h(t){if(27===t.which){var o=f.top();o&&(o.value.close(),f.removeTop(),o=null)}}var f=m.createNew();return r.on("keypress",h),s.$on("$destroy",function(){r.off("keypress",h)}),function(p,s,m,h){function d(t){var o=(t||h.trigger||m).split(" "),i=o.map(function(t){return e[t]||t});return{show:o,hide:i}}h=angular.extend({},o,i,h);var b=t(p),v=u.startSymbol(),g=u.endSymbol(),w="<div "+b+'-popup uib-title="'+v+"title"+g+'" '+(h.useContentExp?'content-exp="contentExp()" ':'content="'+v+"content"+g+'" ')+'placement="'+v+"placement"+g+'" popup-class="'+v+"popupClass"+g+'" animation="animation" is-open="isOpen" origin-scope="origScope" class="uib-position-measure"></div>';return{compile:function(){var t=n(w);return function(o,e,i){function n(){I.isOpen?m():u()}function u(){(!A||o.$eval(i[s+"Enable"]))&&(w(),C(),I.popupDelay?N||(N=l(b,I.popupDelay,!1)):b())}function m(){v(),I.popupCloseDelay?D||(D=l(g,I.popupCloseDelay,!1)):g()}function b(){return v(),w(),I.content?($(),void I.$evalAsync(function(){I.isOpen=!0,T(!0),Y()})):angular.noop}function v(){N&&(l.cancel(N),N=null),R&&(l.cancel(R),R=null)}function g(){I&&I.$evalAsync(function(){I&&(I.isOpen=!1,T(!1),I.animation?M||(M=l(y,150,!1)):y())})}function w(){D&&(l.cancel(D),D=null),M&&(l.cancel(M),M=null)}function $(){O||(E=I.$new(),O=t(E,function(t){H?r.find("body").append(t):e.after(t)}),k())}function y(){v(),w(),P(),O&&(O.remove(),O=null),E&&(E.$destroy(),E=null)}function C(){I.title=i[s+"Title"],I.content=q?q(o):i[p],I.popupClass=i[s+"Class"],I.placement=angular.isDefined(i[s+"Placement"])?i[s+"Placement"]:h.placement;var t=a.parsePlacement(I.placement);W=t[1]?t[0]+"-"+t[1]:t[0];var e=parseInt(i[s+"PopupDelay"],10),n=parseInt(i[s+"PopupCloseDelay"],10);I.popupDelay=isNaN(e)?h.popupDelay:e,I.popupCloseDelay=isNaN(n)?h.popupCloseDelay:n}function T(t){L&&angular.isFunction(L.assign)&&L.assign(o,t)}function k(){F.length=0,q?(F.push(o.$watch(q,function(t){I.content=t,!t&&I.isOpen&&g()})),F.push(E.$watch(function(){B||(B=!0,E.$$postDigest(function(){B=!1,I&&I.isOpen&&Y()}))}))):F.push(i.$observe(p,function(t){I.content=t,!t&&I.isOpen?g():Y()})),F.push(i.$observe(s+"Title",function(t){I.title=t,I.isOpen&&Y()})),F.push(i.$observe(s+"Placement",function(t){I.placement=t?t:h.placement,I.isOpen&&Y()}))}function P(){F.length&&(angular.forEach(F,function(t){t()}),F.length=0)}function x(t){I&&I.isOpen&&O&&(e[0].contains(t.target)||O[0].contains(t.target)||m())}function S(){var t=i[s+"Trigger"];X(),U=d(t),"none"!==U.show&&U.show.forEach(function(t,o){"outsideClick"===t?(e.on("click",n),r.on("click",x)):t===U.hide[o]?e.on(t,n):t&&(e.on(t,u),e.on(U.hide[o],m)),e.on("keypress",function(t){27===t.which&&m()})})}var O,E,M,N,D,R,W,H=angular.isDefined(h.appendToBody)?h.appendToBody:!1,U=d(void 0),A=angular.isDefined(i[s+"Enable"]),I=o.$new(!0),B=!1,L=angular.isDefined(i[s+"IsOpen"])?c(i[s+"IsOpen"]):!1,q=h.useContentExp?c(i[p]):!1,F=[],Y=function(){O&&O.html()&&(R||(R=l(function(){var t=a.positionElements(e,O,I.placement,H);O.css({top:t.top+"px",left:t.left+"px"}),O.hasClass(t.placement.split("-")[0])||(O.removeClass(W.split("-")[0]),O.addClass(t.placement.split("-")[0])),O.hasClass(h.placementClassPrefix+t.placement)||(O.removeClass(h.placementClassPrefix+W),O.addClass(h.placementClassPrefix+t.placement)),O.hasClass("uib-position-measure")?(a.positionArrow(O,t.placement),O.removeClass("uib-position-measure")):W!==t.placement&&a.positionArrow(O,t.placement),W=t.placement,R=null},0,!1)))};I.origScope=o,I.isOpen=!1,f.add(I,{close:g}),I.contentExp=function(){return I.content},i.$observe("disabled",function(t){t&&v(),t&&I.isOpen&&g()}),L&&o.$watch(L,function(t){I&&!t===I.isOpen&&n()});var X=function(){U.show.forEach(function(t){"outsideClick"===t?e.off("click",n):(e.off(t,u),e.off(t,n))}),U.hide.forEach(function(t){"outsideClick"===t?r.off("click",x):e.off(t,m)})};S();var V=o.$eval(i[s+"Animation"]);I.animation=angular.isDefined(V)?!!V:h.animation;var _,Z=s+"AppendToBody";_=Z in i&&void 0===i[Z]?!0:o.$eval(i[Z]),H=angular.isDefined(_)?_:H,o.$on("$destroy",function(){X(),y(),f.remove(I),I=null})}}}}}]}).directive("uibTooltipTemplateTransclude",["$animate","$sce","$compile","$templateRequest",function(t,o,e,i){return{link:function(p,n,l){var r,a,u,s=p.$eval(l.tooltipTemplateTranscludeScope),c=0,m=function(){a&&(a.remove(),a=null),r&&(r.$destroy(),r=null),u&&(t.leave(u).then(function(){a=null}),a=u,u=null)};p.$watch(o.parseAsResourceUrl(l.uibTooltipTemplateTransclude),function(o){var l=++c;o?(i(o,!0).then(function(i){if(l===c){var p=s.$new(),a=i,h=e(a)(p,function(o){m(),t.enter(o,n)});r=p,u=h,r.$emit("$includeContentLoaded",o)}},function(){l===c&&(m(),p.$emit("$includeContentError",o))}),p.$emit("$includeContentRequested",o)):m()}),p.$on("$destroy",m)}}}]).directive("uibTooltipClasses",["$uibPosition",function(t){return{restrict:"A",link:function(o,e,i){if(o.placement){var p=t.parsePlacement(o.placement);e.addClass(p[0])}o.popupClass&&e.addClass(o.popupClass),o.animation()&&e.addClass(i.tooltipAnimationClass)}}}]).directive("uibTooltipPopup",function(){return{replace:!0,scope:{content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-popup.html"}}).directive("uibTooltip",["$uibTooltip",function(t){return t("uibTooltip","tooltip","mouseenter")}]).directive("uibTooltipTemplatePopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/tooltip/tooltip-template-popup.html"}}).directive("uibTooltipTemplate",["$uibTooltip",function(t){return t("uibTooltipTemplate","tooltip","mouseenter",{useContentExp:!0})}]).directive("uibTooltipHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-html-popup.html"}}).directive("uibTooltipHtml",["$uibTooltip",function(t){return t("uibTooltipHtml","tooltip","mouseenter",{useContentExp:!0})}]),angular.module("ui.bootstrap.position",[]).factory("$uibPosition",["$document","$window",function(t,o){var e,i,p={normal:/(auto|scroll)/,hidden:/(auto|scroll|hidden)/},n={auto:/\s?auto?\s?/i,primary:/^(top|bottom|left|right)$/,secondary:/^(top|bottom|left|right|center)$/,vertical:/^(top|bottom)$/},l=/(HTML|BODY)/;return{getRawNode:function(t){return t.nodeName?t:t[0]||t},parseStyle:function(t){return t=parseFloat(t),isFinite(t)?t:0},offsetParent:function(e){function i(t){return"static"===(o.getComputedStyle(t).position||"static")}e=this.getRawNode(e);for(var p=e.offsetParent||t[0].documentElement;p&&p!==t[0].documentElement&&i(p);)p=p.offsetParent;return p||t[0].documentElement},scrollbarWidth:function(p){if(p){if(angular.isUndefined(i)){var n=t.find("body");n.addClass("uib-position-body-scrollbar-measure"),i=o.innerWidth-n[0].clientWidth,i=isFinite(i)?i:0,n.removeClass("uib-position-body-scrollbar-measure")}return i}if(angular.isUndefined(e)){var l=angular.element('<div class="uib-position-scrollbar-measure"></div>');t.find("body").append(l),e=l[0].offsetWidth-l[0].clientWidth,e=isFinite(e)?e:0,l.remove()}return e},scrollbarPadding:function(t){t=this.getRawNode(t);var e=o.getComputedStyle(t),i=this.parseStyle(e.paddingRight),p=this.parseStyle(e.paddingBottom),n=this.scrollParent(t,!1,!0),r=this.scrollbarWidth(n,l.test(n.tagName));return{scrollbarWidth:r,widthOverflow:n.scrollWidth>n.clientWidth,right:i+r,originalRight:i,heightOverflow:n.scrollHeight>n.clientHeight,bottom:p+r,originalBottom:p}},isScrollable:function(t,e){t=this.getRawNode(t);var i=e?p.hidden:p.normal,n=o.getComputedStyle(t);return i.test(n.overflow+n.overflowY+n.overflowX)},scrollParent:function(e,i,n){e=this.getRawNode(e);var l=i?p.hidden:p.normal,r=t[0].documentElement,a=o.getComputedStyle(e);if(n&&l.test(a.overflow+a.overflowY+a.overflowX))return e;var u="absolute"===a.position,s=e.parentElement||r;if(s===r||"fixed"===a.position)return r;for(;s.parentElement&&s!==r;){var c=o.getComputedStyle(s);if(u&&"static"!==c.position&&(u=!1),!u&&l.test(c.overflow+c.overflowY+c.overflowX))break;s=s.parentElement}return s},position:function(e,i){e=this.getRawNode(e);var p=this.offset(e);if(i){var n=o.getComputedStyle(e);p.top-=this.parseStyle(n.marginTop),p.left-=this.parseStyle(n.marginLeft)}var l=this.offsetParent(e),r={top:0,left:0};return l!==t[0].documentElement&&(r=this.offset(l),r.top+=l.clientTop-l.scrollTop,r.left+=l.clientLeft-l.scrollLeft),{width:Math.round(angular.isNumber(p.width)?p.width:e.offsetWidth),height:Math.round(angular.isNumber(p.height)?p.height:e.offsetHeight),top:Math.round(p.top-r.top),left:Math.round(p.left-r.left)}},offset:function(e){e=this.getRawNode(e);var i=e.getBoundingClientRect();return{width:Math.round(angular.isNumber(i.width)?i.width:e.offsetWidth),height:Math.round(angular.isNumber(i.height)?i.height:e.offsetHeight),top:Math.round(i.top+(o.pageYOffset||t[0].documentElement.scrollTop)),left:Math.round(i.left+(o.pageXOffset||t[0].documentElement.scrollLeft))}},viewportOffset:function(e,i,p){e=this.getRawNode(e),p=p!==!1?!0:!1;var n=e.getBoundingClientRect(),l={top:0,left:0,bottom:0,right:0},r=i?t[0].documentElement:this.scrollParent(e),a=r.getBoundingClientRect();if(l.top=a.top+r.clientTop,l.left=a.left+r.clientLeft,r===t[0].documentElement&&(l.top+=o.pageYOffset,l.left+=o.pageXOffset),l.bottom=l.top+r.clientHeight,l.right=l.left+r.clientWidth,p){var u=o.getComputedStyle(r);l.top+=this.parseStyle(u.paddingTop),l.bottom-=this.parseStyle(u.paddingBottom),l.left+=this.parseStyle(u.paddingLeft),l.right-=this.parseStyle(u.paddingRight)}return{top:Math.round(n.top-l.top),bottom:Math.round(l.bottom-n.bottom),left:Math.round(n.left-l.left),right:Math.round(l.right-n.right)}},parsePlacement:function(t){var o=n.auto.test(t);return o&&(t=t.replace(n.auto,"")),t=t.split("-"),t[0]=t[0]||"top",n.primary.test(t[0])||(t[0]="top"),t[1]=t[1]||"center",n.secondary.test(t[1])||(t[1]="center"),t[2]=o?!0:!1,t},positionElements:function(t,e,i,p){t=this.getRawNode(t),e=this.getRawNode(e);var l=angular.isDefined(e.offsetWidth)?e.offsetWidth:e.prop("offsetWidth"),r=angular.isDefined(e.offsetHeight)?e.offsetHeight:e.prop("offsetHeight");i=this.parsePlacement(i);var a=p?this.offset(t):this.position(t),u={top:0,left:0,placement:""};if(i[2]){var s=this.viewportOffset(t,p),c=o.getComputedStyle(e),m={width:l+Math.round(Math.abs(this.parseStyle(c.marginLeft)+this.parseStyle(c.marginRight))),height:r+Math.round(Math.abs(this.parseStyle(c.marginTop)+this.parseStyle(c.marginBottom)))};if(i[0]="top"===i[0]&&m.height>s.top&&m.height<=s.bottom?"bottom":"bottom"===i[0]&&m.height>s.bottom&&m.height<=s.top?"top":"left"===i[0]&&m.width>s.left&&m.width<=s.right?"right":"right"===i[0]&&m.width>s.right&&m.width<=s.left?"left":i[0],i[1]="top"===i[1]&&m.height-a.height>s.bottom&&m.height-a.height<=s.top?"bottom":"bottom"===i[1]&&m.height-a.height>s.top&&m.height-a.height<=s.bottom?"top":"left"===i[1]&&m.width-a.width>s.right&&m.width-a.width<=s.left?"right":"right"===i[1]&&m.width-a.width>s.left&&m.width-a.width<=s.right?"left":i[1],"center"===i[1])if(n.vertical.test(i[0])){var h=a.width/2-l/2;s.left+h<0&&m.width-a.width<=s.right?i[1]="left":s.right+h<0&&m.width-a.width<=s.left&&(i[1]="right")}else{var f=a.height/2-m.height/2;s.top+f<0&&m.height-a.height<=s.bottom?i[1]="top":s.bottom+f<0&&m.height-a.height<=s.top&&(i[1]="bottom")}}switch(i[0]){case"top":u.top=a.top-r;break;case"bottom":u.top=a.top+a.height;break;case"left":u.left=a.left-l;break;case"right":u.left=a.left+a.width}switch(i[1]){case"top":u.top=a.top;break;case"bottom":u.top=a.top+a.height-r;break;case"left":u.left=a.left;break;case"right":u.left=a.left+a.width-l;break;case"center":n.vertical.test(i[0])?u.left=a.left+a.width/2-l/2:u.top=a.top+a.height/2-r/2}return u.top=Math.round(u.top),u.left=Math.round(u.left),u.placement="center"===i[1]?i[0]:i[0]+"-"+i[1],u},positionArrow:function(t,e){t=this.getRawNode(t);var i=t.querySelector(".tooltip-inner, .popover-inner");if(i){var p=angular.element(i).hasClass("tooltip-inner"),l=t.querySelector(p?".tooltip-arrow":".arrow");if(l){var r={top:"",bottom:"",left:"",right:""};if(e=this.parsePlacement(e),"center"===e[1])return void angular.element(l).css(r);var a="border-"+e[0]+"-width",u=o.getComputedStyle(l)[a],s="border-";s+=n.vertical.test(e[0])?e[0]+"-"+e[1]:e[1]+"-"+e[0],s+="-radius";var c=o.getComputedStyle(p?i:t)[s];switch(e[0]){case"top":r.bottom=p?"0":"-"+u;break;case"bottom":r.top=p?"0":"-"+u;break;case"left":r.right=p?"0":"-"+u;break;case"right":r.left=p?"0":"-"+u}r[e[1]]=c,angular.element(l).css(r)}}}}}]),angular.module("ui.bootstrap.stackedMap",[]).factory("$$stackedMap",function(){return{createNew:function(){var t=[];return{add:function(o,e){t.push({key:o,value:e})},get:function(o){for(var e=0;e<t.length;e++)if(o===t[e].key)return t[e]},keys:function(){for(var o=[],e=0;e<t.length;e++)o.push(t[e].key);return o},top:function(){return t[t.length-1]},remove:function(o){for(var e=-1,i=0;i<t.length;i++)if(o===t[i].key){e=i;break}return t.splice(e,1)[0]},removeTop:function(){return t.splice(t.length-1,1)[0]},length:function(){return t.length}}}}}),angular.module("ui.bootstrap.typeahead",["ui.bootstrap.debounce","ui.bootstrap.position"]).factory("uibTypeaheadParser",["$parse",function(t){var o=/^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+([\s\S]+?)$/;return{parse:function(e){var i=e.match(o);if(!i)throw new Error('Expected typeahead specification in form of "_modelValue_ (as _label_)? for _item_ in _collection_" but got "'+e+'".');return{itemName:i[3],source:t(i[4]),viewMapper:t(i[2]||i[1]),modelMapper:t(i[1])}}}}]).controller("UibTypeaheadController",["$scope","$element","$attrs","$compile","$parse","$q","$timeout","$document","$window","$rootScope","$$debounce","$uibPosition","uibTypeaheadParser",function(t,o,e,i,p,n,l,r,a,u,s,c,m){function h(){L.moveInProgress||(L.moveInProgress=!0,L.$digest()),G()}function f(){L.position=M?c.offset(o):c.position(o),L.position.top+=o.prop("offsetHeight")}var d,b,v=[9,13,27,38,40],g=200,w=t.$eval(e.typeaheadMinLength);w||0===w||(w=1),t.$watch(e.typeaheadMinLength,function(t){w=t||0===t?t:1});var $=t.$eval(e.typeaheadWaitMs)||0,y=t.$eval(e.typeaheadEditable)!==!1;t.$watch(e.typeaheadEditable,function(t){y=t!==!1});var C,T,k=p(e.typeaheadLoading).assign||angular.noop,P=e.typeaheadShouldSelect?p(e.typeaheadShouldSelect):function(t,o){var e=o.$event;return 13===e.which||9===e.which},x=p(e.typeaheadOnSelect),S=angular.isDefined(e.typeaheadSelectOnBlur)?t.$eval(e.typeaheadSelectOnBlur):!1,O=p(e.typeaheadNoResults).assign||angular.noop,E=e.typeaheadInputFormatter?p(e.typeaheadInputFormatter):void 0,M=e.typeaheadAppendToBody?t.$eval(e.typeaheadAppendToBody):!1,N=e.typeaheadAppendTo?t.$eval(e.typeaheadAppendTo):null,D=t.$eval(e.typeaheadFocusFirst)!==!1,R=e.typeaheadSelectOnExact?t.$eval(e.typeaheadSelectOnExact):!1,W=p(e.typeaheadIsOpen).assign||angular.noop,H=t.$eval(e.typeaheadShowHint)||!1,U=p(e.ngModel),A=p(e.ngModel+"($$$p)"),I=function(o,e){return angular.isFunction(U(t))&&b&&b.$options&&b.$options.getterSetter?A(o,{$$$p:e}):U.assign(o,e)},B=m.parse(e.uibTypeahead),L=t.$new(),q=t.$on("$destroy",function(){L.$destroy()});L.$on("$destroy",q);var F="typeahead-"+L.$id+"-"+Math.floor(1e4*Math.random());o.attr({"aria-autocomplete":"list","aria-expanded":!1,"aria-owns":F});var Y,X;H&&(Y=angular.element("<div></div>"),Y.css("position","relative"),o.after(Y),X=o.clone(),X.attr("placeholder",""),X.attr("tabindex","-1"),X.val(""),X.css({position:"absolute",top:"0px",left:"0px","border-color":"transparent","box-shadow":"none",opacity:1,background:"none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255)",color:"#999"}),o.css({position:"relative","vertical-align":"top","background-color":"transparent"}),Y.append(X),X.after(o));var V=angular.element("<div uib-typeahead-popup></div>");V.attr({id:F,matches:"matches",active:"activeIdx",select:"select(activeIdx, evt)","move-in-progress":"moveInProgress",query:"query",position:"position","assign-is-open":"assignIsOpen(isOpen)",debounce:"debounceUpdate"}),angular.isDefined(e.typeaheadTemplateUrl)&&V.attr("template-url",e.typeaheadTemplateUrl),angular.isDefined(e.typeaheadPopupTemplateUrl)&&V.attr("popup-template-url",e.typeaheadPopupTemplateUrl);var _=function(){H&&X.val("")},Z=function(){L.matches=[],L.activeIdx=-1,o.attr("aria-expanded",!1),_()},j=function(t){return F+"-option-"+t};L.$watch("activeIdx",function(t){0>t?o.removeAttr("aria-activedescendant"):o.attr("aria-activedescendant",j(t))});var z=function(t,o){return L.matches.length>o&&t?t.toUpperCase()===L.matches[o].label.toUpperCase():!1},K=function(e,i){var p={$viewValue:e};k(t,!0),O(t,!1),n.when(B.source(t,p)).then(function(n){var l=e===d.$viewValue;if(l&&C)if(n&&n.length>0){L.activeIdx=D?0:-1,O(t,!1),L.matches.length=0;for(var r=0;r<n.length;r++)p[B.itemName]=n[r],L.matches.push({id:j(r),label:B.viewMapper(L,p),model:n[r]});if(L.query=e,f(),o.attr("aria-expanded",!0),R&&1===L.matches.length&&z(e,0)&&(angular.isNumber(L.debounceUpdate)||angular.isObject(L.debounceUpdate)?s(function(){L.select(0,i)},angular.isNumber(L.debounceUpdate)?L.debounceUpdate:L.debounceUpdate["default"]):L.select(0,i)),H){var a=L.matches[0].label;X.val(angular.isString(e)&&e.length>0&&a.slice(0,e.length).toUpperCase()===e.toUpperCase()?e+a.slice(e.length):"")}}else Z(),O(t,!0);l&&k(t,!1)},function(){Z(),k(t,!1),O(t,!0)})};M&&(angular.element(a).on("resize",h),r.find("body").on("scroll",h));var G=s(function(){L.matches.length&&f(),L.moveInProgress=!1},g);L.moveInProgress=!1,L.query=void 0;var J,Q=function(t){J=l(function(){K(t)},$)},to=function(){J&&l.cancel(J)};Z(),L.assignIsOpen=function(o){W(t,o)},L.select=function(i,p){var n,r,a={};T=!0,a[B.itemName]=r=L.matches[i].model,n=B.modelMapper(t,a),I(t,n),d.$setValidity("editable",!0),d.$setValidity("parse",!0),x(t,{$item:r,$model:n,$label:B.viewMapper(t,a),$event:p}),Z(),L.$eval(e.typeaheadFocusOnSelect)!==!1&&l(function(){o[0].focus()},0,!1)},o.on("keydown",function(o){if(0!==L.matches.length&&-1!==v.indexOf(o.which)){var e=P(t,{$event:o});if(-1===L.activeIdx&&e||9===o.which&&o.shiftKey)return Z(),void L.$digest();o.preventDefault();var i;switch(o.which){case 27:o.stopPropagation(),Z(),t.$digest();break;case 38:L.activeIdx=(L.activeIdx>0?L.activeIdx:L.matches.length)-1,L.$digest(),i=V.find("li")[L.activeIdx],i.parentNode.scrollTop=i.offsetTop;break;case 40:L.activeIdx=(L.activeIdx+1)%L.matches.length,L.$digest(),i=V.find("li")[L.activeIdx],i.parentNode.scrollTop=i.offsetTop;break;default:e&&L.$apply(function(){angular.isNumber(L.debounceUpdate)||angular.isObject(L.debounceUpdate)?s(function(){L.select(L.activeIdx,o)},angular.isNumber(L.debounceUpdate)?L.debounceUpdate:L.debounceUpdate["default"]):L.select(L.activeIdx,o)})}}}),o.bind("focus",function(t){C=!0,0!==w||d.$viewValue||l(function(){K(d.$viewValue,t)},0)}),o.bind("blur",function(t){S&&L.matches.length&&-1!==L.activeIdx&&!T&&(T=!0,L.$apply(function(){angular.isObject(L.debounceUpdate)&&angular.isNumber(L.debounceUpdate.blur)?s(function(){L.select(L.activeIdx,t)},L.debounceUpdate.blur):L.select(L.activeIdx,t)})),!y&&d.$error.editable&&(d.$setViewValue(),d.$setValidity("editable",!0),d.$setValidity("parse",!0),o.val("")),C=!1,T=!1});var oo=function(e){o[0]!==e.target&&3!==e.which&&0!==L.matches.length&&(Z(),u.$$phase||t.$digest())};r.on("click",oo),t.$on("$destroy",function(){r.off("click",oo),(M||N)&&eo.remove(),M&&(angular.element(a).off("resize",h),r.find("body").off("scroll",h)),V.remove(),H&&Y.remove()});var eo=i(V)(L);M?r.find("body").append(eo):N?angular.element(N).eq(0).append(eo):o.after(eo),this.init=function(o,e){d=o,b=e,L.debounceUpdate=d.$options&&p(d.$options.debounce)(t),d.$parsers.unshift(function(o){return C=!0,0===w||o&&o.length>=w?$>0?(to(),Q(o)):K(o):(k(t,!1),to(),Z()),y?o:o?void d.$setValidity("editable",!1):(d.$setValidity("editable",!0),null)}),d.$formatters.push(function(o){var e,i,p={};return y||d.$setValidity("editable",!0),E?(p.$model=o,E(t,p)):(p[B.itemName]=o,e=B.viewMapper(t,p),p[B.itemName]=void 0,i=B.viewMapper(t,p),e!==i?e:o)})}}]).directive("uibTypeahead",function(){return{controller:"UibTypeaheadController",require:["ngModel","^?ngModelOptions","uibTypeahead"],link:function(t,o,e,i){i[2].init(i[0],i[1])}}}).directive("uibTypeaheadPopup",["$$debounce",function(t){return{scope:{matches:"=",query:"=",active:"=",position:"&",moveInProgress:"=",select:"&",assignIsOpen:"&",debounce:"&"},replace:!0,templateUrl:function(t,o){return o.popupTemplateUrl||"uib/template/typeahead/typeahead-popup.html"},link:function(o,e,i){o.templateUrl=i.templateUrl,o.isOpen=function(){var t=o.matches.length>0;return o.assignIsOpen({isOpen:t}),t},o.isActive=function(t){return o.active===t},o.selectActive=function(t){o.active=t},o.selectMatch=function(e,i){var p=o.debounce();angular.isNumber(p)||angular.isObject(p)?t(function(){o.select({activeIdx:e,evt:i})},angular.isNumber(p)?p:p["default"]):o.select({activeIdx:e,evt:i})}}}}]).directive("uibTypeaheadMatch",["$templateRequest","$compile","$parse",function(t,o,e){return{scope:{index:"=",match:"=",query:"="},link:function(i,p,n){var l=e(n.templateUrl)(i.$parent)||"uib/template/typeahead/typeahead-match.html";t(l).then(function(t){var e=angular.element(t.trim());p.replaceWith(e),o(e)(i)})}}}]).filter("uibTypeaheadHighlight",["$sce","$injector","$log",function(t,o,e){function i(t){return t.replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1")}function p(t){return/<.*>/g.test(t)}var n;return n=o.has("$sanitize"),function(o,l){return!n&&p(o)&&e.warn("Unsafe use of typeahead please use ngSanitize"),o=l?(""+o).replace(new RegExp(i(l),"gi"),"<strong>$&</strong>"):o,n||(o=t.trustAsHtml(o)),o}}]),angular.module("ui.bootstrap.debounce",[]).factory("$$debounce",["$timeout",function(t){return function(o,e){var i;return function(){var p=this,n=Array.prototype.slice.call(arguments);i&&t.cancel(i),i=t(function(){o.apply(p,n)},e)}}}]),angular.module("uib/template/popover/popover-html.html",[]).run(["$templateCache",function(t){t.put("uib/template/popover/popover-html.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content" ng-bind-html="contentExp()"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/popover/popover-template.html",[]).run(["$templateCache",function(t){t.put("uib/template/popover/popover-template.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content"\n        uib-tooltip-template-transclude="contentExp()"\n        tooltip-template-transclude-scope="originScope()"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/popover/popover.html",[]).run(["$templateCache",function(t){t.put("uib/template/popover/popover.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content" ng-bind="content"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-html-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/tooltip/tooltip-html-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind-html="contentExp()"></div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/tooltip/tooltip-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind="content"></div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-template-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/tooltip/tooltip-template-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner"\n    uib-tooltip-template-transclude="contentExp()"\n    tooltip-template-transclude-scope="originScope()"></div>\n</div>\n')}]),angular.module("uib/template/typeahead/typeahead-match.html",[]).run(["$templateCache",function(t){t.put("uib/template/typeahead/typeahead-match.html",'<a href\n   tabindex="-1"\n   ng-bind-html="match.label | uibTypeaheadHighlight:query"\n   ng-attr-title="{{match.label}}"></a>\n')}]),angular.module("uib/template/typeahead/typeahead-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/typeahead/typeahead-popup.html",'<ul class="dropdown-menu" ng-show="isOpen() && !moveInProgress" ng-style="{top: position().top+\'px\', left: position().left+\'px\'}" role="listbox" aria-hidden="{{!isOpen()}}">\n    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index, $event)" role="option" id="{{::match.id}}">\n        <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>\n    </li>\n</ul>\n')}]),angular.module("ui.bootstrap.tooltip").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTooltipCss&&angular.element(document).find("head").prepend('<style type="text/css">[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-bottom > .tooltip-arrow,[uib-popover-popup].popover.top-left > .arrow,[uib-popover-popup].popover.top-right > .arrow,[uib-popover-popup].popover.bottom-left > .arrow,[uib-popover-popup].popover.bottom-right > .arrow,[uib-popover-popup].popover.left-top > .arrow,[uib-popover-popup].popover.left-bottom > .arrow,[uib-popover-popup].popover.right-top > .arrow,[uib-popover-popup].popover.right-bottom > .arrow,[uib-popover-html-popup].popover.top-left > .arrow,[uib-popover-html-popup].popover.top-right > .arrow,[uib-popover-html-popup].popover.bottom-left > .arrow,[uib-popover-html-popup].popover.bottom-right > .arrow,[uib-popover-html-popup].popover.left-top > .arrow,[uib-popover-html-popup].popover.left-bottom > .arrow,[uib-popover-html-popup].popover.right-top > .arrow,[uib-popover-html-popup].popover.right-bottom > .arrow,[uib-popover-template-popup].popover.top-left > .arrow,[uib-popover-template-popup].popover.top-right > .arrow,[uib-popover-template-popup].popover.bottom-left > .arrow,[uib-popover-template-popup].popover.bottom-right > .arrow,[uib-popover-template-popup].popover.left-top > .arrow,[uib-popover-template-popup].popover.left-bottom > .arrow,[uib-popover-template-popup].popover.right-top > .arrow,[uib-popover-template-popup].popover.right-bottom > .arrow{top:auto;bottom:auto;left:auto;right:auto;margin:0;}[uib-popover-popup].popover,[uib-popover-html-popup].popover,[uib-popover-template-popup].popover{display:block !important;}</style>'),angular.$$uibTooltipCss=!0}),angular.module("ui.bootstrap.position").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibPositionCss&&angular.element(document).find("head").prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style>'),angular.$$uibPositionCss=!0}),angular.module("ui.bootstrap.typeahead").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTypeaheadCss&&angular.element(document).find("head").prepend('<style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style>'),angular.$$uibTypeaheadCss=!0});
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.calendar', ['weed.core'])
+    .directive('weCalendar', calendarDirective);
+
+
+  function calendarDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        selectedobject: '=',
+        selected: '=',
+        languagec: '=',
+        numberposition: '=',
+        activities: '=',
+        limit: '=',
+        functionopenselect:'=',
+        selectedobjectinside: '=',
+        actualmonth: '=',
+        updatefunction: '='
+      },
+      templateUrl: 'components/calendar/calendar.html',
+      link: function(scope, elem, attrs) {
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = moment().locale(scope.languagec);
+        scope.month = scope.selected.clone();
+        scope.actualmonth = moment();
+        var start = scope.selected.clone();
+        start.date(1);
+        _removeTime(start.day(0));
+		scope.findToday = false;
+
+        _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        scope.select = function(day) {
+          scope.selected = day.date;
+          scope.selectedobject = day;
+        };
+
+        scope.today = function() {
+		  scope.findToday = true;
+          scope.actualmonth = moment();
+		  scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        };
+
+        scope.next = function() {
+          var next = scope.month.clone();
+          scope.actualmonth = scope.actualmonth.add(1,'months');
+          _removeTime(next.month(next.month()+1).date(1));
+          scope.month.month(scope.month.month()+1);
+          console.log(scope.month);
+          _buildMonth(scope, next, scope.month, scope.actualmonth);
+        };
+
+        scope.previous = function() {
+            var previous = scope.month.clone();
+            scope.actualmonth = scope.actualmonth.add(-1,'months');
+            _removeTime(previous.month(previous.month()-1).date(1));
+            scope.month.month(scope.month.month()-1);
+            console.log(scope.month);
+            _buildMonth(scope, previous, scope.month, scope.actualmonth);
+        };
+
+        scope.doOnClickElement = function(elementInside){
+          scope.functionopenselect(elementInside);
+        };
+
+        scope.updatefunction = function() {
+          console.log(scope.month);
+          console.log(scope.actualmonth);
+          var dummy = scope.month.clone();
+          _removeTime(dummy.month(dummy.month()).date(1));
+          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
+        };
+      }
+    };
+
+    function _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month, actualmonth) {
+      scope.monthActivities = scope.activities(actualmonth);
+
+      scope.monthActivities.then(
+        function(su){
+          scope.weeks = [];
+          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          while (!done) {
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+              date.add(1, "w");
+              done = count++ > 2 && monthIndex !== date.month();
+              monthIndex = date.month();
+          }
+    		  if(scope.findToday) {
+    		    scope.findToday = false;
+      			for(var i = 0; i < scope.weeks.length; i++) {
+      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+      			    if(scope.weeks[i].days[j].isToday)
+        				{
+        				  scope.select(scope.weeks[i].days[j]);
+        				  break;
+        				  i = scope.weeks.length;
+        				}
+      			  }
+      			}
+    		  }
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
+    }
+
+    function _buildWeek(date, month, activities) {
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+          days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              dateId: date.format("DD-MM-YYYY"),
+              activities: []
+          });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              days[days.length-1].activities.push(activities[j]);
+            }
+          }
+          date = date.clone();
+
+          date.add(1, "d");
+      }
+      return days;
+    }
+  };
+
+})(angular);
+
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -15149,212 +15309,6 @@ if (typeof define === 'function' && define.amd) {
     }
   }
 
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.calendar', ['weed.core'])
-    .directive('weCalendar', calendarDirective);
-
-
-  function calendarDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        selectedobject: '=',
-        selected: '=',
-        languagec: '=',
-        numberposition: '=',
-        activities: '=',
-        limit: '=',
-        functionopenselect:'=',
-        selectedobjectinside: '=',
-        actualmonth: '=',
-        updatefunction: '='
-      },
-      templateUrl: 'components/calendar/calendar.html',
-      link: function(scope, elem, attrs) {
-        moment.locale(scope.languagec);
-        scope.weekArray = moment.weekdays();
-        scope.selected = moment().locale(scope.languagec);
-        scope.month = scope.selected.clone();
-        scope.actualmonth = moment();
-        var start = scope.selected.clone();
-        start.date(1);
-        _removeTime(start.day(0));
-		scope.findToday = false;
-
-        _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        scope.select = function(day) {
-          scope.selected = day.date;
-          scope.selectedobject = day;
-        };
-
-        scope.today = function() {
-		  scope.findToday = true;
-          scope.actualmonth = moment();
-		  scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        };
-
-        scope.next = function() {
-          var next = scope.month.clone();
-          scope.actualmonth = scope.actualmonth.add(1,'months');
-          _removeTime(next.month(next.month()+1).date(1));
-          scope.month.month(scope.month.month()+1);
-
-          _buildMonth(scope, next, scope.month, scope.actualmonth);
-        };
-
-        scope.previous = function() {
-            var previous = scope.month.clone();
-            scope.actualmonth = scope.actualmonth.add(-1,'months');
-            _removeTime(previous.month(previous.month()-1).date(1));
-            scope.month.month(scope.month.month()-1);
-
-            _buildMonth(scope, previous, scope.month, scope.actualmonth);
-        };
-
-        scope.doOnClickElement = function(elementInside){
-          scope.functionopenselect(elementInside);
-        };
-
-        scope.updatefunction = function() {
-          console.log(scope.month);
-          console.log(scope.actualmonth);
-          _removeTime(scope.actualmonth.month(scope.actualmonth.month()).date(1));
-          _buildMonth(scope, scope.actualmonth, scope.month, scope.actualmonth);
-        };
-      }
-    };
-
-    function _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
-
-    function _buildMonth(scope, start, month, actualmonth) {
-      scope.monthActivities = scope.activities(actualmonth);
-
-      scope.monthActivities.then(
-        function(su){
-          scope.weeks = [];
-          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-          while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-              date.add(1, "w");
-              done = count++ > 2 && monthIndex !== date.month();
-              monthIndex = date.month();
-          }
-    		  if(scope.findToday) {
-    		    scope.findToday = false;
-      			for(var i = 0; i < scope.weeks.length; i++) {
-      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-      			    if(scope.weeks[i].days[j].isToday)
-        				{
-        				  scope.select(scope.weeks[i].days[j]);
-        				  break;
-        				  i = scope.weeks.length;
-        				}
-      			  }
-      			}
-    		  }
-        },
-        function(err){
-          $log.log("ERROR: ",error);
-        }
-      );
-    }
-
-    function _buildWeek(date, month, activities) {
-      var days = [];
-      for (var i = 0; i < 7; i++) {
-          days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              dateId: date.format("DD-MM-YYYY"),
-              activities: []
-          });
-          for(var j = 0; j < activities.length; j++)
-          {
-            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
-              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
-              days[days.length-1].activities.push(activities[j]);
-            }
-          }
-          date = date.clone();
-
-          date.add(1, "d");
-      }
-      return days;
-    }
-  };
-
-})(angular);
-
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', inputWrapperDirective);
-
-  // No dependencies
-
-  function inputWrapperDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        rightIcon: '@',
-        leftIcon: '@',
-        componentPosition: '@',
-        size: '@',
-        placeholder: '@'
-      },
-      replace: true,
-      templateUrl: 'components/forms/inputWrapper.html',
-      link: inputWrapperLink
-    };
-  }
-    function inputWrapperLink(scope, elem) {
-      var input = elem.find('input');
-      input.on("focus", function(){
-        scope.focused = true;
-        scope.$apply();
-      });
-
-      input.on("blur", function(){
-        scope.focused = false;
-        scope.$apply();
-      });
-
-    }
 })(angular);
 (function(angular) {
   'use strict';
@@ -15653,6 +15607,53 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        rightIcon: '@',
+        leftIcon: '@',
+        componentPosition: '@',
+        size: '@',
+        placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html',
+      link: inputWrapperLink
+    };
+  }
+    function inputWrapperLink(scope, elem) {
+      var input = elem.find('input');
+      input.on("focus", function(){
+        scope.focused = true;
+        scope.$apply();
+      });
+
+      input.on("blur", function(){
+        scope.focused = false;
+        scope.$apply();
+      });
+
+    }
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weIcon
  * @description
  * # Directive to import icons
@@ -15778,6 +15779,82 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
+    .directive('weNavbarElement', navbarElementDirective);
+
+  // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@',
+        counter: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
+            break;
+          default:
+            template = 'navbarElement.html'
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }
+})(angular);
 (function(angular){
   'use strict';
 
@@ -15865,82 +15942,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInputWrapper
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective);
-
-  // No dependencies
-
-  function navbarDirective(){
-    return {
-      restrict: 'E',
-      link: function(){
-        var body = angular.element(document.querySelector('body'));
-        body.addClass('with-navbar');
-      },
-      templateUrl: 'components/navbar/navbar.html',
-      transclude: true,
-      replace: true
-    }
-  }
-
-  function navbarElementDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        position: '@',
-        type: '@',
-        icon: '@',
-        logotype: '@',
-        isotype: '@',
-        placeholder: '@',
-        userPicture: '@',
-        userRole: '@',
-        counter: '@'
-      },
-      link: function(scope, elem, attrs, controllers, $transclude){
-        // Check if there is text
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-      },
-      templateUrl: function(elem, attrs) {
-        var template = '';
-        switch (attrs.type) {
-          case 'link':
-            template = 'navbarElementLink.html';
-            break;
-          case 'logo':
-            template = 'navbarElementLogo.html';
-            break;
-          case 'separator':
-            template = 'navbarElementSeparator.html'
-            break;
-          case 'user':
-            template = 'navbarElementUser.html'
-            break;
-          default:
-            template = 'navbarElement.html'
-        }
-        return 'components/navbar/' + template;
-      }
-    };
-  }
 })(angular);
 (function() {
   'use strict';
