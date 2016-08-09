@@ -85,7 +85,7 @@
         scope.updatefunction = function() {
           console.log(scope.month);
           console.log(scope.actualmonth);
-          _buildMonth(scope, scope.actualmonth, scope.actualmonth, scope.actualmonth);
+          _buildMonth(scope, scope.month, scope.month, scope.actualmonth);
         };
       }
     };
@@ -107,19 +107,19 @@
               done = count++ > 2 && monthIndex !== date.month();
               monthIndex = date.month();
           }
-		  if(scope.findToday){
-		    scope.findToday = false;
-			for(var i = 0; i < scope.weeks.length; i++) {
-			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-			    if(scope.weeks[i].days[j].isToday)
-				{
-				  scope.select(scope.weeks[i].days[j]);
-				  break;
-				  i = scope.weeks.length;
-				}
-			  }
-			}
-		  }
+    		  if(scope.findToday) {
+    		    scope.findToday = false;
+      			for(var i = 0; i < scope.weeks.length; i++) {
+      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+      			    if(scope.weeks[i].days[j].isToday)
+        				{
+        				  scope.select(scope.weeks[i].days[j]);
+        				  break;
+        				  i = scope.weeks.length;
+        				}
+      			  }
+      			}
+    		  }
         },
         function(err){
           $log.log("ERROR: ",error);
