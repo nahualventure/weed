@@ -85,7 +85,7 @@
         scope.updatefunction = function() {
           console.log(scope.month);
           console.log(scope.actualmonth);
-          _buildMonth(scope, scope.actualmonth, scope.month, scope.actualmonth);
+          _buildMonth(scope, scope.actualmonth, scope.actualmonth, scope.actualmonth);
         };
       }
     };
