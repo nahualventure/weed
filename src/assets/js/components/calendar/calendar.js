@@ -151,7 +151,6 @@
           }
           date = date.clone();
           date.add(1, "d");
-          console.log(days);
       }
       return days;
     }
