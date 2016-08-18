@@ -127,7 +127,6 @@
 
     function _buildWeek(date, month, activities) {
       var days = [];
-      console.log(activities);
       for (var i = 0; i < 7; i++) {
           days.push({
               name: date.format("dd").substring(0, 1),
@@ -142,12 +141,17 @@
           {
             if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
               activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              if(!activities[j].place)
+              {
+                activities[j].place = activities[j].meeting.place;
+              }
               days[days.length-1].activities.push(activities[j]);
             }
+
           }
           date = date.clone();
-
           date.add(1, "d");
+          console.log(days);
       }
       return days;
     }
