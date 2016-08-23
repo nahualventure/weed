@@ -56,6 +56,10 @@
           }
         };
 
+        scope.manageClickMore = function() {
+          scope.comesfromtodaywatch = true;
+        }
+
         scope.today = function() {
 		    scope.findToday = true;
         scope.actualmonth = moment();
