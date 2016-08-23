@@ -27,8 +27,7 @@
         selectedobjectinside: '=',
         actualmonth: '=',
         updatefunction: '=',
-        doselectedclick: '=',
-        comesfromtodaywatch: '='
+        doselectedclick: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -47,7 +46,7 @@
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
-          
+
           if(scope.comesfromtodaywatch)
           {
             scope.comesfromtodaywatch = false;
@@ -58,9 +57,9 @@
         };
 
         scope.today = function() {
-		  scope.findToday = true;
-          scope.actualmonth = moment();
-		  scope.selected = moment().locale(scope.languagec);
+		    scope.findToday = true;
+        scope.actualmonth = moment();
+		    scope.selected = moment().locale(scope.languagec);
           scope.month = scope.selected.clone();
           var start = scope.selected.clone();
           start.date(1);
