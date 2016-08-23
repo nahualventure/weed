@@ -26,7 +26,8 @@
         functionopenselect:'=',
         selectedobjectinside: '=',
         actualmonth: '=',
-        updatefunction: '='
+        updatefunction: '=',
+        doselectedclick: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -45,6 +46,7 @@
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
+          scope.doselectedclick();
         };
 
         scope.today = function() {
@@ -76,9 +78,9 @@
             _buildMonth(scope, previous, scope.month, scope.actualmonth);
         };
 
-        scope.doOnClickElement = function(elementInside){
+        /*scope.doOnClickElement = function(elementInside){
           scope.functionopenselect(elementInside);
-        };
+        };*/
 
         scope.updatefunction = function() {
           var dummy = scope.month.clone();
