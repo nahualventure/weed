@@ -40,14 +40,21 @@
         var start = scope.selected.clone();
         start.date(1);
         _removeTime(start.day(0));
-		scope.findToday = false;
+		    scope.findToday = false;
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
-          scope.doselectedclick(day);
+          
+          if(scope.comesfromtodaywatch)
+          {
+            scope.comesfromtodaywatch = false;
+          }
+          else {
+            scope.doselectedclick(day);
+          }
         };
 
         scope.today = function() {
