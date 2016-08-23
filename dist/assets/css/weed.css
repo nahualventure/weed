@@ -8158,12 +8158,14 @@ hr {
 }
 .we-calendar-class .header .calendar-header-month {
   font-weight: bold;
-  text-transform: capitalize;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   vertical-align: middle;
   line-height: 80px;
   font-size: 20px;
+}
+.we-calendar-class .header .calendar-header-month:first-letter {
+  text-transform: capitalize;
 }
 .we-calendar-class .header .calendar-navigation {
   position: absolute;

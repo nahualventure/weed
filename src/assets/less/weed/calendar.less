@@ -57,7 +57,9 @@
         vertical-align: middle;
       .calendar-header-month {
           font-weight:bold;
-          text-transform:capitalize;
+          &:first-letter{
+            text-transform:capitalize;
+          }
           .border-box;
           vertical-align: middle;
           line-height:@calendar-header-height;
