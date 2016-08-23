@@ -46,7 +46,7 @@
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
-          scope.doselectedclick();
+          scope.doselectedclick(day);
         };
 
         scope.today = function() {
