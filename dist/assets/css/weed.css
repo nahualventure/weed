@@ -8158,6 +8158,7 @@ hr {
 }
 .we-calendar-class .header .calendar-header-month {
   font-weight: bold;
+  display: inline-block;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   vertical-align: middle;
