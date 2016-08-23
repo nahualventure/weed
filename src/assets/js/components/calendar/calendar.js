@@ -27,7 +27,8 @@
         selectedobjectinside: '=',
         actualmonth: '=',
         updatefunction: '=',
-        doselectedclick: '='
+        doselectedclick: '=',
+        comesfromtodaywatch: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -113,6 +114,7 @@
       			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
       			    if(scope.weeks[i].days[j].isToday)
         				{
+                  scope.comesfromtodaywatch = true;
         				  scope.select(scope.weeks[i].days[j]);
         				  break;
         				  i = scope.weeks.length;
