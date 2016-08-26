@@ -59,6 +59,9 @@
         scope.manageClickMore = function() {
           scope.comesfromtodaywatch = true;
         }
+        scope.doOnClickElement = function(){
+          scope.comesfromtodaywatch = true;
+        }
 
         scope.today = function() {
 		    scope.findToday = true;
