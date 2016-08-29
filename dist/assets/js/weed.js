@@ -15211,10 +15211,6 @@ if (typeof define === 'function' && define.amd) {
         scope.manageClickMore = function() {
           scope.comesfromtodaywatch = true;
         }
-        scope.doOnClickElement = function(elementInside){
-          scope.comesfromtodaywatch = true;
-          scope.functionopenselect(elementInside);
-        }
 
         scope.today = function() {
 		    scope.findToday = true;
@@ -15327,7 +15323,6 @@ if (typeof define === 'function' && define.amd) {
   };
 
 })(angular);
-
 (function(angular) {
   'use strict';
 
@@ -15672,6 +15667,35 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weListItem
  * @description
  * # navbarDirective
@@ -15766,35 +15790,6 @@ if (typeof define === 'function' && define.amd) {
       }
     };
   }
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
 
 })(angular);
 /**
@@ -15961,6 +15956,96 @@ if (typeof define === 'function' && define.amd) {
 
 
 })(angular);
+(function() {
+  'use strict';
+
+  angular.module('weed.popup', ['weed.core'])
+    .directive('wePopup', popupDirective);
+
+  // Weed api injection
+  popupDirective.$inject = ['WeedApi'];
+
+  function popupDirective(weedApi) {
+
+    var body = angular.element(document.querySelector('body'));
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        avoidCloseOutside: '@'
+      },
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popup.html',
+      controllerAs: 'popup',
+      controller: popupController
+    };
+
+    return directive;
+
+    popupController.$inject = ['$scope'];
+
+    function popupController($scope){
+      var vm = this;
+
+      vm.active = false;
+
+      vm.open = function(){
+        vm.active = true;
+        body.addClass('with-open-popup');
+        $scope.$apply();
+      }
+
+      vm.close = function(){
+        vm.active = false;
+        body.removeClass('with-open-popup');
+        $scope.$apply();
+      }
+    }
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            controller.open();
+            break;
+          case 'hide':
+          case 'close':
+            controller.close();
+            break;
+        }
+      });
+    }
+  }
+
+  function popupTitle(weedApi) {
+
+    var directive = {
+      restrict: 'A',
+      transclude: true,
+      scope: {},
+      replace: true,
+      link: popupLink,
+      templateUrl: 'components/popup/popupTitle.html',
+    };
+
+    return directive;
+
+    // TODO: unmock this directive
+    function popupLink($scope, elem, attrs, controller) {
+      weedApi.subscribe(attrs.id, function(id, message){
+        switch(message){
+          case 'show':
+          case 'open':
+            console.log("Open(#" + id + "): " + message);
+        }
+      });
+    }
+  }
+})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weNavbar
@@ -16065,96 +16150,6 @@ if (typeof define === 'function' && define.amd) {
         templateUrl: 'components/sidebar/sidebarHeader.html'
       };
     });
-})(angular);
-(function() {
-  'use strict';
-
-  angular.module('weed.popup', ['weed.core'])
-    .directive('wePopup', popupDirective);
-
-  // Weed api injection
-  popupDirective.$inject = ['WeedApi'];
-
-  function popupDirective(weedApi) {
-
-    var body = angular.element(document.querySelector('body'));
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        avoidCloseOutside: '@'
-      },
-      replace: true,
-      link: popupLink,
-      templateUrl: 'components/popup/popup.html',
-      controllerAs: 'popup',
-      controller: popupController
-    };
-
-    return directive;
-
-    popupController.$inject = ['$scope'];
-
-    function popupController($scope){
-      var vm = this;
-
-      vm.active = false;
-
-      vm.open = function(){
-        vm.active = true;
-        body.addClass('with-open-popup');
-        $scope.$apply();
-      }
-
-      vm.close = function(){
-        vm.active = false;
-        body.removeClass('with-open-popup');
-        $scope.$apply();
-      }
-    }
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            controller.open();
-            break;
-          case 'hide':
-          case 'close':
-            controller.close();
-            break;
-        }
-      });
-    }
-  }
-
-  function popupTitle(weedApi) {
-
-    var directive = {
-      restrict: 'A',
-      transclude: true,
-      scope: {},
-      replace: true,
-      link: popupLink,
-      templateUrl: 'components/popup/popupTitle.html',
-    };
-
-    return directive;
-
-    // TODO: unmock this directive
-    function popupLink($scope, elem, attrs, controller) {
-      weedApi.subscribe(attrs.id, function(id, message){
-        switch(message){
-          case 'show':
-          case 'open':
-            console.log("Open(#" + id + "): " + message);
-        }
-      });
-    }
-  }
 })(angular);
 /**
  * @ngdoc function
