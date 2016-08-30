@@ -369,7 +369,7 @@
     <h2>Popup</h2>
     <a we-button icon="heart" color="warning" we-open="test-popup-1">Open test popup</a>
     <div ng-controller="PopupController as popupCtrl">
-        <div id="test-popup-1" we-popup avoid-close-outside="true">
+        <div id="test-popup-1" we-popup afterclose = "popupCtrl.holamundo" avoid-close-outside="true">
 
           <div class="popup-title-bar">
             Título de popup
@@ -1301,6 +1301,10 @@
 
             function popupController(WeedApi){
                 var vm = this;
+
+                vm.holamundo = function(){
+                  console.log("hola mundo!!!!!!!!!!!!!!");
+                };
 
                 vm.closeActiveElements = function(){
                     WeedApi.closeActiveElements();
