@@ -16002,7 +16002,7 @@ if (typeof define === 'function' && define.amd) {
         vm.active = false;
         body.removeClass('with-open-popup');
         if(typeof $scope.afterClose !== undefined){
-          $scope.afterClose;
+          $scope.afterClose();
         }
         $scope.$apply();
       }
