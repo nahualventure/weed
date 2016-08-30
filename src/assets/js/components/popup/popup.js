@@ -16,7 +16,7 @@
       transclude: true,
       scope: {
         avoidCloseOutside: '@',
-        afterclose: '='
+        afterclose: '&'
       },
       replace: true,
       link: popupLink,
