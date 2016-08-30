@@ -43,7 +43,7 @@
       vm.close = function(){
         vm.active = false;
         body.removeClass('with-open-popup');
-        if(typeof $scope.afterClose !== undefined){
+        if(typeof scope.afterClose !== undefined){
           scope.afterClose();
         }
         $scope.$apply();
