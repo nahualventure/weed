@@ -44,8 +44,8 @@
         vm.active = false;
         body.removeClass('with-open-popup');
         console.log($scope.afterclose);
-        console.log(vm.afterclose);
         if(typeof $scope.afterclose !== 'undefined'){
+          console.log("hola he pasado la prueba de undefined");
           $scope.afterclose();
         }
         $scope.$apply();
