@@ -15,14 +15,14 @@
       restrict: 'A',
       transclude: true,
       scope: {
-        avoidCloseOutside: '@'
+        avoidCloseOutside: '@',
+        afterClose: '='
       },
       replace: true,
       link: popupLink,
       templateUrl: 'components/popup/popup.html',
       controllerAs: 'popup',
-      controller: popupController,
-      afterClose: '='
+      controller: popupController
     };
 
     return directive;
