@@ -15150,179 +15150,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.calendar', ['weed.core'])
-    .directive('weCalendar', calendarDirective);
-
-
-  function calendarDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        selectedobject: '=',
-        selected: '=',
-        languagec: '=',
-        numberposition: '=',
-        activities: '=',
-        limit: '=',
-        functionopenselect:'=',
-        selectedobjectinside: '=',
-        actualmonth: '=',
-        updatefunction: '=',
-        doselectedclick: '='
-      },
-      templateUrl: 'components/calendar/calendar.html',
-      link: function(scope, elem, attrs) {
-        moment.locale(scope.languagec);
-        scope.weekArray = moment.weekdays();
-        scope.selected = moment().locale(scope.languagec);
-        scope.month = scope.selected.clone();
-        scope.actualmonth = moment();
-        var start = scope.selected.clone();
-        start.date(1);
-        _removeTime(start.day(0));
-		    scope.findToday = false;
-
-        _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        scope.select = function(day) {
-          scope.selected = day.date;
-          scope.selectedobject = day;
-
-          if(scope.comesfromtodaywatch)
-          {
-            scope.comesfromtodaywatch = false;
-          }
-          else {
-            scope.doselectedclick(day);
-          }
-        };
-
-        scope.manageClickMore = function() {
-          scope.comesfromtodaywatch = true;
-        }
-
-        scope.today = function() {
-		    scope.findToday = true;
-        scope.actualmonth = moment();
-		    scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        };
-
-        scope.next = function() {
-          var next = scope.month.clone();
-          scope.actualmonth = scope.actualmonth.add(1,'months');
-          _removeTime(next.month(next.month()+1).date(1));
-          scope.month.month(scope.month.month()+1);
-          _buildMonth(scope, next, scope.month, scope.actualmonth);
-        };
-
-        scope.previous = function() {
-            var previous = scope.month.clone();
-            scope.actualmonth = scope.actualmonth.add(-1,'months');
-            _removeTime(previous.month(previous.month()-1).date(1));
-            scope.month.month(scope.month.month()-1);
-            _buildMonth(scope, previous, scope.month, scope.actualmonth);
-        };
-
-        /*scope.doOnClickElement = function(elementInside){
-          scope.functionopenselect(elementInside);
-        };*/
-
-        scope.updatefunction = function() {
-          var dummy = scope.month.clone();
-          _removeTime(dummy.month(dummy.month()).date(1));
-          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
-        };
-      }
-    };
-
-    function _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
-
-    function _buildMonth(scope, start, month, actualmonth) {
-      scope.monthActivities = scope.activities(actualmonth);
-
-      scope.monthActivities.then(
-        function(su){
-          scope.weeks = [];
-          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-          while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-              date.add(1, "w");
-              done = count++ > 2 && monthIndex !== date.month();
-              monthIndex = date.month();
-          }
-    		  if(scope.findToday) {
-    		    scope.findToday = false;
-      			for(var i = 0; i < scope.weeks.length; i++) {
-      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-      			    if(scope.weeks[i].days[j].isToday)
-        				{
-                  scope.comesfromtodaywatch = true;
-        				  scope.select(scope.weeks[i].days[j]);
-        				  break;
-        				  i = scope.weeks.length;
-        				}
-      			  }
-      			}
-    		  }
-        },
-        function(err){
-          $log.log("ERROR: ",error);
-        }
-      );
-    }
-
-    function _buildWeek(date, month, activities) {
-      var days = [];
-      for (var i = 0; i < 7; i++) {
-          days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              dateId: date.format("DD-MM-YYYY"),
-              activities: []
-          });
-          for(var j = 0; j < activities.length; j++)
-          {
-            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
-              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
-              if(!activities[j].place)
-              {
-                activities[j].place = activities[j].meeting.place;
-              }
-              days[days.length-1].activities.push(activities[j]);
-            }
-
-          }
-          date = date.clone();
-          date.add(1, "d");
-      }
-      return days;
-    }
-  };
-
-})(angular);
 (function(angular) {
   'use strict';
 
@@ -15620,6 +15447,179 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.calendar', ['weed.core'])
+    .directive('weCalendar', calendarDirective);
+
+
+  function calendarDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        selectedobject: '=',
+        selected: '=',
+        languagec: '=',
+        numberposition: '=',
+        activities: '=',
+        limit: '=',
+        functionopenselect:'=',
+        selectedobjectinside: '=',
+        actualmonth: '=',
+        updatefunction: '=',
+        doselectedclick: '='
+      },
+      templateUrl: 'components/calendar/calendar.html',
+      link: function(scope, elem, attrs) {
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = moment().locale(scope.languagec);
+        scope.month = scope.selected.clone();
+        scope.actualmonth = moment();
+        var start = scope.selected.clone();
+        start.date(1);
+        _removeTime(start.day(0));
+		    scope.findToday = false;
+
+        _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        scope.select = function(day) {
+          scope.selected = day.date;
+          scope.selectedobject = day;
+
+          if(scope.comesfromtodaywatch)
+          {
+            scope.comesfromtodaywatch = false;
+          }
+          else {
+            scope.doselectedclick(day);
+          }
+        };
+
+        scope.manageClickMore = function() {
+          scope.comesfromtodaywatch = true;
+        }
+
+        scope.today = function() {
+		    scope.findToday = true;
+        scope.actualmonth = moment();
+		    scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        };
+
+        scope.next = function() {
+          var next = scope.month.clone();
+          scope.actualmonth = scope.actualmonth.add(1,'months');
+          _removeTime(next.month(next.month()+1).date(1));
+          scope.month.month(scope.month.month()+1);
+          _buildMonth(scope, next, scope.month, scope.actualmonth);
+        };
+
+        scope.previous = function() {
+            var previous = scope.month.clone();
+            scope.actualmonth = scope.actualmonth.add(-1,'months');
+            _removeTime(previous.month(previous.month()-1).date(1));
+            scope.month.month(scope.month.month()-1);
+            _buildMonth(scope, previous, scope.month, scope.actualmonth);
+        };
+
+        /*scope.doOnClickElement = function(elementInside){
+          scope.functionopenselect(elementInside);
+        };*/
+
+        scope.updatefunction = function() {
+          var dummy = scope.month.clone();
+          _removeTime(dummy.month(dummy.month()).date(1));
+          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
+        };
+      }
+    };
+
+    function _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month, actualmonth) {
+      scope.monthActivities = scope.activities(actualmonth);
+
+      scope.monthActivities.then(
+        function(su){
+          scope.weeks = [];
+          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          while (!done) {
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+              date.add(1, "w");
+              done = count++ > 2 && monthIndex !== date.month();
+              monthIndex = date.month();
+          }
+    		  if(scope.findToday) {
+    		    scope.findToday = false;
+      			for(var i = 0; i < scope.weeks.length; i++) {
+      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+      			    if(scope.weeks[i].days[j].isToday)
+        				{
+                  scope.comesfromtodaywatch = true;
+        				  scope.select(scope.weeks[i].days[j]);
+        				  break;
+        				  i = scope.weeks.length;
+        				}
+      			  }
+      			}
+    		  }
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
+    }
+
+    function _buildWeek(date, month, activities) {
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+          days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              dateId: date.format("DD-MM-YYYY"),
+              activities: []
+          });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              if(!activities[j].place)
+              {
+                activities[j].place = activities[j].meeting.place;
+              }
+              days[days.length-1].activities.push(activities[j]);
+            }
+
+          }
+          date = date.clone();
+          date.add(1, "d");
+      }
+      return days;
+    }
+  };
+
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -15792,6 +15792,82 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
+    .directive('weNavbarElement', navbarElementDirective);
+
+  // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@',
+        counter: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
+            break;
+          default:
+            template = 'navbarElement.html'
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }
+})(angular);
 (function(angular){
   'use strict';
 
@@ -15882,79 +15958,86 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weNavbar
+ * @name weed.directive: weTab
  * @description
  * # navbarDirective
  * Directive of the app
- * Depends upon weInputWrapper
+ * TODO: to-load, button-groups
  */
 
 (function(angular){
   'use strict';
 
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective);
-
-  // No dependencies
-
-  function navbarDirective(){
-    return {
-      restrict: 'E',
-      link: function(){
-        var body = angular.element(document.querySelector('body'));
-        body.addClass('with-navbar');
-      },
-      templateUrl: 'components/navbar/navbar.html',
-      transclude: true,
-      replace: true
-    }
-  }
-
-  function navbarElementDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        position: '@',
-        type: '@',
-        icon: '@',
-        logotype: '@',
-        isotype: '@',
-        placeholder: '@',
-        userPicture: '@',
-        userRole: '@',
-        counter: '@'
-      },
-      link: function(scope, elem, attrs, controllers, $transclude){
-        // Check if there is text
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-      },
-      templateUrl: function(elem, attrs) {
-        var template = '';
-        switch (attrs.type) {
-          case 'link':
-            template = 'navbarElementLink.html';
-            break;
-          case 'logo':
-            template = 'navbarElementLogo.html';
-            break;
-          case 'separator':
-            template = 'navbarElementSeparator.html'
-            break;
-          case 'user':
-            template = 'navbarElementUser.html'
-            break;
-          default:
-            template = 'navbarElement.html'
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false;
+          tabsetCtrl.addTab(scope);
         }
-        return 'components/navbar/' + template;
-      }
-    };
-  }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var vm = this;
+
+          vm.tabs = [];
+
+          vm.addTab = function addTab(tab) {
+            vm.tabs.push(tab);
+
+            if(vm.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          vm.select = function(selectedTab) {
+            angular.forEach(vm.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
 })(angular);
 /**
  * @ngdoc function
@@ -16063,89 +16146,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weTab
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false;
-          tabsetCtrl.addTab(scope);
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var vm = this;
-
-          vm.tabs = [];
-
-          vm.addTab = function addTab(tab) {
-            vm.tabs.push(tab);
-
-            if(vm.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
-
-          vm.select = function(selectedTab) {
-            angular.forEach(vm.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
-              }
-            });
-
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -16235,7 +16235,7 @@ if (typeof define === 'function' && define.amd) {
       transclude: true,
       scope: {
         avoidCloseOutside: '@',
-        afterclose: '&'
+        afterclose: '='
       },
       replace: true,
       link: popupLink,
@@ -16263,11 +16263,11 @@ if (typeof define === 'function' && define.amd) {
         vm.active = false;
         body.removeClass('with-open-popup');
         console.log($scope.afterclose);
+        $scope.$apply();
         if(typeof $scope.afterclose !== 'undefined'){
           console.log("hola he pasado la prueba de undefined");
           $scope.afterclose();
         }
-        $scope.$apply();
       }
     }
 
