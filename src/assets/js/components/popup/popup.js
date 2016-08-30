@@ -16,7 +16,7 @@
       transclude: true,
       scope: {
         avoidCloseOutside: '@',
-        afterClose: '='
+        afterclose: '='
       },
       replace: true,
       link: popupLink,
@@ -43,10 +43,10 @@
       vm.close = function(){
         vm.active = false;
         body.removeClass('with-open-popup');
-        console.log($scope.afterClose);
-        console.log(vm);
-        if(typeof $scope.afterClose !== 'undefined'){
-          $scope.afterClose();
+        console.log($scope.afterclose);
+        console.log(vm.afterclose);
+        if(typeof $scope.afterclose !== 'undefined'){
+          $scope.afterclose();
         }
         $scope.$apply();
       }
