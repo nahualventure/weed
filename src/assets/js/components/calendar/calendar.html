@@ -34,7 +34,7 @@
   <div
     class="calendar-meeting-inside"
     ng-repeat="act in day.activities | limitTo:limit"
-    ng-click="functionopenselect(act, $event)">
+    ng-click="functionopenselect(act, $event); popoverIsOpen = false">
     <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
     <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
   </div>
@@ -44,9 +44,10 @@
     color="success"
     size="tiny"
     class="calendar-meeting-inside-button-more"
-    uib-popover-template="'components/calendar/calendar-popover.html'"
     ng-click="manageClickMore; $event.stopPropagation();"
+    uib-popover-template="'components/calendar/calendar-popover.html'"
     popover-trigger="outsideClick"
+    popover-is-open="popoverIsOpen"
     popover-placement="right">{{day.activities.length - limit}} MÁS</a>
   </div>
 </div>

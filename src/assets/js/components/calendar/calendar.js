@@ -40,6 +40,7 @@
         start.date(1);
         _removeTime(start.day(0));
 		    scope.findToday = false;
+        scope.popoverIsOpen = false;
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
