@@ -156,9 +156,7 @@
           });
           for(var j = 0; j < activities.length; j++)
           {
-            console.log(activities[j].date);
-            console.log(activities[j].meeting.date);
-            if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+            if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
               activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
               if(!activities[j].place)
               {
