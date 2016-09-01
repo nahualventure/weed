@@ -27,7 +27,8 @@
         selectedobjectinside: '=',
         actualmonth: '=',
         updatefunction: '=',
-        doselectedclick: '='
+        doselectedclick: '=',
+        popoverIsOpen: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -40,7 +41,6 @@
         start.date(1);
         _removeTime(start.day(0));
 		    scope.findToday = false;
-        scope.popoverIsOpen = false;
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 

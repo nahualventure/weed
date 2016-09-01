@@ -34,7 +34,7 @@
   <div
     class="calendar-meeting-inside"
     ng-repeat="act in day.activities | limitTo:limit"
-    ng-click="functionopenselect(act, $event); popoverIsOpen = false">
+    ng-click="functionopenselect(act, $event)">
     <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
     <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
   </div>
