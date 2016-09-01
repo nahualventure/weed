@@ -111,6 +111,8 @@
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
+          console.log(date);
+          console.log(su);
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
               scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
@@ -141,6 +143,7 @@
 
     function _buildWeek(date, month, activities) {
       var days = [];
+      console.log(date);
       for (var i = 0; i < 7; i++) {
           days.push({
               name: date.format("dd").substring(0, 1),
@@ -153,6 +156,7 @@
           });
           for(var j = 0; j < activities.length; j++)
           {
+            console.log(activities);
             if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
               activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
               if(!activities[j].place)
