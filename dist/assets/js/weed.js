@@ -15152,6 +15152,53 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weIcon
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.forms', ['weed.core'])
+    .directive('weInputWrapper', inputWrapperDirective);
+
+  // No dependencies
+
+  function inputWrapperDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      scope: {
+        rightIcon: '@',
+        leftIcon: '@',
+        componentPosition: '@',
+        size: '@',
+        placeholder: '@'
+      },
+      replace: true,
+      templateUrl: 'components/forms/inputWrapper.html',
+      link: inputWrapperLink
+    };
+  }
+    function inputWrapperLink(scope, elem) {
+      var input = elem.find('input');
+      input.on("focus", function(){
+        scope.focused = true;
+        scope.$apply();
+      });
+
+      input.on("blur", function(){
+        scope.focused = false;
+        scope.$apply();
+      });
+
+    }
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weIcon
  * @description
  * # Directive to import icons
@@ -15308,7 +15355,8 @@ if (typeof define === 'function' && define.amd) {
           });
           for(var j = 0; j < activities.length; j++)
           {
-            console.log(activities);
+            console.log(activities[j].date);
+            console.log(activities[j].meeting.date);
             if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
               activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
               if(!activities[j].place)
@@ -15622,53 +15670,6 @@ if (typeof define === 'function' && define.amd) {
       }
     };
   }
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weIcon
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.forms', ['weed.core'])
-    .directive('weInputWrapper', inputWrapperDirective);
-
-  // No dependencies
-
-  function inputWrapperDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      scope: {
-        rightIcon: '@',
-        leftIcon: '@',
-        componentPosition: '@',
-        size: '@',
-        placeholder: '@'
-      },
-      replace: true,
-      templateUrl: 'components/forms/inputWrapper.html',
-      link: inputWrapperLink
-    };
-  }
-    function inputWrapperLink(scope, elem) {
-      var input = elem.find('input');
-      input.on("focus", function(){
-        scope.focused = true;
-        scope.$apply();
-      });
-
-      input.on("blur", function(){
-        scope.focused = false;
-        scope.$apply();
-      });
-
-    }
 })(angular);
 /**
  * @ngdoc function
