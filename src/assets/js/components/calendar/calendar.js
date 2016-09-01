@@ -111,8 +111,6 @@
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
-          console.log(date);
-          console.log(su);
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
               scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
