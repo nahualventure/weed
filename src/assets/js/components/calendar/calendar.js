@@ -143,7 +143,6 @@
 
     function _buildWeek(date, month, activities) {
       var days = [];
-      console.log(date);
       for (var i = 0; i < 7; i++) {
           days.push({
               name: date.format("dd").substring(0, 1),
