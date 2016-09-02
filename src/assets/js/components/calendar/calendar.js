@@ -64,6 +64,7 @@
         };
 
         scope.manageClickMore = function() {
+          console.log(scope.selectedobject);
           //scope.comesfromtodaywatch = true;
           //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         }
