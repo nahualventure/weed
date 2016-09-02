@@ -12,7 +12,7 @@
         class="calendar-navigation navigation-today"
         color="primary">Hoy</a>
 
-    <span class="calendar-header-month" ng-click="closePopoverNow()">{{month.format("MMMM [del] YYYY")}}</span>
+    <span class="calendar-header-month">{{month.format("MMMM [del] YYYY")}}</span>
 
     <a
       we-button
@@ -47,6 +47,8 @@
     ng-click="manageClickMore; $event.stopPropagation();"
     uib-popover-template="'components/calendar/calendar-popover.html'"
     popover-placement="right"
-    popover-is-open="'openPop'">{{day.activities.length - limit}} MÁS</a>
+    popover-trigger="outsideClick"
+    popover-append-to-body="true"
+    popover-is-open="openPop">{{day.activities.length - limit}} MÁS</a>
   </div>
 </div>
