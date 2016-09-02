@@ -47,10 +47,7 @@
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
         scope.closePopoverNow = function(day) {
-          console.log("HE sido llmadooooooooooooooooooooooooooooooooooooooooooooo");
           day.openPop = false;
-          console.log(scope.openPop);
-          console.log(day.openPop);
         };
 
         scope.select = function(day) {
@@ -67,7 +64,8 @@
         };
 
         scope.manageClickMore = function() {
-          scope.comesfromtodaywatch = true;
+          //scope.comesfromtodaywatch = true;
+          console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         }
 
         scope.today = function() {
