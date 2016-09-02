@@ -4,7 +4,7 @@
   </div>
   <div class="popover-inner-section calendar-popover-day-content">
     <div class="calendar-popover-day-activity" ng-repeat="act in selectedobject.activities" ng-click="functionopenselect(act, $event)">
-      <div ng-click="closePopoverNow()">
+      <div ng-click="closePopoverNow(day)">
         <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
         <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
       </div>

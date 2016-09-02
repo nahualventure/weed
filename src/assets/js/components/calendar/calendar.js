@@ -46,10 +46,11 @@
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
-        scope.closePopoverNow = function() {
+        scope.closePopoverNow = function(day) {
           console.log("HE sido llmadooooooooooooooooooooooooooooooooooooooooooooo");
-          scope.openPop = false;
+          day.openPop = false;
           console.log(scope.openPop);
+          console.log(day.openPop);
         };
 
         scope.select = function(day) {
@@ -158,7 +159,8 @@
               isToday: date.isSame(new Date(), "day"),
               date: date,
               dateId: date.format("DD-MM-YYYY"),
-              activities: []
+              activities: [],
+              openPop: false
           });
           for(var j = 0; j < activities.length; j++)
           {
