@@ -65,7 +65,7 @@
 
         scope.manageClickMore = function() {
           //scope.comesfromtodaywatch = true;
-          console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+          //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         }
 
         scope.today = function() {
