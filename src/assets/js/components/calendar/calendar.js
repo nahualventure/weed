@@ -42,7 +42,7 @@
         _removeTime(start.day(0));
 		    scope.findToday = false;
 
-        scope.openPop = true;
+        //scope.openPop = true;
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
