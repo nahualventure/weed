@@ -45,6 +45,12 @@
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
+        scope.closePopoverNow = function() {
+          console.log("HE sido llmadooooooooooooooooooooooooooooooooooooooooooooo");
+          scope.openPop = false;
+          console.log(scope.openPop);
+        };
+
         scope.select = function(day) {
           scope.selected = day.date;
           scope.selectedobject = day;
