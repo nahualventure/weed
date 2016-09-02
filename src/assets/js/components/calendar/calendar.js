@@ -63,8 +63,10 @@
           }
         };
 
-        scope.manageClickMore = function() {
+        scope.manageClickMore = function(day) {
           console.log(scope.selectedobject);
+          scope.selectedobject = day;
+          console.log(scop.selectedobject);
           //scope.comesfromtodaywatch = true;
           //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         }
