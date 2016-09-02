@@ -46,8 +46,7 @@
     class="calendar-meeting-inside-button-more"
     ng-click="manageClickMore; $event.stopPropagation();"
     uib-popover-template="'components/calendar/calendar-popover.html'"
-    popover-trigger="outsideClick"
-    popover-is-open="popoverIsOpen"
+    popover-trigger="'focus'"
     popover-placement="right">{{day.activities.length - limit}} MÁS</a>
   </div>
 </div>
