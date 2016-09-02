@@ -3,7 +3,7 @@
     <p class="popover-header-title">{{selectedobject.date.format("DD MMMM, YYYY")}}</p>
   </div>
   <div class="popover-inner-section calendar-popover-day-content">
-    <div class="calendar-popover-day-activity" ng-repeat="act in selectedobject.activities" ng-click="functionopenselect(act, $event)">
+    <div class="calendar-popover-day-activity" ng-repeat="act in selectedobject.activities" ng-click="functionopenselect(act, $event); openPop = false;">
       <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
       <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
     </div>
