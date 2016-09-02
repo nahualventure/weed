@@ -42,13 +42,17 @@
         _removeTime(start.day(0));
 		    scope.findToday = false;
 
-        //scope.openPop = false;
+        scope.openPop = true;
 
         _buildMonth(scope, start, scope.month, scope.actualmonth);
 
         scope.closePopoverNow = function() {
           console.log("HE sido llmadooooooooooooooooooooooooooooooooooooooooooooo");
-          scope.openPop = false;
+
+          scope.$apply(function () {
+            console.log("11111111111111111111111111111111111111111111111");
+            scope.openPop = false;
+          });
           console.log(scope.openPop);
         };
 
