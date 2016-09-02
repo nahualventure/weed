@@ -15200,11 +15200,7 @@ if (typeof define === 'function' && define.amd) {
 
         scope.closePopoverNow = function() {
           console.log("HE sido llmadooooooooooooooooooooooooooooooooooooooooooooo");
-
-          scope.$apply(function () {
-            console.log("11111111111111111111111111111111111111111111111");
-            scope.openPop = false;
-          });
+          scope.openPop = false;
           console.log(scope.openPop);
         };
 
@@ -15681,35 +15677,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weListItem
  * @description
  * # navbarDirective
@@ -15804,6 +15771,35 @@ if (typeof define === 'function' && define.amd) {
       }
     };
   }
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
 
 })(angular);
 /**

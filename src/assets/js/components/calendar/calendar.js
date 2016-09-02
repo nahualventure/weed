@@ -48,11 +48,7 @@
 
         scope.closePopoverNow = function() {
           console.log("HE sido llmadooooooooooooooooooooooooooooooooooooooooooooo");
-
-          scope.$apply(function () {
-            console.log("11111111111111111111111111111111111111111111111");
-            scope.openPop = false;
-          });
+          scope.openPop = false;
           console.log(scope.openPop);
         };
 
