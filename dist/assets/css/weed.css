@@ -4935,6 +4935,56 @@ body .sidebar .header .sidebar-logotype {
   left: 75px;
   width: 71px;
 }
+body .sidebar.text-below .sidebar-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+body .sidebar.text-below .sidebar-list li a,
+body .sidebar.text-below .sidebar-list .li a,
+body .sidebar.text-below .sidebar-list li .a,
+body .sidebar.text-below .sidebar-list .li .a {
+  line-height: 50px;
+  width: 100%;
+  display: inline-block;
+  margin: 5px 0;
+}
+body .sidebar.text-below .sidebar-list li a span.icon-container,
+body .sidebar.text-below .sidebar-list .li a span.icon-container,
+body .sidebar.text-below .sidebar-list li .a span.icon-container,
+body .sidebar.text-below .sidebar-list .li .a span.icon-container {
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  width: 65px;
+}
+body .sidebar.text-below .sidebar-list li a span.icon-container i,
+body .sidebar.text-below .sidebar-list .li a span.icon-container i,
+body .sidebar.text-below .sidebar-list li .a span.icon-container i,
+body .sidebar.text-below .sidebar-list .li .a span.icon-container i {
+  font-size: 2rem;
+}
+body .sidebar.text-below .sidebar-list li a span.centerer,
+body .sidebar.text-below .sidebar-list .li a span.centerer,
+body .sidebar.text-below .sidebar-list li .a span.centerer,
+body .sidebar.text-below .sidebar-list .li .a span.centerer {
+  line-height: 50px;
+  vertical-align: middle;
+}
+body .sidebar.text-below .sidebar-list li a span.text,
+body .sidebar.text-below .sidebar-list .li a span.text,
+body .sidebar.text-below .sidebar-list li .a span.text,
+body .sidebar.text-below .sidebar-list .li .a span.text {
+  font-size: 0.8em;
+  vertical-align: middle;
+  text-align: center;
+  display: block;
+  line-height: 1.5em;
+  margin-top: 5px;
+  color: #a9a9a9;
+}
 body .sidebar-list {
   padding: 0;
   margin: 0;
@@ -4948,7 +4998,7 @@ body .sidebar-list .li .a {
   transition: 0.25s;
   color: #808080;
   font-family: sans-serif;
-  line-height: 55px;
+  line-height: 50px;
   width: 100%;
   display: inline-block;
 }
@@ -4959,7 +5009,7 @@ body .sidebar-list .li .a span.icon-container {
   transition: 0.25s;
   display: inline-block;
   font-size: 1.2em;
-  line-height: 55px;
+  line-height: 50px;
   text-align: center;
   vertical-align: middle;
   width: 65px;
@@ -4977,7 +5027,7 @@ body .sidebar-list .li a span.centerer,
 body .sidebar-list li .a span.centerer,
 body .sidebar-list .li .a span.centerer {
   transition: 0.25s;
-  line-height: 55px;
+  line-height: 50px;
   vertical-align: middle;
 }
 body .sidebar-list li a span.text,
@@ -4989,7 +5039,7 @@ body .sidebar-list .li .a span.text {
   text-transform: uppercase;
   display: inline-block;
   line-height: 1.5em;
-  color: #808080;
+  color: #a9a9a9;
 }
 body .sidebar-list li a:hover,
 body .sidebar-list .li a:hover,
@@ -5032,14 +5082,14 @@ body .sidebar-bottom-action {
   transition: 0.25s;
   color: #808080;
   font-family: sans-serif;
-  line-height: 55px;
+  line-height: 50px;
   width: 100%;
   display: inline-block;
   transition: 0.5s;
   bottom: 0;
   display: none;
   left: 0;
-  line-height: 55px !important;
+  line-height: 50px !important;
   overflow: hidden;
   position: absolute;
   width: 65px;
@@ -5048,7 +5098,7 @@ body .sidebar-bottom-action span.icon-container {
   transition: 0.25s;
   display: inline-block;
   font-size: 1.2em;
-  line-height: 55px;
+  line-height: 50px;
   text-align: center;
   vertical-align: middle;
   width: 65px;
@@ -5060,7 +5110,7 @@ body .sidebar-bottom-action span.icon-container i {
 }
 body .sidebar-bottom-action span.centerer {
   transition: 0.25s;
-  line-height: 55px;
+  line-height: 50px;
   vertical-align: middle;
 }
 body .sidebar-bottom-action span.text {
@@ -5069,7 +5119,7 @@ body .sidebar-bottom-action span.text {
   text-transform: uppercase;
   display: inline-block;
   line-height: 1.5em;
-  color: #808080;
+  color: #a9a9a9;
 }
 body .sidebar-bottom-action:hover,
 body .sidebar-bottom-action.current {
