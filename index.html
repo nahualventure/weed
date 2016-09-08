@@ -369,7 +369,7 @@
     <h2>Popup</h2>
     <a we-button icon="heart" color="warning" we-open="test-popup-1">Open test popup</a>
     <div ng-controller="PopupController as popupCtrl">
-        <div id="test-popup-1" we-popup avoid-close-outside="true">
+        <div id="test-popup-1" we-popup afterclose = "popupCtrl.holamundo" avoid-close-outside="true">
 
           <div class="popup-title-bar">
             Título de popup
@@ -1211,13 +1211,19 @@
 
       </div>
     </div>
-    <h2>Calendar</h2>
-    <div ng-controller="CalendarController as calendarController">
-      <div we-calendar class="we-calendar-class" selected="calendarController.day" days="['Domingo','Lunes','']"></div>
-    </div>
 
-    <h2>Toggle</h2>
-    
+	<!--<h2>Calendar</h2>
+    <div ng-controller="CalendarController as calendarController">
+      <div we-calendar
+           class="we-calendar-class"
+           selectedobject="calendarController.dayO"
+           selected="calendarController.day"
+           languagec="'es'"
+           numberposition="'upper-left'"
+           activities="calendarController.funcionActividades"
+           limit="2"
+           actualmonth="calendarController.actual"></div>
+    </div>-->
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -1261,7 +1267,15 @@
 
             function calendarController() {
               var vm = this;
-              vm.day = moment();
+              vm.day = moment().locale("es");
+              vm.dayO = null;
+              vm.actualmonth =null;
+              vm.funcionActividades = function(actualmonth){
+                return [{"name":"Meeting Committee 1","place":"Here","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
+                        {"name":"Meeting Committee 2","place":"Now","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
+                        {"name":"Meeting Committee 3","place":"There","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7},
+                        {"name":"Meeting Committee 4","place":"IDK","date":"2016-07-27T14:38:10.560Z","description":"This is meeting 11","id":7}];
+              };
             }
 
             function popoverController() {
@@ -1288,6 +1302,10 @@
 
             function popupController(WeedApi){
                 var vm = this;
+
+                vm.holamundo = function(){
+                  console.log("hola mundo!!!!!!!!!!!!!!");
+                };
 
                 vm.closeActiveElements = function(){
                     WeedApi.closeActiveElements();

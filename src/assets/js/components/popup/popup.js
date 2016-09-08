@@ -15,7 +15,8 @@
       restrict: 'A',
       transclude: true,
       scope: {
-        avoidCloseOutside: '@'
+        avoidCloseOutside: '@',
+        afterclose: '='
       },
       replace: true,
       link: popupLink,
@@ -42,6 +43,9 @@
       vm.close = function(){
         vm.active = false;
         body.removeClass('with-open-popup');
+        if(typeof $scope.afterclose !== 'undefined'){
+          $scope.afterclose();
+        }
         $scope.$apply();
       }
     }

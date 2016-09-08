@@ -1,13 +1,15 @@
 @import "config.less";
 @calendar-border-colour:                                                        #CCC;
 @calendar-background-color:                                                     white;
-@calendar-width:                                                                700px;
+@calendar-width:                                                                95%;
 @calendar-border-width:                                                         1px;
 @calendar-margin-bottom:                                                        10px;
+@calendar-margin-left:                                                          30px;
 @calendar-header-second-color:                                                  #2875C7;
+@calendar-selected-color:                                                       red;
 @spacing:                                                                       10px;
 @icon-width:                                                                    40px;
-@calendar-header-height:                                                        40px;
+@calendar-header-height:                                                        80px;
 @calendar-header-width:                                                         100%;
 @calendar-header-font-color:                                                    white;
 @calendar-font-size:                                                            3em;
@@ -16,10 +18,18 @@
 @calendar-day-font-color:                                                       black;
 @calendar-today-background:                                                     #E3F2FF;
 @calendar-day-selected-font-color:                                              white;
+@calendar-navigation-left-position:                                             1rem;
+@calendar-navigation-right-position:                                            1rem;
+@calendar-navigation-today-position:                                            4rem;
+@calendar-navigation-top-position:                                              @calendar-header-height/4;
+@calendar-height-day-cell:                                                      150px;
+@calendar-number-font-size:                                                     0.75em;
+@calendar-names-font-size:                                                      0.75em;
+@calendar-header-font-size:                                                     20px;
+@calendar-height-day-names-cell:                                                30px;
 
 .vertical-center (@height) {
     height:@height;
-    line-height:@height !important;
     display:inline-block;
     vertical-align:middle;
 }
@@ -30,76 +40,118 @@
 }
 
 .we-calendar-class{
-    display: block;
     .border-box;
     background: @calendar-background-color;
     width: @calendar-width;
     border:solid @calendar-border-width @calendar-border-colour;
     margin-bottom: @calendar-margin-bottom;
+    margin-left: @calendar-margin-left;
 
     .header {
         width: @calendar-header-width;
         background: @calendar-header-second-color;
         height: @calendar-header-height;
         color: @calendar-header-font-color;
-
-        * {
-            .vertical-center(@calendar-header-height);
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+      .calendar-header-month {
+          font-weight:bold;
+          display: inline-block;
+          &:first-letter{
+            text-transform: capitalize
+          }
+          .border-box;
+          vertical-align: middle;
+          line-height:@calendar-header-height;
+          font-size: @calendar-header-font-size;
         }
-
-        span {
-            font-weight:bold;
-            text-transform:uppercase;
-            .border-box;
-            padding-left:@icon-width+@spacing;
-            margin-left:@icon-width*-1;
-            text-align:center;
-            padding-right:@icon-width;
-            color:inherit;
+        .calendar-navigation {
+          position: absolute;
+          top: @calendar-navigation-top-position;
+          &.navigation-left{
+            left: @calendar-navigation-left-position;
+          }
+          &.navigation-right{
+            right: @calendar-navigation-right-position;
+          }
+          &.navigation-today{
+            left: @calendar-navigation-today-position;
+          }
         }
     }
     .week {
         float:left;
         width:100%;
-        border-top:solid 1px @calendar-border-colour;
+
 
         &:first-child {
             border-top:none;
         }
 
-        .day {
+        .day-names {
             float:left;
             width:100%/7;
             .border-box;
             border-left:solid 1px @calendar-border-colour;
-            font-size:0.75em;
+            font-size:@calendar-names-font-size;
             text-align:center;
-            .vertical-center(30px);
+            .vertical-center(@calendar-height-day-names-cell);
+            line-height:@calendar-height-day-names-cell;
             background:@calendar-day-background;
             cursor:pointer;
             color:@calendar-day-font-color;
+            border-top:solid 1px @calendar-border-colour;
 
             &:first-child {
                 border-left:none;
             }
-
-            &.today {
-                background:@calendar-today-background;
-            }
-
-            &.different-month {
-                color:@calendar-different-month-color;
-            }
-
-            &.selected {
-                background:@calendar-header-second-color;
-                color:@calendar-day-selected-font-color;
-            }
         }
 
-        &.names>span {
-            color:@calendar-header-second-color;
-            font-weight:bold;
+        .day-cell-number {
+          float:left;
+          width:100%/7;
+          .border-box;
+          border-left:solid 1px @calendar-border-colour;
+          font-size: @calendar-number-font-size;
+          .vertical-center(@calendar-height-day-cell);
+          background:@calendar-day-background;
+          cursor:pointer;
+          color:@calendar-day-font-color;
+          border-top:solid 1px @calendar-border-colour;
+
+          &.center-number{
+            text-align: center;
+            line-height: @calendar-height-day-cell;
+            .calendar-number-day{
+
+            }
+          }
+          &.left-upper-number{
+            text-align: left;
+            line-height: 1rem;
+            .calendar-number-day{
+
+            }
+          }
+
+          &:first-child {
+              border-left:none;
+          }
+
+          &.today {
+              background:@calendar-today-background;
+          }
+
+          &.different-month {
+              color:@calendar-different-month-color;
+          }
+
+          &.selected {
+              background:@calendar-selected-color;
+              color:@calendar-day-selected-font-color;
+          }
         }
+
     }
 }
