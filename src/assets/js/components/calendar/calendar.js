@@ -120,6 +120,16 @@
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
+          for( i = 0; i < su.length ; i++) {
+            su[i].fileCount =0;
+            //vm.time = datetime.format('hh:mm a');
+            for(var j =0; j< su[i].meetingItems.length; j++) {
+              su[i].fileCount += su[i].meetingItems[j].files.length;
+              su[i].dateFormat = moment(su[i].date).format('dddd D [de] MMMM [del] YYYY');
+              su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
+              su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
+            }
+          }
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
               scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
