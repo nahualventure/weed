@@ -176,7 +176,7 @@
             if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
               console.log(activities[j]);
               console.log(activities[j].meeting);
-              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
               if(!activities[j].place)
               {
                 activities[j].place = activities[j].meeting.place;
