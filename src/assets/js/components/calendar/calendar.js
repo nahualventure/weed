@@ -174,7 +174,7 @@
           for(var j = 0; j < activities.length; j++)
           {
             if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
-              activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+              activities[j].formatDate  = moment(activities[j].timeFormatInput).format("HH:mm");
               if(!activities[j].place)
               {
                 activities[j].place = activities[j].meeting.place;
