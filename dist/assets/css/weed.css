@@ -2761,7 +2761,7 @@ button.button {
   padding: 0 40px;
   text-transform: uppercase;
   transition: 0.5s;
-  vertical-align: middle;
+  vertical-align: baseline;
   white-space: nowrap;
 }
 .button .accent {
@@ -2872,7 +2872,7 @@ button.button {
   transition: 0.5s;
 }
 .button span.text {
-  vertical-align: middle;
+  vertical-align: baseline;
   transition: 0.25s;
 }
 .button.left-end {
@@ -3977,7 +3977,7 @@ input[type="url"],
 input[type="date"],
 input[type="datetime"],
 input[type="datetime-local"] {
-  background: #f2f2f2;
+  background: #f8f8f8;
   border: 1px solid #d9d9d9;
   height: 51px;
 }
@@ -4033,7 +4033,7 @@ input.input-small,
   height: 39px;
 }
 textarea {
-  background: #f2f2f2;
+  background: #f8f8f8;
   border: 1px solid #d9d9d9;
   height: 100px;
   margin-bottom: 1rem;
@@ -4090,7 +4090,7 @@ input.input-tiny,
   box-sizing: border-box;
   transition: background 150ms, border 150ms;
   box-shadow: 0 1px 0 0 #f0f0f0;
-  background: #f2f2f2;
+  background: #f8f8f8;
   border: 1px solid #d9d9d9;
   display: inline-block;
   margin-bottom: 1rem;
@@ -5910,9 +5910,6 @@ body.with-open-popup {
   -ms-flex-preferred-size: 0;
       flex-basis: 0;
   max-width: 100%;
-}
-.col.friendly-size {
-  max-width: 916px;
 }
 .col.reverse {
   -ms-flex-direction: column-reverse;

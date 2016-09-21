@@ -17,7 +17,6 @@
 @grid-col-names:                                            s, m, l, xl;
 @grid-col-breaks:                                           @system-small-break, @system-medium-break, @system-large-break, @system-xlarge-break;
 
-@grid-col-friendly-size:                                    916px;
 .@{grid-class} {
   overflow-x: hidden;
 
@@ -61,10 +60,6 @@
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
-
-  &.friendly-size{
-    max-width: @grid-col-friendly-size;
-  }
 
   &.reverse {
     .col-reverse();
