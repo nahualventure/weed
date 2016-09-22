@@ -2761,7 +2761,7 @@ button.button {
   padding: 0 40px;
   text-transform: uppercase;
   transition: 0.5s;
-  vertical-align: baseline;
+  vertical-align: middle;
   white-space: nowrap;
 }
 .button .accent {
