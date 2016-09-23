@@ -1212,6 +1212,11 @@
       </div>
     </div>
 
+    <h2>Knob</h2>
+    <div ng-controller="KnobController as knobController">
+      <span we-knob bool-value="knobController.boolValue"></span>
+    </div>
+
 	<!--<h2>Calendar</h2>
     <div ng-controller="CalendarController as calendarController">
       <div we-calendar
@@ -1249,6 +1254,7 @@
                 .controller('NotificationController', notificationController)
                 .controller('CalendarController', calendarController)
                 .controller('PopoverController', popoverController)
+                .controller('KnobController', knobController)
                 .factory("States", function(){
                   var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
                   return states;
@@ -1281,6 +1287,11 @@
             function popoverController() {
                 var vm = this;
                 vm.text = "Shoo mulaa";
+            }
+
+            function knobController() {
+                var vm = this;
+                vm.boolValue = true;
             }
 
             function typeaheadController(WeedApi, States){

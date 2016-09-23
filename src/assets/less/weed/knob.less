@@ -1,0 +1,58 @@
+@import "config.less";
+
+@knob-border-color:                                         @black;
+@knob-gradient:                                             @white;
+@knob-background:                                           @white;
+@knob-slide-background-color:                               @black-10;
+@knob-slide-border-color:                                   @black-15;
+@knob-true-slide-border-color:                              @black-30;
+@knob-true-slide-background-color:                          @black-50;
+@knob-slide-shadow-color:                                   fadeout(@white, 50%);
+@knob-size:                                                 29px;
+@knob-slide-width:                                          65px;
+@knob-slide-height:                                         23px;
+
+.knob-container{
+  display: inline-block;
+  height: @knob-slide-height;
+  position: relative;
+  width: @knob-slide-width;
+
+  .knob{
+    .circle(@knob-size);
+    background: @knob-background;
+    border: 1px solid @knob-border-color;
+    cursor: pointer;
+    display: inline-block;
+    left: -2px;
+    position: absolute;
+    top: (@knob-slide-height - @knob-size) / 2.0;
+    transition: @faster;
+  }
+
+  .knob-slide{
+    background-color: @knob-slide-background-color;
+    border-radius: @system-border-radius;
+    border: 1px solid @knob-slide-border-color;
+    box-shadow: 0 0 0 @knob-slide-shadow-color;
+    cursor: pointer;
+    display: inline-block;
+    height: @knob-slide-height;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: @faster;
+    width: @knob-slide-width;
+  }
+
+  &.bool-true{
+    .knob{
+      left: (@knob-slide-width - @knob-size + 2);
+    }
+
+    .knob-slide{
+      background-color: @knob-true-slide-background-color;
+      border: 1px solid @knob-true-slide-border-color;
+    }
+  }
+}

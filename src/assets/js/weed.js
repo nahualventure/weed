@@ -17,6 +17,7 @@
       'weed.list',
       'weed.calendar',
       'weed.corner-notifications',
+      'weed.knob',
       'ui.bootstrap',
       'ui.bootstrap.typeahead',
       'ui.bootstrap.tooltip',
