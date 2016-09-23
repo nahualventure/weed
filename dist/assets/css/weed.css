@@ -8295,6 +8295,7 @@ hr {
   display: inline-block;
   height: 23px;
   position: relative;
+  vertical-align: middle;
   width: 65px;
 }
 .knob-container .knob {
@@ -8330,6 +8331,16 @@ hr {
 .knob-container.bool-true .knob-slide {
   background-color: #808080;
   border: 1px solid #b3b3b3;
+}
+.knob-container.small-knob .knob {
+  border-radius: 100%;
+  width: 23px;
+  height: 23px;
+  top: -2.5px;
+}
+.knob-container.small-knob .knob-slide {
+  height: 18px;
+  width: 50px;
 }
 /*
  * Instructions: each weed module contains a base customization variables at

@@ -20,7 +20,8 @@
       replace: true,
       templateUrl: 'components/knob/knob.html',
       scope: {
-        boolValue: '='
+        boolValue: '=',
+        size: '@'
       },
       controller: knobController,
       controllerAs: 'ctrl',
@@ -31,7 +32,6 @@
       var vm = this;
 
       vm.toggleBoolValue = function(){
-        console.log("llega");
         vm.boolValue = !vm.boolValue;
       }
     }

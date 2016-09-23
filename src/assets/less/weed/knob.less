@@ -11,11 +11,15 @@
 @knob-size:                                                 29px;
 @knob-slide-width:                                          65px;
 @knob-slide-height:                                         23px;
+@knob-small-size:                                           23px;
+@knob-small-slide-height:                                   18px;
+@knob-small-slide-width:                                    50px;
 
 .knob-container{
   display: inline-block;
   height: @knob-slide-height;
   position: relative;
+  vertical-align: middle;
   width: @knob-slide-width;
 
   .knob{
@@ -53,6 +57,18 @@
     .knob-slide{
       background-color: @knob-true-slide-background-color;
       border: 1px solid @knob-true-slide-border-color;
+    }
+  }
+
+  &.small-knob{
+    .knob{
+      .circle(@knob-small-size);
+      top: (@knob-small-slide-height - @knob-small-size) / 2.0;
+    }
+
+    .knob-slide{
+      height: @knob-small-slide-height;
+      width: @knob-small-slide-width;
     }
   }
 }

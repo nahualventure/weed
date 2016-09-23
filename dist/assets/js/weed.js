@@ -3786,7 +3786,8 @@ if (typeof define === 'function' && define.amd) {
       replace: true,
       templateUrl: 'components/knob/knob.html',
       scope: {
-        boolValue: '='
+        boolValue: '=',
+        size: '@'
       },
       controller: knobController,
       controllerAs: 'ctrl',
@@ -3797,7 +3798,6 @@ if (typeof define === 'function' && define.amd) {
       var vm = this;
 
       vm.toggleBoolValue = function(){
-        console.log("llega");
         vm.boolValue = !vm.boolValue;
       }
     }
