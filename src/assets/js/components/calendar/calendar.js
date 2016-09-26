@@ -181,12 +181,11 @@
               }
               days[days.length-1].activities.push(activities[j]);
             }
+
           }
+          date = date.clone();
+          date.add(1, "d");
       }
-
-      date = date.clone();
-      date.add(1, "d");
-
       return days;
     }
   };
