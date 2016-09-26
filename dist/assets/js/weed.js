@@ -15623,23 +15623,19 @@ if (typeof define === 'function' && define.amd) {
           });
           for(var j = 0; j < activities.length; j++)
           {
-            console.log("---------------su 4-------------------");
-            console.log(activities[j]);
             if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
-              console.log("****************************************************");
-              console.log(activities[j]);
-              console.log(activities[j].meeting);
               activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
               if(!activities[j].place)
               {
                 activities[j].place = activities[j].meeting.place;
               }
               days[days.length-1].activities.push(activities[j]);
-              console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-              console.log(days.length-1);
-              console.log(days[days.length-1].activities);
             }
-
+          }
+          console.log("???????????????????????????????????????");
+          for(var x = 0; x < days.length; x++)
+          {
+            console.log(days[x]);
           }
           date = date.clone();
           date.add(1, "d");
