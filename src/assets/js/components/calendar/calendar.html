@@ -31,12 +31,11 @@
         ng-repeat="day in week.days"
         id="{{day.dateId}}">
   <span class="calendar-number-day">{{day.number}}</span>
-  {{day.activities}}
   <div
     class="calendar-meeting-inside"
     ng-repeat="act in day.activities | limitTo:limit"
     ng-click="functionopenselect(act, $event); day.openPop = false">
-    <p class="calendar-meeting-inside-place ellipsis">{{act}}</p>
+    <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
     <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
   </div>
   <a
