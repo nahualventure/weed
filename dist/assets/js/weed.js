@@ -15634,11 +15634,6 @@ if (typeof define === 'function' && define.amd) {
           }
       }
 
-      console.log("---------------- su---------------------------");
-      for(var x =0; x<days.length; x++)
-      {
-        console.log(days[x]);
-      }
       date = date.clone();
       date.add(1, "d");
 
