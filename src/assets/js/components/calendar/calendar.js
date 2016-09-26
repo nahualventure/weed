@@ -120,8 +120,6 @@
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
-          console.log("---------------su -------------------");
-          console.log(su);
           for( i = 0; i < su.length ; i++) {
             su[i].meeting.fileCount =0;
             //vm.time = datetime.format('hh:mm a');
@@ -132,8 +130,6 @@
               su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
             }
           }
-          console.log("---------------su 2-------------------");
-          console.log(su);
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
               scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
@@ -163,8 +159,6 @@
     }
 
     function _buildWeek(date, month, activities) {
-      console.log("---------------su 3-------------------");
-      console.log(activities);
       var days = [];
       for (var i = 0; i < 7; i++) {
           days.push({
@@ -182,6 +176,7 @@
             console.log("---------------su 4-------------------");
             console.log(activities[j]);
             if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
+              console.log("****************************************************");
               console.log(activities[j]);
               console.log(activities[j].meeting);
               activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
