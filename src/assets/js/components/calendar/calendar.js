@@ -185,6 +185,9 @@
                 activities[j].place = activities[j].meeting.place;
               }
               days[days.length-1].activities.push(activities[j]);
+              console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+              console.log(days.length-1);
+              console.log(days[days.length-1].activities);
             }
 
           }
