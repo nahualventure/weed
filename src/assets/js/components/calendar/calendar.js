@@ -120,6 +120,8 @@
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
+          console.log("---------------su -------------------");
+          console.log(su);
           for( i = 0; i < su.length ; i++) {
             su[i].meeting.fileCount =0;
             //vm.time = datetime.format('hh:mm a');
