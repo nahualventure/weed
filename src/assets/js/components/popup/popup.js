@@ -25,9 +25,10 @@
       controller: popupController
     };
 
+    popupController.$inject = ['$scope'];
+
     return directive;
 
-    popupController.$inject = ['$scope'];
 
     function popupController($scope){
       var vm = this;

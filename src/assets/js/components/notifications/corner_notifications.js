@@ -10,6 +10,9 @@
 
   function cornerNotificationDirective(WeedApi, $timeout){
 
+    // Injection
+    cornerNotificationsController.$inject = ['$scope'];
+
     return {
       restrict: 'A',
       replace: true,
@@ -72,9 +75,6 @@
         });
       }
     };
-
-    // Injection
-    cornerNotificationsController.$inject = ['$scope'];
 
     function cornerNotificationsController($scope){
       var vm = this;
