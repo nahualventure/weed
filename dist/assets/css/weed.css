@@ -2611,10 +2611,10 @@ table {
   * Our small help to your productivity
   */
 .pull-right {
-  float: right;
+  float: right !important;
 }
 .pull-left {
-  float: left;
+  float: left !important;
 }
 .hide {
   display: none;
@@ -4688,6 +4688,7 @@ input[type="radio"] {
 }
 .navbar .navbar-element.logo {
   float: left;
+  float: left !important;
   transition: 0.5s;
   background: #7a7a7a;
   height: 65px;
