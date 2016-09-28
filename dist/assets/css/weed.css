@@ -3679,8 +3679,11 @@ input[type="button"] {
 }
 select {
   background: none;
+  border-radius: 7px;
+  box-sizing: border-box;
   height: 53px;
   line-height: 53px;
+  padding: 0 15px;
 }
 select.left-end {
   border-bottom-right-radius: 0;
@@ -3697,10 +3700,12 @@ select.block {
 select.input-small {
   height: 39px;
   line-height: 39px;
+  padding: 0 10px;
 }
 select.input-tiny {
   height: 26px;
   line-height: 26px;
+  padding: 0 5px;
 }
 input[type="text"],
 input[type="number"],
@@ -6784,7 +6789,7 @@ body.sidebarless .corner-notification {
   overflow: hidden;
   padding: 30px 20px 40px 20px;
   position: relative;
-  width: auto;
+  width: 100%;
 }
 .user-card .close,
 .user-card .more {
@@ -6851,7 +6856,7 @@ body.sidebarless .corner-notification {
 }
 .user-card.compress {
   padding: 25px 15px;
-  width: auto;
+  width: 100%;
   height: 90px;
 }
 .user-card.compress .picture {
@@ -6878,67 +6883,6 @@ body.sidebarless .corner-notification {
 }
 .user-card.compress .email {
   display: none;
-}
-.user-card.compress.client {
-  height: auto;
-  position: relative;
-  overflow: visible;
-  width: auto;
-}
-.user-card.compress.client .data {
-  max-width: 150px;
-  width: auto;
-  float: none;
-  margin-bottom: 2rem;
-}
-.user-card.compress.client .data .name {
-  color: #97959c;
-}
-.user-card.compress.client .data .extra-data {
-  color: #b1afb5;
-  font-size: 0.8em;
-  margin-bottom: 1rem;
-}
-.user-card.compress.client .data .client-phone,
-.user-card.compress.client .data .client-email {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 0.8em;
-}
-.user-card.compress.client .data .client-phone {
-  color: #13a547;
-}
-.user-card.compress.client .data .client-email {
-  color: #00938e;
-}
-.user-card.compress.client .client-tag-container {
-  position: absolute;
-  right: -30px;
-  width: 100px;
-  top: 25px;
-}
-.user-card.compress.client .client-tag-container .client-tag-label {
-  color: #716e76;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.8em;
-  padding-left: 1rem;
-  margin-bottom: 0.5rem;
-}
-.user-card.compress.client .client-tag-container .client-tag {
-  border-radius: 5px;
-  color: #fff;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-.user-card.compress.client .client-tag-container .client-tag.danger {
-  background: #de5a5a;
-}
-.user-card.compress.client .client-tag-container .client-tag.success {
-  background: #1ca462;
 }
 .user-card.placeholder {
   background: #e2e7e7;
@@ -7614,7 +7558,7 @@ hr {
   color: #666666;
 }
 .dynamic-table .dynamic-table-row .element.user .picture {
-  border-color: #333333;
+  box-shadow: 0px 0px 0px 2px #333333;
 }
 .dynamic-table .dynamic-table-row .element.dynamic-table-row-tag {
   border-right: 1px solid #eee;
@@ -8045,7 +7989,7 @@ hr {
   padding: 0px 0px 0px 0px;
   position: relative;
   width: auto;
-  max-width: 240px;
+  max-width: 100%;
 }
 .card .picture {
   background: url('') #fff center center;
@@ -8146,8 +8090,8 @@ hr {
   overflow: hidden;
   padding: 5px 20px 20px 20px;
   position: relative;
-  min-width: 240px;
-  max-width: 240px;
+  min-width: 100%;
+  max-width: 100%;
 }
 .bubble-menu .bubble-menu-tittle {
   font-family: sans-serif;
