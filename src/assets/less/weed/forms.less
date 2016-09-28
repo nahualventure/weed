@@ -82,6 +82,7 @@
 @form-toggler-wrapper-vertical-padding:                     1px;
 
 @form-select2-z-index:                                      2;
+@form-select-radius:                                        @system-border-radius*0.7;
 
 // Dropdown
 @form-dropdown-background-color:                            fadeout(@black-5, 5%);
@@ -337,8 +338,11 @@ input[type="button"]{
 // Selects
 select{
   background: none;
+  border-radius: @form-select-radius;
+  box-sizing: border-box;
   height: @form-input-height;
   line-height: @form-input-height;
+  padding: 0 15px;
 
   &.left-end{
     border-bottom-right-radius: 0;
@@ -358,11 +362,13 @@ select{
   &.input-small{
     height: @form-input-small-height - 2px;
     line-height: @form-input-small-height - 2px;
+    padding: 0 10px;
   }
 
   &.input-tiny{
     height: @form-input-tiny-height - 2px;
     line-height: @form-input-tiny-height - 2px;
+    padding: 0 5px;
   }
 }
 
