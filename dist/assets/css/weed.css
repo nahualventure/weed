@@ -8021,9 +8021,9 @@ hr {
   color: #999999;
 }
 .card .card-footer {
-  border-left: 1px solid #bfbfbf;
+  border-top: none;
+  border: 1px solid #bfbfbf;
   border-radius: 0 0 10px 10px;
-  border-right: 1px solid #bfbfbf;
   padding: 1rem;
   text-align: center;
 }

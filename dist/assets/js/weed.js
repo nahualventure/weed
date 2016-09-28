@@ -3692,75 +3692,6 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.knob', ['weed.knob'])
-    .directive('weKnob', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'A',
-      replace: true,
-      templateUrl: 'components/knob/knob.html',
-      scope: {
-        boolValue: '=',
-        size: '@'
-      },
-      controller: knobController,
-      controllerAs: 'ctrl',
-      bindToController: true
-    };
-
-    function knobController(){
-      var vm = this;
-
-      vm.toggleBoolValue = function(){
-        vm.boolValue = !vm.boolValue;
-      }
-    }
-  };
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-/**
- * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -3805,6 +3736,75 @@ if (typeof define === 'function' && define.amd) {
       });
 
     }
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.knob', ['weed.knob'])
+    .directive('weKnob', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'A',
+      replace: true,
+      templateUrl: 'components/knob/knob.html',
+      scope: {
+        boolValue: '=',
+        size: '@'
+      },
+      controller: knobController,
+      controllerAs: 'ctrl',
+      bindToController: true
+    };
+
+    function knobController(){
+      var vm = this;
+
+      vm.toggleBoolValue = function(){
+        vm.boolValue = !vm.boolValue;
+      }
+    }
+  };
+
 })(angular);
 /**
  * @ngdoc function
