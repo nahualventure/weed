@@ -117,8 +117,6 @@
   box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
   box-sizing: border-box;
   background: @background;
-  border: 1px solid @border-color;
-  border-top: none;
   display: inline-block;
   font-family: @font-family;
   height: @height;
@@ -149,8 +147,13 @@
     font-family: @font-family-divider;
     color: @font-color-divider;
   }
+
   .card-section{
+    border-top: none;
+    border-left: 1px solid @border-color;
+    border-right: 1px solid @border-color;
     padding: 1rem;
+
     .card-tittle{
       font-family: @font-family-tittle;
       color: @font-color-tittle;
@@ -160,7 +163,10 @@
       color: @font-color-paragraph;
     }
   }
+
   .card-footer{
+    border-left: 1px solid @border-color;
+    border-right: 1px solid @border-color;
     padding: 1rem;
     text-align: center;
 

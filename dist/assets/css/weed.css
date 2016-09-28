@@ -7978,8 +7978,6 @@ hr {
   box-shadow: 0 2px 1px 0px rgba(191, 191, 191, 0.3);
   box-sizing: border-box;
   background: #fff;
-  border: 1px solid #bfbfbf;
-  border-top: none;
   display: inline-block;
   font-family: sans-serif;
   height: auto;
@@ -8009,6 +8007,9 @@ hr {
   color: #e2e7e7;
 }
 .card .card-section {
+  border-top: none;
+  border-left: 1px solid #bfbfbf;
+  border-right: 1px solid #bfbfbf;
   padding: 1rem;
 }
 .card .card-section .card-tittle {
@@ -8020,6 +8021,8 @@ hr {
   color: #999999;
 }
 .card .card-footer {
+  border-left: 1px solid #bfbfbf;
+  border-right: 1px solid #bfbfbf;
   padding: 1rem;
   text-align: center;
 }
