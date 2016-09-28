@@ -8022,6 +8022,7 @@ hr {
 }
 .card .card-footer {
   border-left: 1px solid #bfbfbf;
+  border-radius: 0 0 10px 10px;
   border-right: 1px solid #bfbfbf;
   padding: 1rem;
   text-align: center;
