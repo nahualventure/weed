@@ -22,13 +22,13 @@
 @user-card-compress-data-width:                             140px;
 @user-card-compress-padding:                                15px;
 @user-card-compress-separation:                             10px;
-@user-card-compress-width:                                  auto;
+@user-card-compress-width:                                  100%;
 @user-card-padding:                                         30px 20px 40px 20px;
 @user-card-picture-margin:                                  20px;
 @user-card-picture-size:                                    90px;
 @user-card-picture-small-size:                              45px;
 @user-card-right-margin:                                    25px;
-@user-card-width:                                           auto;
+@user-card-width:                                           100%;
 @user-card-height:                                          294px;
 @user-card-compressed-height:                               90px;
 @user-card-placeholder-plus-size:                           70px;
@@ -189,80 +189,80 @@
       display: none;
     }
 
-    &.client{
-      height: auto;
-      position: relative;
-      overflow: visible;
-      width: @client-width;
-      // margin: 0 40px 50px 0;
+    // &.client{
+    //   height: auto;
+    //   position: relative;
+    //   overflow: visible;
+    //   width: @client-width;
+    //   // margin: 0 40px 50px 0;
 
-      @client-tag-height: 30px;
-      @client-tag-width: 100px;
-      @client-name-color: #97959c;;
+    //   @client-tag-height: 30px;
+    //   @client-tag-width: 100px;
+    //   @client-name-color: #97959c;;
 
-      .data{
-        max-width: 150px;
-        width: auto;
-        float: none;
-        margin-bottom: @element-vertical-margin*2;
+    //   .data{
+    //     max-width: 150px;
+    //     width: auto;
+    //     float: none;
+    //     margin-bottom: @element-vertical-margin*2;
 
-        .name{
-          color: @client-name-color;
-        }
+    //     .name{
+    //       color: @client-name-color;
+    //     }
 
-        .extra-data{
-          color: lighten(@client-name-color, 10%);
-          font-size: 0.8em;
-          margin-bottom: @element-vertical-margin;
-        }
+    //     .extra-data{
+    //       color: lighten(@client-name-color, 10%);
+    //       font-size: 0.8em;
+    //       margin-bottom: @element-vertical-margin;
+    //     }
 
-        .client-phone, .client-email{
-          .ellipsis();
-          font-weight: bold;
-          font-size: 0.8em;
-        }
+    //     .client-phone, .client-email{
+    //       .ellipsis();
+    //       font-weight: bold;
+    //       font-size: 0.8em;
+    //     }
 
-        .client-phone{
-          color: #13a547;
-        }
+    //     .client-phone{
+    //       color: #13a547;
+    //     }
 
-        .client-email{
-          color: #00938e;
-        }
-      }
+    //     .client-email{
+    //       color: #00938e;
+    //     }
+    //   }
 
-      .client-tag-container{
-        position: absolute;
-        right: -@client-tag-height;
-        width: @client-tag-width;
-        top: (@compress-separation + @compress-padding);
+    //   .client-tag-container{
+    //     position: absolute;
+    //     right: -@client-tag-height;
+    //     width: @client-tag-width;
+    //     top: (@compress-separation + @compress-padding);
 
-        .client-tag-label{
-          color: darken(@client-name-color, 15%);
-          text-transform: uppercase;
-          font-weight: bold;
-          font-size: 0.8em;
-          padding-left: @element-vertical-margin;
-          margin-bottom: @element-vertical-margin / 2.0;
-        }
+    //     .client-tag-label{
+    //       color: darken(@client-name-color, 15%);
+    //       text-transform: uppercase;
+    //       font-weight: bold;
+    //       font-size: 0.8em;
+    //       padding-left: @element-vertical-margin;
+    //       margin-bottom: @element-vertical-margin / 2.0;
+    //     }
 
-        .client-tag{
-          border-radius: @system-border-radius / 2.0;
-          color: @white;
-          height: @client-tag-height;
-          line-height: @client-tag-height;
-          text-align: center;
+    //     .client-tag{
+    //       border-radius: @system-border-radius / 2.0;
+    //       color: @white;
+    //       height: @client-tag-height;
+    //       line-height: @client-tag-height;
+    //       text-align: center;
 
-          &.danger{
-            background: @system-danger-color;
-          }
+    //       &.danger{
+    //         background: @system-danger-color;
+    //       }
 
-          &.success{
-            background: @system-success-color;
-          }
-        }
-      }
-    }
+    //       &.success{
+    //         background: @system-success-color;
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   // TODO r1.0
