@@ -8002,6 +8002,8 @@ hr {
 }
 .card .card-divider {
   background: #b3b3b3;
+  border-left: 1px solid #bfbfbf;
+  border-right: 1px solid #bfbfbf;
   padding: 1rem;
   font-family: sans-serif;
   color: #e2e7e7;
