@@ -344,6 +344,11 @@ select{
   line-height: @form-input-height;
   padding: 0 15px;
 
+  &[disabled],
+  &[disabled="disabled"]{
+    opacity: 0.3;
+  }
+
   &.left-end{
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;

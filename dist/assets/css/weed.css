@@ -3685,6 +3685,10 @@ select {
   line-height: 53px;
   padding: 0 15px;
 }
+select[disabled],
+select[disabled="disabled"] {
+  opacity: 0.3;
+}
 select.left-end {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
