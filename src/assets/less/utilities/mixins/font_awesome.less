@@ -1,0 +1,20 @@
+//.font-awesome-background("\f067", 16px);
+.font-awesome-background(@char; @font-size){
+  position: relative;
+
+  &:after{
+    content: @char;
+    font-family: "FontAwesome";
+    font-size: @font-size;
+    font-style: normal;
+    font-weight: normal;
+    height: @font-size;
+    left: 50%;
+    line-height: @font-size;
+    margin: -(@font-size/2.0) 0 0 -(@font-size/2.0);
+    position: absolute;
+    text-decoration: inherit;
+    top: 50%;
+    z-index: 1;
+  }
+}

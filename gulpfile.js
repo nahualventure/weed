@@ -29,7 +29,7 @@ var paths = {
   ],
   // Less will check these folders for files when you use @import.
   less: [
-    'bower_components/bootstrap/less',
+    'bower_components',
     'src/assets/less/weed'
     // 'bower_components/foundation-icon-fonts'
   ],

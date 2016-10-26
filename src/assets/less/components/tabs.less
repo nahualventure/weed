@@ -1,0 +1,107 @@
+@import "../variables.less";
+
+@tabset-horizontal-border-color:                            @black-25;
+@tabset-tab-background:                                     @black-10;
+@tabset-tab-font-color:                                     @black-35;
+@tabset-tab-hover-font-color:                               @black-25;
+@tabset-vertical-border-color:                              @black-15;
+
+@tabset-tab-height:                                         3rem;
+@tabset-tab-icon-separation:                                10px;
+@tabset-tab-padding:                                        1rem;
+
+.tabset{
+  ul.tabs{
+    .clearbox();
+    .clearfix();
+    list-style: none;
+    background: @tabset-tab-background;
+
+    &.separate-top{
+      border-top: 1px solid @tabset-horizontal-border-color;
+    }
+
+    .tab{
+      box-sizing: border-box;
+      transition: @fastest;
+      background: @tabset-tab-background;
+      border-right: 1px solid @tabset-vertical-border-color;
+      color: @tabset-tab-font-color;
+      display: block;
+      float: left;
+      text-align: center;
+
+      &:hover{
+        color: @tabset-tab-hover-font-color;
+      }
+
+      &:last-child{
+        border-right: none;
+
+        &.not-last{
+          border-right: 1px solid @tabset-vertical-border-color;
+        }
+      }
+
+      &.active{
+        background: @white;
+        border-bottom-color: fadeout(@tabset-horizontal-border-color, 100%);
+        color: @tabset-tab-hover-font-color;
+      }
+
+      .text{
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .@{fa-css-prefix}{
+        margin-right: @tabset-tab-icon-separation;
+      }
+
+      a{
+        color: inherit;
+        display: block;
+        height: @tabset-tab-height;
+        line-height: @tabset-tab-height;
+        padding: 0 @tabset-tab-padding;
+      }
+    }
+  }
+
+  &.vertical-icon{
+    ul.tabs{
+      .tab{
+
+        &:not(.only-icon){
+          height: auto;
+
+          a{
+            height: auto;
+            line-height: initial;
+            padding: 1rem @tabset-tab-padding;
+
+            i.@{fa-css-prefix}{
+              margin-right: 0;
+              margin-bottom: @tabset-tab-icon-separation/2.0;
+            }
+
+            .text{
+              display: block;
+            }
+          }
+        }
+
+        &.only-icon{
+
+          a{
+            .empty-fill();
+          }
+
+          i.@{fa-css-prefix}{
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

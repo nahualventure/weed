@@ -1,0 +1,212 @@
+@card-background:                                         @white;
+@card-border-color:                                       @black-25;
+@card-close-background:                                   @black-5;
+@card-close-border-color:                                 @black-15;
+@card-close-font-color:                                   @black-40;
+@card-font-family:                                        sans-serif;
+@card-font-family-tittle:                                 sans-serif;
+@card-font-family-paragraph:                              sans-serif;
+@card-name-color:                                         @system-base-color;
+@card-picture-background:                                 @white;
+@card-picture-border-color:                               @black-30;
+@card-picture-placeholder:                                url('');
+@card-role-color:                                         @black-15;
+
+@card-placeholder-background:                             #e2e7e7;
+@card-placeholder-border:                                 #d5dada;
+@card-placeholder-plus-background:                        #c1c6c6;
+@card-placeholder-plus-color:                             #e2e7e7;
+@card-placeholder-text-color:                             #a6a7a7;
+
+@card-placeholder-background:                             #e2e7e7;
+@card-placeholder-border:                                 #d5dada;
+@card-placeholder-plus-background:                        #c1c6c6;
+@card-placeholder-plus-color:                             #e2e7e7;
+@card-placeholder-text-color:                             #a6a7a7;
+
+@card-divider-background:                                 #b3b3b3;
+@card-bottom-top-margin:                                  #b3b3b3;
+@card-font-family-divider:                                sans-serif;
+@card-font-color-divider:                                 #e2e7e7;
+@card-font-color-paragraph:                               @black-40;
+@card-font-color-tittle:                                  @black-15;
+@card-hr-divider-top:                                     #b3b3b3;
+@card-hr-divider-bottom:                                  #b3b3b3;
+
+@card-border-radius:                                      @system-border-radius;
+@card-bottom-margin:                                      20px;
+@card-padding:                                            0px 0px 0px 0px;
+@card-picture-margin:                                     20px;
+@card-picture-width:                                      100%;
+@card-picture-height:                                     auto;
+@card-picture-small-size:                                 45px;
+@card-right-margin:                                       25px;
+@card-width:                                              100%;
+@card-max-width:                                          100%;
+@card-height:                                             auto;
+@card-placeholder-plus-size:                              70px;
+@card-placeholder-plus-margin-bottom:                     20px;
+@card-placeholder-plus-margin-top:                        40px;
+@card-placeholder-text-width:                             110px;
+@card-client-width:                                       auto;
+
+@card-footer-font-color:                                  @black-25;
+@card-footer-image-size:                                  50px;
+
+@card-loader-delay:                                       0.1s;
+@card-loader-circle-size:                                 10px;
+@card-loader-circle-separation:                           2px;
+@card-loader-left-separation:                             110px;
+
+@card-loader-color:                                       red;
+
+.make-loader-animation(cardloaderkf; @card-loader-color;);
+
+.make-card(
+  @background: @card-background;
+  @border-color: @card-border-color;
+  @border-radius: @card-border-radius;
+  @bottom-margin: @card-bottom-margin;
+  @close-background: @card-close-background;
+  @close-border-color: @card-close-border-color;
+  @close-font-color: @card-close-font-color;
+  @client-width: @card-client-width;
+  @font-family: @card-font-family;
+  @font-family: @card-font-family;
+  @name-color: @card-name-color;
+  @padding: @card-padding;
+  @picture-background: @card-picture-background;
+  @picture-border-color: @card-picture-border-color;
+  @picture-margin: @card-picture-margin;
+  @picture-placeholder: @card-picture-placeholder;
+  @picture-width: @card-picture-width;
+  @picture-height: @card-picture-height;
+  @picture-small-size: @card-picture-small-size;
+  @right-margin: @card-right-margin;
+  @role-color: @card-role-color;
+  @width: @card-width;
+  @height: @card-height;
+  @placeholder-background: @card-placeholder-background;
+  @placeholder-border: @card-placeholder-border;
+  @placeholder-plus-size: @card-placeholder-plus-size;
+  @placeholder-plus-background: @card-placeholder-plus-background;
+  @placeholder-plus-color: @card-placeholder-plus-color;
+  @placeholder-plus-margin-bottom: @card-placeholder-plus-margin-bottom;
+  @placeholder-plus-margin-top: @card-placeholder-plus-margin-top;
+  @placeholder-text-color: @card-placeholder-text-color;
+  @placeholder-text-width: @card-placeholder-text-width;
+  @divider-background: @card-divider-background;
+  @bottom-top-margin: @card-bottom-top-margin;
+  @font-family-tittle: @card-font-family-tittle;
+  @font-family-paragraph: @card-font-family-paragraph;
+  @font-family-divider: @card-font-family-divider;
+  @font-color-divider: @card-font-color-divider;
+  @font-color-paragraph: @card-font-color-paragraph;
+  @font-color-tittle: @card-font-color-tittle;
+  @hr-divider-top: @card-hr-divider-top;
+  @hr-divider-bottom: @card-hr-divider-bottom;
+  @footer-font-color: @card-footer-font-color;
+  @footer-image-size: @card-footer-image-size;
+  @loader-delay: @card-loader-delay;
+  @loader-circle-size: @card-loader-circle-size;
+  @loader-circle-separation: @card-loader-circle-separation;
+  @loader-left-separation: @card-loader-left-separation;
+  ){
+  border-radius: @border-radius;
+  box-shadow: 0 2px 1px 0px fadeout(@border-color, 70%);
+  box-sizing: border-box;
+  background: @background;
+  display: inline-block;
+  font-family: @font-family;
+  height: @height;
+  margin-bottom: @bottom-margin;
+  margin-right: 0;
+  overflow: hidden;
+  padding: @padding;
+  position: relative;
+  width: @width;
+  max-width: @card-max-width;
+
+  .picture{
+    background: @picture-placeholder @picture-background center center;
+    background-size: cover;
+    display: block;
+    height: @picture-height;
+    margin: 0 auto 0 auto;
+    width: @picture-width;
+
+    &.placeholded{
+      border-color: fadeout(@card-picture-border-color, 100%);
+    }
+  }
+
+  .card-divider{
+    background: @divider-background;
+    border-left: 1px solid @border-color;
+    border-right: 1px solid @border-color;
+    padding: 1rem;
+    font-family: @font-family-divider;
+    color: @font-color-divider;
+  }
+
+  .card-section{
+    border-top: none;
+    border-left: 1px solid @border-color;
+    border-right: 1px solid @border-color;
+    padding: 1rem;
+
+    .card-tittle{
+      font-family: @font-family-tittle;
+      color: @font-color-tittle;
+    }
+    .card-paragraph{
+      font-family: @font-family-paragraph;
+      color: @font-color-paragraph;
+    }
+  }
+
+  .card-footer{
+    border-top: none;
+    border: 1px solid @border-color;
+    border-radius: 0 0 @border-radius @border-radius;
+    padding: 1rem;
+    text-align: center;
+
+    .picture-footer{
+      border-radius: 1000px; // Extreme
+      background: @picture-placeholder @picture-background center center;
+      background-size: cover;
+      border: 2px solid @user-card-picture-border-color;
+      margin-right: 10px;
+      vertical-align: middle;
+      height: @footer-image-size;
+      width: @footer-image-size;
+    }
+    .text-footer{
+      display: inline-block;
+      vertical-align: middle;
+      color: @footer-font-color;
+    }
+  }
+  hr{
+    border: none;
+    border-top: solid 1px @hr-divider-top;
+    border-bottom: solid 1px @hr-divider-bottom;
+  }
+  &.loading{
+    min-height: 530px;
+    .loader{
+      position: absolute;
+      .make-loader(
+        @loader-circle-size:@loader-circle-size;
+        @loader-circle-separation: @loader-circle-separation;
+        @loader-delay: @loader-delay;
+        cardloaderkf;
+      );
+      left:@loader-left-separation;
+    }
+  }
+}
+.card{
+  .make-card();
+}

@@ -1,0 +1,26 @@
+// Center-align a block level element
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical-center(@container-height; @child-height){
+  margin-top: ((@container-height - @child-height) / 2.0);
+  margin-bottom: ((@container-height - @child-height) / 2.0);
+}
+
+.vertical-center-with-padding(@container-height; @child-height){
+  padding-top: ((@container-height - @child-height) / 2.0);
+  padding-bottom: ((@container-height - @child-height) / 2.0);
+}
+
+.vertical-center-with-offset(@container-height; @child-height; @top-adjustment; @bottom-adjustment){
+  margin-top: ((@container-height - @child-height) / 2.0) - @top-adjustment;
+  margin-bottom: ((@container-height - @child-height) / 2.0) - @bottom-adjustment;
+}
+
+.vcentered-text(@h){
+  line-height: @h;
+  height: @h;
+}

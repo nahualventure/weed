@@ -1,0 +1,88 @@
+@import "../variables.less";
+
+// Configuration
+@grid-half-gutter-width:                                    0.5rem;
+@grid-gutter-compensation:                                  -0.5rem;
+@grid-content-padding:                                      1rem;
+@grid-columns:                                              12;
+
+// Classes definition
+@grid-class:                                                grid;
+@grid-row-class:                                            row;
+@grid-column-class:                                         col;
+@grid-offset-class:                                         off;
+@grid-frame-class:                                          frame;
+
+// Default sizings
+@grid-col-names:                                            s, m, l, xl;
+@grid-col-breaks:                                           @system-small-break, @system-medium-break, @system-large-break, @system-xlarge-break;
+
+.@{grid-class} {
+  overflow-x: hidden;
+
+  &.@{grid-frame-class}{
+    box-sizing: border-box;
+    height: 100vh;
+
+    .@{grid-row-class}{
+      height: 100%;
+    }
+  }
+
+  &.scrollable{
+    overflow-y: scroll;
+  }
+}
+
+.@{grid-row-class} {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: @grid-gutter-compensation;
+  margin-right: @grid-gutter-compensation;
+
+  &.scrollable{
+    overflow-y: scroll;
+  }
+}
+
+.@{grid-row-class}.reverse {
+  .row-reverse();
+}
+
+.@{grid-column-class}{
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding-right: @grid-half-gutter-width;
+  padding-left: @grid-half-gutter-width;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+
+  &.reverse {
+    .col-reverse();
+  }
+
+  &.shrink{
+    height: auto !important;
+  }
+
+  &.content{
+    padding: @grid-content-padding;
+  }
+
+  &.scrollable{
+    overflow-y: scroll;
+  }
+}
+
+.makegrid(xs);
+
+.for-each(@grid-col-breaks);
+.-each(@breakpoint) {
+  @media only screen and (min-width: @breakpoint) {
+    .makegrid(extract(@grid-col-names, @i));
+  }
+}

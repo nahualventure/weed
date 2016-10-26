@@ -1,0 +1,151 @@
+/**
+  * Edoo tag framework:  TODO v1.0 docu
+  */
+
+@import "../variables.less";
+@import "buttons.less";
+
+// Configuration
+@tag-danger-color:                    @system-danger-color;
+@tag-default-color:                   @system-default-color;
+@tag-default-text-color:              @black-25;
+@tag-info-color:                      @system-info-color;
+@tag-inverted-color:                  @system-inverted-color;
+@tag-primary-color:                   @system-primary-color;
+@tag-success-color:                   @system-success-color;
+@tag-warning-color:                   @system-warning-color;
+
+@tag-default-border-radius:           @system-border-radius/2.0;
+@tag-default-horizontal-padding:      15px;
+@tag-default-vertical-padding:        0;
+@tag-font-family:                     sans-serif;
+@tag-big-padding:                     30px;
+@tag-big-height:                      @button-large-height - 2px;
+@tag-height:                          @button-height - 2px;
+@tag-small-height:                    @button-small-height - 2px;
+
+// tag generator mixin
+.make-tag(@height: @tag-height; @background-color: @tag-default-color; @text-color: @white; @border-radius: @tag-default-border-radius; @vertical-padding: @tag-default-vertical-padding; @horizontal-padding: @tag-default-horizontal-padding){
+  border-radius: @border-radius;
+  user-select: none;
+  transition: @faster;
+  opacity: 1.0;
+  background-color: @background-color;
+  border: 1px solid darken(@background-color, 4%);
+  color: @text-color;
+  display: inline-block;
+  font-family: @tag-font-family;
+  padding: @vertical-padding @horizontal-padding;
+  height: @height;
+  line-height: @height;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &.custom{
+    border-color: fadeout(darken(@background-color, 7%), 100%);
+    color: @white;
+  }
+
+  &.hidden{
+    opacity: 0.0;
+  }
+
+  .text{
+    vertical-align: middle;
+  }
+
+  .actions{
+    margin-right: -12px;
+  }
+
+  .@{fa-css-prefix}{
+
+    &.@{fa-css-prefix}-times{
+
+      // &:last-child{
+      //   font-size: 0.8em;
+      //   cursor: pointer;
+      //   margin-left: 0.8em;
+      //   margin-right: -0.6em;
+      // }
+
+      &:hover{
+        color: lighten(@text-color, 7%);
+      }
+
+      &:active{
+        color: @text-color;
+        margin-bottom: -1px;
+      }
+    }
+  }
+
+  // &:hover{
+  //   background-color: lighten(@background-color, 3%);
+  // }
+  // &:active{
+  //   background-color: @background-color;
+  // }
+}
+
+.tag{
+  font-size: 12px;
+  .make-tag(@text-color: @tag-default-text-color);
+
+  &.block{
+    display: block;
+  }
+
+  // Default colors
+  &.tag-primary{
+    .make-tag(@background-color: @tag-primary-color);
+  }
+  &.tag-info{
+    .make-tag(@background-color: @tag-info-color);
+  }
+  &.tag-success{
+    .make-tag(@background-color: @tag-success-color);
+  }
+  &.tag-danger{
+    .make-tag(@background-color: @tag-danger-color);
+  }
+  &.tag-warning{
+    .make-tag(@background-color: @tag-warning-color);
+  }
+  &.tag-inverted{
+    .make-tag(@background-color: @tag-inverted-color);
+  }
+
+  // Default sizes
+  &.tag-small{
+    font-size: 10px;
+    line-height: @tag-small-height;
+    height: @tag-small-height;
+  }
+
+  &.tag-large, &.tag-xlarge, &.tag-xxlarge, &.tag-huge{
+    line-height: @tag-big-height;
+    height: @tag-big-height;
+    padding: 0 @tag-big-padding;
+  }
+
+  &.tag-large{
+    font-size: 16px;
+  }
+  &.tag-xlarge{
+    font-size: 18px;
+  }
+  &.tag-xxlarge{
+    font-size: 20px;
+  }
+  &.tag-huge{
+    font-size: 22px;
+  }
+}
+
+// IE fixes
+.ie7{
+  .tag{
+    margin-right: 2px;
+  }
+}

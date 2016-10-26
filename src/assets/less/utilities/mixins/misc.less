@@ -1,0 +1,33 @@
+//
+// Mixins: utilities
+// --------------------------------------------------
+.selection(@bgcolor: #000; @textcolor: #fff){
+  ::selection {
+    background: @bgcolor;
+    color: @textcolor;
+  }
+}
+
+.bevel(@background-color){
+  box-shadow: 0 1px 0 0 lighten(@background-color, 4%);
+}
+
+.mockup-box(@width: 100px; @height: 100px; @border: 1px solid #ccc; @background-color: #eee;){
+  width: @width;
+  height: @height;
+  border: @border;
+  background-color: @background-color;
+}
+
+.placeholder(@color){
+  &::-webkit-input-placeholder{color: @color;}
+  &:-moz-placeholder{color: @color;}
+  &::-moz-placeholder{color: @color;}
+  &:-ms-input-placeholder{color: @color;}
+}
+
+.empty-fill(){
+  &:before, &:after{
+    content: "\00a0";
+  }
+}

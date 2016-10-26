@@ -1,0 +1,87 @@
+/**
+  * Weed system variables
+  */
+
+// Colors
+
+  // Grayscale
+@white:                                                     #fff;
+@black-5:                                                   darken(@white, 5%);
+@black-10:                                                  darken(@white, 10%);
+@black-15:                                                  darken(@white, 15%);
+@black-20:                                                  darken(@white, 20%);
+@black-25:                                                  darken(@white, 25%);
+@black-30:                                                  darken(@white, 30%);
+@black-35:                                                  darken(@white, 35%);
+@black-40:                                                  darken(@white, 40%);
+@black-45:                                                  darken(@white, 45%);
+@black-50:                                                  darken(@white, 50%);
+@black-55:                                                  darken(@white, 55%);
+@black-60:                                                  darken(@white, 60%);
+@black-65:                                                  darken(@white, 65%);
+@black-70:                                                  darken(@white, 70%);
+@black-75:                                                  darken(@white, 75%);
+@black-80:                                                  darken(@white, 80%);
+@black-85:                                                  darken(@white, 85%);
+@black-90:                                                  darken(@white, 90%);
+@black-95:                                                  darken(@white, 95%);
+@black:                                                     darken(@white, 100%);
+
+  // Base theme color
+@system-base-color:                                         @black-50;
+
+  // System colors
+@system-default-color:                                      #f6f6f6;
+@system-primary-color:                                      darken(@system-base-color, 3%);
+@system-info-color:                                         #008782;
+@system-success-color:                                      #1ca462;
+@system-danger-color:                                       #de5a5a;
+@system-warning-color:                                      #ffb122;
+@system-inverted-color:                                     #333333;
+
+  // Placeholder color
+@system-placeholder-text-color:                             @black-50;
+
+// Fonts
+@font-sans-serif:                                           sans-serif;
+@font-base:                                                 @font-sans-serif;
+@font-monospace:                                            monospace;
+@font-serif:                                                serif;
+
+// Font awesome configuration
+@fa-font-path:                                              "../fonts";
+@fa-css-prefix:                                             fa;
+
+// Animation speeds
+@fastest:                                                   0.125s;
+@faster:                                                    0.25s;
+@fast:                                                      0.5s;
+@smooth:                                                    1s;
+@slow:                                                      2s;
+
+// Easings
+@system-easing-wiggly:                                      cubic-bezier(0.370, -0.010, 0.230, 1.550);
+
+// Z
+@z-maximum:                                                 2147483647;
+@z-front:                                                   500;
+@z-immediate-over:                                          5;
+@z-tip:                                                     15005;
+
+
+// Scaffold configuration
+@system-body-color:                                         #fafafa;
+@system-text-color:                                         @black;
+@system-font-family:                                        @font-base;
+@system-title-font-family:                                  @font-monospace;
+@element-vertical-margin:                                   1rem;
+@system-border-radius:                                      10px;
+
+// Default breakpoints
+@system-xlarge-break:                                       1675px;
+@system-large-break:                                        1300px;
+@system-medium-break:                                       985px;
+@system-small-break:                                        650px;
+
+// Misc helpers
+@blank-char:                                                "\00a0";

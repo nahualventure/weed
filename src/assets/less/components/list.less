@@ -1,0 +1,418 @@
+/**
+  * Edoo list group framework
+  */
+
+@import "forms.less";
+@import "../variables.less";
+
+// Configuration
+
+@list-background-color:                                     @white;
+@list-background-color-hover:                               @black-5;
+@list-background-color-active:                              @black-5;
+@list-background-color-disabled:                            @black-5;
+@list-border-radius:                                        @system-border-radius;
+@list-border-color:                                         @black-15;
+@list-font-color:                                           @black-45;
+@list-font-color-focus:                                     @black-65;
+@list-font-color-disabled:                                  @black-45;
+@list-font-color-active:                                    @black-45;
+@list-item-height:                                          @form-input-height;
+@list-item-height-small:                                    @form-input-small-height;
+@list-item-height-tiny:                                     @form-input-tiny-height;
+@list-font-size:                                            14px;
+@list-font-size-small:                                      12px;
+@list-font-size-tiny:                                       11px;
+@list-horizontal-padding:                                   25px;
+@list-vertical-padding:                                     5px;
+
+@list-danger-background-color:                              lighten(@system-danger-color, 30%);
+@list-danger-background-color-hover:                        lighten(@system-danger-color, 25%);
+@list-danger-background-color-active:                       lighten(@system-danger-color, 25%);
+@list-danger-text-color:                                    darken(@system-danger-color,5%);
+@list-default-background-color:                             lighten(@system-default-color, 10%);
+@list-default-background-color-hover:                       lighten(@system-default-color, 5%);
+@list-default-background-color-active:                      lighten(@system-default-color, 5%);
+@list-default-text-color:                                   darken(@system-default-color,5%);
+@list-info-background-color:                                lighten(@system-primary-color, 35%);
+@list-info-background-color-hover:                          lighten(@system-primary-color, 30%);
+@list-info-background-color-active:                         lighten(@system-primary-color, 30%);
+@list-info-text-color:                                      darken(@system-primary-color, 5%);
+@list-inverted-background-color:                            lighten(@system-default-color, 5%);
+@list-inverted-background-color-hover:                      lighten(@system-default-color, 10%);
+@list-inverted-background-color-active:                     lighten(@system-default-color, 10%);
+@list-inverted-text-color:                                  @system-default-color;
+@list-primary-background-color:                             lighten(@system-primary-color, 45%);
+@list-primary-background-color-hover:                       lighten(@system-primary-color, 40%);
+@list-primary-background-color-active:                      lighten(@system-primary-color, 40%);
+@list-primary-text-color:                                   @system-primary-color;
+@list-success-background-color:                             lighten(@system-success-color, 45%);
+@list-success-background-color-hover:                       lighten(@system-success-color, 40%);
+@list-success-background-color-active:                      lighten(@system-success-color, 40%);
+@list-success-text-color:                                   @system-success-color;
+@list-warning-background-color:                             lighten(@system-warning-color, 35%);
+@list-warning-background-color-hover:                       lighten(@system-warning-color, 30%);
+@list-warning-background-color-active:                      lighten(@system-warning-color, 30%);
+@list-warning-text-color:                                   desaturate(@system-warning-color, 25%);
+
+
+.list {
+  color: @list-font-color;
+  font-size: @list-font-size;
+  margin-bottom: 20px;
+  padding-left: 0;
+
+  // List small
+  &.list-small{
+    font-size: @list-font-size-small;
+    .list-item{
+      height: @list-item-height-small;
+      line-height: @list-item-height-small;
+      .item-text{
+        line-height: (@list-item-height-small - 1px);
+      }
+    }
+    i.list-mark{
+      left: 24px;
+      line-height: @list-item-height-small;
+    }
+
+    .button {
+      &.button-small {
+        box-sizing: content-box;
+        left: -1px;
+        top: -1px;
+      }
+
+      &.button-tiny {
+        left: (@list-vertical-padding*1.4);
+        top: (@list-item-height-small - @button-tiny-height - 2)/2.0;
+      }
+    }
+  }
+
+  // List tiny
+  &.list-tiny{
+    font-size: @list-font-size-tiny;
+    .list-item{
+      height: @list-item-height-tiny;
+      line-height: @list-item-height-tiny;
+      .item-text{
+        line-height: (@list-item-height-tiny - 1px);
+      }
+    }
+    i.list-mark{
+      left: 24px;
+      line-height: @list-item-height-tiny;
+    }
+
+    .button {
+      &.button-tiny {
+        box-sizing: content-box;
+        left: -1px;
+        top: -1px;
+      }
+    }
+  }
+
+  // Component position left: default
+  &.component-position-left .list-item{
+    padding-left: 0;
+    .item-text{
+      float: right;
+    }
+    .button {
+      float: left;
+      right: auto;
+      left: 0;
+    }
+
+    .list-normal{
+      &.button-small{
+        border-bottom-right-radius: @list-border-radius;
+        border-top-right-radius: @list-border-radius;
+      }
+
+      &.button-tiny{
+        border-bottom-right-radius: @list-border-radius/2.0;
+        border-top-right-radius: @list-border-radius/2.0;
+      }
+    }
+
+    .multi-component{
+      float: left;
+    }
+
+    &.list-small{
+
+      .button{
+        &.button-small{
+          left: auto;
+          right: 0;
+        }
+
+        &.button-tiny{
+          border-bottom-right-radius: @list-border-radius/2.0;
+          border-top-right-radius: @list-border-radius/2.0;
+          left: auto;
+          right: (@list-vertical-padding*1.4);
+        }
+      }
+
+      i.input-mark{
+        left: @list-horizontal-padding - 1px;
+        right: auto;
+      }
+    }
+
+    &.list-tiny{
+
+      .button.button-tiny{
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        left: 0;
+        right: auto;
+      }
+
+      i.input-mark{
+        left: auto;
+        right: 15px;
+      }
+    }
+  }
+
+  // Component position right
+  &.component-position-right .list-item{
+    padding-right: 0;
+
+    .button {
+      float: right;
+      left: auto;
+      right: 0;
+    }
+    .list-normal{
+      &.button-small {
+        border-bottom-left-radius: @list-border-radius;
+        border-top-left-radius: @list-border-radius;
+        right: (@list-vertical-padding*1.4);
+      }
+
+      &.button-tiny {
+        border-bottom-left-radius: @list-border-radius/2.0;
+        border-top-left-radius: @list-border-radius/2.0;
+        right: (@list-vertical-padding*2.5);
+      }
+    }
+
+    .multi-component{
+      float: right;
+    }
+
+    i.item-mark{
+      left: auto;
+      right: (@list-horizontal-padding + 5px);
+    }
+
+    &.list-small{
+
+      .button{
+        &.button-small{
+          left: auto;
+          right: 0;
+        }
+
+        &.button-tiny{
+          border-bottom-left-radius: @list-border-radius/2.0;
+          border-top-left-radius: @list-border-radius/2.0;
+          left: auto;
+          right: (@list-vertical-padding*1.4);
+        }
+      }
+
+      i.input-mark{
+        left: auto;
+        right: @list-horizontal-padding - 1px;
+      }
+    }
+
+    &.list-tiny{
+
+      .button.button-tiny{
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        left: auto;
+        right: 0;
+      }
+
+      i.input-mark{
+        left: auto;
+        right: 15px;
+      }
+    }
+  }
+  .list-item {
+    height: (@list-item-height - 2px);
+    line-height: @list-item-height;
+    position: relative;
+    display: block;
+    padding: 0 @list-horizontal-padding;
+    margin-bottom: -1px;
+    background-color: @list-background-color;
+    border: 1px solid @list-border-color;
+    .button, .multi-component, .input-mark{
+      border-radius: 0;
+    }
+    &:first-child{
+      border-top-right-radius: @list-border-radius;
+      border-top-left-radius: @list-border-radius;
+    }
+    &:last-child{
+      margin-bottom: 0;
+      border-bottom-right-radius: @list-border-radius;
+      border-bottom-left-radius: @list-border-radius;
+    }
+    &.disabled{
+      background-color: @list-background-color-disabled;
+      color: @list-font-color-disabled;
+      cursor: not-allowed;
+    }
+    .item-text{
+      margin: 0;
+      padding: 0;
+      float: left;
+      display: block;
+      line-height: (@list-item-height - 1px);
+    }
+    &.list-item-primary{
+      color: @list-primary-text-color;
+      background-color: @list-primary-background-color;
+    }
+    &.list-item-success{
+      color: @list-success-text-color;
+      background-color: @list-success-background-color;
+    }
+    &.list-item-info{
+      color: @list-info-text-color;
+      background-color: @list-info-background-color;
+    }
+    &.list-item-warning{
+      color: @list-warning-text-color;
+      background-color: @list-warning-background-color;
+    }
+    &.list-item-danger{
+      color: @list-danger-text-color;
+      background-color: @list-danger-background-color;
+    }
+  }
+
+  &.component-position-right .list-item {
+    padding-right: 0;
+
+    &:first-child {
+      .button, .multi-component, .input-mark {
+        border-top-right-radius: @list-border-radius;
+      }
+    }
+
+    &:last-child {
+      .button, .multi-component, .input-mark {
+        border-bottom-right-radius: @list-border-radius;
+      }
+    }
+  }
+
+  &.component-position-left .list-item {
+    padding-left: 0;
+
+    &:first-child {
+      .button, .multi-component, .input-mark {
+        border-top-left-radius: @list-border-radius;
+      }
+    }
+
+    &:last-child {
+      .button, .multi-component, .input-mark {
+        border-bottom-left-radius: @list-border-radius;
+      }
+    }
+  }
+
+  &.clickable, &.selectable{
+    cursor: pointer;
+    .list-item{
+      &:hover, &:focus{
+        //text-decoration: none;
+        color: @list-font-color-focus;
+        background-color: @list-background-color-hover;
+      }
+      &.list-item-primary{
+        &:hover, &:focus{
+          color: @list-primary-text-color;
+          background-color: @list-primary-background-color-hover;
+        }
+      }
+      &.list-item-success{
+        &:hover, &:focus{
+          color: @list-success-text-color;
+          background-color: @list-success-background-color-hover;
+        }
+      }
+      &.list-item-info{
+        &:hover, &:focus{
+          color: @list-info-text-color;
+          background-color: @list-info-background-color-hover;
+        }
+      }
+      &.list-item-warning{
+        &:hover, &:focus{
+          color: @list-warning-text-color;
+          background-color: @list-warning-background-color-hover;
+        }
+      }
+      &.list-item-danger{
+        &:hover, &:focus{
+          color: @list-danger-text-color;
+          background-color: @list-danger-background-color-hover;
+        }
+      }
+    }
+  }
+  &.selectable{
+    .list-item{
+      &.active{
+        color: @list-font-color-active;
+        background-color: @list-background-color-active;
+      }
+      &.list-item-primary{
+        &.active{
+          background-color: @list-primary-background-color-active;;
+        }
+      }
+      &.list-item-success{
+        &.active{
+          background-color: @list-success-background-color-active;;
+        }
+      }
+      &.list-item-info{
+        &.active{
+          background-color: @list-info-background-color-active;;
+        }
+      }
+      &.list-item-warning{
+        &.active{
+          background-color: @list-warning-background-color-active;;
+        }
+      }
+      &.list-item-danger{
+        &.active{
+          background-color: @list-danger-background-color-active;;
+        }
+      }
+    }
+  }
+
+  button.list-item {
+    width: 100%;
+    text-align: left;
+  }
+}
