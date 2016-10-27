@@ -8,12 +8,14 @@
 @date-picker-height-components:                             80px;
 @date-picker-width-components:                              100px;
 @button-default-color:                                      @system-default-color;
-
+@date-picker-arrows-height:                                 1rem;
+@date-picker-padding-am-pm:                                 0 44px;
 
 .uib-timepicker{
   tbody{
     .text-center{
       text-align: center;
+      line-height: @date-picker-arrows-height;
 
       .uib-increment {
         a{
@@ -45,6 +47,7 @@
         .button;
         width: @date-picker-width-components;
         height: @date-picker-height-components;
+        padding: @date-picker-padding-am-pm;
       }
     }
   }

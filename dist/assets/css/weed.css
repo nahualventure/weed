@@ -8684,6 +8684,7 @@ hr {
   */
 .uib-timepicker tbody .text-center {
   text-align: center;
+  line-height: 1rem;
 }
 .uib-timepicker tbody .text-center .uib-increment a span {
   display: inline-block;
@@ -8763,6 +8764,7 @@ hr {
   white-space: nowrap;
   width: 100px;
   height: 80px;
+  padding: 0 44px;
 }
 .uib-timepicker tbody .uib-time button .accent {
   color: #ffffff;
