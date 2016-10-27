@@ -2643,7 +2643,7 @@ if (typeof define === 'function' && define.amd) {
 })(window, document, 'Hammer');
 
 //! moment.js
-//! version : 2.15.1
+//! version : 2.14.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -2671,9 +2671,7 @@ if (typeof define === 'function' && define.amd) {
     }
 
     function isObject(input) {
-        // IE8 will treat undefined and null as object if it wasn't for
-        // input != null
-        return input != null && Object.prototype.toString.call(input) === '[object Object]';
+        return Object.prototype.toString.call(input) === '[object Object]';
     }
 
     function isObjectEmpty(obj) {
@@ -2772,7 +2770,7 @@ if (typeof define === 'function' && define.amd) {
             var parsedParts = some.call(flags.parsedDateParts, function (i) {
                 return i != null;
             });
-            var isNowValid = !isNaN(m._d.getTime()) &&
+            m._isValid = !isNaN(m._d.getTime()) &&
                 flags.overflow < 0 &&
                 !flags.empty &&
                 !flags.invalidMonth &&
@@ -2783,17 +2781,10 @@ if (typeof define === 'function' && define.amd) {
                 (!flags.meridiem || (flags.meridiem && parsedParts));
 
             if (m._strict) {
-                isNowValid = isNowValid &&
+                m._isValid = m._isValid &&
                     flags.charsLeftOver === 0 &&
                     flags.unusedTokens.length === 0 &&
                     flags.bigHour === undefined;
-            }
-
-            if (Object.isFrozen == null || !Object.isFrozen(m)) {
-                m._isValid = isNowValid;
-            }
-            else {
-                return isNowValid;
             }
         }
         return m._isValid;
@@ -2935,22 +2926,7 @@ if (typeof define === 'function' && define.amd) {
                 utils_hooks__hooks.deprecationHandler(null, msg);
             }
             if (firstTime) {
-                var args = [];
-                var arg;
-                for (var i = 0; i < arguments.length; i++) {
-                    arg = '';
-                    if (typeof arguments[i] === 'object') {
-                        arg += '\n[' + i + '] ';
-                        for (var key in arguments[0]) {
-                            arg += key + ': ' + arguments[0][key] + ', ';
-                        }
-                        arg = arg.slice(0, -2); // Remove trailing comma and space
-                    } else {
-                        arg = arguments[i];
-                    }
-                    args.push(arg);
-                }
-                warn(msg + '\nArguments: ' + Array.prototype.slice.call(args).join('') + '\n' + (new Error()).stack);
+                warn(msg + '\nArguments: ' + Array.prototype.slice.call(arguments).join(', ') + '\n' + (new Error()).stack);
                 firstTime = false;
             }
             return fn.apply(this, arguments);
@@ -3477,18 +3453,12 @@ if (typeof define === 'function' && define.amd) {
     var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/;
     var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
     function localeMonths (m, format) {
-        if (!m) {
-            return this._months;
-        }
         return isArray(this._months) ? this._months[m.month()] :
             this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
     }
 
     var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
     function localeMonthsShort (m, format) {
-        if (!m) {
-            return this._monthsShort;
-        }
         return isArray(this._monthsShort) ? this._monthsShort[m.month()] :
             this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
     }
@@ -3634,7 +3604,7 @@ if (typeof define === 'function' && define.amd) {
     }
 
     var defaultMonthsRegex = matchWord;
-    function units_month__monthsRegex (isStrict) {
+    function monthsRegex (isStrict) {
         if (this._monthsParseExact) {
             if (!hasOwnProp(this, '_monthsRegex')) {
                 computeMonthsParse.call(this);
@@ -3985,21 +3955,18 @@ if (typeof define === 'function' && define.amd) {
 
     var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
     function localeWeekdays (m, format) {
-        if (!m) {
-            return this._weekdays;
-        }
         return isArray(this._weekdays) ? this._weekdays[m.day()] :
             this._weekdays[this._weekdays.isFormat.test(format) ? 'format' : 'standalone'][m.day()];
     }
 
     var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
     function localeWeekdaysShort (m) {
-        return (m) ? this._weekdaysShort[m.day()] : this._weekdaysShort;
+        return this._weekdaysShort[m.day()];
     }
 
     var defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
     function localeWeekdaysMin (m) {
-        return (m) ? this._weekdaysMin[m.day()] : this._weekdaysMin;
+        return this._weekdaysMin[m.day()];
     }
 
     function day_of_week__handleStrictParse(weekdayName, format, strict) {
@@ -4694,9 +4661,9 @@ if (typeof define === 'function' && define.amd) {
     }
 
     utils_hooks__hooks.createFromInputFallback = deprecate(
-        'value provided is not in a recognized ISO format. moment construction falls back to js Date(), ' +
-        'which is not reliable across all browsers and versions. Non ISO date formats are ' +
-        'discouraged and will be removed in an upcoming major release. Please refer to ' +
+        'moment construction falls back to js Date. This is ' +
+        'discouraged and will be removed in upcoming major ' +
+        'release. Please refer to ' +
         'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
@@ -5195,14 +5162,6 @@ if (typeof define === 'function' && define.amd) {
         return obj instanceof Duration;
     }
 
-    function absRound (number) {
-        if (number < 0) {
-            return Math.round(-1 * number) * -1;
-        } else {
-            return Math.round(number);
-        }
-    }
-
     // FORMATTING
 
     function offset (token, separator) {
@@ -5353,13 +5312,7 @@ if (typeof define === 'function' && define.amd) {
         if (this._tzm) {
             this.utcOffset(this._tzm);
         } else if (typeof this._i === 'string') {
-            var tZone = offsetFromString(matchOffset, this._i);
-
-            if (tZone === 0) {
-                this.utcOffset(0, true);
-            } else {
-                this.utcOffset(offsetFromString(matchOffset, this._i));
-            }
+            this.utcOffset(offsetFromString(matchOffset, this._i));
         }
         return this;
     }
@@ -5414,7 +5367,7 @@ if (typeof define === 'function' && define.amd) {
     }
 
     // ASP.NET json date format regex
-    var aspNetRegex = /^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
+    var aspNetRegex = /^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?\d*)?$/;
 
     // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
     // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
@@ -5446,11 +5399,11 @@ if (typeof define === 'function' && define.amd) {
             sign = (match[1] === '-') ? -1 : 1;
             duration = {
                 y  : 0,
-                d  : toInt(match[DATE])                         * sign,
-                h  : toInt(match[HOUR])                         * sign,
-                m  : toInt(match[MINUTE])                       * sign,
-                s  : toInt(match[SECOND])                       * sign,
-                ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
+                d  : toInt(match[DATE])        * sign,
+                h  : toInt(match[HOUR])        * sign,
+                m  : toInt(match[MINUTE])      * sign,
+                s  : toInt(match[SECOND])      * sign,
+                ms : toInt(match[MILLISECOND]) * sign
             };
         } else if (!!(match = isoRegex.exec(input))) {
             sign = (match[1] === '-') ? -1 : 1;
@@ -5523,6 +5476,14 @@ if (typeof define === 'function' && define.amd) {
         }
 
         return res;
+    }
+
+    function absRound (number) {
+        if (number < 0) {
+            return Math.round(-1 * number) * -1;
+        } else {
+            return Math.round(number);
+        }
     }
 
     // TODO: remove 'name' arg after deprecation is removed
@@ -6347,7 +6308,7 @@ if (typeof define === 'function' && define.amd) {
     prototype__proto.months            =        localeMonths;
     prototype__proto.monthsShort       =        localeMonthsShort;
     prototype__proto.monthsParse       =        localeMonthsParse;
-    prototype__proto.monthsRegex       = units_month__monthsRegex;
+    prototype__proto.monthsRegex       = monthsRegex;
     prototype__proto.monthsShortRegex  = monthsShortRegex;
 
     // Week
@@ -6841,7 +6802,7 @@ if (typeof define === 'function' && define.amd) {
     ;
 
 
-    utils_hooks__hooks.version = '2.15.1';
+    utils_hooks__hooks.version = '2.14.1';
 
     setHookCallback(local__createLocal);
 
@@ -6931,114 +6892,6 @@ if (typeof define === 'function' && define.amd) {
         week : {
             dow : 1, // Maandag is die eerste dag van die week.
             doy : 4  // Die week wat die 4de Januarie bevat is die eerste week van die jaar.
-        }
-    });
-
-
-    var ar_ly__symbolMap = {
-        '1': '1',
-        '2': '2',
-        '3': '3',
-        '4': '4',
-        '5': '5',
-        '6': '6',
-        '7': '7',
-        '8': '8',
-        '9': '9',
-        '0': '0'
-    }, ar_ly__pluralForm = function (n) {
-        return n === 0 ? 0 : n === 1 ? 1 : n === 2 ? 2 : n % 100 >= 3 && n % 100 <= 10 ? 3 : n % 100 >= 11 ? 4 : 5;
-    }, ar_ly__plurals = {
-        s : ['أقل من ثانية', 'ثانية واحدة', ['ثانيتان', 'ثانيتين'], '%d ثوان', '%d ثانية', '%d ثانية'],
-        m : ['أقل من دقيقة', 'دقيقة واحدة', ['دقيقتان', 'دقيقتين'], '%d دقائق', '%d دقيقة', '%d دقيقة'],
-        h : ['أقل من ساعة', 'ساعة واحدة', ['ساعتان', 'ساعتين'], '%d ساعات', '%d ساعة', '%d ساعة'],
-        d : ['أقل من يوم', 'يوم واحد', ['يومان', 'يومين'], '%d أيام', '%d يومًا', '%d يوم'],
-        M : ['أقل من شهر', 'شهر واحد', ['شهران', 'شهرين'], '%d أشهر', '%d شهرا', '%d شهر'],
-        y : ['أقل من عام', 'عام واحد', ['عامان', 'عامين'], '%d أعوام', '%d عامًا', '%d عام']
-    }, ar_ly__pluralize = function (u) {
-        return function (number, withoutSuffix, string, isFuture) {
-            var f = ar_ly__pluralForm(number),
-                str = ar_ly__plurals[u][ar_ly__pluralForm(number)];
-            if (f === 2) {
-                str = str[withoutSuffix ? 0 : 1];
-            }
-            return str.replace(/%d/i, number);
-        };
-    }, ar_ly__months = [
-        'يناير',
-        'فبراير',
-        'مارس',
-        'أبريل',
-        'مايو',
-        'يونيو',
-        'يوليو',
-        'أغسطس',
-        'سبتمبر',
-        'أكتوبر',
-        'نوفمبر',
-        'ديسمبر'
-    ];
-
-    var ar_ly = moment__default.defineLocale('ar-ly', {
-        months : ar_ly__months,
-        monthsShort : ar_ly__months,
-        weekdays : 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
-        weekdaysShort : 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
-        weekdaysMin : 'ح_ن_ث_ر_خ_ج_س'.split('_'),
-        weekdaysParseExact : true,
-        longDateFormat : {
-            LT : 'HH:mm',
-            LTS : 'HH:mm:ss',
-            L : 'D/\u200FM/\u200FYYYY',
-            LL : 'D MMMM YYYY',
-            LLL : 'D MMMM YYYY HH:mm',
-            LLLL : 'dddd D MMMM YYYY HH:mm'
-        },
-        meridiemParse: /ص|م/,
-        isPM : function (input) {
-            return 'م' === input;
-        },
-        meridiem : function (hour, minute, isLower) {
-            if (hour < 12) {
-                return 'ص';
-            } else {
-                return 'م';
-            }
-        },
-        calendar : {
-            sameDay: '[اليوم عند الساعة] LT',
-            nextDay: '[غدًا عند الساعة] LT',
-            nextWeek: 'dddd [عند الساعة] LT',
-            lastDay: '[أمس عند الساعة] LT',
-            lastWeek: 'dddd [عند الساعة] LT',
-            sameElse: 'L'
-        },
-        relativeTime : {
-            future : 'بعد %s',
-            past : 'منذ %s',
-            s : ar_ly__pluralize('s'),
-            m : ar_ly__pluralize('m'),
-            mm : ar_ly__pluralize('m'),
-            h : ar_ly__pluralize('h'),
-            hh : ar_ly__pluralize('h'),
-            d : ar_ly__pluralize('d'),
-            dd : ar_ly__pluralize('d'),
-            M : ar_ly__pluralize('M'),
-            MM : ar_ly__pluralize('M'),
-            y : ar_ly__pluralize('y'),
-            yy : ar_ly__pluralize('y')
-        },
-        preparse: function (string) {
-            return string.replace(/\u200f/g, '').replace(/،/g, ',');
-        },
-        postformat: function (string) {
-            return string.replace(/\d/g, function (match) {
-                return ar_ly__symbolMap[match];
-            }).replace(/,/g, '،');
-        },
-        week : {
-            dow : 6, // Saturday is the first day of the week.
-            doy : 12  // The week that contains Jan 1st is the first week of the year.
         }
     });
 
@@ -7245,19 +7098,19 @@ if (typeof define === 'function' && define.amd) {
         '٨': '8',
         '٩': '9',
         '٠': '0'
-    }, ar__pluralForm = function (n) {
+    }, pluralForm = function (n) {
         return n === 0 ? 0 : n === 1 ? 1 : n === 2 ? 2 : n % 100 >= 3 && n % 100 <= 10 ? 3 : n % 100 >= 11 ? 4 : 5;
-    }, ar__plurals = {
+    }, plurals = {
         s : ['أقل من ثانية', 'ثانية واحدة', ['ثانيتان', 'ثانيتين'], '%d ثوان', '%d ثانية', '%d ثانية'],
         m : ['أقل من دقيقة', 'دقيقة واحدة', ['دقيقتان', 'دقيقتين'], '%d دقائق', '%d دقيقة', '%d دقيقة'],
         h : ['أقل من ساعة', 'ساعة واحدة', ['ساعتان', 'ساعتين'], '%d ساعات', '%d ساعة', '%d ساعة'],
         d : ['أقل من يوم', 'يوم واحد', ['يومان', 'يومين'], '%d أيام', '%d يومًا', '%d يوم'],
         M : ['أقل من شهر', 'شهر واحد', ['شهران', 'شهرين'], '%d أشهر', '%d شهرا', '%d شهر'],
         y : ['أقل من عام', 'عام واحد', ['عامان', 'عامين'], '%d أعوام', '%d عامًا', '%d عام']
-    }, ar__pluralize = function (u) {
+    }, pluralize = function (u) {
         return function (number, withoutSuffix, string, isFuture) {
-            var f = ar__pluralForm(number),
-                str = ar__plurals[u][ar__pluralForm(number)];
+            var f = pluralForm(number),
+                str = plurals[u][pluralForm(number)];
             if (f === 2) {
                 str = str[withoutSuffix ? 0 : 1];
             }
@@ -7315,17 +7168,17 @@ if (typeof define === 'function' && define.amd) {
         relativeTime : {
             future : 'بعد %s',
             past : 'منذ %s',
-            s : ar__pluralize('s'),
-            m : ar__pluralize('m'),
-            mm : ar__pluralize('m'),
-            h : ar__pluralize('h'),
-            hh : ar__pluralize('h'),
-            d : ar__pluralize('d'),
-            dd : ar__pluralize('d'),
-            M : ar__pluralize('M'),
-            MM : ar__pluralize('M'),
-            y : ar__pluralize('y'),
-            yy : ar__pluralize('y')
+            s : pluralize('s'),
+            m : pluralize('m'),
+            mm : pluralize('m'),
+            h : pluralize('h'),
+            hh : pluralize('h'),
+            d : pluralize('d'),
+            dd : pluralize('d'),
+            M : pluralize('M'),
+            MM : pluralize('M'),
+            y : pluralize('y'),
+            yy : pluralize('y')
         },
         preparse: function (string) {
             return string.replace(/\u200f/g, '').replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
@@ -7655,11 +7508,11 @@ if (typeof define === 'function' && define.amd) {
     };
 
     var bn = moment__default.defineLocale('bn', {
-        months : 'জানুয়ারী_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split('_'),
-        monthsShort : 'জানু_ফেব_মার্চ_এপ্র_মে_জুন_জুল_আগ_সেপ্ট_অক্টো_নভে_ডিসে'.split('_'),
-        weekdays : 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পতিবার_শুক্রবার_শনিবার'.split('_'),
-        weekdaysShort : 'রবি_সোম_মঙ্গল_বুধ_বৃহস্পতি_শুক্র_শনি'.split('_'),
-        weekdaysMin : 'রবি_সোম_মঙ্গ_বুধ_বৃহঃ_শুক্র_শনি'.split('_'),
+        months : 'জানুয়ারী_ফেবুয়ারী_মার্চ_এপ্রিল_মে_জুন_জুলাই_অগাস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split('_'),
+        monthsShort : 'জানু_ফেব_মার্চ_এপর_মে_জুন_জুল_অগ_সেপ্ট_অক্টো_নভ_ডিসেম্'.split('_'),
+        weekdays : 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পত্তিবার_শুক্রবার_শনিবার'.split('_'),
+        weekdaysShort : 'রবি_সোম_মঙ্গল_বুধ_বৃহস্পত্তি_শুক্র_শনি'.split('_'),
+        weekdaysMin : 'রব_সম_মঙ্গ_বু_ব্রিহ_শু_শনি'.split('_'),
         longDateFormat : {
             LT : 'A h:mm সময়',
             LTS : 'A h:mm:ss সময়',
@@ -7997,7 +7850,7 @@ if (typeof define === 'function' && define.amd) {
         longDateFormat : {
             LT : 'H:mm',
             LTS : 'H:mm:ss',
-            L : 'DD.MM.YYYY',
+            L : 'DD. MM. YYYY',
             LL : 'D. MMMM YYYY',
             LLL : 'D. MMMM YYYY H:mm',
             LLLL : 'dddd, D. MMMM YYYY H:mm'
@@ -9804,20 +9657,20 @@ if (typeof define === 'function' && define.amd) {
 
 
     var gl = moment__default.defineLocale('gl', {
-        months : 'xaneiro_febreiro_marzo_abril_maio_xuño_xullo_agosto_setembro_outubro_novembro_decembro'.split('_'),
-        monthsShort : 'xan._feb._mar._abr._mai._xuñ._xul._ago._set._out._nov._dec.'.split('_'),
+        months : 'Xaneiro_Febreiro_Marzo_Abril_Maio_Xuño_Xullo_Agosto_Setembro_Outubro_Novembro_Decembro'.split('_'),
+        monthsShort : 'Xan._Feb._Mar._Abr._Mai._Xuñ._Xul._Ago._Set._Out._Nov._Dec.'.split('_'),
         monthsParseExact: true,
-        weekdays : 'domingo_luns_martes_mércores_xoves_venres_sábado'.split('_'),
-        weekdaysShort : 'dom._lun._mar._mér._xov._ven._sáb.'.split('_'),
-        weekdaysMin : 'do_lu_ma_mé_xo_ve_sá'.split('_'),
+        weekdays : 'Domingo_Luns_Martes_Mércores_Xoves_Venres_Sábado'.split('_'),
+        weekdaysShort : 'Dom._Lun._Mar._Mér._Xov._Ven._Sáb.'.split('_'),
+        weekdaysMin : 'Do_Lu_Ma_Mé_Xo_Ve_Sá'.split('_'),
         weekdaysParseExact : true,
         longDateFormat : {
             LT : 'H:mm',
             LTS : 'H:mm:ss',
             L : 'DD/MM/YYYY',
-            LL : 'D [de] MMMM [de] YYYY',
-            LLL : 'D [de] MMMM [de] YYYY H:mm',
-            LLLL : 'dddd, D [de] MMMM [de] YYYY H:mm'
+            LL : 'D MMMM YYYY',
+            LLL : 'D MMMM YYYY H:mm',
+            LLLL : 'dddd D MMMM YYYY H:mm'
         },
         calendar : {
             sameDay : function () {
@@ -9839,8 +9692,8 @@ if (typeof define === 'function' && define.amd) {
         },
         relativeTime : {
             future : function (str) {
-                if (str.indexOf('un') === 0) {
-                    return 'n' + str;
+                if (str === 'uns segundos') {
+                    return 'nuns segundos';
                 }
                 return 'en ' + str;
             },
@@ -9861,7 +9714,7 @@ if (typeof define === 'function' && define.amd) {
         ordinal : '%dº',
         week : {
             dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
+            doy : 7  // The week that contains Jan 1st is the first week of the year.
         }
     });
 
@@ -10126,7 +9979,7 @@ if (typeof define === 'function' && define.amd) {
         longDateFormat : {
             LT : 'H:mm',
             LTS : 'H:mm:ss',
-            L : 'DD.MM.YYYY',
+            L : 'DD. MM. YYYY',
             LL : 'D. MMMM YYYY',
             LLL : 'D. MMMM YYYY H:mm',
             LLLL : 'dddd, D. MMMM YYYY H:mm'
@@ -11445,7 +11298,7 @@ if (typeof define === 'function' && define.amd) {
         longDateFormat: {
             LT: 'H:mm',
             LTS : 'H:mm:ss',
-            L: 'DD.MM.YYYY',
+            L: 'DD. MM. YYYY',
             LL: 'D. MMMM YYYY',
             LLL: 'D. MMMM YYYY H:mm',
             LLLL: 'dddd, D. MMMM YYYY H:mm'
@@ -11504,56 +11357,6 @@ if (typeof define === 'function' && define.amd) {
         week : {
             dow : 1, // Monday is the first day of the week.
             doy : 7  // The week that contains Jan 1st is the first week of the year.
-        }
-    });
-
-
-    var mi = moment__default.defineLocale('mi', {
-        months: 'Kohi-tāte_Hui-tanguru_Poutū-te-rangi_Paenga-whāwhā_Haratua_Pipiri_Hōngoingoi_Here-turi-kōkā_Mahuru_Whiringa-ā-nuku_Whiringa-ā-rangi_Hakihea'.split('_'),
-        monthsShort: 'Kohi_Hui_Pou_Pae_Hara_Pipi_Hōngoi_Here_Mahu_Whi-nu_Whi-ra_Haki'.split('_'),
-        monthsRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
-        monthsStrictRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
-        monthsShortRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
-        monthsShortStrictRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,2}/i,
-        weekdays: 'Rātapu_Mane_Tūrei_Wenerei_Tāite_Paraire_Hātarei'.split('_'),
-        weekdaysShort: 'Ta_Ma_Tū_We_Tāi_Pa_Hā'.split('_'),
-        weekdaysMin: 'Ta_Ma_Tū_We_Tāi_Pa_Hā'.split('_'),
-        longDateFormat: {
-            LT: 'HH:mm',
-            LTS: 'HH:mm:ss',
-            L: 'DD/MM/YYYY',
-            LL: 'D MMMM YYYY',
-            LLL: 'D MMMM YYYY [i] HH:mm',
-            LLLL: 'dddd, D MMMM YYYY [i] HH:mm'
-        },
-        calendar: {
-            sameDay: '[i teie mahana, i] LT',
-            nextDay: '[apopo i] LT',
-            nextWeek: 'dddd [i] LT',
-            lastDay: '[inanahi i] LT',
-            lastWeek: 'dddd [whakamutunga i] LT',
-            sameElse: 'L'
-        },
-        relativeTime: {
-            future: 'i roto i %s',
-            past: '%s i mua',
-            s: 'te hēkona ruarua',
-            m: 'he meneti',
-            mm: '%d meneti',
-            h: 'te haora',
-            hh: '%d haora',
-            d: 'he ra',
-            dd: '%d ra',
-            M: 'he marama',
-            MM: '%d marama',
-            y: 'he tau',
-            yy: '%d tau'
-        },
-        ordinalParse: /\d{1,2}º/,
-        ordinal: '%dº',
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
 
@@ -12220,9 +12023,6 @@ if (typeof define === 'function' && define.amd) {
     var nl__monthsShortWithDots = 'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split('_'),
         nl__monthsShortWithoutDots = 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_');
 
-    var nl__monthsParse = [/^jan/i, /^feb/i, /^maart|mrt.?$/i, /^apr/i, /^mei$/i, /^jun[i.]?$/i, /^jul[i.]?$/i, /^aug/i, /^sep/i, /^okt/i, /^nov/i, /^dec/i];
-    var nl__monthsRegex = /^(januari|februari|maart|april|mei|april|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
-
     var nl = moment__default.defineLocale('nl', {
         months : 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split('_'),
         monthsShort : function (m, format) {
@@ -12232,16 +12032,7 @@ if (typeof define === 'function' && define.amd) {
                 return nl__monthsShortWithDots[m.month()];
             }
         },
-
-        monthsRegex: nl__monthsRegex,
-        monthsShortRegex: nl__monthsRegex,
-        monthsStrictRegex: /^(januari|februari|maart|mei|ju[nl]i|april|augustus|september|oktober|november|december)/i,
-        monthsShortStrictRegex: /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
-
-        monthsParse : nl__monthsParse,
-        longMonthsParse : nl__monthsParse,
-        shortMonthsParse : nl__monthsParse,
-
+        monthsParseExact : true,
         weekdays : 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
         weekdaysShort : 'zo._ma._di._wo._do._vr._za.'.split('_'),
         weekdaysMin : 'Zo_Ma_Di_Wo_Do_Vr_Za'.split('_'),
@@ -12712,7 +12503,7 @@ if (typeof define === 'function' && define.amd) {
             return number + ' ' + ru__plural(format[key], +number);
         }
     }
-    var ru__monthsParse = [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[йя]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i];
+    var monthsParse = [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[йя]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i];
 
     // http://new.gramota.ru/spravka/rules/139-prop : § 103
     // Сокращения месяцев: http://new.gramota.ru/spravka/buro/search-answer?s=242637
@@ -12734,9 +12525,9 @@ if (typeof define === 'function' && define.amd) {
         },
         weekdaysShort : 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
         weekdaysMin : 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
-        monthsParse : ru__monthsParse,
-        longMonthsParse : ru__monthsParse,
-        shortMonthsParse : ru__monthsParse,
+        monthsParse : monthsParse,
+        longMonthsParse : monthsParse,
+        shortMonthsParse : monthsParse,
 
         // полные названия с падежами, по три буквы, для некоторых, по 4 буквы, сокращения с точкой и без точки
         monthsRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
@@ -13181,7 +12972,7 @@ if (typeof define === 'function' && define.amd) {
         longDateFormat : {
             LT : 'H:mm',
             LTS : 'H:mm:ss',
-            L : 'DD.MM.YYYY',
+            L : 'DD. MM. YYYY',
             LL : 'D. MMMM YYYY',
             LLL : 'D. MMMM YYYY H:mm',
             LLLL : 'dddd, D. MMMM YYYY H:mm'
@@ -13335,7 +13126,7 @@ if (typeof define === 'function' && define.amd) {
         longDateFormat: {
             LT: 'H:mm',
             LTS : 'H:mm:ss',
-            L: 'DD.MM.YYYY',
+            L: 'DD. MM. YYYY',
             LL: 'D. MMMM YYYY',
             LLL: 'D. MMMM YYYY H:mm',
             LLLL: 'dddd, D. MMMM YYYY H:mm'
@@ -13431,7 +13222,7 @@ if (typeof define === 'function' && define.amd) {
         longDateFormat: {
             LT: 'H:mm',
             LTS : 'H:mm:ss',
-            L: 'DD.MM.YYYY',
+            L: 'DD. MM. YYYY',
             LL: 'D. MMMM YYYY',
             LLL: 'D. MMMM YYYY H:mm',
             LLLL: 'dddd, D. MMMM YYYY H:mm'
@@ -13867,12 +13658,12 @@ if (typeof define === 'function' && define.amd) {
         weekdaysMin : 'อา._จ._อ._พ._พฤ._ศ._ส.'.split('_'),
         weekdaysParseExact : true,
         longDateFormat : {
-            LT : 'H:mm',
-            LTS : 'H:mm:ss',
+            LT : 'H นาฬิกา m นาที',
+            LTS : 'H นาฬิกา m นาที s วินาที',
             L : 'YYYY/MM/DD',
             LL : 'D MMMM YYYY',
-            LLL : 'D MMMM YYYY เวลา H:mm',
-            LLLL : 'วันddddที่ D MMMM YYYY เวลา H:mm'
+            LLL : 'D MMMM YYYY เวลา H นาฬิกา m นาที',
+            LLLL : 'วันddddที่ D MMMM YYYY เวลา H นาฬิกา m นาที'
         },
         meridiemParse: /ก่อนเที่ยง|หลังเที่ยง/,
         isPM: function (input) {
@@ -14138,6 +13929,7 @@ if (typeof define === 'function' && define.amd) {
             doy : 7  // The week that contains Jan 1st is the first week of the year.
         }
     });
+
 
 
     // After the year there should be a slash and the amount of years since December 26, 1979 in Roman numerals.
@@ -14710,95 +14502,6 @@ if (typeof define === 'function' && define.amd) {
     });
 
 
-    var zh_hk = moment__default.defineLocale('zh-hk', {
-        months : '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
-        monthsShort : '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-        weekdays : '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
-        weekdaysShort : '週日_週一_週二_週三_週四_週五_週六'.split('_'),
-        weekdaysMin : '日_一_二_三_四_五_六'.split('_'),
-        longDateFormat : {
-            LT : 'Ah點mm分',
-            LTS : 'Ah點m分s秒',
-            L : 'YYYY年MMMD日',
-            LL : 'YYYY年MMMD日',
-            LLL : 'YYYY年MMMD日Ah點mm分',
-            LLLL : 'YYYY年MMMD日ddddAh點mm分',
-            l : 'YYYY年MMMD日',
-            ll : 'YYYY年MMMD日',
-            lll : 'YYYY年MMMD日Ah點mm分',
-            llll : 'YYYY年MMMD日ddddAh點mm分'
-        },
-        meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
-        meridiemHour : function (hour, meridiem) {
-            if (hour === 12) {
-                hour = 0;
-            }
-            if (meridiem === '凌晨' || meridiem === '早上' || meridiem === '上午') {
-                return hour;
-            } else if (meridiem === '中午') {
-                return hour >= 11 ? hour : hour + 12;
-            } else if (meridiem === '下午' || meridiem === '晚上') {
-                return hour + 12;
-            }
-        },
-        meridiem : function (hour, minute, isLower) {
-            var hm = hour * 100 + minute;
-            if (hm < 600) {
-                return '凌晨';
-            } else if (hm < 900) {
-                return '早上';
-            } else if (hm < 1130) {
-                return '上午';
-            } else if (hm < 1230) {
-                return '中午';
-            } else if (hm < 1800) {
-                return '下午';
-            } else {
-                return '晚上';
-            }
-        },
-        calendar : {
-            sameDay : '[今天]LT',
-            nextDay : '[明天]LT',
-            nextWeek : '[下]ddddLT',
-            lastDay : '[昨天]LT',
-            lastWeek : '[上]ddddLT',
-            sameElse : 'L'
-        },
-        ordinalParse: /\d{1,2}(日|月|週)/,
-        ordinal : function (number, period) {
-            switch (period) {
-                case 'd' :
-                case 'D' :
-                case 'DDD' :
-                    return number + '日';
-                case 'M' :
-                    return number + '月';
-                case 'w' :
-                case 'W' :
-                    return number + '週';
-                default :
-                    return number;
-            }
-        },
-        relativeTime : {
-            future : '%s內',
-            past : '%s前',
-            s : '幾秒',
-            m : '1 分鐘',
-            mm : '%d 分鐘',
-            h : '1 小時',
-            hh : '%d 小時',
-            d : '1 天',
-            dd : '%d 天',
-            M : '1 個月',
-            MM : '%d 個月',
-            y : '1 年',
-            yy : '%d 年'
-        }
-    });
-
-
     var zh_tw = moment__default.defineLocale('zh-tw', {
         months : '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
         monthsShort : '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
@@ -15349,7 +15052,8 @@ if (typeof define === 'function' && define.amd) {
 
  * Version: 1.3.3 - 2016-05-22
  * License: MIT
- */angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.popover","ui.bootstrap.tooltip","ui.bootstrap.position","ui.bootstrap.stackedMap","ui.bootstrap.typeahead","ui.bootstrap.debounce"]),angular.module("ui.bootstrap.tpls",["uib/template/popover/popover-html.html","uib/template/popover/popover-template.html","uib/template/popover/popover.html","uib/template/tooltip/tooltip-html-popup.html","uib/template/tooltip/tooltip-popup.html","uib/template/tooltip/tooltip-template-popup.html","uib/template/typeahead/typeahead-match.html","uib/template/typeahead/typeahead-popup.html"]),angular.module("ui.bootstrap.popover",["ui.bootstrap.tooltip"]).directive("uibPopoverTemplatePopup",function(){return{replace:!0,scope:{uibTitle:"@",contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/popover/popover-template.html"}}).directive("uibPopoverTemplate",["$uibTooltip",function(t){return t("uibPopoverTemplate","popover","click",{useContentExp:!0})}]).directive("uibPopoverHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",uibTitle:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/popover/popover-html.html"}}).directive("uibPopoverHtml",["$uibTooltip",function(t){return t("uibPopoverHtml","popover","click",{useContentExp:!0})}]).directive("uibPopoverPopup",function(){return{replace:!0,scope:{uibTitle:"@",content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/popover/popover.html"}}).directive("uibPopover",["$uibTooltip",function(t){return t("uibPopover","popover","click")}]),angular.module("ui.bootstrap.tooltip",["ui.bootstrap.position","ui.bootstrap.stackedMap"]).provider("$uibTooltip",function(){function t(t){var o=/[A-Z]/g,e="-";return t.replace(o,function(t,o){return(o?e:"")+t.toLowerCase()})}var o={placement:"top",placementClassPrefix:"",animation:!0,popupDelay:0,popupCloseDelay:0,useContentExp:!1},e={mouseenter:"mouseleave",click:"click",outsideClick:"outsideClick",focus:"blur",none:""},i={};this.options=function(t){angular.extend(i,t)},this.setTriggers=function(t){angular.extend(e,t)},this.$get=["$window","$compile","$timeout","$document","$uibPosition","$interpolate","$rootScope","$parse","$$stackedMap",function(p,n,l,r,a,u,s,c,m){function h(t){if(27===t.which){var o=f.top();o&&(o.value.close(),f.removeTop(),o=null)}}var f=m.createNew();return r.on("keypress",h),s.$on("$destroy",function(){r.off("keypress",h)}),function(p,s,m,h){function d(t){var o=(t||h.trigger||m).split(" "),i=o.map(function(t){return e[t]||t});return{show:o,hide:i}}h=angular.extend({},o,i,h);var b=t(p),v=u.startSymbol(),g=u.endSymbol(),w="<div "+b+'-popup uib-title="'+v+"title"+g+'" '+(h.useContentExp?'content-exp="contentExp()" ':'content="'+v+"content"+g+'" ')+'placement="'+v+"placement"+g+'" popup-class="'+v+"popupClass"+g+'" animation="animation" is-open="isOpen" origin-scope="origScope" class="uib-position-measure"></div>';return{compile:function(){var t=n(w);return function(o,e,i){function n(){I.isOpen?m():u()}function u(){(!A||o.$eval(i[s+"Enable"]))&&(w(),C(),I.popupDelay?N||(N=l(b,I.popupDelay,!1)):b())}function m(){v(),I.popupCloseDelay?D||(D=l(g,I.popupCloseDelay,!1)):g()}function b(){return v(),w(),I.content?($(),void I.$evalAsync(function(){I.isOpen=!0,T(!0),Y()})):angular.noop}function v(){N&&(l.cancel(N),N=null),R&&(l.cancel(R),R=null)}function g(){I&&I.$evalAsync(function(){I&&(I.isOpen=!1,T(!1),I.animation?M||(M=l(y,150,!1)):y())})}function w(){D&&(l.cancel(D),D=null),M&&(l.cancel(M),M=null)}function $(){O||(E=I.$new(),O=t(E,function(t){H?r.find("body").append(t):e.after(t)}),k())}function y(){v(),w(),P(),O&&(O.remove(),O=null),E&&(E.$destroy(),E=null)}function C(){I.title=i[s+"Title"],I.content=q?q(o):i[p],I.popupClass=i[s+"Class"],I.placement=angular.isDefined(i[s+"Placement"])?i[s+"Placement"]:h.placement;var t=a.parsePlacement(I.placement);W=t[1]?t[0]+"-"+t[1]:t[0];var e=parseInt(i[s+"PopupDelay"],10),n=parseInt(i[s+"PopupCloseDelay"],10);I.popupDelay=isNaN(e)?h.popupDelay:e,I.popupCloseDelay=isNaN(n)?h.popupCloseDelay:n}function T(t){L&&angular.isFunction(L.assign)&&L.assign(o,t)}function k(){F.length=0,q?(F.push(o.$watch(q,function(t){I.content=t,!t&&I.isOpen&&g()})),F.push(E.$watch(function(){B||(B=!0,E.$$postDigest(function(){B=!1,I&&I.isOpen&&Y()}))}))):F.push(i.$observe(p,function(t){I.content=t,!t&&I.isOpen?g():Y()})),F.push(i.$observe(s+"Title",function(t){I.title=t,I.isOpen&&Y()})),F.push(i.$observe(s+"Placement",function(t){I.placement=t?t:h.placement,I.isOpen&&Y()}))}function P(){F.length&&(angular.forEach(F,function(t){t()}),F.length=0)}function x(t){I&&I.isOpen&&O&&(e[0].contains(t.target)||O[0].contains(t.target)||m())}function S(){var t=i[s+"Trigger"];X(),U=d(t),"none"!==U.show&&U.show.forEach(function(t,o){"outsideClick"===t?(e.on("click",n),r.on("click",x)):t===U.hide[o]?e.on(t,n):t&&(e.on(t,u),e.on(U.hide[o],m)),e.on("keypress",function(t){27===t.which&&m()})})}var O,E,M,N,D,R,W,H=angular.isDefined(h.appendToBody)?h.appendToBody:!1,U=d(void 0),A=angular.isDefined(i[s+"Enable"]),I=o.$new(!0),B=!1,L=angular.isDefined(i[s+"IsOpen"])?c(i[s+"IsOpen"]):!1,q=h.useContentExp?c(i[p]):!1,F=[],Y=function(){O&&O.html()&&(R||(R=l(function(){var t=a.positionElements(e,O,I.placement,H);O.css({top:t.top+"px",left:t.left+"px"}),O.hasClass(t.placement.split("-")[0])||(O.removeClass(W.split("-")[0]),O.addClass(t.placement.split("-")[0])),O.hasClass(h.placementClassPrefix+t.placement)||(O.removeClass(h.placementClassPrefix+W),O.addClass(h.placementClassPrefix+t.placement)),O.hasClass("uib-position-measure")?(a.positionArrow(O,t.placement),O.removeClass("uib-position-measure")):W!==t.placement&&a.positionArrow(O,t.placement),W=t.placement,R=null},0,!1)))};I.origScope=o,I.isOpen=!1,f.add(I,{close:g}),I.contentExp=function(){return I.content},i.$observe("disabled",function(t){t&&v(),t&&I.isOpen&&g()}),L&&o.$watch(L,function(t){I&&!t===I.isOpen&&n()});var X=function(){U.show.forEach(function(t){"outsideClick"===t?e.off("click",n):(e.off(t,u),e.off(t,n))}),U.hide.forEach(function(t){"outsideClick"===t?r.off("click",x):e.off(t,m)})};S();var V=o.$eval(i[s+"Animation"]);I.animation=angular.isDefined(V)?!!V:h.animation;var _,Z=s+"AppendToBody";_=Z in i&&void 0===i[Z]?!0:o.$eval(i[Z]),H=angular.isDefined(_)?_:H,o.$on("$destroy",function(){X(),y(),f.remove(I),I=null})}}}}}]}).directive("uibTooltipTemplateTransclude",["$animate","$sce","$compile","$templateRequest",function(t,o,e,i){return{link:function(p,n,l){var r,a,u,s=p.$eval(l.tooltipTemplateTranscludeScope),c=0,m=function(){a&&(a.remove(),a=null),r&&(r.$destroy(),r=null),u&&(t.leave(u).then(function(){a=null}),a=u,u=null)};p.$watch(o.parseAsResourceUrl(l.uibTooltipTemplateTransclude),function(o){var l=++c;o?(i(o,!0).then(function(i){if(l===c){var p=s.$new(),a=i,h=e(a)(p,function(o){m(),t.enter(o,n)});r=p,u=h,r.$emit("$includeContentLoaded",o)}},function(){l===c&&(m(),p.$emit("$includeContentError",o))}),p.$emit("$includeContentRequested",o)):m()}),p.$on("$destroy",m)}}}]).directive("uibTooltipClasses",["$uibPosition",function(t){return{restrict:"A",link:function(o,e,i){if(o.placement){var p=t.parsePlacement(o.placement);e.addClass(p[0])}o.popupClass&&e.addClass(o.popupClass),o.animation()&&e.addClass(i.tooltipAnimationClass)}}}]).directive("uibTooltipPopup",function(){return{replace:!0,scope:{content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-popup.html"}}).directive("uibTooltip",["$uibTooltip",function(t){return t("uibTooltip","tooltip","mouseenter")}]).directive("uibTooltipTemplatePopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/tooltip/tooltip-template-popup.html"}}).directive("uibTooltipTemplate",["$uibTooltip",function(t){return t("uibTooltipTemplate","tooltip","mouseenter",{useContentExp:!0})}]).directive("uibTooltipHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-html-popup.html"}}).directive("uibTooltipHtml",["$uibTooltip",function(t){return t("uibTooltipHtml","tooltip","mouseenter",{useContentExp:!0})}]),angular.module("ui.bootstrap.position",[]).factory("$uibPosition",["$document","$window",function(t,o){var e,i,p={normal:/(auto|scroll)/,hidden:/(auto|scroll|hidden)/},n={auto:/\s?auto?\s?/i,primary:/^(top|bottom|left|right)$/,secondary:/^(top|bottom|left|right|center)$/,vertical:/^(top|bottom)$/},l=/(HTML|BODY)/;return{getRawNode:function(t){return t.nodeName?t:t[0]||t},parseStyle:function(t){return t=parseFloat(t),isFinite(t)?t:0},offsetParent:function(e){function i(t){return"static"===(o.getComputedStyle(t).position||"static")}e=this.getRawNode(e);for(var p=e.offsetParent||t[0].documentElement;p&&p!==t[0].documentElement&&i(p);)p=p.offsetParent;return p||t[0].documentElement},scrollbarWidth:function(p){if(p){if(angular.isUndefined(i)){var n=t.find("body");n.addClass("uib-position-body-scrollbar-measure"),i=o.innerWidth-n[0].clientWidth,i=isFinite(i)?i:0,n.removeClass("uib-position-body-scrollbar-measure")}return i}if(angular.isUndefined(e)){var l=angular.element('<div class="uib-position-scrollbar-measure"></div>');t.find("body").append(l),e=l[0].offsetWidth-l[0].clientWidth,e=isFinite(e)?e:0,l.remove()}return e},scrollbarPadding:function(t){t=this.getRawNode(t);var e=o.getComputedStyle(t),i=this.parseStyle(e.paddingRight),p=this.parseStyle(e.paddingBottom),n=this.scrollParent(t,!1,!0),r=this.scrollbarWidth(n,l.test(n.tagName));return{scrollbarWidth:r,widthOverflow:n.scrollWidth>n.clientWidth,right:i+r,originalRight:i,heightOverflow:n.scrollHeight>n.clientHeight,bottom:p+r,originalBottom:p}},isScrollable:function(t,e){t=this.getRawNode(t);var i=e?p.hidden:p.normal,n=o.getComputedStyle(t);return i.test(n.overflow+n.overflowY+n.overflowX)},scrollParent:function(e,i,n){e=this.getRawNode(e);var l=i?p.hidden:p.normal,r=t[0].documentElement,a=o.getComputedStyle(e);if(n&&l.test(a.overflow+a.overflowY+a.overflowX))return e;var u="absolute"===a.position,s=e.parentElement||r;if(s===r||"fixed"===a.position)return r;for(;s.parentElement&&s!==r;){var c=o.getComputedStyle(s);if(u&&"static"!==c.position&&(u=!1),!u&&l.test(c.overflow+c.overflowY+c.overflowX))break;s=s.parentElement}return s},position:function(e,i){e=this.getRawNode(e);var p=this.offset(e);if(i){var n=o.getComputedStyle(e);p.top-=this.parseStyle(n.marginTop),p.left-=this.parseStyle(n.marginLeft)}var l=this.offsetParent(e),r={top:0,left:0};return l!==t[0].documentElement&&(r=this.offset(l),r.top+=l.clientTop-l.scrollTop,r.left+=l.clientLeft-l.scrollLeft),{width:Math.round(angular.isNumber(p.width)?p.width:e.offsetWidth),height:Math.round(angular.isNumber(p.height)?p.height:e.offsetHeight),top:Math.round(p.top-r.top),left:Math.round(p.left-r.left)}},offset:function(e){e=this.getRawNode(e);var i=e.getBoundingClientRect();return{width:Math.round(angular.isNumber(i.width)?i.width:e.offsetWidth),height:Math.round(angular.isNumber(i.height)?i.height:e.offsetHeight),top:Math.round(i.top+(o.pageYOffset||t[0].documentElement.scrollTop)),left:Math.round(i.left+(o.pageXOffset||t[0].documentElement.scrollLeft))}},viewportOffset:function(e,i,p){e=this.getRawNode(e),p=p!==!1?!0:!1;var n=e.getBoundingClientRect(),l={top:0,left:0,bottom:0,right:0},r=i?t[0].documentElement:this.scrollParent(e),a=r.getBoundingClientRect();if(l.top=a.top+r.clientTop,l.left=a.left+r.clientLeft,r===t[0].documentElement&&(l.top+=o.pageYOffset,l.left+=o.pageXOffset),l.bottom=l.top+r.clientHeight,l.right=l.left+r.clientWidth,p){var u=o.getComputedStyle(r);l.top+=this.parseStyle(u.paddingTop),l.bottom-=this.parseStyle(u.paddingBottom),l.left+=this.parseStyle(u.paddingLeft),l.right-=this.parseStyle(u.paddingRight)}return{top:Math.round(n.top-l.top),bottom:Math.round(l.bottom-n.bottom),left:Math.round(n.left-l.left),right:Math.round(l.right-n.right)}},parsePlacement:function(t){var o=n.auto.test(t);return o&&(t=t.replace(n.auto,"")),t=t.split("-"),t[0]=t[0]||"top",n.primary.test(t[0])||(t[0]="top"),t[1]=t[1]||"center",n.secondary.test(t[1])||(t[1]="center"),t[2]=o?!0:!1,t},positionElements:function(t,e,i,p){t=this.getRawNode(t),e=this.getRawNode(e);var l=angular.isDefined(e.offsetWidth)?e.offsetWidth:e.prop("offsetWidth"),r=angular.isDefined(e.offsetHeight)?e.offsetHeight:e.prop("offsetHeight");i=this.parsePlacement(i);var a=p?this.offset(t):this.position(t),u={top:0,left:0,placement:""};if(i[2]){var s=this.viewportOffset(t,p),c=o.getComputedStyle(e),m={width:l+Math.round(Math.abs(this.parseStyle(c.marginLeft)+this.parseStyle(c.marginRight))),height:r+Math.round(Math.abs(this.parseStyle(c.marginTop)+this.parseStyle(c.marginBottom)))};if(i[0]="top"===i[0]&&m.height>s.top&&m.height<=s.bottom?"bottom":"bottom"===i[0]&&m.height>s.bottom&&m.height<=s.top?"top":"left"===i[0]&&m.width>s.left&&m.width<=s.right?"right":"right"===i[0]&&m.width>s.right&&m.width<=s.left?"left":i[0],i[1]="top"===i[1]&&m.height-a.height>s.bottom&&m.height-a.height<=s.top?"bottom":"bottom"===i[1]&&m.height-a.height>s.top&&m.height-a.height<=s.bottom?"top":"left"===i[1]&&m.width-a.width>s.right&&m.width-a.width<=s.left?"right":"right"===i[1]&&m.width-a.width>s.left&&m.width-a.width<=s.right?"left":i[1],"center"===i[1])if(n.vertical.test(i[0])){var h=a.width/2-l/2;s.left+h<0&&m.width-a.width<=s.right?i[1]="left":s.right+h<0&&m.width-a.width<=s.left&&(i[1]="right")}else{var f=a.height/2-m.height/2;s.top+f<0&&m.height-a.height<=s.bottom?i[1]="top":s.bottom+f<0&&m.height-a.height<=s.top&&(i[1]="bottom")}}switch(i[0]){case"top":u.top=a.top-r;break;case"bottom":u.top=a.top+a.height;break;case"left":u.left=a.left-l;break;case"right":u.left=a.left+a.width}switch(i[1]){case"top":u.top=a.top;break;case"bottom":u.top=a.top+a.height-r;break;case"left":u.left=a.left;break;case"right":u.left=a.left+a.width-l;break;case"center":n.vertical.test(i[0])?u.left=a.left+a.width/2-l/2:u.top=a.top+a.height/2-r/2}return u.top=Math.round(u.top),u.left=Math.round(u.left),u.placement="center"===i[1]?i[0]:i[0]+"-"+i[1],u},positionArrow:function(t,e){t=this.getRawNode(t);var i=t.querySelector(".tooltip-inner, .popover-inner");if(i){var p=angular.element(i).hasClass("tooltip-inner"),l=t.querySelector(p?".tooltip-arrow":".arrow");if(l){var r={top:"",bottom:"",left:"",right:""};if(e=this.parsePlacement(e),"center"===e[1])return void angular.element(l).css(r);var a="border-"+e[0]+"-width",u=o.getComputedStyle(l)[a],s="border-";s+=n.vertical.test(e[0])?e[0]+"-"+e[1]:e[1]+"-"+e[0],s+="-radius";var c=o.getComputedStyle(p?i:t)[s];switch(e[0]){case"top":r.bottom=p?"0":"-"+u;break;case"bottom":r.top=p?"0":"-"+u;break;case"left":r.right=p?"0":"-"+u;break;case"right":r.left=p?"0":"-"+u}r[e[1]]=c,angular.element(l).css(r)}}}}}]),angular.module("ui.bootstrap.stackedMap",[]).factory("$$stackedMap",function(){return{createNew:function(){var t=[];return{add:function(o,e){t.push({key:o,value:e})},get:function(o){for(var e=0;e<t.length;e++)if(o===t[e].key)return t[e]},keys:function(){for(var o=[],e=0;e<t.length;e++)o.push(t[e].key);return o},top:function(){return t[t.length-1]},remove:function(o){for(var e=-1,i=0;i<t.length;i++)if(o===t[i].key){e=i;break}return t.splice(e,1)[0]},removeTop:function(){return t.splice(t.length-1,1)[0]},length:function(){return t.length}}}}}),angular.module("ui.bootstrap.typeahead",["ui.bootstrap.debounce","ui.bootstrap.position"]).factory("uibTypeaheadParser",["$parse",function(t){var o=/^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+([\s\S]+?)$/;return{parse:function(e){var i=e.match(o);if(!i)throw new Error('Expected typeahead specification in form of "_modelValue_ (as _label_)? for _item_ in _collection_" but got "'+e+'".');return{itemName:i[3],source:t(i[4]),viewMapper:t(i[2]||i[1]),modelMapper:t(i[1])}}}}]).controller("UibTypeaheadController",["$scope","$element","$attrs","$compile","$parse","$q","$timeout","$document","$window","$rootScope","$$debounce","$uibPosition","uibTypeaheadParser",function(t,o,e,i,p,n,l,r,a,u,s,c,m){function h(){L.moveInProgress||(L.moveInProgress=!0,L.$digest()),G()}function f(){L.position=M?c.offset(o):c.position(o),L.position.top+=o.prop("offsetHeight")}var d,b,v=[9,13,27,38,40],g=200,w=t.$eval(e.typeaheadMinLength);w||0===w||(w=1),t.$watch(e.typeaheadMinLength,function(t){w=t||0===t?t:1});var $=t.$eval(e.typeaheadWaitMs)||0,y=t.$eval(e.typeaheadEditable)!==!1;t.$watch(e.typeaheadEditable,function(t){y=t!==!1});var C,T,k=p(e.typeaheadLoading).assign||angular.noop,P=e.typeaheadShouldSelect?p(e.typeaheadShouldSelect):function(t,o){var e=o.$event;return 13===e.which||9===e.which},x=p(e.typeaheadOnSelect),S=angular.isDefined(e.typeaheadSelectOnBlur)?t.$eval(e.typeaheadSelectOnBlur):!1,O=p(e.typeaheadNoResults).assign||angular.noop,E=e.typeaheadInputFormatter?p(e.typeaheadInputFormatter):void 0,M=e.typeaheadAppendToBody?t.$eval(e.typeaheadAppendToBody):!1,N=e.typeaheadAppendTo?t.$eval(e.typeaheadAppendTo):null,D=t.$eval(e.typeaheadFocusFirst)!==!1,R=e.typeaheadSelectOnExact?t.$eval(e.typeaheadSelectOnExact):!1,W=p(e.typeaheadIsOpen).assign||angular.noop,H=t.$eval(e.typeaheadShowHint)||!1,U=p(e.ngModel),A=p(e.ngModel+"($$$p)"),I=function(o,e){return angular.isFunction(U(t))&&b&&b.$options&&b.$options.getterSetter?A(o,{$$$p:e}):U.assign(o,e)},B=m.parse(e.uibTypeahead),L=t.$new(),q=t.$on("$destroy",function(){L.$destroy()});L.$on("$destroy",q);var F="typeahead-"+L.$id+"-"+Math.floor(1e4*Math.random());o.attr({"aria-autocomplete":"list","aria-expanded":!1,"aria-owns":F});var Y,X;H&&(Y=angular.element("<div></div>"),Y.css("position","relative"),o.after(Y),X=o.clone(),X.attr("placeholder",""),X.attr("tabindex","-1"),X.val(""),X.css({position:"absolute",top:"0px",left:"0px","border-color":"transparent","box-shadow":"none",opacity:1,background:"none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255)",color:"#999"}),o.css({position:"relative","vertical-align":"top","background-color":"transparent"}),Y.append(X),X.after(o));var V=angular.element("<div uib-typeahead-popup></div>");V.attr({id:F,matches:"matches",active:"activeIdx",select:"select(activeIdx, evt)","move-in-progress":"moveInProgress",query:"query",position:"position","assign-is-open":"assignIsOpen(isOpen)",debounce:"debounceUpdate"}),angular.isDefined(e.typeaheadTemplateUrl)&&V.attr("template-url",e.typeaheadTemplateUrl),angular.isDefined(e.typeaheadPopupTemplateUrl)&&V.attr("popup-template-url",e.typeaheadPopupTemplateUrl);var _=function(){H&&X.val("")},Z=function(){L.matches=[],L.activeIdx=-1,o.attr("aria-expanded",!1),_()},j=function(t){return F+"-option-"+t};L.$watch("activeIdx",function(t){0>t?o.removeAttr("aria-activedescendant"):o.attr("aria-activedescendant",j(t))});var z=function(t,o){return L.matches.length>o&&t?t.toUpperCase()===L.matches[o].label.toUpperCase():!1},K=function(e,i){var p={$viewValue:e};k(t,!0),O(t,!1),n.when(B.source(t,p)).then(function(n){var l=e===d.$viewValue;if(l&&C)if(n&&n.length>0){L.activeIdx=D?0:-1,O(t,!1),L.matches.length=0;for(var r=0;r<n.length;r++)p[B.itemName]=n[r],L.matches.push({id:j(r),label:B.viewMapper(L,p),model:n[r]});if(L.query=e,f(),o.attr("aria-expanded",!0),R&&1===L.matches.length&&z(e,0)&&(angular.isNumber(L.debounceUpdate)||angular.isObject(L.debounceUpdate)?s(function(){L.select(0,i)},angular.isNumber(L.debounceUpdate)?L.debounceUpdate:L.debounceUpdate["default"]):L.select(0,i)),H){var a=L.matches[0].label;X.val(angular.isString(e)&&e.length>0&&a.slice(0,e.length).toUpperCase()===e.toUpperCase()?e+a.slice(e.length):"")}}else Z(),O(t,!0);l&&k(t,!1)},function(){Z(),k(t,!1),O(t,!0)})};M&&(angular.element(a).on("resize",h),r.find("body").on("scroll",h));var G=s(function(){L.matches.length&&f(),L.moveInProgress=!1},g);L.moveInProgress=!1,L.query=void 0;var J,Q=function(t){J=l(function(){K(t)},$)},to=function(){J&&l.cancel(J)};Z(),L.assignIsOpen=function(o){W(t,o)},L.select=function(i,p){var n,r,a={};T=!0,a[B.itemName]=r=L.matches[i].model,n=B.modelMapper(t,a),I(t,n),d.$setValidity("editable",!0),d.$setValidity("parse",!0),x(t,{$item:r,$model:n,$label:B.viewMapper(t,a),$event:p}),Z(),L.$eval(e.typeaheadFocusOnSelect)!==!1&&l(function(){o[0].focus()},0,!1)},o.on("keydown",function(o){if(0!==L.matches.length&&-1!==v.indexOf(o.which)){var e=P(t,{$event:o});if(-1===L.activeIdx&&e||9===o.which&&o.shiftKey)return Z(),void L.$digest();o.preventDefault();var i;switch(o.which){case 27:o.stopPropagation(),Z(),t.$digest();break;case 38:L.activeIdx=(L.activeIdx>0?L.activeIdx:L.matches.length)-1,L.$digest(),i=V.find("li")[L.activeIdx],i.parentNode.scrollTop=i.offsetTop;break;case 40:L.activeIdx=(L.activeIdx+1)%L.matches.length,L.$digest(),i=V.find("li")[L.activeIdx],i.parentNode.scrollTop=i.offsetTop;break;default:e&&L.$apply(function(){angular.isNumber(L.debounceUpdate)||angular.isObject(L.debounceUpdate)?s(function(){L.select(L.activeIdx,o)},angular.isNumber(L.debounceUpdate)?L.debounceUpdate:L.debounceUpdate["default"]):L.select(L.activeIdx,o)})}}}),o.bind("focus",function(t){C=!0,0!==w||d.$viewValue||l(function(){K(d.$viewValue,t)},0)}),o.bind("blur",function(t){S&&L.matches.length&&-1!==L.activeIdx&&!T&&(T=!0,L.$apply(function(){angular.isObject(L.debounceUpdate)&&angular.isNumber(L.debounceUpdate.blur)?s(function(){L.select(L.activeIdx,t)},L.debounceUpdate.blur):L.select(L.activeIdx,t)})),!y&&d.$error.editable&&(d.$setViewValue(),d.$setValidity("editable",!0),d.$setValidity("parse",!0),o.val("")),C=!1,T=!1});var oo=function(e){o[0]!==e.target&&3!==e.which&&0!==L.matches.length&&(Z(),u.$$phase||t.$digest())};r.on("click",oo),t.$on("$destroy",function(){r.off("click",oo),(M||N)&&eo.remove(),M&&(angular.element(a).off("resize",h),r.find("body").off("scroll",h)),V.remove(),H&&Y.remove()});var eo=i(V)(L);M?r.find("body").append(eo):N?angular.element(N).eq(0).append(eo):o.after(eo),this.init=function(o,e){d=o,b=e,L.debounceUpdate=d.$options&&p(d.$options.debounce)(t),d.$parsers.unshift(function(o){return C=!0,0===w||o&&o.length>=w?$>0?(to(),Q(o)):K(o):(k(t,!1),to(),Z()),y?o:o?void d.$setValidity("editable",!1):(d.$setValidity("editable",!0),null)}),d.$formatters.push(function(o){var e,i,p={};return y||d.$setValidity("editable",!0),E?(p.$model=o,E(t,p)):(p[B.itemName]=o,e=B.viewMapper(t,p),p[B.itemName]=void 0,i=B.viewMapper(t,p),e!==i?e:o)})}}]).directive("uibTypeahead",function(){return{controller:"UibTypeaheadController",require:["ngModel","^?ngModelOptions","uibTypeahead"],link:function(t,o,e,i){i[2].init(i[0],i[1])}}}).directive("uibTypeaheadPopup",["$$debounce",function(t){return{scope:{matches:"=",query:"=",active:"=",position:"&",moveInProgress:"=",select:"&",assignIsOpen:"&",debounce:"&"},replace:!0,templateUrl:function(t,o){return o.popupTemplateUrl||"uib/template/typeahead/typeahead-popup.html"},link:function(o,e,i){o.templateUrl=i.templateUrl,o.isOpen=function(){var t=o.matches.length>0;return o.assignIsOpen({isOpen:t}),t},o.isActive=function(t){return o.active===t},o.selectActive=function(t){o.active=t},o.selectMatch=function(e,i){var p=o.debounce();angular.isNumber(p)||angular.isObject(p)?t(function(){o.select({activeIdx:e,evt:i})},angular.isNumber(p)?p:p["default"]):o.select({activeIdx:e,evt:i})}}}}]).directive("uibTypeaheadMatch",["$templateRequest","$compile","$parse",function(t,o,e){return{scope:{index:"=",match:"=",query:"="},link:function(i,p,n){var l=e(n.templateUrl)(i.$parent)||"uib/template/typeahead/typeahead-match.html";t(l).then(function(t){var e=angular.element(t.trim());p.replaceWith(e),o(e)(i)})}}}]).filter("uibTypeaheadHighlight",["$sce","$injector","$log",function(t,o,e){function i(t){return t.replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1")}function p(t){return/<.*>/g.test(t)}var n;return n=o.has("$sanitize"),function(o,l){return!n&&p(o)&&e.warn("Unsafe use of typeahead please use ngSanitize"),o=l?(""+o).replace(new RegExp(i(l),"gi"),"<strong>$&</strong>"):o,n||(o=t.trustAsHtml(o)),o}}]),angular.module("ui.bootstrap.debounce",[]).factory("$$debounce",["$timeout",function(t){return function(o,e){var i;return function(){var p=this,n=Array.prototype.slice.call(arguments);i&&t.cancel(i),i=t(function(){o.apply(p,n)},e)}}}]),angular.module("uib/template/popover/popover-html.html",[]).run(["$templateCache",function(t){t.put("uib/template/popover/popover-html.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content" ng-bind-html="contentExp()"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/popover/popover-template.html",[]).run(["$templateCache",function(t){t.put("uib/template/popover/popover-template.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content"\n        uib-tooltip-template-transclude="contentExp()"\n        tooltip-template-transclude-scope="originScope()"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/popover/popover.html",[]).run(["$templateCache",function(t){t.put("uib/template/popover/popover.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content" ng-bind="content"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-html-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/tooltip/tooltip-html-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind-html="contentExp()"></div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/tooltip/tooltip-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind="content"></div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-template-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/tooltip/tooltip-template-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner"\n    uib-tooltip-template-transclude="contentExp()"\n    tooltip-template-transclude-scope="originScope()"></div>\n</div>\n')}]),angular.module("uib/template/typeahead/typeahead-match.html",[]).run(["$templateCache",function(t){t.put("uib/template/typeahead/typeahead-match.html",'<a href\n   tabindex="-1"\n   ng-bind-html="match.label | uibTypeaheadHighlight:query"\n   ng-attr-title="{{match.label}}"></a>\n')}]),angular.module("uib/template/typeahead/typeahead-popup.html",[]).run(["$templateCache",function(t){t.put("uib/template/typeahead/typeahead-popup.html",'<ul class="dropdown-menu" ng-show="isOpen() && !moveInProgress" ng-style="{top: position().top+\'px\', left: position().left+\'px\'}" role="listbox" aria-hidden="{{!isOpen()}}">\n    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index, $event)" role="option" id="{{::match.id}}">\n        <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>\n    </li>\n</ul>\n')}]),angular.module("ui.bootstrap.tooltip").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTooltipCss&&angular.element(document).find("head").prepend('<style type="text/css">[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-bottom > .tooltip-arrow,[uib-popover-popup].popover.top-left > .arrow,[uib-popover-popup].popover.top-right > .arrow,[uib-popover-popup].popover.bottom-left > .arrow,[uib-popover-popup].popover.bottom-right > .arrow,[uib-popover-popup].popover.left-top > .arrow,[uib-popover-popup].popover.left-bottom > .arrow,[uib-popover-popup].popover.right-top > .arrow,[uib-popover-popup].popover.right-bottom > .arrow,[uib-popover-html-popup].popover.top-left > .arrow,[uib-popover-html-popup].popover.top-right > .arrow,[uib-popover-html-popup].popover.bottom-left > .arrow,[uib-popover-html-popup].popover.bottom-right > .arrow,[uib-popover-html-popup].popover.left-top > .arrow,[uib-popover-html-popup].popover.left-bottom > .arrow,[uib-popover-html-popup].popover.right-top > .arrow,[uib-popover-html-popup].popover.right-bottom > .arrow,[uib-popover-template-popup].popover.top-left > .arrow,[uib-popover-template-popup].popover.top-right > .arrow,[uib-popover-template-popup].popover.bottom-left > .arrow,[uib-popover-template-popup].popover.bottom-right > .arrow,[uib-popover-template-popup].popover.left-top > .arrow,[uib-popover-template-popup].popover.left-bottom > .arrow,[uib-popover-template-popup].popover.right-top > .arrow,[uib-popover-template-popup].popover.right-bottom > .arrow{top:auto;bottom:auto;left:auto;right:auto;margin:0;}[uib-popover-popup].popover,[uib-popover-html-popup].popover,[uib-popover-template-popup].popover{display:block !important;}</style>'),angular.$$uibTooltipCss=!0}),angular.module("ui.bootstrap.position").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibPositionCss&&angular.element(document).find("head").prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style>'),angular.$$uibPositionCss=!0}),angular.module("ui.bootstrap.typeahead").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTypeaheadCss&&angular.element(document).find("head").prepend('<style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style>'),angular.$$uibTypeaheadCss=!0});
+ */angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.timepicker","ui.bootstrap.typeahead","ui.bootstrap.debounce","ui.bootstrap.position","ui.bootstrap.popover","ui.bootstrap.tooltip","ui.bootstrap.stackedMap"]),angular.module("ui.bootstrap.tpls",["uib/template/timepicker/timepicker.html","uib/template/typeahead/typeahead-match.html","uib/template/typeahead/typeahead-popup.html","uib/template/popover/popover-html.html","uib/template/popover/popover-template.html","uib/template/popover/popover.html","uib/template/tooltip/tooltip-html-popup.html","uib/template/tooltip/tooltip-popup.html","uib/template/tooltip/tooltip-template-popup.html"]),angular.module("ui.bootstrap.timepicker",[]).constant("uibTimepickerConfig",{hourStep:1,minuteStep:1,secondStep:1,showMeridian:!0,showSeconds:!1,meridians:null,readonlyInput:!1,mousewheel:!0,arrowkeys:!0,showSpinners:!0,templateUrl:"uib/template/timepicker/timepicker.html"}).controller("UibTimepickerController",["$scope","$element","$attrs","$parse","$log","$locale","uibTimepickerConfig",function(e,t,o,n,i,a,r){function p(){var t=+e.hours,o=e.showMeridian?t>0&&13>t:t>=0&&24>t;return o&&""!==e.hours?(e.showMeridian&&(12===t&&(t=0),e.meridian===y[1]&&(t+=12)),t):void 0}function l(){var t=+e.minutes,o=t>=0&&60>t;return o&&""!==e.minutes?t:void 0}function u(){var t=+e.seconds;return t>=0&&60>t?t:void 0}function s(e,t){return null===e?"":angular.isDefined(e)&&e.toString().length<2&&!t?"0"+e:e.toString()}function c(e){d(),w.$setViewValue(new Date(b)),h(e)}function d(){w.$setValidity("time",!0),e.invalidHours=!1,e.invalidMinutes=!1,e.invalidSeconds=!1}function h(t){if(w.$modelValue){var o=b.getHours(),n=b.getMinutes(),i=b.getSeconds();e.showMeridian&&(o=0===o||12===o?12:o%12),e.hours="h"===t?o:s(o,!S),"m"!==t&&(e.minutes=s(n)),e.meridian=b.getHours()<12?y[0]:y[1],"s"!==t&&(e.seconds=s(i)),e.meridian=b.getHours()<12?y[0]:y[1]}else e.hours=null,e.minutes=null,e.seconds=null,e.meridian=y[0]}function m(e){b=g(b,e),c()}function f(e,t){return g(e,60*t)}function g(e,t){var o=new Date(e.getTime()+1e3*t),n=new Date(e);return n.setHours(o.getHours(),o.getMinutes(),o.getSeconds()),n}function v(){return!(null!==e.hours&&""!==e.hours||null!==e.minutes&&""!==e.minutes||e.showSeconds&&(!e.showSeconds||null!==e.seconds&&""!==e.seconds))}var b=new Date,$=[],w={$setViewValue:angular.noop},y=angular.isDefined(o.meridians)?e.$parent.$eval(o.meridians):r.meridians||a.DATETIME_FORMATS.AMPMS,S=angular.isDefined(o.padHours)?e.$parent.$eval(o.padHours):!0;e.tabindex=angular.isDefined(o.tabindex)?o.tabindex:0,t.removeAttr("tabindex"),this.init=function(t,n){w=t,w.$render=this.render,w.$formatters.unshift(function(e){return e?new Date(e):null});var i=n.eq(0),a=n.eq(1),p=n.eq(2),l=angular.isDefined(o.mousewheel)?e.$parent.$eval(o.mousewheel):r.mousewheel;l&&this.setupMousewheelEvents(i,a,p);var u=angular.isDefined(o.arrowkeys)?e.$parent.$eval(o.arrowkeys):r.arrowkeys;u&&this.setupArrowkeyEvents(i,a,p),e.readonlyInput=angular.isDefined(o.readonlyInput)?e.$parent.$eval(o.readonlyInput):r.readonlyInput,this.setupInputEvents(i,a,p)};var x=r.hourStep;o.hourStep&&$.push(e.$parent.$watch(n(o.hourStep),function(e){x=+e}));var T=r.minuteStep;o.minuteStep&&$.push(e.$parent.$watch(n(o.minuteStep),function(e){T=+e}));var k;$.push(e.$parent.$watch(n(o.min),function(e){var t=new Date(e);k=isNaN(t)?void 0:t}));var M;$.push(e.$parent.$watch(n(o.max),function(e){var t=new Date(e);M=isNaN(t)?void 0:t}));var C=!1;o.ngDisabled&&$.push(e.$parent.$watch(n(o.ngDisabled),function(e){C=e})),e.noIncrementHours=function(){var e=f(b,60*x);return C||e>M||b>e&&k>e},e.noDecrementHours=function(){var e=f(b,60*-x);return C||k>e||e>b&&e>M},e.noIncrementMinutes=function(){var e=f(b,T);return C||e>M||b>e&&k>e},e.noDecrementMinutes=function(){var e=f(b,-T);return C||k>e||e>b&&e>M},e.noIncrementSeconds=function(){var e=g(b,D);return C||e>M||b>e&&k>e},e.noDecrementSeconds=function(){var e=g(b,-D);return C||k>e||e>b&&e>M},e.noToggleMeridian=function(){return b.getHours()<12?C||f(b,720)>M:C||f(b,-720)<k};var D=r.secondStep;o.secondStep&&$.push(e.$parent.$watch(n(o.secondStep),function(e){D=+e})),e.showSeconds=r.showSeconds,o.showSeconds&&$.push(e.$parent.$watch(n(o.showSeconds),function(t){e.showSeconds=!!t})),e.showMeridian=r.showMeridian,o.showMeridian&&$.push(e.$parent.$watch(n(o.showMeridian),function(t){if(e.showMeridian=!!t,w.$error.time){var o=p(),n=l();angular.isDefined(o)&&angular.isDefined(n)&&(b.setHours(o),c())}else h()})),this.setupMousewheelEvents=function(t,o,n){var i=function(e){e.originalEvent&&(e=e.originalEvent);var t=e.wheelDelta?e.wheelDelta:-e.deltaY;return e.detail||t>0};t.bind("mousewheel wheel",function(t){C||e.$apply(i(t)?e.incrementHours():e.decrementHours()),t.preventDefault()}),o.bind("mousewheel wheel",function(t){C||e.$apply(i(t)?e.incrementMinutes():e.decrementMinutes()),t.preventDefault()}),n.bind("mousewheel wheel",function(t){C||e.$apply(i(t)?e.incrementSeconds():e.decrementSeconds()),t.preventDefault()})},this.setupArrowkeyEvents=function(t,o,n){t.bind("keydown",function(t){C||(38===t.which?(t.preventDefault(),e.incrementHours(),e.$apply()):40===t.which&&(t.preventDefault(),e.decrementHours(),e.$apply()))}),o.bind("keydown",function(t){C||(38===t.which?(t.preventDefault(),e.incrementMinutes(),e.$apply()):40===t.which&&(t.preventDefault(),e.decrementMinutes(),e.$apply()))}),n.bind("keydown",function(t){C||(38===t.which?(t.preventDefault(),e.incrementSeconds(),e.$apply()):40===t.which&&(t.preventDefault(),e.decrementSeconds(),e.$apply()))})},this.setupInputEvents=function(t,o,n){if(e.readonlyInput)return e.updateHours=angular.noop,e.updateMinutes=angular.noop,void(e.updateSeconds=angular.noop);var i=function(t,o,n){w.$setViewValue(null),w.$setValidity("time",!1),angular.isDefined(t)&&(e.invalidHours=t),angular.isDefined(o)&&(e.invalidMinutes=o),angular.isDefined(n)&&(e.invalidSeconds=n)};e.updateHours=function(){var e=p(),t=l();w.$setDirty(),angular.isDefined(e)&&angular.isDefined(t)?(b.setHours(e),b.setMinutes(t),k>b||b>M?i(!0):c("h")):i(!0)},t.bind("blur",function(){w.$setTouched(),v()?d():null===e.hours||""===e.hours?i(!0):!e.invalidHours&&e.hours<10&&e.$apply(function(){e.hours=s(e.hours,!S)})}),e.updateMinutes=function(){var e=l(),t=p();w.$setDirty(),angular.isDefined(e)&&angular.isDefined(t)?(b.setHours(t),b.setMinutes(e),k>b||b>M?i(void 0,!0):c("m")):i(void 0,!0)},o.bind("blur",function(){w.$setTouched(),v()?d():null===e.minutes?i(void 0,!0):!e.invalidMinutes&&e.minutes<10&&e.$apply(function(){e.minutes=s(e.minutes)})}),e.updateSeconds=function(){var e=u();w.$setDirty(),angular.isDefined(e)?(b.setSeconds(e),c("s")):i(void 0,void 0,!0)},n.bind("blur",function(){v()?d():!e.invalidSeconds&&e.seconds<10&&e.$apply(function(){e.seconds=s(e.seconds)})})},this.render=function(){var t=w.$viewValue;isNaN(t)?(w.$setValidity("time",!1),i.error('Timepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.')):(t&&(b=t),k>b||b>M?(w.$setValidity("time",!1),e.invalidHours=!0,e.invalidMinutes=!0):d(),h())},e.showSpinners=angular.isDefined(o.showSpinners)?e.$parent.$eval(o.showSpinners):r.showSpinners,e.incrementHours=function(){e.noIncrementHours()||m(60*x*60)},e.decrementHours=function(){e.noDecrementHours()||m(60*-x*60)},e.incrementMinutes=function(){e.noIncrementMinutes()||m(60*T)},e.decrementMinutes=function(){e.noDecrementMinutes()||m(60*-T)},e.incrementSeconds=function(){e.noIncrementSeconds()||m(D)},e.decrementSeconds=function(){e.noDecrementSeconds()||m(-D)},e.toggleMeridian=function(){var t=l(),o=p();e.noToggleMeridian()||(angular.isDefined(t)&&angular.isDefined(o)?m(720*(b.getHours()<12?60:-60)):e.meridian=e.meridian===y[0]?y[1]:y[0])},e.blur=function(){w.$setTouched()},e.$on("$destroy",function(){for(;$.length;)$.shift()()})}]).directive("uibTimepicker",["uibTimepickerConfig",function(e){return{require:["uibTimepicker","?^ngModel"],controller:"UibTimepickerController",controllerAs:"timepicker",replace:!0,scope:{},templateUrl:function(t,o){return o.templateUrl||e.templateUrl},link:function(e,t,o,n){var i=n[0],a=n[1];a&&i.init(a,t.find("input"))}}}]),angular.module("ui.bootstrap.typeahead",["ui.bootstrap.debounce","ui.bootstrap.position"]).factory("uibTypeaheadParser",["$parse",function(e){var t=/^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+([\s\S]+?)$/;return{parse:function(o){var n=o.match(t);if(!n)throw new Error('Expected typeahead specification in form of "_modelValue_ (as _label_)? for _item_ in _collection_" but got "'+o+'".');return{itemName:n[3],source:e(n[4]),viewMapper:e(n[2]||n[1]),modelMapper:e(n[1])}}}}]).controller("UibTypeaheadController",["$scope","$element","$attrs","$compile","$parse","$q","$timeout","$document","$window","$rootScope","$$debounce","$uibPosition","uibTypeaheadParser",function(e,t,o,n,i,a,r,p,l,u,s,c,d){function h(){W.moveInProgress||(W.moveInProgress=!0,W.$digest()),G()}function m(){W.position=O?c.offset(t):c.position(t),W.position.top+=t.prop("offsetHeight")}var f,g,v=[9,13,27,38,40],b=200,$=e.$eval(o.typeaheadMinLength);$||0===$||($=1),e.$watch(o.typeaheadMinLength,function(e){$=e||0===e?e:1});var w=e.$eval(o.typeaheadWaitMs)||0,y=e.$eval(o.typeaheadEditable)!==!1;e.$watch(o.typeaheadEditable,function(e){y=e!==!1});var S,x,T=i(o.typeaheadLoading).assign||angular.noop,k=o.typeaheadShouldSelect?i(o.typeaheadShouldSelect):function(e,t){var o=t.$event;return 13===o.which||9===o.which},M=i(o.typeaheadOnSelect),C=angular.isDefined(o.typeaheadSelectOnBlur)?e.$eval(o.typeaheadSelectOnBlur):!1,D=i(o.typeaheadNoResults).assign||angular.noop,I=o.typeaheadInputFormatter?i(o.typeaheadInputFormatter):void 0,O=o.typeaheadAppendToBody?e.$eval(o.typeaheadAppendToBody):!1,P=o.typeaheadAppendTo?e.$eval(o.typeaheadAppendTo):null,H=e.$eval(o.typeaheadFocusFirst)!==!1,E=o.typeaheadSelectOnExact?e.$eval(o.typeaheadSelectOnExact):!1,U=i(o.typeaheadIsOpen).assign||angular.noop,N=e.$eval(o.typeaheadShowHint)||!1,A=i(o.ngModel),R=i(o.ngModel+"($$$p)"),V=function(t,o){return angular.isFunction(A(e))&&g&&g.$options&&g.$options.getterSetter?R(t,{$$$p:o}):A.assign(t,o)},q=d.parse(o.uibTypeahead),W=e.$new(),B=e.$on("$destroy",function(){W.$destroy()});W.$on("$destroy",B);var F="typeahead-"+W.$id+"-"+Math.floor(1e4*Math.random());t.attr({"aria-autocomplete":"list","aria-expanded":!1,"aria-owns":F});var L,_;N&&(L=angular.element("<div></div>"),L.css("position","relative"),t.after(L),_=t.clone(),_.attr("placeholder",""),_.attr("tabindex","-1"),_.val(""),_.css({position:"absolute",top:"0px",left:"0px","border-color":"transparent","box-shadow":"none",opacity:1,background:"none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255)",color:"#999"}),t.css({position:"relative","vertical-align":"top","background-color":"transparent"}),L.append(_),_.after(t));var Y=angular.element("<div uib-typeahead-popup></div>");Y.attr({id:F,matches:"matches",active:"activeIdx",select:"select(activeIdx, evt)","move-in-progress":"moveInProgress",query:"query",position:"position","assign-is-open":"assignIsOpen(isOpen)",debounce:"debounceUpdate"}),angular.isDefined(o.typeaheadTemplateUrl)&&Y.attr("template-url",o.typeaheadTemplateUrl),angular.isDefined(o.typeaheadPopupTemplateUrl)&&Y.attr("popup-template-url",o.typeaheadPopupTemplateUrl);var j=function(){N&&_.val("")},X=function(){W.matches=[],W.activeIdx=-1,t.attr("aria-expanded",!1),j()},z=function(e){return F+"-option-"+e};W.$watch("activeIdx",function(e){0>e?t.removeAttr("aria-activedescendant"):t.attr("aria-activedescendant",z(e))});var K=function(e,t){return W.matches.length>t&&e?e.toUpperCase()===W.matches[t].label.toUpperCase():!1},Z=function(o,n){var i={$viewValue:o};T(e,!0),D(e,!1),a.when(q.source(e,i)).then(function(a){var r=o===f.$viewValue;if(r&&S)if(a&&a.length>0){W.activeIdx=H?0:-1,D(e,!1),W.matches.length=0;for(var p=0;p<a.length;p++)i[q.itemName]=a[p],W.matches.push({id:z(p),label:q.viewMapper(W,i),model:a[p]});if(W.query=o,m(),t.attr("aria-expanded",!0),E&&1===W.matches.length&&K(o,0)&&(angular.isNumber(W.debounceUpdate)||angular.isObject(W.debounceUpdate)?s(function(){W.select(0,n)},angular.isNumber(W.debounceUpdate)?W.debounceUpdate:W.debounceUpdate["default"]):W.select(0,n)),N){var l=W.matches[0].label;_.val(angular.isString(o)&&o.length>0&&l.slice(0,o.length).toUpperCase()===o.toUpperCase()?o+l.slice(o.length):"")}}else X(),D(e,!0);r&&T(e,!1)},function(){X(),T(e,!1),D(e,!0)})};O&&(angular.element(l).on("resize",h),p.find("body").on("scroll",h));var G=s(function(){W.matches.length&&m(),W.moveInProgress=!1},b);W.moveInProgress=!1,W.query=void 0;var J,Q=function(e){J=r(function(){Z(e)},w)},et=function(){J&&r.cancel(J)};X(),W.assignIsOpen=function(t){U(e,t)},W.select=function(n,i){var a,p,l={};x=!0,l[q.itemName]=p=W.matches[n].model,a=q.modelMapper(e,l),V(e,a),f.$setValidity("editable",!0),f.$setValidity("parse",!0),M(e,{$item:p,$model:a,$label:q.viewMapper(e,l),$event:i}),X(),W.$eval(o.typeaheadFocusOnSelect)!==!1&&r(function(){t[0].focus()},0,!1)},t.on("keydown",function(t){if(0!==W.matches.length&&-1!==v.indexOf(t.which)){var o=k(e,{$event:t});if(-1===W.activeIdx&&o||9===t.which&&t.shiftKey)return X(),void W.$digest();t.preventDefault();var n;switch(t.which){case 27:t.stopPropagation(),X(),e.$digest();break;case 38:W.activeIdx=(W.activeIdx>0?W.activeIdx:W.matches.length)-1,W.$digest(),n=Y.find("li")[W.activeIdx],n.parentNode.scrollTop=n.offsetTop;break;case 40:W.activeIdx=(W.activeIdx+1)%W.matches.length,W.$digest(),n=Y.find("li")[W.activeIdx],n.parentNode.scrollTop=n.offsetTop;break;default:o&&W.$apply(function(){angular.isNumber(W.debounceUpdate)||angular.isObject(W.debounceUpdate)?s(function(){W.select(W.activeIdx,t)},angular.isNumber(W.debounceUpdate)?W.debounceUpdate:W.debounceUpdate["default"]):W.select(W.activeIdx,t)})}}}),t.bind("focus",function(e){S=!0,0!==$||f.$viewValue||r(function(){Z(f.$viewValue,e)},0)}),t.bind("blur",function(e){C&&W.matches.length&&-1!==W.activeIdx&&!x&&(x=!0,W.$apply(function(){angular.isObject(W.debounceUpdate)&&angular.isNumber(W.debounceUpdate.blur)?s(function(){W.select(W.activeIdx,e)},W.debounceUpdate.blur):W.select(W.activeIdx,e)})),!y&&f.$error.editable&&(f.$setViewValue(),f.$setValidity("editable",!0),f.$setValidity("parse",!0),t.val("")),S=!1,x=!1});var tt=function(o){t[0]!==o.target&&3!==o.which&&0!==W.matches.length&&(X(),u.$$phase||e.$digest())};p.on("click",tt),e.$on("$destroy",function(){p.off("click",tt),(O||P)&&ot.remove(),O&&(angular.element(l).off("resize",h),p.find("body").off("scroll",h)),Y.remove(),N&&L.remove()});var ot=n(Y)(W);O?p.find("body").append(ot):P?angular.element(P).eq(0).append(ot):t.after(ot),this.init=function(t,o){f=t,g=o,W.debounceUpdate=f.$options&&i(f.$options.debounce)(e),f.$parsers.unshift(function(t){return S=!0,0===$||t&&t.length>=$?w>0?(et(),Q(t)):Z(t):(T(e,!1),et(),X()),y?t:t?void f.$setValidity("editable",!1):(f.$setValidity("editable",!0),null)}),f.$formatters.push(function(t){var o,n,i={};return y||f.$setValidity("editable",!0),I?(i.$model=t,I(e,i)):(i[q.itemName]=t,o=q.viewMapper(e,i),i[q.itemName]=void 0,n=q.viewMapper(e,i),o!==n?o:t)})}}]).directive("uibTypeahead",function(){return{controller:"UibTypeaheadController",require:["ngModel","^?ngModelOptions","uibTypeahead"],link:function(e,t,o,n){n[2].init(n[0],n[1])}}}).directive("uibTypeaheadPopup",["$$debounce",function(e){return{scope:{matches:"=",query:"=",active:"=",position:"&",moveInProgress:"=",select:"&",assignIsOpen:"&",debounce:"&"},replace:!0,templateUrl:function(e,t){return t.popupTemplateUrl||"uib/template/typeahead/typeahead-popup.html"},link:function(t,o,n){t.templateUrl=n.templateUrl,t.isOpen=function(){var e=t.matches.length>0;return t.assignIsOpen({isOpen:e}),e},t.isActive=function(e){return t.active===e},t.selectActive=function(e){t.active=e},t.selectMatch=function(o,n){var i=t.debounce();angular.isNumber(i)||angular.isObject(i)?e(function(){t.select({activeIdx:o,evt:n})},angular.isNumber(i)?i:i["default"]):t.select({activeIdx:o,evt:n})}}}}]).directive("uibTypeaheadMatch",["$templateRequest","$compile","$parse",function(e,t,o){return{scope:{index:"=",match:"=",query:"="},link:function(n,i,a){var r=o(a.templateUrl)(n.$parent)||"uib/template/typeahead/typeahead-match.html";e(r).then(function(e){var o=angular.element(e.trim());i.replaceWith(o),t(o)(n)})}}}]).filter("uibTypeaheadHighlight",["$sce","$injector","$log",function(e,t,o){function n(e){return e.replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1")}function i(e){return/<.*>/g.test(e)}var a;return a=t.has("$sanitize"),function(t,r){return!a&&i(t)&&o.warn("Unsafe use of typeahead please use ngSanitize"),t=r?(""+t).replace(new RegExp(n(r),"gi"),"<strong>$&</strong>"):t,a||(t=e.trustAsHtml(t)),t}}]),angular.module("ui.bootstrap.debounce",[]).factory("$$debounce",["$timeout",function(e){return function(t,o){var n;return function(){var i=this,a=Array.prototype.slice.call(arguments);n&&e.cancel(n),n=e(function(){t.apply(i,a)},o)}}}]),angular.module("ui.bootstrap.position",[]).factory("$uibPosition",["$document","$window",function(e,t){var o,n,i={normal:/(auto|scroll)/,hidden:/(auto|scroll|hidden)/},a={auto:/\s?auto?\s?/i,primary:/^(top|bottom|left|right)$/,secondary:/^(top|bottom|left|right|center)$/,vertical:/^(top|bottom)$/},r=/(HTML|BODY)/;return{getRawNode:function(e){return e.nodeName?e:e[0]||e},parseStyle:function(e){return e=parseFloat(e),isFinite(e)?e:0},offsetParent:function(o){function n(e){return"static"===(t.getComputedStyle(e).position||"static")}o=this.getRawNode(o);for(var i=o.offsetParent||e[0].documentElement;i&&i!==e[0].documentElement&&n(i);)i=i.offsetParent;return i||e[0].documentElement},scrollbarWidth:function(i){if(i){if(angular.isUndefined(n)){var a=e.find("body");a.addClass("uib-position-body-scrollbar-measure"),n=t.innerWidth-a[0].clientWidth,n=isFinite(n)?n:0,a.removeClass("uib-position-body-scrollbar-measure")}return n}if(angular.isUndefined(o)){var r=angular.element('<div class="uib-position-scrollbar-measure"></div>');e.find("body").append(r),o=r[0].offsetWidth-r[0].clientWidth,o=isFinite(o)?o:0,r.remove()}return o},scrollbarPadding:function(e){e=this.getRawNode(e);var o=t.getComputedStyle(e),n=this.parseStyle(o.paddingRight),i=this.parseStyle(o.paddingBottom),a=this.scrollParent(e,!1,!0),p=this.scrollbarWidth(a,r.test(a.tagName));return{scrollbarWidth:p,widthOverflow:a.scrollWidth>a.clientWidth,right:n+p,originalRight:n,heightOverflow:a.scrollHeight>a.clientHeight,bottom:i+p,originalBottom:i}},isScrollable:function(e,o){e=this.getRawNode(e);var n=o?i.hidden:i.normal,a=t.getComputedStyle(e);return n.test(a.overflow+a.overflowY+a.overflowX)},scrollParent:function(o,n,a){o=this.getRawNode(o);var r=n?i.hidden:i.normal,p=e[0].documentElement,l=t.getComputedStyle(o);if(a&&r.test(l.overflow+l.overflowY+l.overflowX))return o;var u="absolute"===l.position,s=o.parentElement||p;if(s===p||"fixed"===l.position)return p;for(;s.parentElement&&s!==p;){var c=t.getComputedStyle(s);if(u&&"static"!==c.position&&(u=!1),!u&&r.test(c.overflow+c.overflowY+c.overflowX))break;s=s.parentElement}return s},position:function(o,n){o=this.getRawNode(o);var i=this.offset(o);if(n){var a=t.getComputedStyle(o);i.top-=this.parseStyle(a.marginTop),i.left-=this.parseStyle(a.marginLeft)}var r=this.offsetParent(o),p={top:0,left:0};return r!==e[0].documentElement&&(p=this.offset(r),p.top+=r.clientTop-r.scrollTop,p.left+=r.clientLeft-r.scrollLeft),{width:Math.round(angular.isNumber(i.width)?i.width:o.offsetWidth),height:Math.round(angular.isNumber(i.height)?i.height:o.offsetHeight),top:Math.round(i.top-p.top),left:Math.round(i.left-p.left)}},offset:function(o){o=this.getRawNode(o);var n=o.getBoundingClientRect();return{width:Math.round(angular.isNumber(n.width)?n.width:o.offsetWidth),height:Math.round(angular.isNumber(n.height)?n.height:o.offsetHeight),top:Math.round(n.top+(t.pageYOffset||e[0].documentElement.scrollTop)),left:Math.round(n.left+(t.pageXOffset||e[0].documentElement.scrollLeft))}},viewportOffset:function(o,n,i){o=this.getRawNode(o),i=i!==!1?!0:!1;var a=o.getBoundingClientRect(),r={top:0,left:0,bottom:0,right:0},p=n?e[0].documentElement:this.scrollParent(o),l=p.getBoundingClientRect();if(r.top=l.top+p.clientTop,r.left=l.left+p.clientLeft,p===e[0].documentElement&&(r.top+=t.pageYOffset,r.left+=t.pageXOffset),r.bottom=r.top+p.clientHeight,r.right=r.left+p.clientWidth,i){var u=t.getComputedStyle(p);r.top+=this.parseStyle(u.paddingTop),r.bottom-=this.parseStyle(u.paddingBottom),r.left+=this.parseStyle(u.paddingLeft),r.right-=this.parseStyle(u.paddingRight)}return{top:Math.round(a.top-r.top),bottom:Math.round(r.bottom-a.bottom),left:Math.round(a.left-r.left),right:Math.round(r.right-a.right)}},parsePlacement:function(e){var t=a.auto.test(e);return t&&(e=e.replace(a.auto,"")),e=e.split("-"),e[0]=e[0]||"top",a.primary.test(e[0])||(e[0]="top"),e[1]=e[1]||"center",a.secondary.test(e[1])||(e[1]="center"),e[2]=t?!0:!1,e},positionElements:function(e,o,n,i){e=this.getRawNode(e),o=this.getRawNode(o);var r=angular.isDefined(o.offsetWidth)?o.offsetWidth:o.prop("offsetWidth"),p=angular.isDefined(o.offsetHeight)?o.offsetHeight:o.prop("offsetHeight");n=this.parsePlacement(n);var l=i?this.offset(e):this.position(e),u={top:0,left:0,placement:""};if(n[2]){var s=this.viewportOffset(e,i),c=t.getComputedStyle(o),d={width:r+Math.round(Math.abs(this.parseStyle(c.marginLeft)+this.parseStyle(c.marginRight))),height:p+Math.round(Math.abs(this.parseStyle(c.marginTop)+this.parseStyle(c.marginBottom)))};if(n[0]="top"===n[0]&&d.height>s.top&&d.height<=s.bottom?"bottom":"bottom"===n[0]&&d.height>s.bottom&&d.height<=s.top?"top":"left"===n[0]&&d.width>s.left&&d.width<=s.right?"right":"right"===n[0]&&d.width>s.right&&d.width<=s.left?"left":n[0],n[1]="top"===n[1]&&d.height-l.height>s.bottom&&d.height-l.height<=s.top?"bottom":"bottom"===n[1]&&d.height-l.height>s.top&&d.height-l.height<=s.bottom?"top":"left"===n[1]&&d.width-l.width>s.right&&d.width-l.width<=s.left?"right":"right"===n[1]&&d.width-l.width>s.left&&d.width-l.width<=s.right?"left":n[1],"center"===n[1])if(a.vertical.test(n[0])){var h=l.width/2-r/2;s.left+h<0&&d.width-l.width<=s.right?n[1]="left":s.right+h<0&&d.width-l.width<=s.left&&(n[1]="right")}else{var m=l.height/2-d.height/2;s.top+m<0&&d.height-l.height<=s.bottom?n[1]="top":s.bottom+m<0&&d.height-l.height<=s.top&&(n[1]="bottom")}}switch(n[0]){case"top":u.top=l.top-p;break;case"bottom":u.top=l.top+l.height;break;case"left":u.left=l.left-r;break;case"right":u.left=l.left+l.width}switch(n[1]){case"top":u.top=l.top;break;case"bottom":u.top=l.top+l.height-p;break;case"left":u.left=l.left;break;case"right":u.left=l.left+l.width-r;break;case"center":a.vertical.test(n[0])?u.left=l.left+l.width/2-r/2:u.top=l.top+l.height/2-p/2}return u.top=Math.round(u.top),u.left=Math.round(u.left),u.placement="center"===n[1]?n[0]:n[0]+"-"+n[1],u},positionArrow:function(e,o){e=this.getRawNode(e);var n=e.querySelector(".tooltip-inner, .popover-inner");if(n){var i=angular.element(n).hasClass("tooltip-inner"),r=e.querySelector(i?".tooltip-arrow":".arrow");if(r){var p={top:"",bottom:"",left:"",right:""};if(o=this.parsePlacement(o),"center"===o[1])return void angular.element(r).css(p);var l="border-"+o[0]+"-width",u=t.getComputedStyle(r)[l],s="border-";s+=a.vertical.test(o[0])?o[0]+"-"+o[1]:o[1]+"-"+o[0],s+="-radius";var c=t.getComputedStyle(i?n:e)[s];switch(o[0]){case"top":p.bottom=i?"0":"-"+u;break;case"bottom":p.top=i?"0":"-"+u;break;case"left":p.right=i?"0":"-"+u;break;case"right":p.left=i?"0":"-"+u}p[o[1]]=c,angular.element(r).css(p)}}}}}]),angular.module("ui.bootstrap.popover",["ui.bootstrap.tooltip"]).directive("uibPopoverTemplatePopup",function(){return{replace:!0,scope:{uibTitle:"@",contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/popover/popover-template.html"}}).directive("uibPopoverTemplate",["$uibTooltip",function(e){return e("uibPopoverTemplate","popover","click",{useContentExp:!0})}]).directive("uibPopoverHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",uibTitle:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/popover/popover-html.html"}}).directive("uibPopoverHtml",["$uibTooltip",function(e){return e("uibPopoverHtml","popover","click",{useContentExp:!0})}]).directive("uibPopoverPopup",function(){return{replace:!0,scope:{uibTitle:"@",content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/popover/popover.html"}}).directive("uibPopover",["$uibTooltip",function(e){return e("uibPopover","popover","click")}]),angular.module("ui.bootstrap.tooltip",["ui.bootstrap.position","ui.bootstrap.stackedMap"]).provider("$uibTooltip",function(){function e(e){var t=/[A-Z]/g,o="-";return e.replace(t,function(e,t){return(t?o:"")+e.toLowerCase()})}var t={placement:"top",placementClassPrefix:"",animation:!0,popupDelay:0,popupCloseDelay:0,useContentExp:!1},o={mouseenter:"mouseleave",click:"click",outsideClick:"outsideClick",focus:"blur",none:""},n={};this.options=function(e){angular.extend(n,e)},this.setTriggers=function(e){angular.extend(o,e)},this.$get=["$window","$compile","$timeout","$document","$uibPosition","$interpolate","$rootScope","$parse","$$stackedMap",function(i,a,r,p,l,u,s,c,d){function h(e){if(27===e.which){var t=m.top();t&&(t.value.close(),m.removeTop(),t=null)}}var m=d.createNew();return p.on("keypress",h),s.$on("$destroy",function(){p.off("keypress",h)}),function(i,s,d,h){function f(e){var t=(e||h.trigger||d).split(" "),n=t.map(function(e){return o[e]||e});return{show:t,hide:n}}h=angular.extend({},t,n,h);var g=e(i),v=u.startSymbol(),b=u.endSymbol(),$="<div "+g+'-popup uib-title="'+v+"title"+b+'" '+(h.useContentExp?'content-exp="contentExp()" ':'content="'+v+"content"+b+'" ')+'placement="'+v+"placement"+b+'" popup-class="'+v+"popupClass"+b+'" animation="animation" is-open="isOpen" origin-scope="origScope" class="uib-position-measure"></div>';return{compile:function(){var e=a($);return function(t,o,n){function a(){V.isOpen?d():u()}function u(){(!R||t.$eval(n[s+"Enable"]))&&($(),S(),V.popupDelay?P||(P=r(g,V.popupDelay,!1)):g())}function d(){v(),V.popupCloseDelay?H||(H=r(b,V.popupCloseDelay,!1)):b()}function g(){return v(),$(),V.content?(w(),void V.$evalAsync(function(){V.isOpen=!0,x(!0),L()})):angular.noop}function v(){P&&(r.cancel(P),P=null),E&&(r.cancel(E),E=null)}function b(){V&&V.$evalAsync(function(){V&&(V.isOpen=!1,x(!1),V.animation?O||(O=r(y,150,!1)):y())})}function $(){H&&(r.cancel(H),H=null),O&&(r.cancel(O),O=null)}function w(){D||(I=V.$new(),D=e(I,function(e){N?p.find("body").append(e):o.after(e)}),T())}function y(){v(),$(),k(),D&&(D.remove(),D=null),I&&(I.$destroy(),I=null)}function S(){V.title=n[s+"Title"],V.content=B?B(t):n[i],V.popupClass=n[s+"Class"],V.placement=angular.isDefined(n[s+"Placement"])?n[s+"Placement"]:h.placement;var e=l.parsePlacement(V.placement);U=e[1]?e[0]+"-"+e[1]:e[0];var o=parseInt(n[s+"PopupDelay"],10),a=parseInt(n[s+"PopupCloseDelay"],10);V.popupDelay=isNaN(o)?h.popupDelay:o,V.popupCloseDelay=isNaN(a)?h.popupCloseDelay:a}function x(e){W&&angular.isFunction(W.assign)&&W.assign(t,e)}function T(){F.length=0,B?(F.push(t.$watch(B,function(e){V.content=e,!e&&V.isOpen&&b()})),F.push(I.$watch(function(){q||(q=!0,I.$$postDigest(function(){q=!1,V&&V.isOpen&&L()}))}))):F.push(n.$observe(i,function(e){V.content=e,!e&&V.isOpen?b():L()})),F.push(n.$observe(s+"Title",function(e){V.title=e,V.isOpen&&L()})),F.push(n.$observe(s+"Placement",function(e){V.placement=e?e:h.placement,V.isOpen&&L()}))}function k(){F.length&&(angular.forEach(F,function(e){e()}),F.length=0)}function M(e){V&&V.isOpen&&D&&(o[0].contains(e.target)||D[0].contains(e.target)||d())}function C(){var e=n[s+"Trigger"];_(),A=f(e),"none"!==A.show&&A.show.forEach(function(e,t){"outsideClick"===e?(o.on("click",a),p.on("click",M)):e===A.hide[t]?o.on(e,a):e&&(o.on(e,u),o.on(A.hide[t],d)),o.on("keypress",function(e){27===e.which&&d()})})}var D,I,O,P,H,E,U,N=angular.isDefined(h.appendToBody)?h.appendToBody:!1,A=f(void 0),R=angular.isDefined(n[s+"Enable"]),V=t.$new(!0),q=!1,W=angular.isDefined(n[s+"IsOpen"])?c(n[s+"IsOpen"]):!1,B=h.useContentExp?c(n[i]):!1,F=[],L=function(){D&&D.html()&&(E||(E=r(function(){var e=l.positionElements(o,D,V.placement,N);D.css({top:e.top+"px",left:e.left+"px"}),D.hasClass(e.placement.split("-")[0])||(D.removeClass(U.split("-")[0]),D.addClass(e.placement.split("-")[0])),D.hasClass(h.placementClassPrefix+e.placement)||(D.removeClass(h.placementClassPrefix+U),D.addClass(h.placementClassPrefix+e.placement)),D.hasClass("uib-position-measure")?(l.positionArrow(D,e.placement),D.removeClass("uib-position-measure")):U!==e.placement&&l.positionArrow(D,e.placement),U=e.placement,E=null},0,!1)))};V.origScope=t,V.isOpen=!1,m.add(V,{close:b}),V.contentExp=function(){return V.content},n.$observe("disabled",function(e){e&&v(),e&&V.isOpen&&b()}),W&&t.$watch(W,function(e){V&&!e===V.isOpen&&a()});var _=function(){A.show.forEach(function(e){"outsideClick"===e?o.off("click",a):(o.off(e,u),o.off(e,a))}),A.hide.forEach(function(e){"outsideClick"===e?p.off("click",M):o.off(e,d)})};C();var Y=t.$eval(n[s+"Animation"]);V.animation=angular.isDefined(Y)?!!Y:h.animation;var j,X=s+"AppendToBody";j=X in n&&void 0===n[X]?!0:t.$eval(n[X]),N=angular.isDefined(j)?j:N,t.$on("$destroy",function(){_(),y(),m.remove(V),V=null})}}}}}]}).directive("uibTooltipTemplateTransclude",["$animate","$sce","$compile","$templateRequest",function(e,t,o,n){return{link:function(i,a,r){var p,l,u,s=i.$eval(r.tooltipTemplateTranscludeScope),c=0,d=function(){l&&(l.remove(),l=null),p&&(p.$destroy(),p=null),u&&(e.leave(u).then(function(){l=null}),l=u,u=null)};i.$watch(t.parseAsResourceUrl(r.uibTooltipTemplateTransclude),function(t){var r=++c;t?(n(t,!0).then(function(n){if(r===c){var i=s.$new(),l=n,h=o(l)(i,function(t){d(),e.enter(t,a)});p=i,u=h,p.$emit("$includeContentLoaded",t)}},function(){r===c&&(d(),i.$emit("$includeContentError",t))}),i.$emit("$includeContentRequested",t)):d()}),i.$on("$destroy",d)}}}]).directive("uibTooltipClasses",["$uibPosition",function(e){return{restrict:"A",link:function(t,o,n){if(t.placement){var i=e.parsePlacement(t.placement);o.addClass(i[0])}t.popupClass&&o.addClass(t.popupClass),t.animation()&&o.addClass(n.tooltipAnimationClass)}}}]).directive("uibTooltipPopup",function(){return{replace:!0,scope:{content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-popup.html"}}).directive("uibTooltip",["$uibTooltip",function(e){return e("uibTooltip","tooltip","mouseenter")}]).directive("uibTooltipTemplatePopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/tooltip/tooltip-template-popup.html"}}).directive("uibTooltipTemplate",["$uibTooltip",function(e){return e("uibTooltipTemplate","tooltip","mouseenter",{useContentExp:!0})}]).directive("uibTooltipHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-html-popup.html"}}).directive("uibTooltipHtml",["$uibTooltip",function(e){return e("uibTooltipHtml","tooltip","mouseenter",{useContentExp:!0})}]),angular.module("ui.bootstrap.stackedMap",[]).factory("$$stackedMap",function(){return{createNew:function(){var e=[];return{add:function(t,o){e.push({key:t,value:o})},get:function(t){for(var o=0;o<e.length;o++)if(t===e[o].key)return e[o]},keys:function(){for(var t=[],o=0;o<e.length;o++)t.push(e[o].key);return t},top:function(){return e[e.length-1]},remove:function(t){for(var o=-1,n=0;n<e.length;n++)if(t===e[n].key){o=n;break}return e.splice(o,1)[0]},removeTop:function(){return e.splice(e.length-1,1)[0]},length:function(){return e.length}}}}}),angular.module("uib/template/timepicker/timepicker.html",[]).run(["$templateCache",function(e){e.put("uib/template/timepicker/timepicker.html",'<table class="uib-timepicker">\n  <tbody>\n    <tr class="text-center" ng-show="::showSpinners">\n      <td class="uib-increment hours"><a ng-click="incrementHours()" ng-class="{disabled: noIncrementHours()}" class="btn btn-link" ng-disabled="noIncrementHours()" tabindex="{{::tabindex}}"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n      <td>&nbsp;</td>\n      <td class="uib-increment minutes"><a ng-click="incrementMinutes()" ng-class="{disabled: noIncrementMinutes()}" class="btn btn-link" ng-disabled="noIncrementMinutes()" tabindex="{{::tabindex}}"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n      <td ng-show="showSeconds">&nbsp;</td>\n      <td ng-show="showSeconds" class="uib-increment seconds"><a ng-click="incrementSeconds()" ng-class="{disabled: noIncrementSeconds()}" class="btn btn-link" ng-disabled="noIncrementSeconds()" tabindex="{{::tabindex}}"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n      <td ng-show="showMeridian"></td>\n    </tr>\n    <tr>\n      <td class="form-group uib-time hours" ng-class="{\'has-error\': invalidHours}">\n        <input type="text" placeholder="HH" ng-model="hours" ng-change="updateHours()" class="form-control text-center" ng-readonly="::readonlyInput" maxlength="2" tabindex="{{::tabindex}}" ng-disabled="noIncrementHours()" ng-blur="blur()">\n      </td>\n      <td class="uib-separator">:</td>\n      <td class="form-group uib-time minutes" ng-class="{\'has-error\': invalidMinutes}">\n        <input type="text" placeholder="MM" ng-model="minutes" ng-change="updateMinutes()" class="form-control text-center" ng-readonly="::readonlyInput" maxlength="2" tabindex="{{::tabindex}}" ng-disabled="noIncrementMinutes()" ng-blur="blur()">\n      </td>\n      <td ng-show="showSeconds" class="uib-separator">:</td>\n      <td class="form-group uib-time seconds" ng-class="{\'has-error\': invalidSeconds}" ng-show="showSeconds">\n        <input type="text" placeholder="SS" ng-model="seconds" ng-change="updateSeconds()" class="form-control text-center" ng-readonly="readonlyInput" maxlength="2" tabindex="{{::tabindex}}" ng-disabled="noIncrementSeconds()" ng-blur="blur()">\n      </td>\n      <td ng-show="showMeridian" class="uib-time am-pm"><button type="button" ng-class="{disabled: noToggleMeridian()}" class="btn btn-default text-center" ng-click="toggleMeridian()" ng-disabled="noToggleMeridian()" tabindex="{{::tabindex}}">{{meridian}}</button></td>\n    </tr>\n    <tr class="text-center" ng-show="::showSpinners">\n      <td class="uib-decrement hours"><a ng-click="decrementHours()" ng-class="{disabled: noDecrementHours()}" class="btn btn-link" ng-disabled="noDecrementHours()" tabindex="{{::tabindex}}"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n      <td>&nbsp;</td>\n      <td class="uib-decrement minutes"><a ng-click="decrementMinutes()" ng-class="{disabled: noDecrementMinutes()}" class="btn btn-link" ng-disabled="noDecrementMinutes()" tabindex="{{::tabindex}}"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n      <td ng-show="showSeconds">&nbsp;</td>\n      <td ng-show="showSeconds" class="uib-decrement seconds"><a ng-click="decrementSeconds()" ng-class="{disabled: noDecrementSeconds()}" class="btn btn-link" ng-disabled="noDecrementSeconds()" tabindex="{{::tabindex}}"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n      <td ng-show="showMeridian"></td>\n    </tr>\n  </tbody>\n</table>\n')
+}]),angular.module("uib/template/typeahead/typeahead-match.html",[]).run(["$templateCache",function(e){e.put("uib/template/typeahead/typeahead-match.html",'<a href\n   tabindex="-1"\n   ng-bind-html="match.label | uibTypeaheadHighlight:query"\n   ng-attr-title="{{match.label}}"></a>\n')}]),angular.module("uib/template/typeahead/typeahead-popup.html",[]).run(["$templateCache",function(e){e.put("uib/template/typeahead/typeahead-popup.html",'<ul class="dropdown-menu" ng-show="isOpen() && !moveInProgress" ng-style="{top: position().top+\'px\', left: position().left+\'px\'}" role="listbox" aria-hidden="{{!isOpen()}}">\n    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index, $event)" role="option" id="{{::match.id}}">\n        <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>\n    </li>\n</ul>\n')}]),angular.module("uib/template/popover/popover-html.html",[]).run(["$templateCache",function(e){e.put("uib/template/popover/popover-html.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content" ng-bind-html="contentExp()"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/popover/popover-template.html",[]).run(["$templateCache",function(e){e.put("uib/template/popover/popover-template.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content"\n        uib-tooltip-template-transclude="contentExp()"\n        tooltip-template-transclude-scope="originScope()"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/popover/popover.html",[]).run(["$templateCache",function(e){e.put("uib/template/popover/popover.html",'<div class="popover"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="uibTitle" ng-if="uibTitle"></h3>\n      <div class="popover-content" ng-bind="content"></div>\n  </div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-html-popup.html",[]).run(["$templateCache",function(e){e.put("uib/template/tooltip/tooltip-html-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind-html="contentExp()"></div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-popup.html",[]).run(["$templateCache",function(e){e.put("uib/template/tooltip/tooltip-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind="content"></div>\n</div>\n')}]),angular.module("uib/template/tooltip/tooltip-template-popup.html",[]).run(["$templateCache",function(e){e.put("uib/template/tooltip/tooltip-template-popup.html",'<div class="tooltip"\n  tooltip-animation-class="fade"\n  uib-tooltip-classes\n  ng-class="{ in: isOpen() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner"\n    uib-tooltip-template-transclude="contentExp()"\n    tooltip-template-transclude-scope="originScope()"></div>\n</div>\n')}]),angular.module("ui.bootstrap.timepicker").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTimepickerCss&&angular.element(document).find("head").prepend('<style type="text/css">.uib-time input{width:50px;}</style>'),angular.$$uibTimepickerCss=!0}),angular.module("ui.bootstrap.typeahead").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTypeaheadCss&&angular.element(document).find("head").prepend('<style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style>'),angular.$$uibTypeaheadCss=!0}),angular.module("ui.bootstrap.position").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibPositionCss&&angular.element(document).find("head").prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style>'),angular.$$uibPositionCss=!0}),angular.module("ui.bootstrap.tooltip").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibTooltipCss&&angular.element(document).find("head").prepend('<style type="text/css">[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-bottom > .tooltip-arrow,[uib-popover-popup].popover.top-left > .arrow,[uib-popover-popup].popover.top-right > .arrow,[uib-popover-popup].popover.bottom-left > .arrow,[uib-popover-popup].popover.bottom-right > .arrow,[uib-popover-popup].popover.left-top > .arrow,[uib-popover-popup].popover.left-bottom > .arrow,[uib-popover-popup].popover.right-top > .arrow,[uib-popover-popup].popover.right-bottom > .arrow,[uib-popover-html-popup].popover.top-left > .arrow,[uib-popover-html-popup].popover.top-right > .arrow,[uib-popover-html-popup].popover.bottom-left > .arrow,[uib-popover-html-popup].popover.bottom-right > .arrow,[uib-popover-html-popup].popover.left-top > .arrow,[uib-popover-html-popup].popover.left-bottom > .arrow,[uib-popover-html-popup].popover.right-top > .arrow,[uib-popover-html-popup].popover.right-bottom > .arrow,[uib-popover-template-popup].popover.top-left > .arrow,[uib-popover-template-popup].popover.top-right > .arrow,[uib-popover-template-popup].popover.bottom-left > .arrow,[uib-popover-template-popup].popover.bottom-right > .arrow,[uib-popover-template-popup].popover.left-top > .arrow,[uib-popover-template-popup].popover.left-bottom > .arrow,[uib-popover-template-popup].popover.right-top > .arrow,[uib-popover-template-popup].popover.right-bottom > .arrow{top:auto;bottom:auto;left:auto;right:auto;margin:0;}[uib-popover-popup].popover,[uib-popover-html-popup].popover,[uib-popover-template-popup].popover{display:block !important;}</style>'),angular.$$uibTooltipCss=!0});
 /**
  * @ngdoc function
  * @name weed.directive: weNavbar
@@ -15448,204 +15152,6 @@ if (typeof define === 'function' && define.amd) {
   }
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.calendar', ['weed.core'])
-    .directive('weCalendar', calendarDirective);
-
-
-  function calendarDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        selectedobject: '=',
-        selected: '=',
-        languagec: '=',
-        numberposition: '=',
-        activities: '=',
-        limit: '=',
-        functionopenselect:'=',
-        selectedobjectinside: '=',
-        actualmonth: '=',
-        updatefunction: '=',
-        doselectedclick: '=',
-        popoverIsOpen: '=',
-        secondcallfunction: '='
-      },
-      templateUrl: 'components/calendar/calendar.html',
-      link: function(scope, elem, attrs) {
-        moment.locale(scope.languagec);
-        scope.weekArray = moment.weekdays();
-        scope.selected = moment().locale(scope.languagec);
-        scope.month = scope.selected.clone();
-        scope.actualmonth = moment();
-        var start = scope.selected.clone();
-        start.date(1);
-        _removeTime(start.day(0));
-		    scope.findToday = false;
-
-        //scope.openPop = true;
-
-        _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        scope.closePopoverNow = function(day) {
-          day.openPop = false;
-        };
-
-        scope.select = function(day) {
-          scope.selected = day.date;
-          scope.selectedobject = day;
-
-          if(scope.comesfromtodaywatch)
-          {
-            scope.comesfromtodaywatch = false;
-          }
-          else {
-            scope.doselectedclick(day);
-          }
-        };
-
-        scope.manageClickMore = function(day) {
-          scope.selectedobject = day;
-          scope.comesfromtodaywatch = true;
-          //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        }
-
-        scope.today = function() {
-		    scope.findToday = true;
-        scope.actualmonth = moment();
-		    scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        };
-
-        scope.next = function() {
-          var next = scope.month.clone();
-          scope.actualmonth = scope.actualmonth.add(1,'months');
-          _removeTime(next.month(next.month()+1).date(1));
-          scope.month.month(scope.month.month()+1);
-          _buildMonth(scope, next, scope.month, scope.actualmonth);
-        };
-
-        scope.previous = function() {
-            var previous = scope.month.clone();
-            scope.actualmonth = scope.actualmonth.add(-1,'months');
-            _removeTime(previous.month(previous.month()-1).date(1));
-            scope.month.month(scope.month.month()-1);
-            _buildMonth(scope, previous, scope.month, scope.actualmonth);
-        };
-
-        /*scope.doOnClickElement = function(elementInside){
-          scope.functionopenselect(elementInside);
-        };*/
-
-        scope.updatefunction = function() {
-          var dummy = scope.month.clone();
-          _removeTime(dummy.month(dummy.month()).date(1));
-          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
-        };
-      }
-    };
-
-    function _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
-
-    function _buildMonth(scope, start, month, actualmonth) {
-      scope.monthActivities = scope.activities(actualmonth);
-
-      scope.monthActivities.then(
-        function(su){
-          scope.weeks = [];
-          var responsables = [];
-          for( i = 0; i < su.length ; i++) {
-            su[i].meeting.fileCount =0;
-            //vm.time = datetime.format('hh:mm a');
-            for(var j =0; j< su[i].meeting.meetingItems.length; j++) {
-              su[i].meeting.fileCount += su[i].meeting.meetingItems[j].files.length;
-              su[i].meeting.dateFormat = moment(su[i].meeting.date).format('dddd D [de] MMMM [del] YYYY');
-              su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
-              su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
-              responsables.push(su[i].meeting.meetingItems[j].responsableId);
-            }
-          }
-          scope.secondcallfunction(responsables);
-          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-          while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-              date.add(1, "w");
-              done = count++ > 2 && monthIndex !== date.month();
-              monthIndex = date.month();
-          }
-    		  if(scope.findToday) {
-    		    scope.findToday = false;
-      			for(var i = 0; i < scope.weeks.length; i++) {
-      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-      			    if(scope.weeks[i].days[j].isToday)
-        				{
-                  scope.comesfromtodaywatch = true;
-        				  scope.select(scope.weeks[i].days[j]);
-        				  break;
-        				  i = scope.weeks.length;
-        				}
-      			  }
-      			}
-    		  }
-        },
-        function(err){
-          $log.log("ERROR: ",error);
-        }
-      );
-    }
-
-    function _buildWeek(date, month, activities) {
-      var days = [];
-      for (var i = 0; i < 7; i++) {
-          days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              dateId: date.format("DD-MM-YYYY"),
-              activities: [],
-              openPop: false
-          });
-          for(var j = 0; j < activities.length; j++)
-          {
-            if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
-              activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
-              if(!activities[j].place)
-              {
-                activities[j].place = activities[j].meeting.place;
-              }
-              days[days.length-1].activities.push(activities[j]);
-            }
-
-          }
-          date = date.clone();
-          date.add(1, "d");
-      }
-      return days;
-    }
-  };
-
-})(angular);
-
 (function(angular) {
   'use strict';
 
@@ -15943,6 +15449,204 @@ if (typeof define === 'function' && define.amd) {
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.calendar', ['weed.core'])
+    .directive('weCalendar', calendarDirective);
+
+
+  function calendarDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        selectedobject: '=',
+        selected: '=',
+        languagec: '=',
+        numberposition: '=',
+        activities: '=',
+        limit: '=',
+        functionopenselect:'=',
+        selectedobjectinside: '=',
+        actualmonth: '=',
+        updatefunction: '=',
+        doselectedclick: '=',
+        popoverIsOpen: '=',
+        secondcallfunction: '='
+      },
+      templateUrl: 'components/calendar/calendar.html',
+      link: function(scope, elem, attrs) {
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = moment().locale(scope.languagec);
+        scope.month = scope.selected.clone();
+        scope.actualmonth = moment();
+        var start = scope.selected.clone();
+        start.date(1);
+        _removeTime(start.day(0));
+		    scope.findToday = false;
+
+        //scope.openPop = true;
+
+        _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        scope.closePopoverNow = function(day) {
+          day.openPop = false;
+        };
+
+        scope.select = function(day) {
+          scope.selected = day.date;
+          scope.selectedobject = day;
+
+          if(scope.comesfromtodaywatch)
+          {
+            scope.comesfromtodaywatch = false;
+          }
+          else {
+            scope.doselectedclick(day);
+          }
+        };
+
+        scope.manageClickMore = function(day) {
+          scope.selectedobject = day;
+          scope.comesfromtodaywatch = true;
+          //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        }
+
+        scope.today = function() {
+		    scope.findToday = true;
+        scope.actualmonth = moment();
+		    scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        };
+
+        scope.next = function() {
+          var next = scope.month.clone();
+          scope.actualmonth = scope.actualmonth.add(1,'months');
+          _removeTime(next.month(next.month()+1).date(1));
+          scope.month.month(scope.month.month()+1);
+          _buildMonth(scope, next, scope.month, scope.actualmonth);
+        };
+
+        scope.previous = function() {
+            var previous = scope.month.clone();
+            scope.actualmonth = scope.actualmonth.add(-1,'months');
+            _removeTime(previous.month(previous.month()-1).date(1));
+            scope.month.month(scope.month.month()-1);
+            _buildMonth(scope, previous, scope.month, scope.actualmonth);
+        };
+
+        /*scope.doOnClickElement = function(elementInside){
+          scope.functionopenselect(elementInside);
+        };*/
+
+        scope.updatefunction = function() {
+          var dummy = scope.month.clone();
+          _removeTime(dummy.month(dummy.month()).date(1));
+          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
+        };
+      }
+    };
+
+    function _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month, actualmonth) {
+      scope.monthActivities = scope.activities(actualmonth);
+
+      scope.monthActivities.then(
+        function(su){
+          scope.weeks = [];
+          var responsables = [];
+          for( i = 0; i < su.length ; i++) {
+            su[i].meeting.fileCount =0;
+            //vm.time = datetime.format('hh:mm a');
+            for(var j =0; j< su[i].meeting.meetingItems.length; j++) {
+              su[i].meeting.fileCount += su[i].meeting.meetingItems[j].files.length;
+              su[i].meeting.dateFormat = moment(su[i].meeting.date).format('dddd D [de] MMMM [del] YYYY');
+              su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
+              su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
+              responsables.push(su[i].meeting.meetingItems[j].responsableId);
+            }
+          }
+          scope.secondcallfunction(responsables);
+          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          while (!done) {
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+              date.add(1, "w");
+              done = count++ > 2 && monthIndex !== date.month();
+              monthIndex = date.month();
+          }
+    		  if(scope.findToday) {
+    		    scope.findToday = false;
+      			for(var i = 0; i < scope.weeks.length; i++) {
+      			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+      			    if(scope.weeks[i].days[j].isToday)
+        				{
+                  scope.comesfromtodaywatch = true;
+        				  scope.select(scope.weeks[i].days[j]);
+        				  break;
+        				  i = scope.weeks.length;
+        				}
+      			  }
+      			}
+    		  }
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
+    }
+
+    function _buildWeek(date, month, activities) {
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+          days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              dateId: date.format("DD-MM-YYYY"),
+              activities: [],
+              openPop: false
+          });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
+              activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
+              if(!activities[j].place)
+              {
+                activities[j].place = activities[j].meeting.place;
+              }
+              days[days.length-1].activities.push(activities[j]);
+            }
+
+          }
+          date = date.clone();
+          date.add(1, "d");
+      }
+      return days;
+    }
+  };
+
+})(angular);
+
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -15999,35 +15703,6 @@ if (typeof define === 'function' && define.amd) {
 (function(angular){
   'use strict';
 
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
   angular.module('weed.knob', ['weed.knob'])
     .directive('weKnob', iconDirective);
 
@@ -16054,6 +15729,35 @@ if (typeof define === 'function' && define.amd) {
         vm.boolValue = !vm.boolValue;
       }
     }
+  };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
   };
 
 })(angular);
@@ -16417,6 +16121,89 @@ if (typeof define === 'function' && define.amd) {
 
 /**
  * @ngdoc function
+ * @name weed.directive: weTab
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs', ['weed.core'])
+    .directive('weTab', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          heading: '@',
+          icon: '@'
+        },
+        templateUrl: 'components/tabs/tab.html',
+        require: '^weTabset',
+        link: function(scope, elem, attr, tabsetCtrl) {
+          scope.active = false;
+          tabsetCtrl.addTab(scope);
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * TODO: to-load, button-groups
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.tabs')
+    .directive('weTabset', function() {
+      return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+          iconPosition: '@'
+        },
+        templateUrl: 'components/tabs/tabset.html',
+        bindToController: true,
+        controllerAs: 'tabset',
+        controller: function() {
+          var vm = this;
+
+          vm.tabs = [];
+
+          vm.addTab = function addTab(tab) {
+            vm.tabs.push(tab);
+
+            if(vm.tabs.length === 1) {
+              tab.active = true;
+            }
+          };
+
+          vm.select = function(selectedTab) {
+            angular.forEach(vm.tabs, function(tab){
+              if(tab.active && tab !== selectedTab){
+                tab.active = false;
+              }
+            });
+
+            selectedTab.active = true;
+          };
+        }
+      };
+    });
+
+})(angular);
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -16524,89 +16311,6 @@ if (typeof define === 'function' && define.amd) {
     });
 })(angular);
 
-/**
- * @ngdoc function
- * @name weed.directive: weTab
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs', ['weed.core'])
-    .directive('weTab', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          heading: '@',
-          icon: '@'
-        },
-        templateUrl: 'components/tabs/tab.html',
-        require: '^weTabset',
-        link: function(scope, elem, attr, tabsetCtrl) {
-          scope.active = false;
-          tabsetCtrl.addTab(scope);
-        }
-      };
-    });
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * TODO: to-load, button-groups
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.tabs')
-    .directive('weTabset', function() {
-      return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {
-          iconPosition: '@'
-        },
-        templateUrl: 'components/tabs/tabset.html',
-        bindToController: true,
-        controllerAs: 'tabset',
-        controller: function() {
-          var vm = this;
-
-          vm.tabs = [];
-
-          vm.addTab = function addTab(tab) {
-            vm.tabs.push(tab);
-
-            if(vm.tabs.length === 1) {
-              tab.active = true;
-            }
-          };
-
-          vm.select = function(selectedTab) {
-            angular.forEach(vm.tabs, function(tab){
-              if(tab.active && tab !== selectedTab){
-                tab.active = false;
-              }
-            });
-
-            selectedTab.active = true;
-          };
-        }
-      };
-    });
-
-})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weNavbar

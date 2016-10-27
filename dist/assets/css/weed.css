@@ -6427,14 +6427,17 @@ body.with-open-popup {
 }
 .top-xs {
   -ms-flex-align: start;
+      -ms-grid-row-align: flex-start;
       align-items: flex-start;
 }
 .middle-xs {
   -ms-flex-align: center;
+      -ms-grid-row-align: center;
       align-items: center;
 }
 .bottom-xs {
   -ms-flex-align: end;
+      -ms-grid-row-align: flex-end;
       align-items: flex-end;
 }
 .around-xs {
@@ -6563,14 +6566,17 @@ body.with-open-popup {
   }
   .top-s {
     -ms-flex-align: start;
+        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-s {
     -ms-flex-align: center;
+        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-s {
     -ms-flex-align: end;
+        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-s {
@@ -6700,14 +6706,17 @@ body.with-open-popup {
   }
   .top-m {
     -ms-flex-align: start;
+        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-m {
     -ms-flex-align: center;
+        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-m {
     -ms-flex-align: end;
+        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-m {
@@ -6837,14 +6846,17 @@ body.with-open-popup {
   }
   .top-l {
     -ms-flex-align: start;
+        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-l {
     -ms-flex-align: center;
+        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-l {
     -ms-flex-align: end;
+        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-l {
@@ -6974,14 +6986,17 @@ body.with-open-popup {
   }
   .top-xl {
     -ms-flex-align: start;
+        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-xl {
     -ms-flex-align: center;
+        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-xl {
     -ms-flex-align: end;
+        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-xl {
@@ -8663,6 +8678,947 @@ hr {
 .knob-container.small-knob .knob-slide {
   height: 18px;
   width: 50px;
+}
+/**
+  * Edoo popover group framework
+  */
+.uib-timepicker tbody .text-center {
+  text-align: center;
+}
+.uib-timepicker tbody .text-center .uib-increment a span {
+  display: inline-block;
+  position: relative;
+}
+.uib-timepicker tbody .text-center .uib-increment a span:after {
+  content: "\f077";
+  font-family: "FontAwesome";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  height: 16px;
+  left: 50%;
+  line-height: 16px;
+  margin: -8px 0 0 -8px;
+  position: absolute;
+  text-decoration: inherit;
+  top: 50%;
+  z-index: 1;
+}
+.uib-timepicker tbody .text-center .uib-decrement a span {
+  display: inline-block;
+  position: relative;
+}
+.uib-timepicker tbody .text-center .uib-decrement a span:after {
+  content: "\f078";
+  font-family: "FontAwesome";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  height: 16px;
+  left: 50%;
+  line-height: 16px;
+  margin: -8px 0 0 -8px;
+  position: absolute;
+  text-decoration: inherit;
+  top: 50%;
+  z-index: 1;
+}
+.uib-timepicker tbody .uib-time input {
+  margin-bottom: 0;
+  width: 100px;
+  height: 80px;
+}
+.uib-timepicker tbody .uib-time button {
+  background-blend-mode: overlay;
+  border-radius: 7px;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(194, 194, 194, 0.08) 100%);
+  background-color: rgba(194, 194, 194, 0.08);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(194, 194, 194, 0.08));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14ffffff', endColorstr='#14c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #f6f6f6;
+  border: 1px solid rgba(246, 246, 246, 0);
+  border-top: 1px solid #f6f6f6;
+  color: #999999;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-color: #f6f6f6;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  height: 51px;
+  line-height: 49px;
+  outline: none;
+  padding: 0 40px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100px;
+  height: 80px;
+}
+.uib-timepicker tbody .uib-time button .accent {
+  color: #ffffff;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button [class^="fa-"],
+.uib-timepicker tbody .uib-time button [class*=" fa-"] {
+  color: #fbfbfb;
+}
+.uib-timepicker tbody .uib-time button:hover,
+.uib-timepicker tbody .uib-time button.hover {
+  background-color: #fefefe;
+  border-top-color: #fbfbfb;
+}
+.uib-timepicker tbody .uib-time button:active,
+.uib-timepicker tbody .uib-time button.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%);
+  background-color: rgba(255, 255, 255, 0.08);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.08), rgba(255, 255, 255, 0.08));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14cbcbcb', endColorstr='#14ffffff', GradientType=0);
+  background-color: #f6f6f6;
+  border-top-color: #f1f1f1;
+}
+.uib-timepicker tbody .uib-time button:focus,
+.uib-timepicker tbody .uib-time button.focus {
+  transition: 0.25s;
+  background-color: #ffffff;
+}
+.uib-timepicker tbody .uib-time button.selected,
+.uib-timepicker tbody .uib-time button.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(194, 194, 194, 0.08) 100%);
+  background-color: rgba(194, 194, 194, 0.08);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(194, 194, 194, 0.08));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14ffffff', endColorstr='#14c2c2c2', GradientType=0);
+  border-top-color: #e4e4e4;
+  background-color: #f6f6f6;
+}
+.uib-timepicker tbody .uib-time button.right-end.bordered {
+  border-left: 1px solid #f6f6f6;
+}
+.uib-timepicker tbody .uib-time button.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #fbfbfb;
+}
+.uib-timepicker tbody .uib-time button.no-paddings {
+  padding: 0;
+  text-align: center;
+}
+.uib-timepicker tbody .uib-time button.resource {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+}
+.uib-timepicker tbody .uib-time button.file-upload-button input[type="file"] {
+  bottom: 0;
+  cursor: pointer;
+  height: 60px !important;
+  left: 0;
+  padding: 0 !important;
+  position: absolute;
+  top: auto  !important;
+  z-index: 8;
+}
+.uib-timepicker tbody .uib-time button.no-cursor {
+  cursor: default !important;
+}
+.uib-timepicker tbody .uib-time button.no-x-paddings {
+  padding: 0 20px;
+}
+.uib-timepicker tbody .uib-time button.animated {
+  transition: 0.25s;
+}
+.uib-timepicker tbody .uib-time button.file-upload {
+  position: relative;
+}
+.uib-timepicker tbody .uib-time button.file-upload .django-file-upload-controller-fix {
+  display: none;
+}
+.uib-timepicker tbody .uib-time button.file-upload input[type="file"] {
+  opacity: 0.0;
+  cursor: pointer;
+  display: block;
+  padding: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 500;
+  height: 100%;
+  font-size: 0;
+}
+.uib-timepicker tbody .uib-time button.underline {
+  text-decoration: underline;
+}
+.uib-timepicker tbody .uib-time button [class^="fa-"],
+.uib-timepicker tbody .uib-time button [class*="fa-"] {
+  color: #b3b3b3;
+  font-size: 1.6em;
+  transition: 0.5s;
+}
+.uib-timepicker tbody .uib-time button span.text {
+  vertical-align: baseline;
+  transition: 0.25s;
+}
+.uib-timepicker tbody .uib-time button.left-end {
+  border-radius: 7px 0 0 7px;
+  margin-right: 0 !important;
+  border-right: none !important;
+}
+.uib-timepicker tbody .uib-time button.mid {
+  border-radius: 0 !important;
+  border-right: none !important;
+}
+.uib-timepicker tbody .uib-time button.right-end {
+  border-radius: 0 7px 7px 0;
+  margin-left: 0 !important;
+}
+.uib-timepicker tbody .uib-time button.only-icon {
+  overflow: hidden;
+  padding: 0 !important;
+  text-align: center;
+  white-space: nowrap;
+  width: 51px;
+}
+.uib-timepicker tbody .uib-time button.only-icon:before,
+.uib-timepicker tbody .uib-time button.only-icon:after {
+  content: "\00a0 ";
+}
+.uib-timepicker tbody .uib-time button.only-icon i {
+  margin: 0;
+}
+.uib-timepicker tbody .uib-time button.only-icon.circle {
+  border-radius: 100% !important;
+}
+.uib-timepicker tbody .uib-time button.button-tiny {
+  border-radius: 5px;
+  font-size: 13px;
+  height: 26px;
+  line-height: 24px;
+  padding: 0 20px;
+}
+.uib-timepicker tbody .uib-time button.button-tiny [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-tiny [class*=" fa-"] {
+  font-size: 11px;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.left-end {
+  border-radius: 5px 0 0 5px;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.right-end {
+  border-radius: 0 5px 5px 0;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.only-icon {
+  width: 26px;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.only-icon i {
+  margin: 0;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader {
+  animation-delay: -0.05s;
+  text-indent: -9999em;
+  left: 22.75px;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader,
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader:before,
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader:after {
+  width: 5.2px;
+  height: 5.2px;
+  border-radius: 100%;
+  animation-fill-mode: both;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader:before {
+  left: -7.2px;
+  animation-delay: -0.1s;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader:after {
+  left: 7.2px;
+  animation-delay: 0.1s;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader:before,
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.only-icon {
+  width: auto;
+}
+.uib-timepicker tbody .uib-time button.button-tiny.loading .loader {
+  top: -23px;
+}
+.uib-timepicker tbody .uib-time button.button-small {
+  border-radius: 7px;
+  font-size: 13px;
+  height: 39px;
+  line-height: 37px;
+  padding: 0 25px;
+}
+.uib-timepicker tbody .uib-time button.button-small [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-small [class*=" fa-"] {
+  font-size: 1.3em;
+}
+.uib-timepicker tbody .uib-time button.button-small.left-end {
+  border-radius: 7px 0 0 7px;
+}
+.uib-timepicker tbody .uib-time button.button-small.right-end {
+  border-radius: 0 7px 7px 0;
+}
+.uib-timepicker tbody .uib-time button.button-small.only-icon {
+  width: 39px;
+}
+.uib-timepicker tbody .uib-time button.button-small.only-icon i {
+  margin: 0;
+}
+.uib-timepicker tbody .uib-time button.button-small.loading .loader {
+  animation-delay: -0.05s;
+  text-indent: -9999em;
+  left: 34.125px;
+}
+.uib-timepicker tbody .uib-time button.button-small.loading .loader,
+.uib-timepicker tbody .uib-time button.button-small.loading .loader:before,
+.uib-timepicker tbody .uib-time button.button-small.loading .loader:after {
+  width: 7.8px;
+  height: 7.8px;
+  border-radius: 100%;
+  animation-fill-mode: both;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
+}
+.uib-timepicker tbody .uib-time button.button-small.loading .loader:before {
+  left: -9.8px;
+  animation-delay: -0.1s;
+}
+.uib-timepicker tbody .uib-time button.button-small.loading .loader:after {
+  left: 9.8px;
+  animation-delay: 0.1s;
+}
+.uib-timepicker tbody .uib-time button.button-small.loading .loader:before,
+.uib-timepicker tbody .uib-time button.button-small.loading .loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.uib-timepicker tbody .uib-time button.button-small.loading .loader {
+  top: -18px;
+}
+.uib-timepicker tbody .uib-time button.button-large {
+  border-radius: 7px;
+  font-size: 18px;
+  height: 66px;
+  line-height: 64px;
+  padding: 0 43px;
+}
+.uib-timepicker tbody .uib-time button.button-large [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-large [class*=" fa-"] {
+  font-size: 1.6em;
+}
+.uib-timepicker tbody .uib-time button.button-large.left-end {
+  border-radius: 7px 0 0 7px;
+}
+.uib-timepicker tbody .uib-time button.button-large.right-end {
+  border-radius: 0 7px 7px 0;
+}
+.uib-timepicker tbody .uib-time button.button-large.only-icon {
+  width: 66px;
+}
+.uib-timepicker tbody .uib-time button.button-large.only-icon i {
+  margin: 0;
+}
+.uib-timepicker tbody .uib-time button.button-large.loading .loader {
+  animation-delay: -0.05s;
+  text-indent: -9999em;
+  left: 57.75px;
+}
+.uib-timepicker tbody .uib-time button.button-large.loading .loader,
+.uib-timepicker tbody .uib-time button.button-large.loading .loader:before,
+.uib-timepicker tbody .uib-time button.button-large.loading .loader:after {
+  width: 13.2px;
+  height: 13.2px;
+  border-radius: 100%;
+  animation-fill-mode: both;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
+}
+.uib-timepicker tbody .uib-time button.button-large.loading .loader:before {
+  left: -15.2px;
+  animation-delay: -0.1s;
+}
+.uib-timepicker tbody .uib-time button.button-large.loading .loader:after {
+  left: 15.2px;
+  animation-delay: 0.1s;
+}
+.uib-timepicker tbody .uib-time button.button-large.loading .loader:before,
+.uib-timepicker tbody .uib-time button.button-large.loading .loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.uib-timepicker tbody .uib-time button.button-large.loading .loader {
+  top: -20px;
+}
+.uib-timepicker tbody .uib-time button.button-block,
+.uib-timepicker tbody .uib-time button.block {
+  display: block;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
+.uib-timepicker tbody .uib-time button.loading {
+  text-shadow: none !important;
+  background-color: #f2f2f2 !important;
+  border: 1px solid #ebebeb !important;
+  color: #d9d9d9 !important;
+  cursor: auto !important;
+  position: relative;
+}
+.uib-timepicker tbody .uib-time button.loading [class^="fa-"],
+.uib-timepicker tbody .uib-time button.loading [class*=" fa-"] {
+  color: #d9d9d9 !important;
+}
+.uib-timepicker tbody .uib-time button.loading.clear-background {
+  background: none !important;
+  border: none !important;
+}
+.uib-timepicker tbody .uib-time button.loading:focus {
+  border-color: #808080 !important;
+}
+.uib-timepicker tbody .uib-time button.loading .text,
+.uib-timepicker tbody .uib-time button.loading .fa {
+  opacity: 0;
+}
+.uib-timepicker tbody .uib-time button.loading .loader {
+  animation-delay: -0.05s;
+  text-indent: -9999em;
+  position: absolute;
+  top: -16px;
+  left: 44.625px;
+}
+.uib-timepicker tbody .uib-time button.loading .loader,
+.uib-timepicker tbody .uib-time button.loading .loader:before,
+.uib-timepicker tbody .uib-time button.loading .loader:after {
+  width: 10.2px;
+  height: 10.2px;
+  border-radius: 100%;
+  animation-fill-mode: both;
+  animation: btnloaderkf 1.5s infinite ease-in-out;
+}
+.uib-timepicker tbody .uib-time button.loading .loader:before {
+  left: -12.2px;
+  animation-delay: -0.1s;
+}
+.uib-timepicker tbody .uib-time button.loading .loader:after {
+  left: 12.2px;
+  animation-delay: 0.1s;
+}
+.uib-timepicker tbody .uib-time button.loading .loader:before,
+.uib-timepicker tbody .uib-time button.loading .loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.uib-timepicker tbody .uib-time button:hover,
+.uib-timepicker tbody .uib-time button.hover {
+  background-color: #fbfbfb;
+}
+.uib-timepicker tbody .uib-time button:active,
+.uib-timepicker tbody .uib-time button.active {
+  background-color: #f1f1f1;
+}
+.uib-timepicker tbody .uib-time button.selected {
+  box-shadow: inset 0 2px 3px 0 rgba(0, 0, 0, 0.06);
+  border-top-color: #f6f6f6;
+}
+.uib-timepicker tbody .uib-time button.disabled {
+  text-shadow: none !important;
+  background-color: #f2f2f2 !important;
+  border: 1px solid #ebebeb !important;
+  color: #d9d9d9 !important;
+  cursor: auto !important;
+}
+.uib-timepicker tbody .uib-time button.disabled [class^="fa-"],
+.uib-timepicker tbody .uib-time button.disabled [class*=" fa-"] {
+  color: #d9d9d9 !important;
+}
+.uib-timepicker tbody .uib-time button.disabled.clear-background {
+  background: none !important;
+  border: none !important;
+}
+.uib-timepicker tbody .uib-time button.disabled:focus {
+  border-color: #808080 !important;
+}
+.uib-timepicker tbody .uib-time button.button-gray {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(194, 194, 194, 0.08) 100%);
+  background-color: rgba(194, 194, 194, 0.08);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(194, 194, 194, 0.08));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14ffffff', endColorstr='#14c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #808080;
+  border: 1px solid rgba(102, 102, 102, 0);
+  border-top: 1px solid #666666;
+  color: #000000;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  border-color: #666666;
+}
+.uib-timepicker tbody .uib-time button.button-gray .accent {
+  color: #a6a6a6;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-gray [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-gray [class*=" fa-"] {
+  color: #c5c5c5;
+}
+.uib-timepicker tbody .uib-time button.button-gray:hover,
+.uib-timepicker tbody .uib-time button.button-gray.hover {
+  background-color: #878787;
+  border-top-color: #6b6b6b;
+}
+.uib-timepicker tbody .uib-time button.button-gray:active,
+.uib-timepicker tbody .uib-time button.button-gray.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%);
+  background-color: rgba(255, 255, 255, 0.08);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.08), rgba(255, 255, 255, 0.08));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14cbcbcb', endColorstr='#14ffffff', GradientType=0);
+  background-color: #808080;
+  border-top-color: #616161;
+}
+.uib-timepicker tbody .uib-time button.button-gray:focus,
+.uib-timepicker tbody .uib-time button.button-gray.focus {
+  transition: 0.25s;
+  background-color: #8c8c8c;
+}
+.uib-timepicker tbody .uib-time button.button-gray.selected,
+.uib-timepicker tbody .uib-time button.button-gray.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(194, 194, 194, 0.08) 100%);
+  background-color: rgba(194, 194, 194, 0.08);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(194, 194, 194, 0.08));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14ffffff', endColorstr='#14c2c2c2', GradientType=0);
+  border-top-color: #545454;
+  background-color: #808080;
+}
+.uib-timepicker tbody .uib-time button.button-gray.right-end.bordered {
+  border-left: 1px solid #666666;
+}
+.uib-timepicker tbody .uib-time button.button-gray.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #c5c5c5;
+}
+.uib-timepicker tbody .uib-time button.button-gray [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-gray [class*=" fa-"],
+.uib-timepicker tbody .uib-time button.button-gray svg * {
+  color: #b3b3b3;
+  fill: #b3b3b3;
+}
+.uib-timepicker tbody .uib-time button.button-gray:hover,
+.uib-timepicker tbody .uib-time button.button-gray.hover {
+  background-color: #858585;
+}
+.uib-timepicker tbody .uib-time button.button-gray:active,
+.uib-timepicker tbody .uib-time button.button-gray.active {
+  background-color: #7a7a7a;
+}
+.uib-timepicker tbody .uib-time button.button-gray.selected {
+  border-top-color: #666666;
+}
+.uib-timepicker tbody .uib-time button.button-primary {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #787878;
+  border: 1px solid rgba(120, 120, 120, 0);
+  border-top: 1px solid #787878;
+  color: #fff;
+}
+.uib-timepicker tbody .uib-time button.button-primary .accent {
+  color: #9e9e9e;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-primary [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-primary [class*=" fa-"] {
+  color: #b9b9b9;
+}
+.uib-timepicker tbody .uib-time button.button-primary:hover,
+.uib-timepicker tbody .uib-time button.button-primary.hover {
+  background-color: #808080;
+  border-top-color: #7d7d7d;
+}
+.uib-timepicker tbody .uib-time button.button-primary:active,
+.uib-timepicker tbody .uib-time button.button-primary.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15), rgba(255, 255, 255, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26cbcbcb', endColorstr='#26ffffff', GradientType=0);
+  background-color: #787878;
+  border-top-color: #737373;
+}
+.uib-timepicker tbody .uib-time button.button-primary:focus,
+.uib-timepicker tbody .uib-time button.button-primary.focus {
+  transition: 0.25s;
+  background-color: #858585;
+}
+.uib-timepicker tbody .uib-time button.button-primary.selected,
+.uib-timepicker tbody .uib-time button.button-primary.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  border-top-color: #666666;
+  background-color: #787878;
+}
+.uib-timepicker tbody .uib-time button.button-primary.right-end.bordered {
+  border-left: 1px solid #787878;
+}
+.uib-timepicker tbody .uib-time button.button-primary.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #b9b9b9;
+}
+.uib-timepicker tbody .uib-time button.button-info {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #008782;
+  border: 1px solid rgba(0, 135, 130, 0);
+  border-top: 1px solid #008782;
+  color: #fff;
+}
+.uib-timepicker tbody .uib-time button.button-info .accent {
+  color: #00d3cc;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-info [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-info [class*=" fa-"] {
+  color: #00c8c6;
+}
+.uib-timepicker tbody .uib-time button.button-info:hover,
+.uib-timepicker tbody .uib-time button.button-info.hover {
+  background-color: #009791;
+  border-top-color: #00918c;
+}
+.uib-timepicker tbody .uib-time button.button-info:active,
+.uib-timepicker tbody .uib-time button.button-info.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15), rgba(255, 255, 255, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26cbcbcb', endColorstr='#26ffffff', GradientType=0);
+  background-color: #008782;
+  border-top-color: #007d78;
+}
+.uib-timepicker tbody .uib-time button.button-info:focus,
+.uib-timepicker tbody .uib-time button.button-info.focus {
+  transition: 0.25s;
+  background-color: #00a19b;
+}
+.uib-timepicker tbody .uib-time button.button-info.selected,
+.uib-timepicker tbody .uib-time button.button-info.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  border-top-color: #006360;
+  background-color: #008782;
+}
+.uib-timepicker tbody .uib-time button.button-info.right-end.bordered {
+  border-left: 1px solid #008782;
+}
+.uib-timepicker tbody .uib-time button.button-info.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #00c8c6;
+}
+.uib-timepicker tbody .uib-time button.button-info:hover,
+.uib-timepicker tbody .uib-time button.button-info.hover {
+  background-color: #00918c;
+}
+.uib-timepicker tbody .uib-time button.button-info.selected {
+  border-top-color: #00736e;
+}
+.uib-timepicker tbody .uib-time button.button-success {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #1ca462;
+  border: 1px solid rgba(28, 164, 98, 0);
+  border-top: 1px solid #1ca462;
+  color: #fff;
+}
+.uib-timepicker tbody .uib-time button.button-success .accent {
+  color: #31dc89;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-success [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-success [class*=" fa-"] {
+  color: #2bd697;
+}
+.uib-timepicker tbody .uib-time button.button-success:hover,
+.uib-timepicker tbody .uib-time button.button-success.hover {
+  background-color: #1eb26a;
+  border-top-color: #1dad67;
+}
+.uib-timepicker tbody .uib-time button.button-success:active,
+.uib-timepicker tbody .uib-time button.button-success.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15), rgba(255, 255, 255, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26cbcbcb', endColorstr='#26ffffff', GradientType=0);
+  background-color: #1ca462;
+  border-top-color: #1b9b5d;
+}
+.uib-timepicker tbody .uib-time button.button-success:focus,
+.uib-timepicker tbody .uib-time button.button-success.focus {
+  transition: 0.25s;
+  background-color: #20ba6f;
+}
+.uib-timepicker tbody .uib-time button.button-success.selected,
+.uib-timepicker tbody .uib-time button.button-success.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  border-top-color: #178650;
+  background-color: #1ca462;
+}
+.uib-timepicker tbody .uib-time button.button-success.right-end.bordered {
+  border-left: 1px solid #1ca462;
+}
+.uib-timepicker tbody .uib-time button.button-success.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #2bd697;
+}
+.uib-timepicker tbody .uib-time button.button-danger {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #de5a5a;
+  border: 1px solid rgba(222, 90, 90, 0);
+  border-top: 1px solid #de5a5a;
+  color: #fff;
+}
+.uib-timepicker tbody .uib-time button.button-danger .accent {
+  color: #eb9a9a;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-danger [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-danger [class*=" fa-"] {
+  color: #f08b8b;
+}
+.uib-timepicker tbody .uib-time button.button-danger:hover,
+.uib-timepicker tbody .uib-time button.button-danger.hover {
+  background-color: #e16767;
+  border-top-color: #e06363;
+}
+.uib-timepicker tbody .uib-time button.button-danger:active,
+.uib-timepicker tbody .uib-time button.button-danger.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15), rgba(255, 255, 255, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26cbcbcb', endColorstr='#26ffffff', GradientType=0);
+  background-color: #de5a5a;
+  border-top-color: #dc5252;
+}
+.uib-timepicker tbody .uib-time button.button-danger:focus,
+.uib-timepicker tbody .uib-time button.button-danger.focus {
+  transition: 0.25s;
+  background-color: #e26f6f;
+}
+.uib-timepicker tbody .uib-time button.button-danger.selected,
+.uib-timepicker tbody .uib-time button.button-danger.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  border-top-color: #d83c3c;
+  background-color: #de5a5a;
+}
+.uib-timepicker tbody .uib-time button.button-danger.right-end.bordered {
+  border-left: 1px solid #de5a5a;
+}
+.uib-timepicker tbody .uib-time button.button-danger.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #f08b8b;
+}
+.uib-timepicker tbody .uib-time button.button-warning {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #ffb122;
+  border: 1px solid rgba(255, 177, 34, 0);
+  border-top: 1px solid #ffb122;
+  color: #fff;
+}
+.uib-timepicker tbody .uib-time button.button-warning .accent {
+  color: #ffcc6f;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-warning [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-warning [class*=" fa-"] {
+  color: #ffdc35;
+}
+.uib-timepicker tbody .uib-time button.button-warning:hover,
+.uib-timepicker tbody .uib-time button.button-warning.hover {
+  background-color: #ffb732;
+  border-top-color: #ffb52c;
+}
+.uib-timepicker tbody .uib-time button.button-warning:active,
+.uib-timepicker tbody .uib-time button.button-warning.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15), rgba(255, 255, 255, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26cbcbcb', endColorstr='#26ffffff', GradientType=0);
+  background-color: #ffb122;
+  border-top-color: #ffad18;
+}
+.uib-timepicker tbody .uib-time button.button-warning:focus,
+.uib-timepicker tbody .uib-time button.button-warning.focus {
+  transition: 0.25s;
+  background-color: #ffba3c;
+}
+.uib-timepicker tbody .uib-time button.button-warning.selected,
+.uib-timepicker tbody .uib-time button.button-warning.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  border-top-color: #fda400;
+  background-color: #ffb122;
+}
+.uib-timepicker tbody .uib-time button.button-warning.right-end.bordered {
+  border-left: 1px solid #ffb122;
+}
+.uib-timepicker tbody .uib-time button.button-warning.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #ffdc35;
+}
+.uib-timepicker tbody .uib-time button.button-inverted {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  text-shadow: 0 1px 1px rgba(51, 51, 51, 0.2);
+  background-color: #333333;
+  border: 1px solid rgba(51, 51, 51, 0);
+  border-top: 1px solid #333333;
+  color: #fff;
+}
+.uib-timepicker tbody .uib-time button.button-inverted .accent {
+  color: #595959;
+  margin-left: 0.5rem;
+}
+.uib-timepicker tbody .uib-time button.button-inverted [class^="fa-"],
+.uib-timepicker tbody .uib-time button.button-inverted [class*=" fa-"] {
+  color: #4f4f4f;
+}
+.uib-timepicker tbody .uib-time button.button-inverted:hover,
+.uib-timepicker tbody .uib-time button.button-inverted.hover {
+  background-color: #3b3b3b;
+  border-top-color: #383838;
+}
+.uib-timepicker tbody .uib-time button.button-inverted:active,
+.uib-timepicker tbody .uib-time button.button-inverted.active {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: linear-gradient(to bottom, rgba(203, 203, 203, 0.15), rgba(255, 255, 255, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26cbcbcb', endColorstr='#26ffffff', GradientType=0);
+  background-color: #333333;
+  border-top-color: #2e2e2e;
+}
+.uib-timepicker tbody .uib-time button.button-inverted:focus,
+.uib-timepicker tbody .uib-time button.button-inverted.focus {
+  transition: 0.25s;
+  background-color: #404040;
+}
+.uib-timepicker tbody .uib-time button.button-inverted.selected,
+.uib-timepicker tbody .uib-time button.button-inverted.selected:hover {
+  transition: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(194, 194, 194, 0.15) 100%);
+  background-color: rgba(194, 194, 194, 0.15);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(194, 194, 194, 0.15));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26ffffff', endColorstr='#26c2c2c2', GradientType=0);
+  border-top-color: #212121;
+  background-color: #333333;
+}
+.uib-timepicker tbody .uib-time button.button-inverted.right-end.bordered {
+  border-left: 1px solid #333333;
+}
+.uib-timepicker tbody .uib-time button.button-inverted.clear-background {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  color: #4f4f4f;
 }
 /*
  * Instructions: each weed module contains a base customization variables at

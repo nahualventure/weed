@@ -1,0 +1,51 @@
+/**
+  * Edoo popover group framework
+  */
+
+@date-picker-icon-up:                                       "\f077";
+@date-picker-icon-down:                                     "\f078";
+@date-picker-height-icons:                                  16px;
+@date-picker-height-components:                             80px;
+@date-picker-width-components:                              100px;
+@button-default-color:                                      @system-default-color;
+
+
+.uib-timepicker{
+  tbody{
+    .text-center{
+      text-align: center;
+
+      .uib-increment {
+        a{
+          span{
+            display: inline-block;
+            .font-awesome-background(@date-picker-icon-up, @date-picker-height-icons);
+          }
+        }
+      }
+
+      .uib-decrement{
+        a{
+          span {
+            display: inline-block;
+            .font-awesome-background(@date-picker-icon-down, @date-picker-height-icons);
+          }
+        }
+      }
+    }
+
+    .uib-time{
+      input{
+          margin-bottom: 0;
+          width: @date-picker-width-components;
+          height: @date-picker-height-components;
+      }
+
+      button{
+        .button;
+        width: @date-picker-width-components;
+        height: @date-picker-height-components;
+      }
+    }
+  }
+}
