@@ -1130,6 +1130,10 @@
         <div we-list-item color="warning">Warning</div>
     </div>
 
+	<h2>Timepicker</h2>
+    <div class="row" ng-controller="TimepickerController as pickerCtrl">
+      <uib-timepicker ng-model="pickerCtrl.mytime" ng-change="pickerCtrl.changed()" hour-step="pickerCtrl.hstep" minute-step="pickerCtrl.mstep" show-meridian="pickerCtrl.ismeridian"></uib-timepicker>
+    </div>
     <h2>Typeahead</h2>
     <div class="row" ng-controller="TypeaheadController as typeCtrl">
       <div class="col xs-12">
@@ -1260,6 +1264,7 @@
                   return states;
                 })
                 .controller('TypeaheadController',typeaheadController)
+				.controller('TimepickerController', timepickerController)
                 .run(weedRun);
 
             // Dependencies
@@ -1270,6 +1275,7 @@
             popupController.$inject = ['WeedApi'];
             notificationController.$inject = ['WeedApi'];
             typeaheadController.$inject = ['WeedApi','States'];
+			timepickerController.$inject = ['WeedApi']
 
             function calendarController() {
               var vm = this;
@@ -1298,6 +1304,40 @@
               var vm = this;
               vm.states = States;
             }
+			
+			function timepickerController(WeedApi){
+              var vm = this;
+              vm.mytime = new Date();
+
+              vm.hstep = 1;
+              vm.mstep = 15;
+
+              vm.options = {
+                hstep: [1, 2, 3],
+                mstep: [1, 5, 10, 15, 25, 30]
+              };
+
+              vm.ismeridian = true;
+              vm.toggleMode = function() {
+                vm.ismeridian = ! vm.ismeridian;
+              };
+
+              vm.update = function() {
+                var d = new Date();
+                d.setHours( 14 );
+                d.setMinutes( 0 );
+                vm.mytime = d;
+              };
+
+              vm.changed = function () {
+                console.log('Time changed to: ' + vm.mytime);
+              };
+
+              vm.clear = function() {
+                vm.mytime = null;
+              };
+            }
+			
             function notificationController(WeedApi){
                 var vm = this;
 
