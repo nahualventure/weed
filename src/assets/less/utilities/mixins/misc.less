@@ -31,3 +31,47 @@
     content: "\00a0";
   }
 }
+
+//Mixins moved from Edoo-----------------------------
+
+// Single side border-radius
+.border-top-radius(@radius) {
+  border-top-right-radius: @radius;
+   border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+  border-bottom-right-radius: @radius;
+     border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+  border-bottom-right-radius: @radius;
+   border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+  border-bottom-left-radius: @radius;
+     border-top-left-radius: @radius;
+}
+
+// Resize anything
+.resizable(@direction) {
+  resize: @direction; // Options: horizontal, vertical, both
+  overflow: auto; // Safari fix
+}
+
+.content-columns(@width, @count, @gap) {
+	  column-width: @width;
+	  column-count: @count;
+	  column-gap: @gap;
+	}
+
+.hyphens(@mode: auto) {
+	  word-wrap: break-word;
+	  hyphens: @mode;
+	}
+
+// Reset filters for IE
+//
+// Useful for when you want to remove a gradient from an element.
+.reset-filter() {
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
+}
