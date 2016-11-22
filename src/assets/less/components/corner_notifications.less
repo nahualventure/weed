@@ -136,11 +136,6 @@ body.sidebarless{
   }
 
   .notification-tag{
-    transition: @faster;
-    transition-delay: 0;
-  }
-
-  .notification-tag{
     .square(@corner-notifications-height + 3px);
     background-size: cover;
     border-radius: 1000px; // Extreme
@@ -151,6 +146,7 @@ body.sidebarless{
     position: absolute;
     text-align: center;
     top: -1px;
+    transition: @faster;
 
     .@{fa-css-prefix}{
       height: @corner-notifications-height;
@@ -183,19 +179,9 @@ body.sidebarless{
     }
 
     .notification-tag{
-      .square(@corner-notifications-out-tag-size);
-      font-size: 0.8em;
-      line-height: @corner-notifications-out-tag-size;
-      margin-left: @corner-notifications-out-margin;
-      margin-top: @corner-notifications-out-margin;
       opacity: 0;
-      transition-delay: @fast*0.8;
-      transition: @faster;
-
-      .@{fa-css-prefix}{
-        height: 34px;
-        line-height: 34px;
-      }
+      transform: scale(0.6);
+      transition-delay: @fast;
     }
   }
 

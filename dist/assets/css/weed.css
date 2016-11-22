@@ -833,15 +833,15 @@ body .fa {
   bottom: -10px;
 }
 /*!
- *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-webfont.eot?v=4.6.3');
-  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.6.3') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular') format('svg');
+  src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -962,8 +962,7 @@ body .fa {
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
 }
 .fa-stack {
   position: relative;
@@ -2643,6 +2642,7 @@ body .fa {
   content: "\f23e";
 }
 .fa-battery-4:before,
+.fa-battery:before,
 .fa-battery-full:before {
   content: "\f240";
 }
@@ -2989,6 +2989,143 @@ body .fa {
 .fa-font-awesome:before {
   content: "\f2b4";
 }
+.fa-handshake-o:before {
+  content: "\f2b5";
+}
+.fa-envelope-open:before {
+  content: "\f2b6";
+}
+.fa-envelope-open-o:before {
+  content: "\f2b7";
+}
+.fa-linode:before {
+  content: "\f2b8";
+}
+.fa-address-book:before {
+  content: "\f2b9";
+}
+.fa-address-book-o:before {
+  content: "\f2ba";
+}
+.fa-vcard:before,
+.fa-address-card:before {
+  content: "\f2bb";
+}
+.fa-vcard-o:before,
+.fa-address-card-o:before {
+  content: "\f2bc";
+}
+.fa-user-circle:before {
+  content: "\f2bd";
+}
+.fa-user-circle-o:before {
+  content: "\f2be";
+}
+.fa-user-o:before {
+  content: "\f2c0";
+}
+.fa-id-badge:before {
+  content: "\f2c1";
+}
+.fa-drivers-license:before,
+.fa-id-card:before {
+  content: "\f2c2";
+}
+.fa-drivers-license-o:before,
+.fa-id-card-o:before {
+  content: "\f2c3";
+}
+.fa-quora:before {
+  content: "\f2c4";
+}
+.fa-free-code-camp:before {
+  content: "\f2c5";
+}
+.fa-telegram:before {
+  content: "\f2c6";
+}
+.fa-thermometer-4:before,
+.fa-thermometer:before,
+.fa-thermometer-full:before {
+  content: "\f2c7";
+}
+.fa-thermometer-3:before,
+.fa-thermometer-three-quarters:before {
+  content: "\f2c8";
+}
+.fa-thermometer-2:before,
+.fa-thermometer-half:before {
+  content: "\f2c9";
+}
+.fa-thermometer-1:before,
+.fa-thermometer-quarter:before {
+  content: "\f2ca";
+}
+.fa-thermometer-0:before,
+.fa-thermometer-empty:before {
+  content: "\f2cb";
+}
+.fa-shower:before {
+  content: "\f2cc";
+}
+.fa-bathtub:before,
+.fa-s15:before,
+.fa-bath:before {
+  content: "\f2cd";
+}
+.fa-podcast:before {
+  content: "\f2ce";
+}
+.fa-window-maximize:before {
+  content: "\f2d0";
+}
+.fa-window-minimize:before {
+  content: "\f2d1";
+}
+.fa-window-restore:before {
+  content: "\f2d2";
+}
+.fa-times-rectangle:before,
+.fa-window-close:before {
+  content: "\f2d3";
+}
+.fa-times-rectangle-o:before,
+.fa-window-close-o:before {
+  content: "\f2d4";
+}
+.fa-bandcamp:before {
+  content: "\f2d5";
+}
+.fa-grav:before {
+  content: "\f2d6";
+}
+.fa-etsy:before {
+  content: "\f2d7";
+}
+.fa-imdb:before {
+  content: "\f2d8";
+}
+.fa-ravelry:before {
+  content: "\f2d9";
+}
+.fa-eercast:before {
+  content: "\f2da";
+}
+.fa-microchip:before {
+  content: "\f2db";
+}
+.fa-snowflake-o:before {
+  content: "\f2dc";
+}
+.fa-superpowers:before {
+  content: "\f2dd";
+}
+.fa-wpexplorer:before {
+  content: "\f2de";
+}
+.fa-meetup:before {
+  content: "\f2e0";
+}
 .sr-only {
   position: absolute;
   width: 1px;
@@ -3219,14 +3356,14 @@ button.button {
 .button.no-x-paddings {
   padding: 0 20px;
 }
+.button .accent {
+  color: #4d4d4d;
+}
 .button.animated {
   transition: 0.25s;
 }
 .button.file-upload {
   position: relative;
-}
-.button.file-upload .django-file-upload-controller-fix {
-  display: none;
 }
 .button.file-upload input[type="file"] {
   opacity: 0.0;
@@ -3456,7 +3593,8 @@ button.button {
   text-align: center;
   width: 100%;
 }
-.button.loading {
+.button.loading,
+.button.visible-loader {
   text-shadow: none !important;
   background-color: #f2f2f2 !important;
   border: 1px solid #ebebeb !important;
@@ -3465,21 +3603,28 @@ button.button {
   position: relative;
 }
 .button.loading [class^="fa-"],
-.button.loading [class*=" fa-"] {
+.button.visible-loader [class^="fa-"],
+.button.loading [class*=" fa-"],
+.button.visible-loader [class*=" fa-"] {
   color: #d9d9d9 !important;
 }
-.button.loading.clear-background {
+.button.loading.clear-background,
+.button.visible-loader.clear-background {
   background: none !important;
   border: none !important;
 }
-.button.loading:focus {
-  border-color: #808080 !important;
+.button.loading svg *,
+.button.visible-loader svg * {
+  fill: #d9d9d9 !important;
 }
 .button.loading .text,
-.button.loading .fa {
+.button.visible-loader .text,
+.button.loading .fa,
+.button.visible-loader .fa {
   opacity: 0;
 }
-.button.loading .loader {
+.button.loading .loader,
+.button.visible-loader .loader {
   animation-delay: -0.05s;
   text-indent: -9999em;
   position: absolute;
@@ -3487,24 +3632,31 @@ button.button {
   left: 44.625px;
 }
 .button.loading .loader,
+.button.visible-loader .loader,
 .button.loading .loader:before,
-.button.loading .loader:after {
+.button.visible-loader .loader:before,
+.button.loading .loader:after,
+.button.visible-loader .loader:after {
   width: 10.2px;
   height: 10.2px;
   border-radius: 100%;
   animation-fill-mode: both;
   animation: btnloaderkf 1.5s infinite ease-in-out;
 }
-.button.loading .loader:before {
+.button.loading .loader:before,
+.button.visible-loader .loader:before {
   left: -12.2px;
   animation-delay: -0.1s;
 }
-.button.loading .loader:after {
+.button.loading .loader:after,
+.button.visible-loader .loader:after {
   left: 12.2px;
   animation-delay: 0.1s;
 }
 .button.loading .loader:before,
-.button.loading .loader:after {
+.button.visible-loader .loader:before,
+.button.loading .loader:after,
+.button.visible-loader .loader:after {
   content: '';
   position: absolute;
   top: 0;
@@ -3536,8 +3688,8 @@ button.button {
   background: none !important;
   border: none !important;
 }
-.button.disabled:focus {
-  border-color: #808080 !important;
+.button.disabled svg * {
+  fill: #d9d9d9 !important;
 }
 .button.button-gray {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(194, 194, 194, 0.08) 100%);
@@ -3998,9 +4150,6 @@ button.button {
   background: none !important;
   border: none !important;
   color: #4f4f4f;
-}
-.ie7 .button {
-  margin-right: 2px;
 }
 /**
   * Edoo form framework
@@ -6427,17 +6576,14 @@ body.with-open-popup {
 }
 .top-xs {
   -ms-flex-align: start;
-      -ms-grid-row-align: flex-start;
       align-items: flex-start;
 }
 .middle-xs {
   -ms-flex-align: center;
-      -ms-grid-row-align: center;
       align-items: center;
 }
 .bottom-xs {
   -ms-flex-align: end;
-      -ms-grid-row-align: flex-end;
       align-items: flex-end;
 }
 .around-xs {
@@ -6566,17 +6712,14 @@ body.with-open-popup {
   }
   .top-s {
     -ms-flex-align: start;
-        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-s {
     -ms-flex-align: center;
-        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-s {
     -ms-flex-align: end;
-        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-s {
@@ -6706,17 +6849,14 @@ body.with-open-popup {
   }
   .top-m {
     -ms-flex-align: start;
-        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-m {
     -ms-flex-align: center;
-        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-m {
     -ms-flex-align: end;
-        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-m {
@@ -6846,17 +6986,14 @@ body.with-open-popup {
   }
   .top-l {
     -ms-flex-align: start;
-        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-l {
     -ms-flex-align: center;
-        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-l {
     -ms-flex-align: end;
-        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-l {
@@ -6986,17 +7123,14 @@ body.with-open-popup {
   }
   .top-xl {
     -ms-flex-align: start;
-        -ms-grid-row-align: flex-start;
         align-items: flex-start;
   }
   .middle-xl {
     -ms-flex-align: center;
-        -ms-grid-row-align: center;
         align-items: center;
   }
   .bottom-xl {
     -ms-flex-align: end;
-        -ms-grid-row-align: flex-end;
         align-items: flex-end;
   }
   .around-xl {
@@ -7020,12 +7154,12 @@ body.sidebarless .corner-notification {
   left: 15px;
 }
 .corner-notification {
-  transition: 0.25s;
+  bottom: 20px;
   height: 70px;
   left: 85px;
   position: fixed;
+  transition: 0.5s;
   width: 355px;
-  bottom: 20px;
   z-index: 2147483647;
 }
 .corner-notification.success .background-mask .background {
@@ -7057,7 +7191,7 @@ body.sidebarless .corner-notification {
 .corner-notification .background-mask .text,
 .corner-notification .background-mask .close {
   transition: 0.5s;
-  transition-delay: 0.2s;
+  transition-delay: 0.25s;
 }
 .corner-notification .background-mask .background {
   background: #fff;
@@ -7103,11 +7237,6 @@ body.sidebarless .corner-notification {
   height: 100%;
   line-height: 23px;
 }
-.corner-notification .notification-tag,
-.corner-notification .achievement-badge {
-  transition: 0.25s;
-  transition-delay: 0;
-}
 .corner-notification .notification-tag {
   width: 73px;
   height: 73px;
@@ -7120,46 +7249,46 @@ body.sidebarless .corner-notification {
   position: absolute;
   text-align: center;
   top: -1px;
+  transition: 0.25s;
 }
 .corner-notification .notification-tag .fa {
-  height: 100%;
+  height: 70px;
   line-height: 70px;
+  margin-top: -1px;
   opacity: 0.8;
 }
-.corner-notification.ng-hide {
-  transition-delay: 0.75s;
+.corner-notification .notification-tag.error {
+  background: #d63030;
 }
 .corner-notification.ng-hide .background-mask .background,
-.corner-notification.ng-hide .background-mask .text {
+.corner-notification.out .background-mask .background,
+.corner-notification.ng-hide .background-mask .text,
+.corner-notification.out .background-mask .text {
   margin-left: -357px;
   transition: 0.75s cubic-bezier(0.37, -0.01, 0.23, 1.55);
 }
-.corner-notification.ng-hide .background-mask .text {
+.corner-notification.ng-hide .background-mask .text,
+.corner-notification.out .background-mask .text {
   opacity: 0;
 }
-.corner-notification.ng-hide .background-mask .close {
+.corner-notification.ng-hide .background-mask .close,
+.corner-notification.out .background-mask .close {
   transition: 0.75s cubic-bezier(0.37, -0.01, 0.23, 1.55);
   right: 384px;
 }
 .corner-notification.ng-hide .notification-tag,
-.corner-notification.ng-hide .achievement-badge {
+.corner-notification.out .notification-tag {
   opacity: 0;
-  transition: 0.25s;
-  transition-delay: 0.4s;
-}
-.corner-notification.ng-hide .notification-tag {
-  width: 34px;
-  height: 34px;
-  font-size: 0.8em;
-  line-height: 34px;
-  margin-left: 18px;
-  margin-top: 28px;
+  transform: scale(0.6);
+  transition-delay: 0.5s;
 }
 .corner-notification .grid {
   height: 70px;
 }
-.with-open-sidebar .corner-notification {
-  left: 230px;
+@media (min-width: 1300px) {
+  .open-sidebar .corner-notification {
+    left: 230px;
+  }
 }
 .user-card {
   border-radius: 10px;
@@ -7298,7 +7427,6 @@ body.sidebarless .corner-notification {
   * Edoo tag framework:  TODO v1.0 docu
   */
 .tag {
-  font-size: 12px;
   border-radius: 5px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -7316,6 +7444,7 @@ body.sidebarless .corner-notification {
   line-height: 49px;
   vertical-align: middle;
   white-space: nowrap;
+  font-size: 12px;
 }
 .tag.custom {
   border-color: rgba(228, 228, 228, 0);
@@ -7598,9 +7727,6 @@ body.sidebarless .corner-notification {
 }
 .tag.tag-huge {
   font-size: 22px;
-}
-.ie7 .tag {
-  margin-right: 2px;
 }
 .bubble {
   border-radius: 10px;
@@ -8842,14 +8968,14 @@ hr {
 .uib-timepicker tbody .uib-time button.no-x-paddings {
   padding: 0 20px;
 }
+.uib-timepicker tbody .uib-time button .accent {
+  color: #4d4d4d;
+}
 .uib-timepicker tbody .uib-time button.animated {
   transition: 0.25s;
 }
 .uib-timepicker tbody .uib-time button.file-upload {
   position: relative;
-}
-.uib-timepicker tbody .uib-time button.file-upload .django-file-upload-controller-fix {
-  display: none;
 }
 .uib-timepicker tbody .uib-time button.file-upload input[type="file"] {
   opacity: 0.0;
@@ -9079,7 +9205,8 @@ hr {
   text-align: center;
   width: 100%;
 }
-.uib-timepicker tbody .uib-time button.loading {
+.uib-timepicker tbody .uib-time button.loading,
+.uib-timepicker tbody .uib-time button.visible-loader {
   text-shadow: none !important;
   background-color: #f2f2f2 !important;
   border: 1px solid #ebebeb !important;
@@ -9088,21 +9215,28 @@ hr {
   position: relative;
 }
 .uib-timepicker tbody .uib-time button.loading [class^="fa-"],
-.uib-timepicker tbody .uib-time button.loading [class*=" fa-"] {
+.uib-timepicker tbody .uib-time button.visible-loader [class^="fa-"],
+.uib-timepicker tbody .uib-time button.loading [class*=" fa-"],
+.uib-timepicker tbody .uib-time button.visible-loader [class*=" fa-"] {
   color: #d9d9d9 !important;
 }
-.uib-timepicker tbody .uib-time button.loading.clear-background {
+.uib-timepicker tbody .uib-time button.loading.clear-background,
+.uib-timepicker tbody .uib-time button.visible-loader.clear-background {
   background: none !important;
   border: none !important;
 }
-.uib-timepicker tbody .uib-time button.loading:focus {
-  border-color: #808080 !important;
+.uib-timepicker tbody .uib-time button.loading svg *,
+.uib-timepicker tbody .uib-time button.visible-loader svg * {
+  fill: #d9d9d9 !important;
 }
 .uib-timepicker tbody .uib-time button.loading .text,
-.uib-timepicker tbody .uib-time button.loading .fa {
+.uib-timepicker tbody .uib-time button.visible-loader .text,
+.uib-timepicker tbody .uib-time button.loading .fa,
+.uib-timepicker tbody .uib-time button.visible-loader .fa {
   opacity: 0;
 }
-.uib-timepicker tbody .uib-time button.loading .loader {
+.uib-timepicker tbody .uib-time button.loading .loader,
+.uib-timepicker tbody .uib-time button.visible-loader .loader {
   animation-delay: -0.05s;
   text-indent: -9999em;
   position: absolute;
@@ -9110,24 +9244,31 @@ hr {
   left: 44.625px;
 }
 .uib-timepicker tbody .uib-time button.loading .loader,
+.uib-timepicker tbody .uib-time button.visible-loader .loader,
 .uib-timepicker tbody .uib-time button.loading .loader:before,
-.uib-timepicker tbody .uib-time button.loading .loader:after {
+.uib-timepicker tbody .uib-time button.visible-loader .loader:before,
+.uib-timepicker tbody .uib-time button.loading .loader:after,
+.uib-timepicker tbody .uib-time button.visible-loader .loader:after {
   width: 10.2px;
   height: 10.2px;
   border-radius: 100%;
   animation-fill-mode: both;
   animation: btnloaderkf 1.5s infinite ease-in-out;
 }
-.uib-timepicker tbody .uib-time button.loading .loader:before {
+.uib-timepicker tbody .uib-time button.loading .loader:before,
+.uib-timepicker tbody .uib-time button.visible-loader .loader:before {
   left: -12.2px;
   animation-delay: -0.1s;
 }
-.uib-timepicker tbody .uib-time button.loading .loader:after {
+.uib-timepicker tbody .uib-time button.loading .loader:after,
+.uib-timepicker tbody .uib-time button.visible-loader .loader:after {
   left: 12.2px;
   animation-delay: 0.1s;
 }
 .uib-timepicker tbody .uib-time button.loading .loader:before,
-.uib-timepicker tbody .uib-time button.loading .loader:after {
+.uib-timepicker tbody .uib-time button.visible-loader .loader:before,
+.uib-timepicker tbody .uib-time button.loading .loader:after,
+.uib-timepicker tbody .uib-time button.visible-loader .loader:after {
   content: '';
   position: absolute;
   top: 0;
@@ -9159,8 +9300,8 @@ hr {
   background: none !important;
   border: none !important;
 }
-.uib-timepicker tbody .uib-time button.disabled:focus {
-  border-color: #808080 !important;
+.uib-timepicker tbody .uib-time button.disabled svg * {
+  fill: #d9d9d9 !important;
 }
 .uib-timepicker tbody .uib-time button.button-gray {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(194, 194, 194, 0.08) 100%);
