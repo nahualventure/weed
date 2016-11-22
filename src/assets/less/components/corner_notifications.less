@@ -153,17 +153,14 @@ body.sidebarless{
     top: -1px;
 
     .@{fa-css-prefix}{
-      height: 100%;
+      height: @corner-notifications-height;
       line-height: @corner-notifications-height;
+      margin-top: -1px; // Fix
       opacity: 0.8;
     }
 
     &.error{
       background: darken(@system-danger-color, 10%); // TODO v1.0
-    }
-
-    .@{fa-css-prefix}{
-      margin-top: -1px; // Fix
     }
   }
 
@@ -186,17 +183,19 @@ body.sidebarless{
     }
 
     .notification-tag{
-      opacity: 0;
-      transition: @faster;
-      transition-delay: @fast*0.8;
-    }
-
-    .notification-tag{
       .square(@corner-notifications-out-tag-size);
       font-size: 0.8em;
       line-height: @corner-notifications-out-tag-size;
       margin-left: @corner-notifications-out-margin;
       margin-top: @corner-notifications-out-margin;
+      opacity: 0;
+      transition-delay: @fast*0.8;
+      transition: @faster;
+
+      .@{fa-css-prefix}{
+        height: 34px;
+        line-height: 34px;
+      }
     }
   }
 
