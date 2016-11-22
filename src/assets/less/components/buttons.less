@@ -83,11 +83,12 @@
   @text-color: @white;
   @gradient-opacity: @button-gradient-default-opacity;){
   #gradient > .vertical(fadeout(@button-start-gradient-color, @gradient-opacity), fadeout(@button-end-gradient-color, @gradient-opacity));
-  text-shadow: 0 1px 1px @button-text-shadow;
   background-color: @background-color;
   border: 1px solid fadeout(@border-color, 100%);
   border-top: 1px solid @border-color;
+  box-sizing: border-box;
   color: @text-color;
+  text-shadow: 0 1px 1px @button-text-shadow;
 
   .accent{
     color: lighten(@background-color, 15%);
