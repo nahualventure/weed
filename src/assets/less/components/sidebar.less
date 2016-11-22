@@ -36,17 +36,17 @@
 body{
 
   .sidebar{
-    transition: @fast;
+    background: @sidebar-background-color;
+    border-right: solid @sidebar-border-right-color @sidebar-border-right-size;
+    height: 100%;
     left: 0;
     overflow: hidden;
     position: fixed;
     top: 0;
+    transition: @fast;
     white-space: nowrap;
     width: @sidebar-contracted-width;
     z-index: @navbar-z-index - 1;
-    background: @sidebar-background-color;
-    height: 100%;
-    border-right: solid @sidebar-border-right-color @sidebar-border-right-size;
 
     .header{
       box-sizing: border-box;
@@ -86,14 +86,9 @@ body{
 
     &.text-below{
       .sidebar-list{
-        .clear-box;
-        list-style: none;
 
         li, .li{
           a, .a{
-            line-height: @sidebar-contracted-element-height;
-            width: 100%;
-            display: inline-block;
             margin: 5px 0;
 
             span.icon-container{
@@ -115,8 +110,6 @@ body{
             }
 
             span.text{
-              font-size: 0.8em;
-              vertical-align: middle;
               text-align: center;
               display: block;
               line-height: 1.5em;
@@ -130,7 +123,7 @@ body{
   }
 
   .sidebar-list{
-    .clear-box;
+    .clear-box();
     list-style: none;
 
     li, .li{
@@ -143,7 +136,7 @@ body{
         width: 100%;
         display: inline-block;
 
-        span.icon-container{
+        span.icon-container, span.icon{
           transition: @faster;
           display: inline-block;
           font-size: 1.2em;
@@ -178,7 +171,7 @@ body{
         &.current{
           color: @sidebar-hover-link-color;
 
-          span.icon-container{
+          span.icon-container, span.icon{
             i{
               color: @sidebar-hover-link-color;
             }
@@ -188,7 +181,7 @@ body{
         &:active{
           color: darken(@sidebar-link-color, 15%);
 
-          span.icon-container{
+          span.icon-container, span.icon{
             i{
               color: darken(@sidebar-link-color, 15%);
             }
@@ -202,7 +195,8 @@ body{
     }
   }
 
-  .sidebar-bottom-action{
+  .sidebar-bottom-action,
+  .sidebar-bottom-contractor{
     .sidebar-list > .li > .a;
     transition: @fast;
     bottom: 0;
@@ -224,7 +218,7 @@ body{
     padding-left: @sidebar-contracted-width;
   }
 
-  &.with-open-sidebar{
+  &.with-open-sidebar, &.open-sidebar{
     padding-left: @sidebar-open-width;
 
     .sidebar{
@@ -263,7 +257,7 @@ body{
     .sidebar-bottom-action{
       width: @sidebar-open-width;
 
-      span.icon-container{
+      span.icon-container, span.icon{
         .@{fa-css-prefix}{
           transform: rotate(180deg);
         }
