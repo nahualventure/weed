@@ -62,13 +62,6 @@
 
     &.@{fa-css-prefix}-times{
 
-      // &:last-child{
-      //   font-size: 0.8em;
-      //   cursor: pointer;
-      //   margin-left: 0.8em;
-      //   margin-right: -0.6em;
-      // }
-
       &:hover{
         color: lighten(@text-color, 7%);
       }
@@ -79,18 +72,11 @@
       }
     }
   }
-
-  // &:hover{
-  //   background-color: lighten(@background-color, 3%);
-  // }
-  // &:active{
-  //   background-color: @background-color;
-  // }
 }
 
 .tag{
-  font-size: 12px;
   .make-tag(@text-color: @tag-default-text-color);
+  font-size: 12px;
 
   &.block{
     display: block;
@@ -140,12 +126,5 @@
   }
   &.tag-huge{
     font-size: 22px;
-  }
-}
-
-// IE fixes
-.ie7{
-  .tag{
-    margin-right: 2px;
   }
 }
