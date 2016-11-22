@@ -10,8 +10,6 @@
 @corner-notifications-text-color:                                               @black-35;
 @corner-notifications-text-font-family:                                         sans-serif;
 
-@corner-notifications-achievement-badge-left:                                   -9px;
-@corner-notifications-achievement-badge-top:                                    -13px;
 @corner-notifications-background-mask-margin-left:                              27px;
 @corner-notifications-background-mask-width:                                    @corner-notifications-width + 10px;
 @corner-notifications-bottom-initial-position:                                  20px;
@@ -19,8 +17,6 @@
 @corner-notifications-height:                                                   70px;
 @corner-notifications-left-sidebar-contracted:                                  @sidebar-contracted-width + 20px;
 @corner-notifications-left-sidebar-open:                                        @sidebar-open-width + 20px;
-@corner-notifications-out-achievement-badge-left-margin:                        20px;
-@corner-notifications-out-achievement-badge-top-margin:                         22.5px;
 @corner-notifications-out-left-delta:                                           330px;
 @corner-notifications-out-margin:                                               (@corner-notifications-height - @corner-notifications-out-tag-size) / 2.0;
 @corner-notifications-out-tag-size:                                             34px;
@@ -37,12 +33,12 @@ body.sidebarless{
 }
 
 .corner-notification{
-  transition: @faster;
+  bottom: @corner-notifications-bottom-initial-position;
   height: @corner-notifications-height;
   left: @corner-notifications-left-sidebar-contracted;
   position: fixed;
+  transition: @fast;
   width: @corner-notifications-width;
-  bottom: @corner-notifications-bottom-initial-position;
   z-index: @z-maximum;
 
 
@@ -87,7 +83,7 @@ body.sidebarless{
 
     .background, .text, .close{
       transition: @fast;
-      transition-delay: @fast * 0.4;
+      transition-delay: @faster;
     }
 
     .background{
@@ -139,7 +135,7 @@ body.sidebarless{
     }
   }
 
-  .notification-tag, .achievement-badge{
+  .notification-tag{
     transition: @faster;
     transition-delay: 0;
   }
@@ -161,13 +157,18 @@ body.sidebarless{
       line-height: @corner-notifications-height;
       opacity: 0.8;
     }
+
+    &.error{
+      background: darken(@system-danger-color, 10%); // TODO v1.0
+    }
+
+    .@{fa-css-prefix}{
+      margin-top: -1px; // Fix
+    }
   }
 
   // Animation
-  &.ng-hide{
-    // bottom: -@corner-notifications-height * 1.25;
-    transition-delay: @fast * 1.5;
-
+  &.ng-hide, &.out{
     .background-mask{
       .background, .text{
         margin-left: -1 * @corner-notifications-background-mask-margin-left - @corner-notifications-out-left-delta;
@@ -184,7 +185,7 @@ body.sidebarless{
       }
     }
 
-    .notification-tag, .achievement-badge{
+    .notification-tag{
       opacity: 0;
       transition: @faster;
       transition-delay: @fast*0.8;
@@ -195,27 +196,19 @@ body.sidebarless{
       font-size: 0.8em;
       line-height: @corner-notifications-out-tag-size;
       margin-left: @corner-notifications-out-margin;
-      margin-top: @corner-notifications-out-margin + 10px;
+      margin-top: @corner-notifications-out-margin;
     }
   }
-
-  // &.ng-hide-active{
-  //   bottom: @corner-notifications-bottom-initial-position;
-  // }
 
   .@{grid-class}{
     height: @corner-notifications-height;
   }
-
-  // .achievement-badge{
-  //   left: @corner-notifications-achievement-badge-left;
-  //   position: absolute;
-  //   top: @corner-notifications-achievement-badge-top;
-  // }
 }
 
-.with-open-sidebar{
-  .corner-notification{
-    left: @corner-notifications-left-sidebar-open;
+@media(min-width: @system-large-break){
+  .open-sidebar{
+    .corner-notification{
+      left: @corner-notifications-left-sidebar-open;
+    }
   }
 }
