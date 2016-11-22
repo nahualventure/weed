@@ -205,16 +205,16 @@ button.button{
     padding: 0 @button-horizontal-padding/2.0;
   }
 
+  .accent{
+    color: lighten(@text-color, 10%);
+  }
+
   &.animated{
     transition: @faster;
   }
 
   &.file-upload{
     position:relative;
-
-    .django-file-upload-controller-fix{
-      display: none;
-    }
 
     input[type="file"]{
       opacity: 0.0;
@@ -397,21 +397,6 @@ button.button{
     }
   }
 
-  // TODO: might be unused, can't remember
-  // &.untoggled{
-  //   background-color: lighten(@button-default-color, 5%);
-  //   border: 1px solid @button-default-color;
-  //   color: lighten(@button-default-text-color, 5%);
-
-  //   &:hover{
-  //     background-color: lighten(@button-default-color, 7%);
-  //   }
-  //   &:active{
-  //     .box-shadow(inset 0 1px 1px 0 fadeout(darken(@button-default-color, 15%), 70%));
-  //     background-color: lighten(@button-default-color, 5%);
-  //   }
-  // }
-
   // Misc states
 
   // Blocked button
@@ -423,7 +408,7 @@ button.button{
   }
 
   // Loading (must be after Blocked button)
-  &.loading{
+  &.loading, &.visible-loader{
     .button.disabled();
     position: relative;
 
@@ -480,6 +465,11 @@ button.button{
     &.clear-background{
       background: none !important;
       border: none !important;
+    }
+
+    // SVG for loaders
+    svg *{
+      fill: @button-disabled-text-color !important;
     }
 
     &:focus{
@@ -577,12 +567,5 @@ button.button{
       @background-color: @button-inverted-color;
       @border-color: @button-inverted-border-color;
     );
-  }
-}
-
-// IE fixes
-.ie7{
-  .button{
-    margin-right: 2px;
   }
 }
