@@ -7,6 +7,9 @@
 
 // Configuration
 @navbar-bubble-background-color:                            #ce6f6f;
+@navbar-bubble-font-size:                                   10px;
+@navbar-bubble-font-weight:                                 normal;
+@navbar-bubble-font-family:                                 sans-serif;
 @navbar-color:                                              @system-base-color;
 @navbar-config-button-color:                                @white;
 @navbar-element-hover-color:                                darken(@navbar-color, 2%);
@@ -206,11 +209,13 @@
 
       .navbar-bubble{
         .square(@navbar-notifications-bubble-size);
-        border-radius: 100px;
         background: @navbar-bubble-background-color;
+        border-radius: 100px;
         color: @navbar-notifications-bubble-text-color;
         display: block;
-        font-size: 0.7em;
+        font-family: @navbar-bubble-font-family;
+        font-size: @navbar-bubble-font-size;
+        font-weight: @navbar-bubble-font-weight;
         line-height: @navbar-notifications-bubble-size;
         position: absolute;
         right: @navbar-notifications-position-x;
