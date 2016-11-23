@@ -54,7 +54,6 @@
 
 // Main navigation class
 .navbar{
-  //.clearfix;
   .expand-x();
   .origin();
   user-select: none;
@@ -72,20 +71,6 @@
       }
     }
   }
-
-  // &.detached{
-  //   display: none;
-  //   position: fixed;
-  // }
-
-  // &.inject{
-  //   top: 0;
-  // }
-
-  // &.excise{
-  //   opacity: 0.0;
-  //   top: -1*@navbar-height;
-  // }
 
   // Any rendered element inside navbar (excepting separator)
   .navbar-element{
@@ -138,7 +123,7 @@
         .vertical-center(@navbar-height, @navbar-search-height);
         background: @navbar-search-background-color;
         border: none;
-        height: @navbar-search-height;
+        height: @navbar-search-height !important;
         margin-bottom: 0; // FIX
 
         .input-mark{
@@ -159,6 +144,7 @@
 
     // Navbar user display
     &.navbar-user{
+      opacity: 1.0;
       float: right;
 
       .navbar-element-floater{
@@ -173,6 +159,10 @@
 
       .name{
         max-width: @navbar-user-role-max-width;
+      }
+
+      .role{
+        color: lighten(@navbar-color, 10%);
       }
     }
 
@@ -279,7 +269,7 @@
 }
 
 // TODO: check if breakpoint needed (to autoclose)
-.with-open-sidebar{
+.with-open-sidebar, .open-sidebar{
   .navbar{
     .navbar-element{
       &.logo{
@@ -306,31 +296,6 @@ body{
       .navbar-main-action{
         opacity: 1.0;
         cursor: pointer;
-      }
-    }
-  }
-}
-
-// IE fixes
-.ie7, .ie8{
-  .navbar{
-    .search-form{
-      .navbar-element-floater{
-        input[type="text"]{
-          line-height: @navbar-search-height;
-        }
-        button[type="submit"].search{
-          border: none;
-        }
-      }
-    }
-  }
-}
-.ie7{
-  .navbar{
-    .search-form{
-      .navbar-element-floater{
-        .vertical-center-with-offset(@navbar-height; @navbar-search-height; 2px; 1px);
       }
     }
   }
