@@ -15,7 +15,9 @@
 @navbar-search-font-color:                                  @black-30;
 @navbar-search-font-family:                                 sans-serif;
 @navbar-search-icon-color:                                  @black;
-@navbar-search-kplaceholder-color:                           @black;
+@navbar-search-kplaceholder-color:                          @black;
+@navbar-user-name-color:                                    @white;
+@navbar-user-role-color:                                    @white;
 @navbar-element-link-icon-size:                             18px;
 @navbar-element-link-font-size:                             16px;
 @navbar-element-link-color:                                 @white;
@@ -162,12 +164,12 @@
       }
 
       .name{
-        color: lighten(@navbar-color, 30%);
+        color: @navbar-user-name-color;
         max-width: @navbar-user-role-max-width;
       }
 
       .role{
-        color: lighten(@navbar-color, 15%);
+        color: @navbar-user-role-color;
       }
     }
 
