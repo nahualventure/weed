@@ -287,7 +287,6 @@ button.button{
 
   &.circle{
     border-radius: 100% !important;
-    width: @button-height;
   }
 
   .adjust-button-sizes(
@@ -327,10 +326,6 @@ button.button{
       }
     }
 
-    &.circle{
-      width: @height;
-    }
-
     // MUST be after only-icon
     &.loading{
       .loader{
@@ -355,10 +350,6 @@ button.button{
       @icon-size: 11px;
       @font-size: 13px;
     );
-
-    &.only-icon{
-      width: auto;
-    }
 
     &.loading{
       .loader{
