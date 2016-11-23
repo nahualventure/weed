@@ -149,14 +149,14 @@ button.button{
 
 // Button main class
 .button{
-  background-blend-mode: overlay;
-  border-radius: @button-border-radius;
   .make-button(
     @background-color: @button-default-color;
     @border-color: @button-default-border-color;
     @text-color: @button-default-text-color;
     @gradient-opacity: 92%;
   );
+  background-blend-mode: overlay;
+  border-radius: @button-border-radius;
   text-shadow: 0 1px 1px fadeout(@white, 20%);
   user-select: none;
   border-color: @button-default-border-color;
@@ -204,10 +204,6 @@ button.button{
 
   &.no-x-paddings{
     padding: 0 @button-horizontal-padding/2.0;
-  }
-
-  .accent{
-    color: lighten(@text-color, 10%);
   }
 
   &.animated{
@@ -287,10 +283,11 @@ button.button{
     i{
       margin: 0;
     }
+  }
 
-    &.circle{
-      border-radius: 100% !important;
-    }
+  &.circle{
+    border-radius: 100% !important;
+    width: @button-height;
   }
 
   .adjust-button-sizes(
@@ -328,6 +325,10 @@ button.button{
       i{
         margin: 0;
       }
+    }
+
+    &.circle{
+      width: @height;
     }
 
     // MUST be after only-icon
