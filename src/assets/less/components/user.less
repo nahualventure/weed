@@ -8,6 +8,8 @@
 @user-name-font-size:                                       16px;
 @user-role-font-size:                                       10px;
 @user-data-margin:                                          10px;
+@user-picture-button-right:                                 0;
+@user-picture-button-bottom:                                0;
 
 .user{
   &.no-picture{
@@ -30,10 +32,10 @@
     vertical-align: middle;
 
     .button{
-      bottom: 0;
+      bottom: @user-picture-button-bottom;
       margin: 0 !important;
       position: absolute;
-      right: 0;
+      right: @user-picture-button-right;
     }
   }
 
