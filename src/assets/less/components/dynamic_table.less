@@ -60,6 +60,9 @@
 @dynamic-table-user-name-color:                             @black;
 @dynamic-table-user-role-color:                             @black-60;
 @dynamic-table-user-image-border-color:                     @black-80;
+@dynamic-table-title-color:                                 @black;
+@dynamic-table-title-up-color:                              @black;
+@dynamic-table-title-down-color:                            @black;
 
 .dynamic-table{
   position: relative;
@@ -211,7 +214,7 @@
 
       &.title{
         font-family: @dynamic-table-row-title-font-family;
-        color: @dynamic-table-user-name-color;
+        color: @dynamic-table-title-color;
         height: 100%;
         padding: @dynamic-table-row-title-padding; // TODO v1.0
 
@@ -284,7 +287,12 @@
       }
 
       .up{
+        color: @dynamic-table-title-up-color;
         padding-top: @dynamic-table-small-up-padding;
+      }
+
+      .down{
+        color: @dynamic-table-title-down-color;
       }
 
       .big{
