@@ -146,25 +146,6 @@
         }
       }
 
-      // Inputs
-      // TODO: CHECK IF NEED TO TRANSFER THIS CODE INSIDE .one-liner
-      .input-wrapper,
-      input{
-        .vertical-center(@dynamic-table-row-height, @form-input-height);
-
-        // Remove the first when forms.less is migrated
-        &.input-wrapper-small,
-        &.input-small{
-          .vertical-center(@dynamic-table-row-height, @form-input-small-height);
-        }
-
-        // Remove the first when forms.less is migrated
-        &.input-wrapper-tiny,
-        &.input-tiny{
-          .vertical-center(@dynamic-table-row-height, @form-input-tiny-height);
-        }
-      }
-
       &.actions{
         padding-left: @dynamic-table-row-element-padding/2.0;
         padding-right: @dynamic-table-row-element-padding/2.0;
@@ -247,6 +228,29 @@
       &.one-liner{
         font-size: @dynamic-table-row-one-liner-size;
         line-height: @dynamic-table-row-height;
+
+        // Inputs
+        .input-wrapper,
+        input{
+          .vertical-center(@dynamic-table-row-height, @form-input-height);
+
+          // Remove the first when forms.less is migrated
+          &.input-wrapper-small,
+          &.input-small{
+            .vertical-center(@dynamic-table-row-height, @form-input-small-height);
+          }
+
+          // Remove the first when forms.less is migrated
+          &.input-wrapper-tiny,
+          &.input-tiny{
+            .vertical-center(@dynamic-table-row-height, @form-input-tiny-height);
+          }
+        }
+
+        .input-wrapper input{
+          margin-bottom: 0 !important;
+          margin-top: 0 !important;
+        }
 
         .text, i{
           vertical-align: middle;
