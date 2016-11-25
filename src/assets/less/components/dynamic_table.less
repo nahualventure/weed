@@ -17,8 +17,9 @@
 @dynamic-table-row-title-font-family:                       serif;
 @dynamic-table-shadow-color:                                fadeout(@black, 82%);
 @dynamic-table-placeholder-background:                      #dce4e4;
-@dynamic-table-row-default-iconned-background:                 @system-base-color;
+@dynamic-table-row-default-iconned-background:              @system-base-color;
 @dynamic-table-division-title-color:                        @black;
+@dynamic-table-row-tag-text-color:                          @white;
 
 @dynamic-table-row-radius:                                  @system-border-radius;
 @dynamic-table-row-height:                                  75px;
@@ -189,6 +190,7 @@
 
       &.dynamic-table-row-tag{
         border-right: 1px solid @dynamic-table-in-border-color;
+        color: @dynamic-table-row-tag-text-color;
         height: 100%;
         padding: 0;
         width: @dynamic-table-row-tag-width;
