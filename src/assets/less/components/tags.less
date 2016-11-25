@@ -14,6 +14,13 @@
 @tag-primary-color:                   @system-primary-color;
 @tag-success-color:                   @system-success-color;
 @tag-warning-color:                   @system-warning-color;
+@tag-tiny-font-size:                  12px;
+@tag-small-font-size:                 14px;
+@tag-font-size:                       16px;
+@tag-large-font-size:                 18px;
+@tag-xlarge-font-size:                20px;
+@tag-xxlarge-font-size:               22px;
+@tag-huge-font-size:                  24px;
 
 @tag-default-border-radius:           @system-border-radius/2.0;
 @tag-default-horizontal-padding:      15px;
@@ -38,8 +45,13 @@
   padding: @vertical-padding @horizontal-padding;
   height: @height;
   line-height: @height;
+  margin-right: 0.5rem;
   vertical-align: middle;
   white-space: nowrap;
+
+  i{
+    color: lighten(@background-color, 20%);
+  }
 
   &.custom{
     border-color: fadeout(darken(@background-color, 7%), 100%);
@@ -76,7 +88,7 @@
 
 .tag{
   .make-tag(@text-color: @tag-default-text-color);
-  font-size: 12px;
+  font-size: @tag-font-size;
 
   &.block{
     display: block;
@@ -103,8 +115,14 @@
   }
 
   // Default sizes
+  &.tag-tiny{
+    font-size: @tag-tiny-font-size;
+    line-height: @tag-tiny-height;
+    height: @tag-tiny-height;
+  }
+
   &.tag-small{
-    font-size: 10px;
+    font-size: @tag-small-font-size;
     line-height: @tag-small-height;
     height: @tag-small-height;
   }
@@ -116,15 +134,15 @@
   }
 
   &.tag-large{
-    font-size: 16px;
+    font-size: @tag-large-font-size;
   }
   &.tag-xlarge{
-    font-size: 18px;
+    font-size: @tag-xlarge-font-size;
   }
   &.tag-xxlarge{
-    font-size: 20px;
+    font-size: @tag-xxlarge-font-size;
   }
   &.tag-huge{
-    font-size: 22px;
+    font-size: @tag-huge-font-size;
   }
 }
