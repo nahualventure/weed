@@ -27,6 +27,16 @@
     box-sizing: border-box;
   }
 
+  .picture-placeholder{
+    color: fadeout(@white, 10%);
+    font-size: 18px;
+    line-height: @user-picture-size;
+
+    &:before, &:after{
+      content: "\00a0 ";
+    }
+  }
+
   .picture, .picture-placeholder{
     display: inline-block;
     position: relative;
@@ -47,7 +57,7 @@
     margin-left: @user-data-margin;
     vertical-align: middle;
 
-    .name{
+    .name, .title{
       .ellipsis();
       color: @user-username-color;
       display: block;
