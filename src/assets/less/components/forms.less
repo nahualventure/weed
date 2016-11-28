@@ -787,16 +787,20 @@ input[type="radio"]{
     float: right;
     height: @form-password-strength-height;
     margin-top: 4px; // FIX
+    position: relative;
     width: 75%;
   }
 
   // Password strength bar
   .password-strength-indicator{
     border-radius: @form-password-strength-border-radius;
-    opacity: 1.0;
-    transition: @faster;
     display: inline-block;
     height: @form-password-strength-height;
+    left: 0;
+    opacity: 1.0;
+    position: absolute;
+    top: 0;
+    transition: @faster;
 
     // Default strength steps
     &.step-0{opacity: 0.0; width:1%; background-color: @form-password-strength-0-color;}
