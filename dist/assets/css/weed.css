@@ -5281,9 +5281,9 @@ input[type="radio"] {
   margin-bottom: 15.5px;
   background: #fff;
   border: none;
+  border-radius: 10px;
   height: 34px !important;
   margin-bottom: 0;
-  padding: 0;
 }
 .navbar .navbar-element.search-form .input-wrapper .input-mark,
 .navbar .navbar-element.search-form input .input-mark {
