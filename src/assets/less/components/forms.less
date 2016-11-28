@@ -6,9 +6,6 @@
 
 // Configurations
 @form-font-family:                                          @system-font-family;
-@form-font-size:                                            1em;
-
-@system-default-background-color:                           @black-10;
 
 // Input
 @form-focus-shadow-color:                                   rgba(27, 155, 224, 0.6);
@@ -23,6 +20,9 @@
 @form-label-font-family:                                    sans-serif;
 @form-input-toolbar-border-color:                           #eee;
 @form-input-toolbar-file-label-color:                       #aaa;
+@form-disabled-color:                                       lighten(@form-input-placeholder-color, 4%);
+@form-disabled-border-color:                                lighten(@form-input-border-color, 10%);
+@form-hover-background-color:                               lighten(@form-input-background-color, 20%);
 
 // Textarea
 @form-textarea-padding:                                     15px;
@@ -36,31 +36,7 @@
 
 @form-label-vertical-margin:                                10px;
 
-// Form jslider
-@form-jslider-background-color:                             @black;
-@form-jslider-text-color:                                   @white;
-
-@form-jslider-height:                                       32px;
-@form-jslider-border-radius:                                5px;
-
-@form-jslider_small-sprites:                                none;
-@form-jslider_small-background-color:                       @black-5;
-@form-jslider_small-pointer-background:                     @black-10;
-@form-jslider_small-background-border-color:                @black-10;
-@form-jslider_small-range-color:                            @system-base-color;
-@form-jslider_small-glow-color:                             @white;
-@form-jslider-wrapper-background:                           @white;
-@form-jslider-wrapper-border-color:                         @black;
-@form-jslider-controls-color:                               @black;
-
-@form-jslider-controls-height:                              38px;
-@form-jslider-controls-width:                               35px;
-@form-jslider-wrapper-padding:                              4px 6px;
-@form-jslider-wrapper-with-controls-padding:                4px 40px;
-@form-jslider_small-border-radius:                          @system-border-radius/2.0;
-@form-jslider_small-height:                                 24px;
-@form-jslider_small-pointer-width:                          17px;
-
+@form-single-char-width:                                    50px;
 
 @form-focus-shadow-definition:                              0px 0px 5px 1px;
 @form-focus-transition-time:                                150ms;
@@ -71,39 +47,7 @@
 @form-input-horizontal-padding:                             25px;
 @form-input-vertical-padding:                               5px;
 
-// Toggler
-@form-toggler-wrapper-background-color:                     @black-10;
-@form-toggler-wrapper-border-color:                         @form-input-border-color;
-
-@form-toggler-wrapper-check-radius:                         0.2em;
-@form-toggler-wrapper-horizontal-margin:                    5px;
-@form-toggler-wrapper-horizontal-padding:                   2px;
-@form-toggler-wrapper-radio-radius:                         2em;
-@form-toggler-wrapper-vertical-padding:                     1px;
-
-@form-select2-z-index:                                      2;
 @form-select-radius:                                        @system-border-radius*0.7;
-
-// Dropdown
-@form-dropdown-background-color:                            fadeout(@black-5, 5%);
-@form-dropdown-border-color:                                @black-15;
-@form-dropdown-text-color:                                  @black-55;
-@form-dropwdown-item-hover-background-color:                @system-base-color;
-@form-dropwdown-item-hover-text-color:                      @white;
-@form-dropdown-arrow-color:                                 @black;
-@form-dropdown-arrow-shadow-color:                          @white;
-@form-dropdown-up-arrow-char:                               "\f078";
-@form-dropdown-down-arrow-char:                             "\f077";
-@form-dropdown-gradient-start:                              fadeout(@white, 95%);
-@form-dropdown-gradient-end:                                fadeout(@black, 95%);
-@form-dropdown-reflex-color:                                fadeout(@white, 50%);
-@form-dropdown-drop-background-color:                       @white;
-@form-dropdown-shadow-color:                                rgba(93, 93, 93, 0.18);
-
-@form-dropdown-border-radius:                               5px;
-@form-dropdown-horizontal-padding:                          20px;
-@form-dropdown-arrow-container-width:                       48px;
-@form-dropdown-arrow-size:                                  18px;
 
 // Password strength indicator
 @form-password-strength-0-color:                            @system-danger-color;
@@ -124,212 +68,9 @@
 @form-password-strength-border-radius:                      10px;
 @form-password-strength-height:                             10px;
 
-// Form input message
-@form-input-message-danger-background-color:                lighten(@system-danger-color, 45%);
-@form-input-message-danger-text-color:                      desaturate(darken(@form-input-message-danger-background-color, 25%), 20%);
-@form-input-message-default-background-color:               lighten(@system-default-color, 10%);
-@form-input-message-default-text-color:                     darken(@form-input-message-default-background-color, 25%);
-@form-input-message-info-background-color:                  lighten(@system-primary-color, 45%);
-@form-input-message-info-text-color:                        darken(@form-input-message-info-background-color, 25%);
-@form-input-message-inverted-background-color:              lighten(@system-default-color, 5%);
-@form-input-message-inverted-text-color:                    darken(@form-input-message-default-background-color, 25%);
-@form-input-message-primary-background-color:               lighten(@system-primary-color, 50%);
-@form-input-message-primary-text-color:                     darken(@form-input-message-primary-background-color, 25%);
-@form-input-message-success-background-color:               lighten(@system-success-color, 50%);
-@form-input-message-success-text-color:                     darken(@form-input-message-success-background-color, 25%);
-@form-input-message-warning-background-color:               lighten(@system-warning-color, 40%);
-@form-input-message-warning-text-color:                     desaturate(darken(@form-input-message-warning-background-color, 25%), 25%);
-@form-input-message-font-family:                            sans-serif;
-
-// Typeahead
-@form-typeahead-background-color:                           @white;
-@form-typeahead-dropdown-border-color:                      @black-30;
-@form-typeahead-dropdown-shadow-color:                      @black-30;
-@form-typeahead-font-family:                                sans-serif;
-@form-typeaheaded-background-color:                         @white;
-
-@form-typeahead-user-border-color:                          @black-25;
-@form-typeahead-user-name-color:                            @black;
-@form-typeahead-user-role-color:                            @black-60;
-
-@form-typeahead-user-placeholder-border-color:              @black-25;
-@form-typeahead-user-placeholder-name-color:                @black;
-@form-typeahead-user-placeholder-role-color:                @black-60;
-
-@form-typeahead-hover-color:                                @system-base-color;
-@form-typeahead-hover-user-border-color:                    darken(@system-base-color, 5%);
-@form-typeahead-hover-user-name-color:                      @black;
-@form-typeahead-hover-user-role-color:                      @black-60;
-
-@form-typeahead-suggestion-height:                          54px;
-@form-typeahead-suggestion-padding:                         0 25px;
-
-@form-typeahead-user-expected-height:                       38px;
-@form-typeahead-user-picture-margin-right:                  13px;
-@form-typeahead-user-picture-size:                          32px;
-
-@form-typeahead-user-placeholder-data-max-width:            145px;
-@form-typeahead-user-placeholder-expected-height:           38px;
-@form-typeahead-user-placeholder-picture-margin-right:      13px;
-@form-typeahead-user-placeholder-picture-size:              32px;
-
-@form-input-message-vertical-spacing:                       5px;
-@form-input-message-border-radius:                          5px;
-@form-input-message-default-width:                          250px;
-
 @form-focus-background-color:                               @white;
 
 @form-inline-editable-placeholder-hover-color:              @black-5;
-
-// TODO v1.0
-@form-input-error-border-color:                             #F8A5A5;
-@form-input-error-text-color:                               @form-input-text-color;
-
-// Specific mixins
-.make-form-input-message(@background-color; @text-color){
-  background-color: @background-color;
-  border-color: darken(@background-color, 5%);
-  color: @text-color;
-  font-family: @form-input-message-font-family;
-  font-size: 1em;
-  .qtip-titlebar{
-    background-color: darken(@background-color, 30%);
-    color: lighten(@background-color, 30%);
-  }
-  .qtip-content{
-    padding: @form-input-horizontal-padding;
-  }
-}
-
-.adjust-input-wrapper-size(@new-height:@form-input-height; @new-padding:@form-input-horizontal-padding; @new-textarea-vertical-padding: 0){
-  height: @new-height !important;
-
-  &.area{
-    height: auto !important;
-  }
-
-  input,
-  .fake-result{
-    height: (@new-height - 2*@form-input-vertical-padding - 2) !important;
-    // line-height: (@new-height - 2*@form-input-vertical-padding - 2) !important;
-    padding: 0 @new-padding;
-  }
-
-  .fake-result{
-    line-height: (@new-height - 2*@form-input-vertical-padding - 2) !important;
-  }
-
-  input[type="file"]{
-    height: (@new-height - 2px) !important;
-    // line-height: (@new-height - 2px) !important;
-    margin-top: -1*@form-input-vertical-padding;
-  }
-
-  textarea{
-    padding: @new-textarea-vertical-padding @new-padding !important;
-  }
-
-  &.typeaheaded{
-    .datum-placeholder{
-      padding: 0 @new-padding;
-
-      &.user{
-        .picture-container{
-          img.picture{
-            .vertical-center(@new-height - 2; @form-typeahead-user-placeholder-picture-size);
-          }
-        }
-
-        // User name
-        .data{
-          .vertical-center(@new-height - 2; @form-typeahead-user-placeholder-expected-height);
-        }
-      }
-    }
-  }
-
-  // Special components
-
-    // Internal button
-  .button{
-    height: @new-height - (2*@form-input-vertical-padding) - 2px - 2px;
-    line-height: @new-height - (2*@form-input-vertical-padding) - 2px - 2px;
-  }
-
-    // Input mark (icon)
-  i.input-mark{
-    line-height: @new-height;
-    font-style: normal;
-    padding: 0 (@new-padding / 2.0);
-  }
-
-  .tt-dropdown-menu{
-    margin-top: @new-height - @form-input-vertical-padding;
-  }
-}
-
-.adjust-select-size(@new-height:@form-input-height; @new-arrow-position: 8px; @new-padding:@form-dropdown-horizontal-padding){
-
-  .select2-arrow{
-    padding: 0 (@new-padding/2.0);
-  }
-
-  .select2-choice{
-    height: @new-height - 2px;
-    line-height: @new-height - 2px;
-    padding-left: @new-padding;
-
-    .select2-arrow{
-      b{
-        background-position-y: @new-arrow-position !important;
-      }
-    }
-  }
-}
-
-// Main class
-&.horizontal{
-  .clearfix();
-
-  & > *{
-    float: left;
-  }
-}
-
-.redactor-box{
-  border-radius: @system-border-radius;
-  float: none;
-  max-width: none;
-
-  .redactor-box{
-    border-radius: 0 0 @system-border-radius @system-border-radius;
-    padding: 10px 20px;
-  }
-
-  .redactor-toolbar{
-    padding: 0 10px !important;
-    height: 50px;
-    border: 1px solid #d9d9d9;
-    background: #f6f6f6;
-    border-radius: @system-border-radius @system-border-radius 0 0;
-    box-shadow: none;
-
-    li a{
-      color: #7a7a7a;
-      padding: 18px 15px;
-
-      &:hover{
-        background: #868686;
-        color: @white;
-      }
-    }
-  }
-
-  .redactor-editor{
-    border-top: none;
-    border-radius: 0 0 @system-border-radius @system-border-radius;
-  }
-}
 
 input[type="button"]{
   cursor: pointer !important;
@@ -387,14 +128,12 @@ input[type="date"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="month"],
-input[type="datetime"],
-input[type="datetime-local"],
 input[type="url"],
 input[type="week"],
 textarea,
 .fake-result{
-  box-sizing: border-box;
   .placeholder(@form-input-placeholder-color);
+  box-sizing: border-box;
   background: none;
   border: none;
   border-radius: @system-border-radius;
@@ -408,7 +147,8 @@ textarea,
 
   // Disabled state
   &[disabled="disabled"]{
-    .placeholder(lighten(@form-input-placeholder-color, 2%));
+    .placeholder(@form-disabled-color);
+    color: @form-disabled-color;
   }
 }
 
@@ -435,16 +175,28 @@ input[type="datetime-local"]{
     width: 50%;
     float: left;
 
-    &.input-wrapper-focussed{
+    &.focus, &:focus{
       border-left-color: @form-focus-border-color;
     }
+  }
+
+  &.clear{
+    background: none;
+    border:none;
+  }
+
+  // Single char
+  &.single-char{
+    width: @form-single-char-width;
+    padding: 0;
+    text-align: center;
   }
 }
 
 // States
 input, textarea{
   &:hover, .hover{
-    background: lighten(@form-input-background-color, 20%);
+    background: @form-hover-background-color;
   }
 
   &:focus, &.focus{
@@ -504,6 +256,15 @@ textarea{
       top: (@form-input-small-height - @button-tiny-height - 2)/2.0;
     }
   }
+
+  &.file-upload{
+    height: @form-input-small-height;
+
+    .fake-result{
+      height: @form-input-small-height - 2px;
+      line-height: @form-input-small-height - 2px;
+    }
+  }
 }
 
 // Tiny
@@ -523,6 +284,15 @@ input.input-tiny, .input-wrapper.input-tiny input{
     top: -1px;
   }
 
+  &.file-upload{
+    height: @form-input-tiny-height;
+
+    .fake-result{
+      height: @form-input-tiny-height - 2px;
+      line-height: @form-input-tiny-height - 2px;
+    }
+  }
+
   i.input-mark{
     font-size: 0.8em;
     left: 15px;
@@ -532,10 +302,10 @@ input.input-tiny, .input-wrapper.input-tiny input{
 
 // Input wrapper utility for buttons and floats
 .input-wrapper{
+  .bevel(@system-default-background-color);
   border-radius: @form-input-border-radius;
   box-sizing: border-box;
   transition: background @form-focus-transition-time, border @form-focus-transition-time;
-  .bevel(@system-default-background-color);
   background: @form-input-background-color;
   border: 1px solid @form-input-border-color;
   display: inline-block;
@@ -555,12 +325,20 @@ input.input-tiny, .input-wrapper.input-tiny input{
     margin-bottom: 0;
   }
 
+  &.area{
+    height: auto !important;
+
+    &.with-toolbar{
+      padding-bottom: 0;
+    }
+  }
+
   // Events
 
   // Hover
   &:hover,
   &.hover{
-    background: lighten(@form-input-background-color, 20%);
+    background: @form-hover-background-color;
   }
 
   // Focus
@@ -584,6 +362,16 @@ input.input-tiny, .input-wrapper.input-tiny input{
     &.close-bottom{
       border-radius: 0 0 @form-input-border-radius @form-input-border-radius;
       border-top: none;
+    }
+  }
+
+  // Single char
+  &.single-char{
+    width: @form-single-char-width;
+    
+    input{
+      text-align: center;
+      padding: 0;
     }
   }
 
@@ -648,7 +436,7 @@ input.input-tiny, .input-wrapper.input-tiny input{
     width: 50%;
     float: left;
 
-    &.input-wrapper-focussed{
+    &.focus{
       border-left-color: @form-focus-border-color;
     }
   }
@@ -660,13 +448,14 @@ input.input-tiny, .input-wrapper.input-tiny input{
 
   // File upload control
   &.file-upload{
+    height: @form-input-height;
     position:relative;
 
     .fake-result{
       .ellipsis();
       display: inline-block;
-      height: (@form-input-height - 2*@form-input-vertical-padding - 2);
-      line-height: (@form-input-height - 2*@form-input-vertical-padding - 2);
+      height: @form-input-height - 2px;
+      line-height: @form-input-height - 2px;
     }
 
     input[type="file"]{
@@ -715,6 +504,21 @@ input.input-tiny, .input-wrapper.input-tiny input{
     }
   }
 
+  // Input wrapper states
+  &.disabled{
+    border-color: @form-disabled-border-color;
+    user-select: none;
+
+    &:hover{
+      background: @form-input-background-color;
+    }
+
+    *[disabled="disabled"]{
+      .placeholder(@form-disabled-color);
+      color: @form-disabled-color;
+    }
+  }
+
   .multi-component{
     margin: 0;
     position: absolute;
@@ -730,24 +534,6 @@ input.input-tiny, .input-wrapper.input-tiny input{
     position: absolute;
     top: -1px;
     z-index: (@z-immediate-over + 2);
-  }
-
-  // Marker
-  .form-input-inside-marker{
-    color: lighten(@form-input-text-color, 25%);
-    height: (@form-input-height - 2px);
-    line-height: (@form-input-height - 2px);
-    position: absolute;
-    top: 0;
-    padding: 0 5px 0 @form-input-horizontal-padding;
-
-    &:first-child{
-      left: 0;
-    }
-
-    &:last-child{
-      right: 0;
-    }
   }
 
   // Password strength
@@ -948,16 +734,16 @@ input.input-tiny, .input-wrapper.input-tiny input{
 }
 
 // Form label
-label, .form-label{ // TODO: change class="label" inside forms
-  text-shadow :0 1px 0 @form-label-shadow-color;
+label, .label{
   color: @form-label-color;
   cursor: pointer;
   display: block;
+  font-family: @form-label-font-family;
   font-size: 0.75rem;
   font-weight: bold;
   line-height: 2rem;
+  text-shadow :0 1px 0 @form-label-shadow-color;
   text-transform: uppercase;
-  font-family: @form-label-font-family;
 
   input, textarea{
     margin-bottom: 0;
@@ -981,14 +767,10 @@ input[type="radio"]{
   margin: 0 0.5rem;
 }
 
-// TODO: select
-// TODO: checkbox
-// TODO: radio
-
 // Password strength indicator
 .password-strength-wrapper{
-  border-radius: @form-password-strength-border-radius;
   .clearfix();
+  border-radius: @form-password-strength-border-radius;
   margin: @form-password-strength-vertical-spacing auto;
   width: 98%;
 
@@ -1028,21 +810,5 @@ input[type="radio"]{
     &.step-80{width:80%; background-color: @form-password-strength-80-color;}
     &.step-90{width:90%; background-color: @form-password-strength-90-color;}
     &.step-100{width:100%; background-color: @form-password-strength-100-color;}
-  }
-}
-
-// Extra classes (third parties)
-
-// TODO: typeahead
-// TODO: slider
-// TODO: qtip
-// TODO: calendar
-
-// IE fixes
-.ie7{
-  .input-wrapper{
-    .button.float-right{
-      top: (@form-input-vertical-padding + 1.5px);
-    }
   }
 }
