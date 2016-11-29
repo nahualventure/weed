@@ -5158,14 +5158,18 @@ input[type="radio"] {
   float: right;
   height: 10px;
   margin-top: 4px;
+  position: relative;
   width: 75%;
 }
 .password-strength-wrapper .password-strength-indicator {
   border-radius: 10px;
-  opacity: 1.0;
-  transition: 0.25s;
   display: inline-block;
   height: 10px;
+  left: 0;
+  opacity: 1.0;
+  position: absolute;
+  top: 0;
+  transition: 0.25s;
 }
 .password-strength-wrapper .password-strength-indicator.step-0 {
   opacity: 0.0;
@@ -8961,6 +8965,9 @@ hr {
 /**
   * Edoo popover group framework
   */
+.uib-timepicker {
+  margin-bottom: 1rem;
+}
 .uib-timepicker tbody .text-center {
   text-align: center;
   line-height: 1rem;
