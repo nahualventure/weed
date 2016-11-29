@@ -39,7 +39,7 @@ var paths = {
     'bower_components/bootstrap/less'
   ],
   weedJS: [
-    'bower_components/hammerjs/hammer.js',
+    // 'bower_components/hammerjs/hammer.js',
     //'bower_components/moment/moment.js',
     'bower_components/moment/min/moment-with-locales.js',
     'bower_components/ng-dialog/js/ngDialog.js',
