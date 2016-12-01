@@ -22,8 +22,10 @@
       .uib-increment {
         a{
           span{
-            display: inline-block;
-            .font-awesome-background(@date-picker-icon-up, @date-picker-height-icons);
+            &:after{
+              content: @date-picker-icon-up;
+              font-family: "FontAwesome";
+            }
           }
         }
       }
@@ -31,8 +33,10 @@
       .uib-decrement{
         a{
           span {
-            display: inline-block;
-            .font-awesome-background(@date-picker-icon-down, @date-picker-height-icons);
+            &:after{
+              content: @date-picker-icon-down;
+              font-family: "FontAwesome";
+            }
           }
         }
       }

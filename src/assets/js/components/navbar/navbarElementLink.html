@@ -3,7 +3,7 @@
     {
       'pull-left': position === 'left',
       'pull-right': position === 'right',
-      'with-counter': counter !== undefined
+      'with-counter': counter !== undefined && counter > 0
     }">
 
   <span class ="navbar-element-floater">
@@ -11,5 +11,5 @@
     <span ng-transclude></span>
   </span>
 
-  <span class="navbar-bubble">{{ counter }}</span>
+  <span class="navbar-bubble" ng-if="counter > 0">{{ counter }}</span>
 </a>
