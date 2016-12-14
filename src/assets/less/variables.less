@@ -79,10 +79,21 @@
 @system-border-radius:                                      10px;
 
 // Default breakpoints
-@system-xlarge-break:                                       1675px;
-@system-large-break:                                        1300px;
-@system-medium-break:                                       985px;
+@system-extrasmall-break-name:                              xs;
+@system-extrasmall-break:                                   0;
+@system-small-break-name:                                   s;
 @system-small-break:                                        650px;
+@system-medium-break-name:                                  m;
+@system-medium-break:                                       985px;
+@system-large-break-name:                                   l;
+@system-large-break:                                        1300px;
+@system-xlarge-break-name:                                  xl;
+@system-xlarge-break:                                       1675px;
+
+@system-breakpoints:                                        @system-small-break-name @system-small-break,
+                                                            @system-medium-break-name @system-medium-break,
+                                                            @system-large-break-name @system-large-break,
+                                                            @system-xlarge-break-name @system-xlarge-break;
 
 // Misc helpers
 @blank-char:                                                "\00a0";

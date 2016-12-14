@@ -1,0 +1,37 @@
+@import "for";
+
+.show-for(@size; @prop: block) {
+  &:not(.hide) {
+    display: none !important;
+    @media(min-width: @size){
+      display: @prop !important;
+    }
+  }
+}
+
+.show-for-only(@size; @prop: block) {
+  &:not(.hide) {
+    display: none !important;
+    @media(min-width: @size only){
+      display: @prop !important;
+    }
+  }
+}
+
+.hide-for(@size; @prop: block) {
+  &:not(.hide) {
+    display: $prop !important;
+    @media(min-width: @size) {
+      display: none !important;
+    }
+  }
+}
+
+.hide-for-only(@size; @prop: block) {
+  &:not(.hide) {
+    display: @prop !important;
+    @media(min-width: @size only) {
+      display: none !important;
+    }
+  }
+}

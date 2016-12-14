@@ -1,3 +1,7 @@
+@import "../../variables";
+@import "../mixins/for";
+@import "../mixins/show_hide";
+
 .hide{
   display: none;
 }
@@ -12,4 +16,18 @@
 
 .show-inline-block{
   display: inline-block;
+}
+
+.for(@system-breakpoints); .-each(@pair) {
+  @key: extract(@pair, 1);
+  @value: extract(@pair, 2);
+
+  .show-for-@{key}{ .show-for(@value, block); }
+  .show-for-@{key}-only{ .show-for-only(@value, block); }
+
+  .show-inline-for-@{key}{ .show-for(@value, inline); }
+  .show-inline-for-@{key}-only{ .show-for-only(@value, inline); }
+
+  .show-inline-block-for-@{key}{ .show-for(@value, inline-block); }
+  .show-inline-block-for-@{key}-only{ .show-for-only(@value, inline-block); }
 }

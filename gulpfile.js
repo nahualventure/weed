@@ -116,6 +116,10 @@ gulp.task('less', ['sass'], function(){
       .pipe(less({
         paths: paths.less
       }))
+      .on('error', function(e){
+        console.log(e.toString())
+        this.emit('end')
+      })
       .pipe($.autoprefixer({
         browsers: browsers
       }))
