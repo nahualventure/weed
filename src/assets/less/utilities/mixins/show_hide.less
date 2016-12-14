@@ -1,5 +1,3 @@
-@import "for";
-
 .show-for(@size; @prop: block) {
   &:not(.hide) {
     display: none !important;
@@ -9,10 +7,10 @@
   }
 }
 
-.show-for-only(@size; @prop: block) {
+.show-for-only(@minsize; @maxsize; @prop: block) {
   &:not(.hide) {
     display: none !important;
-    @media(min-width: @size only){
+    @media(min-width: @minsize) and (max-width: @maxsize){
       display: @prop !important;
     }
   }
@@ -27,10 +25,10 @@
   }
 }
 
-.hide-for-only(@size; @prop: block) {
+.hide-for-only(@minsize; @maxsize; @prop: block) {
   &:not(.hide) {
     display: @prop !important;
-    @media(min-width: @size only) {
+    @media(min-width: @minsize) and (max-width: @maxsize) {
       display: none !important;
     }
   }

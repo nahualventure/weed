@@ -80,9 +80,14 @@
 
 .makegrid(xs);
 
-.for-each(@grid-col-breaks);
-.-each(@breakpoint) {
-  @media only screen and (min-width: @breakpoint) {
-    .makegrid(extract(@grid-col-names, @i));
+& {
+  .-each(@breakpoint) {
+    @media only screen and (min-width: @breakpoint) {
+      .makegrid(extract(@grid-col-names, @i));
+    }
   }
+
+  .for-each(@grid-col-breaks);
 }
+
+

@@ -90,10 +90,17 @@
 @system-xlarge-break-name:                                  xl;
 @system-xlarge-break:                                       1675px;
 
-@system-breakpoints:                                        @system-small-break-name @system-small-break,
+@system-breakpoints:                                        @system-extrasmall-break-name @system-extrasmall-break,
+                                                            @system-small-break-name @system-small-break,
                                                             @system-medium-break-name @system-medium-break,
                                                             @system-large-break-name @system-large-break,
                                                             @system-xlarge-break-name @system-xlarge-break;
+
+@system-breakpoint-ranges:                                  @system-extrasmall-break-name @system-extrasmall-break @system-small-break-name @system-small-break,
+                                                            @system-small-break-name @system-small-break @system-medium-break-name @system-medium-break,
+                                                            @system-medium-break-name @system-medium-break @system-large-break-name @system-large-break,
+                                                            @system-large-break-name @system-large-break @system-xlarge-break-name @system-xlarge-break,
+                                                            @system-xlarge-break-name @system-xlarge-break inf 9999999999999999;
 
 // Misc helpers
 @blank-char:                                                "\00a0";
