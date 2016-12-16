@@ -11,39 +11,27 @@
 @navbar-bubble-font-weight:                                 normal;
 @navbar-bubble-font-family:                                 sans-serif;
 @navbar-color:                                              @system-base-color;
-@navbar-config-button-color:                                @white;
-@navbar-element-hover-color:                                darken(@navbar-color, 2%);
 @navbar-notifications-bubble-text-color:                    @white;
 @navbar-search-background-color:                            @white;
 @navbar-search-font-color:                                  @black-30;
 @navbar-search-font-family:                                 sans-serif;
 @navbar-search-icon-color:                                  @black;
-@navbar-search-kplaceholder-color:                          @black;
 @navbar-user-name-color:                                    @white;
 @navbar-user-role-color:                                    @white;
 @navbar-element-link-icon-size:                             18px;
 @navbar-element-link-font-size:                             16px;
 @navbar-element-link-color:                                 @white;
-@navbar-main-action-size:                                   60px;
-@navbar-main-action-border:                                 5px;
 
-@navbar-config-button-height:                               20px;
 @navbar-element-horizontal-margin:                          20px;
 @navbar-height:                                             65px;
 
 @navbar-search-height:                                      34px;
-@navbar-search-horizontal-padding:                          15px;
 @navbar-search-radius:                                      5px;
-@navbar-search-submit-width:                                30px;
 @navbar-search-width:                                       400px;
 @navbar-separator-occupancy:                                0.6;
 @navbar-z-index:                                            @z-maximum - 21;
 
-@navbar-isotype-last-position:                              @sidebar-isotype-last-position;
-@navbar-isotype-start-position:                             @sidebar-isotype-start-position;
 @navbar-isotype-width:                                      @sidebar-isotype-width;
-@navbar-logotype-last-position:                             @sidebar-logotype-last-position;
-@navbar-logotype-start-position:                            @sidebar-logotype-start-position;
 @navbar-logotype-width:                                     @sidebar-logotype-width;
 @navbar-notifications-bubble-size:                          18px;
 @navbar-notifications-position-x:                           12px;
@@ -51,6 +39,7 @@
 @navbar-user-role-max-width:                                120px;
 @navbar-search-placeholder-color:                           @black;
 @navbar-picture-size:                                       @user-picture-size;
+@navbar-element-small-horizontal-margin:                    8px;
 
 // Utilities mixins
 .center-in-navbar(@height){
@@ -68,19 +57,16 @@
 
   &.fixed{
     position: fixed;
-
-    .navbar-main-action-container{
-      .navbar-main-action{
-        opacity: 0.0;
-        cursor: default;
-      }
-    }
   }
 
   // Any rendered element inside navbar (excepting separator)
   .navbar-element{
     display: block;
-    padding: 0 @navbar-element-horizontal-margin;
+    padding: 0 @navbar-element-small-horizontal-margin;
+
+    @media(min-width: @system-small-break){
+      padding: 0 @navbar-element-horizontal-margin;
+    }
 
     // Vertically floating div inside each element
     .navbar-element-floater{
@@ -91,30 +77,20 @@
     // Navbar logo
     &.logo{
       .pull-left();
-      transition: @fast;
-      background: @navbar-element-hover-color;
       height: @navbar-height;
-      overflow: hidden;
-      padding: 0;
-      position: relative;
-      width: @sidebar-contracted-width;
+      padding: 0 @navbar-element-horizontal-margin;
+      text-align: center;
 
       .navbar-isotype, .navbar-logotype{
-        .expand-y();
-        transition: @faster;
         background: center center no-repeat;
-        display: block;
-        position: absolute;
+        display: inline-block;
       }
 
       .navbar-isotype{
-        left: @navbar-isotype-start-position;
         width: @navbar-isotype-width;
       }
 
       .navbar-logotype{
-        opacity: 0.0;
-        left: @navbar-logotype-start-position;
         width: @navbar-logotype-width;
       }
     }
@@ -124,13 +100,13 @@
       width: @navbar-search-width;
 
       .input-wrapper, input{
-        .bevel(@navbar-color);     // Input height
+        .bevel(@navbar-color);
         .vertical-center(@navbar-height, @navbar-search-height);
         background: @navbar-search-background-color;
         border: none;
         border-radius: @form-input-border-radius;
         height: @navbar-search-height !important;
-        margin-bottom: 0; // FIX
+        margin-bottom: 0;
 
         .input-mark{
           color: @navbar-search-icon-color;
@@ -178,11 +154,11 @@
     // Configuration section
     // Notifications section
     &.navbar-link{
-      line-height: @navbar-height;
-      height: @navbar-height;
-      white-space: nowrap;
       color: @navbar-element-link-color;
       font-size: @navbar-element-link-font-size;
+      height: @navbar-height;
+      line-height: @navbar-height;
+      white-space: nowrap;
 
       &:before, &:after{
         content: "\00a0";
@@ -253,66 +229,10 @@
     height: (@navbar-height * @navbar-separator-occupancy);
     margin: (@navbar-height * (1 - @navbar-separator-occupancy) / 2.0) 0;
   }
-
-  .navbar-main-action-container{
-    position: absolute;
-    left: 0;
-    top: 67px;
-    width: 100%;
-    text-align: center;
-    height: 0;
-
-    .navbar-main-action{
-      transition: @faster;
-      .circle(@navbar-main-action-size);
-      .empty-fill();
-      display: inline-block;
-      background-color: @system-base-color;
-      border: @navbar-main-action-border solid @white;
-      font-size: 2em;
-      color: @white;
-      text-align: center;
-      line-height: @navbar-main-action-size;
-      cursor: pointer;
-      margin-top: -27px;
-
-      &:hover{
-        transform: scale(1.05);
-        background: lighten(@system-base-color, 5%);
-      }
-    }
-  }
-}
-
-// TODO: check if breakpoint needed (to autoclose)
-.with-open-sidebar, .open-sidebar{
-  .navbar{
-    .navbar-element{
-      &.logo{
-        width: @sidebar-open-width;
-        .navbar-isotype{
-          left: @navbar-isotype-last-position;
-        }
-        .navbar-logotype{
-          opacity: 1.0;
-          left: @navbar-logotype-last-position;
-        }
-      }
-    }
-  }
 }
 
 body{
   &.with-navbar{
     padding-top: @navbar-height;
-  }
-
-  &.fixed-navbar{
-    .navbar.fixed{
-      .navbar-main-action{
-        opacity: 1.0;
-        cursor: pointer;
-      }
-    }
   }
 }

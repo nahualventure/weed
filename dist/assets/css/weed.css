@@ -5723,13 +5723,14 @@ input[type="radio"] {
 .navbar.fixed {
   position: fixed;
 }
-.navbar.fixed .navbar-main-action-container .navbar-main-action {
-  opacity: 0.0;
-  cursor: default;
-}
 .navbar .navbar-element {
   display: block;
-  padding: 0 20px;
+  padding: 0 8px;
+}
+@media (min-width: 650px) {
+  .navbar .navbar-element {
+    padding: 0 20px;
+  }
 }
 .navbar .navbar-element .navbar-element-floater {
   height: 100%;
@@ -5738,29 +5739,19 @@ input[type="radio"] {
 .navbar .navbar-element.logo {
   float: left;
   float: left !important;
-  transition: 0.5s;
-  background: #7a7a7a;
   height: 65px;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  width: 65px;
+  padding: 0 20px;
+  text-align: center;
 }
 .navbar .navbar-element.logo .navbar-isotype,
 .navbar .navbar-element.logo .navbar-logotype {
-  height: 100%;
-  transition: 0.25s;
   background: center center no-repeat;
-  display: block;
-  position: absolute;
+  display: inline-block;
 }
 .navbar .navbar-element.logo .navbar-isotype {
-  left: 15px;
   width: 36px;
 }
 .navbar .navbar-element.logo .navbar-logotype {
-  opacity: 0.0;
-  left: 75px;
   width: 71px;
 }
 .navbar .navbar-element.search-form {
@@ -5832,11 +5823,11 @@ input[type="radio"] {
   color: #fff;
 }
 .navbar .navbar-element.navbar-link {
-  line-height: 65px;
-  height: 65px;
-  white-space: nowrap;
   color: #fff;
   font-size: 16px;
+  height: 65px;
+  line-height: 65px;
+  white-space: nowrap;
 }
 .navbar .navbar-element.navbar-link:before,
 .navbar .navbar-element.navbar-link:after {
@@ -5890,61 +5881,13 @@ input[type="radio"] {
   height: 39px;
   margin: 13px 0;
 }
-.navbar .navbar-main-action-container {
-  position: absolute;
-  left: 0;
-  top: 67px;
-  width: 100%;
-  text-align: center;
-  height: 0;
-}
-.navbar .navbar-main-action-container .navbar-main-action {
-  transition: 0.25s;
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  display: inline-block;
-  background-color: #808080;
-  border: 5px solid #fff;
-  font-size: 2em;
-  color: #fff;
-  text-align: center;
-  line-height: 60px;
-  cursor: pointer;
-  margin-top: -27px;
-}
-.navbar .navbar-main-action-container .navbar-main-action:before,
-.navbar .navbar-main-action-container .navbar-main-action:after {
-  content: "\00a0";
-}
-.navbar .navbar-main-action-container .navbar-main-action:hover {
-  transform: scale(1.05);
-  background: #8c8c8c;
-}
-.with-open-sidebar .navbar .navbar-element.logo,
-.open-sidebar .navbar .navbar-element.logo {
-  width: 210px;
-}
-.with-open-sidebar .navbar .navbar-element.logo .navbar-isotype,
-.open-sidebar .navbar .navbar-element.logo .navbar-isotype {
-  left: 44px;
-}
-.with-open-sidebar .navbar .navbar-element.logo .navbar-logotype,
-.open-sidebar .navbar .navbar-element.logo .navbar-logotype {
-  opacity: 1.0;
-  left: 85px;
-}
 body.with-navbar {
   padding-top: 65px;
-}
-body.fixed-navbar .navbar.fixed .navbar-main-action {
-  opacity: 1.0;
-  cursor: pointer;
 }
 /**
   * Edoo sidebar framework
   */
-body .sidebar {
+.sidebar {
   background: #000000;
   border-right: solid #000000 1px;
   height: 100%;
@@ -5957,274 +5900,83 @@ body .sidebar {
   width: 65px;
   z-index: 2147483625;
 }
-body .sidebar .header {
-  box-sizing: border-box;
-  transition: 0.25s;
+.sidebar .header {
   background: #000000;
+  box-sizing: border-box;
   display: block;
   height: 65px;
   margin-bottom: 25px;
   overflow: hidden;
   position: relative;
+  transition: 0.25s;
   width: 100%;
 }
-body .sidebar .header:hover {
+.sidebar .header:hover {
   background: #000000;
 }
-body .sidebar .header .sidebar-isotype,
-body .sidebar .header .sidebar-logotype {
-  transition: 0.5s;
+.sidebar .header .sidebar-isotype,
+.sidebar .header .sidebar-logotype {
   background: center center no-repeat;
   display: block;
   height: 65px;
   position: absolute;
   top: 0;
+  transition: 0.5s;
 }
-body .sidebar .header .sidebar-isotype {
+.sidebar .header .sidebar-isotype {
   left: 15px;
   width: 36px;
 }
-body .sidebar .header .sidebar-logotype {
-  opacity: 0.0;
+.sidebar .header .sidebar-logotype {
   left: 75px;
+  opacity: 0.0;
   width: 71px;
 }
-body .sidebar.text-below .sidebar-list li a,
-body .sidebar.text-below .sidebar-list .li a,
-body .sidebar.text-below .sidebar-list li .a,
-body .sidebar.text-below .sidebar-list .li .a {
-  margin: 5px 0;
-}
-body .sidebar.text-below .sidebar-list li a span.icon-container,
-body .sidebar.text-below .sidebar-list .li a span.icon-container,
-body .sidebar.text-below .sidebar-list li .a span.icon-container,
-body .sidebar.text-below .sidebar-list .li .a span.icon-container {
-  display: inline-block;
-  font-size: 1.2em;
-  line-height: 50px;
-  text-align: center;
-  vertical-align: middle;
-  width: 65px;
-}
-body .sidebar.text-below .sidebar-list li a span.icon-container i,
-body .sidebar.text-below .sidebar-list .li a span.icon-container i,
-body .sidebar.text-below .sidebar-list li .a span.icon-container i,
-body .sidebar.text-below .sidebar-list .li .a span.icon-container i {
-  font-size: 2rem;
-}
-body .sidebar.text-below .sidebar-list li a span.centerer,
-body .sidebar.text-below .sidebar-list .li a span.centerer,
-body .sidebar.text-below .sidebar-list li .a span.centerer,
-body .sidebar.text-below .sidebar-list .li .a span.centerer {
-  line-height: 50px;
-  vertical-align: middle;
-}
-body .sidebar.text-below .sidebar-list li a span.text,
-body .sidebar.text-below .sidebar-list .li a span.text,
-body .sidebar.text-below .sidebar-list li .a span.text,
-body .sidebar.text-below .sidebar-list .li .a span.text {
-  text-align: center;
-  display: block;
-  line-height: 1.5em;
-  margin-top: 5px;
-  color: #a9a9a9;
-}
-body .sidebar-list {
+.sidebar-list {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-body .sidebar-list li a,
-body .sidebar-list .li a,
-body .sidebar-list li .a,
-body .sidebar-list .li .a {
-  text-shadow: 1px 1px 1px #000000;
-  transition: 0.25s;
+.sidebar-list li a {
   color: #808080;
+  display: block;
   font-family: sans-serif;
   line-height: 50px;
-  width: 100%;
-  display: inline-block;
-}
-body .sidebar-list li a span.icon-container,
-body .sidebar-list .li a span.icon-container,
-body .sidebar-list li .a span.icon-container,
-body .sidebar-list .li .a span.icon-container,
-body .sidebar-list li a span.icon,
-body .sidebar-list .li a span.icon,
-body .sidebar-list li .a span.icon,
-body .sidebar-list .li .a span.icon {
-  transition: 0.25s;
-  display: inline-block;
-  font-size: 1.2em;
-  line-height: 50px;
+  padding: 0.5rem 1rem;
   text-align: center;
-  vertical-align: middle;
-  width: 65px;
-}
-body .sidebar-list li a span.icon-container i,
-body .sidebar-list .li a span.icon-container i,
-body .sidebar-list li .a span.icon-container i,
-body .sidebar-list .li .a span.icon-container i,
-body .sidebar-list li a span.icon i,
-body .sidebar-list .li a span.icon i,
-body .sidebar-list li .a span.icon i,
-body .sidebar-list .li .a span.icon i {
-  transition: 0.25s;
-  color: #808080;
-  font-size: 1.5em;
-}
-body .sidebar-list li a span.centerer,
-body .sidebar-list .li a span.centerer,
-body .sidebar-list li .a span.centerer,
-body .sidebar-list .li .a span.centerer {
-  transition: 0.25s;
-  line-height: 50px;
-  vertical-align: middle;
-}
-body .sidebar-list li a span.text,
-body .sidebar-list .li a span.text,
-body .sidebar-list li .a span.text,
-body .sidebar-list .li .a span.text {
-  font-size: 0.8em;
-  vertical-align: middle;
-  text-transform: uppercase;
-  display: inline-block;
-  line-height: 1.5em;
-  color: #a9a9a9;
-}
-body .sidebar-list li a:hover,
-body .sidebar-list .li a:hover,
-body .sidebar-list li .a:hover,
-body .sidebar-list .li .a:hover,
-body .sidebar-list li a.current,
-body .sidebar-list .li a.current,
-body .sidebar-list li .a.current,
-body .sidebar-list .li .a.current {
-  color: #333333;
-}
-body .sidebar-list li a:hover span.icon-container i,
-body .sidebar-list .li a:hover span.icon-container i,
-body .sidebar-list li .a:hover span.icon-container i,
-body .sidebar-list .li .a:hover span.icon-container i,
-body .sidebar-list li a.current span.icon-container i,
-body .sidebar-list .li a.current span.icon-container i,
-body .sidebar-list li .a.current span.icon-container i,
-body .sidebar-list .li .a.current span.icon-container i,
-body .sidebar-list li a:hover span.icon i,
-body .sidebar-list .li a:hover span.icon i,
-body .sidebar-list li .a:hover span.icon i,
-body .sidebar-list .li .a:hover span.icon i,
-body .sidebar-list li a.current span.icon i,
-body .sidebar-list .li a.current span.icon i,
-body .sidebar-list li .a.current span.icon i,
-body .sidebar-list .li .a.current span.icon i {
-  color: #333333;
-}
-body .sidebar-list li a:active,
-body .sidebar-list .li a:active,
-body .sidebar-list li .a:active,
-body .sidebar-list .li .a:active {
-  color: #595959;
-}
-body .sidebar-list li a:active span.icon-container i,
-body .sidebar-list .li a:active span.icon-container i,
-body .sidebar-list li .a:active span.icon-container i,
-body .sidebar-list .li .a:active span.icon-container i,
-body .sidebar-list li a:active span.icon i,
-body .sidebar-list .li a:active span.icon i,
-body .sidebar-list li .a:active span.icon i,
-body .sidebar-list .li .a:active span.icon i {
-  color: #595959;
-}
-body .sidebar-list li:last-child,
-body .sidebar-list .li:last-child {
-  border-bottom: none;
-}
-body .sidebar-bottom-action,
-body .sidebar-bottom-contractor {
   text-shadow: 1px 1px 1px #000000;
   transition: 0.25s;
-  color: #808080;
-  font-family: sans-serif;
-  line-height: 50px;
-  width: 100%;
-  display: inline-block;
-  transition: 0.5s;
-  bottom: 0;
-  display: none;
-  left: 0;
-  line-height: 50px !important;
-  overflow: hidden;
-  position: absolute;
-  width: 65px;
 }
-body .sidebar-bottom-action span.icon-container,
-body .sidebar-bottom-contractor span.icon-container,
-body .sidebar-bottom-action span.icon,
-body .sidebar-bottom-contractor span.icon {
-  transition: 0.25s;
-  display: inline-block;
-  font-size: 1.2em;
-  line-height: 50px;
-  text-align: center;
-  vertical-align: middle;
-  width: 65px;
+.sidebar-list li a span,
+.sidebar-list li a i {
+  color: inherit;
 }
-body .sidebar-bottom-action span.icon-container i,
-body .sidebar-bottom-contractor span.icon-container i,
-body .sidebar-bottom-action span.icon i,
-body .sidebar-bottom-contractor span.icon i {
-  transition: 0.25s;
-  color: #808080;
-  font-size: 1.5em;
-}
-body .sidebar-bottom-action span.centerer,
-body .sidebar-bottom-contractor span.centerer {
-  transition: 0.25s;
-  line-height: 50px;
-  vertical-align: middle;
-}
-body .sidebar-bottom-action span.text,
-body .sidebar-bottom-contractor span.text {
-  font-size: 0.8em;
-  vertical-align: middle;
-  text-transform: uppercase;
-  display: inline-block;
-  line-height: 1.5em;
-  color: #a9a9a9;
-}
-body .sidebar-bottom-action:hover,
-body .sidebar-bottom-contractor:hover,
-body .sidebar-bottom-action.current,
-body .sidebar-bottom-contractor.current {
-  color: #333333;
-}
-body .sidebar-bottom-action:hover span.icon-container i,
-body .sidebar-bottom-contractor:hover span.icon-container i,
-body .sidebar-bottom-action.current span.icon-container i,
-body .sidebar-bottom-contractor.current span.icon-container i,
-body .sidebar-bottom-action:hover span.icon i,
-body .sidebar-bottom-contractor:hover span.icon i,
-body .sidebar-bottom-action.current span.icon i,
-body .sidebar-bottom-contractor.current span.icon i {
-  color: #333333;
-}
-body .sidebar-bottom-action:active,
-body .sidebar-bottom-contractor:active {
-  color: #595959;
-}
-body .sidebar-bottom-action:active span.icon-container i,
-body .sidebar-bottom-contractor:active span.icon-container i,
-body .sidebar-bottom-action:active span.icon i,
-body .sidebar-bottom-contractor:active span.icon i {
-  color: #595959;
-}
-body .sidebar-bottom-action {
+.sidebar-list li a span.icon-container,
+.sidebar-list li a span.icon {
   display: block;
 }
+.sidebar-list li a span.icon-container i,
+.sidebar-list li a span.icon i {
+  font-size: 30px;
+}
+.sidebar-list li a span.text {
+  display: block;
+  font-size: 10px;
+  line-height: 16px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.sidebar-list li a:hover,
+.sidebar-list li a.current {
+  color: #333333;
+}
+.sidebar-list li a:active {
+  color: #595959;
+}
+.sidebar-list li a:last-child {
+  border-bottom: none;
+}
 body.with-sidebar {
-  transition: padding 0.5s;
   padding-left: 65px;
 }
 body.with-open-sidebar,
