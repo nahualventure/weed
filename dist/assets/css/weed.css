@@ -5890,7 +5890,7 @@ body.with-navbar {
 .sidebar {
   background: #000000;
   border-right: solid #000000 1px;
-  height: 100%;
+  height: 100vh;
   left: 0;
   overflow: hidden;
   position: fixed;
@@ -5905,11 +5905,13 @@ body.with-navbar {
   box-sizing: border-box;
   display: block;
   height: 65px;
-  margin-bottom: 25px;
-  overflow: hidden;
-  position: relative;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
   transition: 0.25s;
   width: 100%;
+  z-index: 2;
 }
 .sidebar .header:hover {
   background: #000000;
@@ -5917,35 +5919,42 @@ body.with-navbar {
 .sidebar .header .sidebar-isotype,
 .sidebar .header .sidebar-logotype {
   background: center center no-repeat;
-  display: block;
+  display: inline-block;
   height: 65px;
-  position: absolute;
-  top: 0;
-  transition: 0.5s;
 }
 .sidebar .header .sidebar-isotype {
-  left: 15px;
   width: 36px;
 }
 .sidebar .header .sidebar-logotype {
-  left: 75px;
-  opacity: 0.0;
   width: 71px;
 }
 .sidebar-list {
   padding: 0;
   margin: 0;
   list-style: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 65px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sidebar-list li {
+  padding: 0 1rem;
 }
 .sidebar-list li a {
+  border-bottom: 1px solid #1d5352;
   color: #808080;
   display: block;
   font-family: sans-serif;
   line-height: 50px;
-  padding: 0.5rem 1rem;
   text-align: center;
   text-shadow: 1px 1px 1px #000000;
   transition: 0.25s;
+  padding: 1rem 0;
 }
 .sidebar-list li a span,
 .sidebar-list li a i {
@@ -5973,7 +5982,7 @@ body.with-navbar {
 .sidebar-list li a:active {
   color: #595959;
 }
-.sidebar-list li a:last-child {
+.sidebar-list li:last-child a {
   border-bottom: none;
 }
 body.with-sidebar {
