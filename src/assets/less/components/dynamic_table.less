@@ -73,267 +73,268 @@
     font-weight: bold;
   }
 
-  .dynamic-table-tab-section{
-    padding-left: @dynamic-table-tab-section-padding;
+}
+
+.dynamic-table-tab-section{
+  padding-left: @dynamic-table-tab-section-padding;
+}
+
+.dynamic-table-title{
+  color: @dynamic-table-title-color;
+  font-weight: bold;
+  margin-bottom: @element-vertical-margin;
+  padding-left: @element-vertical-margin;
+  text-transform: uppercase;
+}
+
+.dynamic-table-row{
+  background: @dynamic-table-row-background-color;
+  border-radius: @dynamic-table-row-radius;
+  box-shadow: 0 1px 3px 0 @dynamic-table-shadow-color;
+  box-sizing: border-box;
+  color: @dynamic-table-text-color;
+  font-family: @dynamic-table-font-family;
+  // height: @dynamic-table-row-height;
+  margin-bottom: @dynamic-table-row-margin;
+  overflow: hidden;
+  transition: transform @fastest, opacity @fastest;
+  width: 100%;
+
+  &:last-child{
+    margin-bottom: 0;
   }
 
-  .dynamic-table-title{
-    color: @dynamic-table-title-color;
-    font-weight: bold;
-    margin-bottom: @element-vertical-margin;
-    padding-left: @element-vertical-margin;
-    text-transform: uppercase;
+  &.with-body{
+    height: auto;
+    position: relative;
+
+    .dynamic-table-row-extra-body{
+      display: none;
+      clear: both;
+      border-top: 1px solid @dynamic-table-extra-body-border-color;
+      padding: @dynamic-table-extra-body-padding;
+    }
   }
 
-  .dynamic-table-row{
-    background: @dynamic-table-row-background-color;
-    border-radius: @dynamic-table-row-radius;
-    box-shadow: 0 1px 3px 0 @dynamic-table-shadow-color;
-    box-sizing: border-box;
-    color: @dynamic-table-text-color;
-    font-family: @dynamic-table-font-family;
-    height: @dynamic-table-row-height;
-    margin-bottom: @dynamic-table-row-margin;
-    overflow: hidden;
-    transition: transform @fastest, opacity @fastest;
-    width: 100%;
+  &.focus{
+    transform: scale(@dynamic-table-row-transform-height, @dynamic-table-row-transform-height);
+  }
 
-    &:last-child{
-      margin-bottom: 0;
+  &.clickeable{
+    cursor: pointer;
+  }
+
+  .separator{
+    .vertical-center(@dynamic-table-row-height, @dynamic-table-seperator-height);
+    border-right: 1px solid @dynamic-table-sperator-color;
+    display: block;
+    float: left;
+    height: @dynamic-table-seperator-height;
+    width: 0;
+  }
+
+  .user-list{
+    .element.user:not(:last-child){
+      padding-right: 0;
+    }
+  }
+
+  .element{
+    display: block;
+    float: left;
+    padding: 0 @dynamic-table-row-element-padding;
+    text-align: center;
+
+    &.button{
+      line-height: @dynamic-table-row-height;
     }
 
-    &.with-body{
-      height: auto;
-      position: relative;
-
-      .dynamic-table-row-extra-body{
-        display: none;
-        clear: both;
-        border-top: 1px solid @dynamic-table-extra-body-border-color;
-        padding: @dynamic-table-extra-body-padding;
-      }
-    }
-
-    &.focus{
-      transform: scale(@dynamic-table-row-transform-height, @dynamic-table-row-transform-height);
-    }
-
-    &.clickeable{
-      cursor: pointer;
-    }
-
-    .separator{
-      .vertical-center(@dynamic-table-row-height, @dynamic-table-seperator-height);
-      border-right: 1px solid @dynamic-table-sperator-color;
-      display: block;
-      float: left;
-      height: @dynamic-table-seperator-height;
-      width: 0;
-    }
-
-    .user-list{
-      .element.user:not(:last-child){
-        padding-right: 0;
-      }
-    }
-
-    .element{
-      display: block;
-      float: left;
-      padding: 0 @dynamic-table-row-element-padding;
-      text-align: center;
-
-      &.button{
-        line-height: @dynamic-table-row-height;
-      }
-
-      &.spaceless{
-        padding: 0;
-
-        .button{
-          margin-left: 0;
-        }
-      }
-
-      &.actions{
-        padding-left: @dynamic-table-row-element-padding/2.0;
-        padding-right: @dynamic-table-row-element-padding/2.0;
-      }
-
-      &.more{
-        padding-left: 0;
-      }
-
-      &.user{
-        .vertical-center(@dynamic-table-row-height, @user-picture-size + 2*2px);
-        text-align: left;
-
-        .name{
-          color: @dynamic-table-user-name-color;
-          font-weight: bold;
-        }
-
-        .role{
-          color: @dynamic-table-user-role-color;
-        }
-
-        .picture img,
-        img.picture{
-          box-shadow: 0px 0px 0px 1px @dynamic-table-user-image-border-color;
-        }
-      }
-
-      &.dynamic-table-row-tag{
-        border-right: 1px solid @dynamic-table-in-border-color;
-        color: @dynamic-table-row-tag-text-color;
-        height: 100%;
-        padding: 0;
-        width: @dynamic-table-row-tag-width;
-
-        &.title{
-          color: @dynamic-table-row-background-color;
-          width: auto;
-        }
-
-        &.iconned{
-          background: @dynamic-table-row-default-iconned-background;
-          position: relative;
-          overflow: hidden;
-          padding: 0 @dynamic-table-row-element-padding*2; // Space for icon
-
-          .accent{
-            color: inherit;
-            font-weight: bold;
-          }
-
-          .bg-icon{
-            color: fadeout(@dynamic-table-row-background-color, 90%);
-            font-size: @dyamic-table-tag-icon-size;
-            position: absolute;
-            left: @dynamic-table-tag-icon-left-offset; // Icon offset
-            top: @dynamic-table-tag-icon-top-offset; // Icon offset
-          }
-        }
-      }
-
-      &.title{
-        font-family: @dynamic-table-row-title-font-family;
-        color: @dynamic-table-title-color;
-        height: 100%;
-        padding: @dynamic-table-row-title-padding; // TODO v1.0
-
-        .big.up{
-          font-size: @dynamic-table-row-big-up-size;
-          padding-top: @dynamic-table-row-big-up-padding-top;
-          text-align: left;
-        }
-
-        .down{
-          text-align: left;
-          margin-top: @dynamic-table-row-down-margin-correction;
-        }
-      }
-
-      &.one-liner{
-        font-size: @dynamic-table-row-one-liner-size;
-        height: @dynamic-table-row-height;
-        line-height: @dynamic-table-row-height;
-
-        // Inputs
-        .input-wrapper,
-        input{
-          .vertical-center(@dynamic-table-row-height, @form-input-height);
-          vertical-align: middle;
-
-          // Remove the first when forms.less is migrated
-          &.input-wrapper-small,
-          &.input-small{
-            .vertical-center(@dynamic-table-row-height, @form-input-small-height);
-          }
-
-          // Remove the first when forms.less is migrated
-          &.input-wrapper-tiny,
-          &.input-tiny{
-            .vertical-center(@dynamic-table-row-height, @form-input-tiny-height);
-          }
-        }
-
-        .input-wrapper input{
-          margin-bottom: 0 !important;
-          margin-top: 0 !important;
-        }
-
-        .text, i{
-          vertical-align: middle;
-        }
-
-        .link{
-          transition: @fastest;
-          text-transform: uppercase;
-          text-decoration: underline;
-          font-weight: bold;
-        }
-
-        a:hover{
-          color: lighten(@dynamic-table-text-color, 5%);
-        }
-
-        a:active{
-          color: darken(@dynamic-table-text-color, 5%);
-        }
-
-        .text{
-          margin-left: @element-vertical-margin;
-        }
-
-        &.small{
-          font-size: @dynamic-table-row-one-liner-small-size;
-        }
-      }
-
-      &.fade{
-        color: fadeout(@dynamic-table-text-color, 60%);
-      }
+    &.spaceless{
+      padding: 0;
 
       .button{
-        .vertical-center(@dynamic-table-row-height; @button-height);
-        margin-left: @dynamic-table-button-margin;
+        margin-left: 0;
+      }
+    }
 
-        &.button-tiny{
-          .vertical-center(@dynamic-table-row-height; @button-tiny-height);
-        }
+    &.actions{
+      padding-left: @dynamic-table-row-element-padding/2.0;
+      padding-right: @dynamic-table-row-element-padding/2.0;
+    }
 
-        &.button-small{
-          .vertical-center(@dynamic-table-row-height; @button-small-height);
-        }
+    &.more{
+      padding-left: 0;
+    }
+
+    &.user{
+      .vertical-center(@dynamic-table-row-height, @user-picture-size + 2*2px);
+      text-align: left;
+
+      .name{
+        color: @dynamic-table-user-name-color;
+        font-weight: bold;
       }
 
-      .small{
-        height: @dynamic-table-small-element-height;
-        line-height: @dynamic-table-small-element-height;
-        font-size: @dynamic-table-small-element-font-size;
+      .role{
+        color: @dynamic-table-user-role-color;
       }
 
-      .up{
-        color: @dynamic-table-title-up-color;
-        padding-top: @dynamic-table-small-up-padding;
+      .picture img,
+      img.picture{
+        box-shadow: 0px 0px 0px 1px @dynamic-table-user-image-border-color;
+      }
+    }
+
+    &.dynamic-table-row-tag{
+      border-right: 1px solid @dynamic-table-in-border-color;
+      color: @dynamic-table-row-tag-text-color;
+      height: 100%;
+      padding: 0;
+      width: @dynamic-table-row-tag-width;
+
+      &.title{
+        color: @dynamic-table-row-background-color;
+        width: auto;
+      }
+
+      &.iconned{
+        background: @dynamic-table-row-default-iconned-background;
+        position: relative;
+        overflow: hidden;
+        padding: 0 @dynamic-table-row-element-padding*2; // Space for icon
+
+        .accent{
+          color: inherit;
+          font-weight: bold;
+        }
+
+        .bg-icon{
+          color: fadeout(@dynamic-table-row-background-color, 90%);
+          font-size: @dyamic-table-tag-icon-size;
+          position: absolute;
+          left: @dynamic-table-tag-icon-left-offset; // Icon offset
+          top: @dynamic-table-tag-icon-top-offset; // Icon offset
+        }
+      }
+    }
+
+    &.title{
+      font-family: @dynamic-table-row-title-font-family;
+      color: @dynamic-table-title-color;
+      height: 100%;
+      padding: @dynamic-table-row-title-padding; // TODO v1.0
+
+      .big.up{
+        font-size: @dynamic-table-row-big-up-size;
+        padding-top: @dynamic-table-row-big-up-padding-top;
+        text-align: left;
       }
 
       .down{
-        color: @dynamic-table-title-down-color;
+        text-align: left;
+        margin-top: @dynamic-table-row-down-margin-correction;
+      }
+    }
+
+    &.one-liner{
+      font-size: @dynamic-table-row-one-liner-size;
+      height: @dynamic-table-row-height;
+      line-height: @dynamic-table-row-height;
+
+      // Inputs
+      .input-wrapper,
+      input{
+        .vertical-center(@dynamic-table-row-height, @form-input-height);
+        vertical-align: middle;
+
+        // Remove the first when forms.less is migrated
+        &.input-wrapper-small,
+        &.input-small{
+          .vertical-center(@dynamic-table-row-height, @form-input-small-height);
+        }
+
+        // Remove the first when forms.less is migrated
+        &.input-wrapper-tiny,
+        &.input-tiny{
+          .vertical-center(@dynamic-table-row-height, @form-input-tiny-height);
+        }
       }
 
-      .big{
-        .ellipsis();
-        font-size: @dynamic-table-big-element-font-size;
-        height: @dynamic-table-big-element-height;
-        line-height: @dynamic-table-big-element-height;
-        max-width: @dynamic-table-big-element-max-width;
+      .input-wrapper input{
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
       }
 
-      &.pull-right{
-        float: right;
+      .text, i{
+        vertical-align: middle;
       }
+
+      .link{
+        transition: @fastest;
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      a:hover{
+        color: lighten(@dynamic-table-text-color, 5%);
+      }
+
+      a:active{
+        color: darken(@dynamic-table-text-color, 5%);
+      }
+
+      .text{
+        margin-left: @element-vertical-margin;
+      }
+
+      &.small{
+        font-size: @dynamic-table-row-one-liner-small-size;
+      }
+    }
+
+    &.fade{
+      color: fadeout(@dynamic-table-text-color, 60%);
+    }
+
+    .button{
+      .vertical-center(@dynamic-table-row-height; @button-height);
+      margin-left: @dynamic-table-button-margin;
+
+      &.button-tiny{
+        .vertical-center(@dynamic-table-row-height; @button-tiny-height);
+      }
+
+      &.button-small{
+        .vertical-center(@dynamic-table-row-height; @button-small-height);
+      }
+    }
+
+    .small{
+      height: @dynamic-table-small-element-height;
+      line-height: @dynamic-table-small-element-height;
+      font-size: @dynamic-table-small-element-font-size;
+    }
+
+    .up{
+      color: @dynamic-table-title-up-color;
+      padding-top: @dynamic-table-small-up-padding;
+    }
+
+    .down{
+      color: @dynamic-table-title-down-color;
+    }
+
+    .big{
+      .ellipsis();
+      font-size: @dynamic-table-big-element-font-size;
+      height: @dynamic-table-big-element-height;
+      line-height: @dynamic-table-big-element-height;
+      max-width: @dynamic-table-big-element-max-width;
+    }
+
+    &.pull-right{
+      float: right;
     }
   }
 }
