@@ -94,10 +94,11 @@
   box-sizing: border-box;
   color: @dynamic-table-text-color;
   font-family: @dynamic-table-font-family;
-  // height: @dynamic-table-row-height;
   margin-bottom: @dynamic-table-row-margin;
+  min-height: @dynamic-table-row-height;
   overflow: hidden;
   transition: transform @fastest, opacity @fastest;
+  white-space: nowrap;
   width: 100%;
 
   &:last-child{
@@ -158,8 +159,28 @@
     }
 
     &.actions{
-      padding-left: @dynamic-table-row-element-padding/2.0;
-      padding-right: @dynamic-table-row-element-padding/2.0;
+      float: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 2;
+
+      &::before{
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, fadeout(@white, 100%) 0%, @white 30%); 
+        content: " ";
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+      }
+
+      * {
+        position: relative;
+        z-index: 1;
+      }
     }
 
     &.more{
