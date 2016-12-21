@@ -97,6 +97,7 @@
   margin-bottom: @dynamic-table-row-margin;
   min-height: @dynamic-table-row-height;
   overflow: hidden;
+  position: relative;
   transition: transform @fastest, opacity @fastest;
   white-space: nowrap;
   width: 100%;
@@ -164,12 +165,13 @@
       right: 0;
       top: 0;
       z-index: 2;
+      text-align: right;
 
       &::before{
         display: block;
         width: 100%;
         height: 100%;
-        background: linear-gradient(to right, fadeout(@white, 100%) 0%, @white 30%); 
+        background: linear-gradient(to right, fadeout(@white, 100%) 0%, @white 50%); 
         content: " ";
         position: absolute;
         right: 0;

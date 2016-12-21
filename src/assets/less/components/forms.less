@@ -743,9 +743,9 @@ label, .label{
   font-family: @form-label-font-family;
   font-size: 0.75rem;
   font-weight: bold;
-  line-height: 2rem;
   text-shadow :0 1px 0 @form-label-shadow-color;
   text-transform: uppercase;
+  margin-bottom: @element-vertical-margin / 2.0;
 
   input, textarea{
     margin-bottom: 0;
@@ -816,5 +816,11 @@ input[type="radio"]{
     &.step-80{width:80%; background-color: @form-password-strength-80-color;}
     &.step-90{width:90%; background-color: @form-password-strength-90-color;}
     &.step-100{width:100%; background-color: @form-password-strength-100-color;}
+  }
+}
+
+.input-wrapper, input, textarea, .select-wrapper{
+  &.clear-margin{
+    margin-bottom: 0;
   }
 }

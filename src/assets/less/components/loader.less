@@ -2,49 +2,70 @@
 
 @import "../variables.less";
 
+@loader-default-color:                                                          @black-30;
+@loader-default-circle-size:                                                    15px;
+@loader-default-circle-space:                                                   5px;
+
 .make-loader(
     @loader-circle-size;
     @loader-circle-separation;
     @loader-delay;
     @animation){
-  animation-delay: -@loader-delay/2.0;
-  text-indent: -9999em;
+  display: inline-block;
+  height: @loader-circle-size;
+  position: relative;
+  width: (@loader-circle-size*3 + @loader-circle-separation*2);
 
-  &,
-  &:before,
-  &:after{
-    .circle(@loader-circle-size);
-    animation-fill-mode: both;
-    animation: @animation 15*@loader-delay infinite ease-in-out;
-  }
-
-  &:before {
-    left: 0 - @loader-circle-size - @loader-circle-separation;
+  .o{
     animation-delay: -@loader-delay;
-  }
-
-  &:after{
+    display: inline-block;
     left: @loader-circle-size + @loader-circle-separation;
-    animation-delay: @loader-delay;
-  }
-
-  &:before,
-  &:after{
-    content: '';
     position: absolute;
-    top: 0;
+    text-indent: -9999em;
+    top: -@loader-circle-size;
+
+    &,
+    &::before,
+    &::after{
+      .circle(@loader-circle-size);
+      animation-fill-mode: both;
+      animation: @animation 20*@loader-delay infinite ease-in-out;
+    }
+
+    &::before {
+      left: 0 - @loader-circle-size - @loader-circle-separation;
+      animation-delay: -@loader-delay*2;
+    }
+
+    &::after{
+      left: @loader-circle-size + @loader-circle-separation;
+      animation-delay: @loader-delay*2;
+    }
+
+    &::before,
+    &::after{
+      content: '';
+      position: absolute;
+      top: 0;
+    }
   }
 }
 
-.make-loader-animation(@name; @color;){
+.make-loader-animation(@name; @color; @size:@loader-default-circle-size;){
   @keyframes @name {
     0%,
     80%,
     100% {
-      box-shadow: 0 2.5em 0 -1.3em @color;
+      box-shadow: 0 @size 0 0 @color;
     }
     40% {
-      box-shadow: 0 2.5em 0 0 @color;
+      box-shadow: 0 @size 0 -1.3em @color;
     }
   }
+}
+
+.make-loader-animation(defaultloaderkf; @loader-default-color;);
+
+.loader{
+  .make-loader(@loader-default-circle-size; @loader-default-circle-space; 0.1s; defaultloaderkf;);
 }
