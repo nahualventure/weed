@@ -18,7 +18,7 @@
 
 .hide-for(@size; @prop: block) {
   &:not(.hide) {
-    display: $prop !important;
+    display: @prop !important;
     @media(min-width: @size) {
       display: none !important;
     }
