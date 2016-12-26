@@ -75,10 +75,6 @@
 
 }
 
-.dynamic-table-tab-section{
-  padding-left: @dynamic-table-tab-section-padding;
-}
-
 .dynamic-table-title{
   color: @dynamic-table-title-color;
   font-weight: bold;
@@ -115,7 +111,9 @@
       clear: both;
       border-top: 1px solid @dynamic-table-extra-body-border-color;
       padding: @dynamic-table-extra-body-padding;
+      position: relative;
       white-space: normal;
+      z-index: 2;
     }
   }
 
