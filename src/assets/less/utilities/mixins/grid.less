@@ -44,7 +44,7 @@
   }
 }
 
-.make-offsets(@class; @col-number: (@grid-columns - 1)) when (@col-number > 0) {
+.make-offsets(@class; @col-number: (@grid-columns - 1)) when (@col-number >= 0) {
   .make-offsets(@class; (@col-number - 1));
   .make-offset(@class; @col-number);
 }

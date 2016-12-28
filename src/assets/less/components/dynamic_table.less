@@ -126,11 +126,11 @@
   }
 
   .separator{
-    .vertical-center(@dynamic-table-row-height, @dynamic-table-seperator-height);
     border-right: 1px solid @dynamic-table-sperator-color;
-    display: block;
+    display: inline-block;
     float: left;
     height: @dynamic-table-seperator-height;
+    vertical-align: middle;
     width: 0;
   }
 
@@ -146,8 +146,17 @@
     padding: 0 @dynamic-table-row-element-padding;
     text-align: center;
 
-    &.button{
+    &:before, &:after{
+      content: " ";
+      display: inline-block;
+      height: @dynamic-table-row-height;
       line-height: @dynamic-table-row-height;
+      vertical-align: middle;
+    }
+
+    .content{
+      display: inline-block;
+      vertical-align: middle;
     }
 
     &.spaceless{
@@ -189,7 +198,6 @@
     }
 
     &.user{
-      .vertical-center(@dynamic-table-row-height, @user-picture-size);
       text-align: left;
 
       .name{
@@ -248,13 +256,29 @@
 
       .big.up{
         font-size: @dynamic-table-row-big-up-size;
-        padding-top: @dynamic-table-row-big-up-padding-top;
         text-align: left;
       }
 
       .down{
         text-align: left;
         margin-top: @dynamic-table-row-down-margin-correction;
+      }
+    }
+
+    &.button{
+      border: none;
+      border-radius: @dynamic-table-row-radius;
+      height: @dynamic-table-row-height;
+      line-height: @dynamic-table-row-height;
+
+      &.left-end{
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      &.right-end{
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
       }
     }
 
@@ -266,25 +290,9 @@
       // Inputs
       .input-wrapper,
       input{
-        .vertical-center(@dynamic-table-row-height, @form-input-height);
-        vertical-align: middle;
-
-        // Remove the first when forms.less is migrated
-        &.input-wrapper-small,
-        &.input-small{
-          .vertical-center(@dynamic-table-row-height, @form-input-small-height);
-        }
-
-        // Remove the first when forms.less is migrated
-        &.input-wrapper-tiny,
-        &.input-tiny{
-          .vertical-center(@dynamic-table-row-height, @form-input-tiny-height);
-        }
-      }
-
-      .input-wrapper input{
         margin-bottom: 0 !important;
         margin-top: 0 !important;
+        vertical-align: middle;
       }
 
       .text, i{
@@ -320,27 +328,15 @@
     }
 
     .button{
-      .vertical-center(@dynamic-table-row-height; @button-height);
       margin-left: @dynamic-table-button-margin;
-
-      &.button-tiny{
-        .vertical-center(@dynamic-table-row-height; @button-tiny-height);
-      }
-
-      &.button-small{
-        .vertical-center(@dynamic-table-row-height; @button-small-height);
-      }
     }
 
     .small{
-      height: @dynamic-table-small-element-height;
-      line-height: @dynamic-table-small-element-height;
       font-size: @dynamic-table-small-element-font-size;
     }
 
     .up{
       color: @dynamic-table-title-up-color;
-      padding-top: @dynamic-table-small-up-padding;
     }
 
     .down{

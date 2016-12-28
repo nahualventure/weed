@@ -33,22 +33,10 @@
 @tag-small-height:                    @button-small-height - 2px;
 
 // tag generator mixin
-.make-tag(@height: @tag-height; @background-color: @tag-default-color; @text-color: @white; @border-radius: @tag-default-border-radius; @vertical-padding: @tag-default-vertical-padding; @horizontal-padding: @tag-default-horizontal-padding){
-  border-radius: @border-radius;
-  user-select: none;
-  transition: @faster;
-  opacity: 1.0;
+.make-tag(@height: @tag-height; @background-color: @tag-default-color; @text-color: @white; @border-radius: @tag-default-border-radius; @vertical-padding: @tag-default-vertical-padding; @horizontal-padding: @tag-default-horizontal-padding){  
   background-color: @background-color;
   border: 1px solid darken(@background-color, 4%);
   color: @text-color;
-  display: inline-block;
-  font-family: @tag-font-family;
-  padding: @vertical-padding @horizontal-padding;
-  height: @height;
-  line-height: @height;
-  margin-right: 0.5rem;
-  vertical-align: middle;
-  white-space: nowrap;
 
   i{
     color: lighten(@background-color, 20%);
@@ -59,16 +47,14 @@
     color: @white;
   }
 
-  &.hidden{
-    opacity: 0.0;
-  }
+  .content{
+    .title{
+      color: lighten(@background-color, 20%);
+    }
 
-  .text{
-    vertical-align: middle;
-  }
-
-  .actions{
-    margin-right: -12px;
+    .subtitle{
+      color: @white;
+    }
   }
 
   .@{fa-css-prefix}{
@@ -89,7 +75,22 @@
 
 .tag{
   .make-tag(@text-color: @tag-default-text-color);
+  border-color: #dadcdc;
+  border-radius: @tag-default-border-radius;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: @tag-font-family;
   font-size: @tag-font-size;
+  height: @tag-height;
+  line-height: @tag-height;
+  margin-bottom: @element-vertical-margin;
+  margin-right: 0.5rem;
+  opacity: 1.0;
+  padding: @tag-default-vertical-padding @tag-default-horizontal-padding;
+  transition: @faster;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
 
   i{
     color: @tag-default-text-color;
@@ -97,6 +98,62 @@
 
   &.block{
     display: block;
+    position: relative;
+
+    .actions{
+      position: absolute;
+      right: @tag-default-horizontal-padding;
+      top: 0;
+    }
+
+    &.tag-large, &.tag-xlarge, &.tag-xxlarge, &.tag-huge{
+      .actions{
+        right: @tag-big-padding;
+      }
+    }
+  }
+
+  &:before, &:after{
+    content: " ";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  .content{
+    display: inline-block;
+    line-height: initial;
+    text-transform: uppercase;
+    vertical-align: middle;
+
+    .title{
+      color: @system-primary-color;
+
+      i, span{
+        color: inherit;
+        vertical-align: middle;
+      }
+
+      i{
+        margin-right: 5px;
+      }
+    }
+
+    .subtitle{
+      color: #8e9797;
+    }
+  }
+
+  &.hidden{
+    opacity: 0.0;
+  }
+
+  .text{
+    vertical-align: middle;
+  }
+
+  .actions{
+    margin-right: -12px;
   }
 
   // Default colors
@@ -122,20 +179,31 @@
   // Default sizes
   &.tag-tiny{
     font-size: @tag-tiny-font-size;
-    line-height: @tag-tiny-height;
+    line-height: @tag-tiny-height - 2px;
     height: @tag-tiny-height;
   }
 
   &.tag-small{
     font-size: @tag-small-font-size;
-    line-height: @tag-small-height;
+    line-height: @tag-small-height - 2px;
     height: @tag-small-height;
   }
 
   &.tag-large, &.tag-xlarge, &.tag-xxlarge, &.tag-huge{
-    line-height: @tag-big-height;
+    border-radius: 2 * @tag-default-border-radius;
     height: @tag-big-height;
+    line-height: @tag-big-height - 2px;
     padding: 0 @tag-big-padding;
+
+    .content{
+      .title{
+        font-size: 14px;
+      }
+
+      .subtitle{
+        font-size: 12px;
+      }
+    }
   }
 
   &.tag-large{
