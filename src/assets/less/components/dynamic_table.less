@@ -64,6 +64,23 @@
 @dynamic-table-title-color:                                 @black;
 @dynamic-table-title-up-color:                              @black;
 @dynamic-table-title-down-color:                            @black;
+@dynamic-table-tiny-row-height:                             45px;
+@dynamic-table-small-row-height:                            65px;
+
+.resize-dynamic-table-row(@height){
+  min-height: @height;
+
+  .element{
+    &:before, &:after{
+      height: @height;
+    }
+
+    &.button, &.one-liner{
+      height: @height;
+      line-height: @height;
+    }
+  }
+}
 
 .dynamic-table{
   position: relative;
@@ -128,7 +145,6 @@
   .separator{
     border-right: 1px solid @dynamic-table-sperator-color;
     display: inline-block;
-    float: left;
     height: @dynamic-table-seperator-height;
     vertical-align: middle;
     width: 0;
@@ -141,16 +157,15 @@
   }
 
   .element{
-    display: block;
-    float: left;
+    display: inline-block;
     padding: 0 @dynamic-table-row-element-padding;
     text-align: center;
+    vertical-align: middle;
 
     &:before, &:after{
       content: " ";
       display: inline-block;
       height: @dynamic-table-row-height;
-      line-height: @dynamic-table-row-height;
       vertical-align: middle;
     }
 
@@ -364,5 +379,24 @@
     &.pull-right{
       float: right;
     }
+  }
+
+  &.dynamic-table-row-tiny{
+    .resize-dynamic-table-row(@dynamic-table-tiny-row-height);
+
+    .element{
+      padding: 0 10px;
+
+      &.user{
+        img{
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+  }
+
+  &.dynamic-table-row-small{
+    .resize-dynamic-table-row(@dynamic-table-small-row-height);
   }
 }

@@ -169,6 +169,7 @@ button.button{
   line-height: @button-height - 2px;
   outline: none;
   padding: 0 @button-horizontal-padding;
+  position: relative;
   text-transform: @button-text-transform;
   transition: @fast;
   vertical-align: middle;
@@ -182,6 +183,47 @@ button.button{
   &.resource{
     .ellipsis();
     max-width: @button-max-width;
+  }
+
+  i, span.text, .loader{
+    transition: @smooth;
+  }
+
+  .loader{
+    display: block;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    opacity: 0.0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+
+    .o{
+      color: fadeout(@button-default-text-color, 50%);
+      margin: 0;
+      position: relative;
+      left: 0;
+    }
+  }
+
+  &.loading{
+    background: @button-disabled-color !important;
+    border: 1px solid @button-disabled-border-color !important;
+    color: rgba(255, 255, 255, 0.0) !important;
+    cursor: progress;
+    text-shadow: 0 1px 1px rgba(255, 255, 255,.0) !important;
+
+    i{
+      opacity: 0.0;
+    }
+
+    .loader{
+      opacity: 1.0;
+      z-index: 1;
+    }
   }
 
   &.file-upload-button{
@@ -332,18 +374,11 @@ button.button{
         margin: 0;
       }
     }
+  }
 
-    // MUST be after only-icon
-    &.loading{
-      .loader{
-        .make-loader(
-          @loader-circle-size: @height/5;
-          @loader-circle-separation: 2px;
-          @loader-delay: @button-loader-delay;
-          btnloaderkf;
-        );
-        left: @height - @height/8;
-      }
+  &.only-icon{
+    .loader{
+      transform: scale(0.6);
     }
   }
 
@@ -358,9 +393,13 @@ button.button{
       @font-size: 13px;
     );
 
-    &.loading{
+    .loader{
+      transform: scale(0.5);
+    }
+
+    &.only-icon{
       .loader{
-        top: -23px;
+        transform: scale(0.3);
       }
     }
   }
@@ -376,8 +415,14 @@ button.button{
       @font-size: 13px;
     );
 
-    &.loading .loader{
-      top: -18px;
+    .loader{
+      transform: scale(0.7);
+    }
+
+    &.only-icon{
+      .loader{
+        transform: scale(0.5);
+      }
     }
   }
 
@@ -391,10 +436,6 @@ button.button{
       @icon-size: 1.6em;
       @font-size: 18px;
     );
-
-    &.loading .loader{
-      top: -20px;
-    }
   }
 
   // Misc states
@@ -405,28 +446,6 @@ button.button{
     padding: 0;
     text-align: center;
     width: 100%;
-  }
-
-  // Loading (must be after Blocked button)
-  &.loading, &.visible-loader{
-    .button.disabled();
-    position: relative;
-
-    .text, .@{fa-css-prefix}{
-      opacity: 0;
-    }
-
-    .loader{
-      .make-loader(
-        @loader-circle-size: @button-height/5;
-        @loader-circle-separation: 2px;
-        @loader-delay: @button-loader-delay;
-        btnloaderkf;
-      );
-      position: absolute;
-      top: -16px;
-      left: @button-height - @button-height/8;
-    }
   }
 
   // Action states

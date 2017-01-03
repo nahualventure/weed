@@ -316,6 +316,8 @@ input.input-tiny, .input-wrapper.input-tiny input{
   width: 100%;
   line-height: initial;
 
+
+
   // Reset inputs inside input-wrapper
   input,
   textarea,
@@ -342,11 +344,33 @@ input.input-tiny, .input-wrapper.input-tiny input{
     background: @form-hover-background-color;
   }
 
+  .button{
+    &:not(.button-primary):not(.button-success):not(.button-danger):not(.button-warning):not(.button-info):not(.button-inverted){
+      border-color: @form-input-border-color;
+    }
+  }
+
   // Focus
   &:focus, &.focus{
     background: @form-focus-background-color;
     z-index: (@z-immediate-over + 1);
     border-color: @form-focus-border-color;
+
+    &.component-position-left .button,
+    &.input-small.component-position-left .button-small,
+    &.input-tiny.component-position-left .button-tiny{
+      border-left-color: @form-focus-border-color !important;
+      border-top-color: @form-focus-border-color !important;
+      border-bottom-color: @form-focus-border-color !important;
+    }
+
+    &.component-position-right .button,
+    &.input-small.component-position-right .button-small,
+    &.input-tiny.component-position-right .button-tiny{
+      border-right-color: @form-focus-border-color !important;
+      border-top-color: @form-focus-border-color !important;
+      border-bottom-color: @form-focus-border-color !important;
+    }
   }
 
   // Incrusted form states
@@ -428,19 +452,10 @@ input.input-tiny, .input-wrapper.input-tiny input{
   // Horizontal incrusted input states
   &.left-end{
     border-radius: @form-input-border-radius 0 0 @form-input-border-radius;
-    border-right: none;
-    width: 50%;
-    float: left;
   }
 
   &.right-end{
     border-radius: 0 @form-input-border-radius @form-input-border-radius 0;
-    width: 50%;
-    float: left;
-
-    &.focus{
-      border-left-color: @form-focus-border-color;
-    }
   }
 
   &.clear{
@@ -638,7 +653,7 @@ input.input-tiny, .input-wrapper.input-tiny input{
 
     i.input-mark{
       left: auto;
-      right: (@form-input-horizontal-padding + 5px);
+      right: 20px;
     }
 
     &.input-small{
@@ -822,5 +837,23 @@ input[type="radio"]{
 .input-wrapper, input, textarea, .select-wrapper{
   &.clear-margin{
     margin-bottom: 0;
+  }
+}
+
+.inputs{
+  .clearfix();
+
+  .input-wrapper{
+    float: left;
+  }
+
+  &.two{
+    .input-wrapper{
+      width: 50%;
+
+      &.left-end{
+        margin-right: -1px;
+      }
+    }
   }
 }

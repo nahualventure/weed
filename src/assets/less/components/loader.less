@@ -18,6 +18,7 @@
 
   .o{
     animation-delay: -@loader-delay;
+    color: @loader-default-color;
     display: inline-block;
     left: @loader-circle-size + @loader-circle-separation;
     position: absolute;
@@ -51,20 +52,20 @@
   }
 }
 
-.make-loader-animation(@name; @color; @size:@loader-default-circle-size;){
+.make-loader-animation(@name; @size:@loader-default-circle-size;){
   @keyframes @name {
     0%,
     80%,
     100% {
-      box-shadow: 0 @size 0 0 @color;
+      box-shadow: 0 @size 0 0;
     }
     40% {
-      box-shadow: 0 @size 0 -1.3em @color;
+      box-shadow: 0 @size 0 -1.3em;
     }
   }
 }
 
-.make-loader-animation(defaultloaderkf; @loader-default-color;);
+.make-loader-animation(defaultloaderkf;);
 
 .loader{
   .make-loader(@loader-default-circle-size; @loader-default-circle-space; 0.1s; defaultloaderkf;);

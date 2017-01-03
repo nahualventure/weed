@@ -1,108 +1,200 @@
-@import "../variables.less";
-
-@bubble-horizontal-padding:                                 25px;
-@bubble-vertical-padding:                                   35px;
-@inner-bubble-shadow-color:                                 @black;
-@inner-bubble-hr-border-top-color:                          @white;
-@inner-bubble-hr-border-bottom-color:                       @black;
-@inner-bubble-hr-margin:                                    35px;
-@bubble-title-border-color:                                 @black-20;
-@bubble-shadow-background:                                  #dfdfdf;
-@bubble-title-element-meta-color:                           @black;
-@bubble-title-element-accent-color:                         @black-50;
-@bubble-title-separator-color:                              @black;
-
-@bubble-title-element-height:                               54px;
-@bubble-title-separator-margin:                             35px;
-
-@content-panel-bubble-row-label-color:                      @black;
-@content-panel-bubble-row-value-color:                      @black;
-@content-panel-bubble-panel-table-lik-color:                @black;
-
-@content-panel-bubble-panel-row-margin-bottom:              20px;
-@content-panel-bubble-panel-label-margin:                   10px;
-@content-panel-bubble-row-padding:                          7px;
-@content-panel-bubble-row-with-labels-line-height:          32px;
-
-@section-title-bubble-padding:                              25px 35px;
-@bubble-label-color:                                        #afb5ac;
-
-@inner-title-color:                                         @system-base-color;
-@inner-title-font-family:                                   @system-title-font-family;
-@inner-title-container-margin-bottom:                       50px;
-@inner-title-expected-height:                               33px;
-@inner-title-button-expected-height:                        35px;
-@inner-title-padding:                                       10px;
-@inner-title-percentage-color:                              @black-10;
+@bubble-menu-title-color:                                   #cbcbcb;
+@bubble-menu-link-color:                                    #7e7e7e;
+@bubble-menu-hover-link-color:                              #019191;
+@bubble-menu-padding:                                       15px;
+@bubble-menu-title-margin:                                  10px;
+@bubble-menu-alert-subtitle-color:                          #979797;
+@bubble-menu-alert-danger-color:                            #de5a5a;
+@bubble-menu-alert-success-color:                           #15b04f;
+@bubble-menu-alert-marker-size:                             12px;
+@bubble-menu-alert-padding:                                 25px;
+@bubble-menu-alert-margin:                                  20px;
+@bubble-table-link-color:                                   #00938e;
+@bubble-table-text-color:                                   #616464;
 
 .bubble{
-  border-radius: @system-border-radius;
-  box-shadow: 0 1px 4px 0 fadeout(@inner-bubble-shadow-color, 92%);
-  background: @white;
-  padding: @bubble-vertical-padding @bubble-horizontal-padding;
+  position: relative;
 
-  &.bubble-shadow{
-    box-shadow: none;
-    background-color: @bubble-shadow-background;
-  }
-
-  // .tag{
-  //   color: @bubble-label-color;
-  //   text-transform: uppercase;
-  //   font-size: 0.8em;
-  //   padding-left: @element-vertical-margin;
-  //   font-weight: bold;
-  //   margin-bottom: @element-vertical-margin;
-  // }
-
-  .inner-title{
-    .clearfix();
-    line-height: @inner-title-expected-height;
-    height: @inner-title-expected-height;
-    position: relative;
-    padding: 0 @inner-title-padding;
-    margin-bottom: @element-vertical-margin;
-
-    // Reset margins
-    h1, h2, h3, h4, h5, h6{
-      margin-top: 0;
-    }
+  &.bubble-title{
+    margin-bottom: 2rem;
 
     h2{
-      color: @inner-title-color;
-      font-family: @inner-title-font-family;
-      font-size: 1.8em;
-      font-weight: normal;
+      .ellipsis();
     }
 
-    h3{
-      color: @inner-title-color;
-      font-family: @inner-title-font-family;
-      font-size: 0.9em;
-      text-transform: uppercase;
-    }
+    .main-actions{
+      padding-left: 2rem;
 
-    .main-action{
-      position: absolute;
-      right: @inner-title-padding;
-      top: 0;
-
-      .button, select, input{
-        margin-left: 10px;
-        margin-top: (@inner-title-expected-height - @button-height - 2px)/2.0;
-
-        &.button-tiny, &.input-tiny{
-          margin-top: (@inner-title-expected-height - @button-tiny-height - 2px)/2.0;
-        }
-
-        &.button-small, &.input-small{
-          margin-top: (@inner-title-expected-height - @button-small-height - 2px)/2.0;
-        }
+      &:before{
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: linear-gradient(to right, fadeout(@white, 100%) 0%, @white 20%);
+        height: 100%;
+        z-index: -1;
       }
     }
   }
 
-  .inner-body{
-    padding: 0 @inner-title-padding;
+  p{
+    color: #939292;
+    font-family: @installation-paragraph-font-family;
+    line-height: 1.5em;
+  }
+
+  h2{
+    color: @system-base-color;
+    font-weight: normal;
+    margin: 0 !important;
+    line-height: @button-small-height;
+  }
+
+  h3{
+    color: @black-40;
+    margin-bottom: 0.5rem;
+  }
+
+  table.simple-data{
+    tr{
+      td{
+        color: @bubble-table-text-color;
+        padding: 0.5rem 1rem;
+
+        &.table-label{
+          color: #c8c8c8;
+        }
+
+        a{
+          color: #00938e;
+        }
+      }
+    }
+
+    a{
+      transition: @faster;
+      text-decoration: underline;
+      color: @bubble-table-link-color;
+
+      &:hover{
+        color: lighten(@bubble-table-link-color, 5%);
+      }
+
+      &:active{
+        transition: 0;
+        color: @bubble-table-link-color;
+      }
+    }
+  }
+}
+
+.bubble-menu{
+  margin-bottom: @element-vertical-margin;
+
+  .active-unit{
+    color: #269b96;
+    font-size: 1.8em;
+
+    .percentage{
+      color: #c5c5c5;
+    }
+  }
+
+  .user{
+    margin-bottom: @element-vertical-margin;
+    padding: 0 1rem;
+
+    .data{
+      text-align: left;
+
+      .name{
+        color: @system-primary-color;
+      }
+
+      .role{
+        color: @black-40;
+      }
+    }
+  }
+
+  .inside-menu{
+    list-style: none;
+    margin: 0;
+    padding: 0 @bubble-menu-padding;
+
+    .title{
+      color: @bubble-menu-title-color;
+      font-size: 0.95em;
+      font-weight: bold;
+      margin-bottom: @bubble-menu-title-margin;
+      text-transform: uppercase;
+    }
+
+    a{
+      transition: @faster;
+      color: @bubble-menu-link-color;
+      display: inline-block;
+      font-size: 1.2em;
+      line-height: 1.4em;
+      padding: 0.5rem 0;
+
+      &:hover,
+      &.active{
+        color: @bubble-menu-hover-link-color;
+      }
+
+      &.active{
+        text-decoration: underline;
+      }
+
+      &:active{
+        transition: 0;
+        color: darken(@bubble-menu-hover-link-color, 5%);
+      }
+    }
+  }
+
+  .alert{
+    position: relative;
+    padding-left: @bubble-menu-alert-padding;
+    // margin-bottom: @bubble-menu-alert-margin;
+
+    .marker{
+      .circle(@bubble-menu-alert-marker-size);
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 4px; // Fix
+    }
+
+    .title{
+      font-weight: bold;
+    }
+
+    .subtitle{
+      color: @bubble-menu-alert-subtitle-color;
+      font-size: 0.9em;
+    }
+
+    &.danger{
+      .title{
+        color: @bubble-menu-alert-danger-color;
+      }
+
+      .marker{
+        background: @bubble-menu-alert-danger-color;
+      }
+    }
+
+    &.success{
+      .title{
+        color: @bubble-menu-alert-success-color;
+      }
+
+      .marker{
+        background: @bubble-menu-alert-success-color;
+      }
+    }
   }
 }
