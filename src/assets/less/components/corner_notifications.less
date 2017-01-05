@@ -35,11 +35,17 @@ body.sidebarless{
 .corner-notification{
   bottom: @corner-notifications-bottom-initial-position;
   height: @corner-notifications-height;
-  left: @corner-notifications-left-sidebar-contracted;
+  left: -1rem;
   position: fixed;
+  transform: scale(0.8);
   transition: @fast;
   width: @corner-notifications-width;
   z-index: @z-maximum;
+
+  @media(min-width: @system-small-break){
+    left: @corner-notifications-left-sidebar-contracted;
+    transform: scale(1.0);
+  }
 
 
   &.success{

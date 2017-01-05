@@ -64,8 +64,6 @@
 @dynamic-table-title-color:                                 @black;
 @dynamic-table-title-up-color:                              @black;
 @dynamic-table-title-down-color:                            @black;
-@dynamic-table-tiny-row-height:                             45px;
-@dynamic-table-small-row-height:                            65px;
 
 .resize-dynamic-table-row(@height){
   min-height: @height;
@@ -202,10 +200,11 @@
         z-index: 0;
       }
 
-      * {
-        position: relative;
-        z-index: 1;
-      }
+      // Conflicts with buttons loaders inside actions
+      // * {
+      //   position: relative;
+      //   z-index: 1;
+      // }
     }
 
     &.more{
@@ -382,7 +381,7 @@
   }
 
   &.dynamic-table-row-tiny{
-    .resize-dynamic-table-row(@dynamic-table-tiny-row-height);
+    .resize-dynamic-table-row(45px);
 
     .element{
       padding: 0 10px;
@@ -397,6 +396,10 @@
   }
 
   &.dynamic-table-row-small{
-    .resize-dynamic-table-row(@dynamic-table-small-row-height);
+    .resize-dynamic-table-row(65px);
+  }
+
+  &.dynamic-table-row-large{
+    .resize-dynamic-table-row(106px);
   }
 }

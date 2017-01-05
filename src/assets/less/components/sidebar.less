@@ -22,6 +22,7 @@
 @sidebar-text-line-height:                                  16px;
 
 @sidebar-icon-padding:                                      0.5rem 1rem;
+@sidebar-list-element-padding:                              0.85rem;
 @sidebar-border-radius:                                     5px;
 @sidebar-contracted-element-height:                         50px;
 @sidebar-contracted-header-margin:                          25px;
@@ -36,6 +37,7 @@
 @sidebar-open-element-height:                               45px;
 @sidebar-open-width:                                        210px;
 @sidebar-text-left-padding:                                 5px;
+@sidebar-link-border-color:                                 @black;
 
 .sidebar{
   background: @sidebar-background-color;
@@ -102,7 +104,7 @@
     padding: 0 1rem;
 
     a{
-      border-bottom: 1px solid #1d5352;
+      border-bottom: 1px solid @sidebar-link-border-color;
       color: @sidebar-link-color;
       display: block;
       font-family: @sidebar-font-family;
@@ -110,7 +112,7 @@
       text-align: center;
       text-shadow: 1px 1px 1px @sidebar-text-shadow-color;
       transition: @faster;
-      padding: 1rem 0;
+      padding: @sidebar-list-element-padding 0;
 
       span, i{
         color: inherit;

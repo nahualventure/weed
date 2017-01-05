@@ -31,6 +31,7 @@
 @tag-height:                          @button-height - 2px;
 @tag-tiny-height:                     @button-tiny-height - 2px;
 @tag-small-height:                    @button-small-height - 2px;
+@tag-max-width:                       170px;
 
 // tag generator mixin
 .make-tag(@height: @tag-height; @background-color: @tag-default-color; @text-color: @white; @border-radius: @tag-default-border-radius; @vertical-padding: @tag-default-vertical-padding; @horizontal-padding: @tag-default-horizontal-padding){  
@@ -74,6 +75,7 @@
 }
 
 .tag{
+  .ellipsis();
   .make-tag(@text-color: @tag-default-text-color);
   border-color: #dadcdc;
   border-radius: @tag-default-border-radius;
@@ -85,12 +87,29 @@
   line-height: @tag-height;
   margin-bottom: @element-vertical-margin;
   margin-right: 0.5rem;
+  max-width: @tag-max-width;
   opacity: 1.0;
   padding: @tag-default-vertical-padding @tag-default-horizontal-padding;
   transition: @faster;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+
+  &.colored{
+    border-color: rgba(255, 255, 255, 0.0);
+    color: white;
+  }
+
+  &.limitless{
+    max-width: initial;
+  }
+
+  .limit{
+    .ellipsis();
+    display: inline-block;
+    max-width: @tag-max-width;
+    vertical-align: middle;
+  }
 
   &.tag-tiny{
     .actions{

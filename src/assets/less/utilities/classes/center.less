@@ -1,3 +1,24 @@
+.center-text{
+  text-align: center;
+}
+
+.center-text-for(@break; @align;){
+  @media(min-width: @break){
+    text-align: @align;
+  }
+}
+
+& {
+  .for-each(@system-breakpoints); .-each(@pair) {
+    @key: extract(@pair, 1);
+    @value: extract(@pair, 2);
+
+    .center-text-for-@{key}{ .center-text-for(@value; center;); }
+    .right-text-for-@{key}{ .center-text-for(@value; right;); }
+    .left-text-for-@{key}{ .center-text-for(@value; left;); }
+  }
+}
+
 .center-block{
   .center-block();
 }

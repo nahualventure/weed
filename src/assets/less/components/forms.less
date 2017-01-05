@@ -23,6 +23,7 @@
 @form-disabled-color:                                       lighten(@form-input-placeholder-color, 4%);
 @form-disabled-border-color:                                lighten(@form-input-border-color, 10%);
 @form-hover-background-color:                               lighten(@form-input-background-color, 20%);
+@form-label-size:                                           0.8rem;
 
 // Textarea
 @form-textarea-padding:                                     15px;
@@ -502,7 +503,7 @@ input.input-tiny, .input-wrapper.input-tiny input{
     margin: 0 !important;
     position: absolute;
     top: -1px;
-    z-index: (@z-immediate-over + 2);
+    // z-index: (@z-immediate-over + 2); conflicts with typeahead
 
     &.button-small{
       box-sizing: border-box;
@@ -751,12 +752,12 @@ input.input-tiny, .input-wrapper.input-tiny input{
 }
 
 // Form label
-label, .label{
+label{
   color: @form-label-color;
   cursor: pointer;
   display: block;
   font-family: @form-label-font-family;
-  font-size: 0.75rem;
+  font-size: @form-label-size;
   font-weight: bold;
   text-shadow :0 1px 0 @form-label-shadow-color;
   text-transform: uppercase;
@@ -775,6 +776,23 @@ label, .label{
     &:before{
       color: lighten(@form-label-color, 20%);
       content: "* ";
+    }
+  }
+
+  &.component-height{
+    .ellipsis();
+    display: block;
+    height: @form-input-height;
+    line-height: @form-input-height;
+
+    &.small{
+      height: @form-input-small-height;
+      line-height: @form-input-small-height;
+    }
+
+    &.tiny{
+      height: @form-input-tiny-height;
+      line-height: @form-input-tiny-height;
     }
   }
 }

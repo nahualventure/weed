@@ -210,11 +210,14 @@ button.button{
   }
 
   &.loading{
-    background: @button-disabled-color !important;
-    border: 1px solid @button-disabled-border-color !important;
-    color: rgba(255, 255, 255, 0.0) !important;
     cursor: progress;
-    text-shadow: 0 1px 1px rgba(255, 255, 255,.0) !important;
+
+    &:not(.clear-background){
+      background: @button-disabled-color !important;
+      border: 1px solid @button-disabled-border-color !important;
+      color: rgba(255, 255, 255, 0.0) !important;
+      text-shadow: 0 1px 1px rgba(255, 255, 255,.0) !important;
+    }
 
     i{
       opacity: 0.0;
