@@ -50,6 +50,7 @@
 
   .content{
     .title{
+      font-size: 10px;
       color: lighten(@background-color, 20%);
     }
 
@@ -151,8 +152,10 @@
     line-height: initial;
     text-transform: uppercase;
     vertical-align: middle;
+    width: 100%;
 
     .title{
+      .ellipsis();
       color: @system-primary-color;
 
       i, span{
@@ -166,6 +169,7 @@
     }
 
     .subtitle{
+      .ellipsis();
       color: #8e9797;
     }
   }
@@ -223,7 +227,7 @@
 
     .content{
       .title{
-        font-size: 14px;
+        font-size: 10px;
       }
 
       .subtitle{
