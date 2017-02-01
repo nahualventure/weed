@@ -1130,9 +1130,20 @@
         <div we-list-item color="warning">Warning</div>
     </div>
 
-	<h2>Timepicker</h2>
+	  <h2>Timepicker</h2>
     <div class="row" ng-controller="TimepickerController as pickerCtrl">
       <uib-timepicker ng-model="pickerCtrl.mytime" ng-change="pickerCtrl.changed()" hour-step="pickerCtrl.hstep" minute-step="pickerCtrl.mstep" show-meridian="pickerCtrl.ismeridian"></uib-timepicker>
+    </div>
+    <h2>Datepicker</h2>
+    <div class="row" ng-controller="DatepickerController as vm">
+      <div class="col xs-12">
+        <input type="text" class="form-control"
+               datepicker-popup="mediumDate"
+               is-open="vm.valuationDatePickerIsOpen"
+               ng-click="vm.valuationDatePickerOpen()"
+               ng-model="vm.valuationDate" />
+
+      </div>
     </div>
     <h2>Typeahead</h2>
     <div class="row" ng-controller="TypeaheadController as typeCtrl">
@@ -1264,7 +1275,8 @@
                   return states;
                 })
                 .controller('TypeaheadController',typeaheadController)
-				.controller('TimepickerController', timepickerController)
+                .controller('TimepickerController', timepickerController)
+				        .controller('DatepickerController', datepickerController)
                 .run(weedRun);
 
             // Dependencies
@@ -1275,7 +1287,8 @@
             popupController.$inject = ['WeedApi'];
             notificationController.$inject = ['WeedApi'];
             typeaheadController.$inject = ['WeedApi','States'];
-			timepickerController.$inject = ['WeedApi']
+			      timepickerController.$inject = ['WeedApi'];
+            datepickerController.$inject= ['WeedApi'];
 
             function calendarController() {
               var vm = this;
@@ -1304,8 +1317,8 @@
               var vm = this;
               vm.states = States;
             }
-			
-			function timepickerController(WeedApi){
+
+			      function timepickerController(WeedApi){
               var vm = this;
               vm.mytime = new Date();
 
@@ -1337,7 +1350,19 @@
                 vm.mytime = null;
               };
             }
-			
+
+            function datepickerController(WeedApi) {
+              var vm = this;
+
+               vm.valuationDate = new Date();
+               vm.valuationDatePickerIsOpen = false;
+
+               vm.valuationDatePickerOpen = function () {
+
+                   this.valuationDatePickerIsOpen = true;
+               };
+            }
+
             function notificationController(WeedApi){
                 var vm = this;
 
