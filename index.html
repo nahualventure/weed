@@ -1140,9 +1140,9 @@
         <input type="text" class="form-control"
                datepicker-popup="mediumDate"
                is-open="vm.valuationDatePickerIsOpen"
+               uib-datepicker-popup="dd-MMMM-yyyy"
                ng-click="vm.valuationDatePickerOpen()"
                ng-model="vm.valuationDate" />
-
       </div>
     </div>
     <h2>Typeahead</h2>
@@ -1359,7 +1359,7 @@
 
                vm.valuationDatePickerOpen = function () {
 
-                   this.valuationDatePickerIsOpen = true;
+                   vm.valuationDatePickerIsOpen = !vm.valuationDatePickerIsOpen;
                };
             }
 
