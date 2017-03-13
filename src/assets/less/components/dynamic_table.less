@@ -335,11 +335,11 @@
         font-weight: bold;
       }
 
-      a:hover{
+      a:not(.button):hover{
         color: lighten(@dynamic-table-text-color, 5%);
       }
 
-      a:active{
+      a:not(.button):active{
         color: darken(@dynamic-table-text-color, 5%);
       }
 
