@@ -245,11 +245,16 @@
     }
 
     &.dynamic-table-row-tag{
-      border-right: 1px solid @dynamic-table-in-border-color;
+      box-sizing: border-box;
       color: @dynamic-table-row-tag-text-color;
       height: 100%;
       padding: 0;
-      width: @dynamic-table-row-tag-width;
+      width: 100%;
+      
+      @media(min-width: @system-small-break){
+        border-right: 1px solid @dynamic-table-in-border-color;
+        width: @dynamic-table-row-tag-width;
+      }
 
       &.title{
         color: @dynamic-table-row-background-color;
