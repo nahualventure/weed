@@ -140,7 +140,7 @@
               for(var j =0; j< su[i].meetingItems.length; j++) {
                 su[i].fileCount += su[i].meetingItems[j].files.length;
                 su[i].dateFormat = moment(su[i].date).format('dddd D [de] MMMM [del] YYYY');
-                su[i].dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
+                su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
                 su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
                 responsables.push(su[i].meetingItems[j].responsableId);
               }
