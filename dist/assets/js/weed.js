@@ -747,15 +747,26 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
           });
           for(var j = 0; j < activities.length; j++)
           {
-            if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
-              activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
-              if(!activities[j].place)
-              {
-                activities[j].place = activities[j].meeting.place;
+            if(activities[j].meeting) {
+              if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
+                activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
+                if(!activities[j].place)
+                {
+                  activities[j].place = activities[j].meeting.place;
+                }
+                days[days.length-1].activities.push(activities[j]);
               }
-              days[days.length-1].activities.push(activities[j]);
             }
-
+            else {
+              if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+                activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+                if(!activities[j].place)
+                {
+                  activities[j].place = activities[j].place;
+                }
+                days[days.length-1].activities.push(activities[j]);
+              }
+            }
           }
           date = date.clone();
           date.add(1, "d");
