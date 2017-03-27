@@ -8737,11 +8737,17 @@ hr {
   margin-right: 0;
 }
 .dynamic-table-row .element.dynamic-table-row-tag {
-  border-right: 1px solid #eee;
+  box-sizing: border-box;
   color: #fff;
   height: 100%;
   padding: 0;
-  width: 12px;
+  width: 100%;
+}
+@media (min-width: 650px) {
+  .dynamic-table-row .element.dynamic-table-row-tag {
+    border-right: 1px solid #eee;
+    width: 12px;
+  }
 }
 .dynamic-table-row .element.dynamic-table-row-tag.title {
   color: #fff;
@@ -8813,10 +8819,10 @@ hr {
   text-decoration: underline;
   font-weight: bold;
 }
-.dynamic-table-row .element.one-liner a:hover {
+.dynamic-table-row .element.one-liner a:not(.button):hover {
   color: #737373;
 }
-.dynamic-table-row .element.one-liner a:active {
+.dynamic-table-row .element.one-liner a:not(.button):active {
   color: #595959;
 }
 .dynamic-table-row .element.one-liner .text {
