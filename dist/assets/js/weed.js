@@ -1441,10 +1441,13 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 
       vm.active = false;
 
-      vm.open = function(){
+      vm.open = function(directiveId){
         vm.active = true;
         body.addClass('with-open-popup');
         $scope.$apply();
+        if(directiveId){
+          document.getElementById(directiveId).focus();
+        }
       }
 
       vm.close = function(){
@@ -1463,7 +1466,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
         switch(message){
           case 'show':
           case 'open':
-            controller.open();
+            controller.open(attrs.id);
             break;
           case 'hide':
           case 'close':
