@@ -39,7 +39,9 @@
         vm.active = true;
         body.addClass('with-open-popup');
         $scope.$apply();
-        document.getElementById(directiveId).focus();
+        if(directiveId){
+          document.getElementById(directiveId).focus();
+        }
       }
 
       vm.close = function(){
