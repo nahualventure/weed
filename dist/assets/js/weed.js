@@ -680,7 +680,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
         function(su){
           scope.weeks = [];
           var responsables = [];
-          for( i = 0; i < su.length ; i++) {
+          for( var i = 0; i < su.length ; i++) {
             if(su[i].meeting) {
               su[i].meeting.fileCount =0;
               //vm.time = datetime.format('hh:mm a');
