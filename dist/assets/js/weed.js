@@ -710,11 +710,11 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
               function(response) {
                 console.log(response);
                 for (var k = 0; k < response.length; k++ ) {
-                  response[i].isTask = true;
-                  response[i].dateFormatInput = new Date(moment(response[i].deadline).format('M/D/YYYY'));
-                  response[i].timeFormatInput = moment(response[i].date).format('H:mm a');
+                  response[k].isTask = true;
+                  response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
+                  response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
                   su.push(
-                    response[i]
+                    response[k]
                   );
                 }
                 console.log(su);
