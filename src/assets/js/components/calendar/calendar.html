@@ -32,8 +32,18 @@
     class="calendar-meeting-inside"
     ng-repeat="act in day.activities | limitTo:limit"
     ng-click="functionopenselect(act, $event); day.openPop = false">
-    <p class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
-    <p class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
+    <p
+      ng-if="!act.isTask"
+      class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
+    <p
+      ng-if="!act.isTask"
+      class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
+    <p
+      ng-if="act.isTask"
+      class="calendar-meeting-inside-place ellipsis">{{act.name}}</p>
+    <p
+      ng-if="act.isTask"
+      class="calendar-meeting-inside-hour">{{act.description}}</p>
   </div>
   <a
     ng-if="day.activities.length > limit"
