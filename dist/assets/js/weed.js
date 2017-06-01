@@ -714,10 +714,8 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                   response[i].dateFormatInput = new Date(moment(response[i].deadline).format('M/D/YYYY'));
                   response[i].timeFormatInput = moment(response[i].date).format('H:mm a');
                   su.push(
-                    {
-                      response[i];
-                    }
-                  )
+                    response[i];
+                  );
                 }
                 console.log(su);
                 var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
