@@ -151,6 +151,7 @@
             scope.tasks(actualmonth)
             .then(
               function(response) {
+                console.log(response);
                 for (var k = 0; k < response.length; k++ ) {
                   response[i].isTask = true;
                   response[i].dateFormatInput = new Date(moment(response[i].deadline).format('M/D/YYYY'));
@@ -161,6 +162,7 @@
                     }
                   )
                 }
+                console.log(su);
                 var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
                 while (!done) {
                     scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
