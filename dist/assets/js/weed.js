@@ -679,6 +679,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
+          console.log(su);
           var responsables = [];
           for( var i = 0; i < su.length ; i++) {
             if(su[i].meeting) {
@@ -703,49 +704,48 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 responsables.push(su[i].meetingItems[j].responsableId);
               }
             }
-            scope.secondcallfunction(responsables);
-
-            scope.tasks(actualmonth)
-            .then(
-              function(response) {
-                console.log(response);
-                for (var k = 0; k < response.length; k++ ) {
-                  response[k].isTask = true;
-                  response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
-                  response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
-                  su.push(
-                    response[k]
-                  );
-                }
-                console.log(su);
-                var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-                while (!done) {
-                    scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-                    date.add(1, "w");
-                    done = count++ > 2 && monthIndex !== date.month();
-                    monthIndex = date.month();
-                }
-          		  if(scope.findToday) {
-          		    scope.findToday = false;
-            			for(var i = 0; i < scope.weeks.length; i++) {
-            			  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-            			    if(scope.weeks[i].days[j].isToday)
-              				{
-                        scope.comesfromtodaywatch = true;
-              				  scope.select(scope.weeks[i].days[j]);
-              				  break;
-              				  i = scope.weeks.length;
-              				}
-            			  }
-            			}
-          		  }
-              },
-              function(err){
-                $log.log("ERROR: ",error);
-              }
-            );
-
           }
+          scope.secondcallfunction(responsables);
+
+          scope.tasks(actualmonth)
+          .then(
+            function(response) {
+              console.log(response);
+              for (var k = 0; k < response.length; k++ ) {
+                response[k].isTask = true;
+                response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
+                response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
+                su.push(
+                  response[k]
+                );
+              }
+              console.log(su);
+              var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+              while (!done) {
+                  scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+                  date.add(1, "w");
+                  done = count++ > 2 && monthIndex !== date.month();
+                  monthIndex = date.month();
+              }
+              if(scope.findToday) {
+                scope.findToday = false;
+                for(var i = 0; i < scope.weeks.length; i++) {
+                  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+                    if(scope.weeks[i].days[j].isToday)
+                    {
+                      scope.comesfromtodaywatch = true;
+                      scope.select(scope.weeks[i].days[j]);
+                      break;
+                      i = scope.weeks.length;
+                    }
+                  }
+                }
+              }
+            },
+            function(err){
+              $log.log("ERROR: ",error);
+            }
+          );
         },
         function(err){
           $log.log("ERROR: ",error);
@@ -1105,35 +1105,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 (function(angular){
   'use strict';
 
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
-  };
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
   angular.module('weed.knob', ['weed.knob'])
     .directive('weKnob', iconDirective);
 
@@ -1160,6 +1131,35 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
         vm.boolValue = !vm.boolValue;
       }
     }
+  };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
   };
 
 })(angular);
