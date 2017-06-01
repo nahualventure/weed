@@ -122,7 +122,6 @@
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
-          console.log(su);
           var responsables = [];
           for( var i = 0; i < su.length ; i++) {
             if(su[i].meeting) {
@@ -153,7 +152,6 @@
           scope.tasks(actualmonth)
           .then(
             function(response) {
-              console.log(response);
               for (var k = 0; k < response.length; k++ ) {
                 response[k].isTask = true;
                 response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
@@ -162,7 +160,6 @@
                   response[k]
                 );
               }
-              console.log(su);
               var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
               while (!done) {
                   scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
@@ -218,6 +215,11 @@
                 {
                   activities[j].place = activities[j].meeting.place;
                 }
+                days[days.length-1].activities.push(activities[j]);
+              }
+            }
+            else if(activities[j].isTask){
+              if(date.isSame(activities[j].deadline,'year') && date.isSame(activities[j].deadline,'month') && date.isSame(activities[j].deadline,'day')){
                 days[days.length-1].activities.push(activities[j]);
               }
             }

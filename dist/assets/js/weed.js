@@ -679,7 +679,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
-          console.log(su);
           var responsables = [];
           for( var i = 0; i < su.length ; i++) {
             if(su[i].meeting) {
@@ -710,7 +709,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
           scope.tasks(actualmonth)
           .then(
             function(response) {
-              console.log(response);
               for (var k = 0; k < response.length; k++ ) {
                 response[k].isTask = true;
                 response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
@@ -719,7 +717,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                   response[k]
                 );
               }
-              console.log(su);
               var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
               while (!done) {
                   scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
@@ -775,6 +772,11 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 {
                   activities[j].place = activities[j].meeting.place;
                 }
+                days[days.length-1].activities.push(activities[j]);
+              }
+            }
+            else if(activities[j].isTask){
+              if(date.isSame(activities[j].deadline,'year') && date.isSame(activities[j].deadline,'month') && date.isSame(activities[j].deadline,'day')){
                 days[days.length-1].activities.push(activities[j]);
               }
             }
@@ -1105,6 +1107,35 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 (function(angular){
   'use strict';
 
+  angular.module('weed.icon', ['weed.core'])
+    .directive('weIcon', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'E',
+      scope: {
+        icon: '@'
+      },
+      replace: true,
+      templateUrl: 'components/icons/icon.html',
+      link: function(scope, elem, attrs) {}
+    };
+  };
+
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
   angular.module('weed.knob', ['weed.knob'])
     .directive('weKnob', iconDirective);
 
@@ -1131,35 +1162,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
         vm.boolValue = !vm.boolValue;
       }
     }
-  };
-
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.icon', ['weed.core'])
-    .directive('weIcon', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'E',
-      scope: {
-        icon: '@'
-      },
-      replace: true,
-      templateUrl: 'components/icons/icon.html',
-      link: function(scope, elem, attrs) {}
-    };
   };
 
 })(angular);
@@ -1260,82 +1262,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
     };
   }
 
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInputWrapper
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective);
-
-  // No dependencies
-
-  function navbarDirective(){
-    return {
-      restrict: 'E',
-      link: function(){
-        var body = angular.element(document.querySelector('body'));
-        body.addClass('with-navbar');
-      },
-      templateUrl: 'components/navbar/navbar.html',
-      transclude: true,
-      replace: true
-    }
-  }
-
-  function navbarElementDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        position: '@',
-        type: '@',
-        icon: '@',
-        logotype: '@',
-        isotype: '@',
-        placeholder: '@',
-        userPicture: '@',
-        userRole: '@',
-        counter: '@'
-      },
-      link: function(scope, elem, attrs, controllers, $transclude){
-        // Check if there is text
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-      },
-      templateUrl: function(elem, attrs) {
-        var template = '';
-        switch (attrs.type) {
-          case 'link':
-            template = 'navbarElementLink.html';
-            break;
-          case 'logo':
-            template = 'navbarElementLogo.html';
-            break;
-          case 'separator':
-            template = 'navbarElementSeparator.html'
-            break;
-          case 'user':
-            template = 'navbarElementUser.html'
-            break;
-          default:
-            template = 'navbarElement.html'
-        }
-        return 'components/navbar/' + template;
-      }
-    };
-  }
 })(angular);
 (function(angular){
   'use strict';
@@ -1788,4 +1714,80 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
     }
   }
 
+})(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
+    .directive('weNavbarElement', navbarElementDirective);
+
+  // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@',
+        counter: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
+            break;
+          default:
+            template = 'navbarElement.html'
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }
 })(angular);
