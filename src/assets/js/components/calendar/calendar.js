@@ -157,7 +157,7 @@
                   response[i].dateFormatInput = new Date(moment(response[i].deadline).format('M/D/YYYY'));
                   response[i].timeFormatInput = moment(response[i].date).format('H:mm a');
                   su.push(
-                    response[i];
+                    response[i]
                   );
                 }
                 console.log(su);
