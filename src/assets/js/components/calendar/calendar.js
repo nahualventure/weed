@@ -22,7 +22,7 @@
         languagec: '=',
         numberposition: '=',
         activities: '=',
-        task: '=',
+        tasks: '=',
         limit: '=',
         functionopenselect:'=',
         selectedobjectinside: '=',

@@ -579,7 +579,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
         languagec: '=',
         numberposition: '=',
         activities: '=',
-        task: '=',
+        tasks: '=',
         limit: '=',
         functionopenselect:'=',
         selectedobjectinside: '=',
