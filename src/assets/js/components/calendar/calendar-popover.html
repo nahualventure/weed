@@ -14,10 +14,10 @@
 
         <p
           ng-if="act.isTask"
-          class="calendar-meeting-inside-place ellipsis">{{act.name}}</p>
+          class="calendar-meeting-inside-place ellipsis is-task-text">{{act.name}}</p>
         <p
           ng-if="act.isTask"
-          class="calendar-meeting-inside-hour {{act.isTask ? 'is-task-text' : ''}}">{{act.description}}</p>
+          class="calendar-meeting-inside-hour is-task-text"></p>
       </div>
     </div>
   </div>
