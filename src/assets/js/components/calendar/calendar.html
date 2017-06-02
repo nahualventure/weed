@@ -29,7 +29,7 @@
         id="{{day.dateId}}">
   <span class="calendar-number-day">{{day.number}}</span>
   <div
-    class="calendar-meeting-inside"
+    class="calendar-meeting-inside {{act.isTask ? 'is-task-square' : ''}}"
     ng-repeat="act in day.activities | limitTo:limit"
     ng-click="functionopenselect(act, $event); day.openPop = false">
     <p
@@ -41,9 +41,6 @@
     <p
       ng-if="act.isTask"
       class="calendar-meeting-inside-place ellipsis">{{act.name}}</p>
-    <p
-      ng-if="act.isTask"
-      class="calendar-meeting-inside-hour">{{act.description}}</p>
   </div>
   <a
     ng-if="day.activities.length > limit"

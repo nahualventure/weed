@@ -17,7 +17,7 @@
           class="calendar-meeting-inside-place ellipsis">{{act.name}}</p>
         <p
           ng-if="act.isTask"
-          class="calendar-meeting-inside-hour">{{act.description}}</p>
+          class="calendar-meeting-inside-hour {{act.isTask ? 'is-task-text' : ''}}">{{act.description}}</p>
       </div>
     </div>
   </div>
