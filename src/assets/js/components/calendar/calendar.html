@@ -38,6 +38,12 @@
     <p
       ng-if="!act.isTask"
       class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
+    <we-icon
+      ng-click="ctrl.checkDoneTask(task); $event.stopPropagation();"
+       icon="check-circle"
+       size="small"
+       ng-if="act.isTask"
+       class="task-done"></we-icon>
     <p
       ng-if="act.isTask"
       class="calendar-meeting-inside-place ellipsis">{{act.name}}</p>

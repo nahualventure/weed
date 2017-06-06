@@ -30,7 +30,8 @@
         updatefunction: '=',
         doselectedclick: '=',
         popoverIsOpen: '=',
-        secondcallfunction: '='
+        secondcallfunction: '=',
+        checkDoneTask: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
