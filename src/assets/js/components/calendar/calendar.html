@@ -39,7 +39,7 @@
       ng-if="!act.isTask"
       class="calendar-meeting-inside-hour">{{act.formatDate}}</p>
     <we-icon
-      ng-click="ctrl.checkDoneTask(task); $event.stopPropagation();"
+      ng-click="ctrl.checkDoneTask(act); $event.stopPropagation();"
        icon="check-circle"
        size="small"
        ng-if="act.isTask"
