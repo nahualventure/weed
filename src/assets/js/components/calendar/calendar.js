@@ -134,6 +134,12 @@
                 su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
                 su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
                 responsables.push(su[i].meeting.meetingItems[j].responsableId);
+                if(su[i].meeting.boardId) {
+                  su[i].isBoard = true;
+                }
+                else if(su[i].meeting.committeeId) {
+                  su[i].isCommittee = true;
+                }
               }
             }
             else {
@@ -145,6 +151,12 @@
                 su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
                 su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
                 responsables.push(su[i].meetingItems[j].responsableId);
+                if(su[i].boardId) {
+                  su[i].isBoard = true;
+                }
+                else if(su[i].committeeId) {
+                  su[i].isCommittee = true;
+                }
               }
             }
           }
@@ -157,6 +169,12 @@
                 response[k].isTask = true;
                 response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
                 response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
+                if(response[k].boardId) {
+                  response[k].isBoard = true;
+                }
+                else if(response[k].committeeId) {
+                  response[k].isCommittee = true;
+                }
                 su.push(
                   response[k]
                 );
