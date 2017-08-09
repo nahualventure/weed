@@ -691,11 +691,10 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
                 su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
                 responsables.push(su[i].meeting.meetingItems[j].responsableId);
-                console.log(su[i]);
-                if(su[i].meeting.boardId) {
+                if(su[i].boardId) {
                   su[i].isBoard = true;
                 }
-                else if(su[i].meeting.committeeId) {
+                else if(su[i].committeeId) {
                   su[i].isCommittee = true;
                 }
               }
@@ -709,7 +708,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
                 su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
                 responsables.push(su[i].meetingItems[j].responsableId);
-                console.log(su[i]);
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                 }
@@ -728,7 +726,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 response[k].isTask = true;
                 response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
                 response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
-                console.log(response[k]);
                 if(response[k].boardId) {
                   response[k].isBoard = true;
                 }
