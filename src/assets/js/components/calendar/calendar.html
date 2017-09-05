@@ -29,7 +29,7 @@
         id="{{day.dateId}}">
   <span class="calendar-number-day">{{day.number}}</span>
   <div
-    class="calendar-meeting-inside {{act.isTask ? 'is-task-square' : ''}} {{act.isBoard ? 'is-board' : ''}} {{act.isCommittee ? 'is-committee' : ''}}"
+    class="calendar-meeting-inside {{act.isTask ? 'is-task-square' : ''}} {{act.isBoard ? 'is-board' : ''}} {{act.isCommittee ? 'is-committee' : ''}} {{act.hasFinished ? 'is-meeting-done' : 'is-meeting-not-done'}}"
     ng-repeat="act in day.activities | limitTo:limit"
     ng-click="functionopenselect(act, $event); day.openPop = false">
     <p
