@@ -134,6 +134,7 @@
                 su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
                 su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
                 responsables.push(su[i].meeting.meetingItems[j].responsableId);
+                su[i].isFinished = su[i].meeting.hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                 }
@@ -151,6 +152,7 @@
                 su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
                 su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
                 responsables.push(su[i].meetingItems[j].responsableId);
+                su[i].isFinished = su[i].hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                 }

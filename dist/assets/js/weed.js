@@ -691,6 +691,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
                 su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
                 responsables.push(su[i].meeting.meetingItems[j].responsableId);
+                su[i].isFinished = su[i].meeting.hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                 }
@@ -708,6 +709,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
                 su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
                 responsables.push(su[i].meetingItems[j].responsableId);
+                su[i].isFinished = su[i].hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                 }
