@@ -177,6 +177,13 @@
                 else if(response[k].committeeId) {
                   response[k].isCommittee = true;
                 }
+
+                if(moment(response[k].deadline).diff(moment(), 'days') < 0){
+                	if(!response[k].isDone){
+                  	response[k].deadlinePassed = true;
+                	}
+                }
+
                 su.push(
                   response[k]
                 );
