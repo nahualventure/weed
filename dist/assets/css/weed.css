@@ -9245,7 +9245,7 @@ hr {
 .we-calendar-class .header {
   width: 100%;
   background: #2875C7;
-  height: 80px;
+  height: 120px;
   color: white;
   position: relative;
   text-align: center;
@@ -9254,10 +9254,12 @@ hr {
 .we-calendar-class .header .calendar-header-month {
   font-weight: bold;
   display: inline-block;
+  padding: 50px 0 0 0;
+  line-height: 70px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   vertical-align: middle;
-  line-height: 80px;
+  line-height: 120px;
   font-size: 20px;
 }
 .we-calendar-class .header .calendar-header-month:first-letter {
@@ -9265,7 +9267,7 @@ hr {
 }
 .we-calendar-class .header .calendar-navigation {
   position: absolute;
-  top: 20px;
+  top: 30px;
 }
 .we-calendar-class .header .calendar-navigation.navigation-left {
   font-size: 13px;

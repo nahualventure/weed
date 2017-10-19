@@ -9,7 +9,7 @@
 @calendar-selected-color:                                                       red;
 @spacing:                                                                       10px;
 @icon-width:                                                                    40px;
-@calendar-header-height:                                                        80px;
+@calendar-header-height:                                                        120px;
 @calendar-header-width:                                                         100%;
 @calendar-header-font-color:                                                    white;
 @calendar-font-size:                                                            3em;
@@ -27,6 +27,8 @@
 @calendar-names-font-size:                                                      0.75em;
 @calendar-header-font-size:                                                     20px;
 @calendar-height-day-names-cell:                                                30px;
+@calendar-header-month-padding:                                                 50px 0 0 0;
+@calendar-header-month-line-height:                                             70px;
 
 .vertical-center (@height) {
     height:@height;
@@ -58,6 +60,8 @@
       .calendar-header-month {
           font-weight:bold;
           display: inline-block;
+          padding: @calendar-header-month-padding;
+          line-height: @calendar-header-month-line-height;
           &:first-letter{
             text-transform: capitalize
           }
