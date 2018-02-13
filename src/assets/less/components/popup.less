@@ -118,6 +118,7 @@ body.with-open-popup{
   height: 100%;
   left: 0;
   position: fixed;
+  opacity: 0;
   top: 0;
   width: 100%;
   z-index: @popup-z-index;
@@ -152,6 +153,10 @@ body.with-open-popup{
       opacity: 0.0;
       transform: scale(0.95);
     }
+  }
+
+  &.is-active {
+    opacity: 1;
   }
 
   &.ng-hide-active{
