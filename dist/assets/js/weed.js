@@ -929,9 +929,10 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
     return directive;
 
     function link(scope, element, attrs) {
+      var targetId = element.attr('id');
       element.on('keyup', function(e) {
         if (e.keyCode === 27) {
-          weedApi.closeActiveElements();
+          weedApi.publish(targetId, 'close');
         }
         e.preventDefault();
       });

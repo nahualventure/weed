@@ -6200,6 +6200,7 @@ body.with-open-popup {
   height: 100%;
   left: 0;
   position: fixed;
+  opacity: 0;
   top: 0;
   width: 100%;
   z-index: 2147483636;
@@ -6225,6 +6226,9 @@ body.with-open-popup {
 .popup-grid-wrapper.ng-hide .popup {
   opacity: 0.0;
   transform: scale(0.95);
+}
+.popup-grid-wrapper.is-active {
+  opacity: 1;
 }
 .popup-grid-wrapper.ng-hide-active .popup-veil {
   opacity: 1.0;
