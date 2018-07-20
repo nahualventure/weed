@@ -21,6 +21,7 @@
       templateUrl: 'components/knob/knob.html',
       scope: {
         boolValue: '=',
+        onChange: '&?',
         size: '@'
       },
       controller: knobController,
@@ -33,6 +34,9 @@
 
       vm.toggleBoolValue = function(){
         vm.boolValue = !vm.boolValue;
+        if (vm.onChange) {
+          vm.onChange();
+        }
       }
     }
   };
