@@ -29,16 +29,17 @@
       bindToController: true
     };
 
-    function knobController(){
+    function knobController($scope){
       var vm = this;
 
       vm.toggleBoolValue = function(){
         vm.boolValue = !vm.boolValue;
         if (vm.onChange) {
           vm.onChange();
+          $scope.$apply();
         }
       }
     }
-  };
+  }
 
 })(angular);
