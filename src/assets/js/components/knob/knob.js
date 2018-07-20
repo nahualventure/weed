@@ -32,9 +32,6 @@
     function knobController($scope){
       var vm = this;
 
-      vm.test = function() {
-        console.log('asdasd');
-      }
       vm.toggleBoolValue = function(){
         vm.boolValue = !vm.boolValue;
         if (vm.onChange) {
