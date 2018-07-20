@@ -1188,11 +1188,13 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
     function knobController($scope){
       var vm = this;
 
+      vm.test = function() {
+        console.log('asdasd');
+      }
       vm.toggleBoolValue = function(){
         vm.boolValue = !vm.boolValue;
         if (vm.onChange) {
-          vm.onChange();
-          $scope.$apply();
+          vm.onChange({boolValue: vm.boolValue});
         }
       }
     }
