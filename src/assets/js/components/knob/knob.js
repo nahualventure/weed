@@ -29,7 +29,7 @@
       bindToController: true
     };
 
-    function knobController($scope){
+    function knobController($timeout){
       var vm = this;
 
       vm.toggleBoolValue = function(){
