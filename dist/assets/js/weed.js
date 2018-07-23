@@ -555,6 +555,256 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
   }
 
 })(angular);
+(function(angular) {
+  'use strict';
+
+  angular.module('weed.common', ['weed.core'])
+    .directive('weClose', weClose)
+    .directive('weOpen', weOpen)
+    .directive('weToggle', weToggle)
+    .directive('weEscClose', weEscClose)
+    .directive('weHardToggle', weHardToggle)
+    .directive('weCloseAll', weCloseAll)
+    .directive('weFillHeight', weFillHeight)
+  ;
+
+  // Dependency injection
+  weClose.$inject = ['WeedApi'];
+  weOpen.$inject = ['WeedApi'];
+  weToggle.$inject = ['WeedApi'];
+  weEscClose.$inject = ['WeedApi'];
+  weHardToggle.$inject = ['WeedApi'];
+  weCloseAll.$inject = ['WeedApi'];
+  weFillHeight.$inject = ['$window', '$document', '$timeout'];
+
+  function weClose(weedApi) {
+    var directive = {
+      restrict: 'A',
+      link: link
+    };
+
+    return directive;
+
+    function link(scope, element, attrs) {
+      var targetId = '';
+      if (attrs.weClose) {
+        targetId = attrs.weClose;
+      } else {
+        var parentElement = false;
+        var tempElement = element.parent();
+        //find parent modal
+        while(parentElement === false) {
+          if(tempElement[0].nodeName == 'BODY') {
+            parentElement = '';
+          }
+
+          if(typeof tempElement.attr('we-closable') !== 'undefined' && tempElement.attr('we-closable') !== false) {
+            parentElement = tempElement;
+          }
+
+          tempElement = tempElement.parent();
+        }
+
+        targetId = parentElement.attr('id');
+      }
+
+      element.on('click', function(e) {
+        weedApi.publish(targetId, 'close');
+        e.preventDefault();
+      });
+    }
+  }
+
+  function weOpen(weedApi) {
+    var directive = {
+      restrict: 'A',
+      link: link
+    };
+
+    return directive;
+
+    function link(scope, element, attrs) {
+      element.on('click', function(e) {
+        weedApi.publish(attrs.weOpen, 'open');
+        e.preventDefault();
+      });
+    }
+  }
+
+  function weToggle(weedApi) {
+    var directive = {
+      restrict: 'A',
+      link: link
+    }
+
+    return directive;
+
+    function link(scope, element, attrs) {
+      element.on('click', function(e) {
+        weedApi.publish(attrs.weToggle, 'toggle');
+        e.preventDefault();
+      });
+    }
+  }
+
+  function weEscClose(weedApi) {
+    var directive = {
+      restrict: 'A',
+      link: link
+    };
+
+    return directive;
+
+    function link(scope, element, attrs) {
+      var targetId = element.attr('id');
+      element.on('keyup', function(e) {
+        if (e.keyCode === 27) {
+          weedApi.publish(targetId, 'close');
+        }
+        e.preventDefault();
+      });
+    }
+  }
+
+  function weHardToggle(weedApi) {
+    var directive = {
+      restrict: 'A',
+      link: link
+    };
+
+    return directive;
+
+    function link(scope, element, attrs) {
+      element.on('click', function(e) {
+        weedApi.closeActiveElements({exclude: attrs.weHardToggle});
+        weedApi.publish(attrs.weHardToggle, 'toggle');
+        e.preventDefault();
+      });
+    }
+  }
+
+  function weCloseAll(weedApi) {
+    var directive = {
+      restrict: 'A',
+      link: link
+    };
+
+    return directive;
+
+    function link(scope, element, attrs) {
+      element.on('click', function(e) {
+        var tar = e.target;
+        var avoid = ['we-toggle', 'we-hard-toggle', 'we-open', 'we-close'].filter(function(e, i){
+          return e in tar.attributes;
+        });
+
+        if(avoid.length > 0){ return; }
+
+        var activeElements = document.querySelectorAll('.is-active[we-closable]');
+
+        if(activeElements.length && !activeElements[0].hasAttribute('we-ignore-all-close')){
+          if(getParentsUntil(tar, 'we-closable') === false){
+            e.preventDefault();
+            weedApi.publish(activeElements[0].id, 'close');
+          }
+        }
+        return;
+      });
+    }
+    /** special thanks to Chris Ferdinandi for this solution.
+     * http://gomakethings.com/climbing-up-and-down-the-dom-tree-with-vanilla-javascript/
+     */
+    function getParentsUntil(elem, parent) {
+      for ( ; elem && elem !== document.body; elem = elem.parentNode ) {
+        if(elem.hasAttribute(parent)){
+          if(elem.classList.contains('is-active')){ return elem; }
+          break;
+        }
+      }
+      return false;
+    }
+  }
+
+  function weFillHeight($window, $document, $timeout){
+    return {
+      restrict: 'A',
+      scope: {
+        footerElementId: '@',
+        additionalPadding: '@',
+        debounceWait: '@'
+      },
+      link: function (scope, element, attrs) {
+        if (scope.debounceWait === 0) {
+          angular.element($window).on('resize', windowResize);
+        } else {
+          // allow debounce wait time to be passed in.
+          // if not passed in, default to a reasonable 250ms
+          angular.element($window).on('resize', debounce(onWindowResize, scope.debounceWait || 250));
+        }
+
+        onWindowResize();
+
+        // returns a fn that will trigger 'time' amount after it stops getting called.
+        function debounce(fn, time) {
+          var timeout;
+          // every time this returned fn is called, it clears and re-sets the timeout
+          return function() {
+            var context = this;
+            // set args so we can access it inside of inner function
+            var args = arguments;
+            var later = function() {
+              timeout = null;
+              fn.apply(context, args);
+            };
+            $timeout.cancel(timeout);
+            timeout = $timeout(later, time);
+          };
+        }
+
+        function onWindowResize() {
+          var footerElement = angular.element($document[0].getElementById(scope.footerElementId));
+          var footerElementHeight;
+
+          if (footerElement.length === 1) {
+              footerElementHeight = footerElement[0].offsetHeight
+                    + getTopMarginAndBorderHeight(footerElement)
+                    + getBottomMarginAndBorderHeight(footerElement);
+          } else {
+              footerElementHeight = 0;
+          }
+
+          var elementOffsetTop = element[0].offsetTop;
+          var elementBottomMarginAndBorderHeight = getBottomMarginAndBorderHeight(element);
+
+          var additionalPadding = scope.additionalPadding || 0;
+
+          var elementHeight = $window.innerHeight
+                              - elementOffsetTop
+                              - elementBottomMarginAndBorderHeight
+                              - footerElementHeight
+                              - additionalPadding;
+          element.css('height', elementHeight + 'px');
+        }
+
+        function getTopMarginAndBorderHeight(element) {
+          var footerTopMarginHeight = getCssNumeric(element, 'margin-top');
+          var footerTopBorderHeight = getCssNumeric(element, 'border-top-width');
+          return footerTopMarginHeight + footerTopBorderHeight;
+        }
+
+        function getBottomMarginAndBorderHeight(element) {
+          var footerBottomMarginHeight = getCssNumeric(element, 'margin-bottom');
+          var footerBottomBorderHeight = getCssNumeric(element, 'border-bottom-width');
+          return footerBottomMarginHeight + footerBottomBorderHeight;
+        }
+
+        function getCssNumeric(element, propertyName) {
+          return parseInt(element.css(propertyName), 10) || 0;
+        }
+      }
+    };
+  }
+})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weIcon
@@ -828,256 +1078,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 
 })(angular);
 
-(function(angular) {
-  'use strict';
-
-  angular.module('weed.common', ['weed.core'])
-    .directive('weClose', weClose)
-    .directive('weOpen', weOpen)
-    .directive('weToggle', weToggle)
-    .directive('weEscClose', weEscClose)
-    .directive('weHardToggle', weHardToggle)
-    .directive('weCloseAll', weCloseAll)
-    .directive('weFillHeight', weFillHeight)
-  ;
-
-  // Dependency injection
-  weClose.$inject = ['WeedApi'];
-  weOpen.$inject = ['WeedApi'];
-  weToggle.$inject = ['WeedApi'];
-  weEscClose.$inject = ['WeedApi'];
-  weHardToggle.$inject = ['WeedApi'];
-  weCloseAll.$inject = ['WeedApi'];
-  weFillHeight.$inject = ['$window', '$document', '$timeout'];
-
-  function weClose(weedApi) {
-    var directive = {
-      restrict: 'A',
-      link: link
-    };
-
-    return directive;
-
-    function link(scope, element, attrs) {
-      var targetId = '';
-      if (attrs.weClose) {
-        targetId = attrs.weClose;
-      } else {
-        var parentElement = false;
-        var tempElement = element.parent();
-        //find parent modal
-        while(parentElement === false) {
-          if(tempElement[0].nodeName == 'BODY') {
-            parentElement = '';
-          }
-
-          if(typeof tempElement.attr('we-closable') !== 'undefined' && tempElement.attr('we-closable') !== false) {
-            parentElement = tempElement;
-          }
-
-          tempElement = tempElement.parent();
-        }
-
-        targetId = parentElement.attr('id');
-      }
-
-      element.on('click', function(e) {
-        weedApi.publish(targetId, 'close');
-        e.preventDefault();
-      });
-    }
-  }
-
-  function weOpen(weedApi) {
-    var directive = {
-      restrict: 'A',
-      link: link
-    };
-
-    return directive;
-
-    function link(scope, element, attrs) {
-      element.on('click', function(e) {
-        weedApi.publish(attrs.weOpen, 'open');
-        e.preventDefault();
-      });
-    }
-  }
-
-  function weToggle(weedApi) {
-    var directive = {
-      restrict: 'A',
-      link: link
-    }
-
-    return directive;
-
-    function link(scope, element, attrs) {
-      element.on('click', function(e) {
-        weedApi.publish(attrs.weToggle, 'toggle');
-        e.preventDefault();
-      });
-    }
-  }
-
-  function weEscClose(weedApi) {
-    var directive = {
-      restrict: 'A',
-      link: link
-    };
-
-    return directive;
-
-    function link(scope, element, attrs) {
-      var targetId = element.attr('id');
-      element.on('keyup', function(e) {
-        if (e.keyCode === 27) {
-          weedApi.publish(targetId, 'close');
-        }
-        e.preventDefault();
-      });
-    }
-  }
-
-  function weHardToggle(weedApi) {
-    var directive = {
-      restrict: 'A',
-      link: link
-    };
-
-    return directive;
-
-    function link(scope, element, attrs) {
-      element.on('click', function(e) {
-        weedApi.closeActiveElements({exclude: attrs.weHardToggle});
-        weedApi.publish(attrs.weHardToggle, 'toggle');
-        e.preventDefault();
-      });
-    }
-  }
-
-  function weCloseAll(weedApi) {
-    var directive = {
-      restrict: 'A',
-      link: link
-    };
-
-    return directive;
-
-    function link(scope, element, attrs) {
-      element.on('click', function(e) {
-        var tar = e.target;
-        var avoid = ['we-toggle', 'we-hard-toggle', 'we-open', 'we-close'].filter(function(e, i){
-          return e in tar.attributes;
-        });
-
-        if(avoid.length > 0){ return; }
-
-        var activeElements = document.querySelectorAll('.is-active[we-closable]');
-
-        if(activeElements.length && !activeElements[0].hasAttribute('we-ignore-all-close')){
-          if(getParentsUntil(tar, 'we-closable') === false){
-            e.preventDefault();
-            weedApi.publish(activeElements[0].id, 'close');
-          }
-        }
-        return;
-      });
-    }
-    /** special thanks to Chris Ferdinandi for this solution.
-     * http://gomakethings.com/climbing-up-and-down-the-dom-tree-with-vanilla-javascript/
-     */
-    function getParentsUntil(elem, parent) {
-      for ( ; elem && elem !== document.body; elem = elem.parentNode ) {
-        if(elem.hasAttribute(parent)){
-          if(elem.classList.contains('is-active')){ return elem; }
-          break;
-        }
-      }
-      return false;
-    }
-  }
-
-  function weFillHeight($window, $document, $timeout){
-    return {
-      restrict: 'A',
-      scope: {
-        footerElementId: '@',
-        additionalPadding: '@',
-        debounceWait: '@'
-      },
-      link: function (scope, element, attrs) {
-        if (scope.debounceWait === 0) {
-          angular.element($window).on('resize', windowResize);
-        } else {
-          // allow debounce wait time to be passed in.
-          // if not passed in, default to a reasonable 250ms
-          angular.element($window).on('resize', debounce(onWindowResize, scope.debounceWait || 250));
-        }
-
-        onWindowResize();
-
-        // returns a fn that will trigger 'time' amount after it stops getting called.
-        function debounce(fn, time) {
-          var timeout;
-          // every time this returned fn is called, it clears and re-sets the timeout
-          return function() {
-            var context = this;
-            // set args so we can access it inside of inner function
-            var args = arguments;
-            var later = function() {
-              timeout = null;
-              fn.apply(context, args);
-            };
-            $timeout.cancel(timeout);
-            timeout = $timeout(later, time);
-          };
-        }
-
-        function onWindowResize() {
-          var footerElement = angular.element($document[0].getElementById(scope.footerElementId));
-          var footerElementHeight;
-
-          if (footerElement.length === 1) {
-              footerElementHeight = footerElement[0].offsetHeight
-                    + getTopMarginAndBorderHeight(footerElement)
-                    + getBottomMarginAndBorderHeight(footerElement);
-          } else {
-              footerElementHeight = 0;
-          }
-
-          var elementOffsetTop = element[0].offsetTop;
-          var elementBottomMarginAndBorderHeight = getBottomMarginAndBorderHeight(element);
-
-          var additionalPadding = scope.additionalPadding || 0;
-
-          var elementHeight = $window.innerHeight
-                              - elementOffsetTop
-                              - elementBottomMarginAndBorderHeight
-                              - footerElementHeight
-                              - additionalPadding;
-          element.css('height', elementHeight + 'px');
-        }
-
-        function getTopMarginAndBorderHeight(element) {
-          var footerTopMarginHeight = getCssNumeric(element, 'margin-top');
-          var footerTopBorderHeight = getCssNumeric(element, 'border-top-width');
-          return footerTopMarginHeight + footerTopBorderHeight;
-        }
-
-        function getBottomMarginAndBorderHeight(element) {
-          var footerBottomMarginHeight = getCssNumeric(element, 'margin-bottom');
-          var footerBottomBorderHeight = getCssNumeric(element, 'border-bottom-width');
-          return footerBottomMarginHeight + footerBottomBorderHeight;
-        }
-
-        function getCssNumeric(element, propertyName) {
-          return parseInt(element.css(propertyName), 10) || 0;
-        }
-      }
-    };
-  }
-})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weNavbar
@@ -1154,51 +1154,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
   };
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.knob', ['weed.knob'])
-    .directive('weKnob', iconDirective);
-
-  // No dependencies
-
-  function iconDirective() {
-    return {
-      restrict: 'A',
-      replace: true,
-      templateUrl: 'components/knob/knob.html',
-      scope: {
-        boolValue: '=',
-        onChange: '&?',
-        size: '@'
-      },
-      controller: knobController,
-      controllerAs: 'ctrl',
-      bindToController: true
-    };
-
-    function knobController($scope){
-      var vm = this;
-
-      vm.toggleBoolValue = function(){
-        vm.boolValue = !vm.boolValue;
-        if (vm.onChange) {
-          vm.onChange({boolValue: vm.boolValue});
-        }
-      }
-    }
-  }
-
-})(angular);
-
 /**
  * @ngdoc function
  * @name weed.directive: weListItem
@@ -1299,6 +1254,53 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.knob', ['weed.knob'])
+    .directive('weKnob', iconDirective);
+
+  // No dependencies
+
+  function iconDirective() {
+    return {
+      restrict: 'A',
+      replace: true,
+      templateUrl: 'components/knob/knob.html',
+      scope: {
+        boolValue: '=',
+        onChange: '&?',
+        size: '@'
+      },
+      controller: knobController,
+      controllerAs: 'ctrl',
+      bindToController: true
+    };
+
+    function knobController($scope){
+      var vm = this;
+
+      vm.toggleBoolValue = function(){
+        vm.boolValue = !vm.boolValue;
+      }
+      $scope.$watch('ctrl.boolValue', function() {
+        if (vm.onChange) {
+          vm.onChange();
+        }
+      });
+    }
+  }
+
+})(angular);
+
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -1372,94 +1374,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
       }
     };
   }
-})(angular);
-(function(angular){
-  'use strict';
-
-  // TODO
-  angular
-    .module('weed.corner-notifications', ['weed.core'])
-    .directive('weCornerNotification', cornerNotificationDirective);
-
-  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
-
-  function cornerNotificationDirective(WeedApi, $timeout){
-
-    // Injection
-    cornerNotificationsController.$inject = ['$scope'];
-
-    return {
-      restrict: 'A',
-      replace: true,
-      templateUrl: 'components/notifications/cornerNotifications.html',
-      scope: {
-        color: '@',
-        icon: '@',
-        text: '@',
-        timeout: '@'
-      },
-      controller: cornerNotificationsController,
-      controllerAs: 'ctrl',
-      link: function($scope, elem, attrs, controllers, $transclude){
-        $scope.open = false;
-        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
-
-        WeedApi.subscribe(attrs.id, function(id, message){
-          switch(message){
-            case 'show':
-            case 'open':
-              $scope.open = true;
-
-              // Close after a timeout
-              $timeout(function(){
-                $scope.open = false;
-              }, $scope.timeout);
-              break;
-
-            case 'close':
-            case 'hide':
-              $scope.open = false;
-              break;
-
-            case 'toggle':
-              if($scope.open){
-                $scope.open = false;
-              }
-              else{
-                $scope.open = true;
-
-                // Close after a timeout
-                $timeout(function(){
-                  $scope.open = false;
-                }, $scope.timeout);
-              }
-              break;
-
-            default:
-              controllers.text = message.text;
-              controllers.color = message.color;
-              controllers.icon = message.icon;
-              $scope.timeout = message.timeout;
-              $scope.open = true;
-
-              // Close after a timeout
-              $timeout(function(){
-                $scope.open = false;
-              }, $scope.timeout);
-          }
-        });
-      }
-    };
-
-    function cornerNotificationsController($scope){
-      var vm = this;
-      vm.icon = $scope.icon;
-      vm.color = $scope.color;
-      vm.text = $scope.text;
-    }
-  }
-
-
 })(angular);
 (function() {
   'use strict';
@@ -1560,6 +1474,94 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
   }
 })(angular);
 
+(function(angular){
+  'use strict';
+
+  // TODO
+  angular
+    .module('weed.corner-notifications', ['weed.core'])
+    .directive('weCornerNotification', cornerNotificationDirective);
+
+  cornerNotificationDirective.$inject = ['WeedApi', '$timeout'];
+
+  function cornerNotificationDirective(WeedApi, $timeout){
+
+    // Injection
+    cornerNotificationsController.$inject = ['$scope'];
+
+    return {
+      restrict: 'A',
+      replace: true,
+      templateUrl: 'components/notifications/cornerNotifications.html',
+      scope: {
+        color: '@',
+        icon: '@',
+        text: '@',
+        timeout: '@'
+      },
+      controller: cornerNotificationsController,
+      controllerAs: 'ctrl',
+      link: function($scope, elem, attrs, controllers, $transclude){
+        $scope.open = false;
+        $scope.timeout = $scope.timeout ? parseFloat($scope.timeout) : 1000;
+
+        WeedApi.subscribe(attrs.id, function(id, message){
+          switch(message){
+            case 'show':
+            case 'open':
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+              break;
+
+            case 'close':
+            case 'hide':
+              $scope.open = false;
+              break;
+
+            case 'toggle':
+              if($scope.open){
+                $scope.open = false;
+              }
+              else{
+                $scope.open = true;
+
+                // Close after a timeout
+                $timeout(function(){
+                  $scope.open = false;
+                }, $scope.timeout);
+              }
+              break;
+
+            default:
+              controllers.text = message.text;
+              controllers.color = message.color;
+              controllers.icon = message.icon;
+              $scope.timeout = message.timeout;
+              $scope.open = true;
+
+              // Close after a timeout
+              $timeout(function(){
+                $scope.open = false;
+              }, $scope.timeout);
+          }
+        });
+      }
+    };
+
+    function cornerNotificationsController($scope){
+      var vm = this;
+      vm.icon = $scope.icon;
+      vm.color = $scope.color;
+      vm.text = $scope.text;
+    }
+  }
+
+
+})(angular);
 /**
  * @ngdoc function
  * @name weed.directive: weNavbar

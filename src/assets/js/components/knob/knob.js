@@ -34,9 +34,11 @@
 
       vm.toggleBoolValue = function(){
         vm.boolValue = !vm.boolValue;
-        if (vm.onChange) {
-          vm.onChange({boolValue: vm.boolValue});
-        }
+        $timeout(function() {
+          if (vm.onChange) {
+            vm.onChange();
+          }
+        }, 0);
       }
     }
   }
