@@ -99,10 +99,9 @@
     return directive;
 
     function link(scope, element, attrs) {
-      var targetId = element.attr('id');
       element.on('keyup', function(e) {
         if (e.keyCode === 27) {
-          weedApi.publish(targetId, 'close');
+          weedApi.publish(element.attr('id'), 'close');
         }
         e.preventDefault();
       });
