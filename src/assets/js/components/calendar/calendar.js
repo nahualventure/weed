@@ -31,7 +31,8 @@
         doselectedclick: '=',
         popoverIsOpen: '=',
         secondcallfunction: '=',
-        checkDoneTask: '='
+        checkDoneTask: '=',
+        numberValid: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -137,9 +138,15 @@
                 su[i].isFinished = su[i].meeting.hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
+                  if(su[i].boardId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
                 }
                 else if(su[i].committeeId) {
                   su[i].isCommittee = true;
+                  if(su[i].committeeId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
                 }
               }
             }
@@ -155,9 +162,15 @@
                 su[i].isFinished = su[i].hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
+                  if(su[i].boardId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
                 }
                 else if(su[i].committeeId) {
                   su[i].isCommittee = true;
+                  if(su[i].committeeId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
                 }
               }
             }
@@ -173,9 +186,15 @@
                 response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
                 if(response[k].boardId) {
                   response[k].isBoard = true;
+                  if(response[i].boardId == scope.numberValid) {
+                    response[i].corresponds = true;
+                  }
                 }
                 else if(response[k].committeeId) {
                   response[k].isCommittee = true;
+                  if(response[i].committeeId == scope.numberValid) {
+                    response[i].corresponds = true;
+                  }
                 }
 
                 if(moment(response[k].deadline).diff(moment(), 'days') < 0){
