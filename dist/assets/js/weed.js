@@ -677,7 +677,8 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 
     function _buildMonth(scope, start, month, actualmonth) {
       scope.monthActivities = scope.activities(actualmonth);
-
+      console.log("*******************+++++++++++++++++++++++++++");
+      console.log(scope.numberValid);
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
@@ -696,7 +697,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                   su[i].corresponds = false;
-                  console.log(su[i]);
                   if(su[i].boardId == scope.numberValid) {
                     su[i].corresponds = true;
                   }
