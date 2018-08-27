@@ -589,7 +589,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
         popoverIsOpen: '=',
         secondcallfunction: '=',
         checkDoneTask: '=',
-        numberValid: '='
+        numbervalid: '='
       },
       templateUrl: 'components/calendar/calendar.html',
       link: function(scope, elem, attrs) {
@@ -678,7 +678,7 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
     function _buildMonth(scope, start, month, actualmonth) {
       scope.monthActivities = scope.activities(actualmonth);
       console.log("*******************+++++++++++++++++++++++++++");
-      console.log(scope.numberValid);
+      console.log(scope.numbervalid);
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
@@ -697,14 +697,14 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                   su[i].corresponds = false;
-                  if(su[i].boardId == scope.numberValid) {
+                  if(su[i].boardId == scope.numbervalid) {
                     su[i].corresponds = true;
                   }
                 }
                 else if(su[i].committeeId) {
                   su[i].isCommittee = true;
                   su[i].corresponds = false;
-                  if(su[i].committeeId == scope.numberValid) {
+                  if(su[i].committeeId == scope.numbervalid) {
                     su[i].corresponds = true;
                   }
                 }
@@ -723,14 +723,14 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 if(su[i].boardId) {
                   su[i].isBoard = true;
                   su[i].corresponds = false;
-                  if(su[i].boardId == scope.numberValid) {
+                  if(su[i].boardId == scope.numbervalid) {
                     su[i].corresponds = true;
                   }
                 }
                 else if(su[i].committeeId) {
                   su[i].isCommittee = true;
                   su[i].corresponds = false;
-                  if(su[i].committeeId == scope.numberValid) {
+                  if(su[i].committeeId == scope.numbervalid) {
                     su[i].corresponds = true;
                   }
                 }
@@ -749,14 +749,14 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 if(response[k].boardId) {
                   response[k].isBoard = true;
                   response[k].corresponds = false;
-                  if(response[k].boardId == scope.numberValid) {
+                  if(response[k].boardId == scope.numbervalid) {
                     response[k].corresponds = true;
                   }
                 }
                 else if(response[k].committeeId) {
                   response[k].isCommittee = true;
                   response[k].corresponds = false;
-                  if(response[k].committeeId == scope.numberValid) {
+                  if(response[k].committeeId == scope.numbervalid) {
                     response[k].corresponds = true;
                   }
                 }
