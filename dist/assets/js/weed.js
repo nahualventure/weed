@@ -695,12 +695,15 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 su[i].isFinished = su[i].meeting.hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
+                  su[i].corresponds = false;
+                  console.log(su[i]);
                   if(su[i].boardId == scope.numberValid) {
                     su[i].corresponds = true;
                   }
                 }
                 else if(su[i].committeeId) {
                   su[i].isCommittee = true;
+                  su[i].corresponds = false;
                   if(su[i].committeeId == scope.numberValid) {
                     su[i].corresponds = true;
                   }
@@ -719,12 +722,14 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 su[i].isFinished = su[i].hasFinished;
                 if(su[i].boardId) {
                   su[i].isBoard = true;
+                  su[i].corresponds = false;
                   if(su[i].boardId == scope.numberValid) {
                     su[i].corresponds = true;
                   }
                 }
                 else if(su[i].committeeId) {
                   su[i].isCommittee = true;
+                  su[i].corresponds = false;
                   if(su[i].committeeId == scope.numberValid) {
                     su[i].corresponds = true;
                   }
@@ -743,14 +748,16 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
                 response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
                 if(response[k].boardId) {
                   response[k].isBoard = true;
-                  if(response[i].boardId == scope.numberValid) {
-                    response[i].corresponds = true;
+                  response[k].corresponds = false;
+                  if(response[k].boardId == scope.numberValid) {
+                    response[k].corresponds = true;
                   }
                 }
                 else if(response[k].committeeId) {
                   response[k].isCommittee = true;
-                  if(response[i].committeeId == scope.numberValid) {
-                    response[i].corresponds = true;
+                  response[k].corresponds = false;
+                  if(response[k].committeeId == scope.numberValid) {
+                    response[k].corresponds = true;
                   }
                 }
 
@@ -1317,6 +1324,82 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
   }
 
 })(angular);
+/**
+ * @ngdoc function
+ * @name weed.directive: weNavbar
+ * @description
+ * # navbarDirective
+ * Directive of the app
+ * Depends upon weInputWrapper
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.navbar', ['weed.core'])
+    .directive('weNavbar', navbarDirective)
+    .directive('weNavbarElement', navbarElementDirective);
+
+  // No dependencies
+
+  function navbarDirective(){
+    return {
+      restrict: 'E',
+      link: function(){
+        var body = angular.element(document.querySelector('body'));
+        body.addClass('with-navbar');
+      },
+      templateUrl: 'components/navbar/navbar.html',
+      transclude: true,
+      replace: true
+    }
+  }
+
+  function navbarElementDirective(){
+    return {
+      restrict: 'A',
+      transclude: true,
+      replace: true,
+      scope: {
+        position: '@',
+        type: '@',
+        icon: '@',
+        logotype: '@',
+        isotype: '@',
+        placeholder: '@',
+        userPicture: '@',
+        userRole: '@',
+        counter: '@'
+      },
+      link: function(scope, elem, attrs, controllers, $transclude){
+        // Check if there is text
+        $transclude(function(clone){
+          scope.hasText = clone.length > 0;
+        });
+      },
+      templateUrl: function(elem, attrs) {
+        var template = '';
+        switch (attrs.type) {
+          case 'link':
+            template = 'navbarElementLink.html';
+            break;
+          case 'logo':
+            template = 'navbarElementLogo.html';
+            break;
+          case 'separator':
+            template = 'navbarElementSeparator.html'
+            break;
+          case 'user':
+            template = 'navbarElementUser.html'
+            break;
+          default:
+            template = 'navbarElement.html'
+        }
+        return 'components/navbar/' + template;
+      }
+    };
+  }
+})(angular);
 (function(angular){
   'use strict';
 
@@ -1404,82 +1487,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
   }
 
 
-})(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weNavbar
- * @description
- * # navbarDirective
- * Directive of the app
- * Depends upon weInputWrapper
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.navbar', ['weed.core'])
-    .directive('weNavbar', navbarDirective)
-    .directive('weNavbarElement', navbarElementDirective);
-
-  // No dependencies
-
-  function navbarDirective(){
-    return {
-      restrict: 'E',
-      link: function(){
-        var body = angular.element(document.querySelector('body'));
-        body.addClass('with-navbar');
-      },
-      templateUrl: 'components/navbar/navbar.html',
-      transclude: true,
-      replace: true
-    }
-  }
-
-  function navbarElementDirective(){
-    return {
-      restrict: 'A',
-      transclude: true,
-      replace: true,
-      scope: {
-        position: '@',
-        type: '@',
-        icon: '@',
-        logotype: '@',
-        isotype: '@',
-        placeholder: '@',
-        userPicture: '@',
-        userRole: '@',
-        counter: '@'
-      },
-      link: function(scope, elem, attrs, controllers, $transclude){
-        // Check if there is text
-        $transclude(function(clone){
-          scope.hasText = clone.length > 0;
-        });
-      },
-      templateUrl: function(elem, attrs) {
-        var template = '';
-        switch (attrs.type) {
-          case 'link':
-            template = 'navbarElementLink.html';
-            break;
-          case 'logo':
-            template = 'navbarElementLogo.html';
-            break;
-          case 'separator':
-            template = 'navbarElementSeparator.html'
-            break;
-          case 'user':
-            template = 'navbarElementUser.html'
-            break;
-          default:
-            template = 'navbarElement.html'
-        }
-        return 'components/navbar/' + template;
-      }
-    };
-  }
 })(angular);
 (function() {
   'use strict';
