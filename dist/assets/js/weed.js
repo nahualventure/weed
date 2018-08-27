@@ -677,8 +677,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 
     function _buildMonth(scope, start, month, actualmonth) {
       scope.monthActivities = scope.activities(actualmonth);
-      console.log("*******************+++++++++++++++++++++++++++");
-      console.log(scope.numbervalid);
       scope.monthActivities.then(
         function(su){
           scope.weeks = [];
