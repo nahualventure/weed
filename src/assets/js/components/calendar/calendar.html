@@ -31,7 +31,7 @@
   <div
     class="calendar-meeting-inside {{act.isTask ? 'is-task-square' : ''}} {{act.isBoard ? 'is-board' : ''}} {{act.isCommittee ? 'is-committee' : ''}} {{act.corresponds ? 'is-corresponds' : ''}}  {{!act.isTask && act.isFinished ? 'is-meeting-done' : ''}} {{!act.isTask && !act.isFinished ? 'is-meeting-not-done' : ''}} {{act.deadlinePassed ? 'deadline-passed' : ''}}"
     ng-repeat="act in day.activities | limitTo:limit"
-    ng-click="{{act.corresponds ? 'functionopenselect(act, $event); day.openPop = false' : 'doOnClickD()''}}   ">
+    ng-click="functionopenselect(act, $event); day.openPop = false">
     <p
       ng-if="!act.isTask"
       class="calendar-meeting-inside-place ellipsis">{{act.place}}</p>
