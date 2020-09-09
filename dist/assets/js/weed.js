@@ -555,303 +555,6 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
   }
 
 })(angular);
-/**
- * @ngdoc function
- * @name weed.directive: weIcon
- * @description
- * # Directive to import icons
- * Directive of the app
- */
-
-(function(angular){
-  'use strict';
-
-  angular.module('weed.calendar', ['weed.core'])
-    .directive('weCalendar', calendarDirective);
-
-
-  function calendarDirective() {
-    return {
-      restrict: 'A',
-      scope: {
-        selectedobject: '=',
-        selected: '=',
-        languagec: '=',
-        numberposition: '=',
-        activities: '=',
-        tasks: '=',
-        limit: '=',
-        functionopenselect:'=',
-        selectedobjectinside: '=',
-        actualmonth: '=',
-        updatefunction: '=',
-        doselectedclick: '=',
-        popoverIsOpen: '=',
-        secondcallfunction: '=',
-        checkDoneTask: '=',
-        numbervalid: '='
-      },
-      templateUrl: 'components/calendar/calendar.html',
-      link: function(scope, elem, attrs) {
-        moment.locale(scope.languagec);
-        scope.weekArray = moment.weekdays();
-        scope.selected = moment().locale(scope.languagec);
-        scope.month = scope.selected.clone();
-        scope.actualmonth = moment();
-        var start = scope.selected.clone();
-        start.date(1);
-        _removeTime(start.day(0));
-		    scope.findToday = false;
-
-        //scope.openPop = true;
-
-        _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        scope.closePopoverNow = function(day) {
-          day.openPop = false;
-        };
-
-        scope.select = function(day) {
-          scope.selected = day.date;
-          scope.selectedobject = day;
-
-          if(scope.comesfromtodaywatch)
-          {
-            scope.comesfromtodaywatch = false;
-          }
-          else {
-            scope.doselectedclick(day);
-          }
-        };
-
-        scope.manageClickMore = function(day) {
-          scope.selectedobject = day;
-          scope.comesfromtodaywatch = true;
-          //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        }
-
-        scope.today = function() {
-		    scope.findToday = true;
-        scope.actualmonth = moment();
-		    scope.selected = moment().locale(scope.languagec);
-          scope.month = scope.selected.clone();
-          var start = scope.selected.clone();
-          start.date(1);
-          _removeTime(start.day(0));
-
-          _buildMonth(scope, start, scope.month, scope.actualmonth);
-
-        };
-
-        scope.next = function() {
-          var next = scope.month.clone();
-          scope.actualmonth = scope.actualmonth.add(1,'months');
-          _removeTime(next.month(next.month()+1).date(1));
-          scope.month.month(scope.month.month()+1);
-          _buildMonth(scope, next, scope.month, scope.actualmonth);
-        };
-
-        scope.previous = function() {
-            var previous = scope.month.clone();
-            scope.actualmonth = scope.actualmonth.add(-1,'months');
-            _removeTime(previous.month(previous.month()-1).date(1));
-            scope.month.month(scope.month.month()-1);
-            _buildMonth(scope, previous, scope.month, scope.actualmonth);
-        };
-
-        /*scope.doOnClickElement = function(elementInside){
-          scope.functionopenselect(elementInside);
-        };*/
-
-        scope.updatefunction = function() {
-          var dummy = scope.month.clone();
-          _removeTime(dummy.month(dummy.month()).date(1));
-          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
-        };
-      }
-    };
-
-    function _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
-
-    function _buildMonth(scope, start, month, actualmonth) {
-      scope.monthActivities = scope.activities(actualmonth);
-      scope.monthActivities.then(
-        function(su){
-          scope.weeks = [];
-          var responsables = [];
-          for( var i = 0; i < su.length ; i++) {
-            if(su[i].meeting) {
-              su[i].meeting.fileCount =0;
-              //vm.time = datetime.format('hh:mm a');
-              for(var j =0; j< su[i].meeting.meetingItems.length; j++) {
-                su[i].meeting.fileCount += su[i].meeting.meetingItems[j].files.length;
-                su[i].meeting.dateFormat = moment(su[i].meeting.date).format('dddd D [de] MMMM [del] YYYY');
-                su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
-                su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
-                responsables.push(su[i].meeting.meetingItems[j].responsableId);
-                su[i].isFinished = su[i].meeting.hasFinished;
-                if(su[i].boardId) {
-                  su[i].isBoard = true;
-                  su[i].corresponds = false;
-                  if(su[i].boardId == scope.numbervalid) {
-                    su[i].corresponds = true;
-                  }
-                }
-                else if(su[i].committeeId) {
-                  su[i].isCommittee = true;
-                  su[i].corresponds = false;
-                  if(su[i].committeeId == scope.numbervalid) {
-                    su[i].corresponds = true;
-                  }
-                }
-              }
-            }
-            else {
-              su[i].fileCount =0;
-              //vm.time = datetime.format('hh:mm a');
-              for(var j =0; j< su[i].meetingItems.length; j++) {
-                su[i].fileCount += su[i].meetingItems[j].files.length;
-                su[i].dateFormat = moment(su[i].date).format('dddd D [de] MMMM [del] YYYY');
-                su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
-                su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
-                responsables.push(su[i].meetingItems[j].responsableId);
-                su[i].isFinished = su[i].hasFinished;
-                if(su[i].boardId) {
-                  su[i].isBoard = true;
-                  su[i].corresponds = false;
-                  if(su[i].boardId == scope.numbervalid) {
-                    su[i].corresponds = true;
-                  }
-                }
-                else if(su[i].committeeId) {
-                  su[i].isCommittee = true;
-                  su[i].corresponds = false;
-                  if(su[i].committeeId == scope.numbervalid) {
-                    su[i].corresponds = true;
-                  }
-                }
-              }
-            }
-          }
-          scope.secondcallfunction(responsables);
-
-          scope.tasks(actualmonth)
-          .then(
-            function(response) {
-              for (var k = 0; k < response.length; k++ ) {
-                response[k].isTask = true;
-                response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
-                response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
-                if(response[k].boardId) {
-                  response[k].isBoard = true;
-                  response[k].corresponds = false;
-                  if(response[k].boardId == scope.numbervalid) {
-                    response[k].corresponds = true;
-                  }
-                }
-                else if(response[k].committeeId) {
-                  response[k].isCommittee = true;
-                  response[k].corresponds = false;
-                  if(response[k].committeeId == scope.numbervalid) {
-                    response[k].corresponds = true;
-                  }
-                }
-
-                if(moment(response[k].deadline).diff(moment(), 'days') < 0){
-                	if(!response[k].isDone){
-                  	response[k].deadlinePassed = true;
-                	}
-                }
-
-                su.push(
-                  response[k]
-                );
-              }
-              var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-              while (!done) {
-                  scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
-                  date.add(1, "w");
-                  done = count++ > 2 && monthIndex !== date.month();
-                  monthIndex = date.month();
-              }
-              if(scope.findToday) {
-                scope.findToday = false;
-                for(var i = 0; i < scope.weeks.length; i++) {
-                  for(var j = 0; j < scope.weeks[i].days.length; j++) {
-                    if(scope.weeks[i].days[j].isToday)
-                    {
-                      scope.comesfromtodaywatch = true;
-                      scope.select(scope.weeks[i].days[j]);
-                      break;
-                      i = scope.weeks.length;
-                    }
-                  }
-                }
-              }
-            },
-            function(err){
-              $log.log("ERROR: ",error);
-            }
-          );
-        },
-        function(err){
-          $log.log("ERROR: ",error);
-        }
-      );
-    }
-
-    function _buildWeek(date, month, activities) {
-      var days = [];
-      for (var i = 0; i < 7; i++) {
-          days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              dateId: date.format("DD-MM-YYYY"),
-              activities: [],
-              openPop: false
-          });
-          for(var j = 0; j < activities.length; j++)
-          {
-            if(activities[j].meeting) {
-              if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
-                activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
-                if(!activities[j].place)
-                {
-                  activities[j].place = activities[j].meeting.place;
-                }
-                days[days.length-1].activities.push(activities[j]);
-              }
-            }
-            else if(activities[j].isTask){
-              if(date.isSame(activities[j].deadline,'year') && date.isSame(activities[j].deadline,'month') && date.isSame(activities[j].deadline,'day')){
-                days[days.length-1].activities.push(activities[j]);
-              }
-            }
-            else {
-              if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
-                activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
-                if(!activities[j].place)
-                {
-                  activities[j].place = activities[j].place;
-                }
-                days[days.length-1].activities.push(activities[j]);
-              }
-            }
-          }
-          date = date.clone();
-          date.add(1, "d");
-      }
-      return days;
-    }
-  };
-
-})(angular);
-
 (function(angular) {
   'use strict';
 
@@ -1103,6 +806,298 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
 })(angular);
 /**
  * @ngdoc function
+ * @name weed.directive: weIcon
+ * @description
+ * # Directive to import icons
+ * Directive of the app
+ */
+
+(function(angular){
+  'use strict';
+
+  angular.module('weed.calendar', ['weed.core'])
+    .directive('weCalendar', calendarDirective);
+
+
+  function calendarDirective() {
+    return {
+      restrict: 'A',
+      scope: {
+        selectedobject: '=',
+        selected: '=',
+        languagec: '=',
+        numberposition: '=',
+        activities: '=',
+        tasks: '=',
+        limit: '=',
+        functionopenselect:'=',
+        selectedobjectinside: '=',
+        actualmonth: '=',
+        updatefunction: '=',
+        doselectedclick: '=',
+        popoverIsOpen: '=',
+        secondcallfunction: '=',
+        checkDoneTask: '=',
+        numberValid: '='
+      },
+      templateUrl: 'components/calendar/calendar.html',
+      link: function(scope, elem, attrs) {
+        moment.locale(scope.languagec);
+        scope.weekArray = moment.weekdays();
+        scope.selected = moment().locale(scope.languagec);
+        scope.month = scope.selected.clone();
+        scope.actualmonth = moment();
+        var start = scope.selected.clone();
+        start.date(1);
+        _removeTime(start.day(0));
+		    scope.findToday = false;
+
+        //scope.openPop = true;
+
+        _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        scope.closePopoverNow = function(day) {
+          day.openPop = false;
+        };
+
+        scope.select = function(day) {
+          scope.selected = day.date;
+          scope.selectedobject = day;
+
+          if(scope.comesfromtodaywatch)
+          {
+            scope.comesfromtodaywatch = false;
+          }
+          else {
+            scope.doselectedclick(day);
+          }
+        };
+
+        scope.manageClickMore = function(day) {
+          scope.selectedobject = day;
+          scope.comesfromtodaywatch = true;
+          //console.log("pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        }
+
+        scope.today = function() {
+		    scope.findToday = true;
+        scope.actualmonth = moment();
+		    scope.selected = moment().locale(scope.languagec);
+          scope.month = scope.selected.clone();
+          var start = scope.selected.clone();
+          start.date(1);
+          _removeTime(start.day(0));
+
+          _buildMonth(scope, start, scope.month, scope.actualmonth);
+
+        };
+
+        scope.next = function() {
+          var next = scope.month.clone();
+          scope.actualmonth = scope.actualmonth.add(1,'months');
+          _removeTime(next.month(next.month()+1).date(1));
+          scope.month.month(scope.month.month()+1);
+          _buildMonth(scope, next, scope.month, scope.actualmonth);
+        };
+
+        scope.previous = function() {
+            var previous = scope.month.clone();
+            scope.actualmonth = scope.actualmonth.add(-1,'months');
+            _removeTime(previous.month(previous.month()-1).date(1));
+            scope.month.month(scope.month.month()-1);
+            _buildMonth(scope, previous, scope.month, scope.actualmonth);
+        };
+
+        /*scope.doOnClickElement = function(elementInside){
+          scope.functionopenselect(elementInside);
+        };*/
+
+        scope.updatefunction = function() {
+          var dummy = scope.month.clone();
+          _removeTime(dummy.month(dummy.month()).date(1));
+          _buildMonth(scope, dummy, scope.month, scope.actualmonth);
+        };
+      }
+    };
+
+    function _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month, actualmonth) {
+      scope.monthActivities = scope.activities(actualmonth);
+
+      scope.monthActivities.then(
+        function(su){
+          scope.weeks = [];
+          var responsables = [];
+          for( var i = 0; i < su.length ; i++) {
+            if(su[i].meeting) {
+              su[i].meeting.fileCount =0;
+              //vm.time = datetime.format('hh:mm a');
+              for(var j =0; j< su[i].meeting.meetingItems.length; j++) {
+                su[i].meeting.fileCount += su[i].meeting.meetingItems[j].files.length;
+                su[i].meeting.dateFormat = moment(su[i].meeting.date).format('dddd D [de] MMMM [del] YYYY');
+                su[i].meeting.dateFormatInput = new Date(moment(su[i].meeting.date).format('M/D/YYYY'));
+                su[i].meeting.timeFormatInput = moment(su[i].meeting.date).format('H:mm a');
+                responsables.push(su[i].meeting.meetingItems[j].responsableId);
+                su[i].isFinished = su[i].meeting.hasFinished;
+                if(su[i].boardId) {
+                  su[i].isBoard = true;
+                  if(su[i].boardId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
+                }
+                else if(su[i].committeeId) {
+                  su[i].isCommittee = true;
+                  if(su[i].committeeId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
+                }
+              }
+            }
+            else {
+              su[i].fileCount =0;
+              //vm.time = datetime.format('hh:mm a');
+              for(var j =0; j< su[i].meetingItems.length; j++) {
+                su[i].fileCount += su[i].meetingItems[j].files.length;
+                su[i].dateFormat = moment(su[i].date).format('dddd D [de] MMMM [del] YYYY');
+                su[i].dateFormatInput = new Date(moment(su[i].date).format('M/D/YYYY'));
+                su[i].timeFormatInput = moment(su[i].date).format('H:mm a');
+                responsables.push(su[i].meetingItems[j].responsableId);
+                su[i].isFinished = su[i].hasFinished;
+                if(su[i].boardId) {
+                  su[i].isBoard = true;
+                  if(su[i].boardId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
+                }
+                else if(su[i].committeeId) {
+                  su[i].isCommittee = true;
+                  if(su[i].committeeId == scope.numberValid) {
+                    su[i].corresponds = true;
+                  }
+                }
+              }
+            }
+          }
+          scope.secondcallfunction(responsables);
+
+          scope.tasks(actualmonth)
+          .then(
+            function(response) {
+              for (var k = 0; k < response.length; k++ ) {
+                response[k].isTask = true;
+                response[k].dateFormatInput = new Date(moment(response[k].deadline).format('M/D/YYYY'));
+                response[k].timeFormatInput = moment(response[k].date).format('H:mm a');
+                if(response[k].boardId) {
+                  response[k].isBoard = true;
+                  if(response[i].boardId == scope.numberValid) {
+                    response[i].corresponds = true;
+                  }
+                }
+                else if(response[k].committeeId) {
+                  response[k].isCommittee = true;
+                  if(response[i].committeeId == scope.numberValid) {
+                    response[i].corresponds = true;
+                  }
+                }
+
+                if(moment(response[k].deadline).diff(moment(), 'days') < 0){
+                	if(!response[k].isDone){
+                  	response[k].deadlinePassed = true;
+                	}
+                }
+
+                su.push(
+                  response[k]
+                );
+              }
+              var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+              while (!done) {
+                  scope.weeks.push({ days: _buildWeek(date.clone(), month, su) });
+                  date.add(1, "w");
+                  done = count++ > 2 && monthIndex !== date.month();
+                  monthIndex = date.month();
+              }
+              if(scope.findToday) {
+                scope.findToday = false;
+                for(var i = 0; i < scope.weeks.length; i++) {
+                  for(var j = 0; j < scope.weeks[i].days.length; j++) {
+                    if(scope.weeks[i].days[j].isToday)
+                    {
+                      scope.comesfromtodaywatch = true;
+                      scope.select(scope.weeks[i].days[j]);
+                      break;
+                      i = scope.weeks.length;
+                    }
+                  }
+                }
+              }
+            },
+            function(err){
+              $log.log("ERROR: ",error);
+            }
+          );
+        },
+        function(err){
+          $log.log("ERROR: ",error);
+        }
+      );
+    }
+
+    function _buildWeek(date, month, activities) {
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+          days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              dateId: date.format("DD-MM-YYYY"),
+              activities: [],
+              openPop: false
+          });
+          for(var j = 0; j < activities.length; j++)
+          {
+            if(activities[j].meeting) {
+              if(date.isSame(activities[j].meeting.date,'year') && date.isSame(activities[j].meeting.date,'month') && date.isSame(activities[j].meeting.date,'day')){
+                activities[j].formatDate  = moment(activities[j].meeting.date).format("HH:mm");
+                if(!activities[j].place)
+                {
+                  activities[j].place = activities[j].meeting.place;
+                }
+                days[days.length-1].activities.push(activities[j]);
+              }
+            }
+            else if(activities[j].isTask){
+              if(date.isSame(activities[j].deadline,'year') && date.isSame(activities[j].deadline,'month') && date.isSame(activities[j].deadline,'day')){
+                days[days.length-1].activities.push(activities[j]);
+              }
+            }
+            else {
+              if(date.isSame(activities[j].date,'year') && date.isSame(activities[j].date,'month') && date.isSame(activities[j].date,'day')){
+                activities[j].formatDate  = moment(activities[j].date).format("HH:mm");
+                if(!activities[j].place)
+                {
+                  activities[j].place = activities[j].place;
+                }
+                days[days.length-1].activities.push(activities[j]);
+              }
+            }
+          }
+          date = date.clone();
+          date.add(1, "d");
+      }
+      return days;
+    }
+  };
+
+})(angular);
+
+/**
+ * @ngdoc function
  * @name weed.directive: weNavbar
  * @description
  * # navbarDirective
@@ -1201,7 +1196,8 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
       scope: {
         boolValue: '=',
         onChange: '&?',
-        size: '@'
+        size: '@',
+        disabled: '@'
       },
       controller: knobController,
       controllerAs: 'ctrl',
@@ -1212,6 +1208,10 @@ u.left+m<0&&d.width-l.width<=u.right?i[1]="left":u.right+m<0&&d.width-l.width<=u
       var vm = this;
 
       vm.toggleBoolValue = function(){
+        if (vm.disabled) {
+          return;
+        }
+
         vm.boolValue = !vm.boolValue;
         $timeout(function() {
           if (vm.onChange) {

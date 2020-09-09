@@ -22,7 +22,8 @@
       scope: {
         boolValue: '=',
         onChange: '&?',
-        size: '@'
+        size: '@',
+        disabled: '@'
       },
       controller: knobController,
       controllerAs: 'ctrl',
@@ -33,6 +34,10 @@
       var vm = this;
 
       vm.toggleBoolValue = function(){
+        if (vm.disabled) {
+          return;
+        }
+
         vm.boolValue = !vm.boolValue;
         $timeout(function() {
           if (vm.onChange) {
