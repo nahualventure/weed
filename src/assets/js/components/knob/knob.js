@@ -23,7 +23,7 @@
         boolValue: '=',
         onChange: '&?',
         size: '@',
-        disabled: '=?'
+        isDisabled: '=?'
       },
       controller: knobController,
       controllerAs: 'ctrl',
@@ -34,7 +34,7 @@
       var vm = this;
 
       vm.toggleBoolValue = function(){
-        if (vm.disabled) {
+        if (vm.isDisabled) {
           return;
         }
 
