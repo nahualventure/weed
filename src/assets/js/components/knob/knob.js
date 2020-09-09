@@ -23,7 +23,7 @@
         boolValue: '=',
         onChange: '&?',
         size: '@',
-        disabled: '@'
+        disabled: '=?'
       },
       controller: knobController,
       controllerAs: 'ctrl',
