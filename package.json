@@ -25,7 +25,7 @@
   "homepage": "https://github.com/edoo-project/weed#readme",
   "devDependencies": {
     "del": "^2.2.0",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-if": "^2.0.0",
